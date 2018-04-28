@@ -1,0 +1,80 @@
+// ==========
+// = Colors =
+// ==========
+
+$color--text       = #050505
+$color--light-blue = #F3F6FB
+$color--blue       = #5D99D5
+$color--dark-blue  = #548BC1
+$color--green      = #52B694
+$color--dark-green = #3D9578
+
+// ==============
+// = Typography =
+// ==============
+
+fontstack--default =
+    font-family  "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif
+    line-height 1.4
+
+fontstack--headline =
+    font-family  "Source Sans Pro ExtraLight", "Helvetica Neue", Helvetica, Arial, sans-serif
+    line-height 1.4
+    font-weight normal
+
+$fontsize--default = rem(16)
+$fontsize--small = rem(13)
+
+// ===============
+// = Breakpoints =
+// ===============
+
+$breakpoint--phone               = rem(320)
+$breakpoint--phone-large         = rem(375)
+$breakpoint--tablet-portrait     = rem(640)
+$breakpoint--tablet-landscape    = rem(768)
+$breakpoint--desktop-small       = rem(1024)
+$breakpoint--desktop             = rem(1280)
+$breakpoint--desktop-large       = rem(1440)
+$breakpoint--desktop-extra-large = rem(1920)
+
+// ===========
+// = Spacing =
+// ===========
+
+$spacing--1 = 8px // 8px
+$spacing--2 = $spacing--1 * 2
+$spacing--3 = $spacing--1 * 3
+$spacing--4 = $spacing--1 * 4
+$spacing--5 = $spacing--1 * 5
+$spacing--6 = $spacing--1 * 6
+$spacing--7 = $spacing--1 * 7
+$spacing--8 = $spacing--1 * 8
+
+// =========
+// = Debug =
+// =========
+
+debug =
+    *
+        // lost-utility edit
+        outline 2px solid #79ba2b
+        background-color alpha(#79ba2b, 0.2)
+    * *
+        outline 2px solid #44b9a5
+        background-color alpha(#44b9a5, 0.2)
+    * * *
+        outline 2px solid #5f8cff
+        background-color alpha(#5f8cff, 0.2)
+    * * * *
+        outline 2px solid #aa6eff
+        background-color alpha(#aa6eff, 0.2)
+    * * * * *
+        outline 1px solid #ff5f8c
+        background-color alpha(#ff5f8c, 0.2)
+    * * * * * *
+        outline 1px solid #ff8f3a
+        background-color alpha(#ff8f3a, 0.2)
+    * * * * * * *
+        outline 1px solid #ffc950
+        background-color alpha(#ffc950, 0.2)

@@ -1,0 +1,142 @@
+@lost gutter 20px
+@lost flexbox flex
+
+webfont("Fira Code", '../fonts/firacode/firacode-regular')
+webfont("Fira Code", '../fonts/firacode/firacode-bold', bold)
+webfont("Source Sans Pro", '../fonts/sourcesanspro/source-sans-pro-v11-latin-regular')
+webfont("Source Sans Pro", '../fonts/sourcesanspro/source-sans-pro-v11-latin-700', bold)
+webfont("Source Sans Pro ExtraLight", '../fonts/sourcesanspro/source-sans-pro-v11-latin-200')
+
+*
+    box-sizing border-box
+    text-rendering optimizeLegibility !important
+    -webkit-font-smoothing antialiased !important
+    -moz-osx-font-smoothing grayscale !important
+
+html
+    basefontsize(16)
+    // +Breakpoint($breakpoint--desktop)
+    //     basefontsize(14)
+    // +Breakpoint($breakpoint--desktop-large)
+    //     basefontsize(16)
+    // +Breakpoint($breakpoint--desktop-extra-large)
+    //     basefontsize(20)
+
+html, body
+    height 100%
+
+body
+    color $color--text
+    display flex
+    flex-direction column
+    padding $spacing--2
+    margin 0
+    {fontstack--default}
+    font-size $fontsize--default
+    // {debug}
+
+a
+    color $color--blue !important
+    text-decoration none
+    &:hover
+        text-decoration underline
+    &.anchor
+        display none
+
+h1, h2, h3, h4
+    {fontstack--headline}
+
+h1
+    margin 0 0 20px
+    font-size rem(50)
+
+h2
+    font-size rem(36)
+
+h3
+    font-size rem(28)
+
+h4
+    font-size rem(20)
+
+code
+    font-family "Fira Code", "Courier New", Courier, monospace
+    font-weight normal
+
+dl.tree
+    background-color alpha($color--text, 0.07)
+    padding $spacing--2
+    margin 0
+    dd
+        margin 0
+
+.alert.alert-info
+    padding $spacing--2
+    margin-top $spacing--2
+    background-color $color--light-blue
+
+table
+    width 100%
+    border-collapse collapse
+
+tr + tr
+    border-top 1px solid alpha($color--blue, 0.3)
+
+tr:nth-child(odd)
+    td
+        background-color alpha($color--light-blue, 0.8)
+
+td
+    vertical-align top
+    padding $spacing--1
+    code
+        font-size rem(14)
+    &.name code
+        font-weight bold
+        // {fontstack--default}
+        *
+            display inline
+            white-space none
+
+    .description
+        &.short p
+            margin 0
+
+        &.hidden
+            display none
+
+p.elementList
+    line-height 1.7
+    code
+        font-size rem(14)
+        b
+            font-weight normal
+
+pre#source
+    font-size rem(13)
+    line-height 1.2
+
+    a.l
+        background-color alpha($color--text, 0.07)
+        color alpha($color--text, 0.4) !important
+        display inline-block
+        margin-right $spacing--2
+    .xlang
+        color red
+    .php-comment
+        color alpha($color--text, 0.4)
+    .php-keyword1
+        color #00AAB3
+    .php-keyword2
+        color orange
+    .php-var
+        color #0064b3
+    .php-quote
+        color purple
+
+.l
+    a
+        color inherit
+    display block
+    &.highlight
+        background-color lighten(#FFF9D7, 40%)

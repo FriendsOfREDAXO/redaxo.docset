@@ -1,0 +1,22 @@
+{
+  "name": "docset",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^8.3.0",
+    "browser-sync": "^2.23.7",
+    "css-mqpacker": "^6.0.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^2.0.5",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-replace": "^0.6.1",
+    "gulp-sort": "^2.0.0",
+    "gulp-stylus": "^2.7.0",
+    "postcss-merge-rules": "^2.1.2",
+    "postcss-reporter": "^5.0.0",
+    "poststylus": "^1.0.0"
+  }
+}

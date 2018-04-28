@@ -1,0 +1,17 @@
+webfont($family, $file, $weight = normal, $style = normal)
+    @font-face
+        font-family $family
+        src url($file + '.woff2') format('woff2'), url($file + '.woff') format('woff')
+        font-weight $weight
+        font-style $style
+
+Breakpoint($min = false, $max = false)
+    if not $max
+        @media (min-width: $min)
+            {block}
+    else if not $min
+        @media (max-width: ($max - 0.01))
+            {block}
+    else
+        @media (min-width: $min) and (max-width: ($max - 0.01))
+            {block}
