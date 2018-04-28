@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_media_manager</h1>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.media.manager.html">media-manager</a><br/>
+<b>Located at</b> <a href="source-class-rex_media_manager.html#3-351" title="Go to source code">redaxo/src/addons/media_manager/lib/media_manager.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_media_manager.html#17-22" title="Go to source code">__construct</a>( <span><code><a href="class-rex_managed_media.html">rex_managed_media</a></code> <var>$media</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="create" id="_create">
+<td class="attributes"><code>
+				 public static
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_create">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/create"></a><a href="source-class-rex_media_manager.html#24-60" title="Go to source code">create</a>( <span>string <var>$type</var></span>, <span>string <var>$file</var></span> )</code>
+<div class="description short">
+<p>Creates a rex_managed_media object for the given file and mediatype. This
+object might be used to determine the dimension of a image or similar.</p>
+</div>
+<div class="description detailed hidden">
+<p>Creates a rex_managed_media object for the given file and mediatype. This
+object might be used to determine the dimension of a image or similar.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$type</var></dt>
+<dd>Media type</dd>
+<dt><var>$file</var></dt>
+<dd>Media file</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getMedia" id="_getMedia">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_managed_media.html">rex_managed_media</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMedia">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMedia"></a><a href="source-class-rex_media_manager.html#62-68" title="Go to source code">getMedia</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_managed_media.html">rex_managed_media</a></code></code><br/>rex_managed_media<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="applyEffects" id="_applyEffects">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_applyEffects">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/applyEffects"></a><a href="source-class-rex_media_manager.html#70-92" title="Go to source code">applyEffects</a>( <span>mixed <var>$type</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="effectsFromType" id="_effectsFromType">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_effectsFromType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/effectsFromType"></a><a href="source-class-rex_media_manager.html#94-128" title="Go to source code">effectsFromType</a>( <span>mixed <var>$type</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setCachePath" id="_setCachePath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setCachePath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setCachePath"></a><a href="source-class-rex_media_manager.html#130-133" title="Go to source code">setCachePath</a>( <span>mixed <var>$cache_path</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getCachePath" id="_getCachePath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCachePath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCachePath"></a><a href="source-class-rex_media_manager.html#135-138" title="Go to source code">getCachePath</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="useCache" id="_useCache">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_useCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/useCache"></a><a href="source-class-rex_media_manager.html#140-143" title="Go to source code">useCache</a>( <span>mixed <var>$t</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="isCached" id="_isCached">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isCached">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isCached"></a><a href="source-class-rex_media_manager.html#145-174" title="Go to source code">isCached</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getCacheFilename" id="_getCacheFilename">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCacheFilename">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCacheFilename"></a><a href="source-class-rex_media_manager.html#176-179" title="Go to source code">getCacheFilename</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getHeaderCacheFilename" id="_getHeaderCacheFilename">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHeaderCacheFilename">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeaderCacheFilename"></a><a href="source-class-rex_media_manager.html#181-184" title="Go to source code">getHeaderCacheFilename</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteCacheByType" id="_deleteCacheByType">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteCacheByType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteCacheByType"></a><a href="source-class-rex_media_manager.html#195-206" title="Go to source code">deleteCacheByType</a>( <span>mixed <var>$type_id</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteCache" id="_deleteCache">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteCache"></a><a href="source-class-rex_media_manager.html#208-229" title="Go to source code">deleteCache</a>( <span>mixed <var>$filename</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$type</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="sendMedia" id="_sendMedia">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendMedia">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendMedia"></a><a href="source-class-rex_media_manager.html#231-259" title="Go to source code">sendMedia</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getSupportedEffects" id="_getSupportedEffects">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSupportedEffects">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSupportedEffects"></a><a href="source-class-rex_media_manager.html#261-282" title="Go to source code">getSupportedEffects</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="addEffect" id="_addEffect">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addEffect">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addEffect"></a><a href="source-class-rex_media_manager.html#284-287" title="Go to source code">addEffect</a>( <span>mixed <var>$class</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="mediaUpdated" id="_mediaUpdated">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_mediaUpdated">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/mediaUpdated"></a><a href="source-class-rex_media_manager.html#310-313" title="Go to source code">mediaUpdated</a>( <span><code><a href="class-rex_extension_point.html">rex_extension_point</a></code> <var>$ep</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="init" id="_init">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_init">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_media_manager.html#315-333" title="Go to source code">init</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getMediaFile" id="_getMediaFile">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMediaFile">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMediaFile"></a><a href="source-class-rex_media_manager.html#335-345" title="Go to source code">getMediaFile</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getMediaType" id="_getMediaType">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMediaType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMediaType"></a><a href="source-class-rex_media_manager.html#347-350" title="Go to source code">getMediaType</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

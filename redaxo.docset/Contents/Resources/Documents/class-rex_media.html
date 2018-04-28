@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_media</h1>
+<div class="description">
+<p>Object Oriented Framework: Bildet ein Medium des Medienpools ab.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_media</span></b>			
+			
+			 uses 
+				<a href="class-rex_instance_pool_trait.html"><span>rex_instance_pool_trait</span></a>, 
+			
+				<a href="class-rex_instance_list_pool_trait.html"><span>rex_instance_list_pool_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.mediapool.html">mediapool</a><br/>
+<b>Located at</b> <a href="source-class-rex_media.html#3-349" title="Go to source code">redaxo/src/addons/mediapool/lib/media.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public static
+				null|static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_media.html#45-87" title="Go to source code">get</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>null|static</code><br/>null|static<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getRootMedia" id="_getRootMedia">
+<td class="attributes"><code>
+				 public static
+				static[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getRootMedia">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRootMedia"></a><a href="source-class-rex_media.html#89-101" title="Go to source code">getRootMedia</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>static[]</code><br/>static[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getId" id="_getId">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getId"></a><a href="source-class-rex_media.html#103-109" title="Go to source code">getId</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCategory" id="_getCategory">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_media_category.html">rex_media_category</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCategory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCategory"></a><a href="source-class-rex_media.html#111-117" title="Go to source code">getCategory</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_media_category.html">rex_media_category</a></code></code><br/>rex_media_category<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCategoryId" id="_getCategoryId">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCategoryId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCategoryId"></a><a href="source-class-rex_media.html#119-125" title="Go to source code">getCategoryId</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTitle" id="_getTitle">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTitle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTitle"></a><a href="source-class-rex_media.html#127-133" title="Go to source code">getTitle</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFileName" id="_getFileName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFileName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFileName"></a><a href="source-class-rex_media.html#135-141" title="Go to source code">getFileName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getOriginalFileName" id="_getOriginalFileName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getOriginalFileName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOriginalFileName"></a><a href="source-class-rex_media.html#143-149" title="Go to source code">getOriginalFileName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getUrl" id="_getUrl">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUrl"></a><a href="source-class-rex_media.html#151-158" title="Go to source code">getUrl</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getWidth" id="_getWidth">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getWidth">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWidth"></a><a href="source-class-rex_media.html#160-166" title="Go to source code">getWidth</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getHeight" id="_getHeight">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHeight">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeight"></a><a href="source-class-rex_media.html#168-174" title="Go to source code">getHeight</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getType" id="_getType">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getType"></a><a href="source-class-rex_media.html#176-182" title="Go to source code">getType</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSize" id="_getSize">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSize">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSize"></a><a href="source-class-rex_media.html#184-190" title="Go to source code">getSize</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFormattedSize" id="_getFormattedSize">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFormattedSize">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormattedSize"></a><a href="source-class-rex_media.html#192-198" title="Go to source code">getFormattedSize</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getUpdateUser" id="_getUpdateUser">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUpdateUser">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUpdateUser"></a><a href="source-class-rex_media.html#200-206" title="Go to source code">getUpdateUser</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getUpdateDate" id="_getUpdateDate">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUpdateDate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUpdateDate"></a><a href="source-class-rex_media.html#208-214" title="Go to source code">getUpdateDate</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCreateUser" id="_getCreateUser">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCreateUser">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCreateUser"></a><a href="source-class-rex_media.html#216-222" title="Go to source code">getCreateUser</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCreateDate" id="_getCreateDate">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCreateDate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCreateDate"></a><a href="source-class-rex_media.html#224-230" title="Go to source code">getCreateDate</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="toImage" id="_toImage">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_toImage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/toImage"></a><a href="source-class-rex_media.html#232-266" title="Go to source code">toImage</a>( <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$params</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="toLink" id="_toLink">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_toLink">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/toLink"></a><a href="source-class-rex_media.html#268-276" title="Go to source code">toLink</a>( <span>string <var>$attributes</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isImage" id="_isImage">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isImage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isImage"></a><a href="source-class-rex_media.html#278-284" title="Go to source code">isImage</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getExtension" id="_getExtension">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getExtension">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getExtension"></a><a href="source-class-rex_media.html#288-294" title="Go to source code">getExtension</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="fileExists" id="_fileExists">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_fileExists">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/fileExists"></a><a href="source-class-rex_media.html#296-299" title="Go to source code">fileExists</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getDocTypes" id="_getDocTypes">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDocTypes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDocTypes"></a><a href="source-class-rex_media.html#302-305" title="Go to source code">getDocTypes</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="isDocType" id="_isDocType">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isDocType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isDocType"></a><a href="source-class-rex_media.html#307-310" title="Go to source code">isDocType</a>( <span>mixed <var>$type</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getImageTypes" id="_getImageTypes">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getImageTypes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getImageTypes"></a><a href="source-class-rex_media.html#313-316" title="Go to source code">getImageTypes</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="isImageType" id="_isImageType">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isImageType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isImageType"></a><a href="source-class-rex_media.html#318-321" title="Go to source code">isImageType</a>( <span>mixed <var>$extension</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="hasValue" id="_hasValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasValue"></a><a href="source-class-rex_media.html#323-326" title="Go to source code">hasValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getValue" id="_getValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_media.html#328-338" title="Go to source code">getValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="isPermitted" id="_isPermitted">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isPermitted">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPermitted"></a><a href="source-class-rex_media.html#340-348" title="Go to source code">isPermitted</a>( )</code>
+<div class="description short">
+<p>Returns whether the element is permitted.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the element is permitted.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_instance_pool_trait.html#methods">rex_instance_pool_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_instance_pool_trait.html#_addInstance">addInstance()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_clearInstance">clearInstance()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_clearInstancePool">clearInstancePool()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_getInstance">getInstance()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_hasInstance">hasInstance()</a></code>
+</p>
+<h3>Methods used from <a href="class-rex_instance_list_pool_trait.html#methods">rex_instance_list_pool_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_instance_list_pool_trait.html#_addInstanceList">addInstanceList()</a></code>, 
+			<code><a href="class-rex_instance_list_pool_trait.html#_clearInstanceList">clearInstanceList()</a></code>, 
+			<code><a href="class-rex_instance_list_pool_trait.html#_clearInstanceListPool">clearInstanceListPool()</a></code>, 
+			<code><a href="class-rex_instance_list_pool_trait.html#_getInstanceList">getInstanceList()</a></code>, 
+			<code><a href="class-rex_instance_list_pool_trait.html#_hasInstanceList">hasInstanceList()</a></code>
+</p>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="id" id="$id">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24id"></a><a href="source-class-rex_media.html#14" title="Go to source code"><var>$id</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$id">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="category_id" id="$category_id">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24category_id"></a><a href="source-class-rex_media.html#16" title="Go to source code"><var>$category_id</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$category_id">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="name" id="$name">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24name"></a><a href="source-class-rex_media.html#19" title="Go to source code"><var>$name</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$name">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="originalname" id="$originalname">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24originalname"></a><a href="source-class-rex_media.html#21" title="Go to source code"><var>$originalname</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$originalname">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="type" id="$type">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24type"></a><a href="source-class-rex_media.html#23" title="Go to source code"><var>$type</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$type">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="size" id="$size">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24size"></a><a href="source-class-rex_media.html#25" title="Go to source code"><var>$size</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$size">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="width" id="$width">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24width"></a><a href="source-class-rex_media.html#28" title="Go to source code"><var>$width</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$width">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="height" id="$height">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24height"></a><a href="source-class-rex_media.html#30" title="Go to source code"><var>$height</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$height">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="title" id="$title">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24title"></a><a href="source-class-rex_media.html#33" title="Go to source code"><var>$title</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$title">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="updatedate" id="$updatedate">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24updatedate"></a><a href="source-class-rex_media.html#36" title="Go to source code"><var>$updatedate</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$updatedate">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="createdate" id="$createdate">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24createdate"></a><a href="source-class-rex_media.html#38" title="Go to source code"><var>$createdate</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$createdate">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="updateuser" id="$updateuser">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24updateuser"></a><a href="source-class-rex_media.html#41" title="Go to source code"><var>$updateuser</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$updateuser">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="createuser" id="$createuser">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24createuser"></a><a href="source-class-rex_media.html#43" title="Go to source code"><var>$createuser</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$createuser">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_extension</h1>
+<div class="description">
+<p>Klasse die Einsprungpunkte zur Erweiterung der Kernfunktionalitaetet
+bietet.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_extension</span></b>			
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				Markus Staab<br/>
+<b>Located at</b> <a href="source-class-rex_extension.html#3-90" title="Go to source code">redaxo/src/core/lib/extension.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="registerPoint" id="_registerPoint">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_registerPoint">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/registerPoint"></a><a href="source-class-rex_extension.html#25-55" title="Go to source code">registerPoint</a>( <span><code><a href="class-rex_extension_point.html">rex_extension_point</a></code> <var>$extensionPoint</var></span> )</code>
+<div class="description short">
+<p>Registers an extension point.</p>
+</div>
+<div class="description detailed hidden">
+<p>Registers an extension point.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$extensionPoint</var></dt>
+<dd>Extension point</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>Subject, maybe adjusted by the extensions<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="register" id="_register">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_register">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/register"></a><a href="source-class-rex_extension.html#57-74" title="Go to source code">register</a>( <span>string|string[] <var>$extensionPoint</var></span>, <span>callable <var>$extension</var></span>, <span>integer <var>$level</var> = <code><a href="class-rex_extension.html#NORMAL">rex_extension::<b>NORMAL</b></a></code></span>, <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+<p>Registers an extension for an extension point.</p>
+</div>
+<div class="description detailed hidden">
+<p>Registers an extension for an extension point.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$extensionPoint</var></dt>
+<dd>Name(s) of extension point(s)</dd>
+<dt><var>$extension</var></dt>
+<dd>Callback extension</dd>
+<dt><var>$level</var></dt>
+<dd>Runlevel (&lt;code&gt;rex_extension::EARLY&lt;/code&gt;, &lt;code&gt;rex_extension::NORMAL&lt;/code&gt;
+or &lt;code&gt;rex_extension::LATE&lt;/code&gt;)</dd>
+<dt><var>$params</var></dt>
+<dd>Additional params</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isRegistered" id="_isRegistered">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isRegistered">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isRegistered"></a><a href="source-class-rex_extension.html#76-89" title="Go to source code">isRegistered</a>( <span>string <var>$extensionPoint</var></span> )</code>
+<div class="description short">
+<p>Checks whether an extension is registered for the given extension point.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether an extension is registered for the given extension point.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$extensionPoint</var></dt>
+<dd>Name of extension point</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="EARLY" id="EARLY">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/EARLY"></a><a href="source-class-rex_extension.html#14" title="Go to source code"><b>EARLY</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#EARLY">#</a><code>-<span class="php-num">1</span></code></div></td>
+</tr>
+<tr data-order="NORMAL" id="NORMAL">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/NORMAL"></a><a href="source-class-rex_extension.html#15" title="Go to source code"><b>NORMAL</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#NORMAL">#</a><code><span class="php-num">0</span></code></div></td>
+</tr>
+<tr data-order="LATE" id="LATE">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/LATE"></a><a href="source-class-rex_extension.html#16" title="Go to source code"><b>LATE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#LATE">#</a><code><span class="php-num">1</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

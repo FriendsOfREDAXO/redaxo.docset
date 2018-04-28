@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_article_content_base</h1>
+<div class="description">
+<p>Klasse regelt den Zugriff auf Artikelinhalte. Alle benötigten Daten werden
+von der DB bezogen.</p>
+</div>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_article_content.html">rex_article_content</a></code>
+</p>
+</div>
+<div>
+<h3>Indirect known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_article_content_editor.html">rex_article_content_editor</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a>\<a href="package-redaxo.structure.content.html">content</a><br/>
+<b>Located at</b> <a href="source-class-rex_article_content_base.html#3-534" title="Go to source code">redaxo/src/addons/structure/plugins/content/lib/article_content_base.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_article_content_base.html#34-65" title="Go to source code">__construct</a>( <span>mixed <var>$article_id</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getSqlInstance" id="_getSqlInstance">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSqlInstance">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSqlInstance"></a><a href="source-class-rex_article_content_base.html#67-76" title="Go to source code">getSqlInstance</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setSliceRevision" id="_setSliceRevision">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setSliceRevision">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setSliceRevision"></a><a href="source-class-rex_article_content_base.html#78-81" title="Go to source code">setSliceRevision</a>( <span>mixed <var>$sr</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setSliceId" id="_setSliceId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setSliceId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setSliceId"></a><a href="source-class-rex_article_content_base.html#84-87" title="Go to source code">setSliceId</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setClang" id="_setClang">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setClang">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setClang"></a><a href="source-class-rex_article_content_base.html#89-95" title="Go to source code">setClang</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getArticleId" id="_getArticleId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getArticleId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArticleId"></a><a href="source-class-rex_article_content_base.html#97-100" title="Go to source code">getArticleId</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getClangId" id="_getClangId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getClangId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getClangId"></a><a href="source-class-rex_article_content_base.html#102-105" title="Go to source code">getClangId</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getClang" id="_getClang">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getClang">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getClang"></a><a href="source-class-rex_article_content_base.html#107-113" title="Go to source code"><span class="deprecated">getClang</span></a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Deprecated</h4>
+<div class="list">
+							since redaxo 5.6, use getClangId() instead<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setArticleId" id="_setArticleId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setArticleId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setArticleId"></a><a href="source-class-rex_article_content_base.html#115-134" title="Go to source code">setArticleId</a>( <span>mixed <var>$article_id</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setTemplateId" id="_setTemplateId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setTemplateId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setTemplateId"></a><a href="source-class-rex_article_content_base.html#136-139" title="Go to source code">setTemplateId</a>( <span>mixed <var>$template_id</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getTemplateId" id="_getTemplateId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTemplateId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTemplateId"></a><a href="source-class-rex_article_content_base.html#141-144" title="Go to source code">getTemplateId</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setMode" id="_setMode">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setMode">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setMode"></a><a href="source-class-rex_article_content_base.html#146-149" title="Go to source code">setMode</a>( <span>mixed <var>$mode</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setFunction" id="_setFunction">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setFunction">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFunction"></a><a href="source-class-rex_article_content_base.html#151-154" title="Go to source code">setFunction</a>( <span>mixed <var>$function</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setEval" id="_setEval">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setEval">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setEval"></a><a href="source-class-rex_article_content_base.html#156-163" title="Go to source code">setEval</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="correctValue" id="_correctValue">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_correctValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/correctValue"></a><a href="source-class-rex_article_content_base.html#165-178" title="Go to source code">correctValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="_getValue" id="__getValue">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#__getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_getValue"></a><a href="source-class-rex_article_content_base.html#180-185" title="Go to source code">_getValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getValue" id="_getValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_article_content_base.html#187-199" title="Go to source code">getValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="hasValue" id="_hasValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasValue"></a><a href="source-class-rex_article_content_base.html#201-204" title="Go to source code">hasValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="outputSlice" id="_outputSlice">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_outputSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/outputSlice"></a><a href="source-class-rex_article_content_base.html#206-228" title="Go to source code">outputSlice</a>( <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$artDataSql</var></span>, <span>integer <var>$moduleIdToAdd</var></span> )</code>
+<div class="description short">
+<p>Outputs a slice.</p>
+</div>
+<div class="description detailed hidden">
+<p>Outputs a slice.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$artDataSql</var></dt>
+<dd>A rex_sql instance containing all slice and module data</dd>
+<dt><var>$moduleIdToAdd</var></dt>
+<dd>The id of the module, which was selected using the ModuleSelect</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSlice" id="_getSlice">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSlice"></a><a href="source-class-rex_article_content_base.html#230-248" title="Go to source code">getSlice</a>( <span>integer <var>$sliceId</var></span> )</code>
+<div class="description short">
+<p>Returns the content of the given slice-id.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the content of the given slice-id.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$sliceId</var></dt>
+<dd>A article-slice id</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getArticle" id="_getArticle">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArticle"></a><a href="source-class-rex_article_content_base.html#250-377" title="Go to source code">getArticle</a>( <span>integer <var>$curctype</var> = -<span class="php-num">1</span></span> )</code>
+<div class="description short">
+<p>Returns the content of the article of the given ctype. If no ctype is given,
+content of all ctypes is returned.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the content of the article of the given ctype. If no ctype is given,
+content of all ctypes is returned.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$curctype</var></dt>
+<dd>The ctype to fetch, or -1 for all ctypes</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="preArticle" id="_preArticle">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_preArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preArticle"></a><a href="source-class-rex_article_content_base.html#379-391" title="Go to source code">preArticle</a>( <span>string <var>$articleContent</var></span>, <span>integer <var>$module_id</var></span> )</code>
+<div class="description short">
+<p>Method which gets called, before the slices of the article are processed.</p>
+</div>
+<div class="description detailed hidden">
+<p>Method which gets called, before the slices of the article are processed.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$articleContent</var></dt>
+<dd>The content of the article</dd>
+<dt><var>$module_id</var></dt>
+<dd>A module id</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="postArticle" id="_postArticle">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_postArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/postArticle"></a><a href="source-class-rex_article_content_base.html#393-405" title="Go to source code">postArticle</a>( <span>string <var>$articleContent</var></span>, <span>integer <var>$module_id</var></span> )</code>
+<div class="description short">
+<p>Method which gets called, after all slices have been processed.</p>
+</div>
+<div class="description detailed hidden">
+<p>Method which gets called, after all slices have been processed.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$articleContent</var></dt>
+<dd>The content of the article</dd>
+<dt><var>$module_id</var></dt>
+<dd>A module id</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getArticleTemplate" id="_getArticleTemplate">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getArticleTemplate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArticleTemplate"></a><a href="source-class-rex_article_content_base.html#408-426" title="Go to source code">getArticleTemplate</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getStreamOutput" id="_getStreamOutput">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getStreamOutput">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStreamOutput"></a><a href="source-class-rex_article_content_base.html#428-441" title="Go to source code">getStreamOutput</a>( <span>mixed <var>$path</var></span>, <span>mixed <var>$content</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="replaceVars" id="_replaceVars">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_replaceVars">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVars"></a><a href="source-class-rex_article_content_base.html#444-462" title="Go to source code">replaceVars</a>( <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$sql</var></span>, <span>mixed <var>$content</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="replaceObjectVars" id="_replaceObjectVars">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_replaceObjectVars">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceObjectVars"></a><a href="source-class-rex_article_content_base.html#465-480" title="Go to source code">replaceObjectVars</a>( <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$sql</var></span>, <span>mixed <var>$content</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="replaceCommonVars" id="_replaceCommonVars">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_replaceCommonVars">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceCommonVars"></a><a href="source-class-rex_article_content_base.html#483-522" title="Go to source code">replaceCommonVars</a>( <span>mixed <var>$content</var></span>, <span>mixed <var>$template_id</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="replaceLinks" id="_replaceLinks">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_replaceLinks">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceLinks"></a><a href="source-class-rex_article_content_base.html#524-533" title="Go to source code">replaceLinks</a>( <span>mixed <var>$content</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="warning" id="$warning">
+<td class="attributes"><code>
+				public  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24warning"></a><a href="source-class-rex_article_content_base.html#11" title="Go to source code"><var>$warning</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$warning">#</a><code></code></div></td>
+</tr>
+<tr data-order="info" id="$info">
+<td class="attributes"><code>
+				public  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24info"></a><a href="source-class-rex_article_content_base.html#12" title="Go to source code"><var>$info</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$info">#</a><code></code></div></td>
+</tr>
+<tr data-order="debug" id="$debug">
+<td class="attributes"><code>
+				public  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24debug"></a><a href="source-class-rex_article_content_base.html#13" title="Go to source code"><var>$debug</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$debug">#</a><code></code></div></td>
+</tr>
+<tr data-order="template_id" id="$template_id">
+<td class="attributes"><code>
+				public  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24template_id"></a><a href="source-class-rex_article_content_base.html#15" title="Go to source code"><var>$template_id</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$template_id">#</a><code></code></div></td>
+</tr>
+<tr data-order="template_attributes" id="$template_attributes">
+<td class="attributes"><code>
+				public  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24template_attributes"></a><a href="source-class-rex_article_content_base.html#16" title="Go to source code"><var>$template_attributes</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$template_attributes">#</a><code></code></div></td>
+</tr>
+<tr data-order="category_id" id="$category_id">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24category_id"></a><a href="source-class-rex_article_content_base.html#18" title="Go to source code"><var>$category_id</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$category_id">#</a><code></code></div></td>
+</tr>
+<tr data-order="article_id" id="$article_id">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24article_id"></a><a href="source-class-rex_article_content_base.html#19" title="Go to source code"><var>$article_id</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$article_id">#</a><code></code></div></td>
+</tr>
+<tr data-order="slice_id" id="$slice_id">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24slice_id"></a><a href="source-class-rex_article_content_base.html#20" title="Go to source code"><var>$slice_id</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$slice_id">#</a><code></code></div></td>
+</tr>
+<tr data-order="getSlice" id="$getSlice">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24getSlice"></a><a href="source-class-rex_article_content_base.html#21" title="Go to source code"><var>$getSlice</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$getSlice">#</a><code></code></div></td>
+</tr>
+<tr data-order="mode" id="$mode">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24mode"></a><a href="source-class-rex_article_content_base.html#22" title="Go to source code"><var>$mode</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$mode">#</a><code></code></div></td>
+</tr>
+<tr data-order="function" id="$function">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24function"></a><a href="source-class-rex_article_content_base.html#23" title="Go to source code"><var>$function</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$function">#</a><code></code></div></td>
+</tr>
+<tr data-order="ctype" id="$ctype">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24ctype"></a><a href="source-class-rex_article_content_base.html#25" title="Go to source code"><var>$ctype</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$ctype">#</a><code></code></div></td>
+</tr>
+<tr data-order="clang" id="$clang">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24clang"></a><a href="source-class-rex_article_content_base.html#26" title="Go to source code"><var>$clang</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$clang">#</a><code></code></div></td>
+</tr>
+<tr data-order="eval" id="$eval">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24eval"></a><a href="source-class-rex_article_content_base.html#28" title="Go to source code"><var>$eval</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$eval">#</a><code></code></div></td>
+</tr>
+<tr data-order="slice_revision" id="$slice_revision">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24slice_revision"></a><a href="source-class-rex_article_content_base.html#30" title="Go to source code"><var>$slice_revision</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$slice_revision">#</a><code></code></div></td>
+</tr>
+<tr data-order="ARTICLE" id="$ARTICLE">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24ARTICLE"></a><a href="source-class-rex_article_content_base.html#32" title="Go to source code"><var>$ARTICLE</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$ARTICLE">#</a><code></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

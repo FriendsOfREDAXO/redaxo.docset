@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Trait rex_instance_list_pool_trait</h1>
+<div class="description">
+<p>Instance List Pool Trait.</p>
+</div>
+<div>
+<h3>Direct Known Users</h3>
+<p class="elementList">
+<code><a href="class-rex_media.html">rex_media</a></code>, 
+			<code><a href="class-rex_media_category.html">rex_media_category</a></code>, 
+			<code><a href="class-rex_structure_element.html">rex_structure_element</a></code>
+</p>
+</div>
+<div>
+<h3>Indirect Known Users</h3>
+<p class="elementList">
+<code><a href="class-rex_article.html">rex_article</a></code>, 
+			<code><a href="class-rex_category.html">rex_category</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_instance_list_pool_trait.html#3-106" title="Go to source code">redaxo/src/core/lib/base/instance_list_pool_trait.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="addInstanceList" id="_addInstanceList">
+<td class="attributes"><code>
+				 protected static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addInstanceList">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addInstanceList"></a><a href="source-class-rex_instance_list_pool_trait.html#17-27" title="Go to source code">addInstanceList</a>( <span>mixed <var>$key</var></span>, <span>array <var>$instanceKeyList</var></span> )</code>
+<div class="description short">
+<p>Adds an instance list.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds an instance list.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+<dt><var>$instanceKeyList</var></dt>
+<dd>Array of instance keys</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasInstanceList" id="_hasInstanceList">
+<td class="attributes"><code>
+				 protected static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasInstanceList">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasInstanceList"></a><a href="source-class-rex_instance_list_pool_trait.html#29-40" title="Go to source code">hasInstanceList</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+<p>Checks whether an instance list exists for the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether an instance list exists for the given key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInstanceList" id="_getInstanceList">
+<td class="attributes"><code>
+				 protected static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInstanceList">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInstanceList"></a><a href="source-class-rex_instance_list_pool_trait.html#42-72" title="Go to source code">getInstanceList</a>( <span>mixed <var>$key</var></span>, <span>callable <var>$getInstanceCallback</var></span>, <span>callable <var>$createListCallback</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the instance list for the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the instance list for the given key.</p>
+<p>If the instance list does not exist it will be created by calling the
+$createListCallback</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+<dt><var>$getInstanceCallback</var></dt>
+<dd>Callback, will be called for every list item to get the instance</dd>
+<dt><var>$createListCallback</var></dt>
+<dd>Callback, will be called to create the list of instance keys</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="clearInstanceList" id="_clearInstanceList">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_clearInstanceList">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clearInstanceList"></a><a href="source-class-rex_instance_list_pool_trait.html#74-83" title="Go to source code">clearInstanceList</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+<p>Clears the instance list of the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Clears the instance list of the given key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="clearInstanceListPool" id="_clearInstanceListPool">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_clearInstanceListPool">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clearInstanceListPool"></a><a href="source-class-rex_instance_list_pool_trait.html#85-91" title="Go to source code">clearInstanceListPool</a>( )</code>
+<div class="description short">
+<p>Clears the instance list pool.</p>
+</div>
+<div class="description detailed hidden">
+<p>Clears the instance list pool.</p>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

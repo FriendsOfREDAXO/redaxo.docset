@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_article_content_editor</h1>
+<div class="description">
+<p>Erweiterung eines Artikels um slicemanagement.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_article_content_base.html"><span>rex_article_content_base</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<a href="class-rex_article_content.html"><span>rex_article_content</span></a>
+</dd>
+<dd style="padding-left:60px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_article_content_editor</span></b>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a>\<a href="package-redaxo.structure.content.html">content</a><br/>
+<b>Located at</b> <a href="source-class-rex_article_content_editor.html#3-490" title="Go to source code">redaxo/src/addons/structure/plugins/content/lib/article_content_editor.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_article_content_editor.html#13-16" title="Go to source code">__construct</a>( <span>mixed <var>$article_id</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content.html#___construct">rex_article_content::__construct</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="outputSlice" id="_outputSlice">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_outputSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/outputSlice"></a><a href="source-class-rex_article_content_editor.html#18-92" title="Go to source code">outputSlice</a>( <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$artDataSql</var></span>, <span>integer <var>$moduleIdToAdd</var></span> )</code>
+<div class="description short">
+<p>Outputs a slice.</p>
+</div>
+<div class="description detailed hidden">
+<p>Outputs a slice.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$artDataSql</var></dt>
+<dd>A rex_sql instance containing all slice and module data</dd>
+<dt><var>$moduleIdToAdd</var></dt>
+<dd>The id of the module, which was selected using the ModuleSelect</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#_outputSlice">rex_article_content_base::outputSlice</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="preArticle" id="_preArticle">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_preArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preArticle"></a><a href="source-class-rex_article_content_editor.html#281-310" title="Go to source code">preArticle</a>( <span>string <var>$articleContent</var></span>, <span>integer <var>$module_id</var></span> )</code>
+<div class="description short">
+<p>Method which gets called, before the slices of the article are processed.</p>
+</div>
+<div class="description detailed hidden">
+<p>Method which gets called, before the slices of the article are processed.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$articleContent</var></dt>
+<dd>The content of the article</dd>
+<dt><var>$module_id</var></dt>
+<dd>A module id</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#_preArticle">rex_article_content_base::preArticle</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="postArticle" id="_postArticle">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_postArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/postArticle"></a><a href="source-class-rex_article_content_editor.html#312-332" title="Go to source code">postArticle</a>( <span>string <var>$articleContent</var></span>, <span>integer <var>$moduleIdToAdd</var></span> )</code>
+<div class="description short">
+<p>Method which gets called, after all slices have been processed.</p>
+</div>
+<div class="description detailed hidden">
+<p>Method which gets called, after all slices have been processed.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$articleContent</var></dt>
+<dd>The content of the article</dd>
+<dt><var>$moduleIdToAdd</var></dt>
+<dd>$module_id A module id</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#_postArticle">rex_article_content_base::postArticle</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addSlice" id="_addSlice">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addSlice"></a><a href="source-class-rex_article_content_editor.html#335-418" title="Go to source code">addSlice</a>( <span>mixed <var>$sliceId</var></span>, <span>mixed <var>$moduleIdToAdd</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="editSlice" id="_editSlice">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_editSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/editSlice"></a><a href="source-class-rex_article_content_editor.html#421-489" title="Go to source code">editSlice</a>( <span>mixed <var>$RE_CONTS</var></span>, <span>mixed <var>$RE_MODUL_IN</var></span>, <span>mixed <var>$RE_CTYPE</var></span>, <span>mixed <var>$RE_MODUL_ID</var></span>, <span>mixed <var>$artDataSql</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_article_content.html#methods">rex_article_content</a></h3>
+<p class="elementList">
+<code><a href="class-rex_article_content.html#__getValue">_getValue()</a></code>, 
+			<code><a href="class-rex_article_content.html#_getArticle">getArticle()</a></code>, 
+			<code><a href="class-rex_article_content.html#_getContentAsQuery">getContentAsQuery()</a></code>, 
+			<code><a href="class-rex_article_content.html#_hasValue">hasValue()</a></code>, 
+			<code><a href="class-rex_article_content.html#_setArticleId">setArticleId()</a></code>
+</p>
+<h3>Methods inherited from <a href="class-rex_article_content_base.html#methods">rex_article_content_base</a></h3>
+<p class="elementList">
+<code><a href="class-rex_article_content_base.html#_correctValue">correctValue()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getArticleId">getArticleId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getArticleTemplate">getArticleTemplate()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getClang"><span class="deprecated">getClang()</span></a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getClangId">getClangId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getSlice">getSlice()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getSqlInstance">getSqlInstance()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getStreamOutput">getStreamOutput()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getTemplateId">getTemplateId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getValue">getValue()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceCommonVars">replaceCommonVars()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceLinks">replaceLinks()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceObjectVars">replaceObjectVars()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceVars">replaceVars()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setClang">setClang()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setEval">setEval()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setFunction">setFunction()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setMode">setMode()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setSliceId">setSliceId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setSliceRevision">setSliceRevision()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setTemplateId">setTemplateId()</a></code>
+</p>
+<h2>Properties summary</h2>
+<h3>Properties inherited from <a href="class-rex_article_content_base.html#properties">rex_article_content_base</a></h3>
+<p class="elementList">
+<code><a href="class-rex_article_content_base.html#$ARTICLE"><var>$ARTICLE</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$article_id"><var>$article_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$category_id"><var>$category_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$clang"><var>$clang</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$ctype"><var>$ctype</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$debug"><var>$debug</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$eval"><var>$eval</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$function"><var>$function</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$getSlice"><var>$getSlice</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$info"><var>$info</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$mode"><var>$mode</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$slice_id"><var>$slice_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$slice_revision"><var>$slice_revision</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$template_attributes"><var>$template_attributes</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$template_id"><var>$template_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$warning"><var>$warning</var></a></code>
+</p>
+</div></body>
+</html>

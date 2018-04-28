@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_addon_manager</h1>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_package_manager.html"><span>rex_package_manager</span></a>
+			
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_addon_manager</span></b>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_addon_manager.html#3-141" title="Go to source code">redaxo/src/core/lib/packages/addons/manager.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_addon_manager.html#8-16" title="Go to source code">__construct</a>( <span><code><a href="class-rex_addon.html">rex_addon</a></code> <var>$addon</var></span> )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+</dl></div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package_manager.html#___construct">rex_package_manager::__construct</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="install" id="_install">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_install">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/install"></a><a href="source-class-rex_addon_manager.html#18-41" title="Go to source code">install</a>( <span>boolean <var>$installDump</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Installs a package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Installs a package.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$installDump</var></dt>
+<dd>When TRUE, the sql dump will be importet</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on error<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_functional_exception.html">rex_functional_exception</a></code></code><br/>rex_functional_exception<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package_manager.html#_install">rex_package_manager::install</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="uninstall" id="_uninstall">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_uninstall">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/uninstall"></a><a href="source-class-rex_addon_manager.html#43-61" title="Go to source code">uninstall</a>( <span>boolean <var>$installDump</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Uninstalls a package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Uninstalls a package.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$installDump</var></dt>
+<dd>When TRUE, the sql dump will be importet</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on error<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_functional_exception.html">rex_functional_exception</a></code></code><br/>rex_functional_exception<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package_manager.html#_uninstall">rex_package_manager::uninstall</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="activate" id="_activate">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_activate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/activate"></a><a href="source-class-rex_addon_manager.html#63-106" title="Go to source code">activate</a>( )</code>
+<div class="description short">
+<p>Activates a package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Activates a package.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on error<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package_manager.html#_activate">rex_package_manager::activate</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="checkDependencies" id="_checkDependencies">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_checkDependencies">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/checkDependencies"></a><a href="source-class-rex_addon_manager.html#108-129" title="Go to source code">checkDependencies</a>( )</code>
+<div class="description short">
+<p>Checks if another Package which is activated, depends on the given
+package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks if another Package which is activated, depends on the given
+package.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package_manager.html#_checkDependencies">rex_package_manager::checkDependencies</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="wrongPackageId" id="_wrongPackageId">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_wrongPackageId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/wrongPackageId"></a><a href="source-class-rex_addon_manager.html#131-140" title="Go to source code">wrongPackageId</a>( <span>string <var>$addonName</var></span>, <span>string <var>$pluginName</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addonName</var></dt>
+<dd></dd>
+<dt><var>$pluginName</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_package_manager.html#methods">rex_package_manager</a></h3>
+<p class="elementList">
+<code><a href="class-rex_package_manager.html#__delete">_delete()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_checkConflicts">checkConflicts()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_checkPackageConflict">checkPackageConflict()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_checkPackageRequirement">checkPackageRequirement()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_checkRedaxoRequirement">checkRedaxoRequirement()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_checkRequirements">checkRequirements()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_deactivate">deactivate()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_delete">delete()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_factory">factory()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_generatePackageOrder">generatePackageOrder()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_getMessage">getMessage()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_i18n">i18n()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_saveConfig">saveConfig()</a></code>, 
+			<code><a href="class-rex_package_manager.html#_synchronizeWithFileSystem">synchronizeWithFileSystem()</a></code>
+</p>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+<h2>Properties summary</h2>
+<h3>Properties inherited from <a href="class-rex_package_manager.html#properties">rex_package_manager</a></h3>
+<p class="elementList">
+<code><a href="class-rex_package_manager.html#$generatePackageOrder"><var>$generatePackageOrder</var></a></code>, 
+			<code><a href="class-rex_package_manager.html#$message"><var>$message</var></a></code>, 
+			<code><a href="class-rex_package_manager.html#$package"><var>$package</var></a></code>
+</p>
+</div></body>
+</html>

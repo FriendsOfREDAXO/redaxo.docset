@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_sql_util</h1>
+<div class="description">
+<p>Class to execute a sql dump.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_sql_util.html#3-233" title="Go to source code">redaxo/src/core/lib/sql/util.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="organizePriorities" id="_organizePriorities">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_organizePriorities">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/organizePriorities"></a><a href="source-class-rex_sql_util.html#10-39" title="Go to source code">organizePriorities</a>( <span>string <var>$tableName</var></span>, <span>string <var>$priorColumnName</var></span>, <span>string <var>$whereCondition</var> = <span class="php-quote">''</span></span>, <span>string <var>$orderBy</var> = <span class="php-quote">''</span></span>, <span>integer <var>$startBy</var> = <span class="php-num">1</span></span> )</code>
+<div class="description short">
+<p>Allgemeine funktion die eine Datenbankspalte fortlaufend durchnummeriert.
+Dies ist z.B. nützlich beim Umgang mit einer Prioritäts-Spalte.</p>
+</div>
+<div class="description detailed hidden">
+<p>Allgemeine funktion die eine Datenbankspalte fortlaufend durchnummeriert.
+Dies ist z.B. nützlich beim Umgang mit einer Prioritäts-Spalte.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$tableName</var></dt>
+<dd>Name der Datenbanktabelle</dd>
+<dt><var>$priorColumnName</var></dt>
+<dd>Name der Spalte in der Tabelle, in der die Priorität (Integer) gespeichert wird</dd>
+<dt><var>$whereCondition</var></dt>
+<dd>Where-Bedingung zur Einschränkung des ResultSets</dd>
+<dt><var>$orderBy</var></dt>
+<dd>Sortierung des ResultSets</dd>
+<dt><var>$startBy</var></dt>
+<dd>Startpriorität</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="importDump" id="_importDump">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_importDump">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/importDump"></a><a href="source-class-rex_sql_util.html#41-69" title="Go to source code">importDump</a>( <span>string <var>$file</var></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Importiert die gegebene SQL-Datei in die Datenbank.</p>
+</div>
+<div class="description detailed hidden">
+<p>Importiert die gegebene SQL-Datei in die Datenbank.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd></dd>
+<dt><var>$debug</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>true bei Erfolg<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_sql_exception.html">rex_sql_exception</a></code></code><br/>rex_sql_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="splitSqlFile" id="_splitSqlFile">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_splitSqlFile">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/splitSqlFile"></a><a href="source-class-rex_sql_util.html#124-232" title="Go to source code">splitSqlFile</a>( <span>mixed <var>&amp; $ret</var></span>, <span>mixed <var>$sql</var></span>, <span>mixed <var>$release</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_dir</h1>
+<div class="description">
+<p>Class for handling directories.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_dir.html#3-131" title="Go to source code">redaxo/src/core/lib/util/dir.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="create" id="_create">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_create">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/create"></a><a href="source-class-rex_dir.html#12-37" title="Go to source code">create</a>( <span>string <var>$dir</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Creates a directory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Creates a directory.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>Path of the new directory</dd>
+<dt><var>$recursive</var></dt>
+<dd>When FALSE, nested directories won't be created</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isWritable" id="_isWritable">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isWritable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isWritable"></a><a href="source-class-rex_dir.html#39-50" title="Go to source code">isWritable</a>( <span>string <var>$dir</var></span> )</code>
+<div class="description short">
+<p>Returns wether the directory is writable.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the directory is writable.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>Path of the directory</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="copy" id="_copy">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_copy">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/copy"></a><a href="source-class-rex_dir.html#52-81" title="Go to source code">copy</a>( <span>string <var>$srcdir</var></span>, <span>string <var>$dstdir</var></span> )</code>
+<div class="description short">
+<p>Copies a directory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Copies a directory.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$srcdir</var></dt>
+<dd>Path of the source directory</dd>
+<dt><var>$dstdir</var></dt>
+<dd>Path of the destination directory</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="delete" id="_delete">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_delete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/delete"></a><a href="source-class-rex_dir.html#83-94" title="Go to source code">delete</a>( <span>string <var>$dir</var></span>, <span>boolean <var>$deleteSelf</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Deletes a directory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Deletes a directory.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>Path of the directory</dd>
+<dt><var>$deleteSelf</var></dt>
+<dd>When FALSE, only subdirectories and files will be deleted</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteFiles" id="_deleteFiles">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteFiles">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteFiles"></a><a href="source-class-rex_dir.html#96-108" title="Go to source code">deleteFiles</a>( <span>string <var>$dir</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Deletes the files in a directory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Deletes the files in a directory.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>Path of the directory</dd>
+<dt><var>$recursive</var></dt>
+<dd>When FALSE, files in subdirectories won't be deleted</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteIterator" id="_deleteIterator">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteIterator">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteIterator"></a><a href="source-class-rex_dir.html#110-130" title="Go to source code">deleteIterator</a>( <span>Traversable <var>$iterator</var></span> )</code>
+<div class="description short">
+<p>Deletes files and directories by a rex_dir_iterator.</p>
+</div>
+<div class="description detailed hidden">
+<p>Deletes files and directories by a rex_dir_iterator.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$iterator</var></dt>
+<dd>Iterator, $iterator-&amp;gt;current() must return a SplFileInfo-Object</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

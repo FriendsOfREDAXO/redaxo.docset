@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Interface rex_context_provider_interface</h1>
+<div class="description">
+<p>Generic interface for classes which provide a complete rex-context. A
+rex-context consists of a set of parameters which may get passed using urls (via
+parameter) or forms (via hidden input fields).</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_context_provider_interface</span></b>			
+			 implements 
+				<a href="class-rex_url_provider_interface.html"><span>rex_url_provider_interface</span></a>
+</dd>
+</dl>
+<div>
+<h3>Direct known implementers</h3>
+<p class="elementList">
+<code><a href="class-rex_context.html">rex_context</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				staabm<br/>
+<b>Located at</b> <a href="source-class-rex_context_provider_interface.html#23-41" title="Go to source code">redaxo/src/core/lib/context.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="getHiddenInputFields" id="_getHiddenInputFields">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHiddenInputFields">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHiddenInputFields"></a><a href="source-class-rex_context_provider_interface.html#33-40" title="Go to source code">getHiddenInputFields</a>( <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+<p>Returns a html string containg hidden input fields for the given
+parameters.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a html string containg hidden input fields for the given
+parameters.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$params</var></dt>
+<dd>A array containing key value pairs for the parameter and its value</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>The generated html source containing the hidden input fields<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_url_provider_interface.html#methods">rex_url_provider_interface</a></h3>
+<p class="elementList">
+<code><a href="class-rex_url_provider_interface.html#_getUrl">getUrl()</a></code>
+</p>
+</div></body>
+</html>

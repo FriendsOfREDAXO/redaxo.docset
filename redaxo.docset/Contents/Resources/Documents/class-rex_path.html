@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_path</h1>
+<div class="description">
+<p>Utility class to generate absolute paths.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_path.html#3-359" title="Go to source code">redaxo/src/core/lib/util/path.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="init" id="_init">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_init">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_path.html#14-22" title="Go to source code">init</a>( <span>mixed <var>$pathprovider</var></span> )</code>
+<div class="description short">
+<p>Initializes the class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Initializes the class.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$pathprovider</var></dt>
+<dd>A path provider</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="base" id="_base">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_base">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/base"></a><a href="source-class-rex_path.html#24-34" title="Go to source code">base</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the base/root path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the base/root path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="frontend" id="_frontend">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_frontend">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/frontend"></a><a href="source-class-rex_path.html#36-46" title="Go to source code">frontend</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the frontend (the document root).</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the frontend (the document root).</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="frontendController" id="_frontendController">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_frontendController">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/frontendController"></a><a href="source-class-rex_path.html#48-56" title="Go to source code">frontendController</a>( )</code>
+<div class="description short">
+<p>Returns the path to the frontend-controller (index.php from frontend).</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the frontend-controller (index.php from frontend).</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="backend" id="_backend">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_backend">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/backend"></a><a href="source-class-rex_path.html#58-68" title="Go to source code">backend</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the backend (folder where the backend controller is
+placed).</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the backend (folder where the backend controller is
+placed).</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="backendController" id="_backendController">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_backendController">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/backendController"></a><a href="source-class-rex_path.html#70-78" title="Go to source code">backendController</a>( )</code>
+<div class="description short">
+<p>Returns the path to the backend-controller (index.php from backend).</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the backend-controller (index.php from backend).</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="media" id="_media">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_media">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/media"></a><a href="source-class-rex_path.html#80-90" title="Go to source code">media</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the media-folder.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the media-folder.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="assets" id="_assets">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_assets">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/assets"></a><a href="source-class-rex_path.html#92-102" title="Go to source code">assets</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the assets folder.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the assets folder.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="coreAssets" id="_coreAssets">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_coreAssets">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/coreAssets"></a><a href="source-class-rex_path.html#104-114" title="Go to source code">coreAssets</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the assets folder of the core, which contains all assets
+required by the core to work properly.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the assets folder of the core, which contains all assets
+required by the core to work properly.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addonAssets" id="_addonAssets">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addonAssets">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addonAssets"></a><a href="source-class-rex_path.html#116-129" title="Go to source code">addonAssets</a>( <span>string <var>$addon</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the assets folder of the given addon, which contains all
+assets required by the addon to work properly.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the assets folder of the given addon, which contains all
+assets required by the addon to work properly.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_path.html#_assets">rex_path::assets()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="pluginAssets" id="_pluginAssets">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_pluginAssets">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/pluginAssets"></a><a href="source-class-rex_path.html#131-145" title="Go to source code">pluginAssets</a>( <span>string <var>$addon</var></span>, <span>string <var>$plugin</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the assets folder of the given plugin of the given
+addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the assets folder of the given plugin of the given
+addon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$plugin</var></dt>
+<dd>Plugin</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_path.html#_assets">rex_path::assets()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="bin" id="_bin">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_bin">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/bin"></a><a href="source-class-rex_path.html#147-157" title="Go to source code">bin</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the bin folder.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the bin folder.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="data" id="_data">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_data">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/data"></a><a href="source-class-rex_path.html#159-169" title="Go to source code">data</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the data folder.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the data folder.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="coreData" id="_coreData">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_coreData">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/coreData"></a><a href="source-class-rex_path.html#171-181" title="Go to source code">coreData</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the data folder of the core.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the data folder of the core.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addonData" id="_addonData">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addonData">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addonData"></a><a href="source-class-rex_path.html#183-194" title="Go to source code">addonData</a>( <span>string <var>$addon</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the data folder of the given addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the data folder of the given addon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="pluginData" id="_pluginData">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_pluginData">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/pluginData"></a><a href="source-class-rex_path.html#196-208" title="Go to source code">pluginData</a>( <span>string <var>$addon</var></span>, <span>string <var>$plugin</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the data folder of the given plugin of the given
+addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the data folder of the given plugin of the given
+addon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$plugin</var></dt>
+<dd>Plugin</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="cache" id="_cache">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_cache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/cache"></a><a href="source-class-rex_path.html#210-220" title="Go to source code">cache</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the cache folder.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the cache folder.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="coreCache" id="_coreCache">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_coreCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/coreCache"></a><a href="source-class-rex_path.html#222-232" title="Go to source code">coreCache</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the cache folder of the core.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the cache folder of the core.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addonCache" id="_addonCache">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addonCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addonCache"></a><a href="source-class-rex_path.html#234-245" title="Go to source code">addonCache</a>( <span>string <var>$addon</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the cache folder of the given addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the cache folder of the given addon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="pluginCache" id="_pluginCache">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_pluginCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/pluginCache"></a><a href="source-class-rex_path.html#247-259" title="Go to source code">pluginCache</a>( <span>string <var>$addon</var></span>, <span>string <var>$plugin</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the cache folder of the given plugin.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the cache folder of the given plugin.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$plugin</var></dt>
+<dd>Plugin</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="src" id="_src">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_src">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/src"></a><a href="source-class-rex_path.html#261-271" title="Go to source code">src</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the src folder.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the src folder.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="core" id="_core">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_core">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/core"></a><a href="source-class-rex_path.html#273-283" title="Go to source code">core</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the path to the actual core.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the actual core.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addon" id="_addon">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addon">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addon"></a><a href="source-class-rex_path.html#285-296" title="Go to source code">addon</a>( <span>string <var>$addon</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the base path to the folder of the given addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the base path to the folder of the given addon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="plugin" id="_plugin">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_plugin">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/plugin"></a><a href="source-class-rex_path.html#298-310" title="Go to source code">plugin</a>( <span>string <var>$addon</var></span>, <span>string <var>$plugin</var></span>, <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the base path to the folder of the plugin of the given addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the base path to the folder of the plugin of the given addon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Addon</dd>
+<dt><var>$plugin</var></dt>
+<dd>Plugin</dd>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="absolute" id="_absolute">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_absolute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/absolute"></a><a href="source-class-rex_path.html#312-342" title="Go to source code">absolute</a>( <span>string <var>$relPath</var></span> )</code>
+<div class="description short">
+<p>Converts a relative path to an absolute.</p>
+</div>
+<div class="description detailed hidden">
+<p>Converts a relative path to an absolute.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$relPath</var></dt>
+<dd>The relative path</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Absolute path<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="basename" id="_basename">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_basename">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/basename"></a><a href="source-class-rex_path.html#344-358" title="Go to source code">basename</a>( <span>string <var>$path</var></span> )</code>
+<div class="description short">
+<p>Returns the basename (filename) of the path independent of directory
+separator (/ or ).</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the basename (filename) of the path independent of directory
+separator (/ or ).</p>
+<p>This method should be used to secure incoming GET/POST parameters containing
+a filename.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$path</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="pathprovider" id="$pathprovider">
+<td class="attributes"><code>
+				protected static 
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24pathprovider"></a><a href="source-class-rex_path.html#12" title="Go to source code"><var>$pathprovider</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$pathprovider">#</a><code></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

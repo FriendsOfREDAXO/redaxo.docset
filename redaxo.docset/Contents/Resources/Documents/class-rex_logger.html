@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_logger</h1>
+<div class="description">
+<p>Simple Logger class.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+Psr\Log\AbstractLogger
+			
+			
+		</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_logger</span></b>			
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				staabm<br/>
+<b>Located at</b> <a href="source-class-rex_logger.html#6-177" title="Go to source code">redaxo/src/core/lib/util/logger.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="getPath" id="_getPath">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPath"></a><a href="source-class-rex_logger.html#22-30" title="Go to source code">getPath</a>( )</code>
+<div class="description short">
+<p>Returns the path to the system.log file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path to the system.log file.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="logException" id="_logException">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_logException">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/logException"></a><a href="source-class-rex_logger.html#32-45" title="Go to source code">logException</a>( <span>Throwable|Exception <var>$exception</var></span> )</code>
+<div class="description short">
+<p>Shorthand: Logs the given Exception.</p>
+</div>
+<div class="description detailed hidden">
+<p>Shorthand: Logs the given Exception.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$exception</var></dt>
+<dd>The Exception to log</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="logError" id="_logError">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_logError">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/logError"></a><a href="source-class-rex_logger.html#47-74" title="Go to source code">logError</a>( <span>integer <var>$errno</var></span>, <span>string <var>$errstr</var></span>, <span>string <var>$errfile</var></span>, <span>integer <var>$errline</var></span> )</code>
+<div class="description short">
+<p>Shorthand: Logs a error message.</p>
+</div>
+<div class="description detailed hidden">
+<p>Shorthand: Logs a error message.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$errno</var></dt>
+<dd>The error code to log, e.g. E_WARNING</dd>
+<dt><var>$errstr</var></dt>
+<dd>The error message</dd>
+<dt><var>$errfile</var></dt>
+<dd>The file in which the error occured</dd>
+<dt><var>$errline</var></dt>
+<dd>The line of the file in which the error occured</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="log" id="_log">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_log">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/log"></a><a href="source-class-rex_logger.html#76-117" title="Go to source code">log</a>( <span>mixed <var>$level</var></span>, <span>string <var>$message</var></span>, <span>array <var>$context</var> = []</span>, <span>string <var>$file</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$line</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Logs with an arbitrary level.</p>
+</div>
+<div class="description detailed hidden">
+<p>Logs with an arbitrary level.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$level</var></dt>
+<dd></dd>
+<dt><var>$message</var></dt>
+<dd></dd>
+<dt><var>$context</var></dt>
+<dd></dd>
+<dt><var>$file</var></dt>
+<dd></dd>
+<dt><var>$line</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="open" id="_open">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_open">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/open"></a><a href="source-class-rex_logger.html#119-128" title="Go to source code">open</a>( )</code>
+<div class="description short">
+<p>Prepares the logifle for later use.</p>
+</div>
+<div class="description detailed hidden">
+<p>Prepares the logifle for later use.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="close" id="_close">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_close">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/close"></a><a href="source-class-rex_logger.html#130-138" title="Go to source code">close</a>( )</code>
+<div class="description short">
+<p>Closes the logfile. The logfile is not be able to log further message after
+beeing closed.</p>
+</div>
+<div class="description detailed hidden">
+<p>Closes the logfile. The logfile is not be able to log further message after
+beeing closed.</p>
+<p>You dont need to close the logfile manually when it was registered during the
+request.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="getLogLevel" id="_getLogLevel">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLogLevel">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLogLevel"></a><a href="source-class-rex_logger.html#140-167" title="Go to source code">getLogLevel</a>( <span>integer <var>$errno</var></span> )</code>
+<div class="description short">
+<p>Map php error codes to PSR3 error levels.</p>
+</div>
+<div class="description detailed hidden">
+<p>Map php error codes to PSR3 error levels.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$errno</var></dt>
+<dd>a php error code, e.g. E_ERROR</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_logger.html#169-176" title="Go to source code">factory</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+</div></body>
+</html>

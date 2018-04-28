@@ -1,0 +1,510 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_validator</h1>
+<div class="description">
+<p>Validator class.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_validator</span></b>			
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_validator.html#3-259" title="Go to source code">redaxo/src/core/lib/util/validator.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_validator.html#17-23" title="Go to source code">__construct</a>( )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_validator.html#25-34" title="Go to source code">factory</a>( )</code>
+<div class="description short">
+<p>Factory method.</p>
+</div>
+<div class="description detailed hidden">
+<p>Factory method.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>static</code><br/>static<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="add" id="_add">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_add">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/add"></a><a href="source-class-rex_validator.html#36-55" title="Go to source code">add</a>( <span>string <var>$type</var></span>, <span>null|string <var>$message</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$option</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Adds a validator.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds a validator.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$type</var></dt>
+<dd>Validator type (any static method name of this class)</dd>
+<dt><var>$message</var></dt>
+<dd>Message which is used if this validator type does not match</dd>
+<dt><var>$option</var></dt>
+<dd>Type specific option</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isValid" id="_isValid">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isValid">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isValid"></a><a href="source-class-rex_validator.html#57-82" title="Go to source code">isValid</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Checks whether the given value matches all added validators.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the given value matches all added validators.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getMessage" id="_getMessage">
+<td class="attributes"><code>
+				 public 
+				string[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMessage"></a><a href="source-class-rex_validator.html#84-92" title="Go to source code">getMessage</a>( )</code>
+<div class="description short">
+<p>Returns the message.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the message.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string[]</code><br/>string[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="notEmpty" id="_notEmpty">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_notEmpty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/notEmpty"></a><a href="source-class-rex_validator.html#94-104" title="Go to source code">notEmpty</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is not empty.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is not empty.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="type" id="_type">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_type">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/type"></a><a href="source-class-rex_validator.html#106-130" title="Go to source code">type</a>( <span>string <var>$value</var></span>, <span>string <var>$type</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is from the given type.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is from the given type.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$type</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="minLength" id="_minLength">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_minLength">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/minLength"></a><a href="source-class-rex_validator.html#132-143" title="Go to source code">minLength</a>( <span>string <var>$value</var></span>, <span>integer <var>$minLength</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value has the given min length.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value has the given min length.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$minLength</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="maxLength" id="_maxLength">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_maxLength">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/maxLength"></a><a href="source-class-rex_validator.html#145-156" title="Go to source code">maxLength</a>( <span>string <var>$value</var></span>, <span>integer <var>$maxLength</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value has the given max value.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value has the given max value.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$maxLength</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="min" id="_min">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_min">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/min"></a><a href="source-class-rex_validator.html#158-169" title="Go to source code">min</a>( <span>string <var>$value</var></span>, <span>integer <var>$min</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is equal or greater than the given min value.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is equal or greater than the given min value.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$min</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="max" id="_max">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_max">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/max"></a><a href="source-class-rex_validator.html#171-182" title="Go to source code">max</a>( <span>string <var>$value</var></span>, <span>integer <var>$max</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is equal or lower than the given max value.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is equal or lower than the given max value.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$max</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="url" id="_url">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_url">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/url"></a><a href="source-class-rex_validator.html#184-194" title="Go to source code">url</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is an URL.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is an URL.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="email" id="_email">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_email">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/email"></a><a href="source-class-rex_validator.html#196-206" title="Go to source code">email</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is an email address.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is an email address.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="match" id="_match">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_match">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/match"></a><a href="source-class-rex_validator.html#208-219" title="Go to source code">match</a>( <span>string <var>$value</var></span>, <span>string <var>$regex</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value matches the given regex.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value matches the given regex.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$regex</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="notMatch" id="_notMatch">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_notMatch">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/notMatch"></a><a href="source-class-rex_validator.html#221-232" title="Go to source code">notMatch</a>( <span>string <var>$value</var></span>, <span>string <var>$regex</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value does not match the given regex.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value does not match the given regex.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$regex</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="values" id="_values">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_values">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/values"></a><a href="source-class-rex_validator.html#234-245" title="Go to source code">values</a>( <span>string <var>$value</var></span>, <span>array <var>$validValues</var></span> )</code>
+<div class="description short">
+<p>Checks whether the value is one of the given valid values.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the value is one of the given valid values.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$validValues</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="custom" id="_custom">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_custom">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/custom"></a><a href="source-class-rex_validator.html#247-258" title="Go to source code">custom</a>( <span>string <var>$value</var></span>, <span>callable <var>$callback</var></span> )</code>
+<div class="description short">
+<p>Checks the value by using the given callable.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks the value by using the given callable.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$callback</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+</div></body>
+</html>

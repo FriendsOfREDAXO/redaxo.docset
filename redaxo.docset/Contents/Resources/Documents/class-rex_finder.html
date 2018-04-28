@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_finder</h1>
+<div class="description">
+<p>Finder.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_finder</span></b>			
+			 implements 
+<span>IteratorAggregate</span>, 
+			
+<span>Countable</span>
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				staabm<br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_finder.html#3-257" title="Go to source code">redaxo/src/core/lib/util/finder.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_finder.html#38-55" title="Go to source code">factory</a>( <span>string <var>$dir</var></span> )</code>
+<div class="description short">
+<p>Returns a new finder object.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a new finder object.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>Path to a directory</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>static</code><br/>static<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="recursive" id="_recursive">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_recursive">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/recursive"></a><a href="source-class-rex_finder.html#57-69" title="Go to source code">recursive</a>( <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Activate/Deactivate recursive directory scanning.</p>
+</div>
+<div class="description detailed hidden">
+<p>Activate/Deactivate recursive directory scanning.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$recursive</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="selfFirst" id="_selfFirst">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_selfFirst">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/selfFirst"></a><a href="source-class-rex_finder.html#71-81" title="Go to source code">selfFirst</a>( )</code>
+<div class="description short">
+<p>Fetch directory contents before recurse its subdirectories.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fetch directory contents before recurse its subdirectories.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="childFirst" id="_childFirst">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_childFirst">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/childFirst"></a><a href="source-class-rex_finder.html#83-93" title="Go to source code">childFirst</a>( )</code>
+<div class="description short">
+<p>Fetch child directories before their parent directory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fetch child directories before their parent directory.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="filesOnly" id="_filesOnly">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_filesOnly">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/filesOnly"></a><a href="source-class-rex_finder.html#95-105" title="Go to source code">filesOnly</a>( )</code>
+<div class="description short">
+<p>Fetch files only.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fetch files only.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="dirsOnly" id="_dirsOnly">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_dirsOnly">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/dirsOnly"></a><a href="source-class-rex_finder.html#107-117" title="Go to source code">dirsOnly</a>( )</code>
+<div class="description short">
+<p>Fetch dirs only.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fetch dirs only.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ignoreFiles" id="_ignoreFiles">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ignoreFiles">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ignoreFiles"></a><a href="source-class-rex_finder.html#119-137" title="Go to source code">ignoreFiles</a>( <span>string|array <var>$glob</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Ignore all files which match the given glob pattern.</p>
+</div>
+<div class="description detailed hidden">
+<p>Ignore all files which match the given glob pattern.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$glob</var></dt>
+<dd>Glob pattern or an array of glob patterns</dd>
+<dt><var>$recursive</var></dt>
+<dd>When FALSE the patterns won't be checked in child directories</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ignoreDirs" id="_ignoreDirs">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ignoreDirs">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ignoreDirs"></a><a href="source-class-rex_finder.html#139-157" title="Go to source code">ignoreDirs</a>( <span>string|array <var>$glob</var></span>, <span>boolean <var>$recursive</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Ignore all directories which match the given glob pattern.</p>
+</div>
+<div class="description detailed hidden">
+<p>Ignore all directories which match the given glob pattern.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$glob</var></dt>
+<dd>Glob pattern or an array of glob patterns</dd>
+<dt><var>$recursive</var></dt>
+<dd>When FALSE the patterns won't be checked in child directories</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ignoreSystemStuff" id="_ignoreSystemStuff">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ignoreSystemStuff">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ignoreSystemStuff"></a><a href="source-class-rex_finder.html#159-171" title="Go to source code">ignoreSystemStuff</a>( <span>boolean <var>$ignoreSystemStuff</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Ignores system stuff (like .DS_Store, .svn, .git etc.).</p>
+</div>
+<div class="description detailed hidden">
+<p>Ignores system stuff (like .DS_Store, .svn, .git etc.).</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$ignoreSystemStuff</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sort" id="_sort">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sort">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sort"></a><a href="source-class-rex_finder.html#173-185" title="Go to source code">sort</a>( <span>integer|callable <var>$sort</var> = <code><a href="class-rex_sortable_iterator.html#KEYS">rex_sortable_iterator::<b>KEYS</b></a></code></span> )</code>
+<div class="description short">
+<p>Sorts the elements.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sorts the elements.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$sort</var></dt>
+<dd>Sort mode, see &lt;code&gt;&lt;a href="class-rex_sortable_iterator.html#___construct"&gt;rex_sortable_iterator::__construct()&lt;/a&gt;&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getIterator" id="_getIterator">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getIterator">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getIterator"></a><a href="source-class-rex_finder.html#187-248" title="Go to source code">getIterator</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Implementation of</h4>
+<div class="list"><code>IteratorAggregate::getIterator()</code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="count" id="_count">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_count">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/count"></a><a href="source-class-rex_finder.html#250-256" title="Go to source code">count</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Implementation of</h4>
+<div class="list"><code>Countable::count()</code></div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="ALL" id="ALL">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/ALL"></a><a href="source-class-rex_finder.html#15" title="Go to source code"><b>ALL</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#ALL">#</a><code><span class="php-quote">'__ALL__'</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_list</h1>
+<div class="description">
+<p>Klasse zum erstellen von Listen.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_list</span></b>			
+			 implements 
+				<a href="class-rex_url_provider_interface.html"><span>rex_url_provider_interface</span></a>
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_list.html#46-1073" title="Go to source code">redaxo/src/core/lib/list.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_list.html#93-163" title="Go to source code">__construct</a>( <span>string <var>$query</var></span>, <span>integer <var>$rowsPerPage</var> = <span class="php-num">30</span></span>, <span>string <var>$listName</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Erstellt ein rex_list Objekt.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt ein rex_list Objekt.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$query</var></dt>
+<dd>SELECT Statement</dd>
+<dt><var>$rowsPerPage</var></dt>
+<dd>Anzahl der Elemente pro Zeile</dd>
+<dt><var>$listName</var></dt>
+<dd>Name der Liste</dd>
+<dt><var>$debug</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_list.html#165-177" title="Go to source code">factory</a>( <span>string <var>$query</var></span>, <span>integer <var>$rowsPerPage</var> = <span class="php-num">30</span></span>, <span>null <var>$listName</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$query</var></dt>
+<dd></dd>
+<dt><var>$rowsPerPage</var></dt>
+<dd></dd>
+<dt><var>$listName</var></dt>
+<dd></dd>
+<dt><var>$debug</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>static</code><br/>static<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="init" id="_init">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_init">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_list.html#179-182" title="Go to source code">init</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getName" id="_getName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_list.html#186-194" title="Go to source code">getName</a>( )</code>
+<div class="description short">
+<p>Gibt den Namen es Formulars zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt den Namen es Formulars zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getMessage" id="_getMessage">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMessage"></a><a href="source-class-rex_list.html#196-204" title="Go to source code">getMessage</a>( )</code>
+<div class="description short">
+<p>Gibt eine Status Nachricht zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt eine Status Nachricht zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getWarning" id="_getWarning">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getWarning">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWarning"></a><a href="source-class-rex_list.html#206-214" title="Go to source code">getWarning</a>( )</code>
+<div class="description short">
+<p>Gibt eine Warnung zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt eine Warnung zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setCaption" id="_setCaption">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setCaption">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setCaption"></a><a href="source-class-rex_list.html#216-225" title="Go to source code">setCaption</a>( <span>string <var>$caption</var></span> )</code>
+<div class="description short">
+<p>Setzt die Caption/den Titel der Tabelle Gibt den Namen es Formulars
+zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Setzt die Caption/den Titel der Tabelle Gibt den Namen es Formulars
+zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$caption</var></dt>
+<dd>Caption/Titel der Tabelle</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCaption" id="_getCaption">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCaption">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCaption"></a><a href="source-class-rex_list.html#227-235" title="Go to source code">getCaption</a>( )</code>
+<div class="description short">
+<p>Gibt die Caption/den Titel der Tabelle zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt die Caption/den Titel der Tabelle zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setNoRowsMessage" id="_setNoRowsMessage">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setNoRowsMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setNoRowsMessage"></a><a href="source-class-rex_list.html#237-240" title="Go to source code">setNoRowsMessage</a>( <span>mixed <var>$msg</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getNoRowsMessage" id="_getNoRowsMessage">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getNoRowsMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getNoRowsMessage"></a><a href="source-class-rex_list.html#242-245" title="Go to source code">getNoRowsMessage</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="addParam" id="_addParam">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addParam">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addParam"></a><a href="source-class-rex_list.html#247-250" title="Go to source code">addParam</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getParams" id="_getParams">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getParams">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParams"></a><a href="source-class-rex_list.html#252-255" title="Go to source code">getParams</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="loadBackendConfig" id="_loadBackendConfig">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_loadBackendConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/loadBackendConfig"></a><a href="source-class-rex_list.html#257-260" title="Go to source code">loadBackendConfig</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="addTableAttribute" id="_addTableAttribute">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addTableAttribute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableAttribute"></a><a href="source-class-rex_list.html#262-265" title="Go to source code">addTableAttribute</a>( <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getTableAttributes" id="_getTableAttributes">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTableAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableAttributes"></a><a href="source-class-rex_list.html#267-270" title="Go to source code">getTableAttributes</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="addFormAttribute" id="_addFormAttribute">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addFormAttribute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addFormAttribute"></a><a href="source-class-rex_list.html#272-275" title="Go to source code">addFormAttribute</a>( <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getFormAttributes" id="_getFormAttributes">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFormAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormAttributes"></a><a href="source-class-rex_list.html#277-280" title="Go to source code">getFormAttributes</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="addLinkAttribute" id="_addLinkAttribute">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addLinkAttribute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addLinkAttribute"></a><a href="source-class-rex_list.html#282-285" title="Go to source code">addLinkAttribute</a>( <span>mixed <var>$columnName</var></span>, <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getLinkAttributes" id="_getLinkAttributes">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLinkAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLinkAttributes"></a><a href="source-class-rex_list.html#287-290" title="Go to source code">getLinkAttributes</a>( <span>mixed <var>$column</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="addColumn" id="_addColumn">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addColumn"></a><a href="source-class-rex_list.html#294-312" title="Go to source code">addColumn</a>( <span>string <var>$columnHead</var></span>, <span>string <var>$columnBody</var></span>, <span>integer <var>$columnIndex</var> = -<span class="php-num">1</span></span>, <span>array <var>$columnLayout</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Methode, um eine Spalte einzufügen.</p>
+</div>
+<div class="description detailed hidden">
+<p>Methode, um eine Spalte einzufügen.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnHead</var></dt>
+<dd>Titel der Spalte</dd>
+<dt><var>$columnBody</var></dt>
+<dd>Text/Format der Spalte</dd>
+<dt><var>$columnIndex</var></dt>
+<dd>Stelle, an der die neue Spalte erscheinen soll</dd>
+<dt><var>$columnLayout</var></dt>
+<dd>Layout der Spalte</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeColumn" id="_removeColumn">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeColumn"></a><a href="source-class-rex_list.html#314-322" title="Go to source code">removeColumn</a>( <span>string <var>$columnName</var></span> )</code>
+<div class="description short">
+<p>Entfernt eine Spalte aus der Anzeige.</p>
+</div>
+<div class="description detailed hidden">
+<p>Entfernt eine Spalte aus der Anzeige.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumnLayout" id="_setColumnLayout">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumnLayout">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnLayout"></a><a href="source-class-rex_list.html#324-333" title="Go to source code">setColumnLayout</a>( <span>string <var>$columnHead</var></span>, <span>array <var>$columnLayout</var></span> )</code>
+<div class="description short">
+<p>Methode, um das Layout einer Spalte zu setzen.</p>
+</div>
+<div class="description detailed hidden">
+<p>Methode, um das Layout einer Spalte zu setzen.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnHead</var></dt>
+<dd>Titel der Spalte</dd>
+<dt><var>$columnLayout</var></dt>
+<dd>Layout der Spalte</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnLayout" id="_getColumnLayout">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnLayout">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLayout"></a><a href="source-class-rex_list.html#335-349" title="Go to source code">getColumnLayout</a>( <span>string <var>$columnName</var></span> )</code>
+<div class="description short">
+<p>Gibt das Layout einer Spalte zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt das Layout einer Spalte zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnLayouts" id="_getColumnLayouts">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnLayouts">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLayouts"></a><a href="source-class-rex_list.html#351-357" title="Go to source code">getColumnLayouts</a>( )</code>
+<div class="description short">
+<p>Gibt die Layouts aller Spalten zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt die Layouts aller Spalten zurück.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnName" id="_getColumnName">
+<td class="attributes"><code>
+				 public 
+				string|null
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnName"></a><a href="source-class-rex_list.html#359-374" title="Go to source code">getColumnName</a>( <span>integer <var>$columnIndex</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt den Namen einer Spalte zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt den Namen einer Spalte zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnIndex</var></dt>
+<dd>Nummer der Spalte</dd>
+<dt><var>$default</var></dt>
+<dd>Defaultrückgabewert, falls keine Spalte mit der angegebenen Nummer vorhanden
+ist</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string|null</code><br/>string|null<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnNames" id="_getColumnNames">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnNames">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnNames"></a><a href="source-class-rex_list.html#376-384" title="Go to source code">getColumnNames</a>( )</code>
+<div class="description short">
+<p>Gibt alle Namen der Spalten als Array zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt alle Namen der Spalten als Array zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumnLabel" id="_setColumnLabel">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumnLabel">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnLabel"></a><a href="source-class-rex_list.html#386-395" title="Go to source code">setColumnLabel</a>( <span>string <var>$columnName</var></span>, <span>string <var>$label</var></span> )</code>
+<div class="description short">
+<p>Setzt ein Label für eine Spalte.</p>
+</div>
+<div class="description detailed hidden">
+<p>Setzt ein Label für eine Spalte.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$label</var></dt>
+<dd>Label für die Spalte</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnLabel" id="_getColumnLabel">
+<td class="attributes"><code>
+				 public 
+				string|null
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnLabel">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLabel"></a><a href="source-class-rex_list.html#397-415" title="Go to source code">getColumnLabel</a>( <span>string <var>$columnName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt das Label der Spalte zurück, falls gesetzt.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt das Label der Spalte zurück, falls gesetzt.</p>
+<p>Falls nicht vorhanden und der Parameter $default auf null steht, wird der
+Spaltenname zurückgegeben</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$default</var></dt>
+<dd>Defaultrückgabewert, falls kein Label gesetzt ist</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string|null</code><br/>string|null<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumnFormat" id="_setColumnFormat">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumnFormat">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnFormat"></a><a href="source-class-rex_list.html#417-428" title="Go to source code">setColumnFormat</a>( <span>string <var>$columnName</var></span>, <span>string <var>$format_type</var></span>, <span>mixed <var>$format</var> = <span class="php-quote">''</span></span>, <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+<p>Setzt ein Format für die Spalte.</p>
+</div>
+<div class="description detailed hidden">
+<p>Setzt ein Format für die Spalte.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$format_type</var></dt>
+<dd>Formatierungstyp</dd>
+<dt><var>$format</var></dt>
+<dd>Zu verwendentes Format</dd>
+<dt><var>$params</var></dt>
+<dd>Custom params für callback func bei format_type 'custom'</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnFormat" id="_getColumnFormat">
+<td class="attributes"><code>
+				 public 
+				string|null
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnFormat">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnFormat"></a><a href="source-class-rex_list.html#430-445" title="Go to source code">getColumnFormat</a>( <span>string <var>$columnName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt das Format für eine Spalte zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt das Format für eine Spalte zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$default</var></dt>
+<dd>Defaultrückgabewert, falls keine Formatierung gesetzt ist</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string|null</code><br/>string|null<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumnSortable" id="_setColumnSortable">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumnSortable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnSortable"></a><a href="source-class-rex_list.html#447-457" title="Go to source code">setColumnSortable</a>( <span>string <var>$columnName</var></span>, <span>string <var>$direction</var> = <span class="php-quote">'asc'</span></span> )</code>
+<div class="description short">
+<p>Markiert eine Spalte als sortierbar.</p>
+</div>
+<div class="description detailed hidden">
+<p>Markiert eine Spalte als sortierbar.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$direction</var></dt>
+<dd>Startsortierrichtung der Spalte [ASC|DESC]</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumnOption" id="_setColumnOption">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumnOption">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnOption"></a><a href="source-class-rex_list.html#459-470" title="Go to source code">setColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span>, <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+<p>Setzt eine Option für eine Spalte (z.b. Sortable,..).</p>
+</div>
+<div class="description detailed hidden">
+<p>Setzt eine Option für eine Spalte (z.b. Sortable,..).</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$option</var></dt>
+<dd>Name/Id der Option</dd>
+<dt><var>$value</var></dt>
+<dd>Wert der Option</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnOption" id="_getColumnOption">
+<td class="attributes"><code>
+				 public 
+				mixed|null
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnOption">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnOption"></a><a href="source-class-rex_list.html#472-487" title="Go to source code">getColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt den Wert einer Option für eine Spalte zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt den Wert einer Option für eine Spalte zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$option</var></dt>
+<dd>Name/Id der Option</dd>
+<dt><var>$default</var></dt>
+<dd>Defaultrückgabewert, falls die Option nicht gesetzt ist</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed|null</code><br/>mixed|null<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasColumnOption" id="_hasColumnOption">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasColumnOption">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumnOption"></a><a href="source-class-rex_list.html#489-500" title="Go to source code">hasColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span> )</code>
+<div class="description short">
+<p>Gibt zurück, ob für eine Spalte eine Option gesetzt wurde.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt zurück, ob für eine Spalte eine Option gesetzt wurde.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$option</var></dt>
+<dd>Name/Id der Option</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumnParams" id="_setColumnParams">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumnParams">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnParams"></a><a href="source-class-rex_list.html#502-511" title="Go to source code">setColumnParams</a>( <span>string <var>$columnName</var></span>, <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+<p>Verlinkt eine Spalte mit den übergebenen Parametern.</p>
+</div>
+<div class="description detailed hidden">
+<p>Verlinkt eine Spalte mit den übergebenen Parametern.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+<dt><var>$params</var></dt>
+<dd>Array von Parametern</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnParams" id="_getColumnParams">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnParams">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnParams"></a><a href="source-class-rex_list.html#513-526" title="Go to source code">getColumnParams</a>( <span>string <var>$columnName</var></span> )</code>
+<div class="description short">
+<p>Gibt die Parameter für eine Spalte zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt die Parameter für eine Spalte zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasColumnParams" id="_hasColumnParams">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasColumnParams">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumnParams"></a><a href="source-class-rex_list.html#528-538" title="Go to source code">hasColumnParams</a>( <span>string <var>$columnName</var></span> )</code>
+<div class="description short">
+<p>Gibt zurück, ob Parameter für eine Spalte existieren.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt zurück, ob Parameter für eine Spalte existieren.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columnName</var></dt>
+<dd>Name der Spalte</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addTableColumnGroup" id="_addTableColumnGroup">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addTableColumnGroup">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableColumnGroup"></a><a href="source-class-rex_list.html#542-583" title="Go to source code">addTableColumnGroup</a>( <span>array <var>$columns</var></span>, <span>integer <var>$columnGroupSpan</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Methode um eine Colgroup einzufügen.</p>
+</div>
+<div class="description detailed hidden">
+<p>Methode um eine Colgroup einzufügen.</p>
+<p>Beispiel 1:</p>
+<p>$list-&gt;addTableColumnGroup([40, '*', 240, 140]);</p>
+<p>Beispiel 2:</p>
+<p>$list-&gt;addTableColumnGroup([ ['width' =&gt; 40], ['width' =&gt; 140,
+'span' =&gt; 2], ['width' =&gt; 240] ]);</p>
+<p>Beispiel 3:</p>
+<p>$list-&gt;addTableColumnGroup([ ['class' =&gt; 'classname-a'], ['class' =&gt;
+'classname-b'], ['class' =&gt; 'classname-c'] ]);</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columns</var></dt>
+<dd>Array von Spalten</dd>
+<dt><var>$columnGroupSpan</var></dt>
+<dd>Span der Columngroup</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTableColumnGroups" id="_getTableColumnGroups">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTableColumnGroups">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableColumnGroups"></a><a href="source-class-rex_list.html#585-591" title="Go to source code">getTableColumnGroups</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addTableColumn" id="_addTableColumn">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addTableColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableColumn"></a><a href="source-class-rex_list.html#593-626" title="Go to source code">addTableColumn</a>( <span>integer <var>$width</var></span>, <span>integer <var>$span</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$class</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Fügt der zuletzte eingefügten TableColumnGroup eine weitere Spalte
+hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fügt der zuletzte eingefügten TableColumnGroup eine weitere Spalte
+hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$width</var></dt>
+<dd>Breite der Spalte</dd>
+<dt><var>$span</var></dt>
+<dd>Span der Spalte</dd>
+<dt><var>$class</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getUrl" id="_getUrl">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUrl"></a><a href="source-class-rex_list.html#630-659" title="Go to source code">getUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Returns a Url which contains the given parameters.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a Url which contains the given parameters.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$params</var></dt>
+<dd>A scalar array containing key value pairs for the parameter and its value</dd>
+<dt><var>$escape</var></dt>
+<dd>Flag whether the argument separator "&amp;amp;" should be escaped (&amp;amp;)</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>The generated Url<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_url_provider_interface.html#_getUrl">rex_url_provider_interface::getUrl()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getParsedUrl" id="_getParsedUrl">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getParsedUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParsedUrl"></a><a href="source-class-rex_list.html#661-699" title="Go to source code">getParsedUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Gibt eine Url zurück, die die Parameter $params enthält Dieser Url werden
+die Standard rexList Variablen zugefügt.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt eine Url zurück, die die Parameter $params enthält Dieser Url werden
+die Standard rexList Variablen zugefügt.</p>
+<p>Innerhalb dieser Url werden variablen ersetzt</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$params</var></dt>
+<dd></dd>
+<dt><var>$escape</var></dt>
+<dd>Flag whether the argument separator "&amp;amp;" should be escaped (&amp;amp;)</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+							#replaceVariable, #replaceVariables<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="prepareQuery" id="_prepareQuery">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_prepareQuery">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/prepareQuery"></a><a href="source-class-rex_list.html#703-734" title="Go to source code">prepareQuery</a>( <span>string <var>$query</var></span> )</code>
+<div class="description short">
+<p>Prepariert das SQL Statement vorm anzeigen der Liste.</p>
+</div>
+<div class="description detailed hidden">
+<p>Prepariert das SQL Statement vorm anzeigen der Liste.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$query</var></dt>
+<dd>SQL Statement</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getRows" id="_getRows">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getRows">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRows"></a><a href="source-class-rex_list.html#736-744" title="Go to source code">getRows</a>( )</code>
+<div class="description short">
+<p>Gibt die Anzahl der Zeilen zurück, welche vom ursprüngliche SQL Statement
+betroffen werden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt die Anzahl der Zeilen zurück, welche vom ursprüngliche SQL Statement
+betroffen werden.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPager" id="_getPager">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_pager.html">rex_pager</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPager">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPager"></a><a href="source-class-rex_list.html#746-754" title="Go to source code">getPager</a>( )</code>
+<div class="description short">
+<p>Returns the pager for this list.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the pager for this list.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_pager.html">rex_pager</a></code></code><br/>rex_pager<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSortColumn" id="_getSortColumn">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSortColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSortColumn"></a><a href="source-class-rex_list.html#756-769" title="Go to source code">getSortColumn</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt zurück, nach welcher Spalte sortiert werden soll.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt zurück, nach welcher Spalte sortiert werden soll.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$default</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSortType" id="_getSortType">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSortType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSortType"></a><a href="source-class-rex_list.html#771-788" title="Go to source code">getSortType</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt zurück, in welcher Art und Weise sortiert werden soll (ASC/DESC).</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt zurück, in welcher Art und Weise sortiert werden soll (ASC/DESC).</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$default</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPagination" id="_getPagination">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPagination">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPagination"></a><a href="source-class-rex_list.html#790-801" title="Go to source code">getPagination</a>( )</code>
+<div class="description short">
+<p>Gibt die Navigation der Liste zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt die Navigation der Liste zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFooter" id="_getFooter">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFooter">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFooter"></a><a href="source-class-rex_list.html#803-817" title="Go to source code">getFooter</a>( )</code>
+<div class="description short">
+<p>Gibt den Footer der Liste zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt den Footer der Liste zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getHeader" id="_getHeader">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHeader">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeader"></a><a href="source-class-rex_list.html#819-830" title="Go to source code">getHeader</a>( )</code>
+<div class="description short">
+<p>Gibt den Header der Liste zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt den Header der Liste zurück.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="replaceVariable" id="_replaceVariable">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_replaceVariable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVariable"></a><a href="source-class-rex_list.html#834-837" title="Go to source code">replaceVariable</a>( <span>mixed <var>$string</var></span>, <span>mixed <var>$varname</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="replaceVariables" id="_replaceVariables">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_replaceVariables">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVariables"></a><a href="source-class-rex_list.html#839-865" title="Go to source code">replaceVariables</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Ersetzt alle Variablen im Format ###&lt;Spaltenname&gt;###.</p>
+</div>
+<div class="description detailed hidden">
+<p>Ersetzt alle Variablen im Format ###&lt;Spaltenname&gt;###.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Zu durchsuchender String</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isCustomFormat" id="_isCustomFormat">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isCustomFormat">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isCustomFormat"></a><a href="source-class-rex_list.html#867-870" title="Go to source code">isCustomFormat</a>( <span>mixed <var>$format</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="formatValue" id="_formatValue">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_formatValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatValue"></a><a href="source-class-rex_list.html#872-904" title="Go to source code">formatValue</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var></span>, <span>boolean <var>$escape</var></span>, <span>string <var>$field</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Formatiert einen übergebenen String anhand der rexFormatter Klasse.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formatiert einen übergebenen String anhand der rexFormatter Klasse.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Zu formatierender String</dd>
+<dt><var>$format</var></dt>
+<dd>mit den Formatierungsinformationen</dd>
+<dt><var>$escape</var></dt>
+<dd>Flag, Ob escapen von $value erlaubt ist</dd>
+<dt><var>$field</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="_getAttributeString" id="__getAttributeString">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#__getAttributeString">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_getAttributeString"></a><a href="source-class-rex_list.html#906-915" title="Go to source code">_getAttributeString</a>( <span>mixed <var>$array</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumnLink" id="_getColumnLink">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumnLink">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLink"></a><a href="source-class-rex_list.html#917-920" title="Go to source code">getColumnLink</a>( <span>mixed <var>$columnName</var></span>, <span>mixed <var>$columnValue</var></span>, <span>mixed <var>$params</var> = []</span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getValue" id="_getValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_list.html#922-925" title="Go to source code">getValue</a>( <span>mixed <var>$colname</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getArrayValue" id="_getArrayValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getArrayValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArrayValue"></a><a href="source-class-rex_list.html#927-930" title="Go to source code">getArrayValue</a>( <span>mixed <var>$colname</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_list.html#932-1067" title="Go to source code">get</a>( )</code>
+<div class="description short">
+<p>Erstellt den Tabellen Quellcode.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt den Tabellen Quellcode.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="show" id="_show">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_show">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/show"></a><a href="source-class-rex_list.html#1069-1072" title="Go to source code">show</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+</div></body>
+</html>

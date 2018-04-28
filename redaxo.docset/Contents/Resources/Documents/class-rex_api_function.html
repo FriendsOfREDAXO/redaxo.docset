@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_api_function</h1>
+<div class="description">
+<p>This is a base class for all functions which a component may provide for
+public use. Those function will be called automatically by the core. Inside an
+api function you might check the preconditions which have to be met
+(permissions, etc.) and forward the call to an underlying service which does the
+actual job.</p>
+<p>There can only be one rex_api_function called per request, but not every
+request must have an api function.</p>
+<p>The classname of a possible implementation must start with "rex_api".</p>
+<p>A api function may also be called by an ajax-request. In fact there might be
+ajax-requests which do nothing more than triggering an api function.</p>
+<p>The api functions return meaningfull error messages which the caller may
+display to the end-user.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_api_function</span></b>			
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+</dl>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_api_article_move.html">rex_api_article_move</a></code>, 
+			<code><a href="class-rex_api_content_copy.html">rex_api_content_copy</a></code>, 
+			<code><a href="class-rex_api_sitemap_tree.html">rex_api_sitemap_tree</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				staabm<br/>
+<b>Located at</b> <a href="source-class-rex_api_function.html#3-249" title="Go to source code">redaxo/src/core/lib/api_function.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="execute" id="_execute">
+<td class="attributes"><code>
+				abstract public 
+				<code><a href="class-rex_api_result.html">rex_api_result</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_execute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/execute"></a><a href="source-class-rex_api_function.html#43-53" title="Go to source code">execute</a>( )</code>
+<div class="description short">
+<p>This method have to be overriden by a subclass and does all logic which the
+api function represents.</p>
+</div>
+<div class="description detailed hidden">
+<p>This method have to be overriden by a subclass and does all logic which the
+api function represents.</p>
+<p>In the first place this method may retrieve and validate parameters from the
+request. Afterwards the actual logic should be executed.</p>
+<p>This function may also throw exceptions e.g. in case when permissions are
+missing or the provided parameters are invalid.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_api_result.html">rex_api_result</a></code></code><br/>The result of the api-function<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_api_function.html#62-91" title="Go to source code">factory</a>( )</code>
+<div class="description short">
+<p>Returns the api function instance which is bound to the current request, or
+null if no api function was bound.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the api function instance which is bound to the current request, or
+null if no api function was bound.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getUrlParams" id="_getUrlParams">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUrlParams">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUrlParams"></a><a href="source-class-rex_api_function.html#93-112" title="Go to source code">getUrlParams</a>( )</code>
+<div class="description short">
+<p>Returns an array containing the <code>rex-api-call</code> and
+<code>_csrf_token</code> params.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns an array containing the <code>rex-api-call</code> and
+<code>_csrf_token</code> params.</p>
+<p>The method must be called on sub classes.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getHiddenFields" id="_getHiddenFields">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHiddenFields">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHiddenFields"></a><a href="source-class-rex_api_function.html#114-134" title="Go to source code">getHiddenFields</a>( )</code>
+<div class="description short">
+<p>Returns the hidden fields for <code>rex-api-call</code> and
+<code>_csrf_token</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the hidden fields for <code>rex-api-call</code> and
+<code>_csrf_token</code>.</p>
+<p>The method must be called on sub classes.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="handleCall" id="_handleCall">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_handleCall">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/handleCall"></a><a href="source-class-rex_api_function.html#136-199" title="Go to source code">handleCall</a>( )</code>
+<div class="description short">
+<p>checks whether an api function is bound to the current requests. If so, so
+the api function will be executed.</p>
+</div>
+<div class="description detailed hidden">
+<p>checks whether an api function is bound to the current requests. If so, so
+the api function will be executed.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasMessage" id="_hasMessage">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasMessage"></a><a href="source-class-rex_api_function.html#201-206" title="Go to source code">hasMessage</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getMessage" id="_getMessage">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMessage"></a><a href="source-class-rex_api_function.html#208-224" title="Go to source code">getMessage</a>( <span>mixed <var>$formatted</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_api_function.html#226-229" title="Go to source code">__construct</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getResult" id="_getResult">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_api_result.html">rex_api_result</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getResult">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getResult"></a><a href="source-class-rex_api_function.html#231-237" title="Go to source code">getResult</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_api_result.html">rex_api_result</a></code></code><br/>rex_api_result<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="requiresCsrfProtection" id="_requiresCsrfProtection">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_requiresCsrfProtection">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/requiresCsrfProtection"></a><a href="source-class-rex_api_function.html#239-248" title="Go to source code">requiresCsrfProtection</a>( )</code>
+<div class="description short">
+<p>Csrf validation is disabled by default for backwards compatiblity reasons.
+This default will change in a future version. Prepare all your api functions to
+work with csrf token by using your-api-class::getUrlParams()/getHiddenFields(),
+otherwise they will stop work.</p>
+</div>
+<div class="description detailed hidden">
+<p>Csrf validation is disabled by default for backwards compatiblity reasons.
+This default will change in a future version. Prepare all your api functions to
+work with csrf token by using your-api-class::getUrlParams()/getHiddenFields(),
+otherwise they will stop work.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="REQ_CALL_PARAM" id="REQ_CALL_PARAM">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/REQ_CALL_PARAM"></a><a href="source-class-rex_api_function.html#26" title="Go to source code"><b>REQ_CALL_PARAM</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#REQ_CALL_PARAM">#</a><code><span class="php-quote">'rex-api-call'</span></code></div></td>
+</tr>
+<tr data-order="REQ_RESULT_PARAM" id="REQ_RESULT_PARAM">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/REQ_RESULT_PARAM"></a><a href="source-class-rex_api_function.html#27" title="Go to source code"><b>REQ_RESULT_PARAM</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#REQ_RESULT_PARAM">#</a><code><span class="php-quote">'rex-api-result'</span></code></div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="published" id="$published">
+<td class="attributes"><code>
+				protected  
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24published"></a><a href="source-class-rex_api_function.html#29-34" title="Go to source code"><var>$published</var></a>
+<div class="description short">
+<p>Flag, indicating if this api function may be called from the frontend. False
+by default.</p>
+</div>
+<div class="description detailed hidden">
+<p>Flag, indicating if this api function may be called from the frontend. False
+by default.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$published">#</a><code><span class="php-keyword1">false</span></code></div></td>
+</tr>
+<tr data-order="result" id="$result">
+<td class="attributes"><code>
+				protected  
+				<code><a href="class-rex_api_result.html">rex_api_result</a></code>
+</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24result"></a><a href="source-class-rex_api_function.html#36-41" title="Go to source code"><var>$result</var></a>
+<div class="description short">
+<p>The result of the function call.</p>
+</div>
+<div class="description detailed hidden">
+<p>The result of the function call.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$result">#</a><code><span class="php-keyword1">null</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

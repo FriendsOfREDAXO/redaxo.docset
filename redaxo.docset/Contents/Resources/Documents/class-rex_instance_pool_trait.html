@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Trait rex_instance_pool_trait</h1>
+<div class="description">
+<p>Instance Pool Trait.</p>
+</div>
+<div>
+<h3>Direct Known Users</h3>
+<p class="elementList">
+<code><a href="class-rex_media.html">rex_media</a></code>, 
+			<code><a href="class-rex_media_category.html">rex_media_category</a></code>, 
+			<code><a href="class-rex_sql_table.html">rex_sql_table</a></code>, 
+			<code><a href="class-rex_structure_element.html">rex_structure_element</a></code>
+</p>
+</div>
+<div>
+<h3>Indirect Known Users</h3>
+<p class="elementList">
+<code><a href="class-rex_article.html">rex_article</a></code>, 
+			<code><a href="class-rex_category.html">rex_category</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_instance_pool_trait.html#3-116" title="Go to source code">redaxo/src/core/lib/base/instance_pool_trait.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="addInstance" id="_addInstance">
+<td class="attributes"><code>
+				 protected static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addInstance">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addInstance"></a><a href="source-class-rex_instance_pool_trait.html#25-36" title="Go to source code">addInstance</a>( <span>mixed <var>$key</var></span>, <span><code><a href="class-rex_instance_pool_trait.html">rex_instance_pool_trait</a></code> <var>$instance</var></span> )</code>
+<div class="description short">
+<p>Adds an instance.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds an instance.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+<dt><var>$instance</var></dt>
+<dd>Instance</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasInstance" id="_hasInstance">
+<td class="attributes"><code>
+				 protected static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasInstance">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasInstance"></a><a href="source-class-rex_instance_pool_trait.html#38-50" title="Go to source code">hasInstance</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+<p>Checks whether an instance exists for the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether an instance exists for the given key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInstance" id="_getInstance">
+<td class="attributes"><code>
+				 protected static
+				null|static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInstance">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInstance"></a><a href="source-class-rex_instance_pool_trait.html#52-75" title="Go to source code">getInstance</a>( <span>mixed <var>$key</var></span>, <span>callable <var>$createCallback</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the instance for the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the instance for the given key.</p>
+<p>If the instance does not exist it will be created by calling the
+$createCallback</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+<dt><var>$createCallback</var></dt>
+<dd>Callback, will be called to create a new instance</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>null|static</code><br/>null|static<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="clearInstance" id="_clearInstance">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_clearInstance">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clearInstance"></a><a href="source-class-rex_instance_pool_trait.html#77-87" title="Go to source code">clearInstance</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+<p>Removes the instance of the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes the instance of the given key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="clearInstancePool" id="_clearInstancePool">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_clearInstancePool">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clearInstancePool"></a><a href="source-class-rex_instance_pool_trait.html#89-101" title="Go to source code">clearInstancePool</a>( )</code>
+<div class="description short">
+<p>Clears the instance pool.</p>
+</div>
+<div class="description detailed hidden">
+<p>Clears the instance pool.</p>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

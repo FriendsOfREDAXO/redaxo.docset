@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_perm</h1>
+<div class="description">
+<p>Class for permissions.</p>
+</div>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_perm.html#3-69" title="Go to source code">redaxo/src/core/lib/login/perm.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="register" id="_register">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_register">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/register"></a><a href="source-class-rex_perm.html#23-34" title="Go to source code">register</a>( <span>string <var>$perm</var></span>, <span>string <var>$name</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$group</var> = <code><a href="class-rex_perm.html#GENERAL">rex_perm::<b>GENERAL</b></a></code></span> )</code>
+<div class="description short">
+<p>Registers a new permission.</p>
+</div>
+<div class="description detailed hidden">
+<p>Registers a new permission.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$perm</var></dt>
+<dd>Perm key</dd>
+<dt><var>$name</var></dt>
+<dd>Perm name</dd>
+<dt><var>$group</var></dt>
+<dd>Perm group, possible values are rex_perm::GENERAL, rex_perm::OPTIONS and
+rex_perm::EXTRAS</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="has" id="_has">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_has">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/has"></a><a href="source-class-rex_perm.html#36-51" title="Go to source code">has</a>( <span>string <var>$perm</var></span> )</code>
+<div class="description short">
+<p>Returns whether the permission is registered.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the permission is registered.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$perm</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAll" id="_getAll">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAll">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAll"></a><a href="source-class-rex_perm.html#53-68" title="Go to source code">getAll</a>( <span>string <var>$group</var> = <code><a href="class-rex_perm.html#GENERAL">rex_perm::<b>GENERAL</b></a></code></span> )</code>
+<div class="description short">
+<p>Returns all permissions for the given group.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns all permissions for the given group.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$group</var></dt>
+<dd>Perm group</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>Permissions<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="GENERAL" id="GENERAL">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/GENERAL"></a><a href="source-class-rex_perm.html#12" title="Go to source code"><b>GENERAL</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#GENERAL">#</a><code><span class="php-quote">'general'</span></code></div></td>
+</tr>
+<tr data-order="OPTIONS" id="OPTIONS">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/OPTIONS"></a><a href="source-class-rex_perm.html#13" title="Go to source code"><b>OPTIONS</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#OPTIONS">#</a><code><span class="php-quote">'options'</span></code></div></td>
+</tr>
+<tr data-order="EXTRAS" id="EXTRAS">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/EXTRAS"></a><a href="source-class-rex_perm.html#14" title="Go to source code"><b>EXTRAS</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#EXTRAS">#</a><code><span class="php-quote">'extras'</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

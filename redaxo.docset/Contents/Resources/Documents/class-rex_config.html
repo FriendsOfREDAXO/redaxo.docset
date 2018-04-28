@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_config</h1>
+<div class="description">
+<p>Class for handling configurations. The configuration is persisted between
+requests.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				staabm<br/>
+<b>Located at</b> <a href="source-class-rex_config.html#3-390" title="Go to source code">redaxo/src/core/lib/config.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="set" id="_set">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_set">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/set"></a><a href="source-class-rex_config.html#48-100" title="Go to source code">set</a>( <span>string <var>$namespace</var></span>, <span>string|array <var>$key</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Method which saves an arbitary value associated to the given namespace and
+key. If the second parameter is an associative array, all key/value pairs will
+be saved.</p>
+</div>
+<div class="description detailed hidden">
+<p>Method which saves an arbitary value associated to the given namespace and
+key. If the second parameter is an associative array, all key/value pairs will
+be saved.</p>
+<p>The set-method returns TRUE when an existing value was overridden, otherwise
+FALSE is returned.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$namespace</var></dt>
+<dd>The namespace e.g. an addon name</dd>
+<dt><var>$key</var></dt>
+<dd>The associated key or an associative array of key/value pairs</dd>
+<dt><var>$value</var></dt>
+<dd>The value to save</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE when an existing value was overridden, otherwise FALSE<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_config.html#102-136" title="Go to source code">get</a>( <span>string <var>$namespace</var></span>, <span>string <var>$key</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Method which returns an associated value for the given namespace and key. If
+$key is null, an array of all key/value pairs for the given namespace will be
+returned.</p>
+</div>
+<div class="description detailed hidden">
+<p>Method which returns an associated value for the given namespace and key. If
+$key is null, an array of all key/value pairs for the given namespace will be
+returned.</p>
+<p>If no value can be found for the given key/namespace combination $default is
+returned.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$namespace</var></dt>
+<dd>The namespace e.g. an addon name</dd>
+<dt><var>$key</var></dt>
+<dd>The associated key</dd>
+<dt><var>$default</var></dt>
+<dd>Default return value if no associated-value can be found</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>the value for $key or $default if $key cannot be found in the given $namespace<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="has" id="_has">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_has">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/has"></a><a href="source-class-rex_config.html#138-165" title="Go to source code">has</a>( <span>string <var>$namespace</var></span>, <span>string <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns if the given key is set.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the given key is set.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$namespace</var></dt>
+<dd>The namespace e.g. an addon name</dd>
+<dt><var>$key</var></dt>
+<dd>The associated key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE if the key is set, otherwise FALSE<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="remove" id="_remove">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_remove">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/remove"></a><a href="source-class-rex_config.html#167-204" title="Go to source code">remove</a>( <span>string <var>$namespace</var></span>, <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Removes the setting associated with the given namespace and key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes the setting associated with the given namespace and key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$namespace</var></dt>
+<dd>The namespace e.g. an addon name</dd>
+<dt><var>$key</var></dt>
+<dd>The associated key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE if the value was found and removed, otherwise FALSE<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeNamespace" id="_removeNamespace">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeNamespace">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeNamespace"></a><a href="source-class-rex_config.html#206-233" title="Go to source code">removeNamespace</a>( <span>string <var>$namespace</var></span> )</code>
+<div class="description short">
+<p>Removes all settings associated with the given namespace.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes all settings associated with the given namespace.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$namespace</var></dt>
+<dd>The namespace e.g. an addon name</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE if the namespace was found and removed, otherwise FALSE<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="refresh" id="_refresh">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_refresh">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/refresh"></a><a href="source-class-rex_config.html#235-253" title="Go to source code">refresh</a>( )</code>
+<div class="description short">
+<p>Refreshes rex_config by reloading config from db.</p>
+</div>
+<div class="description detailed hidden">
+<p>Refreshes rex_config by reloading config from db.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="init" id="_init">
+<td class="attributes"><code>
+				 protected static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_init">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_config.html#255-279" title="Go to source code">init</a>( )</code>
+<div class="description short">
+<p>initilizes the rex_config class.</p>
+</div>
+<div class="description detailed hidden">
+<p>initilizes the rex_config class.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="load" id="_load">
+<td class="attributes"><code>
+				 protected static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_load">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/load"></a><a href="source-class-rex_config.html#281-293" title="Go to source code">load</a>( )</code>
+<div class="description short">
+<p>load the config-data.</p>
+</div>
+<div class="description detailed hidden">
+<p>load the config-data.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="save" id="_save">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_save">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/save"></a><a href="source-class-rex_config.html#334-357" title="Go to source code">save</a>( )</code>
+<div class="description short">
+<p>persists the config-data and truncates the file-cache.</p>
+</div>
+<div class="description detailed hidden">
+<p>persists the config-data and truncates the file-cache.</p>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_file</h1>
+<div class="description">
+<p>Class for handling files.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_file.html#3-181" title="Go to source code">redaxo/src/core/lib/util/file.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_file.html#10-21" title="Go to source code">get</a>( <span>string <var>$file</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the content of a file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the content of a file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$default</var></dt>
+<dd>Default value</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>Content of the file or default value if the file isn't readable<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getConfig" id="_getConfig">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getConfig"></a><a href="source-class-rex_file.html#23-35" title="Go to source code">getConfig</a>( <span>string <var>$file</var></span>, <span>mixed <var>$default</var> = []</span> )</code>
+<div class="description short">
+<p>Returns the content of a config file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the content of a config file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$default</var></dt>
+<dd>Default value</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>Content of the file or default value if the file isn't readable<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCache" id="_getCache">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCache"></a><a href="source-class-rex_file.html#37-49" title="Go to source code">getCache</a>( <span>string <var>$file</var></span>, <span>mixed <var>$default</var> = []</span> )</code>
+<div class="description short">
+<p>Returns the content of a cache file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the content of a cache file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$default</var></dt>
+<dd>Default value</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>Content of the file or default value if the file isn't readable<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="put" id="_put">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_put">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/put"></a><a href="source-class-rex_file.html#51-71" title="Go to source code">put</a>( <span>string <var>$file</var></span>, <span>string <var>$content</var></span> )</code>
+<div class="description short">
+<p>Puts content in a file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Puts content in a file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$content</var></dt>
+<dd>Content for the file</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="putConfig" id="_putConfig">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_putConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/putConfig"></a><a href="source-class-rex_file.html#73-85" title="Go to source code">putConfig</a>( <span>string <var>$file</var></span>, <span>mixed <var>$content</var></span>, <span>integer <var>$inline</var> = <span class="php-num">3</span></span> )</code>
+<div class="description short">
+<p>Puts content in a config file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Puts content in a config file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$content</var></dt>
+<dd>Content for the file</dd>
+<dt><var>$inline</var></dt>
+<dd>The level where you switch to inline YAML</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="putCache" id="_putCache">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_putCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/putCache"></a><a href="source-class-rex_file.html#87-98" title="Go to source code">putCache</a>( <span>string <var>$file</var></span>, <span>mixed <var>$content</var></span> )</code>
+<div class="description short">
+<p>Puts content in a cache file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Puts content in a cache file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$content</var></dt>
+<dd>Content for the file</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="copy" id="_copy">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_copy">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/copy"></a><a href="source-class-rex_file.html#100-126" title="Go to source code">copy</a>( <span>string <var>$srcfile</var></span>, <span>string <var>$dstfile</var></span> )</code>
+<div class="description short">
+<p>Copies a file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Copies a file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$srcfile</var></dt>
+<dd>Path of the source file</dd>
+<dt><var>$dstfile</var></dt>
+<dd>Path of the destination file or directory</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="delete" id="_delete">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_delete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/delete"></a><a href="source-class-rex_file.html#128-141" title="Go to source code">delete</a>( <span>string <var>$file</var></span> )</code>
+<div class="description short">
+<p>Deletes a file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Deletes a file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path of the file</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE on success, FALSE on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="extension" id="_extension">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_extension">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/extension"></a><a href="source-class-rex_file.html#143-153" title="Go to source code">extension</a>( <span>string <var>$filename</var></span> )</code>
+<div class="description short">
+<p>Extracts the extension of the given filename.</p>
+</div>
+<div class="description detailed hidden">
+<p>Extracts the extension of the given filename.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd>Filename</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Extension of $filename<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="formattedSize" id="_formattedSize">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_formattedSize">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formattedSize"></a><a href="source-class-rex_file.html#155-166" title="Go to source code">formattedSize</a>( <span>string <var>$file</var></span>, <span>array <var>$format</var> = []</span> )</code>
+<div class="description short">
+<p>Formates the filesize of the given file into a userfriendly form.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formates the filesize of the given file into a userfriendly form.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path to the file</dd>
+<dt><var>$format</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Formatted filesize<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getOutput" id="_getOutput">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getOutput">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOutput"></a><a href="source-class-rex_file.html#168-180" title="Go to source code">getOutput</a>( <span>string <var>$file</var></span> )</code>
+<div class="description short">
+<p>Gets executed content of given file.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gets executed content of given file.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Path of the file</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>executed Content<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

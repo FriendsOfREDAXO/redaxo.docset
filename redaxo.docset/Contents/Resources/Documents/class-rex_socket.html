@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_socket</h1>
+<div class="description">
+<p>Class for sockets.</p>
+<p>Example:</p>
+<pre>
+<span class="php-keyword1">try</span> {
+    <span class="php-var">$socket</span> = rex_socket::factory(<span class="php-quote">'www.example.com'</span>);
+    <span class="php-var">$socket</span>-&gt;setPath(<span class="php-quote">'/url/to/my/resource?param=1'</span>);
+    <span class="php-var">$response</span> = <span class="php-var">$socket</span>-&gt;doGet();
+    <span class="php-keyword1">if</span>(<span class="php-var">$response</span>-&gt;isOk()) {
+        <span class="php-var">$body</span> = <span class="php-var">$response</span>-&gt;getBody();
+    }
+} <span class="php-keyword1">catch</span>(rex_socket_exception <span class="php-var">$e</span>) {
+    <span class="php-comment">// error message: $e-&gt;getMessage()</span>
+}
+</pre>
+</div>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_socket_proxy.html">rex_socket_proxy</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_socket.html#3-427" title="Go to source code">redaxo/src/core/lib/util/socket/socket.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_socket.html#35-51" title="Go to source code">__construct</a>( <span>string <var>$host</var></span>, <span>integer <var>$port</var> = <span class="php-num">80</span></span>, <span>boolean <var>$ssl</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$host</var></dt>
+<dd>Host name</dd>
+<dt><var>$port</var></dt>
+<dd>Port number</dd>
+<dt><var>$ssl</var></dt>
+<dd>SSL flag</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_socket.html#53-71" title="Go to source code">factory</a>( <span>string <var>$host</var></span>, <span>integer <var>$port</var> = <span class="php-num">80</span></span>, <span>boolean <var>$ssl</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Factory method.</p>
+</div>
+<div class="description detailed hidden">
+<p>Factory method.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$host</var></dt>
+<dd>Host name</dd>
+<dt><var>$port</var></dt>
+<dd>Port number</dd>
+<dt><var>$ssl</var></dt>
+<dd>SSL flag</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>static</code><br/>Socket instance<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_socket.html#_factoryUrl">rex_socket::factoryUrl()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="factoryUrl" id="_factoryUrl">
+<td class="attributes"><code>
+				 public static
+				static
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factoryUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factoryUrl"></a><a href="source-class-rex_socket.html#73-89" title="Go to source code">factoryUrl</a>( <span>string <var>$url</var></span> )</code>
+<div class="description short">
+<p>Creates a socket by a full URL.</p>
+</div>
+<div class="description detailed hidden">
+<p>Creates a socket by a full URL.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$url</var></dt>
+<dd>URL</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>static</code><br/>Socket instance<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_socket.html#_factory">rex_socket::factory()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setPath" id="_setPath">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setPath"></a><a href="source-class-rex_socket.html#91-103" title="Go to source code">setPath</a>( <span>string <var>$path</var></span> )</code>
+<div class="description short">
+<p>Sets the path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$path</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addHeader" id="_addHeader">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addHeader">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addHeader"></a><a href="source-class-rex_socket.html#105-118" title="Go to source code">addHeader</a>( <span>string <var>$key</var></span>, <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Adds a header to the current request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds a header to the current request.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addBasicAuthorization" id="_addBasicAuthorization">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addBasicAuthorization">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addBasicAuthorization"></a><a href="source-class-rex_socket.html#120-133" title="Go to source code">addBasicAuthorization</a>( <span>string <var>$user</var></span>, <span>string <var>$password</var></span> )</code>
+<div class="description short">
+<p>Adds the basic authorization header to the current request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds the basic authorization header to the current request.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$user</var></dt>
+<dd></dd>
+<dt><var>$password</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setTimeout" id="_setTimeout">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setTimeout">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setTimeout"></a><a href="source-class-rex_socket.html#135-147" title="Go to source code">setTimeout</a>( <span>integer <var>$timeout</var></span> )</code>
+<div class="description short">
+<p>Sets the timeout for the connection.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the timeout for the connection.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$timeout</var></dt>
+<dd>Timeout</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="followRedirects" id="_followRedirects">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_followRedirects">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/followRedirects"></a><a href="source-class-rex_socket.html#149-167" title="Go to source code">followRedirects</a>( <span>false|integer <var>$redirects</var></span> )</code>
+<div class="description short">
+<p>Sets number of redirects that should be followed automatically.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets number of redirects that should be followed automatically.</p>
+<p>The method only affects GET requests.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$redirects</var></dt>
+<dd>Number of max redirects</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="doGet" id="_doGet">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_socket_response.html">rex_socket_response</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_doGet">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/doGet"></a><a href="source-class-rex_socket.html#169-179" title="Go to source code">doGet</a>( )</code>
+<div class="description short">
+<p>Makes a GET request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Makes a GET request.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_response.html">rex_socket_response</a></code></code><br/>Response<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="doPost" id="_doPost">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_socket_response.html">rex_socket_response</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_doPost">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/doPost"></a><a href="source-class-rex_socket.html#181-237" title="Go to source code">doPost</a>( <span>string|array|callable <var>$data</var> = <span class="php-quote">''</span></span>, <span>array <var>$files</var> = []</span> )</code>
+<div class="description short">
+<p>Makes a POST request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Makes a POST request.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$data</var></dt>
+<dd>Body data as string or array (POST parameters) or a callback for writing the
+body</dd>
+<dt><var>$files</var></dt>
+<dd>Files array, e.g. &lt;code&gt;array('myfile' =&amp;gt; array('path' =&amp;gt; $path, 'type'
+=&amp;gt; 'image/png'))&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_response.html">rex_socket_response</a></code></code><br/>Response<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="doDelete" id="_doDelete">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_socket_response.html">rex_socket_response</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_doDelete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/doDelete"></a><a href="source-class-rex_socket.html#239-249" title="Go to source code">doDelete</a>( )</code>
+<div class="description short">
+<p>Makes a DELETE request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Makes a DELETE request.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_response.html">rex_socket_response</a></code></code><br/>Response<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="doRequest" id="_doRequest">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_socket_response.html">rex_socket_response</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_doRequest">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/doRequest"></a><a href="source-class-rex_socket.html#251-304" title="Go to source code">doRequest</a>( <span>string <var>$method</var></span>, <span>string|callable <var>$data</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Makes a request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Makes a request.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$method</var></dt>
+<dd>HTTP method, e.g. "GET"</dd>
+<dt><var>$data</var></dt>
+<dd>Body data as string or a callback for writing the body</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_response.html">rex_socket_response</a></code></code><br/>Response<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="openConnection" id="_openConnection">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_openConnection">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/openConnection"></a><a href="source-class-rex_socket.html#306-343" title="Go to source code">openConnection</a>( )</code>
+<div class="description short">
+<p>Opens the socket connection.</p>
+</div>
+<div class="description detailed hidden">
+<p>Opens the socket connection.</p>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="writeRequest" id="_writeRequest">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_socket_response.html">rex_socket_response</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_writeRequest">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/writeRequest"></a><a href="source-class-rex_socket.html#345-381" title="Go to source code">writeRequest</a>( <span>string <var>$method</var></span>, <span>string <var>$path</var></span>, <span>array <var>$headers</var> = []</span>, <span>string|callable <var>$data</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Writes a request to the opened connection.</p>
+</div>
+<div class="description detailed hidden">
+<p>Writes a request to the opened connection.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$method</var></dt>
+<dd>HTTP method, e.g. "GET"</dd>
+<dt><var>$path</var></dt>
+<dd>Path</dd>
+<dt><var>$headers</var></dt>
+<dd>Headers</dd>
+<dt><var>$data</var></dt>
+<dd>Body data as string or a callback for writing the body</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_response.html">rex_socket_response</a></code></code><br/>Response<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="parseUrl" id="_parseUrl">
+<td class="attributes"><code>
+				 protected static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_parseUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parseUrl"></a><a href="source-class-rex_socket.html#383-426" title="Go to source code">parseUrl</a>( <span>string <var>$url</var></span> )</code>
+<div class="description short">
+<p>Parses a full URL and returns an array with the keys "host", "port", "ssl"
+and "path".</p>
+</div>
+<div class="description detailed hidden">
+<p>Parses a full URL and returns an array with the keys "host", "port", "ssl"
+and "path".</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$url</var></dt>
+<dd>Full URL</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>URL parts<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="host" id="$host">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24host"></a><a href="source-class-rex_socket.html#26" title="Go to source code"><var>$host</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$host">#</a><code></code></div></td>
+</tr>
+<tr data-order="port" id="$port">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24port"></a><a href="source-class-rex_socket.html#27" title="Go to source code"><var>$port</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$port">#</a><code></code></div></td>
+</tr>
+<tr data-order="ssl" id="$ssl">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24ssl"></a><a href="source-class-rex_socket.html#28" title="Go to source code"><var>$ssl</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$ssl">#</a><code></code></div></td>
+</tr>
+<tr data-order="path" id="$path">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24path"></a><a href="source-class-rex_socket.html#29" title="Go to source code"><var>$path</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$path">#</a><code><span class="php-quote">'/'</span></code></div></td>
+</tr>
+<tr data-order="timeout" id="$timeout">
+<td class="attributes"><code>
+				protected  
+				integer
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24timeout"></a><a href="source-class-rex_socket.html#30" title="Go to source code"><var>$timeout</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$timeout">#</a><code><span class="php-num">15</span></code></div></td>
+</tr>
+<tr data-order="followRedirects" id="$followRedirects">
+<td class="attributes"><code>
+				protected  
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24followRedirects"></a><a href="source-class-rex_socket.html#31" title="Go to source code"><var>$followRedirects</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$followRedirects">#</a><code><span class="php-keyword1">false</span></code></div></td>
+</tr>
+<tr data-order="headers" id="$headers">
+<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24headers"></a><a href="source-class-rex_socket.html#32" title="Go to source code"><var>$headers</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$headers">#</a><code>[]</code></div></td>
+</tr>
+<tr data-order="stream" id="$stream">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24stream"></a><a href="source-class-rex_socket.html#33" title="Go to source code"><var>$stream</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$stream">#</a><code></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

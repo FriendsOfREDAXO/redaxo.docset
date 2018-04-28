@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_article_content</h1>
+<div class="description">
+<p>Klasse regelt den Zugriff auf Artikelinhalte. DB Anfragen werden vermieden,
+caching läuft über generated Dateien.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_article_content_base.html"><span>rex_article_content_base</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_article_content</span></b>
+</dd>
+</dl>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_article_content_editor.html">rex_article_content_editor</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a>\<a href="package-redaxo.structure.content.html">content</a><br/>
+<b>Located at</b> <a href="source-class-rex_article_content.html#3-117" title="Go to source code">redaxo/src/addons/structure/plugins/content/lib/article_content.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_article_content.html#14-18" title="Go to source code">__construct</a>( <span>mixed <var>$article_id</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#___construct">rex_article_content_base::__construct</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getContentAsQuery" id="_getContentAsQuery">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getContentAsQuery">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getContentAsQuery"></a><a href="source-class-rex_article_content.html#21-27" title="Go to source code">getContentAsQuery</a>( <span>mixed <var>$viasql</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setArticleId" id="_setArticleId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setArticleId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setArticleId"></a><a href="source-class-rex_article_content.html#29-50" title="Go to source code">setArticleId</a>( <span>mixed <var>$article_id</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#_setArticleId">rex_article_content_base::setArticleId</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="_getValue" id="__getValue">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#__getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_getValue"></a><a href="source-class-rex_article_content.html#52-62" title="Go to source code">_getValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#__getValue">rex_article_content_base::_getValue</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasValue" id="_hasValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasValue"></a><a href="source-class-rex_article_content.html#64-74" title="Go to source code">hasValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#_hasValue">rex_article_content_base::hasValue</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getArticle" id="_getArticle">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArticle"></a><a href="source-class-rex_article_content.html#76-116" title="Go to source code">getArticle</a>( <span>integer <var>$curctype</var> = -<span class="php-num">1</span></span> )</code>
+<div class="description short">
+<p>Returns the content of the article of the given ctype. If no ctype is given,
+content of all ctypes is returned.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the content of the article of the given ctype. If no ctype is given,
+content of all ctypes is returned.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$curctype</var></dt>
+<dd>The ctype to fetch, or -1 for all ctypes</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_article_content_base.html#_getArticle">rex_article_content_base::getArticle</a></code></div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_article_content_base.html#methods">rex_article_content_base</a></h3>
+<p class="elementList">
+<code><a href="class-rex_article_content_base.html#_correctValue">correctValue()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getArticleId">getArticleId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getArticleTemplate">getArticleTemplate()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getClang"><span class="deprecated">getClang()</span></a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getClangId">getClangId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getSlice">getSlice()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getSqlInstance">getSqlInstance()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getStreamOutput">getStreamOutput()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getTemplateId">getTemplateId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_getValue">getValue()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_outputSlice">outputSlice()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_postArticle">postArticle()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_preArticle">preArticle()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceCommonVars">replaceCommonVars()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceLinks">replaceLinks()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceObjectVars">replaceObjectVars()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_replaceVars">replaceVars()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setClang">setClang()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setEval">setEval()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setFunction">setFunction()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setMode">setMode()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setSliceId">setSliceId()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setSliceRevision">setSliceRevision()</a></code>, 
+			<code><a href="class-rex_article_content_base.html#_setTemplateId">setTemplateId()</a></code>
+</p>
+<h2>Properties summary</h2>
+<h3>Properties inherited from <a href="class-rex_article_content_base.html#properties">rex_article_content_base</a></h3>
+<p class="elementList">
+<code><a href="class-rex_article_content_base.html#$ARTICLE"><var>$ARTICLE</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$article_id"><var>$article_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$category_id"><var>$category_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$clang"><var>$clang</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$ctype"><var>$ctype</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$debug"><var>$debug</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$eval"><var>$eval</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$function"><var>$function</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$getSlice"><var>$getSlice</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$info"><var>$info</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$mode"><var>$mode</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$slice_id"><var>$slice_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$slice_revision"><var>$slice_revision</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$template_attributes"><var>$template_attributes</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$template_id"><var>$template_id</var></a></code>, 
+			<code><a href="class-rex_article_content_base.html#$warning"><var>$warning</var></a></code>
+</p>
+</div></body>
+</html>

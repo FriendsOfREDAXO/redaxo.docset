@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Trait rex_factory_trait</h1>
+<div class="description">
+<p>Factory trait.</p>
+<p>Example child class:</p>
+<pre>
+<span class="php-keyword1">class</span> rex_example
+{
+    <span class="php-keyword1">use</span> rex_factory;
+
+    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$param</span>)
+    {
+        <span class="php-comment">// ...</span>
+    }
+
+    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> factory(<span class="php-var">$param</span>)
+    {
+        <span class="php-var">$class</span> = self::getFactoryClass();
+        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> <span class="php-var">$class</span>(<span class="php-var">$param</span>);
+    }
+}
+</pre>
+</div>
+<div>
+<h3>Direct Known Users</h3>
+<p class="elementList">
+<code><a href="class-rex_api_function.html">rex_api_function</a></code>, 
+			<code><a href="class-rex_backend_password_policy.html">rex_backend_password_policy</a></code>, 
+			<code><a href="class-rex_navigation.html">rex_navigation</a></code>, 
+			<code><a href="class-rex_package_manager.html">rex_package_manager</a></code>, 
+			<code><a href="class-rex_sql.html">rex_sql</a></code>, 
+			<code><a href="class-rex_validator.html">rex_validator</a></code>, 
+			<code><a href="class-rex_be_navigation.html">rex_be_navigation</a></code>, 
+			<code><a href="class-rex_csrf_token.html">rex_csrf_token</a></code>, 
+			<code><a href="class-rex_extension.html">rex_extension</a></code>, 
+			<code><a href="class-rex_finder.html">rex_finder</a></code>, 
+			<code><a href="class-rex_form.html">rex_form</a></code>, 
+			<code><a href="class-rex_list.html">rex_list</a></code>, 
+			<code><a href="class-rex_logger.html">rex_logger</a></code>, 
+			<code><a href="class-rex_markdown.html">rex_markdown</a></code>
+</p>
+</div>
+<div>
+<h3>Indirect Known Users</h3>
+<p class="elementList">
+<code><a href="class-rex_addon_manager.html">rex_addon_manager</a></code>, 
+			<code><a href="class-rex_api_article_move.html">rex_api_article_move</a></code>, 
+			<code><a href="class-rex_api_content_copy.html">rex_api_content_copy</a></code>, 
+			<code><a href="class-rex_api_sitemap_tree.html">rex_api_sitemap_tree</a></code>, 
+			<code><a href="class-rex_plugin_manager.html">rex_plugin_manager</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_factory_trait.html#3-90" title="Go to source code">redaxo/src/core/lib/base/factory_trait.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="setFactoryClass" id="_setFactoryClass">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setFactoryClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFactoryClass"></a><a href="source-class-rex_factory_trait.html#36-53" title="Go to source code">setFactoryClass</a>( <span>string <var>$subclass</var></span> )</code>
+<div class="description short">
+<p>Sets the class for the factory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the class for the factory.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$subclass</var></dt>
+<dd>Classname</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFactoryClass" id="_getFactoryClass">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFactoryClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFactoryClass"></a><a href="source-class-rex_factory_trait.html#55-64" title="Go to source code">getFactoryClass</a>( )</code>
+<div class="description short">
+<p>Returns the class for the factory.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the class for the factory.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasFactoryClass" id="_hasFactoryClass">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasFactoryClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasFactoryClass"></a><a href="source-class-rex_factory_trait.html#66-75" title="Go to source code">hasFactoryClass</a>( )</code>
+<div class="description short">
+<p>Returns if the class has a custom factory class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the class has a custom factory class.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="callFactoryClass" id="_callFactoryClass">
+<td class="attributes"><code>
+				 protected static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_callFactoryClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/callFactoryClass"></a><a href="source-class-rex_factory_trait.html#77-89" title="Go to source code">callFactoryClass</a>( <span>string <var>$method</var></span>, <span>array <var>$arguments</var></span> )</code>
+<div class="description short">
+<p>Calls the factory class with the given method and arguments.</p>
+</div>
+<div class="description detailed hidden">
+<p>Calls the factory class with the given method and arguments.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$method</var></dt>
+<dd>Method name</dd>
+<dt><var>$arguments</var></dt>
+<dd>Array of arguments</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>Result of the callback<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

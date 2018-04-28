@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="de">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="../Assets/css/styles.css" rel="stylesheet"/>
+  <script src="../Assets/js/script.js">
+  </script>
+ </head>
+ <body>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
+</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * Cronjob Addon.
+</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> *
+</span></span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-comment"> * @author gharlan[at]web[dot]de Gregor Harlan
+</span></span><span class="l" id="7"><a class="l" href="#7"> 7 </a><span class="php-comment"> *
+</span></span><span class="l" id="8"><a class="l" href="#8"> 8 </a><span class="php-comment"> * @package redaxo\cronjob
+</span></span><span class="l" id="9"><a class="l" href="#9"> 9 </a><span class="php-comment"> */</span>
+</span><span class="l" id="10"><a class="l" href="#10">10 </a>
+</span><span class="l" id="11"><a class="l" href="#11">11 </a><span class="php-keyword1">class</span> <a href="#rex_cronjob_urlrequest" id="rex_cronjob_urlrequest">rex_cronjob_urlrequest</a> <span class="php-keyword1">extends</span> rex_cronjob
+</span><span class="l" id="12"><a class="l" href="#12">12 </a>{
+</span><span class="l" id="13"><a class="l" href="#13">13 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_execute" id="_execute">execute</a>()
+</span><span class="l" id="14"><a class="l" href="#14">14 </a>    {
+</span><span class="l" id="15"><a class="l" href="#15">15 </a>        <span class="php-keyword1">try</span> {
+</span><span class="l" id="16"><a class="l" href="#16">16 </a>            <span class="php-var">$socket</span> = rex_socket::factoryUrl(<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'url'</span>));
+</span><span class="l" id="17"><a class="l" href="#17">17 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'http-auth'</span>) == <span class="php-quote">'|1|'</span>) {
+</span><span class="l" id="18"><a class="l" href="#18">18 </a>                <span class="php-var">$socket</span>-&gt;addBasicAuthorization(<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'user'</span>), <span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'password'</span>));
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>            }
+</span><span class="l" id="20"><a class="l" href="#20">20 </a>            <span class="php-keyword1">if</span> ((<span class="php-var">$post</span> = <span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'post'</span>)) != <span class="php-quote">''</span>) {
+</span><span class="l" id="21"><a class="l" href="#21">21 </a>                <span class="php-var">$response</span> = <span class="php-var">$socket</span>-&gt;doPost(<span class="php-var">$post</span>);
+</span><span class="l" id="22"><a class="l" href="#22">22 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="23"><a class="l" href="#23">23 </a>                <span class="php-var">$response</span> = <span class="php-var">$socket</span>-&gt;doGet();
+</span><span class="l" id="24"><a class="l" href="#24">24 </a>            }
+</span><span class="l" id="25"><a class="l" href="#25">25 </a>            <span class="php-var">$statusCode</span> = <span class="php-var">$response</span>-&gt;getStatusCode();
+</span><span class="l" id="26"><a class="l" href="#26">26 </a>            <span class="php-var">$success</span> = <span class="php-var">$response</span>-&gt;isSuccessful();
+</span><span class="l" id="27"><a class="l" href="#27">27 </a>            <span class="php-var">$message</span> = <span class="php-var">$statusCode</span> . <span class="php-quote">' '</span> . <span class="php-var">$response</span>-&gt;getStatusMessage();
+</span><span class="l" id="28"><a class="l" href="#28">28 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$statusCode</span>, [<span class="php-num">301</span>, <span class="php-num">302</span>, <span class="php-num">303</span>, <span class="php-num">307</span>])
+</span><span class="l" id="29"><a class="l" href="#29">29 </a>                &amp;&amp; <span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'redirect'</span>, <span class="php-keyword1">true</span>)
+</span><span class="l" id="30"><a class="l" href="#30">30 </a>                &amp;&amp; (<span class="php-var">$location</span> = <span class="php-var">$response</span>-&gt;getHeader(<span class="php-quote">'Location'</span>))
+</span><span class="l" id="31"><a class="l" href="#31">31 </a>            ) {
+</span><span class="l" id="32"><a class="l" href="#32">32 </a>                <span class="php-comment">// maximal eine Umleitung zulassen</span>
+</span><span class="l" id="33"><a class="l" href="#33">33 </a>                <span class="php-var">$this</span>-&gt;setParam(<span class="php-quote">'redirect'</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="34"><a class="l" href="#34">34 </a>                <span class="php-var">$this</span>-&gt;setParam(<span class="php-quote">'url'</span>, <span class="php-var">$location</span>);
+</span><span class="l" id="35"><a class="l" href="#35">35 </a>                <span class="php-comment">// rekursiv erneut ausfuehren</span>
+</span><span class="l" id="36"><a class="l" href="#36">36 </a>                <span class="php-var">$success</span> = <span class="php-var">$this</span>-&gt;execute();
+</span><span class="l" id="37"><a class="l" href="#37">37 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;hasMessage()) {
+</span><span class="l" id="38"><a class="l" href="#38">38 </a>                    <span class="php-var">$message</span> .= <span class="php-quote">' -&gt; '</span> . <span class="php-var">$this</span>-&gt;getMessage();
+</span><span class="l" id="39"><a class="l" href="#39">39 </a>                } <span class="php-keyword1">else</span> {
+</span><span class="l" id="40"><a class="l" href="#40">40 </a>                    <span class="php-var">$message</span> .= <span class="php-quote">' -&gt; Unknown error'</span>;
+</span><span class="l" id="41"><a class="l" href="#41">41 </a>                }
+</span><span class="l" id="42"><a class="l" href="#42">42 </a>            }
+</span><span class="l" id="43"><a class="l" href="#43">43 </a>            <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$message</span>);
+</span><span class="l" id="44"><a class="l" href="#44">44 </a>            <span class="php-keyword1">return</span> <span class="php-var">$success</span>;
+</span><span class="l" id="45"><a class="l" href="#45">45 </a>        } <span class="php-keyword1">catch</span> (rex_exception <span class="php-var">$e</span>) {
+</span><span class="l" id="46"><a class="l" href="#46">46 </a>            <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$e</span>-&gt;getMessage());
+</span><span class="l" id="47"><a class="l" href="#47">47 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="48"><a class="l" href="#48">48 </a>        }
+</span><span class="l" id="49"><a class="l" href="#49">49 </a>    }
+</span><span class="l" id="50"><a class="l" href="#50">50 </a>
+</span><span class="l" id="51"><a class="l" href="#51">51 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTypeName" id="_getTypeName">getTypeName</a>()
+</span><span class="l" id="52"><a class="l" href="#52">52 </a>    {
+</span><span class="l" id="53"><a class="l" href="#53">53 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'cronjob_type_urlrequest'</span>);
+</span><span class="l" id="54"><a class="l" href="#54">54 </a>    }
+</span><span class="l" id="55"><a class="l" href="#55">55 </a>
+</span><span class="l" id="56"><a class="l" href="#56">56 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getParamFields" id="_getParamFields">getParamFields</a>()
+</span><span class="l" id="57"><a class="l" href="#57">57 </a>    {
+</span><span class="l" id="58"><a class="l" href="#58">58 </a>        <span class="php-keyword1">return</span> [
+</span><span class="l" id="59"><a class="l" href="#59">59 </a>            [
+</span><span class="l" id="60"><a class="l" href="#60">60 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_urlrequest_url'</span>),
+</span><span class="l" id="61"><a class="l" href="#61">61 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'url'</span>,
+</span><span class="l" id="62"><a class="l" href="#62">62 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
+</span><span class="l" id="63"><a class="l" href="#63">63 </a>                <span class="php-quote">'default'</span> =&gt; <span class="php-quote">'http://'</span>,
+</span><span class="l" id="64"><a class="l" href="#64">64 </a>            ],
+</span><span class="l" id="65"><a class="l" href="#65">65 </a>            [
+</span><span class="l" id="66"><a class="l" href="#66">66 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_urlrequest_post'</span>),
+</span><span class="l" id="67"><a class="l" href="#67">67 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'post'</span>,
+</span><span class="l" id="68"><a class="l" href="#68">68 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
+</span><span class="l" id="69"><a class="l" href="#69">69 </a>            ],
+</span><span class="l" id="70"><a class="l" href="#70">70 </a>            [
+</span><span class="l" id="71"><a class="l" href="#71">71 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'http-auth'</span>,
+</span><span class="l" id="72"><a class="l" href="#72">72 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'checkbox'</span>,
+</span><span class="l" id="73"><a class="l" href="#73">73 </a>                <span class="php-quote">'options'</span> =&gt; [<span class="php-num">1</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_urlrequest_httpauth'</span>)],
+</span><span class="l" id="74"><a class="l" href="#74">74 </a>            ],
+</span><span class="l" id="75"><a class="l" href="#75">75 </a>            [
+</span><span class="l" id="76"><a class="l" href="#76">76 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_urlrequest_user'</span>),
+</span><span class="l" id="77"><a class="l" href="#77">77 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'user'</span>,
+</span><span class="l" id="78"><a class="l" href="#78">78 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
+</span><span class="l" id="79"><a class="l" href="#79">79 </a>                <span class="php-quote">'visible_if'</span> =&gt; [<span class="php-quote">'http-auth'</span> =&gt; <span class="php-num">1</span>],
+</span><span class="l" id="80"><a class="l" href="#80">80 </a>            ],
+</span><span class="l" id="81"><a class="l" href="#81">81 </a>            [
+</span><span class="l" id="82"><a class="l" href="#82">82 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_urlrequest_password'</span>),
+</span><span class="l" id="83"><a class="l" href="#83">83 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'password'</span>,
+</span><span class="l" id="84"><a class="l" href="#84">84 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
+</span><span class="l" id="85"><a class="l" href="#85">85 </a>                <span class="php-quote">'visible_if'</span> =&gt; [<span class="php-quote">'http-auth'</span> =&gt; <span class="php-num">1</span>],
+</span><span class="l" id="86"><a class="l" href="#86">86 </a>            ],
+</span><span class="l" id="87"><a class="l" href="#87">87 </a>        ];
+</span><span class="l" id="88"><a class="l" href="#88">88 </a>    }
+</span><span class="l" id="89"><a class="l" href="#89">89 </a>}
+</span><span class="l" id="90"><a class="l" href="#90">90 </a></span></code></pre>
+ </body>
+</html>

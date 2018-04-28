@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_addon</h1>
+<div class="description">
+<p>Class for addons.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_package.html"><span>rex_package</span></a>
+			
+			 implements 
+				<a href="class-rex_package_interface.html"><span>rex_package_interface</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_addon</span></b>			
+			 implements 
+				<a href="class-rex_addon_interface.html"><span>rex_addon_interface</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_addon.html#3-325" title="Go to source code">redaxo/src/core/lib/packages/addons/addon.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public static
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_addon.html#26-44" title="Go to source code">get</a>( <span>string <var>$addon</var></span> )</code>
+<div class="description short">
+<p>Returns the addon by the given name.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the addon by the given name.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Name of the addon</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package.html#_get">rex_package::get</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="exists" id="_exists">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_exists">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/exists"></a><a href="source-class-rex_addon.html#46-56" title="Go to source code">exists</a>( <span>string <var>$addon</var></span> )</code>
+<div class="description short">
+<p>Returns if the addon exists.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the addon exists.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$addon</var></dt>
+<dd>Name of the addon</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_package.html#_exists">rex_package::exists</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAddon" id="_getAddon">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_addon.html">rex_addon</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAddon">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAddon"></a><a href="source-class-rex_addon.html#58-64" title="Go to source code">getAddon</a>( )</code>
+<div class="description short">
+<p>Returns the related Addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the related Addon.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_addon.html">rex_addon</a></code></code><br/>rex_addon<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAddon">rex_package_interface::getAddon()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPackageId" id="_getPackageId">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPackageId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPackageId"></a><a href="source-class-rex_addon.html#66-72" title="Go to source code">getPackageId</a>( )</code>
+<div class="description short">
+<p>Returns the package ID.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the package ID.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getPackageId">rex_package_interface::getPackageId()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getType" id="_getType">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getType"></a><a href="source-class-rex_addon.html#74-80" title="Go to source code">getType</a>( )</code>
+<div class="description short">
+<p>Returns the package type as string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the package type as string.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getType">rex_package_interface::getType()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPath" id="_getPath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPath"></a><a href="source-class-rex_addon.html#82-88" title="Go to source code">getPath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the base path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the base path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getPath">rex_package_interface::getPath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAssetsPath" id="_getAssetsPath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAssetsPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAssetsPath"></a><a href="source-class-rex_addon.html#90-96" title="Go to source code">getAssetsPath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the assets path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the assets path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAssetsPath">rex_package_interface::getAssetsPath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAssetsUrl" id="_getAssetsUrl">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAssetsUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAssetsUrl"></a><a href="source-class-rex_addon.html#98-104" title="Go to source code">getAssetsUrl</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the assets url.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the assets url.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAssetsUrl">rex_package_interface::getAssetsUrl()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getDataPath" id="_getDataPath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDataPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDataPath"></a><a href="source-class-rex_addon.html#106-112" title="Go to source code">getDataPath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the data path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the data path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getDataPath">rex_package_interface::getDataPath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCachePath" id="_getCachePath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCachePath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCachePath"></a><a href="source-class-rex_addon.html#114-120" title="Go to source code">getCachePath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the cache path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the cache path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getCachePath">rex_package_interface::getCachePath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isSystemPackage" id="_isSystemPackage">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isSystemPackage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isSystemPackage"></a><a href="source-class-rex_addon.html#122-128" title="Go to source code">isSystemPackage</a>( )</code>
+<div class="description short">
+<p>Returns if it is a system package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if it is a system package.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_isSystemPackage">rex_package_interface::isSystemPackage()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="i18n" id="_i18n">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_i18n">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/i18n"></a><a href="source-class-rex_addon.html#130-141" title="Go to source code">i18n</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Adds the package prefix to the given key and returns the translation for
+it.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds the package prefix to the given key and returns the translation for
+it.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Translation for the key<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_i18n">rex_package_interface::i18n()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPlugin" id="_getPlugin">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_plugin.html">rex_plugin</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPlugin">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPlugin"></a><a href="source-class-rex_addon.html#143-155" title="Go to source code">getPlugin</a>( <span>string <var>$plugin</var></span> )</code>
+<div class="description short">
+<p>Returns the child plugin by the given name.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the child plugin by the given name.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$plugin</var></dt>
+<dd>Name of the plugin</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_plugin.html">rex_plugin</a></code></code><br/>rex_plugin<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_addon_interface.html#_getPlugin">rex_addon_interface::getPlugin()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="pluginExists" id="_pluginExists">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_pluginExists">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/pluginExists"></a><a href="source-class-rex_addon.html#157-163" title="Go to source code">pluginExists</a>( <span>string <var>$plugin</var></span> )</code>
+<div class="description short">
+<p>Returns if the plugin exists.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the plugin exists.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$plugin</var></dt>
+<dd>Name of the plugin</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_addon_interface.html#_pluginExists">rex_addon_interface::pluginExists()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getRegisteredPlugins" id="_getRegisteredPlugins">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_plugin.html">rex_plugin</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getRegisteredPlugins">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRegisteredPlugins"></a><a href="source-class-rex_addon.html#165-171" title="Go to source code">getRegisteredPlugins</a>( )</code>
+<div class="description short">
+<p>Returns the registered plugins.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the registered plugins.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_plugin.html">rex_plugin</a>[]</code></code><br/>rex_plugin[]<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_addon_interface.html#_getRegisteredPlugins">rex_addon_interface::getRegisteredPlugins()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInstalledPlugins" id="_getInstalledPlugins">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_plugin.html">rex_plugin</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInstalledPlugins">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInstalledPlugins"></a><a href="source-class-rex_addon.html#173-179" title="Go to source code">getInstalledPlugins</a>( )</code>
+<div class="description short">
+<p>Returns the installed plugins.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the installed plugins.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_plugin.html">rex_plugin</a>[]</code></code><br/>rex_plugin[]<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_addon_interface.html#_getInstalledPlugins">rex_addon_interface::getInstalledPlugins()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAvailablePlugins" id="_getAvailablePlugins">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_plugin.html">rex_plugin</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAvailablePlugins">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAvailablePlugins"></a><a href="source-class-rex_addon.html#181-187" title="Go to source code">getAvailablePlugins</a>( )</code>
+<div class="description short">
+<p>Returns the available plugins.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the available plugins.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_plugin.html">rex_plugin</a>[]</code></code><br/>rex_plugin[]<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_addon_interface.html#_getAvailablePlugins">rex_addon_interface::getAvailablePlugins()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSystemPlugins" id="_getSystemPlugins">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_plugin.html">rex_plugin</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSystemPlugins">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSystemPlugins"></a><a href="source-class-rex_addon.html#189-209" title="Go to source code">getSystemPlugins</a>( )</code>
+<div class="description short">
+<p>Returns the system plugins.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the system plugins.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_plugin.html">rex_plugin</a>[]</code></code><br/>rex_plugin[]<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_addon_interface.html#_getSystemPlugins">rex_addon_interface::getSystemPlugins()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getRegisteredAddons" id="_getRegisteredAddons">
+<td class="attributes"><code>
+				 public static
+				self[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getRegisteredAddons">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRegisteredAddons"></a><a href="source-class-rex_addon.html#211-219" title="Go to source code">getRegisteredAddons</a>( )</code>
+<div class="description short">
+<p>Returns the registered addons.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the registered addons.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self[]</code><br/>self[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInstalledAddons" id="_getInstalledAddons">
+<td class="attributes"><code>
+				 public static
+				self[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInstalledAddons">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInstalledAddons"></a><a href="source-class-rex_addon.html#221-229" title="Go to source code">getInstalledAddons</a>( )</code>
+<div class="description short">
+<p>Returns the installed addons.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the installed addons.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self[]</code><br/>self[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAvailableAddons" id="_getAvailableAddons">
+<td class="attributes"><code>
+				 public static
+				self[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAvailableAddons">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAvailableAddons"></a><a href="source-class-rex_addon.html#231-239" title="Go to source code">getAvailableAddons</a>( )</code>
+<div class="description short">
+<p>Returns the available addons.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the available addons.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self[]</code><br/>self[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSetupAddons" id="_getSetupAddons">
+<td class="attributes"><code>
+				 public static
+				self[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSetupAddons">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSetupAddons"></a><a href="source-class-rex_addon.html#241-255" title="Go to source code">getSetupAddons</a>( )</code>
+<div class="description short">
+<p>Returns the setup addons.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the setup addons.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self[]</code><br/>self[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSystemAddons" id="_getSystemAddons">
+<td class="attributes"><code>
+				 public static
+				self[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSystemAddons">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSystemAddons"></a><a href="source-class-rex_addon.html#257-271" title="Go to source code">getSystemAddons</a>( )</code>
+<div class="description short">
+<p>Returns the system addons.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the system addons.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self[]</code><br/>self[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="initialize" id="_initialize">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_initialize">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/initialize"></a><a href="source-class-rex_addon.html#273-309" title="Go to source code">initialize</a>( <span>mixed <var>$dbExists</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Initializes all packages.</p>
+</div>
+<div class="description detailed hidden">
+<p>Initializes all packages.</p>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_package.html#methods">rex_package</a></h3>
+<p class="elementList">
+<code><a href="class-rex_package.html#___construct">__construct()</a></code>, 
+			<code><a href="class-rex_package.html#_boot">boot()</a></code>, 
+			<code><a href="class-rex_package.html#_enlist">enlist()</a></code>, 
+			<code><a href="class-rex_package.html#_getAuthor">getAuthor()</a></code>, 
+			<code><a href="class-rex_package.html#_getAvailablePackages">getAvailablePackages()</a></code>, 
+			<code><a href="class-rex_package.html#_getConfig">getConfig()</a></code>, 
+			<code><a href="class-rex_package.html#_getInstalledPackages">getInstalledPackages()</a></code>, 
+			<code><a href="class-rex_package.html#_getName">getName()</a></code>, 
+			<code><a href="class-rex_package.html#_getProperty">getProperty()</a></code>, 
+			<code><a href="class-rex_package.html#_getRegisteredPackages">getRegisteredPackages()</a></code>, 
+			<code><a href="class-rex_package.html#_getSetupPackages">getSetupPackages()</a></code>, 
+			<code><a href="class-rex_package.html#_getSupportPage">getSupportPage()</a></code>, 
+			<code><a href="class-rex_package.html#_getSystemPackages">getSystemPackages()</a></code>, 
+			<code><a href="class-rex_package.html#_getVersion">getVersion()</a></code>, 
+			<code><a href="class-rex_package.html#_hasConfig">hasConfig()</a></code>, 
+			<code><a href="class-rex_package.html#_hasProperty">hasProperty()</a></code>, 
+			<code><a href="class-rex_package.html#_includeFile">includeFile()</a></code>, 
+			<code><a href="class-rex_package.html#_isAvailable">isAvailable()</a></code>, 
+			<code><a href="class-rex_package.html#_isInstalled">isInstalled()</a></code>, 
+			<code><a href="class-rex_package.html#_loadProperties">loadProperties()</a></code>, 
+			<code><a href="class-rex_package.html#_removeConfig">removeConfig()</a></code>, 
+			<code><a href="class-rex_package.html#_removeProperty">removeProperty()</a></code>, 
+			<code><a href="class-rex_package.html#_setConfig">setConfig()</a></code>, 
+			<code><a href="class-rex_package.html#_setProperty">setProperty()</a></code>
+</p>
+<h2>Constants summary</h2>
+<h3>Constants inherited from <a href="class-rex_package.html#constants">rex_package</a></h3>
+<p class="elementList">
+<code><a href="class-rex_package.html#FILE_BOOT"><b>FILE_BOOT</b></a></code>, 
+			<code><a href="class-rex_package.html#FILE_INSTALL"><b>FILE_INSTALL</b></a></code>, 
+			<code><a href="class-rex_package.html#FILE_INSTALL_SQL"><b>FILE_INSTALL_SQL</b></a></code>, 
+			<code><a href="class-rex_package.html#FILE_PACKAGE"><b>FILE_PACKAGE</b></a></code>, 
+			<code><a href="class-rex_package.html#FILE_UNINSTALL"><b>FILE_UNINSTALL</b></a></code>, 
+			<code><a href="class-rex_package.html#FILE_UNINSTALL_SQL"><b>FILE_UNINSTALL_SQL</b></a></code>, 
+			<code><a href="class-rex_package.html#FILE_UPDATE"><b>FILE_UPDATE</b></a></code>
+</p>
+</div></body>
+</html>

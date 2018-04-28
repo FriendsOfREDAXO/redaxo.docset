@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_var</h1>
+<div class="description">
+<p>Abstract baseclass for REX_VARS.</p>
+</div>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_var_article.html">rex_var_article</a></code>, 
+			<code><a href="class-rex_var_category.html">rex_var_category</a></code>, 
+			<code><a href="class-rex_var_value.html">rex_var_value</a></code>, 
+			<code><a href="class-rex_var_clang.html">rex_var_clang</a></code>, 
+			<code><a href="class-rex_var_config.html">rex_var_config</a></code>, 
+			<code><a href="class-rex_var_link.html">rex_var_link</a></code>, 
+			<code><a href="class-rex_var_linklist.html">rex_var_linklist</a></code>, 
+			<code><a href="class-rex_var_media.html">rex_var_media</a></code>, 
+			<code><a href="class-rex_var_medialist.html">rex_var_medialist</a></code>, 
+			<code><a href="class-rex_var_property.html">rex_var_property</a></code>, 
+			<code><a href="class-rex_var_template.html">rex_var_template</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_var.html#3-388" title="Go to source code">redaxo/src/core/lib/var/var.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="parse" id="_parse">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_parse">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parse"></a><a href="source-class-rex_var.html#24-117" title="Go to source code">parse</a>( <span>string <var>$content</var></span>, <span>integer <var>$env</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$context</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$contextData</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Parses all REX_VARs in the given content.</p>
+</div>
+<div class="description detailed hidden">
+<p>Parses all REX_VARs in the given content.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$content</var></dt>
+<dd>Content</dd>
+<dt><var>$env</var></dt>
+<dd>Environment</dd>
+<dt><var>$context</var></dt>
+<dd>Context</dd>
+<dt><var>$contextData</var></dt>
+<dd>Context data</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasArg" id="_hasArg">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasArg">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasArg"></a><a href="source-class-rex_var.html#217-228" title="Go to source code">hasArg</a>( <span>string <var>$key</var></span>, <span>boolean <var>$defaultArg</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Checks whether the given arguments exists.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the given arguments exists.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd></dd>
+<dt><var>$defaultArg</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getArg" id="_getArg">
+<td class="attributes"><code>
+				 protected 
+				null|string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getArg">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArg"></a><a href="source-class-rex_var.html#230-245" title="Go to source code">getArg</a>( <span>string <var>$key</var></span>, <span>null|string <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$defaultArg</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Returns the argument.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the argument.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd></dd>
+<dt><var>$default</var></dt>
+<dd></dd>
+<dt><var>$defaultArg</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>null|string</code><br/>null|string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getParsedArg" id="_getParsedArg">
+<td class="attributes"><code>
+				 protected 
+				integer|null|string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getParsedArg">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParsedArg"></a><a href="source-class-rex_var.html#247-270" title="Go to source code">getParsedArg</a>( <span>string <var>$key</var></span>, <span>null|string <var>$default</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$defaultArg</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Returns the (recursive) parsed argument.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the (recursive) parsed argument.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd></dd>
+<dt><var>$default</var></dt>
+<dd></dd>
+<dt><var>$defaultArg</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>integer|null|string</code><br/>int|null|string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="environmentIs" id="_environmentIs">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_environmentIs">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/environmentIs"></a><a href="source-class-rex_var.html#272-282" title="Go to source code">environmentIs</a>( <span>integer <var>$env</var></span> )</code>
+<div class="description short">
+<p>Checks whether the given envirenment is active.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the given envirenment is active.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$env</var></dt>
+<dd>Environment</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getContext" id="_getContext">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getContext">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getContext"></a><a href="source-class-rex_var.html#284-292" title="Go to source code">getContext</a>( )</code>
+<div class="description short">
+<p>Returns the context.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the context.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getContextData" id="_getContextData">
+<td class="attributes"><code>
+				 protected 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getContextData">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getContextData"></a><a href="source-class-rex_var.html#294-302" title="Go to source code">getContextData</a>( )</code>
+<div class="description short">
+<p>Returns the context data.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the context data.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getOutput" id="_getOutput">
+<td class="attributes"><code>
+				abstract protected 
+				boolean|string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getOutput">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOutput"></a><a href="source-class-rex_var.html#304-309" title="Go to source code">getOutput</a>( )</code>
+<div class="description short">
+<p>Returns the output.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the output.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean|string</code><br/>bool|string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="quote" id="_quote">
+<td class="attributes"><code>
+				 protected static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_quote">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/quote"></a><a href="source-class-rex_var.html#311-324" title="Go to source code">quote</a>( <span>string <var>$string</var></span> )</code>
+<div class="description short">
+<p>Quotes the string for php context.</p>
+</div>
+<div class="description detailed hidden">
+<p>Quotes the string for php context.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$string</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="toArray" id="_toArray">
+<td class="attributes"><code>
+				 public static
+				array|null
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_toArray">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/toArray"></a><a href="source-class-rex_var.html#366-377" title="Go to source code">toArray</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Converts a REX_VAR content to a PHP array.</p>
+</div>
+<div class="description detailed hidden">
+<p>Converts a REX_VAR content to a PHP array.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array|null</code><br/>array|null<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="nothing" id="_nothing">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_nothing">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/nothing"></a><a href="source-class-rex_var.html#379-387" title="Go to source code">nothing</a>( )</code>
+<div class="description short">
+<p>Returns empty string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns empty string.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="ENV_FRONTEND" id="ENV_FRONTEND">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/ENV_FRONTEND"></a><a href="source-class-rex_var.html#10" title="Go to source code"><b>ENV_FRONTEND</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#ENV_FRONTEND">#</a><code><span class="php-num">1</span></code></div></td>
+</tr>
+<tr data-order="ENV_BACKEND" id="ENV_BACKEND">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/ENV_BACKEND"></a><a href="source-class-rex_var.html#11" title="Go to source code"><b>ENV_BACKEND</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#ENV_BACKEND">#</a><code><span class="php-num">2</span></code></div></td>
+</tr>
+<tr data-order="ENV_INPUT" id="ENV_INPUT">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/ENV_INPUT"></a><a href="source-class-rex_var.html#12" title="Go to source code"><b>ENV_INPUT</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#ENV_INPUT">#</a><code><span class="php-num">4</span></code></div></td>
+</tr>
+<tr data-order="ENV_OUTPUT" id="ENV_OUTPUT">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/ENV_OUTPUT"></a><a href="source-class-rex_var.html#13" title="Go to source code"><b>ENV_OUTPUT</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#ENV_OUTPUT">#</a><code><span class="php-num">8</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

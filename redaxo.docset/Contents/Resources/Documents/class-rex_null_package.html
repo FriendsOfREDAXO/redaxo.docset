@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_null_package</h1>
+<div class="description">
+<p>Represents a null package.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_null_package</span></b>			
+			 implements 
+				<a href="class-rex_package_interface.html"><span>rex_package_interface</span></a>
+			
+			 uses 
+				<a href="class-rex_singleton_trait.html"><span>rex_singleton_trait</span></a>
+</dd>
+</dl>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_null_addon.html">rex_null_addon</a></code>, 
+			<code><a href="class-rex_null_plugin.html">rex_null_plugin</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_null_package.html#3-203" title="Go to source code">redaxo/src/core/lib/packages/null.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="getName" id="_getName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_null_package.html#14-20" title="Go to source code">getName</a>( )</code>
+<div class="description short">
+<p>Returns the name of the package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the name of the package.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Name<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getName">rex_package_interface::getName()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAddon" id="_getAddon">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_addon.html">rex_addon</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAddon">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAddon"></a><a href="source-class-rex_null_package.html#22-28" title="Go to source code">getAddon</a>( )</code>
+<div class="description short">
+<p>Returns the related Addon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the related Addon.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_addon.html">rex_addon</a></code></code><br/>rex_addon<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAddon">rex_package_interface::getAddon()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPackageId" id="_getPackageId">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPackageId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPackageId"></a><a href="source-class-rex_null_package.html#30-36" title="Go to source code">getPackageId</a>( )</code>
+<div class="description short">
+<p>Returns the package ID.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the package ID.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getPackageId">rex_package_interface::getPackageId()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPath" id="_getPath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPath"></a><a href="source-class-rex_null_package.html#38-44" title="Go to source code">getPath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the base path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the base path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getPath">rex_package_interface::getPath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAssetsPath" id="_getAssetsPath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAssetsPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAssetsPath"></a><a href="source-class-rex_null_package.html#46-52" title="Go to source code">getAssetsPath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the assets path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the assets path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAssetsPath">rex_package_interface::getAssetsPath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAssetsUrl" id="_getAssetsUrl">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAssetsUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAssetsUrl"></a><a href="source-class-rex_null_package.html#54-60" title="Go to source code">getAssetsUrl</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the assets url.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the assets url.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAssetsUrl">rex_package_interface::getAssetsUrl()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getDataPath" id="_getDataPath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDataPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDataPath"></a><a href="source-class-rex_null_package.html#62-68" title="Go to source code">getDataPath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the data path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the data path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getDataPath">rex_package_interface::getDataPath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getCachePath" id="_getCachePath">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getCachePath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCachePath"></a><a href="source-class-rex_null_package.html#70-76" title="Go to source code">getCachePath</a>( <span>string <var>$file</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns the cache path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the cache path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getCachePath">rex_package_interface::getCachePath()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setConfig" id="_setConfig">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setConfig"></a><a href="source-class-rex_null_package.html#78-84" title="Go to source code">setConfig</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_setConfig">rex_package_interface::setConfig()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getConfig" id="_getConfig">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getConfig"></a><a href="source-class-rex_null_package.html#86-92" title="Go to source code">getConfig</a>( <span>mixed <var>$key</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getConfig">rex_package_interface::getConfig()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasConfig" id="_hasConfig">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasConfig"></a><a href="source-class-rex_null_package.html#94-100" title="Go to source code">hasConfig</a>( <span>mixed <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_hasConfig">rex_package_interface::hasConfig()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeConfig" id="_removeConfig">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeConfig"></a><a href="source-class-rex_null_package.html#102-108" title="Go to source code">removeConfig</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_removeConfig">rex_package_interface::removeConfig()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setProperty" id="_setProperty">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setProperty"></a><a href="source-class-rex_null_package.html#110-115" title="Go to source code">setProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+<p>Sets a property.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets a property.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+<dt><var>$value</var></dt>
+<dd>New value for the property</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_setProperty">rex_package_interface::setProperty()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getProperty" id="_getProperty">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getProperty"></a><a href="source-class-rex_null_package.html#117-123" title="Go to source code">getProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns a property.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a property.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+<dt><var>$default</var></dt>
+<dd>Default value, will be returned if the property isn't set</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getProperty">rex_package_interface::getProperty()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasProperty" id="_hasProperty">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasProperty"></a><a href="source-class-rex_null_package.html#125-131" title="Go to source code">hasProperty</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Returns if a property is set.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if a property is set.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_hasProperty">rex_package_interface::hasProperty()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeProperty" id="_removeProperty">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeProperty"></a><a href="source-class-rex_null_package.html#133-138" title="Go to source code">removeProperty</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Removes a property.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes a property.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_removeProperty">rex_package_interface::removeProperty()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isAvailable" id="_isAvailable">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isAvailable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isAvailable"></a><a href="source-class-rex_null_package.html#140-146" title="Go to source code">isAvailable</a>( )</code>
+<div class="description short">
+<p>Returns if the package is available (activated and installed).</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the package is available (activated and installed).</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_isAvailable">rex_package_interface::isAvailable()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isInstalled" id="_isInstalled">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isInstalled">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isInstalled"></a><a href="source-class-rex_null_package.html#148-154" title="Go to source code">isInstalled</a>( )</code>
+<div class="description short">
+<p>Returns if the package is installed.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the package is installed.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_isInstalled">rex_package_interface::isInstalled()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isSystemPackage" id="_isSystemPackage">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isSystemPackage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isSystemPackage"></a><a href="source-class-rex_null_package.html#156-162" title="Go to source code">isSystemPackage</a>( )</code>
+<div class="description short">
+<p>Returns if it is a system package.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if it is a system package.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_isSystemPackage">rex_package_interface::isSystemPackage()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAuthor" id="_getAuthor">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAuthor">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAuthor"></a><a href="source-class-rex_null_package.html#164-170" title="Go to source code">getAuthor</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the author.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the author.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$default</var></dt>
+<dd>Default value, will be returned if the property isn't set</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getAuthor">rex_package_interface::getAuthor()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getVersion" id="_getVersion">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getVersion">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersion"></a><a href="source-class-rex_null_package.html#172-178" title="Go to source code">getVersion</a>( <span>string <var>$format</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the version.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the version.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$format</var></dt>
+<dd>See &lt;code&gt;&lt;a href="class-rex_formatter.html#_version"&gt;rex_formatter::version()&lt;/a&gt;&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getVersion">rex_package_interface::getVersion()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSupportPage" id="_getSupportPage">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSupportPage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSupportPage"></a><a href="source-class-rex_null_package.html#180-186" title="Go to source code">getSupportPage</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the supportpage.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the supportpage.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$default</var></dt>
+<dd>Default value, will be returned if the property isn't set</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_getSupportPage">rex_package_interface::getSupportPage()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="includeFile" id="_includeFile">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_includeFile">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/includeFile"></a><a href="source-class-rex_null_package.html#188-193" title="Go to source code">includeFile</a>( <span>string <var>$file</var></span>, <span>array <var>$context</var> = []</span> )</code>
+<div class="description short">
+<p>Includes a file in the package context.</p>
+</div>
+<div class="description detailed hidden">
+<p>Includes a file in the package context.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>Filename</dd>
+<dt><var>$context</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_includeFile">rex_package_interface::includeFile()</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="i18n" id="_i18n">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_i18n">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/i18n"></a><a href="source-class-rex_null_package.html#195-202" title="Go to source code">i18n</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Adds the package prefix to the given key and returns the translation for
+it.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds the package prefix to the given key and returns the translation for
+it.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Translation for the key<br/>
+</div>
+<h4>Implementation of</h4>
+<div class="list"><code><a href="class-rex_package_interface.html#_i18n">rex_package_interface::i18n()</a></code></div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_package_interface.html#methods">rex_package_interface</a></h3>
+<p class="elementList">
+<code><a href="class-rex_package_interface.html#_getType">getType()</a></code>
+</p>
+<h3>Methods used from <a href="class-rex_singleton_trait.html#methods">rex_singleton_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_singleton_trait.html#___clone">__clone()</a></code>, 
+			<code><a href="class-rex_singleton_trait.html#_getInstance">getInstance()</a></code>
+</p>
+</div></body>
+</html>

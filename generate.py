@@ -87,7 +87,6 @@ doc_processed = 0
 
 # print(f'Processing {num_docs_to_process} files')
 
-exit(0)
 for page in api_docs:
 
     # Doku laden

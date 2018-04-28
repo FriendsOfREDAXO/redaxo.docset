@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_user</h1>
+<div class="description">
+<p>Class for users.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_user.html#3-190" title="Go to source code">redaxo/src/core/lib/login/user.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_user.html#33-41" title="Go to source code">__construct</a>( <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$sql</var></span> )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$sql</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getValue" id="_getValue">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_user.html#43-53" title="Go to source code">getValue</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Returns the value for the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the value for the given key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>value<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getId" id="_getId">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getId"></a><a href="source-class-rex_user.html#55-63" title="Go to source code">getId</a>( )</code>
+<div class="description short">
+<p>Returns the ID.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the ID.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getLogin" id="_getLogin">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLogin">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLogin"></a><a href="source-class-rex_user.html#65-73" title="Go to source code">getLogin</a>( )</code>
+<div class="description short">
+<p>Returns the user login.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the user login.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Login<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getName" id="_getName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_user.html#75-83" title="Go to source code">getName</a>( )</code>
+<div class="description short">
+<p>Returns the name.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the name.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Name<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getEmail" id="_getEmail">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getEmail">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getEmail"></a><a href="source-class-rex_user.html#85-93" title="Go to source code">getEmail</a>( )</code>
+<div class="description short">
+<p>Returns the email.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the email.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>email<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isAdmin" id="_isAdmin">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isAdmin">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isAdmin"></a><a href="source-class-rex_user.html#95-103" title="Go to source code">isAdmin</a>( )</code>
+<div class="description short">
+<p>Returns if the user is an admin.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the user is an admin.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getLanguage" id="_getLanguage">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLanguage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLanguage"></a><a href="source-class-rex_user.html#105-113" title="Go to source code">getLanguage</a>( )</code>
+<div class="description short">
+<p>Returns the language.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the language.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Language<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getStartPage" id="_getStartPage">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getStartPage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStartPage"></a><a href="source-class-rex_user.html#115-123" title="Go to source code">getStartPage</a>( )</code>
+<div class="description short">
+<p>Returns the start page.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the start page.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Start page<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasRole" id="_hasRole">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasRole">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasRole"></a><a href="source-class-rex_user.html#125-137" title="Go to source code">hasRole</a>( )</code>
+<div class="description short">
+<p>Returns if the user has a role.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the user has a role.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasPerm" id="_hasPerm">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasPerm">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasPerm"></a><a href="source-class-rex_user.html#139-164" title="Go to source code">hasPerm</a>( <span>string <var>$perm</var></span> )</code>
+<div class="description short">
+<p>Returns if the user has the given permission.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the user has the given permission.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$perm</var></dt>
+<dd>Perm key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getComplexPerm" id="_getComplexPerm">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_complex_perm.html">rex_complex_perm</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getComplexPerm">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getComplexPerm"></a><a href="source-class-rex_user.html#166-179" title="Go to source code">getComplexPerm</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Returns the complex perm for the user.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the complex perm for the user.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Complex perm key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_complex_perm.html">rex_complex_perm</a></code></code><br/>Complex perm<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setRoleClass" id="_setRoleClass">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setRoleClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setRoleClass"></a><a href="source-class-rex_user.html#181-189" title="Go to source code">setRoleClass</a>( <span>string <var>$class</var></span> )</code>
+<div class="description short">
+<p>Sets the role class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the role class.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$class</var></dt>
+<dd>Class name</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="sql" id="$sql">
+<td class="attributes"><code>
+				protected  
+				<code><a href="class-rex_sql.html">rex_sql</a></code>
+</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24sql"></a><a href="source-class-rex_user.html#12-17" title="Go to source code"><var>$sql</var></a>
+<div class="description short">
+<p>SQL instance.</p>
+</div>
+<div class="description detailed hidden">
+<p>SQL instance.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$sql">#</a><code></code></div></td>
+</tr>
+<tr data-order="role" id="$role">
+<td class="attributes"><code>
+				protected  
+				<code><a href="class-rex_user_role_interface.html">rex_user_role_interface</a></code>
+</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24role"></a><a href="source-class-rex_user.html#19-24" title="Go to source code"><var>$role</var></a>
+<div class="description short">
+<p>User role instance.</p>
+</div>
+<div class="description detailed hidden">
+<p>User role instance.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$role">#</a><code></code></div></td>
+</tr>
+<tr data-order="roleClass" id="$roleClass">
+<td class="attributes"><code>
+				protected static 
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24roleClass"></a><a href="source-class-rex_user.html#26-31" title="Go to source code"><var>$roleClass</var></a>
+<div class="description short">
+<p>Class name for user roles.</p>
+</div>
+<div class="description detailed hidden">
+<p>Class name for user roles.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$roleClass">#</a><code></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

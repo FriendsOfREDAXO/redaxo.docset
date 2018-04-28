@@ -1,0 +1,1212 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_be_page</h1>
+<div class="description">
+<p>Backend Page Class.</p>
+</div>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_be_page_main.html">rex_be_page_main</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_be_page.html#3-709" title="Go to source code">redaxo/src/core/lib/be/page.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_be_page.html#35-55" title="Go to source code">__construct</a>( <span>string <var>$key</var></span>, <span>string <var>$title</var></span> )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd></dd>
+<dt><var>$title</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getKey" id="_getKey">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getKey"></a><a href="source-class-rex_be_page.html#57-65" title="Go to source code">getKey</a>( )</code>
+<div class="description short">
+<p>Returns the page key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the page key.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFullKey" id="_getFullKey">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFullKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFullKey"></a><a href="source-class-rex_be_page.html#67-75" title="Go to source code">getFullKey</a>( )</code>
+<div class="description short">
+<p>Returns the full page path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the full page path.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTitle" id="_getTitle">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTitle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTitle"></a><a href="source-class-rex_be_page.html#77-85" title="Go to source code">getTitle</a>( )</code>
+<div class="description short">
+<p>Returns the title.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the title.</p>
+<h4>Returns</h4>
+<div class="list">
+							string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setPopup" id="_setPopup">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setPopup">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setPopup"></a><a href="source-class-rex_be_page.html#87-116" title="Go to source code">setPopup</a>( <span>boolean|string <var>$popup</var></span> )</code>
+<div class="description short">
+<p>Sets whether the page is a popup page.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page is a popup page.</p>
+<p>The method adds (or removes) also the rex-popup CSS class and sets
+hasNavigation to false (true). If $popup is a string, the variable will be used
+for the onclick attribute.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$popup</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isPopup" id="_isPopup">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isPopup">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPopup"></a><a href="source-class-rex_be_page.html#118-130" title="Go to source code">isPopup</a>( )</code>
+<div class="description short">
+<p>Returns whether the page is a popup.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page is a popup.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setHref" id="_setHref">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setHref">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHref"></a><a href="source-class-rex_be_page.html#132-147" title="Go to source code">setHref</a>( <span>string|array <var>$href</var></span> )</code>
+<div class="description short">
+<p>Sets the page href.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the page href.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$href</var></dt>
+<dd>Href string or array of params</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasHref" id="_hasHref">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasHref">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasHref"></a><a href="source-class-rex_be_page.html#149-157" title="Go to source code">hasHref</a>( )</code>
+<div class="description short">
+<p>Returns whether the page has a custom href.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page has a custom href.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getHref" id="_getHref">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHref">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHref"></a><a href="source-class-rex_be_page.html#159-170" title="Go to source code">getHref</a>( )</code>
+<div class="description short">
+<p>Returns the page href.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the page href.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setItemAttr" id="_setItemAttr">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setItemAttr">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setItemAttr"></a><a href="source-class-rex_be_page.html#172-193" title="Go to source code">setItemAttr</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Sets an item attribute.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets an item attribute.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getItemAttr" id="_getItemAttr">
+<td class="attributes"><code>
+				 public 
+				string|array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getItemAttr">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getItemAttr"></a><a href="source-class-rex_be_page.html#195-211" title="Go to source code">getItemAttr</a>( <span>string|null <var>$name</var></span>, <span>string <var>$default</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns an item attribute or all item attributes.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns an item attribute or all item attributes.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$default</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string|array</code><br/>Attribute value for given <code>$name</code> or attribute array if
+<code>$name</code> is <code>null</code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeItemAttr" id="_removeItemAttr">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeItemAttr">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeItemAttr"></a><a href="source-class-rex_be_page.html#213-221" title="Go to source code">removeItemAttr</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+<p>Removes an item attribute.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes an item attribute.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addItemClass" id="_addItemClass">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addItemClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addItemClass"></a><a href="source-class-rex_be_page.html#223-243" title="Go to source code">addItemClass</a>( <span>string <var>$class</var></span> )</code>
+<div class="description short">
+<p>Adds an item class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds an item class.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$class</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeItemClass" id="_removeItemClass">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeItemClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeItemClass"></a><a href="source-class-rex_be_page.html#245-253" title="Go to source code">removeItemClass</a>( <span>string <var>$class</var></span> )</code>
+<div class="description short">
+<p>Removes an item class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes an item class.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$class</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setLinkAttr" id="_setLinkAttr">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setLinkAttr">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setLinkAttr"></a><a href="source-class-rex_be_page.html#255-276" title="Go to source code">setLinkAttr</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Sets an link attribute.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets an link attribute.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeLinkAttr" id="_removeLinkAttr">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeLinkAttr">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeLinkAttr"></a><a href="source-class-rex_be_page.html#278-286" title="Go to source code">removeLinkAttr</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+<p>Removes an link attribute.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes an link attribute.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getLinkAttr" id="_getLinkAttr">
+<td class="attributes"><code>
+				 public 
+				string|array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLinkAttr">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLinkAttr"></a><a href="source-class-rex_be_page.html#288-304" title="Go to source code">getLinkAttr</a>( <span>string|null <var>$name</var></span>, <span>string <var>$default</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Returns an link attribute or all link attributes.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns an link attribute or all link attributes.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$default</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string|array</code><br/>Attribute value for given <code>$name</code> or attribute array if
+<code>$name</code> is <code>null</code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addLinkClass" id="_addLinkClass">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addLinkClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addLinkClass"></a><a href="source-class-rex_be_page.html#306-326" title="Go to source code">addLinkClass</a>( <span>string <var>$class</var></span> )</code>
+<div class="description short">
+<p>Adds an link class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds an link class.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$class</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeLinkClass" id="_removeLinkClass">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeLinkClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeLinkClass"></a><a href="source-class-rex_be_page.html#328-336" title="Go to source code">removeLinkClass</a>( <span>string <var>$class</var></span> )</code>
+<div class="description short">
+<p>Removes an link class.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes an link class.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$class</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setPath" id="_setPath">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setPath"></a><a href="source-class-rex_be_page.html#338-350" title="Go to source code">setPath</a>( <span>string <var>$path</var></span> )</code>
+<div class="description short">
+<p>Set the page path which will be included directly by the core.</p>
+</div>
+<div class="description detailed hidden">
+<p>Set the page path which will be included directly by the core.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$path</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasPath" id="_hasPath">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasPath"></a><a href="source-class-rex_be_page.html#352-360" title="Go to source code">hasPath</a>( )</code>
+<div class="description short">
+<p>Returns whether a path is set.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether a path is set.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPath" id="_getPath">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPath"></a><a href="source-class-rex_be_page.html#362-373" title="Go to source code">getPath</a>( )</code>
+<div class="description short">
+<p>Returns the path which will be included directly by the core.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the path which will be included directly by the core.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setSubPath" id="_setSubPath">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setSubPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setSubPath"></a><a href="source-class-rex_be_page.html#375-387" title="Go to source code">setSubPath</a>( <span>string <var>$subPath</var></span> )</code>
+<div class="description short">
+<p>Set the page subpath which should be used by the packages to include this
+page inside their main page.</p>
+</div>
+<div class="description detailed hidden">
+<p>Set the page subpath which should be used by the packages to include this
+page inside their main page.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$subPath</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasSubPath" id="_hasSubPath">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasSubPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasSubPath"></a><a href="source-class-rex_be_page.html#389-397" title="Go to source code">hasSubPath</a>( )</code>
+<div class="description short">
+<p>Returns whether a subpath is set.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether a subpath is set.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSubPath" id="_getSubPath">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSubPath">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSubPath"></a><a href="source-class-rex_be_page.html#399-407" title="Go to source code">getSubPath</a>( )</code>
+<div class="description short">
+<p>Returns the subpath which should by used by packages to include this page
+inside their main page.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the subpath which should by used by packages to include this page
+inside their main page.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addSubpage" id="_addSubpage">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addSubpage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addSubpage"></a><a href="source-class-rex_be_page.html#409-423" title="Go to source code">addSubpage</a>( <span><code><a href="class-rex_be_page.html">rex_be_page</a></code> <var>$subpage</var></span> )</code>
+<div class="description short">
+<p>Adds a subpage.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds a subpage.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$subpage</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setSubpages" id="_setSubpages">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setSubpages">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setSubpages"></a><a href="source-class-rex_be_page.html#436-449" title="Go to source code">setSubpages</a>( <span>array <var>$subpages</var></span> )</code>
+<div class="description short">
+<p>Sets all subpages.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets all subpages.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$subpages</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSubpage" id="_getSubpage">
+<td class="attributes"><code>
+				 public 
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSubpage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSubpage"></a><a href="source-class-rex_be_page.html#451-461" title="Go to source code">getSubpage</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Returns the subpage for the given key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the subpage for the given key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSubpages" id="_getSubpages">
+<td class="attributes"><code>
+				 public 
+				self[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSubpages">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSubpages"></a><a href="source-class-rex_be_page.html#463-471" title="Go to source code">getSubpages</a>( )</code>
+<div class="description short">
+<p>Returns all subpages.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns all subpages.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self[]</code><br/>self[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFirstSubpagesLeaf" id="_getFirstSubpagesLeaf">
+<td class="attributes"><code>
+				 public 
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFirstSubpagesLeaf">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFirstSubpagesLeaf"></a><a href="source-class-rex_be_page.html#473-485" title="Go to source code">getFirstSubpagesLeaf</a>( )</code>
+<div class="description short">
+<p>Returns the first leaf of the subpages tree.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the first leaf of the subpages tree.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setIsActive" id="_setIsActive">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setIsActive">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setIsActive"></a><a href="source-class-rex_be_page.html#487-499" title="Go to source code">setIsActive</a>( <span>boolean <var>$isActive</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Sets whether the page is active.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page is active.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$isActive</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isActive" id="_isActive">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isActive">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isActive"></a><a href="source-class-rex_be_page.html#501-518" title="Go to source code">isActive</a>( )</code>
+<div class="description short">
+<p>Returns whether the page is active.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page is active.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getParent" id="_getParent">
+<td class="attributes"><code>
+				 public 
+				self|null
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getParent">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParent"></a><a href="source-class-rex_be_page.html#520-528" title="Go to source code">getParent</a>( )</code>
+<div class="description short">
+<p>Returns the parent page object.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the parent page object.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>self|null</code><br/>self|null<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setHidden" id="_setHidden">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setHidden">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHidden"></a><a href="source-class-rex_be_page.html#530-542" title="Go to source code">setHidden</a>( <span>boolean <var>$hidden</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Sets whether the page is hidden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page is hidden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$hidden</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isHidden" id="_isHidden">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isHidden">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isHidden"></a><a href="source-class-rex_be_page.html#544-552" title="Go to source code">isHidden</a>( )</code>
+<div class="description short">
+<p>Returns whether the page is hidden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page is hidden.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setHasLayout" id="_setHasLayout">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setHasLayout">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHasLayout"></a><a href="source-class-rex_be_page.html#554-566" title="Go to source code">setHasLayout</a>( <span>boolean <var>$hasLayout</var></span> )</code>
+<div class="description short">
+<p>Sets whether the page has layout.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page has layout.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$hasLayout</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasLayout" id="_hasLayout">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasLayout">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasLayout"></a><a href="source-class-rex_be_page.html#568-576" title="Go to source code">hasLayout</a>( )</code>
+<div class="description short">
+<p>Returns whether tha page has layout.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether tha page has layout.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setHasNavigation" id="_setHasNavigation">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setHasNavigation">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHasNavigation"></a><a href="source-class-rex_be_page.html#578-590" title="Go to source code">setHasNavigation</a>( <span>boolean <var>$hasNavigation</var></span> )</code>
+<div class="description short">
+<p>Sets whether the page has a navigation.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page has a navigation.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$hasNavigation</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasNavigation" id="_hasNavigation">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasNavigation">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasNavigation"></a><a href="source-class-rex_be_page.html#592-600" title="Go to source code">hasNavigation</a>( )</code>
+<div class="description short">
+<p>Returns whether the page has a navigation.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page has a navigation.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setPjax" id="_setPjax">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setPjax">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setPjax"></a><a href="source-class-rex_be_page.html#602-614" title="Go to source code">setPjax</a>( <span>boolean <var>$pjax</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Sets whether the page allows pjax.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page allows pjax.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$pjax</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="allowsPjax" id="_allowsPjax">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_allowsPjax">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/allowsPjax"></a><a href="source-class-rex_be_page.html#616-630" title="Go to source code">allowsPjax</a>( )</code>
+<div class="description short">
+<p>Returns whether the page allows pjax.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page allows pjax.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setIcon" id="_setIcon">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setIcon">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setIcon"></a><a href="source-class-rex_be_page.html#632-644" title="Go to source code">setIcon</a>( <span>string <var>$icon</var></span> )</code>
+<div class="description short">
+<p>Sets whether the page has an icon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets whether the page has an icon.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$icon</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getIcon" id="_getIcon">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getIcon">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getIcon"></a><a href="source-class-rex_be_page.html#646-654" title="Go to source code">getIcon</a>( )</code>
+<div class="description short">
+<p>Returns the icon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the icon.</p>
+<h4>Returns</h4>
+<div class="list">
+							string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasIcon" id="_hasIcon">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasIcon">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasIcon"></a><a href="source-class-rex_be_page.html#656-664" title="Go to source code">hasIcon</a>( )</code>
+<div class="description short">
+<p>Returns whether the page has an icon.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns whether the page has an icon.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setRequiredPermissions" id="_setRequiredPermissions">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setRequiredPermissions">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setRequiredPermissions"></a><a href="source-class-rex_be_page.html#666-678" title="Go to source code">setRequiredPermissions</a>( <span>array|string <var>$perm</var></span> )</code>
+<div class="description short">
+<p>Sets the required permissions.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the required permissions.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$perm</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getRequiredPermissions" id="_getRequiredPermissions">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getRequiredPermissions">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRequiredPermissions"></a><a href="source-class-rex_be_page.html#680-688" title="Go to source code">getRequiredPermissions</a>( )</code>
+<div class="description short">
+<p>Returns the required permission.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the required permission.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="checkPermission" id="_checkPermission">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_checkPermission">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/checkPermission"></a><a href="source-class-rex_be_page.html#690-708" title="Go to source code">checkPermission</a>( <span><code><a href="class-rex_user.html">rex_user</a></code> <var>$rexUser</var></span> )</code>
+<div class="description short">
+<p>Checks whether the given user has permission for the page.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the given user has permission for the page.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$rexUser</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

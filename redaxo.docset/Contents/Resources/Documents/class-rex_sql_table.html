@@ -1,0 +1,832 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_sql_table</h1>
+<div class="description">
+<p>Class to represent sql tables.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<b><span>rex_sql_table</span></b>			
+			
+			 uses 
+				<a href="class-rex_instance_pool_trait.html"><span>rex_instance_pool_trait</span></a>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_sql_table.html#3-968" title="Go to source code">redaxo/src/core/lib/sql/table.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public static
+				self
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_sql_table.html#143-153" title="Go to source code">get</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>self</code><br/>self<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="exists" id="_exists">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_exists">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/exists"></a><a href="source-class-rex_sql_table.html#155-161" title="Go to source code">exists</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getName" id="_getName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_sql_table.html#163-169" title="Go to source code">getName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setName" id="_setName">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setName"></a><a href="source-class-rex_sql_table.html#171-181" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasColumn" id="_hasColumn">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumn"></a><a href="source-class-rex_sql_table.html#183-191" title="Go to source code">hasColumn</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumn" id="_getColumn">
+<td class="attributes"><code>
+				 public 
+				null|<code><a href="class-rex_sql_column.html">rex_sql_column</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumn"></a><a href="source-class-rex_sql_table.html#193-205" title="Go to source code">getColumn</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_sql_column.html">rex_sql_column</a></code></code><br/>null|rex_sql_column<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumns" id="_getColumns">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_sql_column.html">rex_sql_column</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumns">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumns"></a><a href="source-class-rex_sql_table.html#207-213" title="Go to source code">getColumns</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_sql_column.html">rex_sql_column</a>[]</code></code><br/>rex_sql_column[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addColumn" id="_addColumn">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addColumn"></a><a href="source-class-rex_sql_table.html#215-234" title="Go to source code">addColumn</a>( <span><code><a href="class-rex_sql_column.html">rex_sql_column</a></code> <var>$column</var></span>, <span>null|string <var>$afterColumn</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$column</var></dt>
+<dd></dd>
+<dt><var>$afterColumn</var></dt>
+<dd>Column name or &lt;code&gt;rex_sql_table::FIRST&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ensureColumn" id="_ensureColumn">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ensureColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ensureColumn"></a><a href="source-class-rex_sql_table.html#236-259" title="Go to source code">ensureColumn</a>( <span><code><a href="class-rex_sql_column.html">rex_sql_column</a></code> <var>$column</var></span>, <span>null|string <var>$afterColumn</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$column</var></dt>
+<dd></dd>
+<dt><var>$afterColumn</var></dt>
+<dd>Column name or &lt;code&gt;rex_sql_table::FIRST&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ensurePrimaryIdColumn" id="_ensurePrimaryIdColumn">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ensurePrimaryIdColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ensurePrimaryIdColumn"></a><a href="source-class-rex_sql_table.html#261-270" title="Go to source code">ensurePrimaryIdColumn</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ensureGlobalColumns" id="_ensureGlobalColumns">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ensureGlobalColumns">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ensureGlobalColumns"></a><a href="source-class-rex_sql_table.html#272-283" title="Go to source code">ensureGlobalColumns</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="renameColumn" id="_renameColumn">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_renameColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/renameColumn"></a><a href="source-class-rex_sql_table.html#285-323" title="Go to source code">renameColumn</a>( <span>string <var>$oldName</var></span>, <span>string <var>$newName</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$oldName</var></dt>
+<dd></dd>
+<dt><var>$newName</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeColumn" id="_removeColumn">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeColumn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeColumn"></a><a href="source-class-rex_sql_table.html#325-335" title="Go to source code">removeColumn</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getPrimaryKey" id="_getPrimaryKey">
+<td class="attributes"><code>
+				 public 
+				null|string[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPrimaryKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPrimaryKey"></a><a href="source-class-rex_sql_table.html#337-343" title="Go to source code">getPrimaryKey</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>null|string[]</code><br/>Column names<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setPrimaryKey" id="_setPrimaryKey">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setPrimaryKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setPrimaryKey"></a><a href="source-class-rex_sql_table.html#345-368" title="Go to source code">setPrimaryKey</a>( <span>null|string|string[] <var>$columns</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columns</var></dt>
+<dd>Column name(s)</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasIndex" id="_hasIndex">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasIndex">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasIndex"></a><a href="source-class-rex_sql_table.html#370-378" title="Go to source code">hasIndex</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getIndex" id="_getIndex">
+<td class="attributes"><code>
+				 public 
+				null|<code><a href="class-rex_sql_index.html">rex_sql_index</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getIndex">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getIndex"></a><a href="source-class-rex_sql_table.html#380-392" title="Go to source code">getIndex</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_sql_index.html">rex_sql_index</a></code></code><br/>null|rex_sql_index<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getIndexes" id="_getIndexes">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_sql_index.html">rex_sql_index</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getIndexes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getIndexes"></a><a href="source-class-rex_sql_table.html#394-400" title="Go to source code">getIndexes</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_sql_index.html">rex_sql_index</a>[]</code></code><br/>rex_sql_index[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addIndex" id="_addIndex">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addIndex">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addIndex"></a><a href="source-class-rex_sql_table.html#402-418" title="Go to source code">addIndex</a>( <span><code><a href="class-rex_sql_index.html">rex_sql_index</a></code> <var>$index</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$index</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ensureIndex" id="_ensureIndex">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ensureIndex">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ensureIndex"></a><a href="source-class-rex_sql_table.html#420-440" title="Go to source code">ensureIndex</a>( <span><code><a href="class-rex_sql_index.html">rex_sql_index</a></code> <var>$index</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$index</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="renameIndex" id="_renameIndex">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_renameIndex">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/renameIndex"></a><a href="source-class-rex_sql_table.html#442-475" title="Go to source code">renameIndex</a>( <span>string <var>$oldName</var></span>, <span>string <var>$newName</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$oldName</var></dt>
+<dd></dd>
+<dt><var>$newName</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeIndex" id="_removeIndex">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeIndex">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeIndex"></a><a href="source-class-rex_sql_table.html#477-487" title="Go to source code">removeIndex</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasForeignKey" id="_hasForeignKey">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasForeignKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasForeignKey"></a><a href="source-class-rex_sql_table.html#489-497" title="Go to source code">hasForeignKey</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getForeignKey" id="_getForeignKey">
+<td class="attributes"><code>
+				 public 
+				null|<code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getForeignKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getForeignKey"></a><a href="source-class-rex_sql_table.html#499-511" title="Go to source code">getForeignKey</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a></code></code><br/>null|rex_sql_foreign_key<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getForeignKeys" id="_getForeignKeys">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getForeignKeys">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getForeignKeys"></a><a href="source-class-rex_sql_table.html#513-519" title="Go to source code">getForeignKeys</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a>[]</code></code><br/>rex_sql_foreign_key[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addForeignKey" id="_addForeignKey">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addForeignKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addForeignKey"></a><a href="source-class-rex_sql_table.html#521-535" title="Go to source code">addForeignKey</a>( <span><code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a></code> <var>$foreignKey</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ensureForeignKey" id="_ensureForeignKey">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ensureForeignKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ensureForeignKey"></a><a href="source-class-rex_sql_table.html#537-555" title="Go to source code">ensureForeignKey</a>( <span><code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a></code> <var>$foreignKey</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="renameForeignKey" id="_renameForeignKey">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_renameForeignKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/renameForeignKey"></a><a href="source-class-rex_sql_table.html#557-590" title="Go to source code">renameForeignKey</a>( <span>string <var>$oldName</var></span>, <span>string <var>$newName</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$oldName</var></dt>
+<dd></dd>
+<dt><var>$newName</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeForeignKey" id="_removeForeignKey">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeForeignKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeForeignKey"></a><a href="source-class-rex_sql_table.html#592-602" title="Go to source code">removeForeignKey</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="ensure" id="_ensure">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_ensure">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/ensure"></a><a href="source-class-rex_sql_table.html#604-635" title="Go to source code">ensure</a>( )</code>
+<div class="description short">
+<p>Ensures that the table exists with the given definition.</p>
+</div>
+<div class="description detailed hidden">
+<p>Ensures that the table exists with the given definition.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="drop" id="_drop">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_drop">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/drop"></a><a href="source-class-rex_sql_table.html#637-652" title="Go to source code">drop</a>( )</code>
+<div class="description short">
+<p>Drops the table if it exists.</p>
+</div>
+<div class="description detailed hidden">
+<p>Drops the table if it exists.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="create" id="_create">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_create">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/create"></a><a href="source-class-rex_sql_table.html#654-695" title="Go to source code">create</a>( )</code>
+<div class="description short">
+<p>Creates the table.</p>
+</div>
+<div class="description detailed hidden">
+<p>Creates the table.</p>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="alter" id="_alter">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_alter">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/alter"></a><a href="source-class-rex_sql_table.html#697-838" title="Go to source code">alter</a>( )</code>
+<div class="description short">
+<p>Alters the table.</p>
+</div>
+<div class="description detailed hidden">
+<p>Alters the table.</p>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods used from <a href="class-rex_instance_pool_trait.html#methods">rex_instance_pool_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_instance_pool_trait.html#_addInstance">addInstance()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_clearInstance">clearInstance()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_clearInstancePool">clearInstancePool()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_getInstance">getInstance()</a></code>, 
+			<code><a href="class-rex_instance_pool_trait.html#_hasInstance">hasInstance()</a></code>
+</p>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="FIRST" id="FIRST">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/FIRST"></a><a href="source-class-rex_sql_table.html#14" title="Go to source code"><b>FIRST</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#FIRST">#</a><code><span class="php-quote">'FIRST '</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

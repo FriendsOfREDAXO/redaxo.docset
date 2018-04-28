@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex</h1>
+<div class="description">
+<p>REX base class for core properties etc.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex.html#3-402" title="Go to source code">redaxo/src/core/lib/rex.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="setConfig" id="_setConfig">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setConfig"></a><a href="source-class-rex.html#21-27" title="Go to source code">setConfig</a>( <span>mixed <var>$key</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_config.html#_set">rex_config::set()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getConfig" id="_getConfig">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getConfig"></a><a href="source-class-rex.html#29-35" title="Go to source code">getConfig</a>( <span>mixed <var>$key</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_config.html#_get">rex_config::get()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasConfig" id="_hasConfig">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasConfig"></a><a href="source-class-rex.html#37-43" title="Go to source code">hasConfig</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_config.html#_has">rex_config::has()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeConfig" id="_removeConfig">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeConfig"></a><a href="source-class-rex.html#45-51" title="Go to source code">removeConfig</a>( <span>mixed <var>$key</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<code><code><a href="class-rex_config.html#_remove">rex_config::remove()</a></code></code><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setProperty" id="_setProperty">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setProperty"></a><a href="source-class-rex.html#53-109" title="Go to source code">setProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+<p>Sets a property.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets a property.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+<dt><var>$value</var></dt>
+<dd>Value for the property</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE when an existing value was overridden, otherwise FALSE<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>on invalid parameters<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getProperty" id="_getProperty">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getProperty"></a><a href="source-class-rex.html#111-130" title="Go to source code">getProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns a property.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a property.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+<dt><var>$default</var></dt>
+<dd>Default value, will be returned if the property isn't set</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>The value for $key or $default if $key cannot be found<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>on invalid parameters<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="hasProperty" id="_hasProperty">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasProperty"></a><a href="source-class-rex.html#132-142" title="Go to source code">hasProperty</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Returns if a property is set.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if a property is set.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE if the key is set, otherwise FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeProperty" id="_removeProperty">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeProperty">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeProperty"></a><a href="source-class-rex.html#144-161" title="Go to source code">removeProperty</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Removes a property.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes a property.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Key of the property</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE if the value was found and removed, otherwise FALSE<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>on invalid parameters<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isSetup" id="_isSetup">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isSetup">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isSetup"></a><a href="source-class-rex.html#163-171" title="Go to source code">isSetup</a>( )</code>
+<div class="description short">
+<p>Returns if the setup is active.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the setup is active.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isBackend" id="_isBackend">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isBackend">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isBackend"></a><a href="source-class-rex.html#173-181" title="Go to source code">isBackend</a>( )</code>
+<div class="description short">
+<p>Returns if the environment is the backend.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the environment is the backend.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getEnvironment" id="_getEnvironment">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getEnvironment">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getEnvironment"></a><a href="source-class-rex.html#183-195" title="Go to source code">getEnvironment</a>( )</code>
+<div class="description short">
+<p>Returns the environment.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the environment.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isDebugMode" id="_isDebugMode">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isDebugMode">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isDebugMode"></a><a href="source-class-rex.html#197-207" title="Go to source code">isDebugMode</a>( )</code>
+<div class="description short">
+<p>Returns if the debug mode is active.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the debug mode is active.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getDebugFlags" id="_getDebugFlags">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDebugFlags">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDebugFlags"></a><a href="source-class-rex.html#209-217" title="Go to source code">getDebugFlags</a>( )</code>
+<div class="description short">
+<p>Returns the debug flags.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the debug flags.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isSafeMode" id="_isSafeMode">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isSafeMode">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isSafeMode"></a><a href="source-class-rex.html#219-227" title="Go to source code">isSafeMode</a>( )</code>
+<div class="description short">
+<p>Returns if the safe mode is active.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns if the safe mode is active.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTablePrefix" id="_getTablePrefix">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTablePrefix">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTablePrefix"></a><a href="source-class-rex.html#229-237" title="Go to source code">getTablePrefix</a>( )</code>
+<div class="description short">
+<p>Returns the table prefix.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the table prefix.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTable" id="_getTable">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTable"></a><a href="source-class-rex.html#239-249" title="Go to source code">getTable</a>( <span>string <var>$table</var></span> )</code>
+<div class="description short">
+<p>Adds the table prefix to the table name.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds the table prefix to the table name.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$table</var></dt>
+<dd>Table name</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTempPrefix" id="_getTempPrefix">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTempPrefix">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTempPrefix"></a><a href="source-class-rex.html#251-259" title="Go to source code">getTempPrefix</a>( )</code>
+<div class="description short">
+<p>Returns the temp prefix.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the temp prefix.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getUser" id="_getUser">
+<td class="attributes"><code>
+				 public static
+				<code><a href="class-rex_user.html">rex_user</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUser">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUser"></a><a href="source-class-rex.html#261-269" title="Go to source code">getUser</a>( )</code>
+<div class="description short">
+<p>Returns the current user.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the current user.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_user.html">rex_user</a></code></code><br/>rex_user<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getConsole" id="_getConsole">
+<td class="attributes"><code>
+				 public static
+				null|<code><a href="class-rex_console_application.html">rex_console_application</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getConsole">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getConsole"></a><a href="source-class-rex.html#271-279" title="Go to source code">getConsole</a>( )</code>
+<div class="description short">
+<p>Returns the console application.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the console application.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_console_application.html">rex_console_application</a></code></code><br/>null|rex_console_application<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getServer" id="_getServer">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getServer">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getServer"></a><a href="source-class-rex.html#281-295" title="Go to source code">getServer</a>( <span>null|string <var>$protocol</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the server URL.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the server URL.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$protocol</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getServerName" id="_getServerName">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getServerName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getServerName"></a><a href="source-class-rex.html#297-305" title="Go to source code">getServerName</a>( )</code>
+<div class="description short">
+<p>Returns the server name.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the server name.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getErrorEmail" id="_getErrorEmail">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getErrorEmail">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getErrorEmail"></a><a href="source-class-rex.html#307-315" title="Go to source code">getErrorEmail</a>( )</code>
+<div class="description short">
+<p>Returns the error email.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the error email.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getVersion" id="_getVersion">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getVersion">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersion"></a><a href="source-class-rex.html#317-332" title="Go to source code">getVersion</a>( <span>string <var>$format</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the redaxo version.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the redaxo version.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$format</var></dt>
+<dd>See &lt;code&gt;&lt;a href="class-rex_formatter.html#_version"&gt;rex_formatter::version()&lt;/a&gt;&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getVersionHash" id="_getVersionHash">
+<td class="attributes"><code>
+				 public static
+				false|string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getVersionHash">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersionHash"></a><a href="source-class-rex.html#334-361" title="Go to source code">getVersionHash</a>( <span>string <var>$path</var></span> )</code>
+<div class="description short">
+<p>Returns the current git version hash for the given path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the current git version hash for the given path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$path</var></dt>
+<dd>A local filesystem path</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>false|string</code><br/>false|string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getAccesskey" id="_getAccesskey">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAccesskey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAccesskey"></a><a href="source-class-rex.html#363-381" title="Go to source code">getAccesskey</a>( <span>string <var>$title</var></span>, <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Returns the title tag and if the property "use_accesskeys" is true, the
+accesskey tag.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the title tag and if the property "use_accesskeys" is true, the
+accesskey tag.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$title</var></dt>
+<dd>Title</dd>
+<dt><var>$key</var></dt>
+<dd>Key for the accesskey</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFilePerm" id="_getFilePerm">
+<td class="attributes"><code>
+				 public static
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFilePerm">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFilePerm"></a><a href="source-class-rex.html#383-391" title="Go to source code">getFilePerm</a>( )</code>
+<div class="description short">
+<p>Returns the file perm.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the file perm.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getDirPerm" id="_getDirPerm">
+<td class="attributes"><code>
+				 public static
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDirPerm">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDirPerm"></a><a href="source-class-rex.html#393-401" title="Go to source code">getDirPerm</a>( )</code>
+<div class="description short">
+<p>Returns the dir perm.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the dir perm.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="CONFIG_NAMESPACE" id="CONFIG_NAMESPACE">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/CONFIG_NAMESPACE"></a><a href="source-class-rex.html#12" title="Go to source code"><b>CONFIG_NAMESPACE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#CONFIG_NAMESPACE">#</a><code><span class="php-quote">'core'</span></code></div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="properties" id="$properties">
+<td class="attributes"><code>
+				protected static 
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24properties"></a><a href="source-class-rex.html#14-19" title="Go to source code"><var>$properties</var></a>
+<div class="description short">
+<p>Array of properties.</p>
+</div>
+<div class="description detailed hidden">
+<p>Array of properties.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$properties">#</a><code>[]</code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

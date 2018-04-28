@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_autoload</h1>
+<div class="description">
+<p>REDAXO Autoloader.</p>
+<p>This class was originally copied from the Symfony Framework: Fabien Potencier
+&lt;<a href="mailto:fabien.potencier@symfony-project.com">fabien.potencier@<!-- -->symfony-project.com</a>&gt;</p>
+<p>Adjusted in very many places</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_autoload.html#3-367" title="Go to source code">redaxo/src/core/lib/autoload.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="register" id="_register">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_register">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/register"></a><a href="source-class-rex_autoload.html#28-54" title="Go to source code">register</a>( )</code>
+<div class="description short">
+<p>Register rex_autoload in spl autoloader.</p>
+</div>
+<div class="description detailed hidden">
+<p>Register rex_autoload in spl autoloader.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="unregister" id="_unregister">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_unregister">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/unregister"></a><a href="source-class-rex_autoload.html#56-63" title="Go to source code">unregister</a>( )</code>
+<div class="description short">
+<p>Unregister rex_autoload from spl autoloader.</p>
+</div>
+<div class="description detailed hidden">
+<p>Unregister rex_autoload from spl autoloader.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="autoload" id="_autoload">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_autoload">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/autoload"></a><a href="source-class-rex_autoload.html#65-114" title="Go to source code">autoload</a>( <span>string <var>$class</var></span> )</code>
+<div class="description short">
+<p>Handles autoloading of classes.</p>
+</div>
+<div class="description detailed hidden">
+<p>Handles autoloading of classes.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$class</var></dt>
+<dd>A class name</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>Returns true if the class has been loaded<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="saveCache" id="_saveCache">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_saveCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/saveCache"></a><a href="source-class-rex_autoload.html#140-160" title="Go to source code">saveCache</a>( )</code>
+<div class="description short">
+<p>Saves the cache.</p>
+</div>
+<div class="description detailed hidden">
+<p>Saves the cache.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="reload" id="_reload">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_reload">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/reload"></a><a href="source-class-rex_autoload.html#162-177" title="Go to source code">reload</a>( <span>boolean <var>$force</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Reanalyses all added directories.</p>
+</div>
+<div class="description detailed hidden">
+<p>Reanalyses all added directories.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$force</var></dt>
+<dd>If true, all files are reanalysed, otherwise only new and changed files</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="removeCache" id="_removeCache">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_removeCache">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeCache"></a><a href="source-class-rex_autoload.html#179-185" title="Go to source code">removeCache</a>( )</code>
+<div class="description short">
+<p>Removes the cache.</p>
+</div>
+<div class="description detailed hidden">
+<p>Removes the cache.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="addDirectory" id="_addDirectory">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addDirectory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addDirectory"></a><a href="source-class-rex_autoload.html#187-204" title="Go to source code">addDirectory</a>( <span>string <var>$dir</var></span> )</code>
+<div class="description short">
+<p>Adds a directory to the autoloading system if not yet present.</p>
+</div>
+<div class="description detailed hidden">
+<p>Adds a directory to the autoloading system if not yet present.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>The directory to look for classes</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getClasses" id="_getClasses">
+<td class="attributes"><code>
+				 public static
+				string[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getClasses">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getClasses"></a><a href="source-class-rex_autoload.html#206-214" title="Go to source code">getClasses</a>( )</code>
+<div class="description short">
+<p>Returns the classes.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the classes.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string[]</code><br/>string[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="composerLoader" id="$composerLoader">
+<td class="attributes"><code>
+				protected static 
+				Composer\Autoload\ClassLoader
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24composerLoader"></a><a href="source-class-rex_autoload.html#15-18" title="Go to source code"><var>$composerLoader</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$composerLoader">#</a><code></code></div></td>
+</tr>
+<tr data-order="registered" id="$registered">
+<td class="attributes"><code>
+				protected static 
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24registered"></a><a href="source-class-rex_autoload.html#20" title="Go to source code"><var>$registered</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$registered">#</a><code><span class="php-keyword1">false</span></code></div></td>
+</tr>
+<tr data-order="cacheFile" id="$cacheFile">
+<td class="attributes"><code>
+				protected static 
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24cacheFile"></a><a href="source-class-rex_autoload.html#21" title="Go to source code"><var>$cacheFile</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$cacheFile">#</a><code><span class="php-keyword1">null</span></code></div></td>
+</tr>
+<tr data-order="cacheChanged" id="$cacheChanged">
+<td class="attributes"><code>
+				protected static 
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24cacheChanged"></a><a href="source-class-rex_autoload.html#22" title="Go to source code"><var>$cacheChanged</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$cacheChanged">#</a><code><span class="php-keyword1">false</span></code></div></td>
+</tr>
+<tr data-order="reloaded" id="$reloaded">
+<td class="attributes"><code>
+				protected static 
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24reloaded"></a><a href="source-class-rex_autoload.html#23" title="Go to source code"><var>$reloaded</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$reloaded">#</a><code><span class="php-keyword1">false</span></code></div></td>
+</tr>
+<tr data-order="dirs" id="$dirs">
+<td class="attributes"><code>
+				protected static 
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24dirs"></a><a href="source-class-rex_autoload.html#24" title="Go to source code"><var>$dirs</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$dirs">#</a><code>[]</code></div></td>
+</tr>
+<tr data-order="addedDirs" id="$addedDirs">
+<td class="attributes"><code>
+				protected static 
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24addedDirs"></a><a href="source-class-rex_autoload.html#25" title="Go to source code"><var>$addedDirs</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$addedDirs">#</a><code>[]</code></div></td>
+</tr>
+<tr data-order="classes" id="$classes">
+<td class="attributes"><code>
+				protected static 
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24classes"></a><a href="source-class-rex_autoload.html#26" title="Go to source code"><var>$classes</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$classes">#</a><code>[]</code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

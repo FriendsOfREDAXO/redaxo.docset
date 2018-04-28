@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_content_service</h1>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a>\<a href="package-redaxo.structure.content.html">content</a><br/>
+<b>Located at</b> <a href="source-class-rex_content_service.html#3-272" title="Go to source code">redaxo/src/addons/structure/plugins/content/lib/content_service.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="moveSlice" id="_moveSlice">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_moveSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/moveSlice"></a><a href="source-class-rex_content_service.html#8-87" title="Go to source code">moveSlice</a>( <span>integer <var>$slice_id</var></span>, <span>integer <var>$clang</var></span>, <span>string <var>$direction</var></span> )</code>
+<div class="description short">
+<p>Verschiebt einen Slice.</p>
+</div>
+<div class="description detailed hidden">
+<p>Verschiebt einen Slice.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$slice_id</var></dt>
+<dd>Id des Slices</dd>
+<dt><var>$clang</var></dt>
+<dd>Id der Sprache</dd>
+<dt><var>$direction</var></dt>
+<dd>Richtung in die verschoben werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br>rex_api_exception<br/>
+</br></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteSlice" id="_deleteSlice">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteSlice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteSlice"></a><a href="source-class-rex_content_service.html#89-126" title="Go to source code">deleteSlice</a>( <span>integer <var>$slice_id</var></span> )</code>
+<div class="description short">
+<p>Löscht einen Slice.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht einen Slice.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$slice_id</var></dt>
+<dd>Id des Slices</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="copyContent" id="_copyContent">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_copyContent">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/copyContent"></a><a href="source-class-rex_content_service.html#128-217" title="Go to source code">copyContent</a>( <span>integer <var>$from_id</var></span>, <span>integer <var>$to_id</var></span>, <span>integer <var>$from_clang</var> = <span class="php-num">1</span></span>, <span>integer <var>$to_clang</var> = <span class="php-num">1</span></span>, <span>integer <var>$revision</var> = <span class="php-num">0</span></span> )</code>
+<div class="description short">
+<p>Kopiert die Inhalte eines Artikels in einen anderen Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Kopiert die Inhalte eines Artikels in einen anderen Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$from_id</var></dt>
+<dd>ArtikelId des Artikels, aus dem kopiert werden (Quell ArtikelId)</dd>
+<dt><var>$to_id</var></dt>
+<dd>ArtikelId des Artikel, in den kopiert werden sollen (Ziel ArtikelId)</dd>
+<dt><var>$from_clang</var></dt>
+<dd>ClangId des Artikels, aus dem kopiert werden soll (Quell ClangId)</dd>
+<dt><var>$to_clang</var></dt>
+<dd>ClangId des Artikels, in den kopiert werden soll (Ziel ClangId)</dd>
+<dt><var>$revision</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="generateArticleContent" id="_generateArticleContent">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_generateArticleContent">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/generateArticleContent"></a><a href="source-class-rex_content_service.html#219-258" title="Go to source code">generateArticleContent</a>( <span>integer <var>$article_id</var></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Generiert den Artikel-Cache des Artikelinhalts.</p>
+</div>
+<div class="description detailed hidden">
+<p>Generiert den Artikel-Cache des Artikelinhalts.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$article_id</var></dt>
+<dd>Id des zu generierenden Artikels</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, FALSE wenn eine ungütlige article_id übergeben wird, sonst
+eine Fehlermeldung<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

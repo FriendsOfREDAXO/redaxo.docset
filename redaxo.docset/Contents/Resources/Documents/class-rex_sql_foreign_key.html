@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_sql_foreign_key</h1>
+<div class="description">
+<p>Class to represent sql foreign keys.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_sql_foreign_key.html#3-181" title="Go to source code">redaxo/src/core/lib/sql/foreign_key.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_sql_foreign_key.html#33-47" title="Go to source code">__construct</a>( <span>string <var>$name</var></span>, <span>string <var>$table</var></span>, <span>array <var>$columns</var></span>, <span>string <var>$onUpdate</var> = <code><a href="class-rex_sql_foreign_key.html#RESTRICT">rex_sql_foreign_key::<b>RESTRICT</b></a></code></span>, <span>string <var>$onDelete</var> = <code><a href="class-rex_sql_foreign_key.html#RESTRICT">rex_sql_foreign_key::<b>RESTRICT</b></a></code></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$table</var></dt>
+<dd></dd>
+<dt><var>$columns</var></dt>
+<dd>Mapping of locale column to column in foreign table</dd>
+<dt><var>$onUpdate</var></dt>
+<dd>One of &lt;code&gt;rex_sql_foreign_key::RESTRICT&lt;/code&gt;,
+&lt;code&gt;rex_sql_foreign_key::CASCADE&lt;/code&gt;,
+&lt;code&gt;rex_sql_foreign_key::SET_NULL&lt;/code&gt;</dd>
+<dt><var>$onDelete</var></dt>
+<dd>One of &lt;code&gt;rex_sql_foreign_key::RESTRICT&lt;/code&gt;,
+&lt;code&gt;rex_sql_foreign_key::CASCADE&lt;/code&gt;,
+&lt;code&gt;rex_sql_foreign_key::SET_NULL&lt;/code&gt;</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setModified" id="_setModified">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setModified">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setModified"></a><a href="source-class-rex_sql_foreign_key.html#49-59" title="Go to source code">setModified</a>( <span>boolean <var>$modified</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$modified</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isModified" id="_isModified">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isModified">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isModified"></a><a href="source-class-rex_sql_foreign_key.html#61-67" title="Go to source code">isModified</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setName" id="_setName">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setName"></a><a href="source-class-rex_sql_foreign_key.html#69-79" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getName" id="_getName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_sql_foreign_key.html#81-87" title="Go to source code">getName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setTable" id="_setTable">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setTable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setTable"></a><a href="source-class-rex_sql_foreign_key.html#89-99" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$table</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getTable" id="_getTable">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTable">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTable"></a><a href="source-class-rex_sql_foreign_key.html#101-107" title="Go to source code">getTable</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setColumns" id="_setColumns">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setColumns">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumns"></a><a href="source-class-rex_sql_foreign_key.html#109-119" title="Go to source code">setColumns</a>( <span>array <var>$columns</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$columns</var></dt>
+<dd>Mapping of locale column to column in foreign table</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getColumns" id="_getColumns">
+<td class="attributes"><code>
+				 public 
+				string[]
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getColumns">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumns"></a><a href="source-class-rex_sql_foreign_key.html#121-127" title="Go to source code">getColumns</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string[]</code><br/>string[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setOnUpdate" id="_setOnUpdate">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setOnUpdate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setOnUpdate"></a><a href="source-class-rex_sql_foreign_key.html#129-139" title="Go to source code">setOnUpdate</a>( <span>string <var>$onUpdate</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$onUpdate</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getOnUpdate" id="_getOnUpdate">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getOnUpdate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOnUpdate"></a><a href="source-class-rex_sql_foreign_key.html#141-147" title="Go to source code">getOnUpdate</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setOnDelete" id="_setOnDelete">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setOnDelete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setOnDelete"></a><a href="source-class-rex_sql_foreign_key.html#149-159" title="Go to source code">setOnDelete</a>( <span>string <var>$onDelete</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$onDelete</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getOnDelete" id="_getOnDelete">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getOnDelete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOnDelete"></a><a href="source-class-rex_sql_foreign_key.html#161-167" title="Go to source code">getOnDelete</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="equals" id="_equals">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_equals">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/equals"></a><a href="source-class-rex_sql_foreign_key.html#169-180" title="Go to source code">equals</a>( <span><code><a href="class-rex_sql_foreign_key.html">rex_sql_foreign_key</a></code> <var>$index</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="RESTRICT" id="RESTRICT">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/RESTRICT"></a><a href="source-class-rex_sql_foreign_key.html#12" title="Go to source code"><b>RESTRICT</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#RESTRICT">#</a><code><span class="php-quote">'RESTRICT'</span></code></div></td>
+</tr>
+<tr data-order="CASCADE" id="CASCADE">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/CASCADE"></a><a href="source-class-rex_sql_foreign_key.html#13" title="Go to source code"><b>CASCADE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#CASCADE">#</a><code><span class="php-quote">'CASCADE'</span></code></div></td>
+</tr>
+<tr data-order="SET_NULL" id="SET_NULL">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/SET_NULL"></a><a href="source-class-rex_sql_foreign_key.html#14" title="Go to source code"><b>SET_NULL</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#SET_NULL">#</a><code><span class="php-quote">'SET NULL'</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

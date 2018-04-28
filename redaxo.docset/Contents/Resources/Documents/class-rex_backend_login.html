@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_backend_login</h1>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_login.html"><span>rex_login</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_backend_login</span></b>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_backend_login.html#3-170" title="Go to source code">redaxo/src/core/lib/login/backend_login.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_backend_login.html#17-36" title="Go to source code">__construct</a>( )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_login.html#___construct">rex_login::__construct</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setStayLoggedIn" id="_setStayLoggedIn">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setStayLoggedIn">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setStayLoggedIn"></a><a href="source-class-rex_backend_login.html#38-41" title="Go to source code">setStayLoggedIn</a>( <span>mixed <var>$stayLoggedIn</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="checkLogin" id="_checkLogin">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_checkLogin">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/checkLogin"></a><a href="source-class-rex_backend_login.html#43-109" title="Go to source code">checkLogin</a>( )</code>
+<div class="description short">
+<p>Prüft die mit setLogin() und setPassword() gesetzten Werte anhand des
+LoginQueries/UserQueries und gibt den Status zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Prüft die mit setLogin() und setPassword() gesetzten Werte anhand des
+LoginQueries/UserQueries und gibt den Status zurück.</p>
+<p>Gibt true zurück bei erfolg, sonst false</p>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_login.html#_checkLogin">rex_login::checkLogin</a></code></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteSession" id="_deleteSession">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteSession">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteSession"></a><a href="source-class-rex_backend_login.html#111-119" title="Go to source code">deleteSession</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="hasSession" id="_hasSession">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasSession">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasSession"></a><a href="source-class-rex_backend_login.html#131-142" title="Go to source code">hasSession</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="createUser" id="_createUser">
+<td class="attributes"><code>
+				 public static
+				<code><a href="class-rex_user.html">rex_user</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_createUser">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/createUser"></a><a href="source-class-rex_backend_login.html#144-169" title="Go to source code">createUser</a>( )</code>
+<div class="description short">
+<p>Creates the user object if it does not already exist.</p>
+</div>
+<div class="description detailed hidden">
+<p>Creates the user object if it does not already exist.</p>
+<p>Helpful if you want to check permissions of the backend user in frontend. If
+you only want to know if there is any backend session, use <code><a href="class-rex_backend_login.html#_hasSession">rex_backend_login::hasSession()</a></code>.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_user.html">rex_user</a></code></code><br/>rex_user<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_login.html#methods">rex_login</a></h3>
+<p class="elementList">
+<code><a href="class-rex_login.html#_getMessage">getMessage()</a></code>, 
+			<code><a href="class-rex_login.html#_getSessionVar">getSessionVar()</a></code>, 
+			<code><a href="class-rex_login.html#_getUser">getUser()</a></code>, 
+			<code><a href="class-rex_login.html#_getValue">getValue()</a></code>, 
+			<code><a href="class-rex_login.html#_isLoggedOut">isLoggedOut()</a></code>, 
+			<code><a href="class-rex_login.html#_passwordHash">passwordHash()</a></code>, 
+			<code><a href="class-rex_login.html#_passwordNeedsRehash">passwordNeedsRehash()</a></code>, 
+			<code><a href="class-rex_login.html#_passwordVerify">passwordVerify()</a></code>, 
+			<code><a href="class-rex_login.html#_regenerateSessionId">regenerateSessionId()</a></code>, 
+			<code><a href="class-rex_login.html#_setCache">setCache()</a></code>, 
+			<code><a href="class-rex_login.html#_setIdColumn">setIdColumn()</a></code>, 
+			<code><a href="class-rex_login.html#_setLogin">setLogin()</a></code>, 
+			<code><a href="class-rex_login.html#_setLoginQuery">setLoginQuery()</a></code>, 
+			<code><a href="class-rex_login.html#_setLogout">setLogout()</a></code>, 
+			<code><a href="class-rex_login.html#_setMessage">setMessage()</a></code>, 
+			<code><a href="class-rex_login.html#_setPasswordColumn">setPasswordColumn()</a></code>, 
+			<code><a href="class-rex_login.html#_setSessionDuration">setSessionDuration()</a></code>, 
+			<code><a href="class-rex_login.html#_setSessionVar">setSessionVar()</a></code>, 
+			<code><a href="class-rex_login.html#_setSqlDb">setSqlDb()</a></code>, 
+			<code><a href="class-rex_login.html#_setSystemId">setSystemId()</a></code>, 
+			<code><a href="class-rex_login.html#_setUserQuery">setUserQuery()</a></code>, 
+			<code><a href="class-rex_login.html#_startSession">startSession()</a></code>
+</p>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="SYSTEM_ID" id="SYSTEM_ID">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/SYSTEM_ID"></a><a href="source-class-rex_backend_login.html#8" title="Go to source code"><b>SYSTEM_ID</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#SYSTEM_ID">#</a><code><span class="php-quote">'backend_login'</span></code></div></td>
+</tr>
+<tr data-order="LOGIN_TRIES_1" id="LOGIN_TRIES_1">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/LOGIN_TRIES_1"></a><a href="source-class-rex_backend_login.html#9" title="Go to source code"><b>LOGIN_TRIES_1</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#LOGIN_TRIES_1">#</a><code><span class="php-num">3</span></code></div></td>
+</tr>
+<tr data-order="RELOGIN_DELAY_1" id="RELOGIN_DELAY_1">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/RELOGIN_DELAY_1"></a><a href="source-class-rex_backend_login.html#10" title="Go to source code"><b>RELOGIN_DELAY_1</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#RELOGIN_DELAY_1">#</a><code><span class="php-num">5</span></code></div></td>
+</tr>
+<tr data-order="LOGIN_TRIES_2" id="LOGIN_TRIES_2">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/LOGIN_TRIES_2"></a><a href="source-class-rex_backend_login.html#11" title="Go to source code"><b>LOGIN_TRIES_2</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#LOGIN_TRIES_2">#</a><code><span class="php-num">50</span></code></div></td>
+</tr>
+<tr data-order="RELOGIN_DELAY_2" id="RELOGIN_DELAY_2">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/RELOGIN_DELAY_2"></a><a href="source-class-rex_backend_login.html#12" title="Go to source code"><b>RELOGIN_DELAY_2</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#RELOGIN_DELAY_2">#</a><code><span class="php-num">3600</span></code></div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<h3>Properties inherited from <a href="class-rex_login.html#properties">rex_login</a></h3>
+<p class="elementList">
+<code><a href="class-rex_login.html#$DB"><var>$DB</var></a></code>, 
+			<code><a href="class-rex_login.html#$cache"><var>$cache</var></a></code>, 
+			<code><a href="class-rex_login.html#$idColumn"><var>$idColumn</var></a></code>, 
+			<code><a href="class-rex_login.html#$loginQuery"><var>$loginQuery</var></a></code>, 
+			<code><a href="class-rex_login.html#$loginStatus"><var>$loginStatus</var></a></code>, 
+			<code><a href="class-rex_login.html#$logout"><var>$logout</var></a></code>, 
+			<code><a href="class-rex_login.html#$message"><var>$message</var></a></code>, 
+			<code><a href="class-rex_login.html#$passwordColumn"><var>$passwordColumn</var></a></code>, 
+			<code><a href="class-rex_login.html#$sessionDuration"><var>$sessionDuration</var></a></code>, 
+			<code><a href="class-rex_login.html#$systemId"><var>$systemId</var></a></code>, 
+			<code><a href="class-rex_login.html#$user"><var>$user</var></a></code>, 
+			<code><a href="class-rex_login.html#$userLogin"><var>$userLogin</var></a></code>, 
+			<code><a href="class-rex_login.html#$userPassword"><var>$userPassword</var></a></code>, 
+			<code><a href="class-rex_login.html#$userQuery"><var>$userQuery</var></a></code>
+</p>
+</div></body>
+</html>

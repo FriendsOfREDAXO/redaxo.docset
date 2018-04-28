@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_fragment</h1>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_fragment.html#3-251" title="Go to source code">redaxo/src/core/lib/fragment.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_fragment.html#29-37" title="Go to source code">__construct</a>( <span>array <var>$vars</var> = []</span> )</code>
+<div class="description short">
+<p>Creates a fragment with the given variables.</p>
+</div>
+<div class="description detailed hidden">
+<p>Creates a fragment with the given variables.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$vars</var></dt>
+<dd>A array of key-value pairs to pass as local parameters</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getVar" id="_getVar">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getVar">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVar"></a><a href="source-class-rex_fragment.html#39-54" title="Go to source code">getVar</a>( <span>string <var>$name</var></span>, <span>string <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the value of the given variable $name.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the value of the given variable $name.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd>Variable name</dd>
+<dt><var>$default</var></dt>
+<dd>Default value</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setVar" id="_setVar">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setVar">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setVar"></a><a href="source-class-rex_fragment.html#56-80" title="Go to source code">setVar</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Set the variable $name to the given value.</p>
+</div>
+<div class="description detailed hidden">
+<p>Set the variable $name to the given value.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd>The name of the variable</dd>
+<dt><var>$value</var></dt>
+<dd>The value for the variable</dd>
+<dt><var>$escape</var></dt>
+<dd>Flag which indicates if the value should be escaped or not</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="parse" id="_parse">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_parse">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parse"></a><a href="source-class-rex_fragment.html#82-123" title="Go to source code">parse</a>( <span>string <var>$filename</var></span>, <span>boolean <var>$delete_whitespaces</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Parses the variables of the fragment into the file $filename.</p>
+</div>
+<div class="description detailed hidden">
+<p>Parses the variables of the fragment into the file $filename.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd>the filename of the fragment to parse</dd>
+<dt><var>$delete_whitespaces</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br>rex_exception<br/>
+</br></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="decorate" id="_decorate">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_decorate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/decorate"></a><a href="source-class-rex_fragment.html#125-140" title="Go to source code">decorate</a>( <span>string <var>$filename</var></span>, <span>array <var>$params</var></span> )</code>
+<div class="description short">
+<p>Decorate the current fragment, with another fragment. The decorated fragment
+receives the parameters which are passed to this method.</p>
+</div>
+<div class="description detailed hidden">
+<p>Decorate the current fragment, with another fragment. The decorated fragment
+receives the parameters which are passed to this method.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd>The filename of the fragment used for decoration</dd>
+<dt><var>$params</var></dt>
+<dd>A array of key-value pairs to pass as parameters</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="escape" id="_escape">
+<td class="attributes"><code>
+				 protected 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_escape">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/escape"></a><a href="source-class-rex_fragment.html#144-157" title="Go to source code">escape</a>( <span>mixed <var>$value</var></span>, <span>string <var>$strategy</var> = <span class="php-quote">'html'</span></span> )</code>
+<div class="description short">
+<p>Escapes the value $val for proper use in the gui.</p>
+</div>
+<div class="description detailed hidden">
+<p>Escapes the value $val for proper use in the gui.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>The value to escape</dd>
+<dt><var>$strategy</var></dt>
+<dd>One of "html", "html_attr", "css", "js", "url"</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="subfragment" id="_subfragment">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_subfragment">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/subfragment"></a><a href="source-class-rex_fragment.html#159-171" title="Go to source code">subfragment</a>( <span>string <var>$filename</var></span>, <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+<p>Include a Subfragment from within a fragment.</p>
+</div>
+<div class="description detailed hidden">
+<p>Include a Subfragment from within a fragment.</p>
+<p>The Subfragment gets all variables of the current fragment, plus optional
+overrides from $params</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd>The filename of the fragment to use</dd>
+<dt><var>$params</var></dt>
+<dd>A array of key-value pairs to pass as local parameters</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="i18n" id="_i18n">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_i18n">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/i18n"></a><a href="source-class-rex_fragment.html#173-198" title="Go to source code">i18n</a>( <span>string <var>$key</var></span> )</code>
+<div class="description short">
+<p>Translate the given key $key.</p>
+</div>
+<div class="description detailed hidden">
+<p>Translate the given key $key.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>The key to translate</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="__get" id="___get">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__get"></a><a href="source-class-rex_fragment.html#200-216" title="Go to source code">__get</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+<p>Magic getter to reference variables from within the fragment.</p>
+</div>
+<div class="description detailed hidden">
+<p>Magic getter to reference variables from within the fragment.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd>The name of the variable to get</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>mixed<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="__isset" id="___isset">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___isset">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__isset"></a><a href="source-class-rex_fragment.html#218-228" title="Go to source code">__isset</a>( <span>string <var>$name</var></span> )</code>
+<div class="description short">
+<p>Magic method to check if a variable is set.</p>
+</div>
+<div class="description detailed hidden">
+<p>Magic method to check if a variable is set.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd>The name of the variable to check</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addDirectory" id="_addDirectory">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addDirectory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addDirectory"></a><a href="source-class-rex_fragment.html#239-250" title="Go to source code">addDirectory</a>( <span>string <var>$dir</var></span> )</code>
+<div class="description short">
+<p>Add a path to the fragment search path.</p>
+</div>
+<div class="description detailed hidden">
+<p>Add a path to the fragment search path.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$dir</var></dt>
+<dd>A path to a directory where fragments can be found</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

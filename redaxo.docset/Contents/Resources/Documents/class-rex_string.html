@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_string</h1>
+<div class="description">
+<p>String utility class.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_string.html#3-250" title="Go to source code">redaxo/src/core/lib/util/string.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="size" id="_size">
+<td class="attributes"><code>
+				 public static
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_size">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/size"></a><a href="source-class-rex_string.html#10-20" title="Go to source code">size</a>( <span>string <var>$string</var></span> )</code>
+<div class="description short">
+<p>Returns the string size in bytes.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the string size in bytes.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$string</var></dt>
+<dd>String</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>Size in bytes<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="normalizeEncoding" id="_normalizeEncoding">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_normalizeEncoding">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/normalizeEncoding"></a><a href="source-class-rex_string.html#22-53" title="Go to source code">normalizeEncoding</a>( <span>string <var>$string</var></span> )</code>
+<div class="description short">
+<p>Normalizes the encoding of a string (UTF8 NFD to NFC).</p>
+</div>
+<div class="description detailed hidden">
+<p>Normalizes the encoding of a string (UTF8 NFD to NFC).</p>
+<p>On HFS+ filesystem (OS X) filenames are stored in UTF8 NFD while all other
+filesystems are using UTF8 NFC. NFC is more common in general.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$string</var></dt>
+<dd>Input string</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="normalize" id="_normalize">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_normalize">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/normalize"></a><a href="source-class-rex_string.html#55-74" title="Go to source code">normalize</a>( <span>string <var>$string</var></span>, <span>string <var>$replaceChar</var> = <span class="php-quote">'_'</span></span>, <span>string <var>$allowedChars</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Normalizes a string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Normalizes a string.</p>
+<p>Makes the string lowercase, replaces umlauts by their ascii representation
+(ä -&gt; ae etc.), and replaces all other chars that do not match a-z, 0-9 or
+$allowedChars by $replaceChar.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$string</var></dt>
+<dd>Input string</dd>
+<dt><var>$replaceChar</var></dt>
+<dd>Character that is used to replace not allowed chars</dd>
+<dt><var>$allowedChars</var></dt>
+<dd>Character whitelist</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="split" id="_split">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_split">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/split"></a><a href="source-class-rex_string.html#76-119" title="Go to source code">split</a>( <span>string <var>$string</var></span> )</code>
+<div class="description short">
+<p>Splits a string by spaces (Strings with quotes will be regarded).</p>
+</div>
+<div class="description detailed hidden">
+<p>Splits a string by spaces (Strings with quotes will be regarded).</p>
+<p>Examples: "a b 'c d'" -&gt; array('a', 'b', 'c d') "a=1 b='c d'" -&gt;
+array('a' =&gt; 1, 'b' =&gt; 'c d')</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$string</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="versionSplit" id="_versionSplit">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_versionSplit">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/versionSplit"></a><a href="source-class-rex_string.html#121-131" title="Go to source code">versionSplit</a>( <span>string <var>$version</var></span> )</code>
+<div class="description short">
+<p>Splits a version string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Splits a version string.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$version</var></dt>
+<dd>Version</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>Version parts<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="versionCompare" id="_versionCompare">
+<td class="attributes"><code>
+				 public static
+				integer|boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_versionCompare">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/versionCompare"></a><a href="source-class-rex_string.html#133-155" title="Go to source code">versionCompare</a>( <span>string <var>$version1</var></span>, <span>string <var>$version2</var></span>, <span>string <var>$comparator</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Compares two version number strings.</p>
+</div>
+<div class="description detailed hidden">
+<p>Compares two version number strings.</p>
+<p>In contrast to version_compare() it treats "1.0" and "1.0.0" as equal and it
+supports a space as separator for the version parts, e.g. "1.0 beta1"</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$version1</var></dt>
+<dd>First version number</dd>
+<dt><var>$version2</var></dt>
+<dd>Second version number</dd>
+<dt><var>$comparator</var></dt>
+<dd>Optional comparator</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>integer|boolean</code><br/>int|bool<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.version-compare.php">http://www.php.net/manual/en/function.version-compare.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="yamlEncode" id="_yamlEncode">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_yamlEncode">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/yamlEncode"></a><a href="source-class-rex_string.html#157-168" title="Go to source code">yamlEncode</a>( <span>array <var>$value</var></span>, <span>integer <var>$inline</var> = <span class="php-num">3</span></span> )</code>
+<div class="description short">
+<p>Returns a string containing the YAML representation of $value.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a string containing the YAML representation of $value.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>The value being encoded</dd>
+<dt><var>$inline</var></dt>
+<dd>The level where you switch to inline YAML</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="yamlDecode" id="_yamlDecode">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_yamlDecode">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/yamlDecode"></a><a href="source-class-rex_string.html#170-186" title="Go to source code">yamlDecode</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Parses YAML into a PHP array.</p>
+</div>
+<div class="description detailed hidden">
+<p>Parses YAML into a PHP array.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>YAML string</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_yaml_parse_exception.html">rex_yaml_parse_exception</a></code></code><br/>rex_yaml_parse_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="buildQuery" id="_buildQuery">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_buildQuery">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/buildQuery"></a><a href="source-class-rex_string.html#188-211" title="Go to source code">buildQuery</a>( <span>array <var>$params</var></span>, <span>string <var>$argSeparator</var> = <span class="php-quote">'&amp;'</span></span> )</code>
+<div class="description short">
+<p>Generates URL-encoded query string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Generates URL-encoded query string.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$params</var></dt>
+<dd></dd>
+<dt><var>$argSeparator</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="buildAttributes" id="_buildAttributes">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_buildAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/buildAttributes"></a><a href="source-class-rex_string.html#213-236" title="Go to source code">buildAttributes</a>( <span>array <var>$attributes</var></span> )</code>
+<div class="description short">
+<p>Returns a string by key="value" pair.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns a string by key="value" pair.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="highlight" id="_highlight">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_highlight">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/highlight"></a><a href="source-class-rex_string.html#238-249" title="Go to source code">highlight</a>( <span>string <var>$string</var></span> )</code>
+<div class="description short">
+<p>Highlights a string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Highlights a string.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$string</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

@@ -1,0 +1,820 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_form_element</h1>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_form_container_element.html">rex_form_container_element</a></code>, 
+			<code><a href="class-rex_form_control_element.html">rex_form_control_element</a></code>, 
+			<code><a href="class-rex_form_options_element.html">rex_form_options_element</a></code>, 
+			<code><a href="class-rex_form_raw_element.html">rex_form_raw_element</a></code>, 
+			<code><a href="class-rex_form_select_element.html">rex_form_select_element</a></code>, 
+			<code><a href="class-rex_form_widget_linklist_element.html">rex_form_widget_linklist_element</a></code>, 
+			<code><a href="class-rex_form_widget_linkmap_element.html">rex_form_widget_linkmap_element</a></code>, 
+			<code><a href="class-rex_form_widget_media_element.html">rex_form_widget_media_element</a></code>, 
+			<code><a href="class-rex_form_widget_medialist_element.html">rex_form_widget_medialist_element</a></code>
+</p>
+</div>
+<div>
+<h3>Indirect known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_form_checkbox_element.html">rex_form_checkbox_element</a></code>, 
+			<code><a href="class-rex_form_prio_element.html">rex_form_prio_element</a></code>, 
+			<code><a href="class-rex_form_radio_element.html">rex_form_radio_element</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_form_element.html#3-291" title="Go to source code">redaxo/src/core/lib/form/elements/element.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_form_element.html#24-38" title="Go to source code">__construct</a>( <span>mixed <var>$tag</var></span>, <span><code><a href="class-rex_form.html">rex_form</a></code> <var>$table</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span>, <span>mixed <var>$separateEnding</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setValue" id="_setValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setValue"></a><a href="source-class-rex_form_element.html#42-48" title="Go to source code">setValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setDefaultSaveValue" id="_setDefaultSaveValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setDefaultSaveValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setDefaultSaveValue"></a><a href="source-class-rex_form_element.html#50-53" title="Go to source code">setDefaultSaveValue</a>( <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getSaveValue" id="_getSaveValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSaveValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSaveValue"></a><a href="source-class-rex_form_element.html#55-59" title="Go to source code">getSaveValue</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getValue" id="_getValue">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_form_element.html#61-64" title="Go to source code">getValue</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setFieldName" id="_setFieldName">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setFieldName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFieldName"></a><a href="source-class-rex_form_element.html#66-69" title="Go to source code">setFieldName</a>( <span>mixed <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getFieldName" id="_getFieldName">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFieldName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFieldName"></a><a href="source-class-rex_form_element.html#71-74" title="Go to source code">getFieldName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setLabel" id="_setLabel">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setLabel">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setLabel"></a><a href="source-class-rex_form_element.html#76-79" title="Go to source code">setLabel</a>( <span>mixed <var>$label</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getLabel" id="_getLabel">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLabel">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLabel"></a><a href="source-class-rex_form_element.html#81-84" title="Go to source code">getLabel</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setNotice" id="_setNotice">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setNotice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setNotice"></a><a href="source-class-rex_form_element.html#86-89" title="Go to source code">setNotice</a>( <span>mixed <var>$notice</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getNotice" id="_getNotice">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getNotice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getNotice"></a><a href="source-class-rex_form_element.html#91-94" title="Go to source code">getNotice</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getTag" id="_getTag">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getTag">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTag"></a><a href="source-class-rex_form_element.html#96-99" title="Go to source code">getTag</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setSuffix" id="_setSuffix">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setSuffix">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setSuffix"></a><a href="source-class-rex_form_element.html#101-104" title="Go to source code">setSuffix</a>( <span>mixed <var>$suffix</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getSuffix" id="_getSuffix">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSuffix">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSuffix"></a><a href="source-class-rex_form_element.html#106-109" title="Go to source code">getSuffix</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setPrefix" id="_setPrefix">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setPrefix">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setPrefix"></a><a href="source-class-rex_form_element.html#111-114" title="Go to source code">setPrefix</a>( <span>mixed <var>$prefix</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getPrefix" id="_getPrefix">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getPrefix">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPrefix"></a><a href="source-class-rex_form_element.html#116-119" title="Go to source code">getPrefix</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setHeader" id="_setHeader">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setHeader">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHeader"></a><a href="source-class-rex_form_element.html#121-124" title="Go to source code">setHeader</a>( <span>mixed <var>$header</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getHeader" id="_getHeader">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHeader">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeader"></a><a href="source-class-rex_form_element.html#126-129" title="Go to source code">getHeader</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setFooter" id="_setFooter">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setFooter">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFooter"></a><a href="source-class-rex_form_element.html#131-134" title="Go to source code">setFooter</a>( <span>mixed <var>$footer</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getFooter" id="_getFooter">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFooter">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFooter"></a><a href="source-class-rex_form_element.html#136-139" title="Go to source code">getFooter</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setAttribute" id="_setAttribute">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setAttribute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setAttribute"></a><a href="source-class-rex_form_element.html#141-154" title="Go to source code">setAttribute</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getAttribute" id="_getAttribute">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAttribute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAttribute"></a><a href="source-class-rex_form_element.html#156-166" title="Go to source code">getAttribute</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setAttributes" id="_setAttributes">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setAttributes"></a><a href="source-class-rex_form_element.html#168-175" title="Go to source code">setAttributes</a>( <span>array <var>$attributes</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getAttributes" id="_getAttributes">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAttributes"></a><a href="source-class-rex_form_element.html#177-180" title="Go to source code">getAttributes</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="hasAttribute" id="_hasAttribute">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasAttribute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasAttribute"></a><a href="source-class-rex_form_element.html#182-185" title="Go to source code">hasAttribute</a>( <span>mixed <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="hasSeparateEnding" id="_hasSeparateEnding">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_hasSeparateEnding">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasSeparateEnding"></a><a href="source-class-rex_form_element.html#187-190" title="Go to source code">hasSeparateEnding</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getValidator" id="_getValidator">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_validator.html">rex_validator</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValidator">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValidator"></a><a href="source-class-rex_form_element.html#192-198" title="Go to source code">getValidator</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_validator.html">rex_validator</a></code></code><br/>rex_validator<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="formatClass" id="_formatClass">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_formatClass">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatClass"></a><a href="source-class-rex_form_element.html#202-205" title="Go to source code">formatClass</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="formatLabel" id="_formatLabel">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_formatLabel">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatLabel"></a><a href="source-class-rex_form_element.html#207-217" title="Go to source code">formatLabel</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="formatElement" id="_formatElement">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_formatElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatElement"></a><a href="source-class-rex_form_element.html#219-237" title="Go to source code">formatElement</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="formatNotice" id="_formatNotice">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_formatNotice">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatNotice"></a><a href="source-class-rex_form_element.html#239-246" title="Go to source code">formatNotice</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="wrapContent" id="_wrapContent">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_wrapContent">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/wrapContent"></a><a href="source-class-rex_form_element.html#248-251" title="Go to source code">wrapContent</a>( <span>mixed <var>$content</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getFragment" id="_getFragment">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFragment">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFragment"></a><a href="source-class-rex_form_element.html#253-256" title="Go to source code">getFragment</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="_get" id="__get">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#__get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_get"></a><a href="source-class-rex_form_element.html#258-279" title="Go to source code">_get</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_form_element.html#281-285" title="Go to source code">get</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="show" id="_show">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_show">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/show"></a><a href="source-class-rex_form_element.html#287-290" title="Go to source code">show</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="value" id="$value">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24value"></a><a href="source-class-rex_form_element.html#8" title="Go to source code"><var>$value</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$value">#</a><code></code></div></td>
+</tr>
+<tr data-order="defaultSaveValue" id="$defaultSaveValue">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24defaultSaveValue"></a><a href="source-class-rex_form_element.html#9" title="Go to source code"><var>$defaultSaveValue</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$defaultSaveValue">#</a><code><span class="php-quote">''</span></code></div></td>
+</tr>
+<tr data-order="label" id="$label">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24label"></a><a href="source-class-rex_form_element.html#10" title="Go to source code"><var>$label</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$label">#</a><code></code></div></td>
+</tr>
+<tr data-order="tag" id="$tag">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24tag"></a><a href="source-class-rex_form_element.html#11" title="Go to source code"><var>$tag</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$tag">#</a><code></code></div></td>
+</tr>
+<tr data-order="table" id="$table">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24table"></a><a href="source-class-rex_form_element.html#12" title="Go to source code"><var>$table</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$table">#</a><code></code></div></td>
+</tr>
+<tr data-order="attributes" id="$attributes">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24attributes"></a><a href="source-class-rex_form_element.html#13" title="Go to source code"><var>$attributes</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$attributes">#</a><code></code></div></td>
+</tr>
+<tr data-order="separateEnding" id="$separateEnding">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24separateEnding"></a><a href="source-class-rex_form_element.html#14" title="Go to source code"><var>$separateEnding</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$separateEnding">#</a><code></code></div></td>
+</tr>
+<tr data-order="fieldName" id="$fieldName">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24fieldName"></a><a href="source-class-rex_form_element.html#15" title="Go to source code"><var>$fieldName</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$fieldName">#</a><code></code></div></td>
+</tr>
+<tr data-order="header" id="$header">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24header"></a><a href="source-class-rex_form_element.html#16" title="Go to source code"><var>$header</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$header">#</a><code></code></div></td>
+</tr>
+<tr data-order="footer" id="$footer">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24footer"></a><a href="source-class-rex_form_element.html#17" title="Go to source code"><var>$footer</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$footer">#</a><code></code></div></td>
+</tr>
+<tr data-order="prefix" id="$prefix">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24prefix"></a><a href="source-class-rex_form_element.html#18" title="Go to source code"><var>$prefix</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$prefix">#</a><code></code></div></td>
+</tr>
+<tr data-order="suffix" id="$suffix">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24suffix"></a><a href="source-class-rex_form_element.html#19" title="Go to source code"><var>$suffix</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$suffix">#</a><code></code></div></td>
+</tr>
+<tr data-order="notice" id="$notice">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24notice"></a><a href="source-class-rex_form_element.html#20" title="Go to source code"><var>$notice</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$notice">#</a><code></code></div></td>
+</tr>
+<tr data-order="validator" id="$validator">
+<td class="attributes"><code>
+				protected  
+				<code><a href="class-rex_validator.html">rex_validator</a></code>
+</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24validator"></a><a href="source-class-rex_form_element.html#21-22" title="Go to source code"><var>$validator</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$validator">#</a><code></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

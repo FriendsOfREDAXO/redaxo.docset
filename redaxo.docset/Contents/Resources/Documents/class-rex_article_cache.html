@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_article_cache</h1>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a><br/>
+<b>Located at</b> <a href="source-class-rex_article_cache.html#3-217" title="Go to source code">redaxo/src/addons/structure/lib/cache_article.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="delete" id="_delete">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_delete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/delete"></a><a href="source-class-rex_article_cache.html#8-35" title="Go to source code">delete</a>( <span>integer <var>$id</var></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Löscht die gecachten Dateien eines Artikels. Wenn keine clang angegeben,
+wird der Artikel-Cache in allen Sprachen gelöscht.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht die gecachten Dateien eines Artikels. Wenn keine clang angegeben,
+wird der Artikel-Cache in allen Sprachen gelöscht.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des Artikels</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>True on success, False on errro<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteMeta" id="_deleteMeta">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteMeta">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteMeta"></a><a href="source-class-rex_article_cache.html#37-66" title="Go to source code">deleteMeta</a>( <span>integer <var>$id</var></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Löscht die gecachten Meta-Dateien eines Artikels. Wenn keine clang
+angegeben, wird der Artikel in allen Sprachen gelöscht.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht die gecachten Meta-Dateien eines Artikels. Wenn keine clang
+angegeben, wird der Artikel in allen Sprachen gelöscht.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des Artikels</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>True on success, False on errro<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteContent" id="_deleteContent">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteContent">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteContent"></a><a href="source-class-rex_article_cache.html#68-95" title="Go to source code">deleteContent</a>( <span>integer <var>$id</var></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Löscht die gecachten Content-Dateien eines Artikels. Wenn keine clang
+angegeben, wird der Artikel in allen Sprachen gelöscht.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht die gecachten Content-Dateien eines Artikels. Wenn keine clang
+angegeben, wird der Artikel in allen Sprachen gelöscht.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des Artikels</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>True on success, False on errro<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteLists" id="_deleteLists">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteLists">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteLists"></a><a href="source-class-rex_article_cache.html#97-120" title="Go to source code">deleteLists</a>( <span>integer <var>$id</var></span> )</code>
+<div class="description short">
+<p>Löscht die gecachten List-Dateien eines Artikels. Wenn keine clang
+angegeben, wird der Artikel in allen Sprachen gelöscht.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht die gecachten List-Dateien eines Artikels. Wenn keine clang
+angegeben, wird der Artikel in allen Sprachen gelöscht.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>True on success, False on errro<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="generateMeta" id="_generateMeta">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_generateMeta">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/generateMeta"></a><a href="source-class-rex_article_cache.html#122-168" title="Go to source code">generateMeta</a>( <span>integer <var>$article_id</var></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Generiert den Artikel-Cache der Metainformationen.</p>
+</div>
+<div class="description detailed hidden">
+<p>Generiert den Artikel-Cache der Metainformationen.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$article_id</var></dt>
+<dd>Id des zu generierenden Artikels</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, FALSE wenn eine ungütlige article_id übergeben wird, sonst
+eine Fehlermeldung<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="generateLists" id="_generateLists">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_generateLists">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/generateLists"></a><a href="source-class-rex_article_cache.html#170-216" title="Go to source code">generateLists</a>( <span>integer <var>$parent_id</var></span> )</code>
+<div class="description short">
+<p>Generiert alle *.alist u. *.clist Dateien einer Kategorie/eines Artikels.</p>
+</div>
+<div class="description detailed hidden">
+<p>Generiert alle *.alist u. *.clist Dateien einer Kategorie/eines Artikels.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$parent_id</var></dt>
+<dd>KategorieId oder ArtikelId, die erneuert werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE wenn der Artikel gelöscht wurde, sonst eine Fehlermeldung<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

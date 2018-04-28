@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_category_service</h1>
+<div class="description">
+<p>Funktionensammlung für die Strukturverwaltung.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a><br/>
+<b>Located at</b> <a href="source-class-rex_category_service.html#3-574" title="Go to source code">redaxo/src/addons/structure/lib/service_category.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="addCategory" id="_addCategory">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addCategory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addCategory"></a><a href="source-class-rex_category_service.html#10-142" title="Go to source code">addCategory</a>( <span>integer <var>$category_id</var></span>, <span>array <var>$data</var></span> )</code>
+<div class="description short">
+<p>Erstellt eine neue Kategorie.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt eine neue Kategorie.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$category_id</var></dt>
+<dd>KategorieId in der die neue Kategorie erstellt werden soll</dd>
+<dt><var>$data</var></dt>
+<dd>Array mit den Daten der Kategorie</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="editCategory" id="_editCategory">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_editCategory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/editCategory"></a><a href="source-class-rex_category_service.html#144-251" title="Go to source code">editCategory</a>( <span>integer <var>$category_id</var></span>, <span>integer <var>$clang</var></span>, <span>array <var>$data</var></span> )</code>
+<div class="description short">
+<p>Bearbeitet einer Kategorie.</p>
+</div>
+<div class="description detailed hidden">
+<p>Bearbeitet einer Kategorie.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$category_id</var></dt>
+<dd>Id der Kategorie die verändert werden soll</dd>
+<dt><var>$clang</var></dt>
+<dd>Id der Sprache</dd>
+<dt><var>$data</var></dt>
+<dd>Array mit den Daten der Kategorie</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteCategory" id="_deleteCategory">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteCategory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteCategory"></a><a href="source-class-rex_category_service.html#253-314" title="Go to source code">deleteCategory</a>( <span>integer <var>$category_id</var></span> )</code>
+<div class="description short">
+<p>Löscht eine Kategorie und reorganisiert die Prioritäten verbleibender
+Geschwister-Kategorien.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht eine Kategorie und reorganisiert die Prioritäten verbleibender
+Geschwister-Kategorien.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$category_id</var></dt>
+<dd>Id der Kategorie die gelöscht werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="categoryStatus" id="_categoryStatus">
+<td class="attributes"><code>
+				 public static
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_categoryStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/categoryStatus"></a><a href="source-class-rex_category_service.html#316-365" title="Go to source code">categoryStatus</a>( <span>integer <var>$category_id</var></span>, <span>integer <var>$clang</var></span>, <span>integer|null <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Ändert den Status der Kategorie.</p>
+</div>
+<div class="description detailed hidden">
+<p>Ändert den Status der Kategorie.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$category_id</var></dt>
+<dd>Id der Kategorie die gelöscht werden soll</dd>
+<dt><var>$clang</var></dt>
+<dd>Id der Sprache</dd>
+<dt><var>$status</var></dt>
+<dd>Status auf den die Kategorie gesetzt werden soll, oder NULL wenn zum nächsten
+Status weitergeschaltet werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>Der neue Status der Kategorie<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="statusTypes" id="_statusTypes">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_statusTypes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/statusTypes"></a><a href="source-class-rex_category_service.html#367-388" title="Go to source code">statusTypes</a>( )</code>
+<div class="description short">
+<p>Gibt alle Stati zurück, die für eine Kategorie gültig sind.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt alle Stati zurück, die für eine Kategorie gültig sind.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>Array von Stati<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="nextStatus" id="_nextStatus">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_nextStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/nextStatus"></a><a href="source-class-rex_category_service.html#390-394" title="Go to source code">nextStatus</a>( <span>mixed <var>$currentStatus</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="prevStatus" id="_prevStatus">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_prevStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/prevStatus"></a><a href="source-class-rex_category_service.html#396-404" title="Go to source code">prevStatus</a>( <span>mixed <var>$currentStatus</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="copyCategory" id="_copyCategory">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_copyCategory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/copyCategory"></a><a href="source-class-rex_category_service.html#406-415" title="Go to source code">copyCategory</a>( <span>integer <var>$from_cat</var></span>, <span>integer <var>$to_cat</var></span> )</code>
+<div class="description short">
+<p>Kopiert eine Kategorie in eine andere.</p>
+</div>
+<div class="description detailed hidden">
+<p>Kopiert eine Kategorie in eine andere.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$from_cat</var></dt>
+<dd>KategorieId der Kategorie, die kopiert werden soll (Quelle)</dd>
+<dt><var>$to_cat</var></dt>
+<dd>KategorieId der Kategorie, IN die kopiert werden soll (Ziel)</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="newCatPrio" id="_newCatPrio">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_newCatPrio">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/newCatPrio"></a><a href="source-class-rex_category_service.html#417-443" title="Go to source code">newCatPrio</a>( <span>integer <var>$parent_id</var></span>, <span>integer <var>$clang</var></span>, <span>integer <var>$new_prio</var></span>, <span>integer <var>$old_prio</var></span> )</code>
+<div class="description short">
+<p>Berechnet die Prios der Kategorien in einer Kategorie neu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Berechnet die Prios der Kategorien in einer Kategorie neu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$parent_id</var></dt>
+<dd>KategorieId der Kategorie, die erneuert werden soll</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId der Kategorie, die erneuert werden soll</dd>
+<dt><var>$new_prio</var></dt>
+<dd>Neue PrioNr der Kategorie</dd>
+<dt><var>$old_prio</var></dt>
+<dd>Alte PrioNr der Kategorie</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="moveCategory" id="_moveCategory">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_moveCategory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/moveCategory"></a><a href="source-class-rex_category_service.html#445-545" title="Go to source code">moveCategory</a>( <span>integer <var>$from_cat</var></span>, <span>integer <var>$to_cat</var></span> )</code>
+<div class="description short">
+<p>Verschieben einer Kategorie in eine andere.</p>
+</div>
+<div class="description detailed hidden">
+<p>Verschieben einer Kategorie in eine andere.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$from_cat</var></dt>
+<dd>KategorieId der Kategorie, die verschoben werden soll (Quelle)</dd>
+<dt><var>$to_cat</var></dt>
+<dd>KategorieId der Kategorie, IN die verschoben werden soll (Ziel)</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="reqKey" id="_reqKey">
+<td class="attributes"><code>
+				 protected static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_reqKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/reqKey"></a><a href="source-class-rex_category_service.html#547-560" title="Go to source code">reqKey</a>( <span>array <var>$array</var></span>, <span>string <var>$keyName</var></span> )</code>
+<div class="description short">
+<p>Checks whether the required array key $keyName isset.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the required array key $keyName isset.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$array</var></dt>
+<dd>The array</dd>
+<dt><var>$keyName</var></dt>
+<dd>The key</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

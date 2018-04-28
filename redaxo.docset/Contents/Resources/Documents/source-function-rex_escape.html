@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="../Assets/css/styles.css" rel="stylesheet"/>
+  <script src="../Assets/js/script.js">
+  </script>
+ </head>
+ <body>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1">  1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2">  2 </a>
+</span><span class="l" id="3"><a class="l" href="#3">  3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4">  4 </a><span class="php-comment"> * Escapes a variable.
+</span></span><span class="l" id="5"><a class="l" href="#5">  5 </a><span class="php-comment"> *
+</span></span><span class="l" id="6"><a class="l" href="#6">  6 </a><span class="php-comment"> * This function is adapted from code coming from Twig.
+</span></span><span class="l" id="7"><a class="l" href="#7">  7 </a><span class="php-comment"> * (c) Fabien Potencier
+</span></span><span class="l" id="8"><a class="l" href="#8">  8 </a><span class="php-comment"> * https://github.com/twigphp/Twig/blob/103cae817d68b56ddcb50c051a6ed7980d746409/lib/Twig/Extension/Core.php#L880-L1106
+</span></span><span class="l" id="9"><a class="l" href="#9">  9 </a><span class="php-comment"> *
+</span></span><span class="l" id="10"><a class="l" href="#10"> 10 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="11"><a class="l" href="#11"> 11 </a><span class="php-comment"> *
+</span></span><span class="l" id="12"><a class="l" href="#12"> 12 </a><span class="php-comment"> * @param mixed  $value    The value to escape
+</span></span><span class="l" id="13"><a class="l" href="#13"> 13 </a><span class="php-comment"> * @param string $strategy One of "html", "html_attr", "css", "js", "url"
+</span></span><span class="l" id="14"><a class="l" href="#14"> 14 </a><span class="php-comment"> *
+</span></span><span class="l" id="15"><a class="l" href="#15"> 15 </a><span class="php-comment"> * @throws InvalidArgumentException
+</span></span><span class="l" id="16"><a class="l" href="#16"> 16 </a><span class="php-comment"> *
+</span></span><span class="l" id="17"><a class="l" href="#17"> 17 </a><span class="php-comment"> * @return mixed
+</span></span><span class="l" id="18"><a class="l" href="#18"> 18 </a><span class="php-comment"> */</span>
+</span><span class="l" id="19"><a class="l" href="#19"> 19 </a><span class="php-keyword1">function</span> <a href="#_rex_escape" id="_rex_escape">rex_escape</a>(<span class="php-var">$value</span>, <span class="php-var">$strategy</span> = <span class="php-quote">'html'</span>)
+</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>{
+</span><span class="l" id="21"><a class="l" href="#21"> 21 </a>    <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_string</span>(<span class="php-var">$value</span>)) {
+</span><span class="l" id="22"><a class="l" href="#22"> 22 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>)) {
+</span><span class="l" id="23"><a class="l" href="#23"> 23 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$value</span> <span class="php-keyword1">as</span> <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
+</span><span class="l" id="24"><a class="l" href="#24"> 24 </a>                <span class="php-var">$value</span>[<span class="php-var">$k</span>] = rex_escape(<span class="php-var">$v</span>, <span class="php-var">$strategy</span>);
+</span><span class="l" id="25"><a class="l" href="#25"> 25 </a>            }
+</span><span class="l" id="26"><a class="l" href="#26"> 26 </a>
+</span><span class="l" id="27"><a class="l" href="#27"> 27 </a>            <span class="php-keyword1">return</span> <span class="php-var">$value</span>;
+</span><span class="l" id="28"><a class="l" href="#28"> 28 </a>        }
+</span><span class="l" id="29"><a class="l" href="#29"> 29 </a>
+</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$value</span> <span class="php-keyword1">instanceof</span> \stdClass) {
+</span><span class="l" id="31"><a class="l" href="#31"> 31 </a>            <span class="php-keyword1">foreach</span> (<span class="php-keyword2">get_object_vars</span>(<span class="php-var">$value</span>) <span class="php-keyword1">as</span> <span class="php-var">$k</span> =&gt; <span class="php-var">$v</span>) {
+</span><span class="l" id="32"><a class="l" href="#32"> 32 </a>                <span class="php-var">$value</span>-&gt;<span class="php-var">$k</span> = rex_escape(<span class="php-var">$v</span>, <span class="php-var">$strategy</span>);
+</span><span class="l" id="33"><a class="l" href="#33"> 33 </a>            }
+</span><span class="l" id="34"><a class="l" href="#34"> 34 </a>
+</span><span class="l" id="35"><a class="l" href="#35"> 35 </a>            <span class="php-keyword1">return</span> <span class="php-var">$value</span>;
+</span><span class="l" id="36"><a class="l" href="#36"> 36 </a>        }
+</span><span class="l" id="37"><a class="l" href="#37"> 37 </a>
+</span><span class="l" id="38"><a class="l" href="#38"> 38 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_object</span>(<span class="php-var">$value</span>) &amp;&amp; <span class="php-keyword2">method_exists</span>(<span class="php-var">$value</span>, <span class="php-quote">'__toString'</span>)) {
+</span><span class="l" id="39"><a class="l" href="#39"> 39 </a>            <span class="php-var">$value</span> = (string) <span class="php-var">$value</span>;
+</span><span class="l" id="40"><a class="l" href="#40"> 40 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="41"><a class="l" href="#41"> 41 </a>            <span class="php-keyword1">return</span> <span class="php-var">$value</span>;
+</span><span class="l" id="42"><a class="l" href="#42"> 42 </a>        }
+</span><span class="l" id="43"><a class="l" href="#43"> 43 </a>    }
+</span><span class="l" id="44"><a class="l" href="#44"> 44 </a>
+</span><span class="l" id="45"><a class="l" href="#45"> 45 </a>    <span class="php-var">$string</span> = <span class="php-var">$value</span>;
+</span><span class="l" id="46"><a class="l" href="#46"> 46 </a>
+</span><span class="l" id="47"><a class="l" href="#47"> 47 </a>    <span class="php-keyword1">switch</span> (<span class="php-var">$strategy</span>) {
+</span><span class="l" id="48"><a class="l" href="#48"> 48 </a>        <span class="php-keyword1">case</span> <span class="php-quote">'html'</span>:
+</span><span class="l" id="49"><a class="l" href="#49"> 49 </a>            <span class="php-comment">// see http://php.net/htmlspecialchars</span>
+</span><span class="l" id="50"><a class="l" href="#50"> 50 </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$string</span>, ENT_QUOTES | ENT_SUBSTITUTE, <span class="php-quote">'UTF-8'</span>);
+</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>
+</span><span class="l" id="52"><a class="l" href="#52"> 52 </a>        <span class="php-keyword1">case</span> <span class="php-quote">'js'</span>:
+</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>            <span class="php-comment">// escape all non-alphanumeric characters</span>
+</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>            <span class="php-comment">// into their \xHH or \uHHHH representations</span>
+</span><span class="l" id="55"><a class="l" href="#55"> 55 </a>
+</span><span class="l" id="56"><a class="l" href="#56"> 56 </a>            <span class="php-keyword1">if</span> (<span class="php-num">0</span> === <span class="php-keyword2">strlen</span>(<span class="php-var">$string</span>) ? <span class="php-keyword1">false</span> : <span class="php-num">1</span> !== <span class="php-keyword2">preg_match</span>(<span class="php-quote">'/^./su'</span>, <span class="php-var">$string</span>)) {
+</span><span class="l" id="57"><a class="l" href="#57"> 57 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'The string to escape is not a valid UTF-8 string.'</span>);
+</span><span class="l" id="58"><a class="l" href="#58"> 58 </a>            }
+</span><span class="l" id="59"><a class="l" href="#59"> 59 </a>
+</span><span class="l" id="60"><a class="l" href="#60"> 60 </a>            <span class="php-var">$string</span> = <span class="php-keyword2">preg_replace_callback</span>(<span class="php-quote">'#[^a-zA-Z0-9,\._]#Su'</span>, <span class="php-keyword1">function</span> (<span class="php-var">$matches</span>) {
+</span><span class="l" id="61"><a class="l" href="#61"> 61 </a>                <span class="php-var">$char</span> = <span class="php-var">$matches</span>[<span class="php-num">0</span>];
+</span><span class="l" id="62"><a class="l" href="#62"> 62 </a>
+</span><span class="l" id="63"><a class="l" href="#63"> 63 </a>                <span class="php-comment">// \xHH</span>
+</span><span class="l" id="64"><a class="l" href="#64"> 64 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$char</span>[<span class="php-num">1</span>])) {
+</span><span class="l" id="65"><a class="l" href="#65"> 65 </a>                    <span class="php-keyword1">return</span> <span class="php-quote">'\\x'</span>.<span class="php-keyword2">strtoupper</span>(<span class="php-keyword2">substr</span>(<span class="php-quote">'00'</span>.<span class="php-keyword2">bin2hex</span>(<span class="php-var">$char</span>), -<span class="php-num">2</span>));
+</span><span class="l" id="66"><a class="l" href="#66"> 66 </a>                }
+</span><span class="l" id="67"><a class="l" href="#67"> 67 </a>
+</span><span class="l" id="68"><a class="l" href="#68"> 68 </a>                <span class="php-comment">// \uHHHH</span>
+</span><span class="l" id="69"><a class="l" href="#69"> 69 </a>                <span class="php-var">$char</span> = <span class="php-keyword2">mb_convert_encoding</span>(<span class="php-var">$char</span>, <span class="php-quote">'UTF-16BE'</span>, <span class="php-quote">'UTF-8'</span>);
+</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>                <span class="php-var">$char</span> = <span class="php-keyword2">strtoupper</span>(<span class="php-keyword2">bin2hex</span>(<span class="php-var">$char</span>));
+</span><span class="l" id="71"><a class="l" href="#71"> 71 </a>
+</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>                <span class="php-keyword1">if</span> (<span class="php-num">4</span> &gt;= <span class="php-keyword2">strlen</span>(<span class="php-var">$char</span>)) {
+</span><span class="l" id="73"><a class="l" href="#73"> 73 </a>                    <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'\u%04s'</span>, <span class="php-var">$char</span>);
+</span><span class="l" id="74"><a class="l" href="#74"> 74 </a>                }
+</span><span class="l" id="75"><a class="l" href="#75"> 75 </a>
+</span><span class="l" id="76"><a class="l" href="#76"> 76 </a>                <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'\u%04s\u%04s'</span>, <span class="php-keyword2">substr</span>(<span class="php-var">$char</span>, <span class="php-num">0</span>, -<span class="php-num">4</span>), <span class="php-keyword2">substr</span>(<span class="php-var">$char</span>, -<span class="php-num">4</span>));
+</span><span class="l" id="77"><a class="l" href="#77"> 77 </a>            }, <span class="php-var">$string</span>);
+</span><span class="l" id="78"><a class="l" href="#78"> 78 </a>
+</span><span class="l" id="79"><a class="l" href="#79"> 79 </a>            <span class="php-keyword1">return</span> <span class="php-var">$string</span>;
+</span><span class="l" id="80"><a class="l" href="#80"> 80 </a>
+</span><span class="l" id="81"><a class="l" href="#81"> 81 </a>        <span class="php-keyword1">case</span> <span class="php-quote">'css'</span>:
+</span><span class="l" id="82"><a class="l" href="#82"> 82 </a>            <span class="php-keyword1">if</span> (<span class="php-num">0</span> == <span class="php-keyword2">strlen</span>(<span class="php-var">$string</span>) ? <span class="php-keyword1">false</span> : <span class="php-num">1</span> !== <span class="php-keyword2">preg_match</span>(<span class="php-quote">'/^./su'</span>, <span class="php-var">$string</span>)) {
+</span><span class="l" id="83"><a class="l" href="#83"> 83 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'The string to escape is not a valid UTF-8 string.'</span>);
+</span><span class="l" id="84"><a class="l" href="#84"> 84 </a>            }
+</span><span class="l" id="85"><a class="l" href="#85"> 85 </a>
+</span><span class="l" id="86"><a class="l" href="#86"> 86 </a>            <span class="php-var">$string</span> = <span class="php-keyword2">preg_replace_callback</span>(<span class="php-quote">'#[^a-zA-Z0-9]#Su'</span>, <span class="php-keyword1">function</span> (<span class="php-var">$matches</span>) {
+</span><span class="l" id="87"><a class="l" href="#87"> 87 </a>                <span class="php-var">$char</span> = <span class="php-var">$matches</span>[<span class="php-num">0</span>];
+</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>
+</span><span class="l" id="89"><a class="l" href="#89"> 89 </a>                <span class="php-comment">// \xHH</span>
+</span><span class="l" id="90"><a class="l" href="#90"> 90 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$char</span>[<span class="php-num">1</span>])) {
+</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>                    <span class="php-var">$hex</span> = <span class="php-keyword2">ltrim</span>(<span class="php-keyword2">strtoupper</span>(<span class="php-keyword2">bin2hex</span>(<span class="php-var">$char</span>)), <span class="php-quote">'0'</span>);
+</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>                    <span class="php-keyword1">if</span> (<span class="php-num">0</span> === <span class="php-keyword2">strlen</span>(<span class="php-var">$hex</span>)) {
+</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>                        <span class="php-var">$hex</span> = <span class="php-quote">'0'</span>;
+</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>                    }
+</span><span class="l" id="95"><a class="l" href="#95"> 95 </a>
+</span><span class="l" id="96"><a class="l" href="#96"> 96 </a>                    <span class="php-keyword1">return</span> <span class="php-quote">'\\'</span>.<span class="php-var">$hex</span>.<span class="php-quote">' '</span>;
+</span><span class="l" id="97"><a class="l" href="#97"> 97 </a>                }
+</span><span class="l" id="98"><a class="l" href="#98"> 98 </a>
+</span><span class="l" id="99"><a class="l" href="#99"> 99 </a>                <span class="php-comment">// \uHHHH</span>
+</span><span class="l" id="100"><a class="l" href="#100">100 </a>                <span class="php-var">$char</span> = <span class="php-keyword2">mb_convert_encoding</span>(<span class="php-var">$char</span>, <span class="php-quote">'UTF-16BE'</span>, <span class="php-quote">'UTF-8'</span>);
+</span><span class="l" id="101"><a class="l" href="#101">101 </a>
+</span><span class="l" id="102"><a class="l" href="#102">102 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'\\'</span>.<span class="php-keyword2">ltrim</span>(<span class="php-keyword2">strtoupper</span>(<span class="php-keyword2">bin2hex</span>(<span class="php-var">$char</span>)), <span class="php-quote">'0'</span>).<span class="php-quote">' '</span>;
+</span><span class="l" id="103"><a class="l" href="#103">103 </a>            }, <span class="php-var">$string</span>);
+</span><span class="l" id="104"><a class="l" href="#104">104 </a>
+</span><span class="l" id="105"><a class="l" href="#105">105 </a>            <span class="php-keyword1">return</span> <span class="php-var">$string</span>;
+</span><span class="l" id="106"><a class="l" href="#106">106 </a>
+</span><span class="l" id="107"><a class="l" href="#107">107 </a>        <span class="php-keyword1">case</span> <span class="php-quote">'html_attr'</span>:
+</span><span class="l" id="108"><a class="l" href="#108">108 </a>            <span class="php-keyword1">if</span> (<span class="php-num">0</span> == <span class="php-keyword2">strlen</span>(<span class="php-var">$string</span>) ? <span class="php-keyword1">false</span> : <span class="php-num">1</span> !== <span class="php-keyword2">preg_match</span>(<span class="php-quote">'/^./su'</span>, <span class="php-var">$string</span>)) {
+</span><span class="l" id="109"><a class="l" href="#109">109 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'The string to escape is not a valid UTF-8 string.'</span>);
+</span><span class="l" id="110"><a class="l" href="#110">110 </a>            }
+</span><span class="l" id="111"><a class="l" href="#111">111 </a>
+</span><span class="l" id="112"><a class="l" href="#112">112 </a>            <span class="php-var">$string</span> = <span class="php-keyword2">preg_replace_callback</span>(<span class="php-quote">'#[^a-zA-Z0-9,\.\-_]#Su'</span>, <span class="php-keyword1">function</span> (<span class="php-var">$matches</span>) {
+</span><span class="l" id="113"><a class="l" href="#113">113 </a>                <span class="php-comment">/**
+</span></span><span class="l" id="114"><a class="l" href="#114">114 </a><span class="php-comment">                 * This function is adapted from code coming from Zend Framework.
+</span></span><span class="l" id="115"><a class="l" href="#115">115 </a><span class="php-comment">                 *
+</span></span><span class="l" id="116"><a class="l" href="#116">116 </a><span class="php-comment">                 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+</span></span><span class="l" id="117"><a class="l" href="#117">117 </a><span class="php-comment">                 * @license   http://framework.zend.com/license/new-bsd New BSD License
+</span></span><span class="l" id="118"><a class="l" href="#118">118 </a><span class="php-comment">                 */</span>
+</span><span class="l" id="119"><a class="l" href="#119">119 </a>                <span class="php-comment">/*
+</span></span><span class="l" id="120"><a class="l" href="#120">120 </a><span class="php-comment">                 * While HTML supports far more named entities, the lowest common denominator
+</span></span><span class="l" id="121"><a class="l" href="#121">121 </a><span class="php-comment">                 * has become HTML5's XML Serialisation which is restricted to the those named
+</span></span><span class="l" id="122"><a class="l" href="#122">122 </a><span class="php-comment">                 * entities that XML supports. Using HTML entities would result in this error:
+</span></span><span class="l" id="123"><a class="l" href="#123">123 </a><span class="php-comment">                 *     XML Parsing Error: undefined entity
+</span></span><span class="l" id="124"><a class="l" href="#124">124 </a><span class="php-comment">                 */</span>
+</span><span class="l" id="125"><a class="l" href="#125">125 </a>                <span class="php-keyword1">static</span> <span class="php-var"><a href="#$entityMap" id="$entityMap">$entityMap</a></span> = [
+</span><span class="l" id="126"><a class="l" href="#126">126 </a>                    <span class="php-num">34</span> =&gt; <span class="php-quote">'quot'</span>, <span class="php-comment">/* quotation mark */</span>
+</span><span class="l" id="127"><a class="l" href="#127">127 </a>                    <span class="php-num">38</span> =&gt; <span class="php-quote">'amp'</span>,  <span class="php-comment">/* ampersand */</span>
+</span><span class="l" id="128"><a class="l" href="#128">128 </a>                    <span class="php-num">60</span> =&gt; <span class="php-quote">'lt'</span>,   <span class="php-comment">/* less-than sign */</span>
+</span><span class="l" id="129"><a class="l" href="#129">129 </a>                    <span class="php-num">62</span> =&gt; <span class="php-quote">'gt'</span>,   <span class="php-comment">/* greater-than sign */</span>
+</span><span class="l" id="130"><a class="l" href="#130">130 </a>                ];
+</span><span class="l" id="131"><a class="l" href="#131">131 </a>
+</span><span class="l" id="132"><a class="l" href="#132">132 </a>                <span class="php-var">$chr</span> = <span class="php-var">$matches</span>[<span class="php-num">0</span>];
+</span><span class="l" id="133"><a class="l" href="#133">133 </a>                <span class="php-var">$ord</span> = <span class="php-keyword2">ord</span>(<span class="php-var">$chr</span>);
+</span><span class="l" id="134"><a class="l" href="#134">134 </a>
+</span><span class="l" id="135"><a class="l" href="#135">135 </a>                <span class="php-comment">/*
+</span></span><span class="l" id="136"><a class="l" href="#136">136 </a><span class="php-comment">                 * The following replaces characters undefined in HTML with the
+</span></span><span class="l" id="137"><a class="l" href="#137">137 </a><span class="php-comment">                 * hex entity for the Unicode replacement character.
+</span></span><span class="l" id="138"><a class="l" href="#138">138 </a><span class="php-comment">                 */</span>
+</span><span class="l" id="139"><a class="l" href="#139">139 </a>                <span class="php-keyword1">if</span> ((<span class="php-var">$ord</span> &lt;= <span class="php-num">0x1f</span> &amp;&amp; <span class="php-var">$chr</span> != <span class="php-quote">"\t"</span> &amp;&amp; <span class="php-var">$chr</span> != <span class="php-quote">"\n"</span> &amp;&amp; <span class="php-var">$chr</span> != <span class="php-quote">"\r"</span>) || (<span class="php-var">$ord</span> &gt;= <span class="php-num">0x7f</span> &amp;&amp; <span class="php-var">$ord</span> &lt;= <span class="php-num">0x9f</span>)) {
+</span><span class="l" id="140"><a class="l" href="#140">140 </a>                    <span class="php-keyword1">return</span> <span class="php-quote">'&amp;#xFFFD;'</span>;
+</span><span class="l" id="141"><a class="l" href="#141">141 </a>                }
+</span><span class="l" id="142"><a class="l" href="#142">142 </a>
+</span><span class="l" id="143"><a class="l" href="#143">143 </a>                <span class="php-comment">/*
+</span></span><span class="l" id="144"><a class="l" href="#144">144 </a><span class="php-comment">                 * Check if the current character to escape has a name entity we should
+</span></span><span class="l" id="145"><a class="l" href="#145">145 </a><span class="php-comment">                 * replace it with while grabbing the hex string of the character.
+</span></span><span class="l" id="146"><a class="l" href="#146">146 </a><span class="php-comment">                 */</span>
+</span><span class="l" id="147"><a class="l" href="#147">147 </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$chr</span>) == <span class="php-num">1</span>) {
+</span><span class="l" id="148"><a class="l" href="#148">148 </a>                    <span class="php-var">$hex</span> = <span class="php-keyword2">strtoupper</span>(<span class="php-keyword2">substr</span>(<span class="php-quote">'00'</span>.<span class="php-keyword2">bin2hex</span>(<span class="php-var">$chr</span>), -<span class="php-num">2</span>));
+</span><span class="l" id="149"><a class="l" href="#149">149 </a>                } <span class="php-keyword1">else</span> {
+</span><span class="l" id="150"><a class="l" href="#150">150 </a>                    <span class="php-var">$chr</span> = <span class="php-keyword2">mb_convert_encoding</span>(<span class="php-var">$chr</span>, <span class="php-quote">'UTF-16BE'</span>, <span class="php-quote">'UTF-8'</span>);
+</span><span class="l" id="151"><a class="l" href="#151">151 </a>                    <span class="php-var">$hex</span> = <span class="php-keyword2">strtoupper</span>(<span class="php-keyword2">substr</span>(<span class="php-quote">'0000'</span>.<span class="php-keyword2">bin2hex</span>(<span class="php-var">$chr</span>), -<span class="php-num">4</span>));
+</span><span class="l" id="152"><a class="l" href="#152">152 </a>                }
+</span><span class="l" id="153"><a class="l" href="#153">153 </a>
+</span><span class="l" id="154"><a class="l" href="#154">154 </a>                <span class="php-var">$int</span> = <span class="php-keyword2">hexdec</span>(<span class="php-var">$hex</span>);
+</span><span class="l" id="155"><a class="l" href="#155">155 </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$int</span>, <span class="php-var">$entityMap</span>)) {
+</span><span class="l" id="156"><a class="l" href="#156">156 </a>                    <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'&amp;%s;'</span>, <span class="php-var">$entityMap</span>[<span class="php-var">$int</span>]);
+</span><span class="l" id="157"><a class="l" href="#157">157 </a>                }
+</span><span class="l" id="158"><a class="l" href="#158">158 </a>
+</span><span class="l" id="159"><a class="l" href="#159">159 </a>                <span class="php-comment">/*
+</span></span><span class="l" id="160"><a class="l" href="#160">160 </a><span class="php-comment">                 * Per OWASP recommendations, we'll use hex entities for any other
+</span></span><span class="l" id="161"><a class="l" href="#161">161 </a><span class="php-comment">                 * characters where a named entity does not exist.
+</span></span><span class="l" id="162"><a class="l" href="#162">162 </a><span class="php-comment">                 */</span>
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>                <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'&amp;#x%s;'</span>, <span class="php-var">$hex</span>);
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>            }, <span class="php-var">$string</span>);
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>            <span class="php-keyword1">return</span> <span class="php-var">$string</span>;
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>        <span class="php-keyword1">case</span> <span class="php-quote">'url'</span>:
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$string</span>);
+</span><span class="l" id="170"><a class="l" href="#170">170 </a>
+</span><span class="l" id="171"><a class="l" href="#171">171 </a>        <span class="php-keyword1">default</span>:
+</span><span class="l" id="172"><a class="l" href="#172">172 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Invalid escaping strategy "%s" (valid ones: "html", "html_attr", "css", "js", "url").'</span>, <span class="php-var">$strategy</span>));
+</span><span class="l" id="173"><a class="l" href="#173">173 </a>    }
+</span><span class="l" id="174"><a class="l" href="#174">174 </a>}
+</span><span class="l" id="175"><a class="l" href="#175">175 </a></span></code></pre>
+ </body>
+</html>

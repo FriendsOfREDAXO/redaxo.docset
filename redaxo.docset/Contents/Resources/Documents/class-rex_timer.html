@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_timer</h1>
+<div class="description">
+<p>Class to stop the script time.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_timer.html#3-65" title="Go to source code">redaxo/src/core/lib/util/timer.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_timer.html#18-30" title="Go to source code">__construct</a>( <span>float <var>$start</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$start</var></dt>
+<dd>Start time</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="reset" id="_reset">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_reset">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/reset"></a><a href="source-class-rex_timer.html#32-38" title="Go to source code">reset</a>( )</code>
+<div class="description short">
+<p>Resets the timer.</p>
+</div>
+<div class="description detailed hidden">
+<p>Resets the timer.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="getDelta" id="_getDelta">
+<td class="attributes"><code>
+				 public 
+				float
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDelta">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDelta"></a><a href="source-class-rex_timer.html#40-50" title="Go to source code">getDelta</a>( <span>integer <var>$precision</var> = <code><a href="class-rex_timer.html#MILLISEC">rex_timer::<b>MILLISEC</b></a></code></span> )</code>
+<div class="description short">
+<p>Returns the time difference.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the time difference.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$precision</var></dt>
+<dd>Factor which will be multiplied, for convertion into different units (e.g. 1000
+for milli,...)</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>float</code><br/>Time difference<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFormattedDelta" id="_getFormattedDelta">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFormattedDelta">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormattedDelta"></a><a href="source-class-rex_timer.html#52-64" title="Go to source code">getFormattedDelta</a>( <span>integer <var>$precision</var> = <code><a href="class-rex_timer.html#MILLISEC">rex_timer::<b>MILLISEC</b></a></code></span>, <span>integer <var>$decimals</var> = <span class="php-num">3</span></span> )</code>
+<div class="description short">
+<p>Returns the formatted time difference.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the formatted time difference.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$precision</var></dt>
+<dd>Factor which will be multiplied, for convertion into different units (e.g. 1000
+for milli,...)</dd>
+<dt><var>$decimals</var></dt>
+<dd>Number of decimals points</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Formatted time difference<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="SEC" id="SEC">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/SEC"></a><a href="source-class-rex_timer.html#12" title="Go to source code"><b>SEC</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#SEC">#</a><code><span class="php-num">1</span></code></div></td>
+</tr>
+<tr data-order="MILLISEC" id="MILLISEC">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/MILLISEC"></a><a href="source-class-rex_timer.html#13" title="Go to source code"><b>MILLISEC</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#MILLISEC">#</a><code><span class="php-num">1000</span></code></div></td>
+</tr>
+<tr data-order="MICROSEC" id="MICROSEC">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/MICROSEC"></a><a href="source-class-rex_timer.html#14" title="Go to source code"><b>MICROSEC</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#MICROSEC">#</a><code><span class="php-num">1000000</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

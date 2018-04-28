@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_formatter</h1>
+<div class="description">
+<p>String formatter class.</p>
+</div>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_formatter.html#3-362" title="Go to source code">redaxo/src/core/lib/util/formatter.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="format" id="_format">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_format">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/format"></a><a href="source-class-rex_formatter.html#17-34" title="Go to source code">format</a>( <span>string <var>$value</var></span>, <span>string <var>$formatType</var></span>, <span>mixed <var>$format</var></span> )</code>
+<div class="description short">
+<p>Formats a string by the given format type.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by the given format type.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+<dt><var>$formatType</var></dt>
+<dd>Format type (any method name of this class)</dd>
+<dt><var>$format</var></dt>
+<dd>For possible values look at the other methods of this class</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="date" id="_date">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_date">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/date"></a><a href="source-class-rex_formatter.html#36-57" title="Go to source code">date</a>( <span>string <var>$value</var></span>, <span>string <var>$format</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Formats a string by <code>date()</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by <code>date()</code>.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Unix timestamp or datetime string for &lt;code&gt;strtotime&lt;/code&gt;</dd>
+<dt><var>$format</var></dt>
+<dd>Default format is &lt;code&gt;d.m.Y&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.date.php">http://www.php.net/manual/en/function.date.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="strftime" id="_strftime">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_strftime">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/strftime"></a><a href="source-class-rex_formatter.html#59-83" title="Go to source code">strftime</a>( <span>string <var>$value</var></span>, <span>string <var>$format</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Formats a string by <code>strftime()</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by <code>strftime()</code>.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Unix timestamp or datetime string for &lt;code&gt;strtotime&lt;/code&gt;</dd>
+<dt><var>$format</var></dt>
+<dd>Possible values are format strings like in &lt;code&gt;strftime&lt;/code&gt; or "date" or
+"datetime", default is "date"</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.strftime.php">http://www.php.net/manual/en/function.strftime.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="number" id="_number">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_number">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/number"></a><a href="source-class-rex_formatter.html#85-114" title="Go to source code">number</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var> = []</span> )</code>
+<div class="description short">
+<p>Formats a string by <code>number_format()</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by <code>number_format()</code>.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+<dt><var>$format</var></dt>
+<dd>Array with number of decimals, decimals point and thousands separator, default
+is &lt;code&gt;array(2, ',', ' ')&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.number-format.php">http://www.php.net/manual/en/function.number-format.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="bytes" id="_bytes">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_bytes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/bytes"></a><a href="source-class-rex_formatter.html#116-146" title="Go to source code">bytes</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var> = []</span> )</code>
+<div class="description short">
+<p>Formats a string as bytes.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string as bytes.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+<dt><var>$format</var></dt>
+<dd>Same as &lt;code&gt;&lt;a href="class-rex_formatter.html#_number"&gt;rex_formatter::number()&lt;/a&gt;&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sprintf" id="_sprintf">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sprintf">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sprintf"></a><a href="source-class-rex_formatter.html#148-164" title="Go to source code">sprintf</a>( <span>string <var>$value</var></span>, <span>string <var>$format</var> = <span class="php-quote">''</span></span> )</code>
+<div class="description short">
+<p>Formats a string by <code>sprintf()</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by <code>sprintf()</code>.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+<dt><var>$format</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.sprintf.php">http://www.php.net/manual/en/function.sprintf.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="nl2br" id="_nl2br">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_nl2br">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/nl2br"></a><a href="source-class-rex_formatter.html#166-178" title="Go to source code">nl2br</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Formats a string by <code>nl2br</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by <code>nl2br</code>.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.nl2br.php">http://www.php.net/manual/en/function.nl2br.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="truncate" id="_truncate">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_truncate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/truncate"></a><a href="source-class-rex_formatter.html#180-219" title="Go to source code">truncate</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var> = []</span> )</code>
+<div class="description short">
+<p>Truncates a string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Truncates a string.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+<dt><var>$format</var></dt>
+<dd>Default format is &lt;code&gt;array('length' =&amp;gt; 80, 'etc' =&amp;gt; '...',
+'break_words' =&amp;gt; false)&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="widont" id="_widont">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_widont">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/widont"></a><a href="source-class-rex_formatter.html#221-237" title="Go to source code">widont</a>( <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Avoid widows in a string.</p>
+</div>
+<div class="description detailed hidden">
+<p>Avoid widows in a string.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="version" id="_version">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_version">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/version"></a><a href="source-class-rex_formatter.html#239-252" title="Go to source code">version</a>( <span>string <var>$value</var></span>, <span>string <var>$format</var></span> )</code>
+<div class="description short">
+<p>Formats a version string by <code>sprintf()</code>.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a version string by <code>sprintf()</code>.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Version</dd>
+<dt><var>$format</var></dt>
+<dd>Version format, e.g. "%s.%s"</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/function.sprintf.php">http://www.php.net/manual/en/function.sprintf.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="url" id="_url">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_url">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/url"></a><a href="source-class-rex_formatter.html#254-290" title="Go to source code">url</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var> = []</span> )</code>
+<div class="description short">
+<p>Formats a string as link.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string as link.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>URL</dd>
+<dt><var>$format</var></dt>
+<dd>Array with link attributes and params</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Link<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="email" id="_email">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_email">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/email"></a><a href="source-class-rex_formatter.html#292-320" title="Go to source code">email</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var> = []</span> )</code>
+<div class="description short">
+<p>Formats a string as email link.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string as email link.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Email</dd>
+<dt><var>$format</var></dt>
+<dd>Array with link attributes and params</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Email link<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="custom" id="_custom">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_custom">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/custom"></a><a href="source-class-rex_formatter.html#322-352" title="Go to source code">custom</a>( <span>string <var>$value</var></span>, <span>callable|array <var>$format</var></span> )</code>
+<div class="description short">
+<p>Formats a string by a custom callable.</p>
+</div>
+<div class="description detailed hidden">
+<p>Formats a string by a custom callable.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$value</var></dt>
+<dd>Value</dd>
+<dt><var>$format</var></dt>
+<dd>A callable or an array of a callable and additional params</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

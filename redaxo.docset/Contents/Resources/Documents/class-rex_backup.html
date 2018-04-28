@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_backup</h1>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.backup.html">backup</a><br/>
+<b>Located at</b> <a href="source-class-rex_backup.html#3-496" title="Go to source code">redaxo/src/addons/backup/lib/backup.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="getDir" id="_getDir">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getDir">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDir"></a><a href="source-class-rex_backup.html#13-19" title="Go to source code">getDir</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getBackupFiles" id="_getBackupFiles">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getBackupFiles">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getBackupFiles"></a><a href="source-class-rex_backup.html#21-48" title="Go to source code">getBackupFiles</a>( <span>mixed <var>$filePrefix</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="importDb" id="_importDb">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_importDb">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/importDb"></a><a href="source-class-rex_backup.html#50-236" title="Go to source code">importDb</a>( <span>string <var>$filename</var></span> )</code>
+<div class="description short">
+<p>Importiert den SQL Dump $filename in die Datenbank.</p>
+</div>
+<div class="description detailed hidden">
+<p>Importiert den SQL Dump $filename in die Datenbank.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd>Pfad + Dateinamen zur SQL-Datei</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>Gibt ein Assoc. Array zurück. 'state' =&gt; boolean (Status ob fehler
+aufgetreten sind) 'message' =&gt; Evtl. Status/Fehlermeldung<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="importFiles" id="_importFiles">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_importFiles">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/importFiles"></a><a href="source-class-rex_backup.html#238-290" title="Go to source code">importFiles</a>( <span>string <var>$filename</var></span> )</code>
+<div class="description short">
+<p>Importiert das Tar-Archiv $filename in den Ordner /files.</p>
+</div>
+<div class="description detailed hidden">
+<p>Importiert das Tar-Archiv $filename in den Ordner /files.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd>Pfad + Dateinamen zum Tar-Archiv</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>Gibt ein Assoc. Array zurück. 'state' =&gt; boolean (Status ob fehler
+aufgetreten sind) 'message' =&gt; Evtl. Status/Fehlermeldung<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="exportDb" id="_exportDb">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_exportDb">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/exportDb"></a><a href="source-class-rex_backup.html#292-430" title="Go to source code">exportDb</a>( <span>string <var>$filename</var></span>, <span>array <var>$tables</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Erstellt einen SQL Dump, der die aktuellen Datebankstruktur darstellt. Dieser
+wird in der Datei $filename gespeichert.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt einen SQL Dump, der die aktuellen Datebankstruktur darstellt. Dieser
+wird in der Datei $filename gespeichert.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$filename</var></dt>
+<dd></dd>
+<dt><var>$tables</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE wenn ein Dump erstellt wurde, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="exportFiles" id="_exportFiles">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_exportFiles">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/exportFiles"></a><a href="source-class-rex_backup.html#432-454" title="Go to source code">exportFiles</a>( <span>array <var>$folders</var></span> )</code>
+<div class="description short">
+<p>Exportiert alle Ordner $folders aus dem Verzeichnis /files.</p>
+</div>
+<div class="description detailed hidden">
+<p>Exportiert alle Ordner $folders aus dem Verzeichnis /files.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$folders</var></dt>
+<dd>Array von Ordnernamen, die exportiert werden sollen</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Inhalt des Tar-Archives als String<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="IMPORT_ARCHIVE" id="IMPORT_ARCHIVE">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/IMPORT_ARCHIVE"></a><a href="source-class-rex_backup.html#8" title="Go to source code"><b>IMPORT_ARCHIVE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#IMPORT_ARCHIVE">#</a><code><span class="php-num">1</span></code></div></td>
+</tr>
+<tr data-order="IMPORT_DB" id="IMPORT_DB">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/IMPORT_DB"></a><a href="source-class-rex_backup.html#9" title="Go to source code"><b>IMPORT_DB</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#IMPORT_DB">#</a><code><span class="php-num">2</span></code></div></td>
+</tr>
+<tr data-order="IMPORT_EVENT_PRE" id="IMPORT_EVENT_PRE">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/IMPORT_EVENT_PRE"></a><a href="source-class-rex_backup.html#10" title="Go to source code"><b>IMPORT_EVENT_PRE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#IMPORT_EVENT_PRE">#</a><code><span class="php-num">3</span></code></div></td>
+</tr>
+<tr data-order="IMPORT_EVENT_POST" id="IMPORT_EVENT_POST">
+<td class="attributes"><code>integer</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/IMPORT_EVENT_POST"></a><a href="source-class-rex_backup.html#11" title="Go to source code"><b>IMPORT_EVENT_POST</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#IMPORT_EVENT_POST">#</a><code><span class="php-num">4</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

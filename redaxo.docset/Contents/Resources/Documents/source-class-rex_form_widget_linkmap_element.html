@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="../Assets/css/styles.css" rel="stylesheet"/>
+  <script src="../Assets/js/script.js">
+  </script>
+ </head>
+ <body>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
+</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * @package redaxo\structure
+</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> */</span>
+</span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-keyword1">class</span> <a href="#rex_form_widget_linkmap_element" id="rex_form_widget_linkmap_element">rex_form_widget_linkmap_element</a> <span class="php-keyword1">extends</span> rex_form_element
+</span><span class="l" id="7"><a class="l" href="#7"> 7 </a>{
+</span><span class="l" id="8"><a class="l" href="#8"> 8 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$category_id" id="$category_id">$category_id</a></span> = <span class="php-num">0</span>;
+</span><span class="l" id="9"><a class="l" href="#9"> 9 </a>
+</span><span class="l" id="10"><a class="l" href="#10">10 </a>    <span class="php-comment">// 1. Parameter nicht genutzt, muss aber hier stehen,</span>
+</span><span class="l" id="11"><a class="l" href="#11">11 </a>    <span class="php-comment">// wg einheitlicher Konstruktorparameter</span>
+</span><span class="l" id="12"><a class="l" href="#12">12 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#___construct" id="___construct">__construct</a>(<span class="php-var">$tag</span> = <span class="php-quote">''</span>, rex_form <span class="php-var">$table</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="13"><a class="l" href="#13">13 </a>    {
+</span><span class="l" id="14"><a class="l" href="#14">14 </a>        parent::__construct(<span class="php-quote">''</span>, <span class="php-var">$table</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="15"><a class="l" href="#15">15 </a>    }
+</span><span class="l" id="16"><a class="l" href="#16">16 </a>
+</span><span class="l" id="17"><a class="l" href="#17">17 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_setCategoryId" id="_setCategoryId">setCategoryId</a>(<span class="php-var">$category_id</span>)
+</span><span class="l" id="18"><a class="l" href="#18">18 </a>    {
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>        <span class="php-var">$this</span>-&gt;category_id = <span class="php-var">$category_id</span>;
+</span><span class="l" id="20"><a class="l" href="#20">20 </a>    }
+</span><span class="l" id="21"><a class="l" href="#21">21 </a>
+</span><span class="l" id="22"><a class="l" href="#22">22 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_formatElement" id="_formatElement">formatElement</a>()
+</span><span class="l" id="23"><a class="l" href="#23">23 </a>    {
+</span><span class="l" id="24"><a class="l" href="#24">24 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$widget_counter" id="$widget_counter">$widget_counter</a></span> = <span class="php-num">1</span>;
+</span><span class="l" id="25"><a class="l" href="#25">25 </a>
+</span><span class="l" id="26"><a class="l" href="#26">26 </a>        <span class="php-var">$html</span> = rex_var_link::getWidget(<span class="php-var">$widget_counter</span>, <span class="php-var">$this</span>-&gt;getAttribute(<span class="php-quote">'name'</span>), <span class="php-var">$this</span>-&gt;getValue(), [<span class="php-quote">'category'</span> =&gt; <span class="php-var">$this</span>-&gt;category_id]);
+</span><span class="l" id="27"><a class="l" href="#27">27 </a>
+</span><span class="l" id="28"><a class="l" href="#28">28 </a>        ++<span class="php-var">$widget_counter</span>;
+</span><span class="l" id="29"><a class="l" href="#29">29 </a>        <span class="php-keyword1">return</span> <span class="php-var">$html</span>;
+</span><span class="l" id="30"><a class="l" href="#30">30 </a>    }
+</span><span class="l" id="31"><a class="l" href="#31">31 </a>}
+</span><span class="l" id="32"><a class="l" href="#32">32 </a></span></code></pre>
+ </body>
+</html>

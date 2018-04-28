@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_stream</h1>
+<div class="description">
+<p>Stream wrapper to include variables like files (php code will be
+evaluated).</p>
+<p>Example:</p>
+<pre>
+<span class="xlang">&lt;?php</span>
+  <span class="php-keyword1">include</span> rex_stream::factory(<span class="php-quote">'myContent'</span>, <span class="php-quote">'&lt;?php echo "Hello World"; ?&gt;'</span>);
+<span class="xlang">?&gt;</span>
+</pre>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>See:</b>
+<a href="http://www.php.net/manual/en/class.streamwrapper.php">http://www.php.net/manual/en/class.streamwrapper.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_stream.html#3-162" title="Go to source code">redaxo/src/core/lib/util/stream.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="factory" id="_factory">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_factory">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_stream.html#29-75" title="Go to source code">factory</a>( <span>string <var>$path</var></span>, <span>string <var>$content</var></span> )</code>
+<div class="description short">
+<p>Prepares a new stream.</p>
+</div>
+<div class="description detailed hidden">
+<p>Prepares a new stream.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$path</var></dt>
+<dd>Virtual path which should describe the content (e.g. "template/1"), only
+relevant for error messages</dd>
+<dt><var>$content</var></dt>
+<dd>Content which will be included</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Full path with protocol (e.g. "rex:///template/1")<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_open" id="_stream_open">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_open">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_open"></a><a href="source-class-rex_stream.html#77-91" title="Go to source code">stream_open</a>( <span>mixed <var>$path</var></span>, <span>mixed <var>$mode</var></span>, <span>mixed <var>$options</var></span>, <span>mixed <var>&amp; $opened_path</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-open.php">http://www.php.net/manual/en/streamwrapper.stream-open.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_read" id="_stream_read">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_read">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_read"></a><a href="source-class-rex_stream.html#93-101" title="Go to source code">stream_read</a>( <span>mixed <var>$count</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-read.php">http://www.php.net/manual/en/streamwrapper.stream-read.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_eof" id="_stream_eof">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_eof">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_eof"></a><a href="source-class-rex_stream.html#103-109" title="Go to source code">stream_eof</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-eof.php">http://www.php.net/manual/en/streamwrapper.stream-eof.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_seek" id="_stream_seek">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_seek">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_seek"></a><a href="source-class-rex_stream.html#111-129" title="Go to source code">stream_seek</a>( <span>mixed <var>$offset</var></span>, <span>mixed <var>$whence</var> = SEEK_SET</span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-seek.php">http://www.php.net/manual/en/streamwrapper.stream-seek.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_tell" id="_stream_tell">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_tell">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_tell"></a><a href="source-class-rex_stream.html#131-137" title="Go to source code">stream_tell</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-tell.php">http://www.php.net/manual/en/streamwrapper.stream-tell.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_flush" id="_stream_flush">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_flush">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_flush"></a><a href="source-class-rex_stream.html#139-145" title="Go to source code">stream_flush</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-flush.php">http://www.php.net/manual/en/streamwrapper.stream-flush.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="stream_stat" id="_stream_stat">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stream_stat">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stream_stat"></a><a href="source-class-rex_stream.html#147-153" title="Go to source code">stream_stat</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.stream-stat.php">http://www.php.net/manual/en/streamwrapper.stream-stat.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="url_stat" id="_url_stat">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_url_stat">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/url_stat"></a><a href="source-class-rex_stream.html#155-161" title="Go to source code">url_stat</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>See</h4>
+<div class="list">
+<a href="http://www.php.net/manual/en/streamwrapper.url-stat.php">http://www.php.net/manual/en/streamwrapper.url-stat.php</a><br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

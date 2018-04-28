@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_article_service</h1>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a><br/>
+<b>Located at</b> <a href="source-class-rex_article_service.html#3-909" title="Go to source code">redaxo/src/addons/structure/lib/service_article.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="addArticle" id="_addArticle">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addArticle"></a><a href="source-class-rex_article_service.html#8-110" title="Go to source code">addArticle</a>( <span>array <var>$data</var></span> )</code>
+<div class="description short">
+<p>Erstellt einen neuen Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt einen neuen Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$data</var></dt>
+<dd>Array mit den Daten des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="editArticle" id="_editArticle">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_editArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/editArticle"></a><a href="source-class-rex_article_service.html#112-212" title="Go to source code">editArticle</a>( <span>integer <var>$article_id</var></span>, <span>integer <var>$clang</var></span>, <span>array <var>$data</var></span> )</code>
+<div class="description short">
+<p>Bearbeitet einen Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Bearbeitet einen Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$article_id</var></dt>
+<dd>Id des Artikels der verändert werden soll</dd>
+<dt><var>$clang</var></dt>
+<dd>Id der Sprache</dd>
+<dt><var>$data</var></dt>
+<dd>Array mit den Daten des Artikels</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="deleteArticle" id="_deleteArticle">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_deleteArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteArticle"></a><a href="source-class-rex_article_service.html#214-255" title="Go to source code">deleteArticle</a>( <span>integer <var>$article_id</var></span> )</code>
+<div class="description short">
+<p>Löscht einen Artikel und reorganisiert die Prioritäten verbleibender
+Geschwister-Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht einen Artikel und reorganisiert die Prioritäten verbleibender
+Geschwister-Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$article_id</var></dt>
+<dd>Id des Artikels die gelöscht werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="_deleteArticle" id="__deleteArticle">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#__deleteArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_deleteArticle"></a><a href="source-class-rex_article_service.html#257-326" title="Go to source code">_deleteArticle</a>( <span>integer <var>$id</var></span> )</code>
+<div class="description short">
+<p>Löscht einen Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Löscht einen Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des Artikels, der gelöscht werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Eine Statusmeldung<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="articleStatus" id="_articleStatus">
+<td class="attributes"><code>
+				 public static
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_articleStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/articleStatus"></a><a href="source-class-rex_article_service.html#328-377" title="Go to source code">articleStatus</a>( <span>integer <var>$article_id</var></span>, <span>integer <var>$clang</var></span>, <span>integer|null <var>$status</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Ändert den Status des Artikels.</p>
+</div>
+<div class="description detailed hidden">
+<p>Ändert den Status des Artikels.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$article_id</var></dt>
+<dd>Id des Artikels die gelöscht werden soll</dd>
+<dt><var>$clang</var></dt>
+<dd>Id der Sprache</dd>
+<dt><var>$status</var></dt>
+<dd>Status auf den der Artikel gesetzt werden soll, oder NULL wenn zum nächsten
+Status weitergeschaltet werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>Der neue Status des Artikels<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="statusTypes" id="_statusTypes">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_statusTypes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/statusTypes"></a><a href="source-class-rex_article_service.html#379-400" title="Go to source code">statusTypes</a>( )</code>
+<div class="description short">
+<p>Gibt alle Stati zurück, die für einen Artikel gültig sind.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt alle Stati zurück, die für einen Artikel gültig sind.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>Array von Stati<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="nextStatus" id="_nextStatus">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_nextStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/nextStatus"></a><a href="source-class-rex_article_service.html#402-406" title="Go to source code">nextStatus</a>( <span>mixed <var>$currentStatus</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="prevStatus" id="_prevStatus">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_prevStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/prevStatus"></a><a href="source-class-rex_article_service.html#408-416" title="Go to source code">prevStatus</a>( <span>mixed <var>$currentStatus</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="newArtPrio" id="_newArtPrio">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_newArtPrio">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/newArtPrio"></a><a href="source-class-rex_article_service.html#418-444" title="Go to source code">newArtPrio</a>( <span>integer <var>$parent_id</var></span>, <span>integer <var>$clang</var></span>, <span>integer <var>$new_prio</var></span>, <span>integer <var>$old_prio</var></span> )</code>
+<div class="description short">
+<p>Berechnet die Prios der Artikel in einer Kategorie neu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Berechnet die Prios der Artikel in einer Kategorie neu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$parent_id</var></dt>
+<dd>KategorieId der Kategorie, die erneuert werden soll</dd>
+<dt><var>$clang</var></dt>
+<dd>ClangId der Kategorie, die erneuert werden soll</dd>
+<dt><var>$new_prio</var></dt>
+<dd>Neue PrioNr der Kategorie</dd>
+<dt><var>$old_prio</var></dt>
+<dd>Alte PrioNr der Kategorie</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="article2category" id="_article2category">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_article2category">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/article2category"></a><a href="source-class-rex_article_service.html#446-488" title="Go to source code">article2category</a>( <span>integer <var>$art_id</var></span> )</code>
+<div class="description short">
+<p>Konvertiert einen Artikel in eine Kategorie.</p>
+</div>
+<div class="description detailed hidden">
+<p>Konvertiert einen Artikel in eine Kategorie.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$art_id</var></dt>
+<dd>Artikel ID des Artikels, der in eine Kategorie umgewandelt werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="category2article" id="_category2article">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_category2article">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/category2article"></a><a href="source-class-rex_article_service.html#490-537" title="Go to source code">category2article</a>( <span>integer <var>$art_id</var></span> )</code>
+<div class="description short">
+<p>Konvertiert eine Kategorie in einen Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Konvertiert eine Kategorie in einen Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$art_id</var></dt>
+<dd>Artikel ID der Kategorie, die in einen Artikel umgewandelt werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="article2startarticle" id="_article2startarticle">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_article2startarticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/article2startarticle"></a><a href="source-class-rex_article_service.html#539-650" title="Go to source code">article2startarticle</a>( <span>integer <var>$neu_id</var></span> )</code>
+<div class="description short">
+<p>Konvertiert einen Artikel zum Startartikel der eigenen Kategorie.</p>
+</div>
+<div class="description detailed hidden">
+<p>Konvertiert einen Artikel zum Startartikel der eigenen Kategorie.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$neu_id</var></dt>
+<dd>Artikel ID des Artikels, der Startartikel werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="copyMeta" id="_copyMeta">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_copyMeta">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/copyMeta"></a><a href="source-class-rex_article_service.html#652-697" title="Go to source code">copyMeta</a>( <span>integer <var>$from_id</var></span>, <span>integer <var>$to_id</var></span>, <span>integer <var>$from_clang</var> = <span class="php-num">1</span></span>, <span>integer <var>$to_clang</var> = <span class="php-num">1</span></span>, <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+<p>Kopiert die Metadaten eines Artikels in einen anderen Artikel.</p>
+</div>
+<div class="description detailed hidden">
+<p>Kopiert die Metadaten eines Artikels in einen anderen Artikel.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$from_id</var></dt>
+<dd>ArtikelId des Artikels, aus dem kopiert werden (Quell ArtikelId)</dd>
+<dt><var>$to_id</var></dt>
+<dd>ArtikelId des Artikel, in den kopiert werden sollen (Ziel ArtikelId)</dd>
+<dt><var>$from_clang</var></dt>
+<dd>ClangId des Artikels, aus dem kopiert werden soll (Quell ClangId)</dd>
+<dt><var>$to_clang</var></dt>
+<dd>ClangId des Artikels, in den kopiert werden soll (Ziel ClangId)</dd>
+<dt><var>$params</var></dt>
+<dd>Array von Spaltennamen, welche kopiert werden sollen</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="copyArticle" id="_copyArticle">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_copyArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/copyArticle"></a><a href="source-class-rex_article_service.html#699-795" title="Go to source code">copyArticle</a>( <span>integer <var>$id</var></span>, <span>integer <var>$to_cat_id</var></span> )</code>
+<div class="description short">
+<p>Kopieren eines Artikels von einer Kategorie in eine andere.</p>
+</div>
+<div class="description detailed hidden">
+<p>Kopieren eines Artikels von einer Kategorie in eine andere.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des zu kopierenden Artikels</dd>
+<dt><var>$to_cat_id</var></dt>
+<dd>KategorieId in die der Artikel kopiert werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>FALSE bei Fehler, sonst die Artikel Id des neue kopierten Artikels<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="moveArticle" id="_moveArticle">
+<td class="attributes"><code>
+				 public static
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_moveArticle">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/moveArticle"></a><a href="source-class-rex_article_service.html#797-880" title="Go to source code">moveArticle</a>( <span>integer <var>$id</var></span>, <span>integer <var>$from_cat_id</var></span>, <span>integer <var>$to_cat_id</var></span> )</code>
+<div class="description short">
+<p>Verschieben eines Artikels von einer Kategorie in eine Andere.</p>
+</div>
+<div class="description detailed hidden">
+<p>Verschieben eines Artikels von einer Kategorie in eine Andere.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$id</var></dt>
+<dd>ArtikelId des zu verschiebenden Artikels</dd>
+<dt><var>$from_cat_id</var></dt>
+<dd>KategorieId des Artikels, der Verschoben wird</dd>
+<dt><var>$to_cat_id</var></dt>
+<dd>KategorieId in die der Artikel verschoben werden soll</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>TRUE bei Erfolg, sonst FALSE<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="reqKey" id="_reqKey">
+<td class="attributes"><code>
+				 protected static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_reqKey">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/reqKey"></a><a href="source-class-rex_article_service.html#882-895" title="Go to source code">reqKey</a>( <span>array <var>$array</var></span>, <span>string <var>$keyName</var></span> )</code>
+<div class="description short">
+<p>Checks whether the required array key $keyName isset.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks whether the required array key $keyName isset.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$array</var></dt>
+<dd>The array</dd>
+<dt><var>$keyName</var></dt>
+<dd>The key</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_api_exception.html">rex_api_exception</a></code></code><br/>rex_api_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>

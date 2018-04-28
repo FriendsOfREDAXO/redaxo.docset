@@ -1,0 +1,494 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_response</h1>
+<div class="description">
+<p>HTTP1.1 Client Cache Features.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_response.html#3-397" title="Go to source code">redaxo/src/core/lib/response.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="setStatus" id="_setStatus">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setStatus"></a><a href="source-class-rex_response.html#26-40" title="Go to source code">setStatus</a>( <span>integer <var>$httpStatus</var></span> )</code>
+<div class="description short">
+<p>Sets the HTTP Status code.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the HTTP Status code.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$httpStatus</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getStatus" id="_getStatus">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getStatus">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStatus"></a><a href="source-class-rex_response.html#42-50" title="Go to source code">getStatus</a>( )</code>
+<div class="description short">
+<p>Returns the HTTP Status code.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the HTTP Status code.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setHeader" id="_setHeader">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setHeader">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHeader"></a><a href="source-class-rex_response.html#52-61" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+<div class="description short">
+<p>Set a http response header. A existing header with the same name will be
+overridden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Set a http response header. A existing header with the same name will be
+overridden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="preload" id="_preload">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_preload">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preload"></a><a href="source-class-rex_response.html#70-84" title="Go to source code">preload</a>( <span>mixed <var>$file</var></span>, <span>mixed <var>$type</var></span>, <span>mixed <var>$mimeType</var></span> )</code>
+<div class="description short">
+<p>Set a file to be preload via http link header.</p>
+</div>
+<div class="description detailed hidden">
+<p>Set a file to be preload via http link header.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd></dd>
+<dt><var>$type</var></dt>
+<dd></dd>
+<dt><var>$mimeType</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendRedirect" id="_sendRedirect">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendRedirect">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendRedirect"></a><a href="source-class-rex_response.html#93-115" title="Go to source code">sendRedirect</a>( <span>string <var>$url</var></span> )</code>
+<div class="description short">
+<p>Redirects to a URL.</p>
+</div>
+<div class="description detailed hidden">
+<p>Redirects to a URL.</p>
+<p>NOTE: Execution will stop within this method!</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$url</var></dt>
+<dd>URL</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendFile" id="_sendFile">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendFile">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendFile"></a><a href="source-class-rex_response.html#117-155" title="Go to source code">sendFile</a>( <span>string <var>$file</var></span>, <span>string <var>$contentType</var></span>, <span>string <var>$contentDisposition</var> = <span class="php-quote">'inline'</span></span> )</code>
+<div class="description short">
+<p>Sends a file to client.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sends a file to client.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$file</var></dt>
+<dd>File path</dd>
+<dt><var>$contentType</var></dt>
+<dd>Content type</dd>
+<dt><var>$contentDisposition</var></dt>
+<dd>Content disposition</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendResource" id="_sendResource">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendResource">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendResource"></a><a href="source-class-rex_response.html#157-169" title="Go to source code">sendResource</a>( <span>string <var>$content</var></span>, <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$etag</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Sends a resource to the client.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sends a resource to the client.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$content</var></dt>
+<dd>Content</dd>
+<dt><var>$contentType</var></dt>
+<dd>Content type</dd>
+<dt><var>$lastModified</var></dt>
+<dd>HTTP Last-Modified Timestamp</dd>
+<dt><var>$etag</var></dt>
+<dd>HTTP Cachekey to identify the cache</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendPage" id="_sendPage">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendPage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendPage"></a><a href="source-class-rex_response.html#171-198" title="Go to source code">sendPage</a>( <span>string <var>$content</var></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Sends a page to client.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sends a page to client.</p>
+<p>The page content can be modified by the Extension Point OUTPUT_FILTER</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$content</var></dt>
+<dd>Content of page</dd>
+<dt><var>$lastModified</var></dt>
+<dd>HTTP Last-Modified Timestamp</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendContent" id="_sendContent">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendContent">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendContent"></a><a href="source-class-rex_response.html#200-261" title="Go to source code">sendContent</a>( <span>string <var>$content</var></span>, <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$etag</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Sends content to the client.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sends content to the client.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$content</var></dt>
+<dd>Content</dd>
+<dt><var>$contentType</var></dt>
+<dd>Content type</dd>
+<dt><var>$lastModified</var></dt>
+<dd>HTTP Last-Modified Timestamp</dd>
+<dt><var>$etag</var></dt>
+<dd>HTTP Cachekey to identify the cache</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="cleanOutputBuffers" id="_cleanOutputBuffers">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_cleanOutputBuffers">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/cleanOutputBuffers"></a><a href="source-class-rex_response.html#263-271" title="Go to source code">cleanOutputBuffers</a>( )</code>
+<div class="description short">
+<p>Cleans all output buffers.</p>
+</div>
+<div class="description detailed hidden">
+<p>Cleans all output buffers.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendContentType" id="_sendContentType">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendContentType">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendContentType"></a><a href="source-class-rex_response.html#273-282" title="Go to source code">sendContentType</a>( <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Sends the content type header.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sends the content type header.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$contentType</var></dt>
+<dd></dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendCacheControl" id="_sendCacheControl">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendCacheControl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendCacheControl"></a><a href="source-class-rex_response.html#284-291" title="Go to source code">sendCacheControl</a>( <span>mixed <var>$cacheControl</var> = <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span></span> )</code>
+<div class="description short">
+<p>Sends the cache control header.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sends the cache control header.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendLastModified" id="_sendLastModified">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendLastModified">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendLastModified"></a><a href="source-class-rex_response.html#293-320" title="Go to source code">sendLastModified</a>( <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Checks if content has changed by the last modified timestamp.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks if content has changed by the last modified timestamp.</p>
+<p>HTTP_IF_MODIFIED_SINCE feature</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$lastModified</var></dt>
+<dd>HTTP Last-Modified Timestamp</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendEtag" id="_sendEtag">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendEtag">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendEtag"></a><a href="source-class-rex_response.html#322-346" title="Go to source code">sendEtag</a>( <span>string <var>$cacheKey</var></span> )</code>
+<div class="description short">
+<p>Checks if content has changed by the etag cachekey.</p>
+</div>
+<div class="description detailed hidden">
+<p>Checks if content has changed by the etag cachekey.</p>
+<p>HTTP_IF_NONE_MATCH feature</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$cacheKey</var></dt>
+<dd>HTTP Cachekey to identify the cache</dd>
+</dl></div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendGzip" id="_sendGzip">
+<td class="attributes"><code>
+				 protected static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendGzip">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendGzip"></a><a href="source-class-rex_response.html#348-382" title="Go to source code">sendGzip</a>( <span>string <var>$content</var></span> )</code>
+<div class="description short">
+<p>Encodes the content with GZIP/X-GZIP if the browser supports one of them.</p>
+</div>
+<div class="description detailed hidden">
+<p>Encodes the content with GZIP/X-GZIP if the browser supports one of them.</p>
+<p>HTTP_ACCEPT_ENCODING feature</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$content</var></dt>
+<dd>Content</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="HTTP_OK" id="HTTP_OK">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_OK"></a><a href="source-class-rex_response.html#10" title="Go to source code"><b>HTTP_OK</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_OK">#</a><code><span class="php-quote">'200 OK'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_MOVED_PERMANENTLY" id="HTTP_MOVED_PERMANENTLY">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_MOVED_PERMANENTLY"></a><a href="source-class-rex_response.html#11" title="Go to source code"><b>HTTP_MOVED_PERMANENTLY</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_MOVED_PERMANENTLY">#</a><code><span class="php-quote">'301 Moved Permanently'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_NOT_MODIFIED" id="HTTP_NOT_MODIFIED">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_NOT_MODIFIED"></a><a href="source-class-rex_response.html#12" title="Go to source code"><b>HTTP_NOT_MODIFIED</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_NOT_MODIFIED">#</a><code><span class="php-quote">'304 Not Modified'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_NOT_FOUND" id="HTTP_NOT_FOUND">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_NOT_FOUND"></a><a href="source-class-rex_response.html#13" title="Go to source code"><b>HTTP_NOT_FOUND</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_NOT_FOUND">#</a><code><span class="php-quote">'404 Not Found'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_FORBIDDEN" id="HTTP_FORBIDDEN">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_FORBIDDEN"></a><a href="source-class-rex_response.html#14" title="Go to source code"><b>HTTP_FORBIDDEN</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_FORBIDDEN">#</a><code><span class="php-quote">'403 Forbidden'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_UNAUTHORIZED" id="HTTP_UNAUTHORIZED">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_UNAUTHORIZED"></a><a href="source-class-rex_response.html#15" title="Go to source code"><b>HTTP_UNAUTHORIZED</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_UNAUTHORIZED">#</a><code><span class="php-quote">'401 Unauthorized'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_INTERNAL_ERROR" id="HTTP_INTERNAL_ERROR">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_INTERNAL_ERROR"></a><a href="source-class-rex_response.html#16" title="Go to source code"><b>HTTP_INTERNAL_ERROR</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_INTERNAL_ERROR">#</a><code><span class="php-quote">'500 Internal Server Error'</span></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

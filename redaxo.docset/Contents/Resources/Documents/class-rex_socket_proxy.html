@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_socket_proxy</h1>
+<div class="description">
+<p>Class for sockets over a proxy.</p>
+</div>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_socket.html"><span>rex_socket</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_socket_proxy</span></b>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_socket_proxy.html#3-73" title="Go to source code">redaxo/src/core/lib/util/socket/socket_proxy.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="setDestination" id="_setDestination">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setDestination">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setDestination"></a><a href="source-class-rex_socket_proxy.html#16-34" title="Go to source code">setDestination</a>( <span>string <var>$host</var></span>, <span>integer <var>$port</var> = <span class="php-num">80</span></span>, <span>boolean <var>$ssl</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Sets the destination.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the destination.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$host</var></dt>
+<dd>Host name</dd>
+<dt><var>$port</var></dt>
+<dd>Port number</dd>
+<dt><var>$ssl</var></dt>
+<dd>SSL flag</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setDestinationUrl" id="_setDestinationUrl">
+<td class="attributes"><code>
+				 public 
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setDestinationUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setDestinationUrl"></a><a href="source-class-rex_socket_proxy.html#36-48" title="Go to source code">setDestinationUrl</a>( <span>string <var>$url</var></span> )</code>
+<div class="description short">
+<p>Sets the destination by a full URL.</p>
+</div>
+<div class="description detailed hidden">
+<p>Sets the destination by a full URL.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$url</var></dt>
+<dd>Full URL</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>$this Current socket<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="openConnection" id="_openConnection">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_openConnection">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/openConnection"></a><a href="source-class-rex_socket_proxy.html#50-72" title="Go to source code">openConnection</a>( )</code>
+<div class="description short">
+<p>Opens the socket connection.</p>
+</div>
+<div class="description detailed hidden">
+<p>Opens the socket connection.</p>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_socket_exception.html">rex_socket_exception</a></code></code><br/>rex_socket_exception<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_socket.html#_openConnection">rex_socket::openConnection</a></code></div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_socket.html#methods">rex_socket</a></h3>
+<p class="elementList">
+<code><a href="class-rex_socket.html#___construct">__construct()</a></code>, 
+			<code><a href="class-rex_socket.html#_addBasicAuthorization">addBasicAuthorization()</a></code>, 
+			<code><a href="class-rex_socket.html#_addHeader">addHeader()</a></code>, 
+			<code><a href="class-rex_socket.html#_doDelete">doDelete()</a></code>, 
+			<code><a href="class-rex_socket.html#_doGet">doGet()</a></code>, 
+			<code><a href="class-rex_socket.html#_doPost">doPost()</a></code>, 
+			<code><a href="class-rex_socket.html#_doRequest">doRequest()</a></code>, 
+			<code><a href="class-rex_socket.html#_factory">factory()</a></code>, 
+			<code><a href="class-rex_socket.html#_factoryUrl">factoryUrl()</a></code>, 
+			<code><a href="class-rex_socket.html#_followRedirects">followRedirects()</a></code>, 
+			<code><a href="class-rex_socket.html#_parseUrl">parseUrl()</a></code>, 
+			<code><a href="class-rex_socket.html#_setPath">setPath()</a></code>, 
+			<code><a href="class-rex_socket.html#_setTimeout">setTimeout()</a></code>, 
+			<code><a href="class-rex_socket.html#_writeRequest">writeRequest()</a></code>
+</p>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="destinationHost" id="$destinationHost">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24destinationHost"></a><a href="source-class-rex_socket_proxy.html#12" title="Go to source code"><var>$destinationHost</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$destinationHost">#</a><code></code></div></td>
+</tr>
+<tr data-order="destinationPort" id="$destinationPort">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24destinationPort"></a><a href="source-class-rex_socket_proxy.html#13" title="Go to source code"><var>$destinationPort</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$destinationPort">#</a><code></code></div></td>
+</tr>
+<tr data-order="destinationSsl" id="$destinationSsl">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24destinationSsl"></a><a href="source-class-rex_socket_proxy.html#14" title="Go to source code"><var>$destinationSsl</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$destinationSsl">#</a><code></code></div></td>
+</tr>
+</table>
+<h3>Properties inherited from <a href="class-rex_socket.html#properties">rex_socket</a></h3>
+<p class="elementList">
+<code><a href="class-rex_socket.html#$followRedirects"><var>$followRedirects</var></a></code>, 
+			<code><a href="class-rex_socket.html#$headers"><var>$headers</var></a></code>, 
+			<code><a href="class-rex_socket.html#$host"><var>$host</var></a></code>, 
+			<code><a href="class-rex_socket.html#$path"><var>$path</var></a></code>, 
+			<code><a href="class-rex_socket.html#$port"><var>$port</var></a></code>, 
+			<code><a href="class-rex_socket.html#$ssl"><var>$ssl</var></a></code>, 
+			<code><a href="class-rex_socket.html#$stream"><var>$stream</var></a></code>, 
+			<code><a href="class-rex_socket.html#$timeout"><var>$timeout</var></a></code>
+</p>
+</div></body>
+</html>

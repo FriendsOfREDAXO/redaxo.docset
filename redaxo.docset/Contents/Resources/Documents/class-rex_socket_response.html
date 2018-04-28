@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_socket_response</h1>
+<div class="description">
+<p>Class for rex_socket responses.</p>
+</div>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Author:</b>
+				gharlan<br/>
+<b>Located at</b> <a href="source-class-rex_socket_response.html#3-234" title="Go to source code">redaxo/src/core/lib/util/socket/socket_response.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_socket_response.html#22-46" title="Go to source code">__construct</a>( <span>resource <var>$stream</var></span> )</code>
+<div class="description short">
+<p>Constructor.</p>
+</div>
+<div class="description detailed hidden">
+<p>Constructor.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$stream</var></dt>
+<dd>Socket stream</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getStatusCode" id="_getStatusCode">
+<td class="attributes"><code>
+				 public 
+				integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getStatusCode">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStatusCode"></a><a href="source-class-rex_socket_response.html#48-56" title="Go to source code">getStatusCode</a>( )</code>
+<div class="description short">
+<p>Returns the HTTP status code, e.g. 200.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the HTTP status code, e.g. 200.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>integer</code><br/>int<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getStatusMessage" id="_getStatusMessage">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getStatusMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStatusMessage"></a><a href="source-class-rex_socket_response.html#58-66" title="Go to source code">getStatusMessage</a>( )</code>
+<div class="description short">
+<p>Returns the HTTP status message, e.g. "OK".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the HTTP status message, e.g. "OK".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isOk" id="_isOk">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isOk">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isOk"></a><a href="source-class-rex_socket_response.html#68-76" title="Go to source code">isOk</a>( )</code>
+<div class="description short">
+<p>Returns wether the status is "200 OK".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status is "200 OK".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isInformational" id="_isInformational">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isInformational">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isInformational"></a><a href="source-class-rex_socket_response.html#78-86" title="Go to source code">isInformational</a>( )</code>
+<div class="description short">
+<p>Returns wether the status class is "Informational".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status class is "Informational".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isSuccessful" id="_isSuccessful">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isSuccessful">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isSuccessful"></a><a href="source-class-rex_socket_response.html#88-96" title="Go to source code">isSuccessful</a>( )</code>
+<div class="description short">
+<p>Returns wether the status class is "Success".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status class is "Success".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isRedirection" id="_isRedirection">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isRedirection">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isRedirection"></a><a href="source-class-rex_socket_response.html#98-106" title="Go to source code">isRedirection</a>( )</code>
+<div class="description short">
+<p>Returns wether the status class is "Redirection".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status class is "Redirection".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isClientError" id="_isClientError">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isClientError">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isClientError"></a><a href="source-class-rex_socket_response.html#108-116" title="Go to source code">isClientError</a>( )</code>
+<div class="description short">
+<p>Returns wether the status class is "Client Error".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status class is "Client Error".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isServerError" id="_isServerError">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isServerError">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isServerError"></a><a href="source-class-rex_socket_response.html#118-126" title="Go to source code">isServerError</a>( )</code>
+<div class="description short">
+<p>Returns wether the status class is "Server Error".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status class is "Server Error".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isInvalid" id="_isInvalid">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isInvalid">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isInvalid"></a><a href="source-class-rex_socket_response.html#128-136" title="Go to source code">isInvalid</a>( )</code>
+<div class="description short">
+<p>Returns wether the status is invalid.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns wether the status is invalid.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getHeader" id="_getHeader">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHeader">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeader"></a><a href="source-class-rex_socket_response.html#138-159" title="Go to source code">getHeader</a>( <span>string <var>$key</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Returns the header for the given key, or the entire header if no key is
+given.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the header for the given key, or the entire header if no key is
+given.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>Header key</dd>
+<dt><var>$default</var></dt>
+<dd>Default value (is returned if the header is not set)</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getBufferedBody" id="_getBufferedBody">
+<td class="attributes"><code>
+				 public 
+				boolean|string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getBufferedBody">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getBufferedBody"></a><a href="source-class-rex_socket_response.html#161-191" title="Go to source code">getBufferedBody</a>( <span>integer <var>$length</var> = <span class="php-num">1024</span></span> )</code>
+<div class="description short">
+<p>Returns up to <code>$length</code> bytes from the body, or <code>false</code>
+if the end is reached.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns up to <code>$length</code> bytes from the body, or <code>false</code>
+if the end is reached.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$length</var></dt>
+<dd>Max number of bytes</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean|string</code><br/>bool|string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getBody" id="_getBody">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getBody">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getBody"></a><a href="source-class-rex_socket_response.html#193-206" title="Go to source code">getBody</a>( )</code>
+<div class="description short">
+<p>Returns the entire body.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the entire body.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="writeBodyTo" id="_writeBodyTo">
+<td class="attributes"><code>
+				 public 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_writeBodyTo">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/writeBodyTo"></a><a href="source-class-rex_socket_response.html#208-233" title="Go to source code">writeBodyTo</a>( <span>string|resource <var>$resource</var></span> )</code>
+<div class="description short">
+<p>Writes the body to the given resource.</p>
+</div>
+<div class="description detailed hidden">
+<p>Writes the body to the given resource.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$resource</var></dt>
+<dd>File path or file pointer</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/><code>true</code> on success, <code>false</code> on failure<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
+</div></body>
+</html>
