@@ -242,7 +242,7 @@ body {
   margin: 0;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.4;
-  font-size: rem(16);
+  font-size: 1rem;
 }
 a {
   color: #5d99d5 !important;
@@ -264,16 +264,16 @@ h4 {
 }
 h1 {
   margin: 0 0 20px;
-  font-size: rem(50);
+  font-size: 3.125rem;
 }
 h2 {
-  font-size: rem(36);
+  font-size: 2.25rem;
 }
 h3 {
-  font-size: rem(28);
+  font-size: 1.75rem;
 }
 h4 {
-  font-size: rem(20);
+  font-size: 1.25rem;
 }
 code {
   font-family: "Fira Code", "Courier New", Courier, monospace;
@@ -306,7 +306,7 @@ td {
   padding: 8px;
 }
 td code {
-  font-size: rem(14);
+  font-size: 0.875rem;
 }
 td.name code {
   font-weight: bold;
@@ -325,13 +325,13 @@ p.elementList {
   line-height: 1.7;
 }
 p.elementList code {
-  font-size: rem(14);
+  font-size: 0.875rem;
 }
 p.elementList code b {
   font-weight: normal;
 }
 pre#source {
-  font-size: rem(13);
+  font-size: 0.8125rem;
   line-height: 1.2;
 }
 pre#source a.l {

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.scrollTo({
       top: p.offsetTop - 5
     })
-    for (let index = match[1]; index <= match[2]; index++) {
+    for (let index = parseInt(match[1]); index <= parseInt(match[2]); index++) {
       document.getElementById(index).classList.add('highlight')
     }
   }
