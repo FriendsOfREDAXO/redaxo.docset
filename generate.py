@@ -36,6 +36,11 @@ entry_types = {
     'Exceptions': 'Exception',
     'Functions': 'Function'
 }
+chapters = {
+    'methods': 'Method',
+    'constants': 'Constant',
+    'properties': 'Property'
+}
 api_docs = []
 
 c1 = categories[2]
@@ -83,9 +88,7 @@ for f in glob.glob('redaxo.docset/Contents/Resources/Documents/*'):
 # HTML laden und manipulieren
 
 num_docs_to_process = len(api_docs) * 2
-doc_processed = 0
-
-# print(f'Processing {num_docs_to_process} files')
+docs_processed = 0
 
 for page in api_docs:
 
@@ -102,36 +105,16 @@ for page in api_docs:
         i['src'] = '../Assets/images/' + os.path.basename(i['src'])
     page_content = doc_soup.find(id="content")
 
-    # Methoden zum TOC
-    methods = doc_soup.find(id="methods")
-    if methods:
-        methods = methods.find_all("a", title="Go to source code")
-        for anchor in methods:
-            # print(anchor.contents)
-            toc = soup.new_tag("a")
-            toc["name"] = "//apple_ref/cpp/Method/" + urllib.parse.quote_plus(str([child for child in anchor.descendants][-1]))
-            toc["class"] = "dashAnchor"
-            anchor.insert_before(toc)
-
-    # Konstanten zum TOC
-    methods = doc_soup.find(id="constants")
-    if methods:
-        methods = methods.find_all("a", title="Go to source code")
-        for anchor in methods:
-            toc = soup.new_tag("a")
-            toc["name"] = "//apple_ref/cpp/Constant/" + urllib.parse.quote_plus(str([child for child in anchor.descendants][-1]))
-            toc["class"] = "dashAnchor"
-            anchor.insert_before(toc)
-
-    # Properties zum TOC
-    methods = doc_soup.find(id="properties")
-    if methods:
-        methods = methods.find_all("a", title="Go to source code")
-        for anchor in methods:
-            toc = soup.new_tag("a")
-            toc["name"] = "//apple_ref/cpp/Property/" + urllib.parse.quote_plus(str([child for child in anchor.descendants][-1]))
-            toc["class"] = "dashAnchor"
-            anchor.insert_before(toc)
+    for id in chapters:
+        docs = doc_soup.find(id=id)
+        if docs:
+            links_to_sources = docs.find_all("a", title="Go to source code")
+            for anchor in links_to_sources:
+                anchor['href'] = re.sub(r"^(.*\.html)#(\d+)\-(\d+)", r"\1?from=\2&to=\3#\2", anchor['href'], 0, re.MULTILINE)
+                toc = soup.new_tag("a")
+                toc["name"] = f"//apple_ref/cpp/{chapters[id]}/" + urllib.parse.quote_plus(str([child for child in anchor.descendants][-1]))
+                toc["class"] = "dashAnchor"
+                anchor.insert_before(toc)
 
     # modifizierte Doku speichern
     target_doc_soup = bs(template % page_content, "html.parser")
@@ -150,6 +133,11 @@ for page in api_docs:
     htmlOut = taret_source_soup.prettify("utf-8")
     with open("%s/%s" % (htmlDestPath, 'source-' + page), "wb") as file:
         file.write(htmlOut)
+
+    docs_processed += 2
+
+    if (docs_processed % 50 == 0):
+        print(f'{docs_processed} of {num_docs_to_process} documents processed')
 
 # Bilder speichern
 
