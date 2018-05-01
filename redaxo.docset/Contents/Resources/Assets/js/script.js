@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var match = document.location.hash.match(/#(\d+)-(\d+)/)
+  var match = document.location.hash.match(/#(\d+)/)
   if (match) {
-    let p = document.getElementById(match[1])
-    window.scrollTo({
-      top: p.offsetTop - 5
-    })
-    for (let index = parseInt(match[1]); index <= parseInt(match[2]); index++) {
+    let p = window.location.search.substring(1).split(',')
+    for (let index = parseInt(p[0]); index <= parseInt(p[1]); index++) {
       document.getElementById(index).classList.add('highlight')
     }
   }

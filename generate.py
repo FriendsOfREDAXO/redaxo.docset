@@ -96,7 +96,7 @@ for page in api_docs:
     response = http.request('GET', api_url + page)
     doc_soup = bs(response.data, "html.parser")
 
-    # Bilder finden ...
+    # find images
     for i in [img['src'] for img in doc_soup.find_all('img')]:
         images.add(i)
 
@@ -110,7 +110,7 @@ for page in api_docs:
         if docs:
             links_to_sources = docs.find_all("a", title="Go to source code")
             for anchor in links_to_sources:
-                anchor['href'] = re.sub(r"^(.*\.html)#(\d+)\-(\d+)", r"\1?from=\2&to=\3#\2", anchor['href'], 0, re.MULTILINE)
+                anchor['href'] = re.sub(r"^(.*\.html)#(\d+)-(\d+)", r"\1?\2,\3#\2", anchor['href'], 0, re.MULTILINE)
                 toc = soup.new_tag("a")
                 toc["name"] = f"//apple_ref/cpp/{chapters[id]}/" + urllib.parse.quote_plus(str([child for child in anchor.descendants][-1]))
                 toc["class"] = "dashAnchor"
