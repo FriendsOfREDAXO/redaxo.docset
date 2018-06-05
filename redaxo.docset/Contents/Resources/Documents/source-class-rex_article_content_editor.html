@@ -7,496 +7,496 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1">  1 </a><span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"><a class="l" href="#2">  2 </a>
-</span><span class="l" id="3"><a class="l" href="#3">  3 </a><span class="php-comment">/**
-</span></span><span class="l" id="4"><a class="l" href="#4">  4 </a><span class="php-comment"> * Erweiterung eines Artikels um slicemanagement.
-</span></span><span class="l" id="5"><a class="l" href="#5">  5 </a><span class="php-comment"> *
-</span></span><span class="l" id="6"><a class="l" href="#6">  6 </a><span class="php-comment"> * @package redaxo\structure\content
-</span></span><span class="l" id="7"><a class="l" href="#7">  7 </a><span class="php-comment"> */</span>
-</span><span class="l" id="8"><a class="l" href="#8">  8 </a><span class="php-keyword1">class</span> <a href="#rex_article_content_editor" id="rex_article_content_editor">rex_article_content_editor</a> <span class="php-keyword1">extends</span> rex_article_content
-</span><span class="l" id="9"><a class="l" href="#9">  9 </a>{
-</span><span class="l" id="10"><a class="l" href="#10"> 10 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$MODULESELECT" id="$MODULESELECT">$MODULESELECT</a></span>;
-</span><span class="l" id="11"><a class="l" href="#11"> 11 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$sliceAddPosition" id="$sliceAddPosition">$sliceAddPosition</a></span> = <span class="php-num">0</span>;
-</span><span class="l" id="12"><a class="l" href="#12"> 12 </a>
-</span><span class="l" id="13"><a class="l" href="#13"> 13 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#___construct" id="___construct">__construct</a>(<span class="php-var">$article_id</span> = <span class="php-keyword1">null</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="14"><a class="l" href="#14"> 14 </a>    {
-</span><span class="l" id="15"><a class="l" href="#15"> 15 </a>        parent::__construct(<span class="php-var">$article_id</span>, <span class="php-var">$clang</span>);
-</span><span class="l" id="16"><a class="l" href="#16"> 16 </a>    }
-</span><span class="l" id="17"><a class="l" href="#17"> 17 </a>
-</span><span class="l" id="18"><a class="l" href="#18"> 18 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="19"><a class="l" href="#19"> 19 </a><span class="php-comment">     * {@inheritdoc}
-</span></span><span class="l" id="20"><a class="l" href="#20"> 20 </a><span class="php-comment">     */</span>
-</span><span class="l" id="21"><a class="l" href="#21"> 21 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_outputSlice" id="_outputSlice">outputSlice</a>(rex_sql <span class="php-var">$artDataSql</span>, <span class="php-var">$moduleIdToAdd</span>)
-</span><span class="l" id="22"><a class="l" href="#22"> 22 </a>    {
-</span><span class="l" id="23"><a class="l" href="#23"> 23 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode != <span class="php-quote">'edit'</span>) {
-</span><span class="l" id="24"><a class="l" href="#24"> 24 </a>            <span class="php-comment">// ----- wenn mode nicht edit</span>
-</span><span class="l" id="25"><a class="l" href="#25"> 25 </a>            <span class="php-var">$slice_content</span> = parent::outputSlice(
-</span><span class="l" id="26"><a class="l" href="#26"> 26 </a>                <span class="php-var">$artDataSql</span>,
-</span><span class="l" id="27"><a class="l" href="#27"> 27 </a>                <span class="php-var">$moduleIdToAdd</span>
-</span><span class="l" id="28"><a class="l" href="#28"> 28 </a>            );
-</span><span class="l" id="29"><a class="l" href="#29"> 29 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>            <span class="php-var">$sliceId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
-</span><span class="l" id="31"><a class="l" href="#31"> 31 </a>            <span class="php-var">$sliceCtype</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.ctype_id'</span>);
-</span><span class="l" id="32"><a class="l" href="#32"> 32 </a>
-</span><span class="l" id="33"><a class="l" href="#33"> 33 </a>            <span class="php-var">$moduleInput</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.input'</span>);
-</span><span class="l" id="34"><a class="l" href="#34"> 34 </a>            <span class="php-var">$moduleOutput</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.output'</span>);
-</span><span class="l" id="35"><a class="l" href="#35"> 35 </a>            <span class="php-var">$moduleId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.id'</span>);
-</span><span class="l" id="36"><a class="l" href="#36"> 36 </a>
-</span><span class="l" id="37"><a class="l" href="#37"> 37 </a>            <span class="php-comment">// ----- add select box einbauen</span>
-</span><span class="l" id="38"><a class="l" href="#38"> 38 </a>            <span class="php-var">$slice_content</span> = <span class="php-var">$this</span>-&gt;getModuleSelect(<span class="php-var">$sliceId</span>);
-</span><span class="l" id="39"><a class="l" href="#39"> 39 </a>
-</span><span class="l" id="40"><a class="l" href="#40"> 40 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$sliceId</span>) {
-</span><span class="l" id="41"><a class="l" href="#41"> 41 </a>                <span class="php-var">$slice_content</span> .= <span class="php-var">$this</span>-&gt;addSlice(<span class="php-var">$sliceId</span>, <span class="php-var">$moduleIdToAdd</span>);
-</span><span class="l" id="42"><a class="l" href="#42"> 42 </a>            }
-</span><span class="l" id="43"><a class="l" href="#43"> 43 </a>
-</span><span class="l" id="44"><a class="l" href="#44"> 44 </a>            <span class="php-var">$panel</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="45"><a class="l" href="#45"> 45 </a>            <span class="php-comment">// ----- Display message at current slice</span>
-</span><span class="l" id="46"><a class="l" href="#46"> 46 </a>            <span class="php-comment">//if(rex::getUser()-&gt;getComplexPerm('modules')-&gt;hasPerm($moduleId)) {</span>
-</span><span class="l" id="47"><a class="l" href="#47"> 47 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> != <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$sliceId</span>) {
-</span><span class="l" id="48"><a class="l" href="#48"> 48 </a>                <span class="php-var">$msg</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="49"><a class="l" href="#49"> 49 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
-</span><span class="l" id="50"><a class="l" href="#50"> 50 </a>                    <span class="php-var">$msg</span> .= rex_view::warning(<span class="php-var">$this</span>-&gt;warning);
-</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>                }
-</span><span class="l" id="52"><a class="l" href="#52"> 52 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;info != <span class="php-quote">''</span>) {
-</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>                    <span class="php-var">$msg</span> .= rex_view::success(<span class="php-var">$this</span>-&gt;info);
-</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>                }
-</span><span class="l" id="55"><a class="l" href="#55"> 55 </a>                <span class="php-var">$panel</span> .= <span class="php-var">$msg</span>;
-</span><span class="l" id="56"><a class="l" href="#56"> 56 </a>            }
-</span><span class="l" id="57"><a class="l" href="#57"> 57 </a>            <span class="php-comment">//}</span>
-</span><span class="l" id="58"><a class="l" href="#58"> 58 </a>
-</span><span class="l" id="59"><a class="l" href="#59"> 59 </a>            <span class="php-comment">// ----- EDIT/DELETE BLOCK - Wenn Rechte vorhanden</span>
-</span><span class="l" id="60"><a class="l" href="#60"> 60 </a>            <span class="php-keyword1">if</span> (rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$moduleId</span>)) {
-</span><span class="l" id="61"><a class="l" href="#61"> 61 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'edit'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$sliceId</span>) {
-</span><span class="l" id="62"><a class="l" href="#62"> 62 </a>                    <span class="php-comment">// **************** Aktueller Slice</span>
-</span><span class="l" id="63"><a class="l" href="#63"> 63 </a>
-</span><span class="l" id="64"><a class="l" href="#64"> 64 </a>                    <span class="php-comment">// ----- PRE VIEW ACTION [EDIT]</span>
-</span><span class="l" id="65"><a class="l" href="#65"> 65 </a>                    <span class="php-var">$action</span> = <span class="php-keyword1">new</span> rex_article_action(<span class="php-var">$moduleId</span>, <span class="php-quote">'edit'</span>, <span class="php-var">$artDataSql</span>);
-</span><span class="l" id="66"><a class="l" href="#66"> 66 </a>                    <span class="php-keyword1">if</span> (rex_request_method() == <span class="php-quote">'post'</span> &amp;&amp; rex_request(<span class="php-quote">'function'</span>, <span class="php-quote">'string'</span>) == <span class="php-quote">'edit'</span>) {
-</span><span class="l" id="67"><a class="l" href="#67"> 67 </a>                        <span class="php-var">$action</span>-&gt;setRequestValues();
-</span><span class="l" id="68"><a class="l" href="#68"> 68 </a>                    }
-</span><span class="l" id="69"><a class="l" href="#69"> 69 </a>                    <span class="php-var">$action</span>-&gt;<span class="php-keyword2">exec</span>(rex_article_action::PREVIEW);
-</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>                    <span class="php-comment">// ----- / PRE VIEW ACTION</span>
-</span><span class="l" id="71"><a class="l" href="#71"> 71 </a>
-</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>                    <span class="php-var">$moduleInput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$artDataSql</span>, <span class="php-var">$moduleInput</span>);
-</span><span class="l" id="73"><a class="l" href="#73"> 73 </a>                    <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span> . <span class="php-var">$this</span>-&gt;editSlice(<span class="php-var">$sliceId</span>, <span class="php-var">$moduleInput</span>, <span class="php-var">$sliceCtype</span>, <span class="php-var">$moduleId</span>, <span class="php-var">$artDataSql</span>);
-</span><span class="l" id="74"><a class="l" href="#74"> 74 </a>                }
-</span><span class="l" id="75"><a class="l" href="#75"> 75 </a>                <span class="php-comment">// Modulinhalt ausgeben</span>
-</span><span class="l" id="76"><a class="l" href="#76"> 76 </a>                <span class="php-var">$moduleOutput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$artDataSql</span>, <span class="php-var">$moduleOutput</span>);
-</span><span class="l" id="77"><a class="l" href="#77"> 77 </a>                <span class="php-var">$panel</span> .= <span class="php-var">$this</span>-&gt;getWrappedModuleOutput(<span class="php-var">$moduleId</span>, <span class="php-var">$moduleOutput</span>);
-</span><span class="l" id="78"><a class="l" href="#78"> 78 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="79"><a class="l" href="#79"> 79 </a>                <span class="php-comment">// ----- hat keine rechte an diesem modul, einfach ausgeben</span>
-</span><span class="l" id="80"><a class="l" href="#80"> 80 </a>                <span class="php-var">$moduleOutput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$artDataSql</span>, <span class="php-var">$moduleOutput</span>);
-</span><span class="l" id="81"><a class="l" href="#81"> 81 </a>                <span class="php-var">$panel</span> .= <span class="php-var">$this</span>-&gt;getWrappedModuleOutput(<span class="php-var">$moduleId</span>, <span class="php-var">$moduleOutput</span>);
-</span><span class="l" id="82"><a class="l" href="#82"> 82 </a>            }
-</span><span class="l" id="83"><a class="l" href="#83"> 83 </a>
-</span><span class="l" id="84"><a class="l" href="#84"> 84 </a>            <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="85"><a class="l" href="#85"> 85 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'title'</span>, <span class="php-var">$this</span>-&gt;getSliceHeading(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
-</span><span class="l" id="86"><a class="l" href="#86"> 86 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'options'</span>, <span class="php-var">$this</span>-&gt;getSliceMenu(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
-</span><span class="l" id="87"><a class="l" href="#87"> 87 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'body'</span>, <span class="php-var">$panel</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>            <span class="php-var">$slice_content</span> .= <span class="php-quote">'&lt;li class="rex-slice rex-slice-output" id="slice'</span>.<span class="php-var">$sliceId</span>.<span class="php-quote">'"&gt;'</span> . <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/page/section.php'</span>) . <span class="php-quote">'&lt;/li&gt;'</span>;
-</span><span class="l" id="89"><a class="l" href="#89"> 89 </a>        }
-</span><span class="l" id="90"><a class="l" href="#90"> 90 </a>
-</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>        <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span>;
-</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>    }
-</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>
-</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="95"><a class="l" href="#95"> 95 </a><span class="php-comment">     * Returns the slice heading.
-</span></span><span class="l" id="96"><a class="l" href="#96"> 96 </a><span class="php-comment">     *
-</span></span><span class="l" id="97"><a class="l" href="#97"> 97 </a><span class="php-comment">     * @param rex_sql $artDataSql rex_sql istance containing all the slice and module information
-</span></span><span class="l" id="98"><a class="l" href="#98"> 98 </a><span class="php-comment">     *
-</span></span><span class="l" id="99"><a class="l" href="#99"> 99 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="100"><a class="l" href="#100">100 </a><span class="php-comment">     */</span>
-</span><span class="l" id="101"><a class="l" href="#101">101 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getSliceHeading" id="_getSliceHeading">getSliceHeading</a>(rex_sql <span class="php-var">$artDataSql</span>)
-</span><span class="l" id="102"><a class="l" href="#102">102 </a>    {
-</span><span class="l" id="103"><a class="l" href="#103">103 </a>        <span class="php-var">$sliceId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
-</span><span class="l" id="104"><a class="l" href="#104">104 </a>        <span class="php-var">$sliceCtype</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.ctype_id'</span>);
-</span><span class="l" id="105"><a class="l" href="#105">105 </a>
-</span><span class="l" id="106"><a class="l" href="#106">106 </a>        <span class="php-var">$moduleId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.id'</span>);
-</span><span class="l" id="107"><a class="l" href="#107">107 </a>        <span class="php-var">$moduleName</span> = rex_i18n::translate(<span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.name'</span>));
-</span><span class="l" id="108"><a class="l" href="#108">108 </a>
-</span><span class="l" id="109"><a class="l" href="#109">109 </a>        <span class="php-keyword1">return</span> <span class="php-var">$moduleName</span>;
-</span><span class="l" id="110"><a class="l" href="#110">110 </a>    }
-</span><span class="l" id="111"><a class="l" href="#111">111 </a>
-</span><span class="l" id="112"><a class="l" href="#112">112 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="113"><a class="l" href="#113">113 </a><span class="php-comment">     * Returns the slice menu.
-</span></span><span class="l" id="114"><a class="l" href="#114">114 </a><span class="php-comment">     *
-</span></span><span class="l" id="115"><a class="l" href="#115">115 </a><span class="php-comment">     * @param rex_sql $artDataSql rex_sql istance containing all the slice and module information
-</span></span><span class="l" id="116"><a class="l" href="#116">116 </a><span class="php-comment">     *
-</span></span><span class="l" id="117"><a class="l" href="#117">117 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="118"><a class="l" href="#118">118 </a><span class="php-comment">     */</span>
-</span><span class="l" id="119"><a class="l" href="#119">119 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getSliceMenu" id="_getSliceMenu">getSliceMenu</a>(rex_sql <span class="php-var">$artDataSql</span>)
-</span><span class="l" id="120"><a class="l" href="#120">120 </a>    {
-</span><span class="l" id="121"><a class="l" href="#121">121 </a>        <span class="php-var">$sliceId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
-</span><span class="l" id="122"><a class="l" href="#122">122 </a>        <span class="php-var">$sliceCtype</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.ctype_id'</span>);
-</span><span class="l" id="123"><a class="l" href="#123">123 </a>
-</span><span class="l" id="124"><a class="l" href="#124">124 </a>        <span class="php-var">$moduleId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.id'</span>);
-</span><span class="l" id="125"><a class="l" href="#125">125 </a>        <span class="php-var">$moduleName</span> = rex_i18n::translate(<span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.name'</span>));
-</span><span class="l" id="126"><a class="l" href="#126">126 </a>
-</span><span class="l" id="127"><a class="l" href="#127">127 </a>        <span class="php-var">$context</span> = <span class="php-keyword1">new</span> rex_context([
-</span><span class="l" id="128"><a class="l" href="#128">128 </a>            <span class="php-quote">'page'</span> =&gt; rex_be_controller::getCurrentPage(),
-</span><span class="l" id="129"><a class="l" href="#129">129 </a>            <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
-</span><span class="l" id="130"><a class="l" href="#130">130 </a>            <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
-</span><span class="l" id="131"><a class="l" href="#131">131 </a>            <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
-</span><span class="l" id="132"><a class="l" href="#132">132 </a>            <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype,
-</span><span class="l" id="133"><a class="l" href="#133">133 </a>        ]);
-</span><span class="l" id="134"><a class="l" href="#134">134 </a>        <span class="php-var">$fragment</span> = <span class="php-quote">'#slice'</span> . <span class="php-var">$sliceId</span>;
-</span><span class="l" id="135"><a class="l" href="#135">135 </a>
-</span><span class="l" id="136"><a class="l" href="#136">136 </a>        <span class="php-var">$header_right</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="137"><a class="l" href="#137">137 </a>
-</span><span class="l" id="138"><a class="l" href="#138">138 </a>        <span class="php-var">$menu_items_action</span> = [];
-</span><span class="l" id="139"><a class="l" href="#139">139 </a>        <span class="php-var">$menu_items_move</span> = [];
-</span><span class="l" id="140"><a class="l" href="#140">140 </a>
-</span><span class="l" id="141"><a class="l" href="#141">141 </a>        <span class="php-keyword1">if</span> (rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$moduleId</span>)) {
-</span><span class="l" id="142"><a class="l" href="#142">142 </a>            <span class="php-var">$templateHasModule</span> = rex_template::hasModule(<span class="php-var">$this</span>-&gt;template_attributes, <span class="php-var">$this</span>-&gt;ctype, <span class="php-var">$moduleId</span>);
-</span><span class="l" id="143"><a class="l" href="#143">143 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$templateHasModule</span>) {
-</span><span class="l" id="144"><a class="l" href="#144">144 </a>                <span class="php-comment">// edit</span>
-</span><span class="l" id="145"><a class="l" href="#145">145 </a>                <span class="php-var">$item</span> = [];
-</span><span class="l" id="146"><a class="l" href="#146">146 </a>                <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'edit'</span>);
-</span><span class="l" id="147"><a class="l" href="#147">147 </a>                <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'function'</span> =&gt; <span class="php-quote">'edit'</span>]) . <span class="php-var">$fragment</span>;
-</span><span class="l" id="148"><a class="l" href="#148">148 </a>                <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-edit'</span>;
-</span><span class="l" id="149"><a class="l" href="#149">149 </a>                <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'edit'</span>);
-</span><span class="l" id="150"><a class="l" href="#150">150 </a>                <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'edit'</span>;
-</span><span class="l" id="151"><a class="l" href="#151">151 </a>                <span class="php-var">$menu_items_action</span>[] = <span class="php-var">$item</span>;
-</span><span class="l" id="152"><a class="l" href="#152">152 </a>            }
-</span><span class="l" id="153"><a class="l" href="#153">153 </a>
-</span><span class="l" id="154"><a class="l" href="#154">154 </a>            <span class="php-comment">// delete</span>
-</span><span class="l" id="155"><a class="l" href="#155">155 </a>            <span class="php-var">$item</span> = [];
-</span><span class="l" id="156"><a class="l" href="#156">156 </a>            <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'delete'</span>);
-</span><span class="l" id="157"><a class="l" href="#157">157 </a>            <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'function'</span> =&gt; <span class="php-quote">'delete'</span>, <span class="php-quote">'save'</span> =&gt; <span class="php-num">1</span>]) . <span class="php-var">$fragment</span>;
-</span><span class="l" id="158"><a class="l" href="#158">158 </a>            <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-delete'</span>;
-</span><span class="l" id="159"><a class="l" href="#159">159 </a>            <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'delete'</span>);
-</span><span class="l" id="160"><a class="l" href="#160">160 </a>            <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'data-confirm'</span>] = rex_i18n::msg(<span class="php-quote">'confirm_delete_block'</span>);
-</span><span class="l" id="161"><a class="l" href="#161">161 </a>            <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'delete'</span>;
-</span><span class="l" id="162"><a class="l" href="#162">162 </a>            <span class="php-var">$menu_items_action</span>[] = <span class="php-var">$item</span>;
-</span><span class="l" id="163"><a class="l" href="#163">163 </a>
-</span><span class="l" id="164"><a class="l" href="#164">164 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$templateHasModule</span> &amp;&amp; rex::getUser()-&gt;hasPerm(<span class="php-quote">'moveSlice[]'</span>)) {
-</span><span class="l" id="165"><a class="l" href="#165">165 </a>                <span class="php-comment">// moveup</span>
-</span><span class="l" id="166"><a class="l" href="#166">166 </a>                <span class="php-var">$item</span> = [];
-</span><span class="l" id="167"><a class="l" href="#167">167 </a>                <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'move_slice_up'</span>);
-</span><span class="l" id="168"><a class="l" href="#168">168 </a>                <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'upd'</span> =&gt; <span class="php-keyword2">time</span>(), <span class="php-quote">'direction'</span> =&gt; <span class="php-quote">'moveup'</span>] + rex_api_content_move_slice::getUrlParams()) . <span class="php-var">$fragment</span>;
-</span><span class="l" id="169"><a class="l" href="#169">169 </a>                <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-move'</span>;
-</span><span class="l" id="170"><a class="l" href="#170">170 </a>                <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'move_slice_up'</span>);
-</span><span class="l" id="171"><a class="l" href="#171">171 </a>                <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'up'</span>;
-</span><span class="l" id="172"><a class="l" href="#172">172 </a>                <span class="php-var">$menu_items_move</span>[] = <span class="php-var">$item</span>;
-</span><span class="l" id="173"><a class="l" href="#173">173 </a>
-</span><span class="l" id="174"><a class="l" href="#174">174 </a>                <span class="php-comment">// movedown</span>
-</span><span class="l" id="175"><a class="l" href="#175">175 </a>                <span class="php-var">$item</span> = [];
-</span><span class="l" id="176"><a class="l" href="#176">176 </a>                <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'move_slice_down'</span>);
-</span><span class="l" id="177"><a class="l" href="#177">177 </a>                <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'upd'</span> =&gt; <span class="php-keyword2">time</span>(), <span class="php-quote">'direction'</span> =&gt; <span class="php-quote">'movedown'</span>] + rex_api_content_move_slice::getUrlParams()) . <span class="php-var">$fragment</span>;
-</span><span class="l" id="178"><a class="l" href="#178">178 </a>                <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-move'</span>;
-</span><span class="l" id="179"><a class="l" href="#179">179 </a>                <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'move_slice_down'</span>);
-</span><span class="l" id="180"><a class="l" href="#180">180 </a>                <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'down'</span>;
-</span><span class="l" id="181"><a class="l" href="#181">181 </a>                <span class="php-var">$menu_items_move</span>[] = <span class="php-var">$item</span>;
-</span><span class="l" id="182"><a class="l" href="#182">182 </a>            }
-</span><span class="l" id="183"><a class="l" href="#183">183 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="184"><a class="l" href="#184">184 </a>            <span class="php-var">$header_right</span> .= rex_i18n::msg(<span class="php-quote">'no_editing_rights'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span>;
-</span><span class="l" id="185"><a class="l" href="#185">185 </a>        }
-</span><span class="l" id="186"><a class="l" href="#186">186 </a>
-</span><span class="l" id="187"><a class="l" href="#187">187 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="188"><a class="l" href="#188">188 </a>        <span class="php-var">$menu_items_ep</span> = [];
-</span><span class="l" id="189"><a class="l" href="#189">189 </a>        <span class="php-var">$menu_items_ep</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(
-</span><span class="l" id="190"><a class="l" href="#190">190 </a>            <span class="php-quote">'STRUCTURE_CONTENT_SLICE_MENU'</span>,
-</span><span class="l" id="191"><a class="l" href="#191">191 </a>                <span class="php-var">$menu_items_ep</span>,
-</span><span class="l" id="192"><a class="l" href="#192">192 </a>            [
-</span><span class="l" id="193"><a class="l" href="#193">193 </a>                <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
-</span><span class="l" id="194"><a class="l" href="#194">194 </a>                <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
-</span><span class="l" id="195"><a class="l" href="#195">195 </a>                <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$sliceCtype</span>,
-</span><span class="l" id="196"><a class="l" href="#196">196 </a>                <span class="php-quote">'module_id'</span> =&gt; <span class="php-var">$moduleId</span>,
-</span><span class="l" id="197"><a class="l" href="#197">197 </a>                <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
-</span><span class="l" id="198"><a class="l" href="#198">198 </a>                <span class="php-quote">'perm'</span> =&gt; rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$moduleId</span>),
-</span><span class="l" id="199"><a class="l" href="#199">199 </a>            ]
-</span><span class="l" id="200"><a class="l" href="#200">200 </a>        ));
-</span><span class="l" id="201"><a class="l" href="#201">201 </a>
-</span><span class="l" id="202"><a class="l" href="#202">202 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$menu_items_action</span>) &gt; <span class="php-num">0</span>) {
-</span><span class="l" id="203"><a class="l" href="#203">203 </a>            <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="204"><a class="l" href="#204">204 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$menu_items_action</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="205"><a class="l" href="#205">205 </a>            <span class="php-var">$header_right</span> .= <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'slice_menu_action.php'</span>);
-</span><span class="l" id="206"><a class="l" href="#206">206 </a>        }
-</span><span class="l" id="207"><a class="l" href="#207">207 </a>
-</span><span class="l" id="208"><a class="l" href="#208">208 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$menu_items_ep</span>) &gt; <span class="php-num">0</span>) {
-</span><span class="l" id="209"><a class="l" href="#209">209 </a>            <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="210"><a class="l" href="#210">210 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$menu_items_ep</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="211"><a class="l" href="#211">211 </a>            <span class="php-var">$header_right</span> .= <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'slice_menu_ep.php'</span>);
-</span><span class="l" id="212"><a class="l" href="#212">212 </a>        }
-</span><span class="l" id="213"><a class="l" href="#213">213 </a>
-</span><span class="l" id="214"><a class="l" href="#214">214 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$menu_items_move</span>) &gt; <span class="php-num">0</span>) {
-</span><span class="l" id="215"><a class="l" href="#215">215 </a>            <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="216"><a class="l" href="#216">216 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$menu_items_move</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="217"><a class="l" href="#217">217 </a>            <span class="php-var">$header_right</span> .= <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'slice_menu_move.php'</span>);
-</span><span class="l" id="218"><a class="l" href="#218">218 </a>        }
-</span><span class="l" id="219"><a class="l" href="#219">219 </a>
-</span><span class="l" id="220"><a class="l" href="#220">220 </a>        <span class="php-comment">//$header_right = $header_right != '' ? '&lt;div class="col-md-4 text-right"&gt;' . $header_right . '&lt;/div&gt;' : '';</span>
-</span><span class="l" id="221"><a class="l" href="#221">221 </a>
-</span><span class="l" id="222"><a class="l" href="#222">222 </a>        <span class="php-keyword1">return</span> <span class="php-var">$header_right</span>;
-</span><span class="l" id="223"><a class="l" href="#223">223 </a>    }
-</span><span class="l" id="224"><a class="l" href="#224">224 </a>
-</span><span class="l" id="225"><a class="l" href="#225">225 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="226"><a class="l" href="#226">226 </a><span class="php-comment">     * Wraps the output of a module.
-</span></span><span class="l" id="227"><a class="l" href="#227">227 </a><span class="php-comment">     *
-</span></span><span class="l" id="228"><a class="l" href="#228">228 </a><span class="php-comment">     * @param int    $moduleId     The id of the module
-</span></span><span class="l" id="229"><a class="l" href="#229">229 </a><span class="php-comment">     * @param string $moduleOutput The output of the module
-</span></span><span class="l" id="230"><a class="l" href="#230">230 </a><span class="php-comment">     *
-</span></span><span class="l" id="231"><a class="l" href="#231">231 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="232"><a class="l" href="#232">232 </a><span class="php-comment">     */</span>
-</span><span class="l" id="233"><a class="l" href="#233">233 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getWrappedModuleOutput" id="_getWrappedModuleOutput">getWrappedModuleOutput</a>(<span class="php-var">$moduleId</span>, <span class="php-var">$moduleOutput</span>)
-</span><span class="l" id="234"><a class="l" href="#234">234 </a>    {
-</span><span class="l" id="235"><a class="l" href="#235">235 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getStreamOutput(<span class="php-quote">'module/'</span> . <span class="php-var">$moduleId</span> . <span class="php-quote">'/output'</span>, <span class="php-var">$moduleOutput</span>);
-</span><span class="l" id="236"><a class="l" href="#236">236 </a>    }
-</span><span class="l" id="237"><a class="l" href="#237">237 </a>
-</span><span class="l" id="238"><a class="l" href="#238">238 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getModuleSelect" id="_getModuleSelect">getModuleSelect</a>(<span class="php-var">$sliceId</span>)
-</span><span class="l" id="239"><a class="l" href="#239">239 </a>    {
-</span><span class="l" id="240"><a class="l" href="#240">240 </a>        <span class="php-comment">// ----- BLOCKAUSWAHL - SELECT</span>
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>        <span class="php-var">$context</span> = <span class="php-keyword1">new</span> rex_context([
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>            <span class="php-quote">'page'</span> =&gt; rex_be_controller::getCurrentPage(),
-</span><span class="l" id="243"><a class="l" href="#243">243 </a>            <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
-</span><span class="l" id="244"><a class="l" href="#244">244 </a>            <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>            <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype,
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>            <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>            <span class="php-quote">'function'</span> =&gt; <span class="php-quote">'add'</span>,
-</span><span class="l" id="248"><a class="l" href="#248">248 </a>        ]);
-</span><span class="l" id="249"><a class="l" href="#249">249 </a>
-</span><span class="l" id="250"><a class="l" href="#250">250 </a>        <span class="php-var">$position</span> = ++<span class="php-var">$this</span>-&gt;sliceAddPosition;
-</span><span class="l" id="251"><a class="l" href="#251">251 </a>
-</span><span class="l" id="252"><a class="l" href="#252">252 </a>        <span class="php-var">$items</span> = [];
-</span><span class="l" id="253"><a class="l" href="#253">253 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$this</span>-&gt;ctype])) {
-</span><span class="l" id="254"><a class="l" href="#254">254 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$this</span>-&gt;ctype] <span class="php-keyword1">as</span> <span class="php-var">$module</span>) {
-</span><span class="l" id="255"><a class="l" href="#255">255 </a>                <span class="php-var">$item</span> = [];
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>                <span class="php-var">$item</span>[<span class="php-quote">'title'</span>] = <span class="php-var">$module</span>[<span class="php-quote">'name'</span>];
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>                <span class="php-var">$item</span>[<span class="php-quote">'href'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'module_id'</span> =&gt; <span class="php-var">$module</span>[<span class="php-quote">'id'</span>]]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$position</span>;
-</span><span class="l" id="258"><a class="l" href="#258">258 </a>                <span class="php-var">$items</span>[] = <span class="php-var">$item</span>;
-</span><span class="l" id="259"><a class="l" href="#259">259 </a>            }
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>        }
-</span><span class="l" id="261"><a class="l" href="#261">261 </a>
-</span><span class="l" id="262"><a class="l" href="#262">262 </a>        <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'block'</span>, <span class="php-keyword1">true</span>);
-</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'button_label'</span>, rex_i18n::msg(<span class="php-quote">'add_block'</span>));
-</span><span class="l" id="265"><a class="l" href="#265">265 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$items</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="266"><a class="l" href="#266">266 </a>        <span class="php-var">$select</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/dropdowns/dropdown.php'</span>);
-</span><span class="l" id="267"><a class="l" href="#267">267 </a>        <span class="php-var">$select</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(
-</span><span class="l" id="268"><a class="l" href="#268">268 </a>            <span class="php-quote">'STRUCTURE_CONTENT_MODULE_SELECT'</span>,
-</span><span class="l" id="269"><a class="l" href="#269">269 </a>                <span class="php-var">$select</span>,
-</span><span class="l" id="270"><a class="l" href="#270">270 </a>            [
-</span><span class="l" id="271"><a class="l" href="#271">271 </a>                <span class="php-quote">'page'</span> =&gt; rex_be_controller::getCurrentPage(),
-</span><span class="l" id="272"><a class="l" href="#272">272 </a>                <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
-</span><span class="l" id="273"><a class="l" href="#273">273 </a>                <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
-</span><span class="l" id="274"><a class="l" href="#274">274 </a>                <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype,
-</span><span class="l" id="275"><a class="l" href="#275">275 </a>                <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
-</span><span class="l" id="276"><a class="l" href="#276">276 </a>            ]
-</span><span class="l" id="277"><a class="l" href="#277">277 </a>        ));
-</span><span class="l" id="278"><a class="l" href="#278">278 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'&lt;li class="rex-slice rex-slice-select" id="slice-add-pos-'</span> . <span class="php-var">$position</span> . <span class="php-quote">'"&gt;'</span> . <span class="php-var">$select</span> . <span class="php-quote">'&lt;/li&gt;'</span>;
-</span><span class="l" id="279"><a class="l" href="#279">279 </a>    }
-</span><span class="l" id="280"><a class="l" href="#280">280 </a>
-</span><span class="l" id="281"><a class="l" href="#281">281 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="282"><a class="l" href="#282">282 </a><span class="php-comment">     * {@inheritdoc}
-</span></span><span class="l" id="283"><a class="l" href="#283">283 </a><span class="php-comment">     */</span>
-</span><span class="l" id="284"><a class="l" href="#284">284 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_preArticle" id="_preArticle">preArticle</a>(<span class="php-var">$articleContent</span>, <span class="php-var">$module_id</span>)
-</span><span class="l" id="285"><a class="l" href="#285">285 </a>    {
-</span><span class="l" id="286"><a class="l" href="#286">286 </a>        <span class="php-comment">// ---------- moduleselect: nur module nehmen auf die der user rechte hat</span>
-</span><span class="l" id="287"><a class="l" href="#287">287 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode == <span class="php-quote">'edit'</span>) {
-</span><span class="l" id="288"><a class="l" href="#288">288 </a>            <span class="php-var">$MODULE</span> = rex_sql::factory();
-</span><span class="l" id="289"><a class="l" href="#289">289 </a>            <span class="php-var">$modules</span> = <span class="php-var">$MODULE</span>-&gt;getArray(<span class="php-quote">'select * from '</span> . rex::getTablePrefix() . <span class="php-quote">'module order by name'</span>);
-</span><span class="l" id="290"><a class="l" href="#290">290 </a>
-</span><span class="l" id="291"><a class="l" href="#291">291 </a>            <span class="php-var">$template_ctypes</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;template_attributes[<span class="php-quote">'ctype'</span>]) ? <span class="php-var">$this</span>-&gt;template_attributes[<span class="php-quote">'ctype'</span>] : [];
-</span><span class="l" id="292"><a class="l" href="#292">292 </a>            <span class="php-comment">// wenn keine ctyes definiert sind, gibt es immer den CTYPE=1</span>
-</span><span class="l" id="293"><a class="l" href="#293">293 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$template_ctypes</span>) == <span class="php-num">0</span>) {
-</span><span class="l" id="294"><a class="l" href="#294">294 </a>                <span class="php-var">$template_ctypes</span> = [<span class="php-num">1</span> =&gt; <span class="php-quote">'default'</span>];
-</span><span class="l" id="295"><a class="l" href="#295">295 </a>            }
-</span><span class="l" id="296"><a class="l" href="#296">296 </a>
-</span><span class="l" id="297"><a class="l" href="#297">297 </a>            <span class="php-var">$this</span>-&gt;MODULESELECT = [];
-</span><span class="l" id="298"><a class="l" href="#298">298 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$template_ctypes</span> <span class="php-keyword1">as</span> <span class="php-var">$ct_id</span> =&gt; <span class="php-var">$ct_name</span>) {
-</span><span class="l" id="299"><a class="l" href="#299">299 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$modules</span> <span class="php-keyword1">as</span> <span class="php-var">$m</span>) {
-</span><span class="l" id="300"><a class="l" href="#300">300 </a>                    <span class="php-keyword1">if</span> (rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$m</span>[<span class="php-quote">'id'</span>])) {
-</span><span class="l" id="301"><a class="l" href="#301">301 </a>                        <span class="php-keyword1">if</span> (rex_template::hasModule(<span class="php-var">$this</span>-&gt;template_attributes, <span class="php-var">$ct_id</span>, <span class="php-var">$m</span>[<span class="php-quote">'id'</span>])) {
-</span><span class="l" id="302"><a class="l" href="#302">302 </a>                            <span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$ct_id</span>][] = [<span class="php-quote">'name'</span> =&gt; rex_i18n::translate(<span class="php-var">$m</span>[<span class="php-quote">'name'</span>], <span class="php-keyword1">false</span>), <span class="php-quote">'id'</span> =&gt; <span class="php-var">$m</span>[<span class="php-quote">'id'</span>]];
-</span><span class="l" id="303"><a class="l" href="#303">303 </a>                        }
-</span><span class="l" id="304"><a class="l" href="#304">304 </a>                    }
-</span><span class="l" id="305"><a class="l" href="#305">305 </a>                }
-</span><span class="l" id="306"><a class="l" href="#306">306 </a>            }
-</span><span class="l" id="307"><a class="l" href="#307">307 </a>        }
-</span><span class="l" id="308"><a class="l" href="#308">308 </a>
-</span><span class="l" id="309"><a class="l" href="#309">309 </a>        <span class="php-keyword1">return</span> parent::preArticle(<span class="php-var">$articleContent</span>, <span class="php-var">$module_id</span>);
-</span><span class="l" id="310"><a class="l" href="#310">310 </a>    }
-</span><span class="l" id="311"><a class="l" href="#311">311 </a>
-</span><span class="l" id="312"><a class="l" href="#312">312 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="313"><a class="l" href="#313">313 </a><span class="php-comment">     * {@inheritdoc}
-</span></span><span class="l" id="314"><a class="l" href="#314">314 </a><span class="php-comment">     */</span>
-</span><span class="l" id="315"><a class="l" href="#315">315 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_postArticle" id="_postArticle">postArticle</a>(<span class="php-var">$articleContent</span>, <span class="php-var">$moduleIdToAdd</span>)
-</span><span class="l" id="316"><a class="l" href="#316">316 </a>    {
-</span><span class="l" id="317"><a class="l" href="#317">317 </a>        <span class="php-comment">// special identifier for the slot behind the last slice</span>
-</span><span class="l" id="318"><a class="l" href="#318">318 </a>        <span class="php-var">$LCTSL_ID</span> = -<span class="php-num">1</span>;
-</span><span class="l" id="319"><a class="l" href="#319">319 </a>
-</span><span class="l" id="320"><a class="l" href="#320">320 </a>        <span class="php-comment">// ----- add module im edit mode</span>
-</span><span class="l" id="321"><a class="l" href="#321">321 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode == <span class="php-quote">'edit'</span>) {
-</span><span class="l" id="322"><a class="l" href="#322">322 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$LCTSL_ID</span>) {
-</span><span class="l" id="323"><a class="l" href="#323">323 </a>                <span class="php-var">$slice_content</span> = <span class="php-var">$this</span>-&gt;addSlice(<span class="php-var">$LCTSL_ID</span>, <span class="php-var">$moduleIdToAdd</span>);
-</span><span class="l" id="324"><a class="l" href="#324">324 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="325"><a class="l" href="#325">325 </a>                <span class="php-comment">// ----- BLOCKAUSWAHL - SELECT</span>
-</span><span class="l" id="326"><a class="l" href="#326">326 </a>                <span class="php-var">$slice_content</span> = <span class="php-var">$this</span>-&gt;getModuleSelect(<span class="php-var">$LCTSL_ID</span>);
-</span><span class="l" id="327"><a class="l" href="#327">327 </a>            }
-</span><span class="l" id="328"><a class="l" href="#328">328 </a>            <span class="php-var">$articleContent</span> .= <span class="php-var">$slice_content</span>;
-</span><span class="l" id="329"><a class="l" href="#329">329 </a>        }
-</span><span class="l" id="330"><a class="l" href="#330">330 </a>
-</span><span class="l" id="331"><a class="l" href="#331">331 </a>        <span class="php-keyword1">return</span> <span class="php-var">$articleContent</span>;
-</span><span class="l" id="332"><a class="l" href="#332">332 </a>    }
-</span><span class="l" id="333"><a class="l" href="#333">333 </a>
-</span><span class="l" id="334"><a class="l" href="#334">334 </a>    <span class="php-comment">// ----- ADD Slice</span>
-</span><span class="l" id="335"><a class="l" href="#335">335 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_addSlice" id="_addSlice">addSlice</a>(<span class="php-var">$sliceId</span>, <span class="php-var">$moduleIdToAdd</span>)
-</span><span class="l" id="336"><a class="l" href="#336">336 </a>    {
-</span><span class="l" id="337"><a class="l" href="#337">337 </a>        <span class="php-var">$MOD</span> = rex_sql::factory();
-</span><span class="l" id="338"><a class="l" href="#338">338 </a>        <span class="php-var">$MOD</span>-&gt;setQuery(<span class="php-quote">'SELECT * FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'module WHERE id="'</span> . <span class="php-var">$moduleIdToAdd</span> . <span class="php-quote">'"'</span>);
-</span><span class="l" id="339"><a class="l" href="#339">339 </a>
-</span><span class="l" id="340"><a class="l" href="#340">340 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$MOD</span>-&gt;getRows() != <span class="php-num">1</span>) {
-</span><span class="l" id="341"><a class="l" href="#341">341 </a>            <span class="php-var">$slice_content</span> = rex_view::warning(rex_i18n::msg(<span class="php-quote">'module_doesnt_exist'</span>));
-</span><span class="l" id="342"><a class="l" href="#342">342 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="343"><a class="l" href="#343">343 </a>            <span class="php-var">$initDataSql</span> = rex_sql::factory();
-</span><span class="l" id="344"><a class="l" href="#344">344 </a>            <span class="php-var">$initDataSql</span>
-</span><span class="l" id="345"><a class="l" href="#345">345 </a>                -&gt;setValue(<span class="php-quote">'module_id'</span>, <span class="php-var">$moduleIdToAdd</span>)
-</span><span class="l" id="346"><a class="l" href="#346">346 </a>                -&gt;setValue(<span class="php-quote">'ctype_id'</span>, <span class="php-var">$this</span>-&gt;ctype);
-</span><span class="l" id="347"><a class="l" href="#347">347 </a>
-</span><span class="l" id="348"><a class="l" href="#348">348 </a>            <span class="php-comment">// ----- PRE VIEW ACTION [ADD]</span>
-</span><span class="l" id="349"><a class="l" href="#349">349 </a>            <span class="php-var">$action</span> = <span class="php-keyword1">new</span> rex_article_action(<span class="php-var">$moduleIdToAdd</span>, <span class="php-quote">'add'</span>, <span class="php-var">$initDataSql</span>);
-</span><span class="l" id="350"><a class="l" href="#350">350 </a>            <span class="php-var">$action</span>-&gt;setRequestValues();
-</span><span class="l" id="351"><a class="l" href="#351">351 </a>            <span class="php-var">$action</span>-&gt;<span class="php-keyword2">exec</span>(rex_article_action::PREVIEW);
-</span><span class="l" id="352"><a class="l" href="#352">352 </a>            <span class="php-comment">// ----- / PRE VIEW ACTION</span>
-</span><span class="l" id="353"><a class="l" href="#353">353 </a>
-</span><span class="l" id="354"><a class="l" href="#354">354 </a>            <span class="php-var">$moduleInput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$initDataSql</span>, <span class="php-var">$MOD</span>-&gt;getValue(<span class="php-quote">'input'</span>));
-</span><span class="l" id="355"><a class="l" href="#355">355 </a>
-</span><span class="l" id="356"><a class="l" href="#356">356 </a>            <span class="php-var">$moduleInput</span> = <span class="php-var">$this</span>-&gt;getStreamOutput(<span class="php-quote">'module/'</span> . <span class="php-var">$moduleIdToAdd</span> . <span class="php-quote">'/input'</span>, <span class="php-var">$moduleInput</span>);
-</span><span class="l" id="357"><a class="l" href="#357">357 </a>
-</span><span class="l" id="358"><a class="l" href="#358">358 </a>            <span class="php-var">$msg</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="359"><a class="l" href="#359">359 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
-</span><span class="l" id="360"><a class="l" href="#360">360 </a>                <span class="php-var">$msg</span> .= rex_view::warning(<span class="php-var">$this</span>-&gt;warning);
-</span><span class="l" id="361"><a class="l" href="#361">361 </a>            }
-</span><span class="l" id="362"><a class="l" href="#362">362 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;info != <span class="php-quote">''</span>) {
-</span><span class="l" id="363"><a class="l" href="#363">363 </a>                <span class="php-var">$msg</span> .= rex_view::success(<span class="php-var">$this</span>-&gt;info);
-</span><span class="l" id="364"><a class="l" href="#364">364 </a>            }
-</span><span class="l" id="365"><a class="l" href="#365">365 </a>
-</span><span class="l" id="366"><a class="l" href="#366">366 </a>            <span class="php-var">$formElements</span> = [];
-</span><span class="l" id="367"><a class="l" href="#367">367 </a>
-</span><span class="l" id="368"><a class="l" href="#368">368 </a>            <span class="php-var">$n</span> = [];
-</span><span class="l" id="369"><a class="l" href="#369">369 </a>            <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;a class="btn btn-abort" href="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$this</span>-&gt;sliceAddPosition . <span class="php-quote">'"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'form_abort'</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
-</span><span class="l" id="370"><a class="l" href="#370">370 </a>            <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
-</span><span class="l" id="371"><a class="l" href="#371">371 </a>
-</span><span class="l" id="372"><a class="l" href="#372">372 </a>            <span class="php-var">$n</span> = [];
-</span><span class="l" id="373"><a class="l" href="#373">373 </a>            <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;button class="btn btn-save" type="submit" name="btn_save" value="1"'</span> . rex::getAccesskey(rex_i18n::msg(<span class="php-quote">'add_block'</span>), <span class="php-quote">'save'</span>) . <span class="php-quote">'&gt;'</span> . rex_i18n::msg(<span class="php-quote">'add_block'</span>) . <span class="php-quote">'&lt;/button&gt;'</span>;
-</span><span class="l" id="374"><a class="l" href="#374">374 </a>            <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
-</span><span class="l" id="375"><a class="l" href="#375">375 </a>
-</span><span class="l" id="376"><a class="l" href="#376">376 </a>            <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="377"><a class="l" href="#377">377 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'elements'</span>, <span class="php-var">$formElements</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="378"><a class="l" href="#378">378 </a>            <span class="php-var">$slice_footer</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/form/submit.php'</span>);
-</span><span class="l" id="379"><a class="l" href="#379">379 </a>
-</span><span class="l" id="380"><a class="l" href="#380">380 </a>            <span class="php-var">$panel</span> = <span class="php-quote">'
-</span></span><span class="l" id="381"><a class="l" href="#381">381 </a><span class="php-quote">                &lt;fieldset&gt;
-</span></span><span class="l" id="382"><a class="l" href="#382">382 </a><span class="php-quote">                    &lt;legend&gt;'</span> . rex_i18n::msg(<span class="php-quote">'add_block'</span>) . <span class="php-quote">'&lt;/legend&gt;
-</span></span><span class="l" id="383"><a class="l" href="#383">383 </a><span class="php-quote">                    &lt;input type="hidden" name="function" value="add" /&gt;
-</span></span><span class="l" id="384"><a class="l" href="#384">384 </a><span class="php-quote">                    &lt;input type="hidden" name="module_id" value="'</span> . <span class="php-var">$moduleIdToAdd</span> . <span class="php-quote">'" /&gt;
-</span></span><span class="l" id="385"><a class="l" href="#385">385 </a><span class="php-quote">                    &lt;input type="hidden" name="save" value="1" /&gt;
-</span></span><span class="l" id="386"><a class="l" href="#386">386 </a><span class="php-quote">
-</span></span><span class="l" id="387"><a class="l" href="#387">387 </a><span class="php-quote">                    &lt;div class="rex-slice-input"&gt;
-</span></span><span class="l" id="388"><a class="l" href="#388">388 </a><span class="php-quote">                        '</span> . <span class="php-var">$moduleInput</span> . <span class="php-quote">'
-</span></span><span class="l" id="389"><a class="l" href="#389">389 </a><span class="php-quote">                    &lt;/div&gt;
-</span></span><span class="l" id="390"><a class="l" href="#390">390 </a><span class="php-quote">                &lt;/fieldset&gt;
-</span></span><span class="l" id="391"><a class="l" href="#391">391 </a><span class="php-quote">                        '</span>;
-</span><span class="l" id="392"><a class="l" href="#392">392 </a>
-</span><span class="l" id="393"><a class="l" href="#393">393 </a>            <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="394"><a class="l" href="#394">394 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'before'</span>, <span class="php-var">$msg</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="395"><a class="l" href="#395">395 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'class'</span>, <span class="php-quote">'add'</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="396"><a class="l" href="#396">396 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'title'</span>, rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">': '</span> . rex_i18n::translate(<span class="php-var">$MOD</span>-&gt;getValue(<span class="php-quote">'name'</span>)), <span class="php-keyword1">false</span>);
-</span><span class="l" id="397"><a class="l" href="#397">397 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'body'</span>, <span class="php-var">$panel</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="398"><a class="l" href="#398">398 </a>            <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'footer'</span>, <span class="php-var">$slice_footer</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="399"><a class="l" href="#399">399 </a>            <span class="php-var">$slice_content</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/page/section.php'</span>);
-</span><span class="l" id="400"><a class="l" href="#400">400 </a>
-</span><span class="l" id="401"><a class="l" href="#401">401 </a>            <span class="php-var">$slice_content</span> = <span class="php-quote">'
-</span></span><span class="l" id="402"><a class="l" href="#402">402 </a><span class="php-quote">                &lt;li class="rex-slice rex-slice-add"&gt;
-</span></span><span class="l" id="403"><a class="l" href="#403">403 </a><span class="php-quote">                    &lt;form action="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$this</span>-&gt;sliceAddPosition . <span class="php-quote">'" method="post" id="REX_FORM" enctype="multipart/form-data"&gt;
-</span></span><span class="l" id="404"><a class="l" href="#404">404 </a><span class="php-quote">                        '</span> . <span class="php-var">$slice_content</span> . <span class="php-quote">'
-</span></span><span class="l" id="405"><a class="l" href="#405">405 </a><span class="php-quote">                    &lt;/form&gt;
-</span></span><span class="l" id="406"><a class="l" href="#406">406 </a><span class="php-quote">                    &lt;script type="text/javascript"&gt;
-</span></span><span class="l" id="407"><a class="l" href="#407">407 </a><span class="php-quote">                         &lt;!--
-</span></span><span class="l" id="408"><a class="l" href="#408">408 </a><span class="php-quote">                        jQuery(function($) {
-</span></span><span class="l" id="409"><a class="l" href="#409">409 </a><span class="php-quote">                            $(":input:visible:enabled:not([readonly]):first", $("#REX_FORM")).focus();
-</span></span><span class="l" id="410"><a class="l" href="#410">410 </a><span class="php-quote">                        });
-</span></span><span class="l" id="411"><a class="l" href="#411">411 </a><span class="php-quote">                         //--&gt;
-</span></span><span class="l" id="412"><a class="l" href="#412">412 </a><span class="php-quote">                    &lt;/script&gt;
-</span></span><span class="l" id="413"><a class="l" href="#413">413 </a><span class="php-quote">                &lt;/li&gt;
-</span></span><span class="l" id="414"><a class="l" href="#414">414 </a><span class="php-quote">                '</span>;
-</span><span class="l" id="415"><a class="l" href="#415">415 </a>        }
-</span><span class="l" id="416"><a class="l" href="#416">416 </a>
-</span><span class="l" id="417"><a class="l" href="#417">417 </a>        <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span>;
-</span><span class="l" id="418"><a class="l" href="#418">418 </a>    }
-</span><span class="l" id="419"><a class="l" href="#419">419 </a>
-</span><span class="l" id="420"><a class="l" href="#420">420 </a>    <span class="php-comment">// ----- EDIT Slice</span>
-</span><span class="l" id="421"><a class="l" href="#421">421 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_editSlice" id="_editSlice">editSlice</a>(<span class="php-var">$RE_CONTS</span>, <span class="php-var">$RE_MODUL_IN</span>, <span class="php-var">$RE_CTYPE</span>, <span class="php-var">$RE_MODUL_ID</span>, <span class="php-var">$artDataSql</span>)
-</span><span class="l" id="422"><a class="l" href="#422">422 </a>    {
-</span><span class="l" id="423"><a class="l" href="#423">423 </a>        <span class="php-var">$msg</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="424"><a class="l" href="#424">424 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$RE_CONTS</span>) {
-</span><span class="l" id="425"><a class="l" href="#425">425 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
-</span><span class="l" id="426"><a class="l" href="#426">426 </a>                <span class="php-var">$msg</span> .= rex_view::warning(<span class="php-var">$this</span>-&gt;warning);
-</span><span class="l" id="427"><a class="l" href="#427">427 </a>            }
-</span><span class="l" id="428"><a class="l" href="#428">428 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;info != <span class="php-quote">''</span>) {
-</span><span class="l" id="429"><a class="l" href="#429">429 </a>                <span class="php-var">$msg</span> .= rex_view::success(<span class="php-var">$this</span>-&gt;info);
-</span><span class="l" id="430"><a class="l" href="#430">430 </a>            }
-</span><span class="l" id="431"><a class="l" href="#431">431 </a>        }
-</span><span class="l" id="432"><a class="l" href="#432">432 </a>
-</span><span class="l" id="433"><a class="l" href="#433">433 </a>        <span class="php-var">$formElements</span> = [];
-</span><span class="l" id="434"><a class="l" href="#434">434 </a>
-</span><span class="l" id="435"><a class="l" href="#435">435 </a>        <span class="php-var">$n</span> = [];
-</span><span class="l" id="436"><a class="l" href="#436">436 </a>        <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;a class="btn btn-abort" href="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$RE_CONTS</span>, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$RE_CTYPE</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang]) . <span class="php-quote">'#slice'</span> . <span class="php-var">$RE_CONTS</span> . <span class="php-quote">'"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'form_abort'</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
-</span><span class="l" id="437"><a class="l" href="#437">437 </a>        <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
-</span><span class="l" id="438"><a class="l" href="#438">438 </a>
-</span><span class="l" id="439"><a class="l" href="#439">439 </a>        <span class="php-var">$n</span> = [];
-</span><span class="l" id="440"><a class="l" href="#440">440 </a>        <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;button class="btn btn-save" type="submit" name="btn_save" value="1"'</span> . rex::getAccesskey(rex_i18n::msg(<span class="php-quote">'save_block'</span>), <span class="php-quote">'save'</span>) . <span class="php-quote">'&gt;'</span> . rex_i18n::msg(<span class="php-quote">'save_block'</span>) . <span class="php-quote">'&lt;/button&gt;'</span>;
-</span><span class="l" id="441"><a class="l" href="#441">441 </a>        <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
-</span><span class="l" id="442"><a class="l" href="#442">442 </a>
-</span><span class="l" id="443"><a class="l" href="#443">443 </a>        <span class="php-var">$n</span> = [];
-</span><span class="l" id="444"><a class="l" href="#444">444 </a>        <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;button class="btn btn-apply" type="submit" name="btn_update" value="1"'</span> . rex::getAccesskey(rex_i18n::msg(<span class="php-quote">'update_block'</span>), <span class="php-quote">'apply'</span>) . <span class="php-quote">'&gt;'</span> . rex_i18n::msg(<span class="php-quote">'update_block'</span>) . <span class="php-quote">'&lt;/button&gt;'</span>;
-</span><span class="l" id="445"><a class="l" href="#445">445 </a>        <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
-</span><span class="l" id="446"><a class="l" href="#446">446 </a>
-</span><span class="l" id="447"><a class="l" href="#447">447 </a>        <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="448"><a class="l" href="#448">448 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'elements'</span>, <span class="php-var">$formElements</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="449"><a class="l" href="#449">449 </a>        <span class="php-var">$slice_footer</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/form/submit.php'</span>);
-</span><span class="l" id="450"><a class="l" href="#450">450 </a>
-</span><span class="l" id="451"><a class="l" href="#451">451 </a>        <span class="php-var">$panel</span> = <span class="php-quote">'
-</span></span><span class="l" id="452"><a class="l" href="#452">452 </a><span class="php-quote">                &lt;fieldset&gt;
-</span></span><span class="l" id="453"><a class="l" href="#453">453 </a><span class="php-quote">                    &lt;legend&gt;'</span> . rex_i18n::msg(<span class="php-quote">'edit_block'</span>) . <span class="php-quote">'&lt;/legend&gt;
-</span></span><span class="l" id="454"><a class="l" href="#454">454 </a><span class="php-quote">                    &lt;input type="hidden" name="module_id" value="'</span> . <span class="php-var">$RE_MODUL_ID</span> . <span class="php-quote">'" /&gt;
-</span></span><span class="l" id="455"><a class="l" href="#455">455 </a><span class="php-quote">                    &lt;input type="hidden" name="save" value="1" /&gt;
-</span></span><span class="l" id="456"><a class="l" href="#456">456 </a><span class="php-quote">                    &lt;input type="hidden" name="update" value="0" /&gt;
-</span></span><span class="l" id="457"><a class="l" href="#457">457 </a><span class="php-quote">
-</span></span><span class="l" id="458"><a class="l" href="#458">458 </a><span class="php-quote">                    &lt;div class="rex-slice-input"&gt;
-</span></span><span class="l" id="459"><a class="l" href="#459">459 </a><span class="php-quote">                        '</span> . <span class="php-var">$msg</span> . <span class="php-var">$this</span>-&gt;getStreamOutput(<span class="php-quote">'module/'</span> . <span class="php-var">$RE_MODUL_ID</span> . <span class="php-quote">'/input'</span>, <span class="php-var">$RE_MODUL_IN</span>) . <span class="php-quote">'
-</span></span><span class="l" id="460"><a class="l" href="#460">460 </a><span class="php-quote">                    &lt;/div&gt;
-</span></span><span class="l" id="461"><a class="l" href="#461">461 </a><span class="php-quote">                &lt;/fieldset&gt;
-</span></span><span class="l" id="462"><a class="l" href="#462">462 </a><span class="php-quote">
-</span></span><span class="l" id="463"><a class="l" href="#463">463 </a><span class="php-quote">            &lt;/form&gt;'</span>;
-</span><span class="l" id="464"><a class="l" href="#464">464 </a>
-</span><span class="l" id="465"><a class="l" href="#465">465 </a>        <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
-</span><span class="l" id="466"><a class="l" href="#466">466 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'class'</span>, <span class="php-quote">'edit'</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="467"><a class="l" href="#467">467 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'title'</span>, <span class="php-var">$this</span>-&gt;getSliceHeading(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
-</span><span class="l" id="468"><a class="l" href="#468">468 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'options'</span>, <span class="php-var">$this</span>-&gt;getSliceMenu(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
-</span><span class="l" id="469"><a class="l" href="#469">469 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'body'</span>, <span class="php-var">$panel</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="470"><a class="l" href="#470">470 </a>        <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'footer'</span>, <span class="php-var">$slice_footer</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="471"><a class="l" href="#471">471 </a>        <span class="php-var">$slice_content</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/page/section.php'</span>);
-</span><span class="l" id="472"><a class="l" href="#472">472 </a>
-</span><span class="l" id="473"><a class="l" href="#473">473 </a>        <span class="php-var">$slice_content</span> = <span class="php-quote">'
-</span></span><span class="l" id="474"><a class="l" href="#474">474 </a><span class="php-quote">            &lt;li class="rex-slice rex-slice-edit" id="slice'</span> . <span class="php-var">$RE_CONTS</span> . <span class="php-quote">'"&gt;
-</span></span><span class="l" id="475"><a class="l" href="#475">475 </a><span class="php-quote">                &lt;form enctype="multipart/form-data" action="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$RE_CONTS</span>, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$RE_CTYPE</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang, <span class="php-quote">'function'</span> =&gt; <span class="php-quote">'edit'</span>]) . <span class="php-quote">'#slice'</span> . <span class="php-var">$RE_CONTS</span> . <span class="php-quote">'" method="post" id="REX_FORM"&gt;
-</span></span><span class="l" id="476"><a class="l" href="#476">476 </a><span class="php-quote">                    '</span> . <span class="php-var">$slice_content</span> . <span class="php-quote">'
-</span></span><span class="l" id="477"><a class="l" href="#477">477 </a><span class="php-quote">                &lt;/form&gt;
-</span></span><span class="l" id="478"><a class="l" href="#478">478 </a><span class="php-quote">                &lt;script type="text/javascript"&gt;
-</span></span><span class="l" id="479"><a class="l" href="#479">479 </a><span class="php-quote">                     &lt;!--
-</span></span><span class="l" id="480"><a class="l" href="#480">480 </a><span class="php-quote">                    jQuery(function($) {
-</span></span><span class="l" id="481"><a class="l" href="#481">481 </a><span class="php-quote">                        $(":input:visible:enabled:not([readonly]):first", $("#REX_FORM")).focus();
-</span></span><span class="l" id="482"><a class="l" href="#482">482 </a><span class="php-quote">                    });
-</span></span><span class="l" id="483"><a class="l" href="#483">483 </a><span class="php-quote">                     //--&gt;
-</span></span><span class="l" id="484"><a class="l" href="#484">484 </a><span class="php-quote">                &lt;/script&gt;
-</span></span><span class="l" id="485"><a class="l" href="#485">485 </a><span class="php-quote">            &lt;/li&gt;
-</span></span><span class="l" id="486"><a class="l" href="#486">486 </a><span class="php-quote">            '</span>;
-</span><span class="l" id="487"><a class="l" href="#487">487 </a>
-</span><span class="l" id="488"><a class="l" href="#488">488 </a>        <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span>;
-</span><span class="l" id="489"><a class="l" href="#489">489 </a>    }
-</span><span class="l" id="490"><a class="l" href="#490">490 </a>}
-</span><span class="l" id="491"><a class="l" href="#491">491 </a></span></code></pre>
+  <pre id="source"><code><span class="l" id="1">  1 <span class="xlang">&lt;?php</span>
+</span><span class="l" id="2">  2 
+</span><span class="l" id="3">  3 <span class="php-comment">/**
+</span></span><span class="l" id="4">  4 <span class="php-comment"> * Erweiterung eines Artikels um slicemanagement.
+</span></span><span class="l" id="5">  5 <span class="php-comment"> *
+</span></span><span class="l" id="6">  6 <span class="php-comment"> * @package redaxo\structure\content
+</span></span><span class="l" id="7">  7 <span class="php-comment"> */</span>
+</span><span class="l" id="8">  8 <span class="php-keyword1">class</span> rex_article_content_editor <span class="php-keyword1">extends</span> rex_article_content
+</span><span class="l" id="9">  9 {
+</span><span class="l" id="10"> 10     <span class="php-keyword1">private</span> <span class="php-var">$MODULESELECT</span>;
+</span><span class="l" id="11"> 11     <span class="php-keyword1">private</span> <span class="php-var">$sliceAddPosition</span> = <span class="php-num">0</span>;
+</span><span class="l" id="12"> 12 
+</span><span class="l" id="13"> 13     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$article_id</span> = <span class="php-keyword1">null</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="14"> 14     {
+</span><span class="l" id="15"> 15         parent::__construct(<span class="php-var">$article_id</span>, <span class="php-var">$clang</span>);
+</span><span class="l" id="16"> 16     }
+</span><span class="l" id="17"> 17 
+</span><span class="l" id="18"> 18     <span class="php-comment">/**
+</span></span><span class="l" id="19"> 19 <span class="php-comment">     * {@inheritdoc}
+</span></span><span class="l" id="20"> 20 <span class="php-comment">     */</span>
+</span><span class="l" id="21"> 21     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> outputSlice(rex_sql <span class="php-var">$artDataSql</span>, <span class="php-var">$moduleIdToAdd</span>)
+</span><span class="l" id="22"> 22     {
+</span><span class="l" id="23"> 23         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode != <span class="php-quote">'edit'</span>) {
+</span><span class="l" id="24"> 24             <span class="php-comment">// ----- wenn mode nicht edit</span>
+</span><span class="l" id="25"> 25             <span class="php-var">$slice_content</span> = parent::outputSlice(
+</span><span class="l" id="26"> 26                 <span class="php-var">$artDataSql</span>,
+</span><span class="l" id="27"> 27                 <span class="php-var">$moduleIdToAdd</span>
+</span><span class="l" id="28"> 28             );
+</span><span class="l" id="29"> 29         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="30"> 30             <span class="php-var">$sliceId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
+</span><span class="l" id="31"> 31             <span class="php-var">$sliceCtype</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.ctype_id'</span>);
+</span><span class="l" id="32"> 32 
+</span><span class="l" id="33"> 33             <span class="php-var">$moduleInput</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.input'</span>);
+</span><span class="l" id="34"> 34             <span class="php-var">$moduleOutput</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.output'</span>);
+</span><span class="l" id="35"> 35             <span class="php-var">$moduleId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.id'</span>);
+</span><span class="l" id="36"> 36 
+</span><span class="l" id="37"> 37             <span class="php-comment">// ----- add select box einbauen</span>
+</span><span class="l" id="38"> 38             <span class="php-var">$slice_content</span> = <span class="php-var">$this</span>-&gt;getModuleSelect(<span class="php-var">$sliceId</span>);
+</span><span class="l" id="39"> 39 
+</span><span class="l" id="40"> 40             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$sliceId</span>) {
+</span><span class="l" id="41"> 41                 <span class="php-var">$slice_content</span> .= <span class="php-var">$this</span>-&gt;addSlice(<span class="php-var">$sliceId</span>, <span class="php-var">$moduleIdToAdd</span>);
+</span><span class="l" id="42"> 42             }
+</span><span class="l" id="43"> 43 
+</span><span class="l" id="44"> 44             <span class="php-var">$panel</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="45"> 45             <span class="php-comment">// ----- Display message at current slice</span>
+</span><span class="l" id="46"> 46             <span class="php-comment">//if(rex::getUser()-&gt;getComplexPerm('modules')-&gt;hasPerm($moduleId)) {</span>
+</span><span class="l" id="47"> 47             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> != <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$sliceId</span>) {
+</span><span class="l" id="48"> 48                 <span class="php-var">$msg</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="49"> 49                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
+</span><span class="l" id="50"> 50                     <span class="php-var">$msg</span> .= rex_view::warning(<span class="php-var">$this</span>-&gt;warning);
+</span><span class="l" id="51"> 51                 }
+</span><span class="l" id="52"> 52                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;info != <span class="php-quote">''</span>) {
+</span><span class="l" id="53"> 53                     <span class="php-var">$msg</span> .= rex_view::success(<span class="php-var">$this</span>-&gt;info);
+</span><span class="l" id="54"> 54                 }
+</span><span class="l" id="55"> 55                 <span class="php-var">$panel</span> .= <span class="php-var">$msg</span>;
+</span><span class="l" id="56"> 56             }
+</span><span class="l" id="57"> 57             <span class="php-comment">//}</span>
+</span><span class="l" id="58"> 58 
+</span><span class="l" id="59"> 59             <span class="php-comment">// ----- EDIT/DELETE BLOCK - Wenn Rechte vorhanden</span>
+</span><span class="l" id="60"> 60             <span class="php-keyword1">if</span> (rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$moduleId</span>)) {
+</span><span class="l" id="61"> 61                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'edit'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$sliceId</span>) {
+</span><span class="l" id="62"> 62                     <span class="php-comment">// **************** Aktueller Slice</span>
+</span><span class="l" id="63"> 63 
+</span><span class="l" id="64"> 64                     <span class="php-comment">// ----- PRE VIEW ACTION [EDIT]</span>
+</span><span class="l" id="65"> 65                     <span class="php-var">$action</span> = <span class="php-keyword1">new</span> rex_article_action(<span class="php-var">$moduleId</span>, <span class="php-quote">'edit'</span>, <span class="php-var">$artDataSql</span>);
+</span><span class="l" id="66"> 66                     <span class="php-keyword1">if</span> (rex_request_method() == <span class="php-quote">'post'</span> &amp;&amp; rex_request(<span class="php-quote">'function'</span>, <span class="php-quote">'string'</span>) == <span class="php-quote">'edit'</span>) {
+</span><span class="l" id="67"> 67                         <span class="php-var">$action</span>-&gt;setRequestValues();
+</span><span class="l" id="68"> 68                     }
+</span><span class="l" id="69"> 69                     <span class="php-var">$action</span>-&gt;<span class="php-keyword2">exec</span>(rex_article_action::PREVIEW);
+</span><span class="l" id="70"> 70                     <span class="php-comment">// ----- / PRE VIEW ACTION</span>
+</span><span class="l" id="71"> 71 
+</span><span class="l" id="72"> 72                     <span class="php-var">$moduleInput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$artDataSql</span>, <span class="php-var">$moduleInput</span>);
+</span><span class="l" id="73"> 73                     <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span> . <span class="php-var">$this</span>-&gt;editSlice(<span class="php-var">$sliceId</span>, <span class="php-var">$moduleInput</span>, <span class="php-var">$sliceCtype</span>, <span class="php-var">$moduleId</span>, <span class="php-var">$artDataSql</span>);
+</span><span class="l" id="74"> 74                 }
+</span><span class="l" id="75"> 75                 <span class="php-comment">// Modulinhalt ausgeben</span>
+</span><span class="l" id="76"> 76                 <span class="php-var">$moduleOutput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$artDataSql</span>, <span class="php-var">$moduleOutput</span>);
+</span><span class="l" id="77"> 77                 <span class="php-var">$panel</span> .= <span class="php-var">$this</span>-&gt;getWrappedModuleOutput(<span class="php-var">$moduleId</span>, <span class="php-var">$moduleOutput</span>);
+</span><span class="l" id="78"> 78             } <span class="php-keyword1">else</span> {
+</span><span class="l" id="79"> 79                 <span class="php-comment">// ----- hat keine rechte an diesem modul, einfach ausgeben</span>
+</span><span class="l" id="80"> 80                 <span class="php-var">$moduleOutput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$artDataSql</span>, <span class="php-var">$moduleOutput</span>);
+</span><span class="l" id="81"> 81                 <span class="php-var">$panel</span> .= <span class="php-var">$this</span>-&gt;getWrappedModuleOutput(<span class="php-var">$moduleId</span>, <span class="php-var">$moduleOutput</span>);
+</span><span class="l" id="82"> 82             }
+</span><span class="l" id="83"> 83 
+</span><span class="l" id="84"> 84             <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="85"> 85             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'title'</span>, <span class="php-var">$this</span>-&gt;getSliceHeading(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
+</span><span class="l" id="86"> 86             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'options'</span>, <span class="php-var">$this</span>-&gt;getSliceMenu(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
+</span><span class="l" id="87"> 87             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'body'</span>, <span class="php-var">$panel</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="88"> 88             <span class="php-var">$slice_content</span> .= <span class="php-quote">'&lt;li class="rex-slice rex-slice-output" id="slice'</span>.<span class="php-var">$sliceId</span>.<span class="php-quote">'"&gt;'</span> . <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/page/section.php'</span>) . <span class="php-quote">'&lt;/li&gt;'</span>;
+</span><span class="l" id="89"> 89         }
+</span><span class="l" id="90"> 90 
+</span><span class="l" id="91"> 91         <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span>;
+</span><span class="l" id="92"> 92     }
+</span><span class="l" id="93"> 93 
+</span><span class="l" id="94"> 94     <span class="php-comment">/**
+</span></span><span class="l" id="95"> 95 <span class="php-comment">     * Returns the slice heading.
+</span></span><span class="l" id="96"> 96 <span class="php-comment">     *
+</span></span><span class="l" id="97"> 97 <span class="php-comment">     * @param rex_sql $artDataSql rex_sql istance containing all the slice and module information
+</span></span><span class="l" id="98"> 98 <span class="php-comment">     *
+</span></span><span class="l" id="99"> 99 <span class="php-comment">     * @return string
+</span></span><span class="l" id="100">100 <span class="php-comment">     */</span>
+</span><span class="l" id="101">101     <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getSliceHeading(rex_sql <span class="php-var">$artDataSql</span>)
+</span><span class="l" id="102">102     {
+</span><span class="l" id="103">103         <span class="php-var">$sliceId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
+</span><span class="l" id="104">104         <span class="php-var">$sliceCtype</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.ctype_id'</span>);
+</span><span class="l" id="105">105 
+</span><span class="l" id="106">106         <span class="php-var">$moduleId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.id'</span>);
+</span><span class="l" id="107">107         <span class="php-var">$moduleName</span> = rex_i18n::translate(<span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.name'</span>));
+</span><span class="l" id="108">108 
+</span><span class="l" id="109">109         <span class="php-keyword1">return</span> <span class="php-var">$moduleName</span>;
+</span><span class="l" id="110">110     }
+</span><span class="l" id="111">111 
+</span><span class="l" id="112">112     <span class="php-comment">/**
+</span></span><span class="l" id="113">113 <span class="php-comment">     * Returns the slice menu.
+</span></span><span class="l" id="114">114 <span class="php-comment">     *
+</span></span><span class="l" id="115">115 <span class="php-comment">     * @param rex_sql $artDataSql rex_sql istance containing all the slice and module information
+</span></span><span class="l" id="116">116 <span class="php-comment">     *
+</span></span><span class="l" id="117">117 <span class="php-comment">     * @return string
+</span></span><span class="l" id="118">118 <span class="php-comment">     */</span>
+</span><span class="l" id="119">119     <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getSliceMenu(rex_sql <span class="php-var">$artDataSql</span>)
+</span><span class="l" id="120">120     {
+</span><span class="l" id="121">121         <span class="php-var">$sliceId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
+</span><span class="l" id="122">122         <span class="php-var">$sliceCtype</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.ctype_id'</span>);
+</span><span class="l" id="123">123 
+</span><span class="l" id="124">124         <span class="php-var">$moduleId</span> = <span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.id'</span>);
+</span><span class="l" id="125">125         <span class="php-var">$moduleName</span> = rex_i18n::translate(<span class="php-var">$artDataSql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'module.name'</span>));
+</span><span class="l" id="126">126 
+</span><span class="l" id="127">127         <span class="php-var">$context</span> = <span class="php-keyword1">new</span> rex_context([
+</span><span class="l" id="128">128             <span class="php-quote">'page'</span> =&gt; rex_be_controller::getCurrentPage(),
+</span><span class="l" id="129">129             <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
+</span><span class="l" id="130">130             <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
+</span><span class="l" id="131">131             <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
+</span><span class="l" id="132">132             <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype,
+</span><span class="l" id="133">133         ]);
+</span><span class="l" id="134">134         <span class="php-var">$fragment</span> = <span class="php-quote">'#slice'</span> . <span class="php-var">$sliceId</span>;
+</span><span class="l" id="135">135 
+</span><span class="l" id="136">136         <span class="php-var">$header_right</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="137">137 
+</span><span class="l" id="138">138         <span class="php-var">$menu_items_action</span> = [];
+</span><span class="l" id="139">139         <span class="php-var">$menu_items_move</span> = [];
+</span><span class="l" id="140">140 
+</span><span class="l" id="141">141         <span class="php-keyword1">if</span> (rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$moduleId</span>)) {
+</span><span class="l" id="142">142             <span class="php-var">$templateHasModule</span> = rex_template::hasModule(<span class="php-var">$this</span>-&gt;template_attributes, <span class="php-var">$this</span>-&gt;ctype, <span class="php-var">$moduleId</span>);
+</span><span class="l" id="143">143             <span class="php-keyword1">if</span> (<span class="php-var">$templateHasModule</span>) {
+</span><span class="l" id="144">144                 <span class="php-comment">// edit</span>
+</span><span class="l" id="145">145                 <span class="php-var">$item</span> = [];
+</span><span class="l" id="146">146                 <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'edit'</span>);
+</span><span class="l" id="147">147                 <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'function'</span> =&gt; <span class="php-quote">'edit'</span>]) . <span class="php-var">$fragment</span>;
+</span><span class="l" id="148">148                 <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-edit'</span>;
+</span><span class="l" id="149">149                 <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'edit'</span>);
+</span><span class="l" id="150">150                 <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'edit'</span>;
+</span><span class="l" id="151">151                 <span class="php-var">$menu_items_action</span>[] = <span class="php-var">$item</span>;
+</span><span class="l" id="152">152             }
+</span><span class="l" id="153">153 
+</span><span class="l" id="154">154             <span class="php-comment">// delete</span>
+</span><span class="l" id="155">155             <span class="php-var">$item</span> = [];
+</span><span class="l" id="156">156             <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'delete'</span>);
+</span><span class="l" id="157">157             <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'function'</span> =&gt; <span class="php-quote">'delete'</span>, <span class="php-quote">'save'</span> =&gt; <span class="php-num">1</span>]) . <span class="php-var">$fragment</span>;
+</span><span class="l" id="158">158             <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-delete'</span>;
+</span><span class="l" id="159">159             <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'delete'</span>);
+</span><span class="l" id="160">160             <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'data-confirm'</span>] = rex_i18n::msg(<span class="php-quote">'confirm_delete_block'</span>);
+</span><span class="l" id="161">161             <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'delete'</span>;
+</span><span class="l" id="162">162             <span class="php-var">$menu_items_action</span>[] = <span class="php-var">$item</span>;
+</span><span class="l" id="163">163 
+</span><span class="l" id="164">164             <span class="php-keyword1">if</span> (<span class="php-var">$templateHasModule</span> &amp;&amp; rex::getUser()-&gt;hasPerm(<span class="php-quote">'moveSlice[]'</span>)) {
+</span><span class="l" id="165">165                 <span class="php-comment">// moveup</span>
+</span><span class="l" id="166">166                 <span class="php-var">$item</span> = [];
+</span><span class="l" id="167">167                 <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'move_slice_up'</span>);
+</span><span class="l" id="168">168                 <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'upd'</span> =&gt; <span class="php-keyword2">time</span>(), <span class="php-quote">'direction'</span> =&gt; <span class="php-quote">'moveup'</span>] + rex_api_content_move_slice::getUrlParams()) . <span class="php-var">$fragment</span>;
+</span><span class="l" id="169">169                 <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-move'</span>;
+</span><span class="l" id="170">170                 <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'move_slice_up'</span>);
+</span><span class="l" id="171">171                 <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'up'</span>;
+</span><span class="l" id="172">172                 <span class="php-var">$menu_items_move</span>[] = <span class="php-var">$item</span>;
+</span><span class="l" id="173">173 
+</span><span class="l" id="174">174                 <span class="php-comment">// movedown</span>
+</span><span class="l" id="175">175                 <span class="php-var">$item</span> = [];
+</span><span class="l" id="176">176                 <span class="php-var">$item</span>[<span class="php-quote">'hidden_label'</span>] = rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span> . <span class="php-quote">' '</span> . rex_i18n::msg(<span class="php-quote">'move_slice_down'</span>);
+</span><span class="l" id="177">177                 <span class="php-var">$item</span>[<span class="php-quote">'url'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'upd'</span> =&gt; <span class="php-keyword2">time</span>(), <span class="php-quote">'direction'</span> =&gt; <span class="php-quote">'movedown'</span>] + rex_api_content_move_slice::getUrlParams()) . <span class="php-var">$fragment</span>;
+</span><span class="l" id="178">178                 <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'class'</span>][] = <span class="php-quote">'btn-move'</span>;
+</span><span class="l" id="179">179                 <span class="php-var">$item</span>[<span class="php-quote">'attributes'</span>][<span class="php-quote">'title'</span>] = rex_i18n::msg(<span class="php-quote">'move_slice_down'</span>);
+</span><span class="l" id="180">180                 <span class="php-var">$item</span>[<span class="php-quote">'icon'</span>] = <span class="php-quote">'down'</span>;
+</span><span class="l" id="181">181                 <span class="php-var">$menu_items_move</span>[] = <span class="php-var">$item</span>;
+</span><span class="l" id="182">182             }
+</span><span class="l" id="183">183         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="184">184             <span class="php-var">$header_right</span> .= rex_i18n::msg(<span class="php-quote">'no_editing_rights'</span>) . <span class="php-quote">' '</span> . <span class="php-var">$moduleName</span>;
+</span><span class="l" id="185">185         }
+</span><span class="l" id="186">186 
+</span><span class="l" id="187">187         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="188">188         <span class="php-var">$menu_items_ep</span> = [];
+</span><span class="l" id="189">189         <span class="php-var">$menu_items_ep</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(
+</span><span class="l" id="190">190             <span class="php-quote">'STRUCTURE_CONTENT_SLICE_MENU'</span>,
+</span><span class="l" id="191">191                 <span class="php-var">$menu_items_ep</span>,
+</span><span class="l" id="192">192             [
+</span><span class="l" id="193">193                 <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
+</span><span class="l" id="194">194                 <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
+</span><span class="l" id="195">195                 <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$sliceCtype</span>,
+</span><span class="l" id="196">196                 <span class="php-quote">'module_id'</span> =&gt; <span class="php-var">$moduleId</span>,
+</span><span class="l" id="197">197                 <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
+</span><span class="l" id="198">198                 <span class="php-quote">'perm'</span> =&gt; rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$moduleId</span>),
+</span><span class="l" id="199">199             ]
+</span><span class="l" id="200">200         ));
+</span><span class="l" id="201">201 
+</span><span class="l" id="202">202         <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$menu_items_action</span>) &gt; <span class="php-num">0</span>) {
+</span><span class="l" id="203">203             <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="204">204             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$menu_items_action</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="205">205             <span class="php-var">$header_right</span> .= <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'slice_menu_action.php'</span>);
+</span><span class="l" id="206">206         }
+</span><span class="l" id="207">207 
+</span><span class="l" id="208">208         <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$menu_items_ep</span>) &gt; <span class="php-num">0</span>) {
+</span><span class="l" id="209">209             <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="210">210             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$menu_items_ep</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="211">211             <span class="php-var">$header_right</span> .= <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'slice_menu_ep.php'</span>);
+</span><span class="l" id="212">212         }
+</span><span class="l" id="213">213 
+</span><span class="l" id="214">214         <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$menu_items_move</span>) &gt; <span class="php-num">0</span>) {
+</span><span class="l" id="215">215             <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="216">216             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$menu_items_move</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="217">217             <span class="php-var">$header_right</span> .= <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'slice_menu_move.php'</span>);
+</span><span class="l" id="218">218         }
+</span><span class="l" id="219">219 
+</span><span class="l" id="220">220         <span class="php-comment">//$header_right = $header_right != '' ? '&lt;div class="col-md-4 text-right"&gt;' . $header_right . '&lt;/div&gt;' : '';</span>
+</span><span class="l" id="221">221 
+</span><span class="l" id="222">222         <span class="php-keyword1">return</span> <span class="php-var">$header_right</span>;
+</span><span class="l" id="223">223     }
+</span><span class="l" id="224">224 
+</span><span class="l" id="225">225     <span class="php-comment">/**
+</span></span><span class="l" id="226">226 <span class="php-comment">     * Wraps the output of a module.
+</span></span><span class="l" id="227">227 <span class="php-comment">     *
+</span></span><span class="l" id="228">228 <span class="php-comment">     * @param int    $moduleId     The id of the module
+</span></span><span class="l" id="229">229 <span class="php-comment">     * @param string $moduleOutput The output of the module
+</span></span><span class="l" id="230">230 <span class="php-comment">     *
+</span></span><span class="l" id="231">231 <span class="php-comment">     * @return string
+</span></span><span class="l" id="232">232 <span class="php-comment">     */</span>
+</span><span class="l" id="233">233     <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getWrappedModuleOutput(<span class="php-var">$moduleId</span>, <span class="php-var">$moduleOutput</span>)
+</span><span class="l" id="234">234     {
+</span><span class="l" id="235">235         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;getStreamOutput(<span class="php-quote">'module/'</span> . <span class="php-var">$moduleId</span> . <span class="php-quote">'/output'</span>, <span class="php-var">$moduleOutput</span>);
+</span><span class="l" id="236">236     }
+</span><span class="l" id="237">237 
+</span><span class="l" id="238">238     <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> getModuleSelect(<span class="php-var">$sliceId</span>)
+</span><span class="l" id="239">239     {
+</span><span class="l" id="240">240         <span class="php-comment">// ----- BLOCKAUSWAHL - SELECT</span>
+</span><span class="l" id="241">241         <span class="php-var">$context</span> = <span class="php-keyword1">new</span> rex_context([
+</span><span class="l" id="242">242             <span class="php-quote">'page'</span> =&gt; rex_be_controller::getCurrentPage(),
+</span><span class="l" id="243">243             <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
+</span><span class="l" id="244">244             <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
+</span><span class="l" id="245">245             <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype,
+</span><span class="l" id="246">246             <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
+</span><span class="l" id="247">247             <span class="php-quote">'function'</span> =&gt; <span class="php-quote">'add'</span>,
+</span><span class="l" id="248">248         ]);
+</span><span class="l" id="249">249 
+</span><span class="l" id="250">250         <span class="php-var">$position</span> = ++<span class="php-var">$this</span>-&gt;sliceAddPosition;
+</span><span class="l" id="251">251 
+</span><span class="l" id="252">252         <span class="php-var">$items</span> = [];
+</span><span class="l" id="253">253         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$this</span>-&gt;ctype])) {
+</span><span class="l" id="254">254             <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$this</span>-&gt;ctype] <span class="php-keyword1">as</span> <span class="php-var">$module</span>) {
+</span><span class="l" id="255">255                 <span class="php-var">$item</span> = [];
+</span><span class="l" id="256">256                 <span class="php-var">$item</span>[<span class="php-quote">'title'</span>] = <span class="php-var">$module</span>[<span class="php-quote">'name'</span>];
+</span><span class="l" id="257">257                 <span class="php-var">$item</span>[<span class="php-quote">'href'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'module_id'</span> =&gt; <span class="php-var">$module</span>[<span class="php-quote">'id'</span>]]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$position</span>;
+</span><span class="l" id="258">258                 <span class="php-var">$items</span>[] = <span class="php-var">$item</span>;
+</span><span class="l" id="259">259             }
+</span><span class="l" id="260">260         }
+</span><span class="l" id="261">261 
+</span><span class="l" id="262">262         <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="263">263         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'block'</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="264">264         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'button_label'</span>, rex_i18n::msg(<span class="php-quote">'add_block'</span>));
+</span><span class="l" id="265">265         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'items'</span>, <span class="php-var">$items</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="266">266         <span class="php-var">$select</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/dropdowns/dropdown.php'</span>);
+</span><span class="l" id="267">267         <span class="php-var">$select</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(
+</span><span class="l" id="268">268             <span class="php-quote">'STRUCTURE_CONTENT_MODULE_SELECT'</span>,
+</span><span class="l" id="269">269                 <span class="php-var">$select</span>,
+</span><span class="l" id="270">270             [
+</span><span class="l" id="271">271                 <span class="php-quote">'page'</span> =&gt; rex_be_controller::getCurrentPage(),
+</span><span class="l" id="272">272                 <span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id,
+</span><span class="l" id="273">273                 <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang,
+</span><span class="l" id="274">274                 <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype,
+</span><span class="l" id="275">275                 <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>,
+</span><span class="l" id="276">276             ]
+</span><span class="l" id="277">277         ));
+</span><span class="l" id="278">278         <span class="php-keyword1">return</span> <span class="php-quote">'&lt;li class="rex-slice rex-slice-select" id="slice-add-pos-'</span> . <span class="php-var">$position</span> . <span class="php-quote">'"&gt;'</span> . <span class="php-var">$select</span> . <span class="php-quote">'&lt;/li&gt;'</span>;
+</span><span class="l" id="279">279     }
+</span><span class="l" id="280">280 
+</span><span class="l" id="281">281     <span class="php-comment">/**
+</span></span><span class="l" id="282">282 <span class="php-comment">     * {@inheritdoc}
+</span></span><span class="l" id="283">283 <span class="php-comment">     */</span>
+</span><span class="l" id="284">284     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> preArticle(<span class="php-var">$articleContent</span>, <span class="php-var">$module_id</span>)
+</span><span class="l" id="285">285     {
+</span><span class="l" id="286">286         <span class="php-comment">// ---------- moduleselect: nur module nehmen auf die der user rechte hat</span>
+</span><span class="l" id="287">287         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode == <span class="php-quote">'edit'</span>) {
+</span><span class="l" id="288">288             <span class="php-var">$MODULE</span> = rex_sql::factory();
+</span><span class="l" id="289">289             <span class="php-var">$modules</span> = <span class="php-var">$MODULE</span>-&gt;getArray(<span class="php-quote">'select * from '</span> . rex::getTablePrefix() . <span class="php-quote">'module order by name'</span>);
+</span><span class="l" id="290">290 
+</span><span class="l" id="291">291             <span class="php-var">$template_ctypes</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;template_attributes[<span class="php-quote">'ctype'</span>]) ? <span class="php-var">$this</span>-&gt;template_attributes[<span class="php-quote">'ctype'</span>] : [];
+</span><span class="l" id="292">292             <span class="php-comment">// wenn keine ctyes definiert sind, gibt es immer den CTYPE=1</span>
+</span><span class="l" id="293">293             <span class="php-keyword1">if</span> (<span class="php-keyword2">count</span>(<span class="php-var">$template_ctypes</span>) == <span class="php-num">0</span>) {
+</span><span class="l" id="294">294                 <span class="php-var">$template_ctypes</span> = [<span class="php-num">1</span> =&gt; <span class="php-quote">'default'</span>];
+</span><span class="l" id="295">295             }
+</span><span class="l" id="296">296 
+</span><span class="l" id="297">297             <span class="php-var">$this</span>-&gt;MODULESELECT = [];
+</span><span class="l" id="298">298             <span class="php-keyword1">foreach</span> (<span class="php-var">$template_ctypes</span> <span class="php-keyword1">as</span> <span class="php-var">$ct_id</span> =&gt; <span class="php-var">$ct_name</span>) {
+</span><span class="l" id="299">299                 <span class="php-keyword1">foreach</span> (<span class="php-var">$modules</span> <span class="php-keyword1">as</span> <span class="php-var">$m</span>) {
+</span><span class="l" id="300">300                     <span class="php-keyword1">if</span> (rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'modules'</span>)-&gt;hasPerm(<span class="php-var">$m</span>[<span class="php-quote">'id'</span>])) {
+</span><span class="l" id="301">301                         <span class="php-keyword1">if</span> (rex_template::hasModule(<span class="php-var">$this</span>-&gt;template_attributes, <span class="php-var">$ct_id</span>, <span class="php-var">$m</span>[<span class="php-quote">'id'</span>])) {
+</span><span class="l" id="302">302                             <span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$ct_id</span>][] = [<span class="php-quote">'name'</span> =&gt; rex_i18n::translate(<span class="php-var">$m</span>[<span class="php-quote">'name'</span>], <span class="php-keyword1">false</span>), <span class="php-quote">'id'</span> =&gt; <span class="php-var">$m</span>[<span class="php-quote">'id'</span>]];
+</span><span class="l" id="303">303                         }
+</span><span class="l" id="304">304                     }
+</span><span class="l" id="305">305                 }
+</span><span class="l" id="306">306             }
+</span><span class="l" id="307">307         }
+</span><span class="l" id="308">308 
+</span><span class="l" id="309">309         <span class="php-keyword1">return</span> parent::preArticle(<span class="php-var">$articleContent</span>, <span class="php-var">$module_id</span>);
+</span><span class="l" id="310">310     }
+</span><span class="l" id="311">311 
+</span><span class="l" id="312">312     <span class="php-comment">/**
+</span></span><span class="l" id="313">313 <span class="php-comment">     * {@inheritdoc}
+</span></span><span class="l" id="314">314 <span class="php-comment">     */</span>
+</span><span class="l" id="315">315     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> postArticle(<span class="php-var">$articleContent</span>, <span class="php-var">$moduleIdToAdd</span>)
+</span><span class="l" id="316">316     {
+</span><span class="l" id="317">317         <span class="php-comment">// special identifier for the slot behind the last slice</span>
+</span><span class="l" id="318">318         <span class="php-var">$LCTSL_ID</span> = -<span class="php-num">1</span>;
+</span><span class="l" id="319">319 
+</span><span class="l" id="320">320         <span class="php-comment">// ----- add module im edit mode</span>
+</span><span class="l" id="321">321         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode == <span class="php-quote">'edit'</span>) {
+</span><span class="l" id="322">322             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$LCTSL_ID</span>) {
+</span><span class="l" id="323">323                 <span class="php-var">$slice_content</span> = <span class="php-var">$this</span>-&gt;addSlice(<span class="php-var">$LCTSL_ID</span>, <span class="php-var">$moduleIdToAdd</span>);
+</span><span class="l" id="324">324             } <span class="php-keyword1">else</span> {
+</span><span class="l" id="325">325                 <span class="php-comment">// ----- BLOCKAUSWAHL - SELECT</span>
+</span><span class="l" id="326">326                 <span class="php-var">$slice_content</span> = <span class="php-var">$this</span>-&gt;getModuleSelect(<span class="php-var">$LCTSL_ID</span>);
+</span><span class="l" id="327">327             }
+</span><span class="l" id="328">328             <span class="php-var">$articleContent</span> .= <span class="php-var">$slice_content</span>;
+</span><span class="l" id="329">329         }
+</span><span class="l" id="330">330 
+</span><span class="l" id="331">331         <span class="php-keyword1">return</span> <span class="php-var">$articleContent</span>;
+</span><span class="l" id="332">332     }
+</span><span class="l" id="333">333 
+</span><span class="l" id="334">334     <span class="php-comment">// ----- ADD Slice</span>
+</span><span class="l" id="335">335     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> addSlice(<span class="php-var">$sliceId</span>, <span class="php-var">$moduleIdToAdd</span>)
+</span><span class="l" id="336">336     {
+</span><span class="l" id="337">337         <span class="php-var">$MOD</span> = rex_sql::factory();
+</span><span class="l" id="338">338         <span class="php-var">$MOD</span>-&gt;setQuery(<span class="php-quote">'SELECT * FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'module WHERE id="'</span> . <span class="php-var">$moduleIdToAdd</span> . <span class="php-quote">'"'</span>);
+</span><span class="l" id="339">339 
+</span><span class="l" id="340">340         <span class="php-keyword1">if</span> (<span class="php-var">$MOD</span>-&gt;getRows() != <span class="php-num">1</span>) {
+</span><span class="l" id="341">341             <span class="php-var">$slice_content</span> = rex_view::warning(rex_i18n::msg(<span class="php-quote">'module_doesnt_exist'</span>));
+</span><span class="l" id="342">342         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="343">343             <span class="php-var">$initDataSql</span> = rex_sql::factory();
+</span><span class="l" id="344">344             <span class="php-var">$initDataSql</span>
+</span><span class="l" id="345">345                 -&gt;setValue(<span class="php-quote">'module_id'</span>, <span class="php-var">$moduleIdToAdd</span>)
+</span><span class="l" id="346">346                 -&gt;setValue(<span class="php-quote">'ctype_id'</span>, <span class="php-var">$this</span>-&gt;ctype);
+</span><span class="l" id="347">347 
+</span><span class="l" id="348">348             <span class="php-comment">// ----- PRE VIEW ACTION [ADD]</span>
+</span><span class="l" id="349">349             <span class="php-var">$action</span> = <span class="php-keyword1">new</span> rex_article_action(<span class="php-var">$moduleIdToAdd</span>, <span class="php-quote">'add'</span>, <span class="php-var">$initDataSql</span>);
+</span><span class="l" id="350">350             <span class="php-var">$action</span>-&gt;setRequestValues();
+</span><span class="l" id="351">351             <span class="php-var">$action</span>-&gt;<span class="php-keyword2">exec</span>(rex_article_action::PREVIEW);
+</span><span class="l" id="352">352             <span class="php-comment">// ----- / PRE VIEW ACTION</span>
+</span><span class="l" id="353">353 
+</span><span class="l" id="354">354             <span class="php-var">$moduleInput</span> = <span class="php-var">$this</span>-&gt;replaceVars(<span class="php-var">$initDataSql</span>, <span class="php-var">$MOD</span>-&gt;getValue(<span class="php-quote">'input'</span>));
+</span><span class="l" id="355">355 
+</span><span class="l" id="356">356             <span class="php-var">$moduleInput</span> = <span class="php-var">$this</span>-&gt;getStreamOutput(<span class="php-quote">'module/'</span> . <span class="php-var">$moduleIdToAdd</span> . <span class="php-quote">'/input'</span>, <span class="php-var">$moduleInput</span>);
+</span><span class="l" id="357">357 
+</span><span class="l" id="358">358             <span class="php-var">$msg</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="359">359             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
+</span><span class="l" id="360">360                 <span class="php-var">$msg</span> .= rex_view::warning(<span class="php-var">$this</span>-&gt;warning);
+</span><span class="l" id="361">361             }
+</span><span class="l" id="362">362             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;info != <span class="php-quote">''</span>) {
+</span><span class="l" id="363">363                 <span class="php-var">$msg</span> .= rex_view::success(<span class="php-var">$this</span>-&gt;info);
+</span><span class="l" id="364">364             }
+</span><span class="l" id="365">365 
+</span><span class="l" id="366">366             <span class="php-var">$formElements</span> = [];
+</span><span class="l" id="367">367 
+</span><span class="l" id="368">368             <span class="php-var">$n</span> = [];
+</span><span class="l" id="369">369             <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;a class="btn btn-abort" href="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$this</span>-&gt;sliceAddPosition . <span class="php-quote">'"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'form_abort'</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
+</span><span class="l" id="370">370             <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
+</span><span class="l" id="371">371 
+</span><span class="l" id="372">372             <span class="php-var">$n</span> = [];
+</span><span class="l" id="373">373             <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;button class="btn btn-save" type="submit" name="btn_save" value="1"'</span> . rex::getAccesskey(rex_i18n::msg(<span class="php-quote">'add_block'</span>), <span class="php-quote">'save'</span>) . <span class="php-quote">'&gt;'</span> . rex_i18n::msg(<span class="php-quote">'add_block'</span>) . <span class="php-quote">'&lt;/button&gt;'</span>;
+</span><span class="l" id="374">374             <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
+</span><span class="l" id="375">375 
+</span><span class="l" id="376">376             <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="377">377             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'elements'</span>, <span class="php-var">$formElements</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="378">378             <span class="php-var">$slice_footer</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/form/submit.php'</span>);
+</span><span class="l" id="379">379 
+</span><span class="l" id="380">380             <span class="php-var">$panel</span> = <span class="php-quote">'
+</span></span><span class="l" id="381">381 <span class="php-quote">                &lt;fieldset&gt;
+</span></span><span class="l" id="382">382 <span class="php-quote">                    &lt;legend&gt;'</span> . rex_i18n::msg(<span class="php-quote">'add_block'</span>) . <span class="php-quote">'&lt;/legend&gt;
+</span></span><span class="l" id="383">383 <span class="php-quote">                    &lt;input type="hidden" name="function" value="add" /&gt;
+</span></span><span class="l" id="384">384 <span class="php-quote">                    &lt;input type="hidden" name="module_id" value="'</span> . <span class="php-var">$moduleIdToAdd</span> . <span class="php-quote">'" /&gt;
+</span></span><span class="l" id="385">385 <span class="php-quote">                    &lt;input type="hidden" name="save" value="1" /&gt;
+</span></span><span class="l" id="386">386 <span class="php-quote">
+</span></span><span class="l" id="387">387 <span class="php-quote">                    &lt;div class="rex-slice-input"&gt;
+</span></span><span class="l" id="388">388 <span class="php-quote">                        '</span> . <span class="php-var">$moduleInput</span> . <span class="php-quote">'
+</span></span><span class="l" id="389">389 <span class="php-quote">                    &lt;/div&gt;
+</span></span><span class="l" id="390">390 <span class="php-quote">                &lt;/fieldset&gt;
+</span></span><span class="l" id="391">391 <span class="php-quote">                        '</span>;
+</span><span class="l" id="392">392 
+</span><span class="l" id="393">393             <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="394">394             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'before'</span>, <span class="php-var">$msg</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="395">395             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'class'</span>, <span class="php-quote">'add'</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="396">396             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'title'</span>, rex_i18n::msg(<span class="php-quote">'module'</span>) . <span class="php-quote">': '</span> . rex_i18n::translate(<span class="php-var">$MOD</span>-&gt;getValue(<span class="php-quote">'name'</span>)), <span class="php-keyword1">false</span>);
+</span><span class="l" id="397">397             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'body'</span>, <span class="php-var">$panel</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="398">398             <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'footer'</span>, <span class="php-var">$slice_footer</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="399">399             <span class="php-var">$slice_content</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/page/section.php'</span>);
+</span><span class="l" id="400">400 
+</span><span class="l" id="401">401             <span class="php-var">$slice_content</span> = <span class="php-quote">'
+</span></span><span class="l" id="402">402 <span class="php-quote">                &lt;li class="rex-slice rex-slice-add"&gt;
+</span></span><span class="l" id="403">403 <span class="php-quote">                    &lt;form action="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$sliceId</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$this</span>-&gt;ctype]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$this</span>-&gt;sliceAddPosition . <span class="php-quote">'" method="post" id="REX_FORM" enctype="multipart/form-data"&gt;
+</span></span><span class="l" id="404">404 <span class="php-quote">                        '</span> . <span class="php-var">$slice_content</span> . <span class="php-quote">'
+</span></span><span class="l" id="405">405 <span class="php-quote">                    &lt;/form&gt;
+</span></span><span class="l" id="406">406 <span class="php-quote">                    &lt;script type="text/javascript"&gt;
+</span></span><span class="l" id="407">407 <span class="php-quote">                         &lt;!--
+</span></span><span class="l" id="408">408 <span class="php-quote">                        jQuery(function($) {
+</span></span><span class="l" id="409">409 <span class="php-quote">                            $(":input:visible:enabled:not([readonly]):first", $("#REX_FORM")).focus();
+</span></span><span class="l" id="410">410 <span class="php-quote">                        });
+</span></span><span class="l" id="411">411 <span class="php-quote">                         //--&gt;
+</span></span><span class="l" id="412">412 <span class="php-quote">                    &lt;/script&gt;
+</span></span><span class="l" id="413">413 <span class="php-quote">                &lt;/li&gt;
+</span></span><span class="l" id="414">414 <span class="php-quote">                '</span>;
+</span><span class="l" id="415">415         }
+</span><span class="l" id="416">416 
+</span><span class="l" id="417">417         <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span>;
+</span><span class="l" id="418">418     }
+</span><span class="l" id="419">419 
+</span><span class="l" id="420">420     <span class="php-comment">// ----- EDIT Slice</span>
+</span><span class="l" id="421">421     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> editSlice(<span class="php-var">$RE_CONTS</span>, <span class="php-var">$RE_MODUL_IN</span>, <span class="php-var">$RE_CTYPE</span>, <span class="php-var">$RE_MODUL_ID</span>, <span class="php-var">$artDataSql</span>)
+</span><span class="l" id="422">422     {
+</span><span class="l" id="423">423         <span class="php-var">$msg</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="424">424         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;slice_id == <span class="php-var">$RE_CONTS</span>) {
+</span><span class="l" id="425">425             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
+</span><span class="l" id="426">426                 <span class="php-var">$msg</span> .= rex_view::warning(<span class="php-var">$this</span>-&gt;warning);
+</span><span class="l" id="427">427             }
+</span><span class="l" id="428">428             <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;info != <span class="php-quote">''</span>) {
+</span><span class="l" id="429">429                 <span class="php-var">$msg</span> .= rex_view::success(<span class="php-var">$this</span>-&gt;info);
+</span><span class="l" id="430">430             }
+</span><span class="l" id="431">431         }
+</span><span class="l" id="432">432 
+</span><span class="l" id="433">433         <span class="php-var">$formElements</span> = [];
+</span><span class="l" id="434">434 
+</span><span class="l" id="435">435         <span class="php-var">$n</span> = [];
+</span><span class="l" id="436">436         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;a class="btn btn-abort" href="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$RE_CONTS</span>, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$RE_CTYPE</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang]) . <span class="php-quote">'#slice'</span> . <span class="php-var">$RE_CONTS</span> . <span class="php-quote">'"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'form_abort'</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
+</span><span class="l" id="437">437         <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
+</span><span class="l" id="438">438 
+</span><span class="l" id="439">439         <span class="php-var">$n</span> = [];
+</span><span class="l" id="440">440         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;button class="btn btn-save" type="submit" name="btn_save" value="1"'</span> . rex::getAccesskey(rex_i18n::msg(<span class="php-quote">'save_block'</span>), <span class="php-quote">'save'</span>) . <span class="php-quote">'&gt;'</span> . rex_i18n::msg(<span class="php-quote">'save_block'</span>) . <span class="php-quote">'&lt;/button&gt;'</span>;
+</span><span class="l" id="441">441         <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
+</span><span class="l" id="442">442 
+</span><span class="l" id="443">443         <span class="php-var">$n</span> = [];
+</span><span class="l" id="444">444         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;button class="btn btn-apply" type="submit" name="btn_update" value="1"'</span> . rex::getAccesskey(rex_i18n::msg(<span class="php-quote">'update_block'</span>), <span class="php-quote">'apply'</span>) . <span class="php-quote">'&gt;'</span> . rex_i18n::msg(<span class="php-quote">'update_block'</span>) . <span class="php-quote">'&lt;/button&gt;'</span>;
+</span><span class="l" id="445">445         <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
+</span><span class="l" id="446">446 
+</span><span class="l" id="447">447         <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="448">448         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'elements'</span>, <span class="php-var">$formElements</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="449">449         <span class="php-var">$slice_footer</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/form/submit.php'</span>);
+</span><span class="l" id="450">450 
+</span><span class="l" id="451">451         <span class="php-var">$panel</span> = <span class="php-quote">'
+</span></span><span class="l" id="452">452 <span class="php-quote">                &lt;fieldset&gt;
+</span></span><span class="l" id="453">453 <span class="php-quote">                    &lt;legend&gt;'</span> . rex_i18n::msg(<span class="php-quote">'edit_block'</span>) . <span class="php-quote">'&lt;/legend&gt;
+</span></span><span class="l" id="454">454 <span class="php-quote">                    &lt;input type="hidden" name="module_id" value="'</span> . <span class="php-var">$RE_MODUL_ID</span> . <span class="php-quote">'" /&gt;
+</span></span><span class="l" id="455">455 <span class="php-quote">                    &lt;input type="hidden" name="save" value="1" /&gt;
+</span></span><span class="l" id="456">456 <span class="php-quote">                    &lt;input type="hidden" name="update" value="0" /&gt;
+</span></span><span class="l" id="457">457 <span class="php-quote">
+</span></span><span class="l" id="458">458 <span class="php-quote">                    &lt;div class="rex-slice-input"&gt;
+</span></span><span class="l" id="459">459 <span class="php-quote">                        '</span> . <span class="php-var">$msg</span> . <span class="php-var">$this</span>-&gt;getStreamOutput(<span class="php-quote">'module/'</span> . <span class="php-var">$RE_MODUL_ID</span> . <span class="php-quote">'/input'</span>, <span class="php-var">$RE_MODUL_IN</span>) . <span class="php-quote">'
+</span></span><span class="l" id="460">460 <span class="php-quote">                    &lt;/div&gt;
+</span></span><span class="l" id="461">461 <span class="php-quote">                &lt;/fieldset&gt;
+</span></span><span class="l" id="462">462 <span class="php-quote">
+</span></span><span class="l" id="463">463 <span class="php-quote">            &lt;/form&gt;'</span>;
+</span><span class="l" id="464">464 
+</span><span class="l" id="465">465         <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();
+</span><span class="l" id="466">466         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'class'</span>, <span class="php-quote">'edit'</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="467">467         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'title'</span>, <span class="php-var">$this</span>-&gt;getSliceHeading(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
+</span><span class="l" id="468">468         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'options'</span>, <span class="php-var">$this</span>-&gt;getSliceMenu(<span class="php-var">$artDataSql</span>), <span class="php-keyword1">false</span>);
+</span><span class="l" id="469">469         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'body'</span>, <span class="php-var">$panel</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="470">470         <span class="php-var">$fragment</span>-&gt;setVar(<span class="php-quote">'footer'</span>, <span class="php-var">$slice_footer</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="471">471         <span class="php-var">$slice_content</span> = <span class="php-var">$fragment</span>-&gt;parse(<span class="php-quote">'core/page/section.php'</span>);
+</span><span class="l" id="472">472 
+</span><span class="l" id="473">473         <span class="php-var">$slice_content</span> = <span class="php-quote">'
+</span></span><span class="l" id="474">474 <span class="php-quote">            &lt;li class="rex-slice rex-slice-edit" id="slice'</span> . <span class="php-var">$RE_CONTS</span> . <span class="php-quote">'"&gt;
+</span></span><span class="l" id="475">475 <span class="php-quote">                &lt;form enctype="multipart/form-data" action="'</span> . rex_url::currentBackendPage([<span class="php-quote">'article_id'</span> =&gt; <span class="php-var">$this</span>-&gt;article_id, <span class="php-quote">'slice_id'</span> =&gt; <span class="php-var">$RE_CONTS</span>, <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$RE_CTYPE</span>, <span class="php-quote">'clang'</span> =&gt; <span class="php-var">$this</span>-&gt;clang, <span class="php-quote">'function'</span> =&gt; <span class="php-quote">'edit'</span>]) . <span class="php-quote">'#slice'</span> . <span class="php-var">$RE_CONTS</span> . <span class="php-quote">'" method="post" id="REX_FORM"&gt;
+</span></span><span class="l" id="476">476 <span class="php-quote">                    '</span> . <span class="php-var">$slice_content</span> . <span class="php-quote">'
+</span></span><span class="l" id="477">477 <span class="php-quote">                &lt;/form&gt;
+</span></span><span class="l" id="478">478 <span class="php-quote">                &lt;script type="text/javascript"&gt;
+</span></span><span class="l" id="479">479 <span class="php-quote">                     &lt;!--
+</span></span><span class="l" id="480">480 <span class="php-quote">                    jQuery(function($) {
+</span></span><span class="l" id="481">481 <span class="php-quote">                        $(":input:visible:enabled:not([readonly]):first", $("#REX_FORM")).focus();
+</span></span><span class="l" id="482">482 <span class="php-quote">                    });
+</span></span><span class="l" id="483">483 <span class="php-quote">                     //--&gt;
+</span></span><span class="l" id="484">484 <span class="php-quote">                &lt;/script&gt;
+</span></span><span class="l" id="485">485 <span class="php-quote">            &lt;/li&gt;
+</span></span><span class="l" id="486">486 <span class="php-quote">            '</span>;
+</span><span class="l" id="487">487 
+</span><span class="l" id="488">488         <span class="php-keyword1">return</span> <span class="php-var">$slice_content</span>;
+</span><span class="l" id="489">489     }
+</span><span class="l" id="490">490 }
+</span><span class="l" id="491">491 </span></code></pre>
  </body>
 </html>

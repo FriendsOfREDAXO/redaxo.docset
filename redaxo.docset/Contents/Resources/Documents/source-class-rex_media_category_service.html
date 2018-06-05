@@ -7,91 +7,117 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
-</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
-</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * @package redaxo\mediapool
-</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> */</span>
-</span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-keyword1">class</span> <a href="#rex_media_category_service" id="rex_media_category_service">rex_media_category_service</a>
-</span><span class="l" id="7"><a class="l" href="#7"> 7 </a>{
-</span><span class="l" id="8"><a class="l" href="#8"> 8 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="9"><a class="l" href="#9"> 9 </a><span class="php-comment">     * @param string                  $name   The name of the new category
-</span></span><span class="l" id="10"><a class="l" href="#10">10 </a><span class="php-comment">     * @param rex_media_category|null $parent The category in which the new category should be created, or null for a top/root level category
-</span></span><span class="l" id="11"><a class="l" href="#11">11 </a><span class="php-comment">     *
-</span></span><span class="l" id="12"><a class="l" href="#12">12 </a><span class="php-comment">     * @return string A success message
-</span></span><span class="l" id="13"><a class="l" href="#13">13 </a><span class="php-comment">     */</span>
-</span><span class="l" id="14"><a class="l" href="#14">14 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addCategory" id="_addCategory">addCategory</a>(<span class="php-var">$name</span>, <span class="php-var">$parent</span>)
-</span><span class="l" id="15"><a class="l" href="#15">15 </a>    {
-</span><span class="l" id="16"><a class="l" href="#16">16 </a>        <span class="php-var">$db</span> = rex_sql::factory();
-</span><span class="l" id="17"><a class="l" href="#17">17 </a>
-</span><span class="l" id="18"><a class="l" href="#18">18 </a>        <span class="php-comment">// root category</span>
-</span><span class="l" id="19"><a class="l" href="#19">19 </a>        <span class="php-var">$parent_id</span> = <span class="php-num">0</span>;
-</span><span class="l" id="20"><a class="l" href="#20">20 </a>        <span class="php-var">$path</span> = <span class="php-quote">'|'</span>;
-</span><span class="l" id="21"><a class="l" href="#21">21 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$parent</span>) {
-</span><span class="l" id="22"><a class="l" href="#22">22 </a>            <span class="php-var">$parent_id</span> = <span class="php-var">$parent</span>-&gt;getId();
-</span><span class="l" id="23"><a class="l" href="#23">23 </a>            <span class="php-var">$path</span> = <span class="php-var">$parent</span>-&gt;getPath() . <span class="php-var">$parent</span>-&gt;getId().<span class="php-quote">'|'</span>;
-</span><span class="l" id="24"><a class="l" href="#24">24 </a>        }
-</span><span class="l" id="25"><a class="l" href="#25">25 </a>
-</span><span class="l" id="26"><a class="l" href="#26">26 </a>        <span class="php-var">$db</span>-&gt;setTable(rex::getTablePrefix() . <span class="php-quote">'media_category'</span>);
-</span><span class="l" id="27"><a class="l" href="#27">27 </a>        <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'name'</span>, <span class="php-var">$name</span>);
-</span><span class="l" id="28"><a class="l" href="#28">28 </a>        <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'parent_id'</span>, <span class="php-var">$parent_id</span>);
-</span><span class="l" id="29"><a class="l" href="#29">29 </a>        <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'path'</span>, <span class="php-var">$path</span>);
-</span><span class="l" id="30"><a class="l" href="#30">30 </a>        <span class="php-var">$db</span>-&gt;addGlobalCreateFields();
-</span><span class="l" id="31"><a class="l" href="#31">31 </a>        <span class="php-var">$db</span>-&gt;addGlobalUpdateFields();
-</span><span class="l" id="32"><a class="l" href="#32">32 </a>
-</span><span class="l" id="33"><a class="l" href="#33">33 </a>        <span class="php-var">$db</span>-&gt;insert();
-</span><span class="l" id="34"><a class="l" href="#34">34 </a>
-</span><span class="l" id="35"><a class="l" href="#35">35 </a>        rex_media_cache::deleteCategoryList(<span class="php-var">$parent_id</span>);
-</span><span class="l" id="36"><a class="l" href="#36">36 </a>
-</span><span class="l" id="37"><a class="l" href="#37">37 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'pool_kat_saved'</span>, <span class="php-var">$name</span>);
-</span><span class="l" id="38"><a class="l" href="#38">38 </a>    }
-</span><span class="l" id="39"><a class="l" href="#39">39 </a>
-</span><span class="l" id="40"><a class="l" href="#40">40 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="41"><a class="l" href="#41">41 </a><span class="php-comment">     * @param int $categoryId
-</span></span><span class="l" id="42"><a class="l" href="#42">42 </a><span class="php-comment">     *
-</span></span><span class="l" id="43"><a class="l" href="#43">43 </a><span class="php-comment">     * @return string A success message
-</span></span><span class="l" id="44"><a class="l" href="#44">44 </a><span class="php-comment">     *
-</span></span><span class="l" id="45"><a class="l" href="#45">45 </a><span class="php-comment">     * @throws rex_functional_exception
-</span></span><span class="l" id="46"><a class="l" href="#46">46 </a><span class="php-comment">     */</span>
-</span><span class="l" id="47"><a class="l" href="#47">47 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_deleteCategory" id="_deleteCategory">deleteCategory</a>(<span class="php-var">$categoryId</span>)
-</span><span class="l" id="48"><a class="l" href="#48">48 </a>    {
-</span><span class="l" id="49"><a class="l" href="#49">49 </a>        <span class="php-var">$gf</span> = rex_sql::factory();
-</span><span class="l" id="50"><a class="l" href="#50">50 </a>        <span class="php-var">$gf</span>-&gt;setQuery(<span class="php-quote">'SELECT * FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'media WHERE category_id=?'</span>, [<span class="php-var">$categoryId</span>]);
-</span><span class="l" id="51"><a class="l" href="#51">51 </a>        <span class="php-var">$gd</span> = rex_sql::factory();
-</span><span class="l" id="52"><a class="l" href="#52">52 </a>        <span class="php-var">$gd</span>-&gt;setQuery(<span class="php-quote">'SELECT * FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'media_category WHERE parent_id=?'</span>, [<span class="php-var">$categoryId</span>]);
-</span><span class="l" id="53"><a class="l" href="#53">53 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$gf</span>-&gt;getRows() == <span class="php-num">0</span> &amp;&amp; <span class="php-var">$gd</span>-&gt;getRows() == <span class="php-num">0</span>) {
-</span><span class="l" id="54"><a class="l" href="#54">54 </a>            <span class="php-var">$gf</span>-&gt;setQuery(<span class="php-quote">'DELETE FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'media_category WHERE id=?'</span>, [<span class="php-var">$categoryId</span>]);
-</span><span class="l" id="55"><a class="l" href="#55">55 </a>            rex_media_cache::deleteCategory(<span class="php-var">$categoryId</span>);
-</span><span class="l" id="56"><a class="l" href="#56">56 </a>            rex_media_cache::deleteLists();
-</span><span class="l" id="57"><a class="l" href="#57">57 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="58"><a class="l" href="#58">58 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_functional_exception(rex_i18n::msg(<span class="php-quote">'pool_kat_not_deleted'</span>));
-</span><span class="l" id="59"><a class="l" href="#59">59 </a>        }
-</span><span class="l" id="60"><a class="l" href="#60">60 </a>
-</span><span class="l" id="61"><a class="l" href="#61">61 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'pool_kat_deleted'</span>);
-</span><span class="l" id="62"><a class="l" href="#62">62 </a>    }
-</span><span class="l" id="63"><a class="l" href="#63">63 </a>
-</span><span class="l" id="64"><a class="l" href="#64">64 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="65"><a class="l" href="#65">65 </a><span class="php-comment">     * @param int   $categoryId The id of the category to edit
-</span></span><span class="l" id="66"><a class="l" href="#66">66 </a><span class="php-comment">     * @param array $data       The category data
-</span></span><span class="l" id="67"><a class="l" href="#67">67 </a><span class="php-comment">     *
-</span></span><span class="l" id="68"><a class="l" href="#68">68 </a><span class="php-comment">     * @return string A success message
-</span></span><span class="l" id="69"><a class="l" href="#69">69 </a><span class="php-comment">     */</span>
-</span><span class="l" id="70"><a class="l" href="#70">70 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_editCategory" id="_editCategory">editCategory</a>(<span class="php-var">$categoryId</span>, <span class="php-keyword1">array</span> <span class="php-var">$data</span>)
-</span><span class="l" id="71"><a class="l" href="#71">71 </a>    {
-</span><span class="l" id="72"><a class="l" href="#72">72 </a>        <span class="php-var">$cat_name</span> = <span class="php-var">$data</span>[<span class="php-quote">'name'</span>];
-</span><span class="l" id="73"><a class="l" href="#73">73 </a>
-</span><span class="l" id="74"><a class="l" href="#74">74 </a>        <span class="php-var">$db</span> = rex_sql::factory();
-</span><span class="l" id="75"><a class="l" href="#75">75 </a>        <span class="php-var">$db</span>-&gt;setTable(rex::getTablePrefix() . <span class="php-quote">'media_category'</span>);
-</span><span class="l" id="76"><a class="l" href="#76">76 </a>        <span class="php-var">$db</span>-&gt;setWhere([<span class="php-quote">'id'</span> =&gt; <span class="php-var">$categoryId</span>]);
-</span><span class="l" id="77"><a class="l" href="#77">77 </a>        <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'name'</span>, <span class="php-var">$cat_name</span>);
-</span><span class="l" id="78"><a class="l" href="#78">78 </a>        <span class="php-var">$db</span>-&gt;addGlobalUpdateFields();
-</span><span class="l" id="79"><a class="l" href="#79">79 </a>
-</span><span class="l" id="80"><a class="l" href="#80">80 </a>        <span class="php-var">$db</span>-&gt;update();
-</span><span class="l" id="81"><a class="l" href="#81">81 </a>
-</span><span class="l" id="82"><a class="l" href="#82">82 </a>        rex_media_cache::deleteCategory(<span class="php-var">$categoryId</span>);
-</span><span class="l" id="83"><a class="l" href="#83">83 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'pool_kat_updated'</span>, <span class="php-var">$cat_name</span>);
-</span><span class="l" id="84"><a class="l" href="#84">84 </a>    }
-</span><span class="l" id="85"><a class="l" href="#85">85 </a>}
-</span><span class="l" id="86"><a class="l" href="#86">86 </a></span></code></pre>
+  <pre id="source"><code><span class="l" id="1">  1 <span class="xlang">&lt;?php</span>
+</span><span class="l" id="2">  2 
+</span><span class="l" id="3">  3 <span class="php-comment">/**
+</span></span><span class="l" id="4">  4 <span class="php-comment"> * @package redaxo\mediapool
+</span></span><span class="l" id="5">  5 <span class="php-comment"> */</span>
+</span><span class="l" id="6">  6 <span class="php-keyword1">class</span> rex_media_category_service
+</span><span class="l" id="7">  7 {
+</span><span class="l" id="8">  8     <span class="php-comment">/**
+</span></span><span class="l" id="9">  9 <span class="php-comment">     * @param string                  $name   The name of the new category
+</span></span><span class="l" id="10"> 10 <span class="php-comment">     * @param rex_media_category|null $parent The category in which the new category should be created, or null for a top/root level category
+</span></span><span class="l" id="11"> 11 <span class="php-comment">     *
+</span></span><span class="l" id="12"> 12 <span class="php-comment">     * @return string A success message
+</span></span><span class="l" id="13"> 13 <span class="php-comment">     */</span>
+</span><span class="l" id="14"> 14     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addCategory(<span class="php-var">$name</span>, <span class="php-var">$parent</span>)
+</span><span class="l" id="15"> 15     {
+</span><span class="l" id="16"> 16         <span class="php-var">$db</span> = rex_sql::factory();
+</span><span class="l" id="17"> 17 
+</span><span class="l" id="18"> 18         <span class="php-comment">// root category</span>
+</span><span class="l" id="19"> 19         <span class="php-var">$parent_id</span> = <span class="php-num">0</span>;
+</span><span class="l" id="20"> 20         <span class="php-var">$path</span> = <span class="php-quote">'|'</span>;
+</span><span class="l" id="21"> 21         <span class="php-keyword1">if</span> (<span class="php-var">$parent</span>) {
+</span><span class="l" id="22"> 22             <span class="php-var">$parent_id</span> = <span class="php-var">$parent</span>-&gt;getId();
+</span><span class="l" id="23"> 23             <span class="php-var">$path</span> = <span class="php-var">$parent</span>-&gt;getPath() . <span class="php-var">$parent</span>-&gt;getId().<span class="php-quote">'|'</span>;
+</span><span class="l" id="24"> 24         }
+</span><span class="l" id="25"> 25 
+</span><span class="l" id="26"> 26         <span class="php-var">$db</span>-&gt;setTable(rex::getTablePrefix() . <span class="php-quote">'media_category'</span>);
+</span><span class="l" id="27"> 27         <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'name'</span>, <span class="php-var">$name</span>);
+</span><span class="l" id="28"> 28         <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'parent_id'</span>, <span class="php-var">$parent_id</span>);
+</span><span class="l" id="29"> 29         <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'path'</span>, <span class="php-var">$path</span>);
+</span><span class="l" id="30"> 30         <span class="php-var">$db</span>-&gt;addGlobalCreateFields();
+</span><span class="l" id="31"> 31         <span class="php-var">$db</span>-&gt;addGlobalUpdateFields();
+</span><span class="l" id="32"> 32 
+</span><span class="l" id="33"> 33         <span class="php-var">$db</span>-&gt;insert();
+</span><span class="l" id="34"> 34 
+</span><span class="l" id="35"> 35         rex_media_cache::deleteCategoryList(<span class="php-var">$parent_id</span>);
+</span><span class="l" id="36"> 36 
+</span><span class="l" id="37"> 37         <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'pool_kat_saved'</span>, <span class="php-var">$name</span>);
+</span><span class="l" id="38"> 38     }
+</span><span class="l" id="39"> 39 
+</span><span class="l" id="40"> 40     <span class="php-comment">/**
+</span></span><span class="l" id="41"> 41 <span class="php-comment">     * @param int $categoryId
+</span></span><span class="l" id="42"> 42 <span class="php-comment">     *
+</span></span><span class="l" id="43"> 43 <span class="php-comment">     * @return string A success message
+</span></span><span class="l" id="44"> 44 <span class="php-comment">     *
+</span></span><span class="l" id="45"> 45 <span class="php-comment">     * @throws rex_functional_exception
+</span></span><span class="l" id="46"> 46 <span class="php-comment">     */</span>
+</span><span class="l" id="47"> 47     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> deleteCategory(<span class="php-var">$categoryId</span>)
+</span><span class="l" id="48"> 48     {
+</span><span class="l" id="49"> 49         <span class="php-var">$gf</span> = rex_sql::factory();
+</span><span class="l" id="50"> 50         <span class="php-var">$gf</span>-&gt;setQuery(<span class="php-quote">'SELECT * FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'media WHERE category_id=?'</span>, [<span class="php-var">$categoryId</span>]);
+</span><span class="l" id="51"> 51         <span class="php-var">$gd</span> = rex_sql::factory();
+</span><span class="l" id="52"> 52         <span class="php-var">$gd</span>-&gt;setQuery(<span class="php-quote">'SELECT * FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'media_category WHERE parent_id=?'</span>, [<span class="php-var">$categoryId</span>]);
+</span><span class="l" id="53"> 53         <span class="php-keyword1">if</span> (<span class="php-var">$gf</span>-&gt;getRows() == <span class="php-num">0</span> &amp;&amp; <span class="php-var">$gd</span>-&gt;getRows() == <span class="php-num">0</span>) {
+</span><span class="l" id="54"> 54             <span class="php-keyword1">if</span> (<span class="php-var">$uses</span> = self::categoryIsInUse(<span class="php-var">$categoryId</span>)) {
+</span><span class="l" id="55"> 55                 <span class="php-var">$gf</span>-&gt;setQuery(<span class="php-quote">'SELECT name FROM '</span> . rex::getTable(<span class="php-quote">'media_category'</span>) . <span class="php-quote">' WHERE id=?'</span>, [<span class="php-var">$categoryId</span>]);
+</span><span class="l" id="56"> 56                 <span class="php-var">$name</span> = <span class="php-quote">"</span><span class="php-var">{$gf-&gt;getValue('name')}</span><span class="php-quote"> [</span><span class="php-var">$categoryId</span><span class="php-quote">]"</span>;
+</span><span class="l" id="57"> 57                 <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_functional_exception(<span class="php-quote">'&lt;strong&gt;'</span> . rex_i18n::msg(<span class="php-quote">'pool_kat_delete_error'</span>, <span class="php-var">$name</span>) . <span class="php-quote">' '</span>
+</span><span class="l" id="58"> 58                     . rex_i18n::msg(<span class="php-quote">'pool_object_in_use_by'</span>) . <span class="php-quote">'&lt;/strong&gt;&lt;br /&gt;'</span> . <span class="php-var">$uses</span>);
+</span><span class="l" id="59"> 59             }
+</span><span class="l" id="60"> 60 
+</span><span class="l" id="61"> 61             <span class="php-var">$gf</span>-&gt;setQuery(<span class="php-quote">'DELETE FROM '</span> . rex::getTablePrefix() . <span class="php-quote">'media_category WHERE id=?'</span>, [<span class="php-var">$categoryId</span>]);
+</span><span class="l" id="62"> 62             rex_media_cache::deleteCategory(<span class="php-var">$categoryId</span>);
+</span><span class="l" id="63"> 63             rex_media_cache::deleteLists();
+</span><span class="l" id="64"> 64         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="65"> 65             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_functional_exception(rex_i18n::msg(<span class="php-quote">'pool_kat_not_deleted'</span>));
+</span><span class="l" id="66"> 66         }
+</span><span class="l" id="67"> 67 
+</span><span class="l" id="68"> 68         <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'pool_kat_deleted'</span>);
+</span><span class="l" id="69"> 69     }
+</span><span class="l" id="70"> 70 
+</span><span class="l" id="71"> 71     <span class="php-comment">/**
+</span></span><span class="l" id="72"> 72 <span class="php-comment">     * @param int $categoryId
+</span></span><span class="l" id="73"> 73 <span class="php-comment">     *
+</span></span><span class="l" id="74"> 74 <span class="php-comment">     * @return bool|string false|warning-Message
+</span></span><span class="l" id="75"> 75 <span class="php-comment">     */</span>
+</span><span class="l" id="76"> 76     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> categoryIsInUse(<span class="php-var">$categoryId</span>)
+</span><span class="l" id="77"> 77     {
+</span><span class="l" id="78"> 78         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="79"> 79         <span class="php-var">$warning</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'MEDIA_CATEGORY_IS_IN_USE'</span>, [], [
+</span><span class="l" id="80"> 80             <span class="php-quote">'id'</span> =&gt; <span class="php-var">$categoryId</span>,
+</span><span class="l" id="81"> 81         ]));
+</span><span class="l" id="82"> 82 
+</span><span class="l" id="83"> 83         <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$warning</span>)) {
+</span><span class="l" id="84"> 84             <span class="php-keyword1">return</span> <span class="php-keyword2">implode</span>(<span class="php-quote">'&lt;br /&gt;'</span>, <span class="php-var">$warning</span>);
+</span><span class="l" id="85"> 85         }
+</span><span class="l" id="86"> 86 
+</span><span class="l" id="87"> 87         <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="88"> 88     }
+</span><span class="l" id="89"> 89 
+</span><span class="l" id="90"> 90     <span class="php-comment">/**
+</span></span><span class="l" id="91"> 91 <span class="php-comment">     * @param int   $categoryId The id of the category to edit
+</span></span><span class="l" id="92"> 92 <span class="php-comment">     * @param array $data       The category data
+</span></span><span class="l" id="93"> 93 <span class="php-comment">     *
+</span></span><span class="l" id="94"> 94 <span class="php-comment">     * @return string A success message
+</span></span><span class="l" id="95"> 95 <span class="php-comment">     */</span>
+</span><span class="l" id="96"> 96     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> editCategory(<span class="php-var">$categoryId</span>, <span class="php-keyword1">array</span> <span class="php-var">$data</span>)
+</span><span class="l" id="97"> 97     {
+</span><span class="l" id="98"> 98         <span class="php-var">$cat_name</span> = <span class="php-var">$data</span>[<span class="php-quote">'name'</span>];
+</span><span class="l" id="99"> 99 
+</span><span class="l" id="100">100         <span class="php-var">$db</span> = rex_sql::factory();
+</span><span class="l" id="101">101         <span class="php-var">$db</span>-&gt;setTable(rex::getTablePrefix() . <span class="php-quote">'media_category'</span>);
+</span><span class="l" id="102">102         <span class="php-var">$db</span>-&gt;setWhere([<span class="php-quote">'id'</span> =&gt; <span class="php-var">$categoryId</span>]);
+</span><span class="l" id="103">103         <span class="php-var">$db</span>-&gt;setValue(<span class="php-quote">'name'</span>, <span class="php-var">$cat_name</span>);
+</span><span class="l" id="104">104         <span class="php-var">$db</span>-&gt;addGlobalUpdateFields();
+</span><span class="l" id="105">105 
+</span><span class="l" id="106">106         <span class="php-var">$db</span>-&gt;update();
+</span><span class="l" id="107">107 
+</span><span class="l" id="108">108         rex_media_cache::deleteCategory(<span class="php-var">$categoryId</span>);
+</span><span class="l" id="109">109         <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'pool_kat_updated'</span>, <span class="php-var">$cat_name</span>);
+</span><span class="l" id="110">110     }
+</span><span class="l" id="111">111 }
+</span><span class="l" id="112">112 </span></code></pre>
  </body>
 </html>

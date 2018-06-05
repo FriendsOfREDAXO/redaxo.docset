@@ -7,89 +7,89 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
-</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
-</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * @package redaxo\media-manager
-</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> */</span>
-</span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-keyword1">class</span> <a href="#rex_effect_header" id="rex_effect_header">rex_effect_header</a> <span class="php-keyword1">extends</span> rex_effect_abstract
-</span><span class="l" id="7"><a class="l" href="#7"> 7 </a>{
-</span><span class="l" id="8"><a class="l" href="#8"> 8 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_execute" id="_execute">execute</a>()
-</span><span class="l" id="9"><a class="l" href="#9"> 9 </a>    {
-</span><span class="l" id="10"><a class="l" href="#10">10 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>] == <span class="php-quote">'no_cache'</span>) {
-</span><span class="l" id="11"><a class="l" href="#11">11 </a>            <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Cache-Control'</span>, <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span>);
-</span><span class="l" id="12"><a class="l" href="#12">12 </a>            <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Expires'</span>, <span class="php-quote">'Sat, 26 Jul 1997 05:00:00 GMT'</span>); <span class="php-comment">// in the past</span>
-</span><span class="l" id="13"><a class="l" href="#13">13 </a>        } <span class="php-keyword1">elseif</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>] !== <span class="php-quote">'cache'</span> <span class="php-comment">/* bc */</span> &amp;&amp; <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>] !== <span class="php-quote">'unspecified'</span>) {
-</span><span class="l" id="14"><a class="l" href="#14">14 </a>            <span class="php-keyword1">switch</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>]) {
-</span><span class="l" id="15"><a class="l" href="#15">15 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 min'</span>:
-</span><span class="l" id="16"><a class="l" href="#16">16 </a>                    <span class="php-var">$seconds</span> = <span class="php-num">60</span>;
-</span><span class="l" id="17"><a class="l" href="#17">17 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="18"><a class="l" href="#18">18 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 hour'</span>:
-</span><span class="l" id="19"><a class="l" href="#19">19 </a>                    <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span>;
-</span><span class="l" id="20"><a class="l" href="#20">20 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="21"><a class="l" href="#21">21 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 day'</span>:
-</span><span class="l" id="22"><a class="l" href="#22">22 </a>                    <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span>;
-</span><span class="l" id="23"><a class="l" href="#23">23 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="24"><a class="l" href="#24">24 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 week'</span>:
-</span><span class="l" id="25"><a class="l" href="#25">25 </a>                    <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span> * <span class="php-num">7</span>;
-</span><span class="l" id="26"><a class="l" href="#26">26 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="27"><a class="l" href="#27">27 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 month'</span>:
-</span><span class="l" id="28"><a class="l" href="#28">28 </a>                    <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span> * <span class="php-num">30</span>;
-</span><span class="l" id="29"><a class="l" href="#29">29 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="30"><a class="l" href="#30">30 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 year'</span>:
-</span><span class="l" id="31"><a class="l" href="#31">31 </a>                <span class="php-keyword1">case</span> <span class="php-quote">'immutable'</span>:
-</span><span class="l" id="32"><a class="l" href="#32">32 </a>                    <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span> * <span class="php-num">365</span>;
-</span><span class="l" id="33"><a class="l" href="#33">33 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="34"><a class="l" href="#34">34 </a>                <span class="php-keyword1">default</span>:
-</span><span class="l" id="35"><a class="l" href="#35">35 </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> LogicException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Unsupported cache duration "%s".'</span>, <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>]));
-</span><span class="l" id="36"><a class="l" href="#36">36 </a>            }
-</span><span class="l" id="37"><a class="l" href="#37">37 </a>
-</span><span class="l" id="38"><a class="l" href="#38">38 </a>            <span class="php-var">$cacheControl</span> = <span class="php-quote">'proxy-revalidate, private, max-age='</span>.<span class="php-var">$seconds</span>;
-</span><span class="l" id="39"><a class="l" href="#39">39 </a>
-</span><span class="l" id="40"><a class="l" href="#40">40 </a>            <span class="php-keyword1">if</span> (<span class="php-quote">'immutable'</span> === <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>]) {
-</span><span class="l" id="41"><a class="l" href="#41">41 </a>                <span class="php-var">$cacheControl</span> .= <span class="php-quote">', immutable'</span>;
-</span><span class="l" id="42"><a class="l" href="#42">42 </a>            }
-</span><span class="l" id="43"><a class="l" href="#43">43 </a>
-</span><span class="l" id="44"><a class="l" href="#44">44 </a>            <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Cache-Control'</span>, <span class="php-var">$cacheControl</span>);
-</span><span class="l" id="45"><a class="l" href="#45">45 </a>        }
-</span><span class="l" id="46"><a class="l" href="#46">46 </a>
-</span><span class="l" id="47"><a class="l" href="#47">47 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'download'</span>] == <span class="php-quote">'download'</span>) {
-</span><span class="l" id="48"><a class="l" href="#48">48 </a>            <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Content-Disposition'</span>, <span class="php-quote">'attachment; filename="'</span> . <span class="php-keyword2">basename</span>(<span class="php-var">$this</span>-&gt;media-&gt;getMediaFilename()) . <span class="php-quote">'";'</span>);
-</span><span class="l" id="49"><a class="l" href="#49">49 </a>        }
-</span><span class="l" id="50"><a class="l" href="#50">50 </a>
-</span><span class="l" id="51"><a class="l" href="#51">51 </a>        <span class="php-comment">/*
-</span></span><span class="l" id="52"><a class="l" href="#52">52 </a><span class="php-comment">         header("Pragma: public"); // required
-</span></span><span class="l" id="53"><a class="l" href="#53">53 </a><span class="php-comment">         header("Expires: 0");
-</span></span><span class="l" id="54"><a class="l" href="#54">54 </a><span class="php-comment">         header("Content-Transfer-Encoding: binary");
-</span></span><span class="l" id="55"><a class="l" href="#55">55 </a><span class="php-comment">         header("Content-Length: ".$fsize);
-</span></span><span class="l" id="56"><a class="l" href="#56">56 </a><span class="php-comment">         */</span>
-</span><span class="l" id="57"><a class="l" href="#57">57 </a>    }
-</span><span class="l" id="58"><a class="l" href="#58">58 </a>
-</span><span class="l" id="59"><a class="l" href="#59">59 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getName" id="_getName">getName</a>()
-</span><span class="l" id="60"><a class="l" href="#60">60 </a>    {
-</span><span class="l" id="61"><a class="l" href="#61">61 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'media_manager_effect_header'</span>);
-</span><span class="l" id="62"><a class="l" href="#62">62 </a>    }
-</span><span class="l" id="63"><a class="l" href="#63">63 </a>
-</span><span class="l" id="64"><a class="l" href="#64">64 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getParams" id="_getParams">getParams</a>()
-</span><span class="l" id="65"><a class="l" href="#65">65 </a>    {
-</span><span class="l" id="66"><a class="l" href="#66">66 </a>        <span class="php-keyword1">return</span> [
-</span><span class="l" id="67"><a class="l" href="#67">67 </a>            [
-</span><span class="l" id="68"><a class="l" href="#68">68 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_header_download'</span>),
-</span><span class="l" id="69"><a class="l" href="#69">69 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'download'</span>,
-</span><span class="l" id="70"><a class="l" href="#70">70 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'select'</span>,
-</span><span class="l" id="71"><a class="l" href="#71">71 </a>                <span class="php-quote">'options'</span> =&gt; [<span class="php-quote">'open_media'</span>, <span class="php-quote">'download'</span>],
-</span><span class="l" id="72"><a class="l" href="#72">72 </a>                <span class="php-quote">'default'</span> =&gt; <span class="php-quote">'open_media'</span>,
-</span><span class="l" id="73"><a class="l" href="#73">73 </a>            ],
-</span><span class="l" id="74"><a class="l" href="#74">74 </a>            [
-</span><span class="l" id="75"><a class="l" href="#75">75 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_header_cache'</span>),
-</span><span class="l" id="76"><a class="l" href="#76">76 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'cache'</span>,
-</span><span class="l" id="77"><a class="l" href="#77">77 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'select'</span>,
-</span><span class="l" id="78"><a class="l" href="#78">78 </a>                <span class="php-quote">'options'</span> =&gt; [<span class="php-quote">'no_cache'</span>, <span class="php-quote">'unspecified'</span>, <span class="php-quote">'max-age: 1 min'</span>, <span class="php-quote">'max-age: 1 hour'</span>, <span class="php-quote">'max-age: 1 day'</span>, <span class="php-quote">'max-age: 1 week'</span>, <span class="php-quote">'max-age: 1 month'</span>, <span class="php-quote">'max-age: 1 year'</span>, <span class="php-quote">'immutable'</span>],
-</span><span class="l" id="79"><a class="l" href="#79">79 </a>                <span class="php-quote">'default'</span> =&gt; <span class="php-quote">'no_cache'</span>,
-</span><span class="l" id="80"><a class="l" href="#80">80 </a>            ],
-</span><span class="l" id="81"><a class="l" href="#81">81 </a>        ];
-</span><span class="l" id="82"><a class="l" href="#82">82 </a>    }
-</span><span class="l" id="83"><a class="l" href="#83">83 </a>}
-</span><span class="l" id="84"><a class="l" href="#84">84 </a></span></code></pre>
+  <pre id="source"><code><span class="l" id="1"> 1 <span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"> 2 
+</span><span class="l" id="3"> 3 <span class="php-comment">/**
+</span></span><span class="l" id="4"> 4 <span class="php-comment"> * @package redaxo\media-manager
+</span></span><span class="l" id="5"> 5 <span class="php-comment"> */</span>
+</span><span class="l" id="6"> 6 <span class="php-keyword1">class</span> rex_effect_header <span class="php-keyword1">extends</span> rex_effect_abstract
+</span><span class="l" id="7"> 7 {
+</span><span class="l" id="8"> 8     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> execute()
+</span><span class="l" id="9"> 9     {
+</span><span class="l" id="10">10         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>] == <span class="php-quote">'no_cache'</span>) {
+</span><span class="l" id="11">11             <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Cache-Control'</span>, <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span>);
+</span><span class="l" id="12">12             <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Expires'</span>, <span class="php-quote">'Sat, 26 Jul 1997 05:00:00 GMT'</span>); <span class="php-comment">// in the past</span>
+</span><span class="l" id="13">13         } <span class="php-keyword1">elseif</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>] !== <span class="php-quote">'cache'</span> <span class="php-comment">/* bc */</span> &amp;&amp; <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>] !== <span class="php-quote">'unspecified'</span>) {
+</span><span class="l" id="14">14             <span class="php-keyword1">switch</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>]) {
+</span><span class="l" id="15">15                 <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 min'</span>:
+</span><span class="l" id="16">16                     <span class="php-var">$seconds</span> = <span class="php-num">60</span>;
+</span><span class="l" id="17">17                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="18">18                 <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 hour'</span>:
+</span><span class="l" id="19">19                     <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span>;
+</span><span class="l" id="20">20                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="21">21                 <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 day'</span>:
+</span><span class="l" id="22">22                     <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span>;
+</span><span class="l" id="23">23                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="24">24                 <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 week'</span>:
+</span><span class="l" id="25">25                     <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span> * <span class="php-num">7</span>;
+</span><span class="l" id="26">26                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="27">27                 <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 month'</span>:
+</span><span class="l" id="28">28                     <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span> * <span class="php-num">30</span>;
+</span><span class="l" id="29">29                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="30">30                 <span class="php-keyword1">case</span> <span class="php-quote">'max-age: 1 year'</span>:
+</span><span class="l" id="31">31                 <span class="php-keyword1">case</span> <span class="php-quote">'immutable'</span>:
+</span><span class="l" id="32">32                     <span class="php-var">$seconds</span> = <span class="php-num">60</span> * <span class="php-num">60</span> * <span class="php-num">24</span> * <span class="php-num">365</span>;
+</span><span class="l" id="33">33                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="34">34                 <span class="php-keyword1">default</span>:
+</span><span class="l" id="35">35                     <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> LogicException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Unsupported cache duration "%s".'</span>, <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>]));
+</span><span class="l" id="36">36             }
+</span><span class="l" id="37">37 
+</span><span class="l" id="38">38             <span class="php-var">$cacheControl</span> = <span class="php-quote">'proxy-revalidate, private, max-age='</span>.<span class="php-var">$seconds</span>;
+</span><span class="l" id="39">39 
+</span><span class="l" id="40">40             <span class="php-keyword1">if</span> (<span class="php-quote">'immutable'</span> === <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'cache'</span>]) {
+</span><span class="l" id="41">41                 <span class="php-var">$cacheControl</span> .= <span class="php-quote">', immutable'</span>;
+</span><span class="l" id="42">42             }
+</span><span class="l" id="43">43 
+</span><span class="l" id="44">44             <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Cache-Control'</span>, <span class="php-var">$cacheControl</span>);
+</span><span class="l" id="45">45         }
+</span><span class="l" id="46">46 
+</span><span class="l" id="47">47         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'download'</span>] == <span class="php-quote">'download'</span>) {
+</span><span class="l" id="48">48             <span class="php-var">$this</span>-&gt;media-&gt;setHeader(<span class="php-quote">'Content-Disposition'</span>, <span class="php-quote">'attachment; filename="'</span> . <span class="php-keyword2">basename</span>(<span class="php-var">$this</span>-&gt;media-&gt;getMediaFilename()) . <span class="php-quote">'";'</span>);
+</span><span class="l" id="49">49         }
+</span><span class="l" id="50">50 
+</span><span class="l" id="51">51         <span class="php-comment">/*
+</span></span><span class="l" id="52">52 <span class="php-comment">         header("Pragma: public"); // required
+</span></span><span class="l" id="53">53 <span class="php-comment">         header("Expires: 0");
+</span></span><span class="l" id="54">54 <span class="php-comment">         header("Content-Transfer-Encoding: binary");
+</span></span><span class="l" id="55">55 <span class="php-comment">         header("Content-Length: ".$fsize);
+</span></span><span class="l" id="56">56 <span class="php-comment">         */</span>
+</span><span class="l" id="57">57     }
+</span><span class="l" id="58">58 
+</span><span class="l" id="59">59     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getName()
+</span><span class="l" id="60">60     {
+</span><span class="l" id="61">61         <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'media_manager_effect_header'</span>);
+</span><span class="l" id="62">62     }
+</span><span class="l" id="63">63 
+</span><span class="l" id="64">64     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getParams()
+</span><span class="l" id="65">65     {
+</span><span class="l" id="66">66         <span class="php-keyword1">return</span> [
+</span><span class="l" id="67">67             [
+</span><span class="l" id="68">68                 <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_header_download'</span>),
+</span><span class="l" id="69">69                 <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'download'</span>,
+</span><span class="l" id="70">70                 <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'select'</span>,
+</span><span class="l" id="71">71                 <span class="php-quote">'options'</span> =&gt; [<span class="php-quote">'open_media'</span>, <span class="php-quote">'download'</span>],
+</span><span class="l" id="72">72                 <span class="php-quote">'default'</span> =&gt; <span class="php-quote">'open_media'</span>,
+</span><span class="l" id="73">73             ],
+</span><span class="l" id="74">74             [
+</span><span class="l" id="75">75                 <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_header_cache'</span>),
+</span><span class="l" id="76">76                 <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'cache'</span>,
+</span><span class="l" id="77">77                 <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'select'</span>,
+</span><span class="l" id="78">78                 <span class="php-quote">'options'</span> =&gt; [<span class="php-quote">'no_cache'</span>, <span class="php-quote">'unspecified'</span>, <span class="php-quote">'max-age: 1 min'</span>, <span class="php-quote">'max-age: 1 hour'</span>, <span class="php-quote">'max-age: 1 day'</span>, <span class="php-quote">'max-age: 1 week'</span>, <span class="php-quote">'max-age: 1 month'</span>, <span class="php-quote">'max-age: 1 year'</span>, <span class="php-quote">'immutable'</span>],
+</span><span class="l" id="79">79                 <span class="php-quote">'default'</span> =&gt; <span class="php-quote">'no_cache'</span>,
+</span><span class="l" id="80">80             ],
+</span><span class="l" id="81">81         ];
+</span><span class="l" id="82">82     }
+</span><span class="l" id="83">83 }
+</span><span class="l" id="84">84 </span></code></pre>
  </body>
 </html>

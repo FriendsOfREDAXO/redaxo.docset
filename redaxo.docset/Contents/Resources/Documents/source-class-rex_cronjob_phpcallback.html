@@ -7,71 +7,71 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
-</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
-</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * Cronjob Addon.
-</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> *
-</span></span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-comment"> * @author gharlan[at]web[dot]de Gregor Harlan
-</span></span><span class="l" id="7"><a class="l" href="#7"> 7 </a><span class="php-comment"> *
-</span></span><span class="l" id="8"><a class="l" href="#8"> 8 </a><span class="php-comment"> * @package redaxo\cronjob
-</span></span><span class="l" id="9"><a class="l" href="#9"> 9 </a><span class="php-comment"> */</span>
-</span><span class="l" id="10"><a class="l" href="#10">10 </a>
-</span><span class="l" id="11"><a class="l" href="#11">11 </a><span class="php-keyword1">class</span> <a href="#rex_cronjob_phpcallback" id="rex_cronjob_phpcallback">rex_cronjob_phpcallback</a> <span class="php-keyword1">extends</span> rex_cronjob
-</span><span class="l" id="12"><a class="l" href="#12">12 </a>{
-</span><span class="l" id="13"><a class="l" href="#13">13 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_execute" id="_execute">execute</a>()
-</span><span class="l" id="14"><a class="l" href="#14">14 </a>    {
-</span><span class="l" id="15"><a class="l" href="#15">15 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/^\s*(?:(\w*?)\:\:)?(\w*?)(?:\((.*?)\))?\;?\s*$/'</span>, <span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'callback'</span>), <span class="php-var">$matches</span>)) {
-</span><span class="l" id="16"><a class="l" href="#16">16 </a>            <span class="php-var">$callback</span> = <span class="php-var">$matches</span>[<span class="php-num">2</span>];
-</span><span class="l" id="17"><a class="l" href="#17">17 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$matches</span>[<span class="php-num">1</span>] != <span class="php-quote">''</span>) {
-</span><span class="l" id="18"><a class="l" href="#18">18 </a>                <span class="php-var">$callback</span> = [<span class="php-var">$matches</span>[<span class="php-num">1</span>], <span class="php-var">$callback</span>];
-</span><span class="l" id="19"><a class="l" href="#19">19 </a>            }
-</span><span class="l" id="20"><a class="l" href="#20">20 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_callable</span>(<span class="php-var">$callback</span>)) {
-</span><span class="l" id="21"><a class="l" href="#21">21 </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$callback</span>)) {
-</span><span class="l" id="22"><a class="l" href="#22">22 </a>                    <span class="php-var">$callback</span> = <span class="php-var">$callback</span>[<span class="php-num">0</span>] . <span class="php-quote">'::'</span> . <span class="php-var">$callback</span>[<span class="php-num">1</span>];
-</span><span class="l" id="23"><a class="l" href="#23">23 </a>                }
-</span><span class="l" id="24"><a class="l" href="#24">24 </a>                <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$callback</span> . <span class="php-quote">'() not callable'</span>);
-</span><span class="l" id="25"><a class="l" href="#25">25 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="26"><a class="l" href="#26">26 </a>            }
-</span><span class="l" id="27"><a class="l" href="#27">27 </a>            <span class="php-var">$params</span> = [];
-</span><span class="l" id="28"><a class="l" href="#28">28 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$matches</span>[<span class="php-num">3</span>]) &amp;&amp; <span class="php-var">$matches</span>[<span class="php-num">3</span>] != <span class="php-quote">''</span>) {
-</span><span class="l" id="29"><a class="l" href="#29">29 </a>                <span class="php-var">$params</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">','</span>, <span class="php-var">$matches</span>[<span class="php-num">3</span>]);
-</span><span class="l" id="30"><a class="l" href="#30">30 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$params</span> <span class="php-keyword1">as</span> <span class="php-var">$i</span> =&gt; <span class="php-var">$param</span>) {
-</span><span class="l" id="31"><a class="l" href="#31">31 </a>                    <span class="php-var">$param</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'/^(\\\'|\")?(.*?)\\1$/'</span>, <span class="php-quote">'$2'</span>, <span class="php-keyword2">trim</span>(<span class="php-var">$param</span>));
-</span><span class="l" id="32"><a class="l" href="#32">32 </a>                    <span class="php-var">$params</span>[<span class="php-var">$i</span>] = <span class="php-var">$param</span>;
-</span><span class="l" id="33"><a class="l" href="#33">33 </a>                }
-</span><span class="l" id="34"><a class="l" href="#34">34 </a>            }
-</span><span class="l" id="35"><a class="l" href="#35">35 </a>            <span class="php-var">$return</span> = <span class="php-keyword2">call_user_func_array</span>(<span class="php-var">$callback</span>, <span class="php-var">$params</span>);
-</span><span class="l" id="36"><a class="l" href="#36">36 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$return</span> !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="37"><a class="l" href="#37">37 </a>                <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$return</span>)) {
-</span><span class="l" id="38"><a class="l" href="#38">38 </a>                    <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$return</span>);
-</span><span class="l" id="39"><a class="l" href="#39">39 </a>                }
-</span><span class="l" id="40"><a class="l" href="#40">40 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
-</span><span class="l" id="41"><a class="l" href="#41">41 </a>            }
-</span><span class="l" id="42"><a class="l" href="#42">42 </a>            <span class="php-var">$this</span>-&gt;setMessage(<span class="php-quote">'Error in callback'</span>);
-</span><span class="l" id="43"><a class="l" href="#43">43 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="44"><a class="l" href="#44">44 </a>        }
-</span><span class="l" id="45"><a class="l" href="#45">45 </a>        <span class="php-var">$this</span>-&gt;setMessage(<span class="php-quote">'Syntax error in callback'</span>);
-</span><span class="l" id="46"><a class="l" href="#46">46 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="47"><a class="l" href="#47">47 </a>    }
-</span><span class="l" id="48"><a class="l" href="#48">48 </a>
-</span><span class="l" id="49"><a class="l" href="#49">49 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTypeName" id="_getTypeName">getTypeName</a>()
-</span><span class="l" id="50"><a class="l" href="#50">50 </a>    {
-</span><span class="l" id="51"><a class="l" href="#51">51 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'cronjob_type_phpcallback'</span>);
-</span><span class="l" id="52"><a class="l" href="#52">52 </a>    }
-</span><span class="l" id="53"><a class="l" href="#53">53 </a>
-</span><span class="l" id="54"><a class="l" href="#54">54 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getParamFields" id="_getParamFields">getParamFields</a>()
-</span><span class="l" id="55"><a class="l" href="#55">55 </a>    {
-</span><span class="l" id="56"><a class="l" href="#56">56 </a>        <span class="php-keyword1">return</span> [
-</span><span class="l" id="57"><a class="l" href="#57">57 </a>            [
-</span><span class="l" id="58"><a class="l" href="#58">58 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_phpcallback'</span>),
-</span><span class="l" id="59"><a class="l" href="#59">59 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'callback'</span>,
-</span><span class="l" id="60"><a class="l" href="#60">60 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
-</span><span class="l" id="61"><a class="l" href="#61">61 </a>                <span class="php-quote">'notice'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_examples'</span>) . <span class="php-quote">': foo(), foo(1, \'string\'), foo::bar()'</span>,
-</span><span class="l" id="62"><a class="l" href="#62">62 </a>            ],
-</span><span class="l" id="63"><a class="l" href="#63">63 </a>        ];
-</span><span class="l" id="64"><a class="l" href="#64">64 </a>    }
-</span><span class="l" id="65"><a class="l" href="#65">65 </a>}
-</span><span class="l" id="66"><a class="l" href="#66">66 </a></span></code></pre>
+  <pre id="source"><code><span class="l" id="1"> 1 <span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"> 2 
+</span><span class="l" id="3"> 3 <span class="php-comment">/**
+</span></span><span class="l" id="4"> 4 <span class="php-comment"> * Cronjob Addon.
+</span></span><span class="l" id="5"> 5 <span class="php-comment"> *
+</span></span><span class="l" id="6"> 6 <span class="php-comment"> * @author gharlan[at]web[dot]de Gregor Harlan
+</span></span><span class="l" id="7"> 7 <span class="php-comment"> *
+</span></span><span class="l" id="8"> 8 <span class="php-comment"> * @package redaxo\cronjob
+</span></span><span class="l" id="9"> 9 <span class="php-comment"> */</span>
+</span><span class="l" id="10">10 
+</span><span class="l" id="11">11 <span class="php-keyword1">class</span> rex_cronjob_phpcallback <span class="php-keyword1">extends</span> rex_cronjob
+</span><span class="l" id="12">12 {
+</span><span class="l" id="13">13     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> execute()
+</span><span class="l" id="14">14     {
+</span><span class="l" id="15">15         <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'/^\s*(?:(\w*?)\:\:)?(\w*?)(?:\((.*?)\))?\;?\s*$/'</span>, <span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'callback'</span>), <span class="php-var">$matches</span>)) {
+</span><span class="l" id="16">16             <span class="php-var">$callback</span> = <span class="php-var">$matches</span>[<span class="php-num">2</span>];
+</span><span class="l" id="17">17             <span class="php-keyword1">if</span> (<span class="php-var">$matches</span>[<span class="php-num">1</span>] != <span class="php-quote">''</span>) {
+</span><span class="l" id="18">18                 <span class="php-var">$callback</span> = [<span class="php-var">$matches</span>[<span class="php-num">1</span>], <span class="php-var">$callback</span>];
+</span><span class="l" id="19">19             }
+</span><span class="l" id="20">20             <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_callable</span>(<span class="php-var">$callback</span>)) {
+</span><span class="l" id="21">21                 <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$callback</span>)) {
+</span><span class="l" id="22">22                     <span class="php-var">$callback</span> = <span class="php-var">$callback</span>[<span class="php-num">0</span>] . <span class="php-quote">'::'</span> . <span class="php-var">$callback</span>[<span class="php-num">1</span>];
+</span><span class="l" id="23">23                 }
+</span><span class="l" id="24">24                 <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$callback</span> . <span class="php-quote">'() not callable'</span>);
+</span><span class="l" id="25">25                 <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="26">26             }
+</span><span class="l" id="27">27             <span class="php-var">$params</span> = [];
+</span><span class="l" id="28">28             <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$matches</span>[<span class="php-num">3</span>]) &amp;&amp; <span class="php-var">$matches</span>[<span class="php-num">3</span>] != <span class="php-quote">''</span>) {
+</span><span class="l" id="29">29                 <span class="php-var">$params</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">','</span>, <span class="php-var">$matches</span>[<span class="php-num">3</span>]);
+</span><span class="l" id="30">30                 <span class="php-keyword1">foreach</span> (<span class="php-var">$params</span> <span class="php-keyword1">as</span> <span class="php-var">$i</span> =&gt; <span class="php-var">$param</span>) {
+</span><span class="l" id="31">31                     <span class="php-var">$param</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'/^(\\\'|\")?(.*?)\\1$/'</span>, <span class="php-quote">'$2'</span>, <span class="php-keyword2">trim</span>(<span class="php-var">$param</span>));
+</span><span class="l" id="32">32                     <span class="php-var">$params</span>[<span class="php-var">$i</span>] = <span class="php-var">$param</span>;
+</span><span class="l" id="33">33                 }
+</span><span class="l" id="34">34             }
+</span><span class="l" id="35">35             <span class="php-var">$return</span> = <span class="php-keyword2">call_user_func_array</span>(<span class="php-var">$callback</span>, <span class="php-var">$params</span>);
+</span><span class="l" id="36">36             <span class="php-keyword1">if</span> (<span class="php-var">$return</span> !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="37">37                 <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$return</span>)) {
+</span><span class="l" id="38">38                     <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$return</span>);
+</span><span class="l" id="39">39                 }
+</span><span class="l" id="40">40                 <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span class="l" id="41">41             }
+</span><span class="l" id="42">42             <span class="php-var">$this</span>-&gt;setMessage(<span class="php-quote">'Error in callback'</span>);
+</span><span class="l" id="43">43             <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="44">44         }
+</span><span class="l" id="45">45         <span class="php-var">$this</span>-&gt;setMessage(<span class="php-quote">'Syntax error in callback'</span>);
+</span><span class="l" id="46">46         <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="47">47     }
+</span><span class="l" id="48">48 
+</span><span class="l" id="49">49     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getTypeName()
+</span><span class="l" id="50">50     {
+</span><span class="l" id="51">51         <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'cronjob_type_phpcallback'</span>);
+</span><span class="l" id="52">52     }
+</span><span class="l" id="53">53 
+</span><span class="l" id="54">54     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getParamFields()
+</span><span class="l" id="55">55     {
+</span><span class="l" id="56">56         <span class="php-keyword1">return</span> [
+</span><span class="l" id="57">57             [
+</span><span class="l" id="58">58                 <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_type_phpcallback'</span>),
+</span><span class="l" id="59">59                 <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'callback'</span>,
+</span><span class="l" id="60">60                 <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
+</span><span class="l" id="61">61                 <span class="php-quote">'notice'</span> =&gt; rex_i18n::msg(<span class="php-quote">'cronjob_examples'</span>) . <span class="php-quote">': foo(), foo(1, \'string\'), foo::bar()'</span>,
+</span><span class="l" id="62">62             ],
+</span><span class="l" id="63">63         ];
+</span><span class="l" id="64">64     }
+</span><span class="l" id="65">65 }
+</span><span class="l" id="66">66 </span></code></pre>
  </body>
 </html>
