@@ -309,200 +309,219 @@
 </span></span><span class="l" id="300">300 <span class="php-comment">     */</span>
 </span><span class="l" id="301">301     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> exportDb(<span class="php-var">$filename</span>, <span class="php-keyword1">array</span> <span class="php-var">$tables</span> = <span class="php-keyword1">null</span>)
 </span><span class="l" id="302">302     {
-</span><span class="l" id="303">303         <span class="php-var">$fp</span> = @<span class="php-keyword2">fopen</span>(<span class="php-var">$filename</span>, <span class="php-quote">'w'</span>);
-</span><span class="l" id="304">304 
-</span><span class="l" id="305">305         <span class="php-keyword1">if</span> (!<span class="php-var">$fp</span>) {
-</span><span class="l" id="306">306             <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="307">307         }
-</span><span class="l" id="308">308 
-</span><span class="l" id="309">309         <span class="php-var">$sql</span> = rex_sql::factory();
-</span><span class="l" id="310">310 
-</span><span class="l" id="311">311         <span class="php-var">$nl</span> = <span class="php-quote">"\n"</span>;
-</span><span class="l" id="312">312         <span class="php-var">$insertSize</span> = <span class="php-num">5000</span>;
-</span><span class="l" id="313">313 
-</span><span class="l" id="314">314         <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="315">315         rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_BEFORE_DB_EXPORT'</span>));
+</span><span class="l" id="303">303         <span class="php-var">$fp</span> = @<span class="php-keyword2">tmpfile</span>();
+</span><span class="l" id="304">304         <span class="php-var">$tempCacheFile</span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="305">305 
+</span><span class="l" id="306">306         <span class="php-comment">// in case of permission issues/misconfigured tmp-folders</span>
+</span><span class="l" id="307">307         <span class="php-keyword1">if</span> (!<span class="php-var">$fp</span>) {
+</span><span class="l" id="308">308             <span class="php-var">$tempCacheFile</span> = rex_path::cache(<span class="php-keyword2">basename</span>(<span class="php-var">$filename</span>));
+</span><span class="l" id="309">309             <span class="php-var">$fp</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-quote">'w'</span>);
+</span><span class="l" id="310">310             <span class="php-keyword1">if</span> (!<span class="php-var">$fp</span>) {
+</span><span class="l" id="311">311                 <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="312">312             }
+</span><span class="l" id="313">313         }
+</span><span class="l" id="314">314 
+</span><span class="l" id="315">315         <span class="php-var">$sql</span> = rex_sql::factory();
 </span><span class="l" id="316">316 
-</span><span class="l" id="317">317         <span class="php-comment">// Versionsstempel hinzufügen</span>
-</span><span class="l" id="318">318         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'## Redaxo Database Dump Version '</span> . rex::getVersion(<span class="php-quote">'%s'</span>) . <span class="php-var">$nl</span>);
-</span><span class="l" id="319">319         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'## Prefix '</span> . rex::getTablePrefix() . <span class="php-var">$nl</span>);
-</span><span class="l" id="320">320         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'## charset utf-8'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="321">321         <span class="php-comment">//  fwrite($fp, '/*!40110 START TRANSACTION; */'.$nl);</span>
+</span><span class="l" id="317">317         <span class="php-var">$nl</span> = <span class="php-quote">"\n"</span>;
+</span><span class="l" id="318">318         <span class="php-var">$insertSize</span> = <span class="php-num">4000</span>;
+</span><span class="l" id="319">319 
+</span><span class="l" id="320">320         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="321">321         rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_BEFORE_DB_EXPORT'</span>));
 </span><span class="l" id="322">322 
-</span><span class="l" id="323">323         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'SET FOREIGN_KEY_CHECKS = 0;'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="324">324 
-</span><span class="l" id="325">325         <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$tables</span>) {
-</span><span class="l" id="326">326             <span class="php-var">$tables</span> = [];
-</span><span class="l" id="327">327             <span class="php-keyword1">foreach</span> (rex_sql::showTables(<span class="php-num">1</span>, rex::getTablePrefix()) <span class="php-keyword1">as</span> <span class="php-var">$table</span>) {
-</span><span class="l" id="328">328                 <span class="php-keyword1">if</span> (<span class="php-var">$table</span> != rex::getTable(<span class="php-quote">'user'</span>) <span class="php-comment">// User Tabelle nicht exportieren</span>
-</span><span class="l" id="329">329                     &amp;&amp; <span class="php-keyword2">substr</span>(<span class="php-var">$table</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(rex::getTablePrefix() . rex::getTempPrefix())) != rex::getTablePrefix() . rex::getTempPrefix()
-</span><span class="l" id="330">330                 ) { <span class="php-comment">// Tabellen die mit rex_tmp_ beginnne, werden nicht exportiert!</span>
-</span><span class="l" id="331">331                     <span class="php-var">$tables</span>[] = <span class="php-var">$table</span>;
-</span><span class="l" id="332">332                 }
-</span><span class="l" id="333">333             }
-</span><span class="l" id="334">334         }
-</span><span class="l" id="335">335         <span class="php-keyword1">foreach</span> (<span class="php-var">$tables</span> <span class="php-keyword1">as</span> <span class="php-var">$table</span>) {
-</span><span class="l" id="336">336             <span class="php-comment">//---- export metadata</span>
-</span><span class="l" id="337">337             <span class="php-var">$create</span> = rex_sql::showCreateTable(<span class="php-var">$table</span>);
-</span><span class="l" id="338">338 
-</span><span class="l" id="339">339             <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'DROP TABLE IF EXISTS '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">';'</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="340">340             <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$create</span> . <span class="php-quote">';'</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="341">341 
-</span><span class="l" id="342">342             <span class="php-var">$fields</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'SHOW FIELDS FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>));
-</span><span class="l" id="343">343 
-</span><span class="l" id="344">344             <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> &amp;<span class="php-var">$field</span>) {
-</span><span class="l" id="345">345                 <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(bigint|int|smallint|mediumint|tinyint|timestamp)#i'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
-</span><span class="l" id="346">346                     <span class="php-var">$field</span> = <span class="php-quote">'int'</span>;
-</span><span class="l" id="347">347                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(float|double|decimal)#'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
-</span><span class="l" id="348">348                     <span class="php-var">$field</span> = <span class="php-quote">'double'</span>;
-</span><span class="l" id="349">349                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(char|varchar|text|longtext|mediumtext|tinytext)#'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
-</span><span class="l" id="350">350                     <span class="php-var">$field</span> = <span class="php-quote">'string'</span>;
-</span><span class="l" id="351">351                 }
-</span><span class="l" id="352">352                 <span class="php-comment">// else ?</span>
-</span><span class="l" id="353">353             }
-</span><span class="l" id="354">354 
-</span><span class="l" id="355">355             <span class="php-comment">//---- export tabledata</span>
-</span><span class="l" id="356">356             <span class="php-var">$start</span> = <span class="php-num">0</span>;
-</span><span class="l" id="357">357             <span class="php-var">$max</span> = <span class="php-var">$insertSize</span>;
-</span><span class="l" id="358">358 
-</span><span class="l" id="359">359             <span class="php-keyword1">do</span> {
-</span><span class="l" id="360">360                 <span class="php-var">$array</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'SELECT * FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' LIMIT '</span> . <span class="php-var">$start</span> . <span class="php-quote">','</span> . <span class="php-var">$max</span>, [], PDO::FETCH_NUM);
-</span><span class="l" id="361">361                 <span class="php-var">$count</span> = <span class="php-var">$sql</span>-&gt;getRows();
-</span><span class="l" id="362">362 
-</span><span class="l" id="363">363                 <span class="php-keyword1">if</span> (<span class="php-var">$count</span> &gt; <span class="php-num">0</span> &amp;&amp; <span class="php-var">$start</span> == <span class="php-num">0</span>) {
-</span><span class="l" id="364">364                     <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'LOCK TABLES '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' WRITE;'</span>);
-</span><span class="l" id="365">365                     <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' DISABLE KEYS */;'</span>);
-</span><span class="l" id="366">366                 } <span class="php-keyword1">elseif</span> (<span class="php-var">$count</span> == <span class="php-num">0</span>) {
-</span><span class="l" id="367">367                     <span class="php-keyword1">break</span>;
-</span><span class="l" id="368">368                 }
-</span><span class="l" id="369">369 
-</span><span class="l" id="370">370                 <span class="php-var">$start</span> += <span class="php-var">$max</span>;
-</span><span class="l" id="371">371                 <span class="php-var">$values</span> = [];
-</span><span class="l" id="372">372 
-</span><span class="l" id="373">373                 <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$row</span>) {
-</span><span class="l" id="374">374                     <span class="php-var">$record</span> = [];
+</span><span class="l" id="323">323         <span class="php-comment">// Versionsstempel hinzufügen</span>
+</span><span class="l" id="324">324         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'## Redaxo Database Dump Version '</span> . rex::getVersion(<span class="php-quote">'%s'</span>) . <span class="php-var">$nl</span>);
+</span><span class="l" id="325">325         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'## Prefix '</span> . rex::getTablePrefix() . <span class="php-var">$nl</span>);
+</span><span class="l" id="326">326         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'## charset utf-8'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="327">327         <span class="php-comment">//  fwrite($fp, '/*!40110 START TRANSACTION; */'.$nl);</span>
+</span><span class="l" id="328">328 
+</span><span class="l" id="329">329         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'SET FOREIGN_KEY_CHECKS = 0;'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="330">330 
+</span><span class="l" id="331">331         <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$tables</span>) {
+</span><span class="l" id="332">332             <span class="php-var">$tables</span> = [];
+</span><span class="l" id="333">333             <span class="php-keyword1">foreach</span> (rex_sql::showTables(<span class="php-num">1</span>, rex::getTablePrefix()) <span class="php-keyword1">as</span> <span class="php-var">$table</span>) {
+</span><span class="l" id="334">334                 <span class="php-keyword1">if</span> (<span class="php-var">$table</span> != rex::getTable(<span class="php-quote">'user'</span>) <span class="php-comment">// User Tabelle nicht exportieren</span>
+</span><span class="l" id="335">335                     &amp;&amp; <span class="php-keyword2">substr</span>(<span class="php-var">$table</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(rex::getTablePrefix() . rex::getTempPrefix())) != rex::getTablePrefix() . rex::getTempPrefix()
+</span><span class="l" id="336">336                 ) { <span class="php-comment">// Tabellen die mit rex_tmp_ beginnne, werden nicht exportiert!</span>
+</span><span class="l" id="337">337                     <span class="php-var">$tables</span>[] = <span class="php-var">$table</span>;
+</span><span class="l" id="338">338                 }
+</span><span class="l" id="339">339             }
+</span><span class="l" id="340">340         }
+</span><span class="l" id="341">341         <span class="php-keyword1">foreach</span> (<span class="php-var">$tables</span> <span class="php-keyword1">as</span> <span class="php-var">$table</span>) {
+</span><span class="l" id="342">342             <span class="php-comment">//---- export metadata</span>
+</span><span class="l" id="343">343             <span class="php-var">$create</span> = rex_sql::showCreateTable(<span class="php-var">$table</span>);
+</span><span class="l" id="344">344 
+</span><span class="l" id="345">345             <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'DROP TABLE IF EXISTS '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">';'</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="346">346             <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$create</span> . <span class="php-quote">';'</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="347">347 
+</span><span class="l" id="348">348             <span class="php-var">$fields</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'SHOW FIELDS FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>));
+</span><span class="l" id="349">349 
+</span><span class="l" id="350">350             <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> &amp;<span class="php-var">$field</span>) {
+</span><span class="l" id="351">351                 <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(bigint|int|smallint|mediumint|tinyint|timestamp)#i'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
+</span><span class="l" id="352">352                     <span class="php-var">$field</span> = <span class="php-quote">'int'</span>;
+</span><span class="l" id="353">353                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(float|double|decimal)#'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
+</span><span class="l" id="354">354                     <span class="php-var">$field</span> = <span class="php-quote">'double'</span>;
+</span><span class="l" id="355">355                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(char|varchar|text|longtext|mediumtext|tinytext)#'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
+</span><span class="l" id="356">356                     <span class="php-var">$field</span> = <span class="php-quote">'string'</span>;
+</span><span class="l" id="357">357                 }
+</span><span class="l" id="358">358                 <span class="php-comment">// else ?</span>
+</span><span class="l" id="359">359             }
+</span><span class="l" id="360">360 
+</span><span class="l" id="361">361             <span class="php-comment">//---- export tabledata</span>
+</span><span class="l" id="362">362             <span class="php-var">$start</span> = <span class="php-num">0</span>;
+</span><span class="l" id="363">363             <span class="php-var">$max</span> = <span class="php-var">$insertSize</span>;
+</span><span class="l" id="364">364 
+</span><span class="l" id="365">365             <span class="php-keyword1">do</span> {
+</span><span class="l" id="366">366                 <span class="php-var">$array</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'SELECT * FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' LIMIT '</span> . <span class="php-var">$start</span> . <span class="php-quote">','</span> . <span class="php-var">$max</span>, [], PDO::FETCH_NUM);
+</span><span class="l" id="367">367                 <span class="php-var">$count</span> = <span class="php-var">$sql</span>-&gt;getRows();
+</span><span class="l" id="368">368 
+</span><span class="l" id="369">369                 <span class="php-keyword1">if</span> (<span class="php-var">$count</span> &gt; <span class="php-num">0</span> &amp;&amp; <span class="php-var">$start</span> == <span class="php-num">0</span>) {
+</span><span class="l" id="370">370                     <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'LOCK TABLES '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' WRITE;'</span>);
+</span><span class="l" id="371">371                     <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' DISABLE KEYS */;'</span>);
+</span><span class="l" id="372">372                 } <span class="php-keyword1">elseif</span> (<span class="php-var">$count</span> == <span class="php-num">0</span>) {
+</span><span class="l" id="373">373                     <span class="php-keyword1">break</span>;
+</span><span class="l" id="374">374                 }
 </span><span class="l" id="375">375 
-</span><span class="l" id="376">376                     <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$idx</span> =&gt; <span class="php-var">$type</span>) {
-</span><span class="l" id="377">377                         <span class="php-var">$column</span> = <span class="php-var">$row</span>[<span class="php-var">$idx</span>];
+</span><span class="l" id="376">376                 <span class="php-var">$start</span> += <span class="php-var">$max</span>;
+</span><span class="l" id="377">377                 <span class="php-var">$values</span> = [];
 </span><span class="l" id="378">378 
-</span><span class="l" id="379">379                         <span class="php-keyword1">switch</span> (<span class="php-var">$type</span>) {
-</span><span class="l" id="380">380                             <span class="php-keyword1">case</span> <span class="php-quote">'int'</span>:
-</span><span class="l" id="381">381                                 <span class="php-var">$record</span>[] = (int) <span class="php-var">$column</span>;
-</span><span class="l" id="382">382                                 <span class="php-keyword1">break</span>;
-</span><span class="l" id="383">383                             <span class="php-keyword1">case</span> <span class="php-quote">'double'</span>:
-</span><span class="l" id="384">384                                 <span class="php-var">$record</span>[] = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%.10F'</span>, (float) <span class="php-var">$column</span>);
-</span><span class="l" id="385">385                                 <span class="php-keyword1">break</span>;
-</span><span class="l" id="386">386                             <span class="php-keyword1">case</span> <span class="php-quote">'string'</span>:
-</span><span class="l" id="387">387                             <span class="php-keyword1">default</span>:
-</span><span class="l" id="388">388                                 <span class="php-var">$record</span>[] = <span class="php-var">$sql</span>-&gt;escape(<span class="php-var">$column</span>, <span class="php-quote">"'"</span>);
-</span><span class="l" id="389">389                                 <span class="php-keyword1">break</span>;
-</span><span class="l" id="390">390                         }
-</span><span class="l" id="391">391                     }
-</span><span class="l" id="392">392 
-</span><span class="l" id="393">393                     <span class="php-var">$values</span>[] = <span class="php-var">$nl</span> . <span class="php-quote">'  ('</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$record</span>) . <span class="php-quote">')'</span>;
-</span><span class="l" id="394">394                 }
-</span><span class="l" id="395">395 
-</span><span class="l" id="396">396                 <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$values</span>)) {
-</span><span class="l" id="397">397                     <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'INSERT INTO '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' VALUES '</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$values</span>) . <span class="php-quote">';'</span>);
-</span><span class="l" id="398">398                     <span class="php-keyword1">unset</span>(<span class="php-var">$values</span>);
-</span><span class="l" id="399">399                 }
-</span><span class="l" id="400">400             } <span class="php-keyword1">while</span> (<span class="php-var">$count</span> &gt;= <span class="php-var">$max</span>);
+</span><span class="l" id="379">379                 <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$row</span>) {
+</span><span class="l" id="380">380                     <span class="php-var">$record</span> = [];
+</span><span class="l" id="381">381 
+</span><span class="l" id="382">382                     <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$idx</span> =&gt; <span class="php-var">$type</span>) {
+</span><span class="l" id="383">383                         <span class="php-var">$column</span> = <span class="php-var">$row</span>[<span class="php-var">$idx</span>];
+</span><span class="l" id="384">384 
+</span><span class="l" id="385">385                         <span class="php-keyword1">switch</span> (<span class="php-var">$type</span>) {
+</span><span class="l" id="386">386                             <span class="php-keyword1">case</span> <span class="php-quote">'int'</span>:
+</span><span class="l" id="387">387                                 <span class="php-var">$record</span>[] = (int) <span class="php-var">$column</span>;
+</span><span class="l" id="388">388                                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="389">389                             <span class="php-keyword1">case</span> <span class="php-quote">'double'</span>:
+</span><span class="l" id="390">390                                 <span class="php-var">$record</span>[] = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%.10F'</span>, (float) <span class="php-var">$column</span>);
+</span><span class="l" id="391">391                                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="392">392                             <span class="php-keyword1">case</span> <span class="php-quote">'string'</span>:
+</span><span class="l" id="393">393                             <span class="php-keyword1">default</span>:
+</span><span class="l" id="394">394                                 <span class="php-var">$record</span>[] = <span class="php-var">$sql</span>-&gt;escape(<span class="php-var">$column</span>, <span class="php-quote">"'"</span>);
+</span><span class="l" id="395">395                                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="396">396                         }
+</span><span class="l" id="397">397                     }
+</span><span class="l" id="398">398 
+</span><span class="l" id="399">399                     <span class="php-var">$values</span>[] = <span class="php-var">$nl</span> . <span class="php-quote">'  ('</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$record</span>) . <span class="php-quote">')'</span>;
+</span><span class="l" id="400">400                 }
 </span><span class="l" id="401">401 
-</span><span class="l" id="402">402             <span class="php-keyword1">if</span> (<span class="php-var">$start</span> &gt; <span class="php-num">0</span>) {
-</span><span class="l" id="403">403                 <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' ENABLE KEYS */;'</span>);
-</span><span class="l" id="404">404                 <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'UNLOCK TABLES;'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="405">405             }
-</span><span class="l" id="406">406         }
+</span><span class="l" id="402">402                 <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$values</span>)) {
+</span><span class="l" id="403">403                     <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'INSERT INTO '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' VALUES '</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$values</span>) . <span class="php-quote">';'</span>);
+</span><span class="l" id="404">404                     <span class="php-keyword1">unset</span>(<span class="php-var">$values</span>);
+</span><span class="l" id="405">405                 }
+</span><span class="l" id="406">406             } <span class="php-keyword1">while</span> (<span class="php-var">$count</span> &gt;= <span class="php-var">$max</span>);
 </span><span class="l" id="407">407 
-</span><span class="l" id="408">408         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'SET FOREIGN_KEY_CHECKS = 1;'</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="409">409 
-</span><span class="l" id="410">410         <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
-</span><span class="l" id="411">411 
-</span><span class="l" id="412">412         <span class="php-var">$hasContent</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="408">408             <span class="php-keyword1">if</span> (<span class="php-var">$start</span> &gt; <span class="php-num">0</span>) {
+</span><span class="l" id="409">409                 <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' ENABLE KEYS */;'</span>);
+</span><span class="l" id="410">410                 <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'UNLOCK TABLES;'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="411">411             }
+</span><span class="l" id="412">412         }
 </span><span class="l" id="413">413 
-</span><span class="l" id="414">414         <span class="php-comment">// Den Dateiinhalt geben wir nur dann weiter, wenn es unbedingt notwendig ist.</span>
-</span><span class="l" id="415">415         <span class="php-keyword1">if</span> (rex_extension::isRegistered(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>)) {
-</span><span class="l" id="416">416             <span class="php-var">$content</span> = rex_file::get(<span class="php-var">$filename</span>);
-</span><span class="l" id="417">417             <span class="php-var">$hashBefore</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="418">418             <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="419">419             <span class="php-var">$content</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>, <span class="php-var">$content</span>));
-</span><span class="l" id="420">420             <span class="php-var">$hashAfter</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="421">421 
-</span><span class="l" id="422">422             <span class="php-keyword1">if</span> (<span class="php-var">$hashAfter</span> != <span class="php-var">$hashBefore</span>) {
-</span><span class="l" id="423">423                 rex_file::put(<span class="php-var">$filename</span>, <span class="php-var">$content</span>);
-</span><span class="l" id="424">424                 <span class="php-var">$hasContent</span> = !<span class="php-keyword1">empty</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="425">425                 <span class="php-keyword1">unset</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="426">426             }
-</span><span class="l" id="427">427         }
-</span><span class="l" id="428">428 
-</span><span class="l" id="429">429         <span class="php-keyword1">return</span> <span class="php-var">$hasContent</span>;
-</span><span class="l" id="430">430     }
-</span><span class="l" id="431">431 
-</span><span class="l" id="432">432     <span class="php-comment">/**
-</span></span><span class="l" id="433">433 <span class="php-comment">     * Exportiert alle Ordner $folders aus dem Verzeichnis /files.
-</span></span><span class="l" id="434">434 <span class="php-comment">     *
-</span></span><span class="l" id="435">435 <span class="php-comment">     * @param array $folders Array von Ordnernamen, die exportiert werden sollen
-</span></span><span class="l" id="436">436 <span class="php-comment">     *
-</span></span><span class="l" id="437">437 <span class="php-comment">     * @return string Inhalt des Tar-Archives als String
-</span></span><span class="l" id="438">438 <span class="php-comment">     */</span>
-</span><span class="l" id="439">439     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> exportFiles(<span class="php-var">$folders</span>)
-</span><span class="l" id="440">440     {
-</span><span class="l" id="441">441         <span class="php-var">$tar</span> = <span class="php-keyword1">new</span> rex_backup_tar();
-</span><span class="l" id="442">442 
-</span><span class="l" id="443">443         <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="444">444         <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_BEFORE_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
-</span><span class="l" id="445">445 
-</span><span class="l" id="446">446         <span class="php-keyword1">foreach</span> (<span class="php-var">$folders</span> <span class="php-keyword1">as</span> <span class="php-var">$item</span>) {
-</span><span class="l" id="447">447             self::addFolderToTar(<span class="php-var">$tar</span>, rex_url::frontend(), <span class="php-var">$item</span>);
-</span><span class="l" id="448">448         }
-</span><span class="l" id="449">449 
-</span><span class="l" id="450">450         <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="451">451         <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
-</span><span class="l" id="452">452 
-</span><span class="l" id="453">453         <span class="php-keyword1">return</span> <span class="php-var">$tar</span>-&gt;toTar(<span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>);
-</span><span class="l" id="454">454     }
-</span><span class="l" id="455">455 
-</span><span class="l" id="456">456     <span class="php-comment">/**
-</span></span><span class="l" id="457">457 <span class="php-comment">     * Fügt einem Tar-Archiv ein Ordner von Dateien hinzu.
-</span></span><span class="l" id="458">458 <span class="php-comment">     */</span>
-</span><span class="l" id="459">459     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addFolderToTar(rex_backup_tar <span class="php-var">$tar</span>, <span class="php-var">$path</span>, <span class="php-var">$dir</span>)
-</span><span class="l" id="460">460     {
-</span><span class="l" id="461">461         <span class="php-var">$handle</span> = <span class="php-keyword2">opendir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>);
-</span><span class="l" id="462">462         <span class="php-var">$isMediafolder</span> = <span class="php-keyword2">realpath</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>) . <span class="php-quote">'/'</span> == rex_path::media();
-</span><span class="l" id="463">463         <span class="php-keyword1">while</span> (<span class="php-keyword1">false</span> !== (<span class="php-var">$file</span> = <span class="php-keyword2">readdir</span>(<span class="php-var">$handle</span>))) {
-</span><span class="l" id="464">464             <span class="php-comment">// Alles exportieren, außer ...</span>
-</span><span class="l" id="465">465             <span class="php-comment">// - addons verzeichnis im mediafolder (wird bei addoninstallation wiedererstellt)</span>
-</span><span class="l" id="466">466             <span class="php-comment">// - svn infos</span>
-</span><span class="l" id="467">467             <span class="php-comment">// - tmp prefix Dateien</span>
+</span><span class="l" id="414">414         <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'SET FOREIGN_KEY_CHECKS = 1;'</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="415">415 
+</span><span class="l" id="416">416         <span class="php-var">$hasContent</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="417">417 
+</span><span class="l" id="418">418         <span class="php-comment">// Den Dateiinhalt geben wir nur dann weiter, wenn es unbedingt notwendig ist.</span>
+</span><span class="l" id="419">419         <span class="php-keyword1">if</span> (rex_extension::isRegistered(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>)) {
+</span><span class="l" id="420">420             <span class="php-var">$content</span> = rex_file::get(<span class="php-var">$filename</span>);
+</span><span class="l" id="421">421             <span class="php-var">$hashBefore</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="422">422             <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="423">423             <span class="php-var">$content</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>, <span class="php-var">$content</span>));
+</span><span class="l" id="424">424             <span class="php-var">$hashAfter</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="425">425 
+</span><span class="l" id="426">426             <span class="php-keyword1">if</span> (<span class="php-var">$hashAfter</span> != <span class="php-var">$hashBefore</span>) {
+</span><span class="l" id="427">427                 rex_file::put(<span class="php-var">$filename</span>, <span class="php-var">$content</span>);
+</span><span class="l" id="428">428                 <span class="php-var">$hasContent</span> = !<span class="php-keyword1">empty</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="429">429                 <span class="php-keyword1">unset</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="430">430             }
+</span><span class="l" id="431">431         }
+</span><span class="l" id="432">432 
+</span><span class="l" id="433">433         <span class="php-comment">// Wenn das backup vollständig und erfolgreich erzeugt werden konnte, den Export 1:1 ans Ziel kopieren.</span>
+</span><span class="l" id="434">434         <span class="php-keyword1">if</span> (<span class="php-var">$tempCacheFile</span>) {
+</span><span class="l" id="435">435             <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
+</span><span class="l" id="436">436             <span class="php-keyword2">rename</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-var">$filename</span>);
+</span><span class="l" id="437">437         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="438">438             <span class="php-var">$destination</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$filename</span>, <span class="php-quote">'w'</span>);
+</span><span class="l" id="439">439             <span class="php-keyword2">rewind</span>(<span class="php-var">$fp</span>);
+</span><span class="l" id="440">440             <span class="php-keyword1">if</span> (!<span class="php-var">$destination</span>) {
+</span><span class="l" id="441">441                 <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="442">442             }
+</span><span class="l" id="443">443             <span class="php-keyword2">stream_copy_to_stream</span>(<span class="php-var">$fp</span>, <span class="php-var">$destination</span>);
+</span><span class="l" id="444">444             <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
+</span><span class="l" id="445">445             <span class="php-keyword2">fclose</span>(<span class="php-var">$destination</span>);
+</span><span class="l" id="446">446         }
+</span><span class="l" id="447">447 
+</span><span class="l" id="448">448         <span class="php-keyword1">return</span> <span class="php-var">$hasContent</span>;
+</span><span class="l" id="449">449     }
+</span><span class="l" id="450">450 
+</span><span class="l" id="451">451     <span class="php-comment">/**
+</span></span><span class="l" id="452">452 <span class="php-comment">     * Exportiert alle Ordner $folders aus dem Verzeichnis /files.
+</span></span><span class="l" id="453">453 <span class="php-comment">     *
+</span></span><span class="l" id="454">454 <span class="php-comment">     * @param array $folders Array von Ordnernamen, die exportiert werden sollen
+</span></span><span class="l" id="455">455 <span class="php-comment">     *
+</span></span><span class="l" id="456">456 <span class="php-comment">     * @return string Inhalt des Tar-Archives als String
+</span></span><span class="l" id="457">457 <span class="php-comment">     */</span>
+</span><span class="l" id="458">458     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> exportFiles(<span class="php-var">$folders</span>)
+</span><span class="l" id="459">459     {
+</span><span class="l" id="460">460         <span class="php-var">$tar</span> = <span class="php-keyword1">new</span> rex_backup_tar();
+</span><span class="l" id="461">461 
+</span><span class="l" id="462">462         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="463">463         <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_BEFORE_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
+</span><span class="l" id="464">464 
+</span><span class="l" id="465">465         <span class="php-keyword1">foreach</span> (<span class="php-var">$folders</span> <span class="php-keyword1">as</span> <span class="php-var">$item</span>) {
+</span><span class="l" id="466">466             self::addFolderToTar(<span class="php-var">$tar</span>, rex_url::frontend(), <span class="php-var">$item</span>);
+</span><span class="l" id="467">467         }
 </span><span class="l" id="468">468 
-</span><span class="l" id="469">469             <span class="php-keyword1">if</span> (<span class="php-var">$file</span> == <span class="php-quote">'.'</span> || <span class="php-var">$file</span> == <span class="php-quote">'..'</span> || <span class="php-var">$file</span> == <span class="php-quote">'.svn'</span>) {
-</span><span class="l" id="470">470                 <span class="php-keyword1">continue</span>;
-</span><span class="l" id="471">471             }
-</span><span class="l" id="472">472 
-</span><span class="l" id="473">473             <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$file</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(rex::getTempPrefix())) == rex::getTempPrefix()) {
-</span><span class="l" id="474">474                 <span class="php-keyword1">continue</span>;
-</span><span class="l" id="475">475             }
-</span><span class="l" id="476">476 
-</span><span class="l" id="477">477             <span class="php-keyword1">if</span> (<span class="php-var">$isMediafolder</span> &amp;&amp; <span class="php-var">$file</span> == <span class="php-quote">'addons'</span>) {
-</span><span class="l" id="478">478                 <span class="php-keyword1">continue</span>;
-</span><span class="l" id="479">479             }
-</span><span class="l" id="480">480 
-</span><span class="l" id="481">481             <span class="php-keyword1">if</span> (<span class="php-keyword2">is_dir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>)) {
-</span><span class="l" id="482">482                 self::addFolderToTar(<span class="php-var">$tar</span>, <span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span>, <span class="php-var">$file</span>);
-</span><span class="l" id="483">483             } <span class="php-keyword1">else</span> {
-</span><span class="l" id="484">484                 <span class="php-var">$tar</span>-&gt;addFile(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>);
-</span><span class="l" id="485">485             }
-</span><span class="l" id="486">486         }
-</span><span class="l" id="487">487         <span class="php-keyword2">closedir</span>(<span class="php-var">$handle</span>);
-</span><span class="l" id="488">488     }
-</span><span class="l" id="489">489 
-</span><span class="l" id="490">490     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> importScript(<span class="php-var">$filename</span>, <span class="php-var">$importType</span>, <span class="php-var">$eventType</span>)
-</span><span class="l" id="491">491     {
-</span><span class="l" id="492">492         <span class="php-keyword1">if</span> (<span class="php-keyword2">file_exists</span>(<span class="php-var">$filename</span>)) {
-</span><span class="l" id="493">493             <span class="php-keyword1">require</span> <span class="php-var">$filename</span>;
-</span><span class="l" id="494">494         }
-</span><span class="l" id="495">495     }
-</span><span class="l" id="496">496 }
-</span><span class="l" id="497">497 </span></code></pre>
+</span><span class="l" id="469">469         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="470">470         <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
+</span><span class="l" id="471">471 
+</span><span class="l" id="472">472         <span class="php-keyword1">return</span> <span class="php-var">$tar</span>-&gt;toTar(<span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="473">473     }
+</span><span class="l" id="474">474 
+</span><span class="l" id="475">475     <span class="php-comment">/**
+</span></span><span class="l" id="476">476 <span class="php-comment">     * Fügt einem Tar-Archiv ein Ordner von Dateien hinzu.
+</span></span><span class="l" id="477">477 <span class="php-comment">     */</span>
+</span><span class="l" id="478">478     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addFolderToTar(rex_backup_tar <span class="php-var">$tar</span>, <span class="php-var">$path</span>, <span class="php-var">$dir</span>)
+</span><span class="l" id="479">479     {
+</span><span class="l" id="480">480         <span class="php-var">$handle</span> = <span class="php-keyword2">opendir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>);
+</span><span class="l" id="481">481         <span class="php-var">$isMediafolder</span> = <span class="php-keyword2">realpath</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>) . <span class="php-quote">'/'</span> == rex_path::media();
+</span><span class="l" id="482">482         <span class="php-keyword1">while</span> (<span class="php-keyword1">false</span> !== (<span class="php-var">$file</span> = <span class="php-keyword2">readdir</span>(<span class="php-var">$handle</span>))) {
+</span><span class="l" id="483">483             <span class="php-comment">// Alles exportieren, außer ...</span>
+</span><span class="l" id="484">484             <span class="php-comment">// - addons verzeichnis im mediafolder (wird bei addoninstallation wiedererstellt)</span>
+</span><span class="l" id="485">485             <span class="php-comment">// - svn infos</span>
+</span><span class="l" id="486">486             <span class="php-comment">// - tmp prefix Dateien</span>
+</span><span class="l" id="487">487 
+</span><span class="l" id="488">488             <span class="php-keyword1">if</span> (<span class="php-var">$file</span> == <span class="php-quote">'.'</span> || <span class="php-var">$file</span> == <span class="php-quote">'..'</span> || <span class="php-var">$file</span> == <span class="php-quote">'.svn'</span>) {
+</span><span class="l" id="489">489                 <span class="php-keyword1">continue</span>;
+</span><span class="l" id="490">490             }
+</span><span class="l" id="491">491 
+</span><span class="l" id="492">492             <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$file</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(rex::getTempPrefix())) == rex::getTempPrefix()) {
+</span><span class="l" id="493">493                 <span class="php-keyword1">continue</span>;
+</span><span class="l" id="494">494             }
+</span><span class="l" id="495">495 
+</span><span class="l" id="496">496             <span class="php-keyword1">if</span> (<span class="php-var">$isMediafolder</span> &amp;&amp; <span class="php-var">$file</span> == <span class="php-quote">'addons'</span>) {
+</span><span class="l" id="497">497                 <span class="php-keyword1">continue</span>;
+</span><span class="l" id="498">498             }
+</span><span class="l" id="499">499 
+</span><span class="l" id="500">500             <span class="php-keyword1">if</span> (<span class="php-keyword2">is_dir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>)) {
+</span><span class="l" id="501">501                 self::addFolderToTar(<span class="php-var">$tar</span>, <span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span>, <span class="php-var">$file</span>);
+</span><span class="l" id="502">502             } <span class="php-keyword1">else</span> {
+</span><span class="l" id="503">503                 <span class="php-var">$tar</span>-&gt;addFile(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>);
+</span><span class="l" id="504">504             }
+</span><span class="l" id="505">505         }
+</span><span class="l" id="506">506         <span class="php-keyword2">closedir</span>(<span class="php-var">$handle</span>);
+</span><span class="l" id="507">507     }
+</span><span class="l" id="508">508 
+</span><span class="l" id="509">509     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> importScript(<span class="php-var">$filename</span>, <span class="php-var">$importType</span>, <span class="php-var">$eventType</span>)
+</span><span class="l" id="510">510     {
+</span><span class="l" id="511">511         <span class="php-keyword1">if</span> (<span class="php-keyword2">file_exists</span>(<span class="php-var">$filename</span>)) {
+</span><span class="l" id="512">512             <span class="php-keyword1">require</span> <span class="php-var">$filename</span>;
+</span><span class="l" id="513">513         }
+</span><span class="l" id="514">514     }
+</span><span class="l" id="515">515 }
+</span><span class="l" id="516">516 </span></code></pre>
  </body>
 </html>

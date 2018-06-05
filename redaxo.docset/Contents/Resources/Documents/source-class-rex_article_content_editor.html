@@ -262,7 +262,7 @@
 </span><span class="l" id="253">253         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$this</span>-&gt;ctype])) {
 </span><span class="l" id="254">254             <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;MODULESELECT[<span class="php-var">$this</span>-&gt;ctype] <span class="php-keyword1">as</span> <span class="php-var">$module</span>) {
 </span><span class="l" id="255">255                 <span class="php-var">$item</span> = [];
-</span><span class="l" id="256">256                 <span class="php-var">$item</span>[<span class="php-quote">'title'</span>] = <span class="php-var">$module</span>[<span class="php-quote">'name'</span>];
+</span><span class="l" id="256">256                 <span class="php-var">$item</span>[<span class="php-quote">'title'</span>] = rex_escape(<span class="php-var">$module</span>[<span class="php-quote">'name'</span>]);
 </span><span class="l" id="257">257                 <span class="php-var">$item</span>[<span class="php-quote">'href'</span>] = <span class="php-var">$context</span>-&gt;getUrl([<span class="php-quote">'module_id'</span> =&gt; <span class="php-var">$module</span>[<span class="php-quote">'id'</span>]]) . <span class="php-quote">'#slice-add-pos-'</span> . <span class="php-var">$position</span>;
 </span><span class="l" id="258">258                 <span class="php-var">$items</span>[] = <span class="php-var">$item</span>;
 </span><span class="l" id="259">259             }

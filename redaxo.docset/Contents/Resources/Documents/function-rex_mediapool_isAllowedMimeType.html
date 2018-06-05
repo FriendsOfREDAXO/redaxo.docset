@@ -8,16 +8,20 @@
 <script src="../Assets/js/script.js"></script>
 </head>
 <body><div class="function" id="content">
-<h1>Function rex_mediapool_mediaIsInUse</h1>
+<h1>Function rex_mediapool_isAllowedMimeType</h1>
+<div class="description">
+<p>Checks file against optional whitelist from property
+<code>allowed_mime_types</code>.</p>
+</div>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.mediapool.html">mediapool</a><br/>
-<b>Located at</b> <a href="source-function-rex_mediapool_mediaIsInUse.html#353-406" title="Go to source code">redaxo/src/addons/mediapool/functions/function_rex_mediapool.php</a><br/>
+<b>Located at</b> <a href="source-function-rex_mediapool_isAllowedMimeType.html#594-618" title="Go to source code">redaxo/src/addons/mediapool/functions/function_rex_mediapool.php</a><br/>
 </div>
 <h2>Parameters summary</h2>
 <table class="summary table table-bordered table-striped" id="parameters">
-<tr id="$filename">
-<td class="name"><code>mixed</code></td>
-<td class="value"><code><var>$filename</var></code></td>
+<tr id="$path">
+<td class="name"><code>string</code></td>
+<td class="value"><code><var>$path</var></code></td>
 <td></td>
 </tr>
 </table>
@@ -25,10 +29,10 @@
 <table class="summary table table-bordered table-striped" id="returns">
 <tr>
 <td class="name"><code>
-			boolean|string
+			boolean
 		</code></td>
 <td>
-			bool|string
+			bool
 		</td>
 </tr>
 </table>

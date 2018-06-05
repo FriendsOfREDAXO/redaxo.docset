@@ -20,7 +20,7 @@
 </dl>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_backend_login.html#3-170" title="Go to source code">redaxo/src/core/lib/login/backend_login.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_backend_login.html#3-178" title="Go to source code">redaxo/src/core/lib/login/backend_login.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -33,7 +33,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#___construct">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_backend_login.html?17,36#17" title="Go to source code">__construct</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_backend_login.html?20,39#20" title="Go to source code">__construct</a>( )</code>
 <div class="description short">
 <p>Constructor.</p>
 </div>
@@ -53,7 +53,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setStayLoggedIn">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setStayLoggedIn"></a><a href="source-class-rex_backend_login.html?38,41#38" title="Go to source code">setStayLoggedIn</a>( <span>mixed <var>$stayLoggedIn</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setStayLoggedIn"></a><a href="source-class-rex_backend_login.html?41,44#41" title="Go to source code">setStayLoggedIn</a>( <span>mixed <var>$stayLoggedIn</var> = <span class="php-keyword1">false</span></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -69,7 +69,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_checkLogin">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/checkLogin"></a><a href="source-class-rex_backend_login.html?43,109#43" title="Go to source code">checkLogin</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/checkLogin"></a><a href="source-class-rex_backend_login.html?46,117#46" title="Go to source code">checkLogin</a>( )</code>
 <div class="description short">
 <p>Prüft die mit setLogin() und setPassword() gesetzten Werte anhand des
 LoginQueries/UserQueries und gibt den Status zurück.</p>
@@ -92,7 +92,7 @@ LoginQueries/UserQueries und gibt den Status zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_deleteSession">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteSession"></a><a href="source-class-rex_backend_login.html?111,119#111" title="Go to source code">deleteSession</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/deleteSession"></a><a href="source-class-rex_backend_login.html?119,127#119" title="Go to source code">deleteSession</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -108,7 +108,7 @@ LoginQueries/UserQueries und gibt den Status zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_hasSession">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasSession"></a><a href="source-class-rex_backend_login.html?131,142#131" title="Go to source code">hasSession</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasSession"></a><a href="source-class-rex_backend_login.html?139,150#139" title="Go to source code">hasSession</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -123,7 +123,7 @@ LoginQueries/UserQueries und gibt den Status zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_createUser">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/createUser"></a><a href="source-class-rex_backend_login.html?144,169#144" title="Go to source code">createUser</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/createUser"></a><a href="source-class-rex_backend_login.html?152,177#152" title="Go to source code">createUser</a>( )</code>
 <div class="description short">
 <p>Creates the user object if it does not already exist.</p>
 </div>
@@ -141,10 +141,13 @@ you only want to know if there is any backend session, use <code><a href="class-
 </table>
 <h3>Methods inherited from <a href="class-rex_login.html#methods">rex_login</a></h3>
 <p class="elementList">
-<code><a href="class-rex_login.html#_getMessage">getMessage()</a></code>, 
+<code><a href="class-rex_login.html#_depersonate">depersonate()</a></code>, 
+			<code><a href="class-rex_login.html#_getImpersonator">getImpersonator()</a></code>, 
+			<code><a href="class-rex_login.html#_getMessage">getMessage()</a></code>, 
 			<code><a href="class-rex_login.html#_getSessionVar">getSessionVar()</a></code>, 
 			<code><a href="class-rex_login.html#_getUser">getUser()</a></code>, 
 			<code><a href="class-rex_login.html#_getValue">getValue()</a></code>, 
+			<code><a href="class-rex_login.html#_impersonate">impersonate()</a></code>, 
 			<code><a href="class-rex_login.html#_isLoggedOut">isLoggedOut()</a></code>, 
 			<code><a href="class-rex_login.html#_passwordHash">passwordHash()</a></code>, 
 			<code><a href="class-rex_login.html#_passwordNeedsRehash">passwordNeedsRehash()</a></code>, 
@@ -164,13 +167,54 @@ you only want to know if there is any backend session, use <code><a href="class-
 			<code><a href="class-rex_login.html#_setUserQuery">setUserQuery()</a></code>, 
 			<code><a href="class-rex_login.html#_startSession">startSession()</a></code>
 </p>
+<h3>Magic methods summary</h3>
+<table class="summary table table-bordered table-striped methods" id="magicMethods">
+<tr data-order="getUser" id="m_getUser">
+<td class="attributes"><code>
+				 public 
+				null|<code><a href="class-rex_user.html">rex_user</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#m_getUser">#</a>
+<code><a href="source-class-rex_backend_login.html#6" title="Go to source code">getUser</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_user.html">rex_user</a></code></code><br/>null|rex_user<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getImpersonator" id="m_getImpersonator">
+<td class="attributes"><code>
+				 public 
+				null|<code><a href="class-rex_user.html">rex_user</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#m_getImpersonator">#</a>
+<code><a href="source-class-rex_backend_login.html#7" title="Go to source code">getImpersonator</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_user.html">rex_user</a></code></code><br/>null|rex_user<br/>
+</div>
+</div>
+</div></td>
+</tr>
+</table>
 <h2>Constants summary</h2>
 <table class="summary table table-bordered table-striped constants" id="constants">
 <tr data-order="SYSTEM_ID" id="SYSTEM_ID">
 <td class="attributes"><code>string</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/SYSTEM_ID"></a><a href="source-class-rex_backend_login.html#8" title="Go to source code"><b>SYSTEM_ID</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/SYSTEM_ID"></a><a href="source-class-rex_backend_login.html#11" title="Go to source code"><b>SYSTEM_ID</b></a>
 </code>
 <div class="description short">
 </div>
@@ -183,7 +227,7 @@ you only want to know if there is any backend session, use <code><a href="class-
 <td class="attributes"><code>integer</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/LOGIN_TRIES_1"></a><a href="source-class-rex_backend_login.html#9" title="Go to source code"><b>LOGIN_TRIES_1</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/LOGIN_TRIES_1"></a><a href="source-class-rex_backend_login.html#12" title="Go to source code"><b>LOGIN_TRIES_1</b></a>
 </code>
 <div class="description short">
 </div>
@@ -196,7 +240,7 @@ you only want to know if there is any backend session, use <code><a href="class-
 <td class="attributes"><code>integer</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/RELOGIN_DELAY_1"></a><a href="source-class-rex_backend_login.html#10" title="Go to source code"><b>RELOGIN_DELAY_1</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/RELOGIN_DELAY_1"></a><a href="source-class-rex_backend_login.html#13" title="Go to source code"><b>RELOGIN_DELAY_1</b></a>
 </code>
 <div class="description short">
 </div>
@@ -209,7 +253,7 @@ you only want to know if there is any backend session, use <code><a href="class-
 <td class="attributes"><code>integer</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/LOGIN_TRIES_2"></a><a href="source-class-rex_backend_login.html#11" title="Go to source code"><b>LOGIN_TRIES_2</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/LOGIN_TRIES_2"></a><a href="source-class-rex_backend_login.html#14" title="Go to source code"><b>LOGIN_TRIES_2</b></a>
 </code>
 <div class="description short">
 </div>
@@ -222,7 +266,7 @@ you only want to know if there is any backend session, use <code><a href="class-
 <td class="attributes"><code>integer</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/RELOGIN_DELAY_2"></a><a href="source-class-rex_backend_login.html#12" title="Go to source code"><b>RELOGIN_DELAY_2</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/RELOGIN_DELAY_2"></a><a href="source-class-rex_backend_login.html#15" title="Go to source code"><b>RELOGIN_DELAY_2</b></a>
 </code>
 <div class="description short">
 </div>
@@ -238,6 +282,7 @@ you only want to know if there is any backend session, use <code><a href="class-
 <code><a href="class-rex_login.html#$DB"><var>$DB</var></a></code>, 
 			<code><a href="class-rex_login.html#$cache"><var>$cache</var></a></code>, 
 			<code><a href="class-rex_login.html#$idColumn"><var>$idColumn</var></a></code>, 
+			<code><a href="class-rex_login.html#$impersonator"><var>$impersonator</var></a></code>, 
 			<code><a href="class-rex_login.html#$loginQuery"><var>$loginQuery</var></a></code>, 
 			<code><a href="class-rex_login.html#$loginStatus"><var>$loginStatus</var></a></code>, 
 			<code><a href="class-rex_login.html#$logout"><var>$logout</var></a></code>, 

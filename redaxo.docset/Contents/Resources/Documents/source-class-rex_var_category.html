@@ -19,38 +19,37 @@
 </span></span><span class="l" id="10">10 <span class="php-comment"> *   - field    =&gt; Feld der Kategorie, das ausgegeben werden soll
 </span></span><span class="l" id="11">11 <span class="php-comment"> *   - clang    =&gt; ClangId der Kategorie
 </span></span><span class="l" id="12">12 <span class="php-comment"> *
-</span></span><span class="l" id="13">13 <span class="php-comment"> *
-</span></span><span class="l" id="14">14 <span class="php-comment"> * @package redaxo\structure
-</span></span><span class="l" id="15">15 <span class="php-comment"> */</span>
-</span><span class="l" id="16">16 <span class="php-keyword1">class</span> rex_var_category <span class="php-keyword1">extends</span> rex_var
-</span><span class="l" id="17">17 {
-</span><span class="l" id="18">18     <span class="php-comment">/**
-</span></span><span class="l" id="19">19 <span class="php-comment">     * Werte für die Ausgabe.
-</span></span><span class="l" id="20">20 <span class="php-comment">     */</span>
-</span><span class="l" id="21">21     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getOutput()
-</span><span class="l" id="22">22     {
-</span><span class="l" id="23">23         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'field'</span>);
-</span><span class="l" id="24">24         <span class="php-keyword1">if</span> (!<span class="php-var">$field</span>) {
-</span><span class="l" id="25">25             <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="26">26         }
-</span><span class="l" id="27">27 
-</span><span class="l" id="28">28         <span class="php-var">$category_id</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'id'</span>, <span class="php-quote">'$this-&gt;getValue(\'category_id\')'</span>);
-</span><span class="l" id="29">29         <span class="php-var">$clang</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'clang'</span>, <span class="php-quote">'null'</span>);
-</span><span class="l" id="30">30 
-</span><span class="l" id="31">31         <span class="php-keyword1">return</span> __CLASS__ . <span class="php-quote">'::getCategoryValue('</span> . <span class="php-var">$category_id</span> . <span class="php-quote">', '</span> . <span class="php-var">$field</span> . <span class="php-quote">', '</span> . <span class="php-var">$clang</span> . <span class="php-quote">')'</span>;
-</span><span class="l" id="32">32     }
-</span><span class="l" id="33">33 
-</span><span class="l" id="34">34     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getCategoryValue(<span class="php-var">$id</span>, <span class="php-var">$field</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="35">35     {
-</span><span class="l" id="36">36         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">null</span>) {
-</span><span class="l" id="37">37             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
-</span><span class="l" id="38">38         }
-</span><span class="l" id="39">39         <span class="php-var">$cat</span> = rex_category::get(<span class="php-var">$id</span>, <span class="php-var">$clang</span>);
-</span><span class="l" id="40">40         <span class="php-keyword1">if</span> (<span class="php-var">$cat</span>) {
-</span><span class="l" id="41">41             <span class="php-keyword1">return</span> <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$cat</span>-&gt;getValue(<span class="php-var">$field</span>));
-</span><span class="l" id="42">42         }
-</span><span class="l" id="43">43     }
-</span><span class="l" id="44">44 }
-</span><span class="l" id="45">45 </span></code></pre>
+</span></span><span class="l" id="13">13 <span class="php-comment"> * @package redaxo\structure
+</span></span><span class="l" id="14">14 <span class="php-comment"> */</span>
+</span><span class="l" id="15">15 <span class="php-keyword1">class</span> rex_var_category <span class="php-keyword1">extends</span> rex_var
+</span><span class="l" id="16">16 {
+</span><span class="l" id="17">17     <span class="php-comment">/**
+</span></span><span class="l" id="18">18 <span class="php-comment">     * Werte für die Ausgabe.
+</span></span><span class="l" id="19">19 <span class="php-comment">     */</span>
+</span><span class="l" id="20">20     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getOutput()
+</span><span class="l" id="21">21     {
+</span><span class="l" id="22">22         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'field'</span>);
+</span><span class="l" id="23">23         <span class="php-keyword1">if</span> (!<span class="php-var">$field</span>) {
+</span><span class="l" id="24">24             <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="25">25         }
+</span><span class="l" id="26">26 
+</span><span class="l" id="27">27         <span class="php-var">$category_id</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'id'</span>, <span class="php-quote">'$this-&gt;getValue(\'category_id\')'</span>);
+</span><span class="l" id="28">28         <span class="php-var">$clang</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'clang'</span>, <span class="php-quote">'null'</span>);
+</span><span class="l" id="29">29 
+</span><span class="l" id="30">30         <span class="php-keyword1">return</span> __CLASS__ . <span class="php-quote">'::getCategoryValue('</span> . <span class="php-var">$category_id</span> . <span class="php-quote">', '</span> . <span class="php-var">$field</span> . <span class="php-quote">', '</span> . <span class="php-var">$clang</span> . <span class="php-quote">')'</span>;
+</span><span class="l" id="31">31     }
+</span><span class="l" id="32">32 
+</span><span class="l" id="33">33     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getCategoryValue(<span class="php-var">$id</span>, <span class="php-var">$field</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="34">34     {
+</span><span class="l" id="35">35         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">null</span>) {
+</span><span class="l" id="36">36             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
+</span><span class="l" id="37">37         }
+</span><span class="l" id="38">38         <span class="php-var">$cat</span> = rex_category::get(<span class="php-var">$id</span>, <span class="php-var">$clang</span>);
+</span><span class="l" id="39">39         <span class="php-keyword1">if</span> (<span class="php-var">$cat</span>) {
+</span><span class="l" id="40">40             <span class="php-keyword1">return</span> <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$cat</span>-&gt;getValue(<span class="php-var">$field</span>));
+</span><span class="l" id="41">41         }
+</span><span class="l" id="42">42     }
+</span><span class="l" id="43">43 }
+</span><span class="l" id="44">44 </span></code></pre>
  </body>
 </html>

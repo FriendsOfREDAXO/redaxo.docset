@@ -14,7 +14,7 @@
 </div>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_response.html#3-402" title="Go to source code">redaxo/src/core/lib/response.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_response.html#3-500" title="Go to source code">redaxo/src/core/lib/response.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -27,7 +27,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setStatus">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setStatus"></a><a href="source-class-rex_response.html?26,40#26" title="Go to source code">setStatus</a>( <span>integer <var>$httpStatus</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setStatus"></a><a href="source-class-rex_response.html?27,41#27" title="Go to source code">setStatus</a>( <span>integer <var>$httpStatus</var></span> )</code>
 <div class="description short">
 <p>Sets the HTTP Status code.</p>
 </div>
@@ -54,7 +54,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getStatus">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStatus"></a><a href="source-class-rex_response.html?42,50#42" title="Go to source code">getStatus</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStatus"></a><a href="source-class-rex_response.html?43,51#43" title="Go to source code">getStatus</a>( )</code>
 <div class="description short">
 <p>Returns the HTTP Status code.</p>
 </div>
@@ -76,7 +76,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setHeader">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHeader"></a><a href="source-class-rex_response.html?52,61#52" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setHeader"></a><a href="source-class-rex_response.html?53,62#53" title="Go to source code">setHeader</a>( <span>string <var>$name</var></span>, <span>string <var>$value</var></span> )</code>
 <div class="description short">
 <p>Set a http response header. A existing header with the same name will be
 overridden.</p>
@@ -103,7 +103,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_preload">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preload"></a><a href="source-class-rex_response.html?70,84#70" title="Go to source code">preload</a>( <span>mixed <var>$file</var></span>, <span>mixed <var>$type</var></span>, <span>mixed <var>$mimeType</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preload"></a><a href="source-class-rex_response.html?71,85#71" title="Go to source code">preload</a>( <span>mixed <var>$file</var></span>, <span>mixed <var>$type</var></span>, <span>mixed <var>$mimeType</var></span> )</code>
 <div class="description short">
 <p>Set a file to be preload via http link header.</p>
 </div>
@@ -130,7 +130,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendRedirect">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendRedirect"></a><a href="source-class-rex_response.html?93,115#93" title="Go to source code">sendRedirect</a>( <span>string <var>$url</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendRedirect"></a><a href="source-class-rex_response.html?94,116#94" title="Go to source code">sendRedirect</a>( <span>string <var>$url</var></span> )</code>
 <div class="description short">
 <p>Redirects to a URL.</p>
 </div>
@@ -158,7 +158,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendFile">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendFile"></a><a href="source-class-rex_response.html?117,160#117" title="Go to source code">sendFile</a>( <span>string <var>$file</var></span>, <span>string <var>$contentType</var></span>, <span>string <var>$contentDisposition</var> = <span class="php-quote">'inline'</span></span>, <span>string <var>$filename</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendFile"></a><a href="source-class-rex_response.html?118,161#118" title="Go to source code">sendFile</a>( <span>string <var>$file</var></span>, <span>string <var>$contentType</var></span>, <span>string <var>$contentDisposition</var> = <span class="php-quote">'inline'</span></span>, <span>null|string <var>$filename</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Sends a file to client.</p>
 </div>
@@ -171,9 +171,9 @@ overridden.</p>
 <dt><var>$contentType</var></dt>
 <dd>Content type</dd>
 <dt><var>$contentDisposition</var></dt>
-<dd>Content disposition</dd>
+<dd>Content disposition ("inline" or "attachment")</dd>
 <dt><var>$filename</var></dt>
-<dd>Send custom Filename</dd>
+<dd>Custom Filename</dd>
 </dl></div>
 </div>
 </div></td>
@@ -187,7 +187,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendResource">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendResource"></a><a href="source-class-rex_response.html?162,174#162" title="Go to source code">sendResource</a>( <span>string <var>$content</var></span>, <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$etag</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendResource"></a><a href="source-class-rex_response.html?163,181#163" title="Go to source code">sendResource</a>( <span>string <var>$content</var></span>, <span>null|string <var>$contentType</var> = <span class="php-keyword1">null</span></span>, <span>null|integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span>, <span>null|string <var>$etag</var> = <span class="php-keyword1">null</span></span>, <span>null|string <var>$contentDisposition</var> = <span class="php-keyword1">null</span></span>, <span>null|string <var>$filename</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Sends a resource to the client.</p>
 </div>
@@ -203,6 +203,10 @@ overridden.</p>
 <dd>HTTP Last-Modified Timestamp</dd>
 <dt><var>$etag</var></dt>
 <dd>HTTP Cachekey to identify the cache</dd>
+<dt><var>$contentDisposition</var></dt>
+<dd>Content disposition ("inline" or "attachment")</dd>
+<dt><var>$filename</var></dt>
+<dd>Filename</dd>
 </dl></div>
 </div>
 </div></td>
@@ -216,7 +220,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendPage">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendPage"></a><a href="source-class-rex_response.html?176,203#176" title="Go to source code">sendPage</a>( <span>string <var>$content</var></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendPage"></a><a href="source-class-rex_response.html?183,210#183" title="Go to source code">sendPage</a>( <span>string <var>$content</var></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Sends a page to client.</p>
 </div>
@@ -242,7 +246,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendContent">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendContent"></a><a href="source-class-rex_response.html?205,266#205" title="Go to source code">sendContent</a>( <span>string <var>$content</var></span>, <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$etag</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendContent"></a><a href="source-class-rex_response.html?212,273#212" title="Go to source code">sendContent</a>( <span>string <var>$content</var></span>, <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$etag</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Sends content to the client.</p>
 </div>
@@ -271,7 +275,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_cleanOutputBuffers">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/cleanOutputBuffers"></a><a href="source-class-rex_response.html?268,276#268" title="Go to source code">cleanOutputBuffers</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/cleanOutputBuffers"></a><a href="source-class-rex_response.html?275,283#275" title="Go to source code">cleanOutputBuffers</a>( )</code>
 <div class="description short">
 <p>Cleans all output buffers.</p>
 </div>
@@ -289,7 +293,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendContentType">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendContentType"></a><a href="source-class-rex_response.html?278,287#278" title="Go to source code">sendContentType</a>( <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendContentType"></a><a href="source-class-rex_response.html?285,294#285" title="Go to source code">sendContentType</a>( <span>string <var>$contentType</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Sends the content type header.</p>
 </div>
@@ -312,7 +316,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendCacheControl">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendCacheControl"></a><a href="source-class-rex_response.html?289,296#289" title="Go to source code">sendCacheControl</a>( <span>mixed <var>$cacheControl</var> = <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendCacheControl"></a><a href="source-class-rex_response.html?296,303#296" title="Go to source code">sendCacheControl</a>( <span>mixed <var>$cacheControl</var> = <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span></span> )</code>
 <div class="description short">
 <p>Sends the cache control header.</p>
 </div>
@@ -330,7 +334,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendLastModified">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendLastModified"></a><a href="source-class-rex_response.html?298,325#298" title="Go to source code">sendLastModified</a>( <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendLastModified"></a><a href="source-class-rex_response.html?305,332#305" title="Go to source code">sendLastModified</a>( <span>integer <var>$lastModified</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Checks if content has changed by the last modified timestamp.</p>
 </div>
@@ -354,7 +358,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendEtag">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendEtag"></a><a href="source-class-rex_response.html?327,351#327" title="Go to source code">sendEtag</a>( <span>string <var>$cacheKey</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendEtag"></a><a href="source-class-rex_response.html?334,358#334" title="Go to source code">sendEtag</a>( <span>string <var>$cacheKey</var></span> )</code>
 <div class="description short">
 <p>Checks if content has changed by the etag cachekey.</p>
 </div>
@@ -378,7 +382,7 @@ overridden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_sendGzip">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendGzip"></a><a href="source-class-rex_response.html?353,387#353" title="Go to source code">sendGzip</a>( <span>string <var>$content</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendGzip"></a><a href="source-class-rex_response.html?360,394#360" title="Go to source code">sendGzip</a>( <span>string <var>$content</var></span> )</code>
 <div class="description short">
 <p>Encodes the content with GZIP/X-GZIP if the browser supports one of them.</p>
 </div>
@@ -394,6 +398,58 @@ overridden.</p>
 <div class="list">
 <code>string</code><br/>string<br/>
 </div>
+</div>
+</div></td>
+</tr>
+<tr data-order="sendCookie" id="_sendCookie">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_sendCookie">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/sendCookie"></a><a href="source-class-rex_response.html?398,477#398" title="Go to source code">sendCookie</a>( <span>string <var>$name</var></span>, <span>string|null <var>$value</var></span>, <span>array <var>$options</var> = []</span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd>The name of the cookie</dd>
+<dt><var>$value</var></dt>
+<dd>The value of the cookie, a empty value to delete the cookie.</dd>
+<dt><var>$options</var></dt>
+<dd>Different cookie Options. Supported keys are: "expires"
+int|string|\DateTimeInterface The time the cookie expires "path" string The path
+on the server in which the cookie will be available on "domain" string|null The
+domain that the cookie is available to "secure" bool Whether the cookie should
+only be transmitted over a secure HTTPS connection from the client "httponly"
+bool Whether the cookie will be made accessible only through the HTTP protocol
+"samesite" string|null Whether the cookie will be available for cross-site
+requests "raw" bool Whether the cookie value should be sent with no url encoding</dd>
+</dl></div>
+<h4>Throws</h4>
+<div class="list">
+<code>InvalidArgumentException</code><br/>\InvalidArgumentException<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="enforceHttps" id="_enforceHttps">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_enforceHttps">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/enforceHttps"></a><a href="source-class-rex_response.html?493,499#493" title="Go to source code">enforceHttps</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
 </div>
 </div></td>
 </tr>
@@ -490,6 +546,19 @@ overridden.</p>
 </div>
 </td>
 <td class="value"><div><a class="anchor" href="#HTTP_INTERNAL_ERROR">#</a><code><span class="php-quote">'500 Internal Server Error'</span></code></div></td>
+</tr>
+<tr data-order="HTTP_SERVICE_UNAVAILABLE" id="HTTP_SERVICE_UNAVAILABLE">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/HTTP_SERVICE_UNAVAILABLE"></a><a href="source-class-rex_response.html#17" title="Go to source code"><b>HTTP_SERVICE_UNAVAILABLE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#HTTP_SERVICE_UNAVAILABLE">#</a><code><span class="php-quote">'503 Service Unavailable'</span></code></div></td>
 </tr>
 </table>
 </div></body>

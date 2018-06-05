@@ -38,7 +38,7 @@
 </span></span><span class="l" id="29">29 <span class="php-comment">     */</span>
 </span><span class="l" id="30">30     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> register(<span class="php-var">$perm</span>, <span class="php-var">$name</span> = <span class="php-keyword1">null</span>, <span class="php-var">$group</span> = self::GENERAL)
 </span><span class="l" id="31">31     {
-</span><span class="l" id="32">32         <span class="php-var">$name</span> = <span class="php-var">$name</span> ?: (rex_i18n::hasMsg(<span class="php-var">$key</span> = <span class="php-quote">'perm_'</span> . <span class="php-var">$group</span> . <span class="php-quote">'_'</span> . <span class="php-var">$perm</span>) ? rex_i18n::msg(<span class="php-var">$key</span>) : <span class="php-var">$perm</span>);
+</span><span class="l" id="32">32         <span class="php-var">$name</span> = <span class="php-var">$name</span> ?: (rex_i18n::hasMsg(<span class="php-var">$key</span> = <span class="php-quote">'perm_'</span> . <span class="php-var">$group</span> . <span class="php-quote">'_'</span> . <span class="php-var">$perm</span>) ? rex_i18n::rawMsg(<span class="php-var">$key</span>) : <span class="php-var">$perm</span>);
 </span><span class="l" id="33">33         self::<span class="php-var">$perms</span>[<span class="php-var">$group</span>][<span class="php-var">$perm</span>] = <span class="php-var">$name</span>;
 </span><span class="l" id="34">34     }
 </span><span class="l" id="35">35 

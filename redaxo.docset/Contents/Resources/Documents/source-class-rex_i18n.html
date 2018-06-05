@@ -18,7 +18,7 @@
 </span><span class="l" id="9">  9 {
 </span><span class="l" id="10"> 10     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$locales</span> = [];
 </span><span class="l" id="11"> 11     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$directories</span> = [];
-</span><span class="l" id="12"> 12     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$loaded</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="12"> 12     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$loaded</span> = [];
 </span><span class="l" id="13"> 13     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$locale</span> = <span class="php-keyword1">null</span>;
 </span><span class="l" id="14"> 14     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$msg</span> = [];
 </span><span class="l" id="15"> 15 
@@ -35,264 +35,329 @@
 </span><span class="l" id="26"> 26         <span class="php-var">$saveLocale</span> = self::<span class="php-var">$locale</span>;
 </span><span class="l" id="27"> 27         self::<span class="php-var">$locale</span> = <span class="php-var">$locale</span>;
 </span><span class="l" id="28"> 28 
-</span><span class="l" id="29"> 29         self::loadAll();
-</span><span class="l" id="30"> 30 
-</span><span class="l" id="31"> 31         <span class="php-keyword1">if</span> (<span class="php-var">$phpSetLocale</span>) {
-</span><span class="l" id="32"> 32             <span class="php-var">$locales</span> = [];
-</span><span class="l" id="33"> 33             <span class="php-keyword1">foreach</span> (<span class="php-keyword2">explode</span>(<span class="php-quote">','</span>, <span class="php-keyword2">trim</span>(self::msg(<span class="php-quote">'setlocale'</span>))) <span class="php-keyword1">as</span> <span class="php-var">$locale</span>) {
-</span><span class="l" id="34"> 34                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.UTF-8'</span>;
-</span><span class="l" id="35"> 35                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.UTF8'</span>;
-</span><span class="l" id="36"> 36                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.utf-8'</span>;
-</span><span class="l" id="37"> 37                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.utf8'</span>;
-</span><span class="l" id="38"> 38                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span>;
-</span><span class="l" id="39"> 39             }
-</span><span class="l" id="40"> 40 
-</span><span class="l" id="41"> 41             <span class="php-keyword2">setlocale</span>(LC_ALL, <span class="php-var">$locales</span>);
-</span><span class="l" id="42"> 42         }
-</span><span class="l" id="43"> 43 
-</span><span class="l" id="44"> 44         <span class="php-keyword1">return</span> <span class="php-var">$saveLocale</span>;
-</span><span class="l" id="45"> 45     }
-</span><span class="l" id="46"> 46 
-</span><span class="l" id="47"> 47     <span class="php-comment">/**
-</span></span><span class="l" id="48"> 48 <span class="php-comment">     * Returns the current locale.
-</span></span><span class="l" id="49"> 49 <span class="php-comment">     *
-</span></span><span class="l" id="50"> 50 <span class="php-comment">     * @return string The current locale
-</span></span><span class="l" id="51"> 51 <span class="php-comment">     */</span>
-</span><span class="l" id="52"> 52     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getLocale()
-</span><span class="l" id="53"> 53     {
-</span><span class="l" id="54"> 54         <span class="php-keyword1">return</span> self::<span class="php-var">$locale</span>;
-</span><span class="l" id="55"> 55     }
-</span><span class="l" id="56"> 56 
-</span><span class="l" id="57"> 57     <span class="php-comment">/**
-</span></span><span class="l" id="58"> 58 <span class="php-comment">     * Adds a directory with lang files.
-</span></span><span class="l" id="59"> 59 <span class="php-comment">     *
-</span></span><span class="l" id="60"> 60 <span class="php-comment">     * @param string $dir Path to the directory
-</span></span><span class="l" id="61"> 61 <span class="php-comment">     */</span>
-</span><span class="l" id="62"> 62     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addDirectory(<span class="php-var">$dir</span>)
-</span><span class="l" id="63"> 63     {
-</span><span class="l" id="64"> 64         <span class="php-var">$dir</span> = <span class="php-keyword2">rtrim</span>(<span class="php-var">$dir</span>, DIRECTORY_SEPARATOR);
-</span><span class="l" id="65"> 65 
-</span><span class="l" id="66"> 66         <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$dir</span>, self::<span class="php-var">$directories</span>, <span class="php-keyword1">true</span>)) {
-</span><span class="l" id="67"> 67             <span class="php-keyword1">return</span>;
-</span><span class="l" id="68"> 68         }
-</span><span class="l" id="69"> 69 
-</span><span class="l" id="70"> 70         self::<span class="php-var">$directories</span>[] = <span class="php-var">$dir</span>;
+</span><span class="l" id="29"> 29         <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(self::<span class="php-var">$loaded</span>[<span class="php-var">$locale</span>])) {
+</span><span class="l" id="30"> 30             self::loadAll(<span class="php-var">$locale</span>);
+</span><span class="l" id="31"> 31         }
+</span><span class="l" id="32"> 32 
+</span><span class="l" id="33"> 33         <span class="php-keyword1">if</span> (<span class="php-var">$phpSetLocale</span>) {
+</span><span class="l" id="34"> 34             <span class="php-var">$locales</span> = [];
+</span><span class="l" id="35"> 35             <span class="php-keyword1">foreach</span> (<span class="php-keyword2">explode</span>(<span class="php-quote">','</span>, <span class="php-keyword2">trim</span>(self::msg(<span class="php-quote">'setlocale'</span>))) <span class="php-keyword1">as</span> <span class="php-var">$locale</span>) {
+</span><span class="l" id="36"> 36                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.UTF-8'</span>;
+</span><span class="l" id="37"> 37                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.UTF8'</span>;
+</span><span class="l" id="38"> 38                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.utf-8'</span>;
+</span><span class="l" id="39"> 39                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span> . <span class="php-quote">'.utf8'</span>;
+</span><span class="l" id="40"> 40                 <span class="php-var">$locales</span>[] = <span class="php-var">$locale</span>;
+</span><span class="l" id="41"> 41             }
+</span><span class="l" id="42"> 42 
+</span><span class="l" id="43"> 43             <span class="php-keyword2">setlocale</span>(LC_ALL, <span class="php-var">$locales</span>);
+</span><span class="l" id="44"> 44         }
+</span><span class="l" id="45"> 45 
+</span><span class="l" id="46"> 46         <span class="php-keyword1">return</span> <span class="php-var">$saveLocale</span>;
+</span><span class="l" id="47"> 47     }
+</span><span class="l" id="48"> 48 
+</span><span class="l" id="49"> 49     <span class="php-comment">/**
+</span></span><span class="l" id="50"> 50 <span class="php-comment">     * Returns the current locale.
+</span></span><span class="l" id="51"> 51 <span class="php-comment">     *
+</span></span><span class="l" id="52"> 52 <span class="php-comment">     * @return string The current locale
+</span></span><span class="l" id="53"> 53 <span class="php-comment">     */</span>
+</span><span class="l" id="54"> 54     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getLocale()
+</span><span class="l" id="55"> 55     {
+</span><span class="l" id="56"> 56         <span class="php-keyword1">return</span> self::<span class="php-var">$locale</span>;
+</span><span class="l" id="57"> 57     }
+</span><span class="l" id="58"> 58 
+</span><span class="l" id="59"> 59     <span class="php-comment">/**
+</span></span><span class="l" id="60"> 60 <span class="php-comment">     * Adds a directory with lang files.
+</span></span><span class="l" id="61"> 61 <span class="php-comment">     *
+</span></span><span class="l" id="62"> 62 <span class="php-comment">     * @param string $dir Path to the directory
+</span></span><span class="l" id="63"> 63 <span class="php-comment">     */</span>
+</span><span class="l" id="64"> 64     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addDirectory(<span class="php-var">$dir</span>)
+</span><span class="l" id="65"> 65     {
+</span><span class="l" id="66"> 66         <span class="php-var">$dir</span> = <span class="php-keyword2">rtrim</span>(<span class="php-var">$dir</span>, DIRECTORY_SEPARATOR);
+</span><span class="l" id="67"> 67 
+</span><span class="l" id="68"> 68         <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$dir</span>, self::<span class="php-var">$directories</span>, <span class="php-keyword1">true</span>)) {
+</span><span class="l" id="69"> 69             <span class="php-keyword1">return</span>;
+</span><span class="l" id="70"> 70         }
 </span><span class="l" id="71"> 71 
-</span><span class="l" id="72"> 72         <span class="php-keyword1">if</span> (self::<span class="php-var">$loaded</span>) {
-</span><span class="l" id="73"> 73             self::loadFile(<span class="php-var">$dir</span> . DIRECTORY_SEPARATOR . self::<span class="php-var">$locale</span> . <span class="php-quote">'.lang'</span>);
-</span><span class="l" id="74"> 74         }
-</span><span class="l" id="75"> 75     }
-</span><span class="l" id="76"> 76 
-</span><span class="l" id="77"> 77     <span class="php-comment">/**
-</span></span><span class="l" id="78"> 78 <span class="php-comment">     * Returns the translation htmlspecialchared for the given key.
-</span></span><span class="l" id="79"> 79 <span class="php-comment">     *
-</span></span><span class="l" id="80"> 80 <span class="php-comment">     * @param string $key Key
+</span><span class="l" id="72"> 72         self::<span class="php-var">$directories</span>[] = <span class="php-var">$dir</span>;
+</span><span class="l" id="73"> 73 
+</span><span class="l" id="74"> 74         <span class="php-keyword1">foreach</span> (self::<span class="php-var">$loaded</span> <span class="php-keyword1">as</span> <span class="php-var">$locale</span> =&gt; <span class="php-var">$_</span>) {
+</span><span class="l" id="75"> 75             self::loadFile(<span class="php-var">$dir</span>, <span class="php-var">$locale</span>);
+</span><span class="l" id="76"> 76         }
+</span><span class="l" id="77"> 77     }
+</span><span class="l" id="78"> 78 
+</span><span class="l" id="79"> 79     <span class="php-comment">/**
+</span></span><span class="l" id="80"> 80 <span class="php-comment">     * Returns the translation htmlspecialchared for the given key.
 </span></span><span class="l" id="81"> 81 <span class="php-comment">     *
-</span></span><span class="l" id="82"> 82 <span class="php-comment">     * @return string Translation for the key
-</span></span><span class="l" id="83"> 83 <span class="php-comment">     */</span>
-</span><span class="l" id="84"> 84     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> msg(<span class="php-var">$key</span>)
-</span><span class="l" id="85"> 85     {
-</span><span class="l" id="86"> 86         <span class="php-keyword1">return</span> self::getMsg(<span class="php-var">$key</span>, <span class="php-keyword1">true</span>, <span class="php-keyword2">func_get_args</span>());
-</span><span class="l" id="87"> 87     }
-</span><span class="l" id="88"> 88 
-</span><span class="l" id="89"> 89     <span class="php-comment">/**
-</span></span><span class="l" id="90"> 90 <span class="php-comment">     * Returns the translation for the given key.
-</span></span><span class="l" id="91"> 91 <span class="php-comment">     *
-</span></span><span class="l" id="92"> 92 <span class="php-comment">     * @param string $key Key
+</span></span><span class="l" id="82"> 82 <span class="php-comment">     * @param string $key Key
+</span></span><span class="l" id="83"> 83 <span class="php-comment">     *
+</span></span><span class="l" id="84"> 84 <span class="php-comment">     * @return string Translation for the key
+</span></span><span class="l" id="85"> 85 <span class="php-comment">     */</span>
+</span><span class="l" id="86"> 86     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> msg(<span class="php-var">$key</span>)
+</span><span class="l" id="87"> 87     {
+</span><span class="l" id="88"> 88         <span class="php-keyword1">return</span> self::getMsg(<span class="php-var">$key</span>, <span class="php-keyword1">true</span>, <span class="php-keyword2">func_get_args</span>());
+</span><span class="l" id="89"> 89     }
+</span><span class="l" id="90"> 90 
+</span><span class="l" id="91"> 91     <span class="php-comment">/**
+</span></span><span class="l" id="92"> 92 <span class="php-comment">     * Returns the translation for the given key.
 </span></span><span class="l" id="93"> 93 <span class="php-comment">     *
-</span></span><span class="l" id="94"> 94 <span class="php-comment">     * @return string Translation for the key
-</span></span><span class="l" id="95"> 95 <span class="php-comment">     */</span>
-</span><span class="l" id="96"> 96     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> rawMsg(<span class="php-var">$key</span>)
-</span><span class="l" id="97"> 97     {
-</span><span class="l" id="98"> 98         <span class="php-keyword1">return</span> self::getMsg(<span class="php-var">$key</span>, <span class="php-keyword1">false</span>, <span class="php-keyword2">func_get_args</span>());
-</span><span class="l" id="99"> 99     }
-</span><span class="l" id="100">100 
-</span><span class="l" id="101">101     <span class="php-comment">/**
-</span></span><span class="l" id="102">102 <span class="php-comment">     * Returns the translation for the given key.
-</span></span><span class="l" id="103">103 <span class="php-comment">     *
-</span></span><span class="l" id="104">104 <span class="php-comment">     * @param string $key
-</span></span><span class="l" id="105">105 <span class="php-comment">     * @param bool   $htmlspecialchars
-</span></span><span class="l" id="106">106 <span class="php-comment">     * @param array  $args
-</span></span><span class="l" id="107">107 <span class="php-comment">     *
-</span></span><span class="l" id="108">108 <span class="php-comment">     * @return mixed
-</span></span><span class="l" id="109">109 <span class="php-comment">     */</span>
-</span><span class="l" id="110">110     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getMsg(<span class="php-var">$key</span>, <span class="php-var">$htmlspecialchars</span>, <span class="php-keyword1">array</span> <span class="php-var">$args</span>)
-</span><span class="l" id="111">111     {
-</span><span class="l" id="112">112         <span class="php-keyword1">if</span> (!self::<span class="php-var">$loaded</span>) {
-</span><span class="l" id="113">113             self::loadAll();
-</span><span class="l" id="114">114         }
-</span><span class="l" id="115">115 
-</span><span class="l" id="116">116         <span class="php-keyword1">if</span> (self::hasMsg(<span class="php-var">$key</span>)) {
-</span><span class="l" id="117">117             <span class="php-var">$msg</span> = self::<span class="php-var">$msg</span>[<span class="php-var">$key</span>];
-</span><span class="l" id="118">118         } <span class="php-keyword1">else</span> {
-</span><span class="l" id="119">119             <span class="php-var">$msg</span> = <span class="php-quote">"[translate:</span><span class="php-var">$key</span><span class="php-quote">]"</span>;
-</span><span class="l" id="120">120             <span class="php-var">$msg</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(
-</span><span class="l" id="121">121                 <span class="php-quote">'I18N_MISSING_TRANSLATION'</span>,
-</span><span class="l" id="122">122                 <span class="php-var">$msg</span>,
-</span><span class="l" id="123">123                 [
-</span><span class="l" id="124">124                     <span class="php-quote">'key'</span> =&gt; <span class="php-var">$key</span>,
-</span><span class="l" id="125">125                     <span class="php-quote">'args'</span> =&gt; <span class="php-var">$args</span>,
-</span><span class="l" id="126">126                 ]
-</span><span class="l" id="127">127             ));
-</span><span class="l" id="128">128         }
-</span><span class="l" id="129">129 
-</span><span class="l" id="130">130         <span class="php-var">$patterns</span> = [];
-</span><span class="l" id="131">131         <span class="php-var">$replacements</span> = [];
-</span><span class="l" id="132">132         <span class="php-var">$argNum</span> = <span class="php-keyword2">count</span>(<span class="php-var">$args</span>);
-</span><span class="l" id="133">133         <span class="php-keyword1">if</span> (<span class="php-var">$argNum</span> &gt; <span class="php-num">1</span>) {
-</span><span class="l" id="134">134             <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">1</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$argNum</span>; ++<span class="php-var">$i</span>) {
-</span><span class="l" id="135">135                 <span class="php-comment">// zero indexed</span>
-</span><span class="l" id="136">136                 <span class="php-var">$patterns</span>[] = <span class="php-quote">'/\{'</span> . (<span class="php-var">$i</span> - <span class="php-num">1</span>) . <span class="php-quote">'\}/'</span>;
-</span><span class="l" id="137">137                 <span class="php-var">$replacements</span>[] = <span class="php-var">$args</span>[<span class="php-var">$i</span>];
-</span><span class="l" id="138">138             }
-</span><span class="l" id="139">139         }
-</span><span class="l" id="140">140 
-</span><span class="l" id="141">141         <span class="php-var">$msg</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-var">$patterns</span>, <span class="php-var">$replacements</span>, <span class="php-var">$msg</span>);
-</span><span class="l" id="142">142 
-</span><span class="l" id="143">143         <span class="php-keyword1">if</span> (<span class="php-var">$htmlspecialchars</span>) {
-</span><span class="l" id="144">144             <span class="php-var">$msg</span> = rex_escape(<span class="php-var">$msg</span>);
-</span><span class="l" id="145">145             <span class="php-var">$msg</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'@&amp;lt;(/?(?:b|i|code|kbd|var)|br ?/?)&amp;gt;@i'</span>, <span class="php-quote">'&lt;$1&gt;'</span>, <span class="php-var">$msg</span>);
-</span><span class="l" id="146">146         }
+</span></span><span class="l" id="94"> 94 <span class="php-comment">     * @param string $key Key
+</span></span><span class="l" id="95"> 95 <span class="php-comment">     *
+</span></span><span class="l" id="96"> 96 <span class="php-comment">     * @return string Translation for the key
+</span></span><span class="l" id="97"> 97 <span class="php-comment">     */</span>
+</span><span class="l" id="98"> 98     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> rawMsg(<span class="php-var">$key</span>)
+</span><span class="l" id="99"> 99     {
+</span><span class="l" id="100">100         <span class="php-keyword1">return</span> self::getMsg(<span class="php-var">$key</span>, <span class="php-keyword1">false</span>, <span class="php-keyword2">func_get_args</span>());
+</span><span class="l" id="101">101     }
+</span><span class="l" id="102">102 
+</span><span class="l" id="103">103     <span class="php-comment">/**
+</span></span><span class="l" id="104">104 <span class="php-comment">     * Returns the translation for the given key.
+</span></span><span class="l" id="105">105 <span class="php-comment">     *
+</span></span><span class="l" id="106">106 <span class="php-comment">     * @param string $key
+</span></span><span class="l" id="107">107 <span class="php-comment">     * @param bool   $htmlspecialchars
+</span></span><span class="l" id="108">108 <span class="php-comment">     * @param array  $args
+</span></span><span class="l" id="109">109 <span class="php-comment">     *
+</span></span><span class="l" id="110">110 <span class="php-comment">     * @return mixed
+</span></span><span class="l" id="111">111 <span class="php-comment">     */</span>
+</span><span class="l" id="112">112     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getMsg(<span class="php-var">$key</span>, <span class="php-var">$htmlspecialchars</span>, <span class="php-keyword1">array</span> <span class="php-var">$args</span>)
+</span><span class="l" id="113">113     {
+</span><span class="l" id="114">114         <span class="php-keyword1">if</span> (!self::<span class="php-var">$locale</span>) {
+</span><span class="l" id="115">115             self::<span class="php-var">$locale</span> = rex::getProperty(<span class="php-quote">'lang'</span>);
+</span><span class="l" id="116">116         }
+</span><span class="l" id="117">117         <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(self::<span class="php-var">$loaded</span>[self::<span class="php-var">$locale</span>])) {
+</span><span class="l" id="118">118             self::loadAll(self::<span class="php-var">$locale</span>);
+</span><span class="l" id="119">119         }
+</span><span class="l" id="120">120 
+</span><span class="l" id="121">121         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$msg</span>[self::<span class="php-var">$locale</span>][<span class="php-var">$key</span>])) {
+</span><span class="l" id="122">122             <span class="php-var">$msg</span> = self::<span class="php-var">$msg</span>[self::<span class="php-var">$locale</span>][<span class="php-var">$key</span>];
+</span><span class="l" id="123">123         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="124">124             <span class="php-var">$msg</span> = self::getMsgFallback(<span class="php-var">$key</span>, <span class="php-var">$args</span>);
+</span><span class="l" id="125">125         }
+</span><span class="l" id="126">126 
+</span><span class="l" id="127">127         <span class="php-var">$patterns</span> = [];
+</span><span class="l" id="128">128         <span class="php-var">$replacements</span> = [];
+</span><span class="l" id="129">129         <span class="php-var">$argNum</span> = <span class="php-keyword2">count</span>(<span class="php-var">$args</span>);
+</span><span class="l" id="130">130         <span class="php-keyword1">if</span> (<span class="php-var">$argNum</span> &gt; <span class="php-num">1</span>) {
+</span><span class="l" id="131">131             <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">1</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$argNum</span>; ++<span class="php-var">$i</span>) {
+</span><span class="l" id="132">132                 <span class="php-comment">// zero indexed</span>
+</span><span class="l" id="133">133                 <span class="php-var">$patterns</span>[] = <span class="php-quote">'/\{'</span> . (<span class="php-var">$i</span> - <span class="php-num">1</span>) . <span class="php-quote">'\}/'</span>;
+</span><span class="l" id="134">134                 <span class="php-var">$replacements</span>[] = <span class="php-var">$args</span>[<span class="php-var">$i</span>];
+</span><span class="l" id="135">135             }
+</span><span class="l" id="136">136         }
+</span><span class="l" id="137">137 
+</span><span class="l" id="138">138         <span class="php-var">$msg</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-var">$patterns</span>, <span class="php-var">$replacements</span>, <span class="php-var">$msg</span>);
+</span><span class="l" id="139">139 
+</span><span class="l" id="140">140         <span class="php-keyword1">if</span> (<span class="php-var">$htmlspecialchars</span>) {
+</span><span class="l" id="141">141             <span class="php-var">$msg</span> = rex_escape(<span class="php-var">$msg</span>);
+</span><span class="l" id="142">142             <span class="php-var">$msg</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'@&amp;lt;(/?(?:b|i|code|kbd|var)|br ?/?)&amp;gt;@i'</span>, <span class="php-quote">'&lt;$1&gt;'</span>, <span class="php-var">$msg</span>);
+</span><span class="l" id="143">143         }
+</span><span class="l" id="144">144 
+</span><span class="l" id="145">145         <span class="php-keyword1">return</span> <span class="php-var">$msg</span>;
+</span><span class="l" id="146">146     }
 </span><span class="l" id="147">147 
-</span><span class="l" id="148">148         <span class="php-keyword1">return</span> <span class="php-var">$msg</span>;
-</span><span class="l" id="149">149     }
-</span><span class="l" id="150">150 
-</span><span class="l" id="151">151     <span class="php-comment">/**
-</span></span><span class="l" id="152">152 <span class="php-comment">     * Checks if there is a translation for the given key.
+</span><span class="l" id="148">148     <span class="php-comment">/**
+</span></span><span class="l" id="149">149 <span class="php-comment">     * Returns the message fallback for a missing key in main locale.
+</span></span><span class="l" id="150">150 <span class="php-comment">     *
+</span></span><span class="l" id="151">151 <span class="php-comment">     * @param string $key
+</span></span><span class="l" id="152">152 <span class="php-comment">     * @param array  $args
 </span></span><span class="l" id="153">153 <span class="php-comment">     *
-</span></span><span class="l" id="154">154 <span class="php-comment">     * @param string $key Key
-</span></span><span class="l" id="155">155 <span class="php-comment">     *
-</span></span><span class="l" id="156">156 <span class="php-comment">     * @return bool TRUE on success, else FALSE
-</span></span><span class="l" id="157">157 <span class="php-comment">     */</span>
-</span><span class="l" id="158">158     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> hasMsg(<span class="php-var">$key</span>)
-</span><span class="l" id="159">159     {
-</span><span class="l" id="160">160         <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(self::<span class="php-var">$msg</span>[<span class="php-var">$key</span>]);
-</span><span class="l" id="161">161     }
-</span><span class="l" id="162">162 
-</span><span class="l" id="163">163     <span class="php-comment">/**
-</span></span><span class="l" id="164">164 <span class="php-comment">     * Adds a new translation to the catalogue.
-</span></span><span class="l" id="165">165 <span class="php-comment">     *
-</span></span><span class="l" id="166">166 <span class="php-comment">     * @param string $key Key
-</span></span><span class="l" id="167">167 <span class="php-comment">     * @param string $msg Message for the key
-</span></span><span class="l" id="168">168 <span class="php-comment">     */</span>
-</span><span class="l" id="169">169     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addMsg(<span class="php-var">$key</span>, <span class="php-var">$msg</span>)
-</span><span class="l" id="170">170     {
-</span><span class="l" id="171">171         self::<span class="php-var">$msg</span>[<span class="php-var">$key</span>] = <span class="php-var">$msg</span>;
-</span><span class="l" id="172">172     }
+</span></span><span class="l" id="154">154 <span class="php-comment">     * @return string
+</span></span><span class="l" id="155">155 <span class="php-comment">     */</span>
+</span><span class="l" id="156">156     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getMsgFallback(<span class="php-var">$key</span>, <span class="php-keyword1">array</span> <span class="php-var">$args</span>)
+</span><span class="l" id="157">157     {
+</span><span class="l" id="158">158         <span class="php-var">$fallback</span> = <span class="php-quote">"[translate:</span><span class="php-var">$key</span><span class="php-quote">]"</span>;
+</span><span class="l" id="159">159 
+</span><span class="l" id="160">160         <span class="php-var">$msg</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'I18N_MISSING_TRANSLATION'</span>, <span class="php-var">$fallback</span>, [
+</span><span class="l" id="161">161             <span class="php-quote">'key'</span> =&gt; <span class="php-var">$key</span>,
+</span><span class="l" id="162">162             <span class="php-quote">'args'</span> =&gt; <span class="php-var">$args</span>,
+</span><span class="l" id="163">163         ]));
+</span><span class="l" id="164">164 
+</span><span class="l" id="165">165         <span class="php-keyword1">if</span> (<span class="php-var">$msg</span> !== <span class="php-var">$fallback</span>) {
+</span><span class="l" id="166">166             <span class="php-keyword1">return</span> <span class="php-var">$msg</span>;
+</span><span class="l" id="167">167         }
+</span><span class="l" id="168">168 
+</span><span class="l" id="169">169         <span class="php-keyword1">foreach</span> (rex::getProperty(<span class="php-quote">'lang_fallback'</span>, []) <span class="php-keyword1">as</span> <span class="php-var">$locale</span>) {
+</span><span class="l" id="170">170             <span class="php-keyword1">if</span> (self::<span class="php-var">$locale</span> === <span class="php-var">$locale</span>) {
+</span><span class="l" id="171">171                 <span class="php-keyword1">continue</span>;
+</span><span class="l" id="172">172             }
 </span><span class="l" id="173">173 
-</span><span class="l" id="174">174     <span class="php-comment">/**
-</span></span><span class="l" id="175">175 <span class="php-comment">     * Returns the locales.
-</span></span><span class="l" id="176">176 <span class="php-comment">     *
-</span></span><span class="l" id="177">177 <span class="php-comment">     * @return array Array of Locales
-</span></span><span class="l" id="178">178 <span class="php-comment">     */</span>
-</span><span class="l" id="179">179     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getLocales()
-</span><span class="l" id="180">180     {
-</span><span class="l" id="181">181         <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(self::<span class="php-var">$locales</span>) &amp;&amp; <span class="php-keyword1">isset</span>(self::<span class="php-var">$directories</span>[<span class="php-num">0</span>]) &amp;&amp; <span class="php-keyword2">is_readable</span>(self::<span class="php-var">$directories</span>[<span class="php-num">0</span>])) {
-</span><span class="l" id="182">182             self::<span class="php-var">$locales</span> = [];
-</span><span class="l" id="183">183 
-</span><span class="l" id="184">184             <span class="php-keyword1">foreach</span> (rex_finder::factory(self::<span class="php-var">$directories</span>[<span class="php-num">0</span>])-&gt;filesOnly() <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
-</span><span class="l" id="185">185                 <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">"/^(\w+)\.lang</span><span class="php-var">$</span><span class="php-quote">/"</span>, <span class="php-var">$file</span>-&gt;getFilename(), <span class="php-var">$matches</span>)) {
-</span><span class="l" id="186">186                     self::<span class="php-var">$locales</span>[] = <span class="php-var">$matches</span>[<span class="php-num">1</span>];
-</span><span class="l" id="187">187                 }
-</span><span class="l" id="188">188             }
-</span><span class="l" id="189">189         }
-</span><span class="l" id="190">190 
-</span><span class="l" id="191">191         <span class="php-keyword1">return</span> self::<span class="php-var">$locales</span>;
-</span><span class="l" id="192">192     }
-</span><span class="l" id="193">193 
-</span><span class="l" id="194">194     <span class="php-comment">/**
-</span></span><span class="l" id="195">195 <span class="php-comment">     * Translates the $text, if it begins with 'translate:', else it returns $text.
-</span></span><span class="l" id="196">196 <span class="php-comment">     *
-</span></span><span class="l" id="197">197 <span class="php-comment">     * @param string   $text                 The text for translation
-</span></span><span class="l" id="198">198 <span class="php-comment">     * @param bool     $use_htmlspecialchars Flag whether the translated text should be passed to htmlspecialchars()
-</span></span><span class="l" id="199">199 <span class="php-comment">     * @param callable $i18nFunction         Function that returns the translation for the i18n key
+</span><span class="l" id="174">174             <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(self::<span class="php-var">$loaded</span>[<span class="php-var">$locale</span>])) {
+</span><span class="l" id="175">175                 self::loadAll(<span class="php-var">$locale</span>);
+</span><span class="l" id="176">176             }
+</span><span class="l" id="177">177 
+</span><span class="l" id="178">178             <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$msg</span>[<span class="php-var">$locale</span>][<span class="php-var">$key</span>])) {
+</span><span class="l" id="179">179                 <span class="php-keyword1">return</span> self::<span class="php-var">$msg</span>[<span class="php-var">$locale</span>][<span class="php-var">$key</span>];
+</span><span class="l" id="180">180             }
+</span><span class="l" id="181">181         }
+</span><span class="l" id="182">182 
+</span><span class="l" id="183">183         <span class="php-keyword1">return</span> <span class="php-var">$fallback</span>;
+</span><span class="l" id="184">184     }
+</span><span class="l" id="185">185 
+</span><span class="l" id="186">186     <span class="php-comment">/**
+</span></span><span class="l" id="187">187 <span class="php-comment">     * Checks if there is a translation for the given key.
+</span></span><span class="l" id="188">188 <span class="php-comment">     *
+</span></span><span class="l" id="189">189 <span class="php-comment">     * @param string $key Key
+</span></span><span class="l" id="190">190 <span class="php-comment">     *
+</span></span><span class="l" id="191">191 <span class="php-comment">     * @return bool TRUE on success, else FALSE
+</span></span><span class="l" id="192">192 <span class="php-comment">     */</span>
+</span><span class="l" id="193">193     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> hasMsg(<span class="php-var">$key</span>)
+</span><span class="l" id="194">194     {
+</span><span class="l" id="195">195         <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(self::<span class="php-var">$msg</span>[self::<span class="php-var">$locale</span>][<span class="php-var">$key</span>]);
+</span><span class="l" id="196">196     }
+</span><span class="l" id="197">197 
+</span><span class="l" id="198">198     <span class="php-comment">/**
+</span></span><span class="l" id="199">199 <span class="php-comment">     * Checks if there is a translation for the given key in current language or any fallback language.
 </span></span><span class="l" id="200">200 <span class="php-comment">     *
-</span></span><span class="l" id="201">201 <span class="php-comment">     * @throws InvalidArgumentException
+</span></span><span class="l" id="201">201 <span class="php-comment">     * @param string $key Key
 </span></span><span class="l" id="202">202 <span class="php-comment">     *
-</span></span><span class="l" id="203">203 <span class="php-comment">     * @return string Translated text
+</span></span><span class="l" id="203">203 <span class="php-comment">     * @return bool TRUE on success, else FALSE
 </span></span><span class="l" id="204">204 <span class="php-comment">     */</span>
-</span><span class="l" id="205">205     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> translate(<span class="php-var">$text</span>, <span class="php-var">$use_htmlspecialchars</span> = <span class="php-keyword1">true</span>, <span class="php-keyword1">callable</span> <span class="php-var">$i18nFunction</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="205">205     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> hasMsgOrFallback(<span class="php-var">$key</span>)
 </span><span class="l" id="206">206     {
-</span><span class="l" id="207">207         <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_string</span>(<span class="php-var">$text</span>)) {
-</span><span class="l" id="208">208             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Expecting $text to be a String, "'</span> . <span class="php-keyword2">gettype</span>(<span class="php-var">$text</span>) . <span class="php-quote">'" given!'</span>);
+</span><span class="l" id="207">207         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$msg</span>[self::<span class="php-var">$locale</span>][<span class="php-var">$key</span>])) {
+</span><span class="l" id="208">208             <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
 </span><span class="l" id="209">209         }
 </span><span class="l" id="210">210 
-</span><span class="l" id="211">211         <span class="php-var">$tranKey</span> = <span class="php-quote">'translate:'</span>;
-</span><span class="l" id="212">212         <span class="php-var">$transKeyLen</span> = <span class="php-keyword2">strlen</span>(<span class="php-var">$tranKey</span>);
-</span><span class="l" id="213">213         <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$text</span>, <span class="php-num">0</span>, <span class="php-var">$transKeyLen</span>) == <span class="php-var">$tranKey</span>) {
-</span><span class="l" id="214">214             <span class="php-keyword1">if</span> (!<span class="php-var">$i18nFunction</span>) {
-</span><span class="l" id="215">215                 <span class="php-var">$i18nFunction</span> = <span class="php-var">$use_htmlspecialchars</span> ? <span class="php-quote">'self::msg'</span> : <span class="php-quote">'self::rawMsg'</span>;
-</span><span class="l" id="216">216             }
-</span><span class="l" id="217">217             <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func</span>(<span class="php-var">$i18nFunction</span>, <span class="php-keyword2">substr</span>(<span class="php-var">$text</span>, <span class="php-var">$transKeyLen</span>));
-</span><span class="l" id="218">218         }
-</span><span class="l" id="219">219         <span class="php-keyword1">if</span> (<span class="php-var">$use_htmlspecialchars</span>) {
-</span><span class="l" id="220">220             <span class="php-keyword1">return</span> <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$text</span>);
-</span><span class="l" id="221">221         }
-</span><span class="l" id="222">222         <span class="php-keyword1">return</span> <span class="php-var">$text</span>;
-</span><span class="l" id="223">223     }
+</span><span class="l" id="211">211         <span class="php-keyword1">foreach</span> (rex::getProperty(<span class="php-quote">'lang_fallback'</span>, []) <span class="php-keyword1">as</span> <span class="php-var">$locale</span>) {
+</span><span class="l" id="212">212             <span class="php-keyword1">if</span> (self::<span class="php-var">$locale</span> === <span class="php-var">$locale</span>) {
+</span><span class="l" id="213">213                 <span class="php-keyword1">continue</span>;
+</span><span class="l" id="214">214             }
+</span><span class="l" id="215">215 
+</span><span class="l" id="216">216             <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(self::<span class="php-var">$loaded</span>[<span class="php-var">$locale</span>])) {
+</span><span class="l" id="217">217                 self::loadAll(<span class="php-var">$locale</span>);
+</span><span class="l" id="218">218             }
+</span><span class="l" id="219">219 
+</span><span class="l" id="220">220             <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$msg</span>[<span class="php-var">$locale</span>][<span class="php-var">$key</span>])) {
+</span><span class="l" id="221">221                 <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span class="l" id="222">222             }
+</span><span class="l" id="223">223         }
 </span><span class="l" id="224">224 
-</span><span class="l" id="225">225     <span class="php-comment">/**
-</span></span><span class="l" id="226">226 <span class="php-comment">     * Translates all array elements.
-</span></span><span class="l" id="227">227 <span class="php-comment">     *
-</span></span><span class="l" id="228">228 <span class="php-comment">     * @param mixed    $array                The Array of Strings for translation
-</span></span><span class="l" id="229">229 <span class="php-comment">     * @param bool     $use_htmlspecialchars Flag whether the translated text should be passed to htmlspecialchars()
-</span></span><span class="l" id="230">230 <span class="php-comment">     * @param callable $i18nFunction         Function that returns the translation for the i18n key
-</span></span><span class="l" id="231">231 <span class="php-comment">     *
-</span></span><span class="l" id="232">232 <span class="php-comment">     * @throws InvalidArgumentException
-</span></span><span class="l" id="233">233 <span class="php-comment">     *
-</span></span><span class="l" id="234">234 <span class="php-comment">     * @return mixed
-</span></span><span class="l" id="235">235 <span class="php-comment">     */</span>
-</span><span class="l" id="236">236     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> translateArray(<span class="php-var">$array</span>, <span class="php-var">$use_htmlspecialchars</span> = <span class="php-keyword1">true</span>, <span class="php-keyword1">callable</span> <span class="php-var">$i18nFunction</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="237">237     {
-</span><span class="l" id="238">238         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$array</span>)) {
-</span><span class="l" id="239">239             <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="240">240                 <span class="php-var">$array</span>[<span class="php-var">$key</span>] = self::translateArray(<span class="php-var">$value</span>, <span class="php-var">$use_htmlspecialchars</span>, <span class="php-var">$i18nFunction</span>);
-</span><span class="l" id="241">241             }
-</span><span class="l" id="242">242             <span class="php-keyword1">return</span> <span class="php-var">$array</span>;
-</span><span class="l" id="243">243         }
-</span><span class="l" id="244">244         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$array</span>)) {
-</span><span class="l" id="245">245             <span class="php-keyword1">return</span> self::translate(<span class="php-var">$array</span>, <span class="php-var">$use_htmlspecialchars</span>, <span class="php-var">$i18nFunction</span>);
-</span><span class="l" id="246">246         }
-</span><span class="l" id="247">247         <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$array</span> || <span class="php-keyword2">is_scalar</span>(<span class="php-var">$array</span>)) {
-</span><span class="l" id="248">248             <span class="php-keyword1">return</span> <span class="php-var">$array</span>;
-</span><span class="l" id="249">249         }
-</span><span class="l" id="250">250         <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Expecting $text to be a String or Array of Scalar, "'</span> . <span class="php-keyword2">gettype</span>(<span class="php-var">$array</span>) . <span class="php-quote">'" given!'</span>);
-</span><span class="l" id="251">251     }
-</span><span class="l" id="252">252 
-</span><span class="l" id="253">253     <span class="php-comment">/**
-</span></span><span class="l" id="254">254 <span class="php-comment">     * Loads the translation definitions of the given file.
-</span></span><span class="l" id="255">255 <span class="php-comment">     *
-</span></span><span class="l" id="256">256 <span class="php-comment">     * @param string $file Path to the file
-</span></span><span class="l" id="257">257 <span class="php-comment">     *
-</span></span><span class="l" id="258">258 <span class="php-comment">     * @return bool TRUE on success, FALSE on failure
-</span></span><span class="l" id="259">259 <span class="php-comment">     */</span>
-</span><span class="l" id="260">260     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> loadFile(<span class="php-var">$file</span>)
-</span><span class="l" id="261">261     {
-</span><span class="l" id="262">262         <span class="php-keyword1">if</span> (
-</span><span class="l" id="263">263             (<span class="php-var">$content</span> = rex_file::get(<span class="php-var">$file</span>)) &amp;&amp;
-</span><span class="l" id="264">264             <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'/^([^=\s]+)\h*=\h*(.*)(?&lt;=\S)/m'</span>, <span class="php-var">$content</span>, <span class="php-var">$matches</span>, PREG_SET_ORDER)
-</span><span class="l" id="265">265         ) {
-</span><span class="l" id="266">266             <span class="php-keyword1">foreach</span> (<span class="php-var">$matches</span> <span class="php-keyword1">as</span> <span class="php-var">$match</span>) {
-</span><span class="l" id="267">267                 self::addMsg(<span class="php-var">$match</span>[<span class="php-num">1</span>], <span class="php-var">$match</span>[<span class="php-num">2</span>]);
-</span><span class="l" id="268">268             }
-</span><span class="l" id="269">269         }
-</span><span class="l" id="270">270     }
-</span><span class="l" id="271">271 
-</span><span class="l" id="272">272     <span class="php-comment">/**
-</span></span><span class="l" id="273">273 <span class="php-comment">     * Loads all translation defintions.
-</span></span><span class="l" id="274">274 <span class="php-comment">     */</span>
-</span><span class="l" id="275">275     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> loadAll()
-</span><span class="l" id="276">276     {
-</span><span class="l" id="277">277         self::<span class="php-var">$msg</span> = [];
-</span><span class="l" id="278">278         <span class="php-keyword1">if</span> (!self::<span class="php-var">$locale</span>) {
-</span><span class="l" id="279">279             self::<span class="php-var">$locale</span> = rex::getProperty(<span class="php-quote">'lang'</span>);
-</span><span class="l" id="280">280         }
-</span><span class="l" id="281">281         <span class="php-keyword1">foreach</span> (self::<span class="php-var">$directories</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span>) {
-</span><span class="l" id="282">282             self::loadFile(<span class="php-var">$dir</span> . DIRECTORY_SEPARATOR . self::<span class="php-var">$locale</span> . <span class="php-quote">'.lang'</span>);
+</span><span class="l" id="225">225         <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="226">226     }
+</span><span class="l" id="227">227 
+</span><span class="l" id="228">228     <span class="php-comment">/**
+</span></span><span class="l" id="229">229 <span class="php-comment">     * Adds a new translation to the catalogue.
+</span></span><span class="l" id="230">230 <span class="php-comment">     *
+</span></span><span class="l" id="231">231 <span class="php-comment">     * @param string $key Key
+</span></span><span class="l" id="232">232 <span class="php-comment">     * @param string $msg Message for the key
+</span></span><span class="l" id="233">233 <span class="php-comment">     */</span>
+</span><span class="l" id="234">234     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> addMsg(<span class="php-var">$key</span>, <span class="php-var">$msg</span>)
+</span><span class="l" id="235">235     {
+</span><span class="l" id="236">236         self::<span class="php-var">$msg</span>[self::<span class="php-var">$locale</span>][<span class="php-var">$key</span>] = <span class="php-var">$msg</span>;
+</span><span class="l" id="237">237     }
+</span><span class="l" id="238">238 
+</span><span class="l" id="239">239     <span class="php-comment">/**
+</span></span><span class="l" id="240">240 <span class="php-comment">     * Returns the locales.
+</span></span><span class="l" id="241">241 <span class="php-comment">     *
+</span></span><span class="l" id="242">242 <span class="php-comment">     * @return array Array of Locales
+</span></span><span class="l" id="243">243 <span class="php-comment">     */</span>
+</span><span class="l" id="244">244     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getLocales()
+</span><span class="l" id="245">245     {
+</span><span class="l" id="246">246         <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(self::<span class="php-var">$locales</span>) &amp;&amp; <span class="php-keyword1">isset</span>(self::<span class="php-var">$directories</span>[<span class="php-num">0</span>]) &amp;&amp; <span class="php-keyword2">is_readable</span>(self::<span class="php-var">$directories</span>[<span class="php-num">0</span>])) {
+</span><span class="l" id="247">247             self::<span class="php-var">$locales</span> = [];
+</span><span class="l" id="248">248 
+</span><span class="l" id="249">249             <span class="php-keyword1">foreach</span> (rex_finder::factory(self::<span class="php-var">$directories</span>[<span class="php-num">0</span>])-&gt;filesOnly() <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
+</span><span class="l" id="250">250                 <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">"/^(\w+)\.lang</span><span class="php-var">$</span><span class="php-quote">/"</span>, <span class="php-var">$file</span>-&gt;getFilename(), <span class="php-var">$matches</span>)) {
+</span><span class="l" id="251">251                     self::<span class="php-var">$locales</span>[] = <span class="php-var">$matches</span>[<span class="php-num">1</span>];
+</span><span class="l" id="252">252                 }
+</span><span class="l" id="253">253             }
+</span><span class="l" id="254">254         }
+</span><span class="l" id="255">255 
+</span><span class="l" id="256">256         <span class="php-keyword1">return</span> self::<span class="php-var">$locales</span>;
+</span><span class="l" id="257">257     }
+</span><span class="l" id="258">258 
+</span><span class="l" id="259">259     <span class="php-comment">/**
+</span></span><span class="l" id="260">260 <span class="php-comment">     * Translates the $text, if it begins with 'translate:', else it returns $text.
+</span></span><span class="l" id="261">261 <span class="php-comment">     *
+</span></span><span class="l" id="262">262 <span class="php-comment">     * @param string   $text                 The text for translation
+</span></span><span class="l" id="263">263 <span class="php-comment">     * @param bool     $use_htmlspecialchars Flag whether the translated text should be passed to htmlspecialchars()
+</span></span><span class="l" id="264">264 <span class="php-comment">     * @param callable $i18nFunction         Function that returns the translation for the i18n key
+</span></span><span class="l" id="265">265 <span class="php-comment">     *
+</span></span><span class="l" id="266">266 <span class="php-comment">     * @throws InvalidArgumentException
+</span></span><span class="l" id="267">267 <span class="php-comment">     *
+</span></span><span class="l" id="268">268 <span class="php-comment">     * @return string Translated text
+</span></span><span class="l" id="269">269 <span class="php-comment">     */</span>
+</span><span class="l" id="270">270     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> translate(<span class="php-var">$text</span>, <span class="php-var">$use_htmlspecialchars</span> = <span class="php-keyword1">true</span>, <span class="php-keyword1">callable</span> <span class="php-var">$i18nFunction</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="271">271     {
+</span><span class="l" id="272">272         <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_string</span>(<span class="php-var">$text</span>)) {
+</span><span class="l" id="273">273             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Expecting $text to be a String, "'</span> . <span class="php-keyword2">gettype</span>(<span class="php-var">$text</span>) . <span class="php-quote">'" given!'</span>);
+</span><span class="l" id="274">274         }
+</span><span class="l" id="275">275 
+</span><span class="l" id="276">276         <span class="php-var">$tranKey</span> = <span class="php-quote">'translate:'</span>;
+</span><span class="l" id="277">277         <span class="php-var">$transKeyLen</span> = <span class="php-keyword2">strlen</span>(<span class="php-var">$tranKey</span>);
+</span><span class="l" id="278">278         <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$text</span>, <span class="php-num">0</span>, <span class="php-var">$transKeyLen</span>) == <span class="php-var">$tranKey</span>) {
+</span><span class="l" id="279">279             <span class="php-keyword1">if</span> (!<span class="php-var">$i18nFunction</span>) {
+</span><span class="l" id="280">280                 <span class="php-var">$i18nFunction</span> = <span class="php-var">$use_htmlspecialchars</span> ? <span class="php-quote">'self::msg'</span> : <span class="php-quote">'self::rawMsg'</span>;
+</span><span class="l" id="281">281             }
+</span><span class="l" id="282">282             <span class="php-keyword1">return</span> <span class="php-keyword2">call_user_func</span>(<span class="php-var">$i18nFunction</span>, <span class="php-keyword2">substr</span>(<span class="php-var">$text</span>, <span class="php-var">$transKeyLen</span>));
 </span><span class="l" id="283">283         }
-</span><span class="l" id="284">284         self::<span class="php-var">$loaded</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="285">285     }
-</span><span class="l" id="286">286 }
-</span><span class="l" id="287">287 </span></code></pre>
+</span><span class="l" id="284">284         <span class="php-keyword1">if</span> (<span class="php-var">$use_htmlspecialchars</span>) {
+</span><span class="l" id="285">285             <span class="php-keyword1">return</span> <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$text</span>);
+</span><span class="l" id="286">286         }
+</span><span class="l" id="287">287         <span class="php-keyword1">return</span> <span class="php-var">$text</span>;
+</span><span class="l" id="288">288     }
+</span><span class="l" id="289">289 
+</span><span class="l" id="290">290     <span class="php-comment">/**
+</span></span><span class="l" id="291">291 <span class="php-comment">     * Translates all array elements.
+</span></span><span class="l" id="292">292 <span class="php-comment">     *
+</span></span><span class="l" id="293">293 <span class="php-comment">     * @param mixed    $array                The Array of Strings for translation
+</span></span><span class="l" id="294">294 <span class="php-comment">     * @param bool     $use_htmlspecialchars Flag whether the translated text should be passed to htmlspecialchars()
+</span></span><span class="l" id="295">295 <span class="php-comment">     * @param callable $i18nFunction         Function that returns the translation for the i18n key
+</span></span><span class="l" id="296">296 <span class="php-comment">     *
+</span></span><span class="l" id="297">297 <span class="php-comment">     * @throws InvalidArgumentException
+</span></span><span class="l" id="298">298 <span class="php-comment">     *
+</span></span><span class="l" id="299">299 <span class="php-comment">     * @return mixed
+</span></span><span class="l" id="300">300 <span class="php-comment">     */</span>
+</span><span class="l" id="301">301     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> translateArray(<span class="php-var">$array</span>, <span class="php-var">$use_htmlspecialchars</span> = <span class="php-keyword1">true</span>, <span class="php-keyword1">callable</span> <span class="php-var">$i18nFunction</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="302">302     {
+</span><span class="l" id="303">303         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$array</span>)) {
+</span><span class="l" id="304">304             <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="305">305                 <span class="php-var">$array</span>[<span class="php-var">$key</span>] = self::translateArray(<span class="php-var">$value</span>, <span class="php-var">$use_htmlspecialchars</span>, <span class="php-var">$i18nFunction</span>);
+</span><span class="l" id="306">306             }
+</span><span class="l" id="307">307             <span class="php-keyword1">return</span> <span class="php-var">$array</span>;
+</span><span class="l" id="308">308         }
+</span><span class="l" id="309">309         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$array</span>)) {
+</span><span class="l" id="310">310             <span class="php-keyword1">return</span> self::translate(<span class="php-var">$array</span>, <span class="php-var">$use_htmlspecialchars</span>, <span class="php-var">$i18nFunction</span>);
+</span><span class="l" id="311">311         }
+</span><span class="l" id="312">312         <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$array</span> || <span class="php-keyword2">is_scalar</span>(<span class="php-var">$array</span>)) {
+</span><span class="l" id="313">313             <span class="php-keyword1">return</span> <span class="php-var">$array</span>;
+</span><span class="l" id="314">314         }
+</span><span class="l" id="315">315         <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Expecting $text to be a String or Array of Scalar, "'</span> . <span class="php-keyword2">gettype</span>(<span class="php-var">$array</span>) . <span class="php-quote">'" given!'</span>);
+</span><span class="l" id="316">316     }
+</span><span class="l" id="317">317 
+</span><span class="l" id="318">318     <span class="php-comment">/**
+</span></span><span class="l" id="319">319 <span class="php-comment">     * Loads the translation definitions of the given file.
+</span></span><span class="l" id="320">320 <span class="php-comment">     *
+</span></span><span class="l" id="321">321 <span class="php-comment">     * @param string $dir    Path to the directory
+</span></span><span class="l" id="322">322 <span class="php-comment">     * @param string $locale Locale
+</span></span><span class="l" id="323">323 <span class="php-comment">     */</span>
+</span><span class="l" id="324">324     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> loadFile(<span class="php-var">$dir</span>, <span class="php-var">$locale</span>)
+</span><span class="l" id="325">325     {
+</span><span class="l" id="326">326         <span class="php-var">$file</span> = <span class="php-var">$dir</span>.DIRECTORY_SEPARATOR.<span class="php-var">$locale</span>.<span class="php-quote">'.lang'</span>;
+</span><span class="l" id="327">327 
+</span><span class="l" id="328">328         <span class="php-keyword1">if</span> (
+</span><span class="l" id="329">329             (<span class="php-var">$content</span> = rex_file::get(<span class="php-var">$file</span>)) &amp;&amp;
+</span><span class="l" id="330">330             <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'/^([^=\s]+)\h*=\h*(\S.*)(?&lt;=\S)/m'</span>, <span class="php-var">$content</span>, <span class="php-var">$matches</span>, PREG_SET_ORDER)
+</span><span class="l" id="331">331         ) {
+</span><span class="l" id="332">332             <span class="php-keyword1">foreach</span> (<span class="php-var">$matches</span> <span class="php-keyword1">as</span> <span class="php-var">$match</span>) {
+</span><span class="l" id="333">333                 self::<span class="php-var">$msg</span>[<span class="php-var">$locale</span>][<span class="php-var">$match</span>[<span class="php-num">1</span>]] = <span class="php-var">$match</span>[<span class="php-num">2</span>];
+</span><span class="l" id="334">334             }
+</span><span class="l" id="335">335         }
+</span><span class="l" id="336">336     }
+</span><span class="l" id="337">337 
+</span><span class="l" id="338">338     <span class="php-comment">/**
+</span></span><span class="l" id="339">339 <span class="php-comment">     * Loads all translation defintions.
+</span></span><span class="l" id="340">340 <span class="php-comment">     *
+</span></span><span class="l" id="341">341 <span class="php-comment">     * @param string $locale Locale
+</span></span><span class="l" id="342">342 <span class="php-comment">     */</span>
+</span><span class="l" id="343">343     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> loadAll(<span class="php-var">$locale</span>)
+</span><span class="l" id="344">344     {
+</span><span class="l" id="345">345         <span class="php-keyword1">foreach</span> (self::<span class="php-var">$directories</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span>) {
+</span><span class="l" id="346">346             self::loadFile(<span class="php-var">$dir</span>, <span class="php-var">$locale</span>);
+</span><span class="l" id="347">347         }
+</span><span class="l" id="348">348 
+</span><span class="l" id="349">349         self::<span class="php-var">$loaded</span>[<span class="php-var">$locale</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="350">350     }
+</span><span class="l" id="351">351 }
+</span><span class="l" id="352">352 </span></code></pre>
  </body>
 </html>

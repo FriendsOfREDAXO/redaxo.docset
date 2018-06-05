@@ -374,29 +374,38 @@
 </span><span class="l" id="365">365         <span class="php-comment">// $sql-&gt;setDebug();</span>
 </span><span class="l" id="366">366 
 </span><span class="l" id="367">367         <span class="php-comment">// remove all deleted data</span>
-</span><span class="l" id="368">368         <span class="php-keyword1">foreach</span> (self::<span class="php-var">$deletedData</span> <span class="php-keyword1">as</span> <span class="php-var">$namespace</span> =&gt; <span class="php-var">$nsData</span>) {
-</span><span class="l" id="369">369             <span class="php-keyword1">foreach</span> (<span class="php-var">$nsData</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="370">370                 <span class="php-var">$sql</span>-&gt;setTable(rex::getTablePrefix() . <span class="php-quote">'config'</span>);
-</span><span class="l" id="371">371                 <span class="php-var">$sql</span>-&gt;setWhere([
-</span><span class="l" id="372">372                     <span class="php-quote">'namespace'</span> =&gt; <span class="php-var">$namespace</span>,
-</span><span class="l" id="373">373                     <span class="php-quote">'key'</span> =&gt; <span class="php-var">$key</span>,
-</span><span class="l" id="374">374                 ]);
-</span><span class="l" id="375">375                 <span class="php-var">$sql</span>-&gt;<span class="php-keyword2">delete</span>();
+</span><span class="l" id="368">368         <span class="php-keyword1">if</span> (self::<span class="php-var">$deletedData</span>) {
+</span><span class="l" id="369">369             <span class="php-var">$sql</span>-&gt;setTable(rex::getTable(<span class="php-quote">'config'</span>));
+</span><span class="l" id="370">370 
+</span><span class="l" id="371">371             <span class="php-var">$where</span> = [];
+</span><span class="l" id="372">372             <span class="php-var">$params</span> = [];
+</span><span class="l" id="373">373             <span class="php-keyword1">foreach</span> (self::<span class="php-var">$deletedData</span> <span class="php-keyword1">as</span> <span class="php-var">$namespace</span> =&gt; <span class="php-var">$nsData</span>) {
+</span><span class="l" id="374">374                 <span class="php-var">$params</span> = <span class="php-keyword2">array_merge</span>(<span class="php-var">$params</span>, [<span class="php-var">$namespace</span>], <span class="php-keyword2">array_keys</span>(<span class="php-var">$nsData</span>));
+</span><span class="l" id="375">375                 <span class="php-var">$where</span>[] = <span class="php-quote">'namespace = ? AND `key` IN ('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-keyword2">array_fill</span>(<span class="php-num">0</span>, <span class="php-keyword2">count</span>(<span class="php-var">$nsData</span>), <span class="php-quote">'?'</span>)).<span class="php-quote">')'</span>;
 </span><span class="l" id="376">376             }
-</span><span class="l" id="377">377         }
-</span><span class="l" id="378">378 
-</span><span class="l" id="379">379         <span class="php-comment">// update all changed data</span>
-</span><span class="l" id="380">380         <span class="php-keyword1">foreach</span> (self::<span class="php-var">$changedData</span> <span class="php-keyword1">as</span> <span class="php-var">$namespace</span> =&gt; <span class="php-var">$nsData</span>) {
-</span><span class="l" id="381">381             <span class="php-keyword1">foreach</span> (<span class="php-var">$nsData</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="382">382                 <span class="php-var">$sql</span>-&gt;setTable(rex::getTablePrefix() . <span class="php-quote">'config'</span>);
-</span><span class="l" id="383">383                 <span class="php-var">$sql</span>-&gt;setValue(<span class="php-quote">'namespace'</span>, <span class="php-var">$namespace</span>);
-</span><span class="l" id="384">384                 <span class="php-var">$sql</span>-&gt;setValue(<span class="php-quote">'key'</span>, <span class="php-var">$key</span>);
-</span><span class="l" id="385">385                 <span class="php-var">$sql</span>-&gt;setValue(<span class="php-quote">'value'</span>, <span class="php-keyword2">json_encode</span>(<span class="php-var">$value</span>));
-</span><span class="l" id="386">386                 <span class="php-var">$sql</span>-&gt;replace();
-</span><span class="l" id="387">387             }
-</span><span class="l" id="388">388         }
-</span><span class="l" id="389">389     }
-</span><span class="l" id="390">390 }
-</span><span class="l" id="391">391 </span></code></pre>
+</span><span class="l" id="377">377 
+</span><span class="l" id="378">378             <span class="php-var">$sql</span>-&gt;setWhere(<span class="php-keyword2">implode</span>(<span class="php-quote">"\n    OR "</span>, <span class="php-var">$where</span>), <span class="php-var">$params</span>);
+</span><span class="l" id="379">379             <span class="php-var">$sql</span>-&gt;<span class="php-keyword2">delete</span>();
+</span><span class="l" id="380">380         }
+</span><span class="l" id="381">381 
+</span><span class="l" id="382">382         <span class="php-comment">// update all changed data</span>
+</span><span class="l" id="383">383         <span class="php-keyword1">if</span> (self::<span class="php-var">$changedData</span>) {
+</span><span class="l" id="384">384             <span class="php-var">$sql</span>-&gt;setTable(rex::getTable(<span class="php-quote">'config'</span>));
+</span><span class="l" id="385">385 
+</span><span class="l" id="386">386             <span class="php-keyword1">foreach</span> (self::<span class="php-var">$changedData</span> <span class="php-keyword1">as</span> <span class="php-var">$namespace</span> =&gt; <span class="php-var">$nsData</span>) {
+</span><span class="l" id="387">387                 <span class="php-keyword1">foreach</span> (<span class="php-var">$nsData</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="388">388                     <span class="php-var">$sql</span>-&gt;addRecord(<span class="php-keyword1">function</span> (rex_sql <span class="php-var">$record</span>) <span class="php-keyword1">use</span> (<span class="php-var">$namespace</span>, <span class="php-var">$key</span>, <span class="php-var">$value</span>) {
+</span><span class="l" id="389">389                         <span class="php-var">$record</span>-&gt;setValue(<span class="php-quote">'namespace'</span>, <span class="php-var">$namespace</span>);
+</span><span class="l" id="390">390                         <span class="php-var">$record</span>-&gt;setValue(<span class="php-quote">'key'</span>, <span class="php-var">$key</span>);
+</span><span class="l" id="391">391                         <span class="php-var">$record</span>-&gt;setValue(<span class="php-quote">'value'</span>, <span class="php-keyword2">json_encode</span>(<span class="php-var">$value</span>));
+</span><span class="l" id="392">392                     });
+</span><span class="l" id="393">393                 }
+</span><span class="l" id="394">394             }
+</span><span class="l" id="395">395 
+</span><span class="l" id="396">396             <span class="php-var">$sql</span>-&gt;insertOrUpdate();
+</span><span class="l" id="397">397         }
+</span><span class="l" id="398">398     }
+</span><span class="l" id="399">399 }
+</span><span class="l" id="400">400 </span></code></pre>
  </body>
 </html>

@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="de">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="../Assets/css/styles.css" rel="stylesheet"/>
+  <script src="../Assets/js/script.js">
+  </script>
+ </head>
+ <body>
+  <pre id="source"><code><span class="l" id="1">   1 <span class="xlang">&lt;?php</span>
+</span><span class="l" id="2">   2 
+</span><span class="l" id="3">   3 <span class="php-comment">/**
+</span></span><span class="l" id="4">   4 <span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="5">   5 <span class="php-comment"> */</span>
+</span><span class="l" id="6">   6 <span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> rex_form_base
+</span><span class="l" id="7">   7 {
+</span><span class="l" id="8">   8     <span class="php-comment">/** @var string */</span>
+</span><span class="l" id="9">   9     <span class="php-keyword1">protected</span> <span class="php-var">$name</span>;
+</span><span class="l" id="10">  10 
+</span><span class="l" id="11">  11     <span class="php-comment">/** @var string "get" or "post" */</span>
+</span><span class="l" id="12">  12     <span class="php-keyword1">protected</span> <span class="php-var">$method</span>;
+</span><span class="l" id="13">  13 
+</span><span class="l" id="14">  14     <span class="php-comment">/** @var string */</span>
+</span><span class="l" id="15">  15     <span class="php-keyword1">protected</span> <span class="php-var">$fieldset</span>;
+</span><span class="l" id="16">  16 
+</span><span class="l" id="17">  17     <span class="php-comment">/** @var array */</span>
+</span><span class="l" id="18">  18     <span class="php-keyword1">protected</span> <span class="php-var">$elements</span>;
+</span><span class="l" id="19">  19 
+</span><span class="l" id="20">  20     <span class="php-comment">/** @var array */</span>
+</span><span class="l" id="21">  21     <span class="php-keyword1">protected</span> <span class="php-var">$params</span>;
+</span><span class="l" id="22">  22 
+</span><span class="l" id="23">  23     <span class="php-comment">/** @var bool */</span>
+</span><span class="l" id="24">  24     <span class="php-keyword1">protected</span> <span class="php-var">$debug</span>;
+</span><span class="l" id="25">  25 
+</span><span class="l" id="26">  26     <span class="php-comment">/** @var null|string */</span>
+</span><span class="l" id="27">  27     <span class="php-keyword1">protected</span> <span class="php-var">$applyUrl</span>;
+</span><span class="l" id="28">  28 
+</span><span class="l" id="29">  29     <span class="php-comment">/** @var null|string */</span>
+</span><span class="l" id="30">  30     <span class="php-keyword1">protected</span> <span class="php-var">$message</span>;
+</span><span class="l" id="31">  31 
+</span><span class="l" id="32">  32     <span class="php-comment">/** @var array */</span>
+</span><span class="l" id="33">  33     <span class="php-keyword1">protected</span> <span class="php-var">$errorMessages</span>;
+</span><span class="l" id="34">  34 
+</span><span class="l" id="35">  35     <span class="php-comment">/** @var string */</span>
+</span><span class="l" id="36">  36     <span class="php-keyword1">protected</span> <span class="php-var">$warning</span>;
+</span><span class="l" id="37">  37 
+</span><span class="l" id="38">  38     <span class="php-comment">/** @var null|string */</span>
+</span><span class="l" id="39">  39     <span class="php-keyword1">protected</span> <span class="php-var">$formId</span>;
+</span><span class="l" id="40">  40 
+</span><span class="l" id="41">  41     <span class="php-comment">/** @var rex_csrf_token */</span>
+</span><span class="l" id="42">  42     <span class="php-keyword1">private</span> <span class="php-var">$csrfToken</span>;
+</span><span class="l" id="43">  43 
+</span><span class="l" id="44">  44     <span class="php-comment">/**
+</span></span><span class="l" id="45">  45 <span class="php-comment">     * Diese Konstruktor sollte nicht verwendet werden. Instanzen muessen ueber die facotry() Methode erstellt werden!
+</span></span><span class="l" id="46">  46 <span class="php-comment">     */</span>
+</span><span class="l" id="47">  47     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> __construct(<span class="php-var">$fieldset</span>, <span class="php-var">$name</span>, <span class="php-var">$method</span> = <span class="php-quote">'post'</span>, <span class="php-var">$debug</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="48">  48     {
+</span><span class="l" id="49">  49         <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$method</span>, [<span class="php-quote">'post'</span>, <span class="php-quote">'get'</span>])) {
+</span><span class="l" id="50">  50             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">"rex_form: Method-Parameter darf nur die Werte 'post' oder 'get' annehmen!"</span>);
+</span><span class="l" id="51">  51         }
+</span><span class="l" id="52">  52 
+</span><span class="l" id="53">  53         <span class="php-var">$this</span>-&gt;name = <span class="php-var">$name</span>;
+</span><span class="l" id="54">  54         <span class="php-var">$this</span>-&gt;method = <span class="php-var">$method</span>;
+</span><span class="l" id="55">  55         <span class="php-var">$this</span>-&gt;elements = [];
+</span><span class="l" id="56">  56         <span class="php-var">$this</span>-&gt;params = [];
+</span><span class="l" id="57">  57         <span class="php-var">$this</span>-&gt;addFieldset(<span class="php-var">$fieldset</span> ?: <span class="php-var">$this</span>-&gt;name);
+</span><span class="l" id="58">  58         <span class="php-var">$this</span>-&gt;setMessage(<span class="php-quote">''</span>);
+</span><span class="l" id="59">  59 
+</span><span class="l" id="60">  60         <span class="php-var">$this</span>-&gt;debug = <span class="php-var">$debug</span>;
+</span><span class="l" id="61">  61 
+</span><span class="l" id="62">  62         <span class="php-var">$this</span>-&gt;csrfToken = rex_csrf_token::factory(<span class="php-quote">'rex_form_'</span>.<span class="php-var">$this</span>-&gt;getName());
+</span><span class="l" id="63">  63     }
+</span><span class="l" id="64">  64 
+</span><span class="l" id="65">  65     <span class="php-comment">/**
+</span></span><span class="l" id="66">  66 <span class="php-comment">     * Initialisiert das Formular.
+</span></span><span class="l" id="67">  67 <span class="php-comment">     */</span>
+</span><span class="l" id="68">  68     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> init()
+</span><span class="l" id="69">  69     {
+</span><span class="l" id="70">  70         <span class="php-comment">// nichts tun</span>
+</span><span class="l" id="71">  71     }
+</span><span class="l" id="72">  72 
+</span><span class="l" id="73">  73     <span class="php-comment">/**
+</span></span><span class="l" id="74">  74 <span class="php-comment">     * Laedt die Konfiguration die noetig ist um rex_form im REDAXO Backend zu verwenden.
+</span></span><span class="l" id="75">  75 <span class="php-comment">     */</span>
+</span><span class="l" id="76">  76     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> loadBackendConfig()
+</span><span class="l" id="77">  77     {
+</span><span class="l" id="78">  78         <span class="php-var">$this</span>-&gt;addParam(<span class="php-quote">'page'</span>, rex_be_controller::getCurrentPage());
+</span><span class="l" id="79">  79     }
+</span><span class="l" id="80">  80 
+</span><span class="l" id="81">  81     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setFormId(<span class="php-var">$id</span>)
+</span><span class="l" id="82">  82     {
+</span><span class="l" id="83">  83         <span class="php-var">$this</span>-&gt;formId = <span class="php-var">$id</span>;
+</span><span class="l" id="84">  84     }
+</span><span class="l" id="85">  85 
+</span><span class="l" id="86">  86     <span class="php-comment">/**
+</span></span><span class="l" id="87">  87 <span class="php-comment">     * Gibt eine Formular-Url zurück.
+</span></span><span class="l" id="88">  88 <span class="php-comment">     *
+</span></span><span class="l" id="89">  89 <span class="php-comment">     * @param array $params
+</span></span><span class="l" id="90">  90 <span class="php-comment">     * @param bool  $escape
+</span></span><span class="l" id="91">  91 <span class="php-comment">     *
+</span></span><span class="l" id="92">  92 <span class="php-comment">     * @return string
+</span></span><span class="l" id="93">  93 <span class="php-comment">     */</span>
+</span><span class="l" id="94">  94     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getUrl(<span class="php-keyword1">array</span> <span class="php-var">$params</span> = [], <span class="php-var">$escape</span> = <span class="php-keyword1">true</span>)
+</span><span class="l" id="95">  95     {
+</span><span class="l" id="96">  96         <span class="php-var">$params</span> = <span class="php-keyword2">array_merge</span>(<span class="php-var">$this</span>-&gt;getParams(), <span class="php-var">$params</span>);
+</span><span class="l" id="97">  97         <span class="php-var">$params</span>[<span class="php-quote">'form'</span>] = <span class="php-var">$this</span>-&gt;getName();
+</span><span class="l" id="98">  98 
+</span><span class="l" id="99">  99         <span class="php-var">$url</span> = rex::isBackend() ? rex_url::backendController(<span class="php-var">$params</span>, <span class="php-var">$escape</span>) : rex_url::frontendController(<span class="php-var">$params</span>, <span class="php-var">$escape</span>);
+</span><span class="l" id="100"> 100 
+</span><span class="l" id="101"> 101         <span class="php-keyword1">return</span> <span class="php-var">$url</span>;
+</span><span class="l" id="102"> 102     }
+</span><span class="l" id="103"> 103 
+</span><span class="l" id="104"> 104     <span class="php-comment">// --------- Sections</span>
+</span><span class="l" id="105"> 105 
+</span><span class="l" id="106"> 106     <span class="php-comment">/**
+</span></span><span class="l" id="107"> 107 <span class="php-comment">     * Fuegt dem Formular ein Fieldset hinzu.
+</span></span><span class="l" id="108"> 108 <span class="php-comment">     * Dieses dient dazu ein Formular in mehrere Abschnitte zu gliedern.
+</span></span><span class="l" id="109"> 109 <span class="php-comment">     */</span>
+</span><span class="l" id="110"> 110     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addFieldset(<span class="php-var">$fieldset</span>)
+</span><span class="l" id="111"> 111     {
+</span><span class="l" id="112"> 112         <span class="php-var">$this</span>-&gt;fieldset = <span class="php-var">$fieldset</span>;
+</span><span class="l" id="113"> 113     }
+</span><span class="l" id="114"> 114 
+</span><span class="l" id="115"> 115     <span class="php-comment">// --------- Fields</span>
+</span><span class="l" id="116"> 116 
+</span><span class="l" id="117"> 117     <span class="php-comment">/**
+</span></span><span class="l" id="118"> 118 <span class="php-comment">     * Fuegt dem Formular ein Input-Feld hinzu.
+</span></span><span class="l" id="119"> 119 <span class="php-comment">     *
+</span></span><span class="l" id="120"> 120 <span class="php-comment">     * @param string $tag
+</span></span><span class="l" id="121"> 121 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="122"> 122 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="123"> 123 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="124"> 124 <span class="php-comment">     * @param bool   $addElement
+</span></span><span class="l" id="125"> 125 <span class="php-comment">     *
+</span></span><span class="l" id="126"> 126 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="127"> 127 <span class="php-comment">     */</span>
+</span><span class="l" id="128"> 128     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addField(<span class="php-var">$tag</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [], <span class="php-var">$addElement</span> = <span class="php-keyword1">true</span>)
+</span><span class="l" id="129"> 129     {
+</span><span class="l" id="130"> 130         <span class="php-var">$element</span> = <span class="php-var">$this</span>-&gt;createElement(<span class="php-var">$tag</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="131"> 131 
+</span><span class="l" id="132"> 132         <span class="php-keyword1">if</span> (<span class="php-var">$addElement</span>) {
+</span><span class="l" id="133"> 133             <span class="php-var">$this</span>-&gt;addElement(<span class="php-var">$element</span>);
+</span><span class="l" id="134"> 134             <span class="php-keyword1">return</span> <span class="php-var">$element</span>;
+</span><span class="l" id="135"> 135         }
+</span><span class="l" id="136"> 136 
+</span><span class="l" id="137"> 137         <span class="php-keyword1">return</span> <span class="php-var">$element</span>;
+</span><span class="l" id="138"> 138     }
+</span><span class="l" id="139"> 139 
+</span><span class="l" id="140"> 140     <span class="php-comment">/**
+</span></span><span class="l" id="141"> 141 <span class="php-comment">     * Fuegt dem Formular ein Container-Feld hinzu.
+</span></span><span class="l" id="142"> 142 <span class="php-comment">     *
+</span></span><span class="l" id="143"> 143 <span class="php-comment">     * Ein Container-Feld wiederrum kann weitere Felder enthalten.
+</span></span><span class="l" id="144"> 144 <span class="php-comment">     *
+</span></span><span class="l" id="145"> 145 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="146"> 146 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="147"> 147 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="148"> 148 <span class="php-comment">     *
+</span></span><span class="l" id="149"> 149 <span class="php-comment">     * @return rex_form_container_element
+</span></span><span class="l" id="150"> 150 <span class="php-comment">     */</span>
+</span><span class="l" id="151"> 151     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addContainerField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="152"> 152     {
+</span><span class="l" id="153"> 153         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="154"> 154             <span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>] = <span class="php-quote">'rex-form-container'</span>;
+</span><span class="l" id="155"> 155         }
+</span><span class="l" id="156"> 156         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_container_element'</span>;
+</span><span class="l" id="157"> 157 
+</span><span class="l" id="158"> 158         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="159"> 159         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="160"> 160     }
+</span><span class="l" id="161"> 161 
+</span><span class="l" id="162"> 162     <span class="php-comment">/**
+</span></span><span class="l" id="163"> 163 <span class="php-comment">     * Fuegt dem Formular ein Input-Feld mit dem Type $type hinzu.
+</span></span><span class="l" id="164"> 164 <span class="php-comment">     *
+</span></span><span class="l" id="165"> 165 <span class="php-comment">     * @param string $type
+</span></span><span class="l" id="166"> 166 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="167"> 167 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="168"> 168 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="169"> 169 <span class="php-comment">     * @param bool   $addElement
+</span></span><span class="l" id="170"> 170 <span class="php-comment">     *
+</span></span><span class="l" id="171"> 171 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="172"> 172 <span class="php-comment">     */</span>
+</span><span class="l" id="173"> 173     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addInputField(<span class="php-var">$type</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [], <span class="php-var">$addElement</span> = <span class="php-keyword1">true</span>)
+</span><span class="l" id="174"> 174     {
+</span><span class="l" id="175"> 175         <span class="php-var">$attributes</span>[<span class="php-quote">'type'</span>] = <span class="php-var">$type</span>;
+</span><span class="l" id="176"> 176         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">'input'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-var">$addElement</span>);
+</span><span class="l" id="177"> 177         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="178"> 178     }
+</span><span class="l" id="179"> 179 
+</span><span class="l" id="180"> 180     <span class="php-comment">/**
+</span></span><span class="l" id="181"> 181 <span class="php-comment">     * Fuegt dem Formular ein Text-Feld hinzu.
+</span></span><span class="l" id="182"> 182 <span class="php-comment">     *
+</span></span><span class="l" id="183"> 183 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="184"> 184 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="185"> 185 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="186"> 186 <span class="php-comment">     *
+</span></span><span class="l" id="187"> 187 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="188"> 188 <span class="php-comment">     */</span>
+</span><span class="l" id="189"> 189     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addTextField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="190"> 190     {
+</span><span class="l" id="191"> 191         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="192"> 192             <span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>] = <span class="php-quote">'form-control'</span>;
+</span><span class="l" id="193"> 193         }
+</span><span class="l" id="194"> 194         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addInputField(<span class="php-quote">'text'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="195"> 195         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="196"> 196     }
+</span><span class="l" id="197"> 197 
+</span><span class="l" id="198"> 198     <span class="php-comment">/**
+</span></span><span class="l" id="199"> 199 <span class="php-comment">     * Fuegt dem Formular ein Read-Only-Text-Feld hinzu.
+</span></span><span class="l" id="200"> 200 <span class="php-comment">     * Dazu wird ein input-Element verwendet.
+</span></span><span class="l" id="201"> 201 <span class="php-comment">     *
+</span></span><span class="l" id="202"> 202 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="203"> 203 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="204"> 204 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="205"> 205 <span class="php-comment">     *
+</span></span><span class="l" id="206"> 206 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="207"> 207 <span class="php-comment">     */</span>
+</span><span class="l" id="208"> 208     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addReadOnlyTextField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="209"> 209     {
+</span><span class="l" id="210"> 210         <span class="php-var">$attributes</span>[<span class="php-quote">'readonly'</span>] = <span class="php-quote">'readonly'</span>;
+</span><span class="l" id="211"> 211         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="212"> 212             <span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>] = <span class="php-quote">'form-control'</span>;
+</span><span class="l" id="213"> 213         }
+</span><span class="l" id="214"> 214         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addInputField(<span class="php-quote">'text'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="215"> 215         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="216"> 216     }
+</span><span class="l" id="217"> 217 
+</span><span class="l" id="218"> 218     <span class="php-comment">/**
+</span></span><span class="l" id="219"> 219 <span class="php-comment">     * Fuegt dem Formular ein Read-Only-Feld hinzu.
+</span></span><span class="l" id="220"> 220 <span class="php-comment">     * Dazu wird ein span-Element verwendet.
+</span></span><span class="l" id="221"> 221 <span class="php-comment">     *
+</span></span><span class="l" id="222"> 222 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="223"> 223 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="224"> 224 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="225"> 225 <span class="php-comment">     *
+</span></span><span class="l" id="226"> 226 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="227"> 227 <span class="php-comment">     */</span>
+</span><span class="l" id="228"> 228     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addReadOnlyField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="229"> 229     {
+</span><span class="l" id="230"> 230         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldSeparateEnding'</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="231"> 231         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::noNameAttribute'</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="232"> 232         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="233"> 233             <span class="php-comment">// Wenn die class geaendert wird, muss auch</span>
+</span><span class="l" id="234"> 234             <span class="php-comment">// rex_form_container_element::getSaveValue()</span>
+</span><span class="l" id="235"> 235             <span class="php-comment">// angepasst werden</span>
+</span><span class="l" id="236"> 236             <span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>] = <span class="php-quote">'form-control-static'</span>;
+</span><span class="l" id="237"> 237         }
+</span><span class="l" id="238"> 238         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">'p'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="239"> 239         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="240"> 240     }
+</span><span class="l" id="241"> 241 
+</span><span class="l" id="242"> 242     <span class="php-comment">/**
+</span></span><span class="l" id="243"> 243 <span class="php-comment">     * Fuegt dem Fomular ein Hidden-Feld hinzu.
+</span></span><span class="l" id="244"> 244 <span class="php-comment">     *
+</span></span><span class="l" id="245"> 245 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="246"> 246 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="247"> 247 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="248"> 248 <span class="php-comment">     *
+</span></span><span class="l" id="249"> 249 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="250"> 250 <span class="php-comment">     */</span>
+</span><span class="l" id="251"> 251     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addHiddenField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="252"> 252     {
+</span><span class="l" id="253"> 253         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addInputField(<span class="php-quote">'hidden'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="254"> 254         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="255"> 255     }
+</span><span class="l" id="256"> 256 
+</span><span class="l" id="257"> 257     <span class="php-comment">/**
+</span></span><span class="l" id="258"> 258 <span class="php-comment">     * Fuegt dem Fomular ein Checkbox-Feld hinzu.
+</span></span><span class="l" id="259"> 259 <span class="php-comment">     * Dies ermoeglicht die Mehrfach-Selektion aus einer vorgegeben Auswahl an Werten.
+</span></span><span class="l" id="260"> 260 <span class="php-comment">     *
+</span></span><span class="l" id="261"> 261 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="262"> 262 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="263"> 263 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="264"> 264 <span class="php-comment">     *
+</span></span><span class="l" id="265"> 265 <span class="php-comment">     * @return rex_form_checkbox_element
+</span></span><span class="l" id="266"> 266 <span class="php-comment">     */</span>
+</span><span class="l" id="267"> 267     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addCheckboxField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="268"> 268     {
+</span><span class="l" id="269"> 269         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_checkbox_element'</span>;
+</span><span class="l" id="270"> 270         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="271"> 271         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="272"> 272     }
+</span><span class="l" id="273"> 273 
+</span><span class="l" id="274"> 274     <span class="php-comment">/**
+</span></span><span class="l" id="275"> 275 <span class="php-comment">     * Fuegt dem Formular ein Radio-Feld hinzu.
+</span></span><span class="l" id="276"> 276 <span class="php-comment">     * Dies ermoeglicht eine Einfache-Selektion aus einer vorgegeben Auswahl an Werten.
+</span></span><span class="l" id="277"> 277 <span class="php-comment">     *
+</span></span><span class="l" id="278"> 278 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="279"> 279 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="280"> 280 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="281"> 281 <span class="php-comment">     *
+</span></span><span class="l" id="282"> 282 <span class="php-comment">     * @return rex_form_radio_element
+</span></span><span class="l" id="283"> 283 <span class="php-comment">     */</span>
+</span><span class="l" id="284"> 284     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addRadioField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="285"> 285     {
+</span><span class="l" id="286"> 286         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_radio_element'</span>;
+</span><span class="l" id="287"> 287         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">'radio'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="288"> 288         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="289"> 289     }
+</span><span class="l" id="290"> 290 
+</span><span class="l" id="291"> 291     <span class="php-comment">/**
+</span></span><span class="l" id="292"> 292 <span class="php-comment">     * Fuegt dem Formular ein Textarea-Feld hinzu.
+</span></span><span class="l" id="293"> 293 <span class="php-comment">     *
+</span></span><span class="l" id="294"> 294 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="295"> 295 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="296"> 296 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="297"> 297 <span class="php-comment">     *
+</span></span><span class="l" id="298"> 298 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="299"> 299 <span class="php-comment">     */</span>
+</span><span class="l" id="300"> 300     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addTextAreaField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="301"> 301     {
+</span><span class="l" id="302"> 302         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldSeparateEnding'</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="303"> 303         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="304"> 304             <span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>] = <span class="php-quote">'form-control'</span>;
+</span><span class="l" id="305"> 305         }
+</span><span class="l" id="306"> 306         <span class="php-comment">/*
+</span></span><span class="l" id="307"> 307 <span class="php-comment">        if (!isset($attributes['cols'])) {
+</span></span><span class="l" id="308"> 308 <span class="php-comment">            $attributes['cols'] = 50;
+</span></span><span class="l" id="309"> 309 <span class="php-comment">        }
+</span></span><span class="l" id="310"> 310 <span class="php-comment">        */</span>
+</span><span class="l" id="311"> 311         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'rows'</span>])) {
+</span><span class="l" id="312"> 312             <span class="php-var">$attributes</span>[<span class="php-quote">'rows'</span>] = <span class="php-num">6</span>;
+</span><span class="l" id="313"> 313         }
+</span><span class="l" id="314"> 314 
+</span><span class="l" id="315"> 315         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">'textarea'</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="316"> 316         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="317"> 317     }
+</span><span class="l" id="318"> 318 
+</span><span class="l" id="319"> 319     <span class="php-comment">/**
+</span></span><span class="l" id="320"> 320 <span class="php-comment">     * Fuegt dem Formular ein Select/Auswahl-Feld hinzu.
+</span></span><span class="l" id="321"> 321 <span class="php-comment">     *
+</span></span><span class="l" id="322"> 322 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="323"> 323 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="324"> 324 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="325"> 325 <span class="php-comment">     *
+</span></span><span class="l" id="326"> 326 <span class="php-comment">     * @return rex_form_select_element
+</span></span><span class="l" id="327"> 327 <span class="php-comment">     */</span>
+</span><span class="l" id="328"> 328     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addSelectField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="329"> 329     {
+</span><span class="l" id="330"> 330         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_select_element'</span>;
+</span><span class="l" id="331"> 331         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="332"> 332             <span class="php-var">$attributes</span>[<span class="php-quote">'class'</span>] = <span class="php-quote">'form-control'</span>;
+</span><span class="l" id="333"> 333         }
+</span><span class="l" id="334"> 334         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="335"> 335         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="336"> 336     }
+</span><span class="l" id="337"> 337 
+</span><span class="l" id="338"> 338     <span class="php-comment">/**
+</span></span><span class="l" id="339"> 339 <span class="php-comment">     * Fuegt dem Formular ein Feld hinzu mit dem der Medienpool angebunden werden kann.
+</span></span><span class="l" id="340"> 340 <span class="php-comment">     * Es kann nur ein Element aus dem Medienpool eingefuegt werden.
+</span></span><span class="l" id="341"> 341 <span class="php-comment">     *
+</span></span><span class="l" id="342"> 342 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="343"> 343 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="344"> 344 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="345"> 345 <span class="php-comment">     *
+</span></span><span class="l" id="346"> 346 <span class="php-comment">     * @throws rex_exception
+</span></span><span class="l" id="347"> 347 <span class="php-comment">     *
+</span></span><span class="l" id="348"> 348 <span class="php-comment">     * @return rex_form_widget_media_element
+</span></span><span class="l" id="349"> 349 <span class="php-comment">     */</span>
+</span><span class="l" id="350"> 350     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addMediaField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="351"> 351     {
+</span><span class="l" id="352"> 352         <span class="php-keyword1">if</span> (!rex_addon::get(<span class="php-quote">'mediapool'</span>)-&gt;isAvailable()) {
+</span><span class="l" id="353"> 353             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(__METHOD__ . <span class="php-quote">'() needs "mediapool" addon!'</span>);
+</span><span class="l" id="354"> 354         }
+</span><span class="l" id="355"> 355         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_widget_media_element'</span>;
+</span><span class="l" id="356"> 356         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="357"> 357         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="358"> 358     }
+</span><span class="l" id="359"> 359 
+</span><span class="l" id="360"> 360     <span class="php-comment">/**
+</span></span><span class="l" id="361"> 361 <span class="php-comment">     * Fuegt dem Formular ein Feld hinzu mit dem der Medienpool angebunden werden kann.
+</span></span><span class="l" id="362"> 362 <span class="php-comment">     * Damit koennen mehrere Elemente aus dem Medienpool eingefuegt werden.
+</span></span><span class="l" id="363"> 363 <span class="php-comment">     *
+</span></span><span class="l" id="364"> 364 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="365"> 365 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="366"> 366 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="367"> 367 <span class="php-comment">     *
+</span></span><span class="l" id="368"> 368 <span class="php-comment">     * @throws rex_exception
+</span></span><span class="l" id="369"> 369 <span class="php-comment">     *
+</span></span><span class="l" id="370"> 370 <span class="php-comment">     * @return rex_form_widget_medialist_element
+</span></span><span class="l" id="371"> 371 <span class="php-comment">     */</span>
+</span><span class="l" id="372"> 372     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addMedialistField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="373"> 373     {
+</span><span class="l" id="374"> 374         <span class="php-keyword1">if</span> (!rex_addon::get(<span class="php-quote">'mediapool'</span>)-&gt;isAvailable()) {
+</span><span class="l" id="375"> 375             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(__METHOD__ . <span class="php-quote">'() needs "mediapool" addon!'</span>);
+</span><span class="l" id="376"> 376         }
+</span><span class="l" id="377"> 377         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_widget_medialist_element'</span>;
+</span><span class="l" id="378"> 378         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="379"> 379         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="380"> 380     }
+</span><span class="l" id="381"> 381 
+</span><span class="l" id="382"> 382     <span class="php-comment">/**
+</span></span><span class="l" id="383"> 383 <span class="php-comment">     * Fuegt dem Formular ein Feld hinzu mit dem die Struktur-Verwaltung angebunden werden kann.
+</span></span><span class="l" id="384"> 384 <span class="php-comment">     * Es kann nur ein Element aus der Struktur eingefuegt werden.
+</span></span><span class="l" id="385"> 385 <span class="php-comment">     *
+</span></span><span class="l" id="386"> 386 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="387"> 387 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="388"> 388 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="389"> 389 <span class="php-comment">     *
+</span></span><span class="l" id="390"> 390 <span class="php-comment">     * @throws rex_exception
+</span></span><span class="l" id="391"> 391 <span class="php-comment">     *
+</span></span><span class="l" id="392"> 392 <span class="php-comment">     * @return rex_form_widget_linkmap_element
+</span></span><span class="l" id="393"> 393 <span class="php-comment">     */</span>
+</span><span class="l" id="394"> 394     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addLinkmapField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="395"> 395     {
+</span><span class="l" id="396"> 396         <span class="php-keyword1">if</span> (!rex_addon::get(<span class="php-quote">'structure'</span>)-&gt;isAvailable()) {
+</span><span class="l" id="397"> 397             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(__METHOD__ . <span class="php-quote">'() needs "structure" addon!'</span>);
+</span><span class="l" id="398"> 398         }
+</span><span class="l" id="399"> 399         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_widget_linkmap_element'</span>;
+</span><span class="l" id="400"> 400         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="401"> 401         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="402"> 402     }
+</span><span class="l" id="403"> 403 
+</span><span class="l" id="404"> 404     <span class="php-comment">/**
+</span></span><span class="l" id="405"> 405 <span class="php-comment">     * Fuegt dem Formular ein Feld hinzu mit dem die Struktur-Verwaltung angebunden werden kann.
+</span></span><span class="l" id="406"> 406 <span class="php-comment">     * Damit koennen mehrere Elemente aus der Struktur eingefuegt werden.
+</span></span><span class="l" id="407"> 407 <span class="php-comment">     *
+</span></span><span class="l" id="408"> 408 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="409"> 409 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="410"> 410 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="411"> 411 <span class="php-comment">     *
+</span></span><span class="l" id="412"> 412 <span class="php-comment">     * @throws rex_exception
+</span></span><span class="l" id="413"> 413 <span class="php-comment">     *
+</span></span><span class="l" id="414"> 414 <span class="php-comment">     * @return rex_form_widget_linklist_element
+</span></span><span class="l" id="415"> 415 <span class="php-comment">     */</span>
+</span><span class="l" id="416"> 416     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addLinklistField(<span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="417"> 417     {
+</span><span class="l" id="418"> 418         <span class="php-keyword1">if</span> (!rex_addon::get(<span class="php-quote">'structure'</span>)-&gt;isAvailable()) {
+</span><span class="l" id="419"> 419             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(__METHOD__ . <span class="php-quote">'() needs "structure" addon!'</span>);
+</span><span class="l" id="420"> 420         }
+</span><span class="l" id="421"> 421         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-quote">'rex_form_widget_linklist_element'</span>;
+</span><span class="l" id="422"> 422         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addField(<span class="php-quote">''</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="423"> 423         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="424"> 424     }
+</span><span class="l" id="425"> 425 
+</span><span class="l" id="426"> 426     <span class="php-comment">/**
+</span></span><span class="l" id="427"> 427 <span class="php-comment">     * Fuegt dem Fomualar ein Control-Feld hinzu.
+</span></span><span class="l" id="428"> 428 <span class="php-comment">     * Damit koennen versch. Aktionen mit dem Fomular durchgefuert werden.
+</span></span><span class="l" id="429"> 429 <span class="php-comment">     *
+</span></span><span class="l" id="430"> 430 <span class="php-comment">     * @param rex_form_element $saveElement
+</span></span><span class="l" id="431"> 431 <span class="php-comment">     * @param rex_form_element $applyElement
+</span></span><span class="l" id="432"> 432 <span class="php-comment">     * @param rex_form_element $deleteElement
+</span></span><span class="l" id="433"> 433 <span class="php-comment">     * @param rex_form_element $resetElement
+</span></span><span class="l" id="434"> 434 <span class="php-comment">     * @param rex_form_element $abortElement
+</span></span><span class="l" id="435"> 435 <span class="php-comment">     *
+</span></span><span class="l" id="436"> 436 <span class="php-comment">     * @return rex_form_control_element
+</span></span><span class="l" id="437"> 437 <span class="php-comment">     */</span>
+</span><span class="l" id="438"> 438     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addControlField(<span class="php-var">$saveElement</span> = <span class="php-keyword1">null</span>, <span class="php-var">$applyElement</span> = <span class="php-keyword1">null</span>, <span class="php-var">$deleteElement</span> = <span class="php-keyword1">null</span>, <span class="php-var">$resetElement</span> = <span class="php-keyword1">null</span>, <span class="php-var">$abortElement</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="439"> 439     {
+</span><span class="l" id="440"> 440         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addElement(<span class="php-keyword1">new</span> rex_form_control_element(<span class="php-var">$this</span>, <span class="php-var">$saveElement</span>, <span class="php-var">$applyElement</span>, <span class="php-var">$deleteElement</span>, <span class="php-var">$resetElement</span>, <span class="php-var">$abortElement</span>));
+</span><span class="l" id="441"> 441         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="442"> 442     }
+</span><span class="l" id="443"> 443 
+</span><span class="l" id="444"> 444     <span class="php-comment">/**
+</span></span><span class="l" id="445"> 445 <span class="php-comment">     * Fuegt dem Formular beliebiges HTML zu.
+</span></span><span class="l" id="446"> 446 <span class="php-comment">     *
+</span></span><span class="l" id="447"> 447 <span class="php-comment">     * @param string $html HTML code
+</span></span><span class="l" id="448"> 448 <span class="php-comment">     *
+</span></span><span class="l" id="449"> 449 <span class="php-comment">     * @return rex_form_raw_element
+</span></span><span class="l" id="450"> 450 <span class="php-comment">     */</span>
+</span><span class="l" id="451"> 451     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addRawField(<span class="php-var">$html</span>)
+</span><span class="l" id="452"> 452     {
+</span><span class="l" id="453"> 453         <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;addElement(<span class="php-keyword1">new</span> rex_form_raw_element(<span class="php-var">$html</span>));
+</span><span class="l" id="454"> 454         <span class="php-keyword1">return</span> <span class="php-var">$field</span>;
+</span><span class="l" id="455"> 455     }
+</span><span class="l" id="456"> 456 
+</span><span class="l" id="457"> 457     <span class="php-comment">/**
+</span></span><span class="l" id="458"> 458 <span class="php-comment">     * Fuegt dem Formular eine Fehlermeldung hinzu.
+</span></span><span class="l" id="459"> 459 <span class="php-comment">     */</span>
+</span><span class="l" id="460"> 460     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addErrorMessage(<span class="php-var">$errorCode</span>, <span class="php-var">$errorMessage</span>)
+</span><span class="l" id="461"> 461     {
+</span><span class="l" id="462"> 462         <span class="php-var">$this</span>-&gt;errorMessages[<span class="php-var">$errorCode</span>] = <span class="php-var">$errorMessage</span>;
+</span><span class="l" id="463"> 463     }
+</span><span class="l" id="464"> 464 
+</span><span class="l" id="465"> 465     <span class="php-comment">/**
+</span></span><span class="l" id="466"> 466 <span class="php-comment">     * Fuegt dem Formular einen Parameter hinzu.
+</span></span><span class="l" id="467"> 467 <span class="php-comment">     * Diese an den Stellen eingefuegt, an denen das Fomular neue Requests erzeugt.
+</span></span><span class="l" id="468"> 468 <span class="php-comment">     */</span>
+</span><span class="l" id="469"> 469     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> addParam(<span class="php-var">$name</span>, <span class="php-var">$value</span>)
+</span><span class="l" id="470"> 470     {
+</span><span class="l" id="471"> 471         <span class="php-var">$this</span>-&gt;params[<span class="php-var">$name</span>] = <span class="php-var">$value</span>;
+</span><span class="l" id="472"> 472     }
+</span><span class="l" id="473"> 473 
+</span><span class="l" id="474"> 474     <span class="php-comment">/**
+</span></span><span class="l" id="475"> 475 <span class="php-comment">     * Gibt alle Parameter des Fomulars zurueck.
+</span></span><span class="l" id="476"> 476 <span class="php-comment">     *
+</span></span><span class="l" id="477"> 477 <span class="php-comment">     * @return array
+</span></span><span class="l" id="478"> 478 <span class="php-comment">     */</span>
+</span><span class="l" id="479"> 479     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getParams()
+</span><span class="l" id="480"> 480     {
+</span><span class="l" id="481"> 481         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;params;
+</span><span class="l" id="482"> 482     }
+</span><span class="l" id="483"> 483 
+</span><span class="l" id="484"> 484     <span class="php-comment">/**
+</span></span><span class="l" id="485"> 485 <span class="php-comment">     * Gibt den Wert des Parameters $name zurueck,
+</span></span><span class="l" id="486"> 486 <span class="php-comment">     * oder $default kein Parameter mit dem Namen exisitiert.
+</span></span><span class="l" id="487"> 487 <span class="php-comment">     *
+</span></span><span class="l" id="488"> 488 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="489"> 489 <span class="php-comment">     * @param mixed  $default
+</span></span><span class="l" id="490"> 490 <span class="php-comment">     *
+</span></span><span class="l" id="491"> 491 <span class="php-comment">     * @return string
+</span></span><span class="l" id="492"> 492 <span class="php-comment">     */</span>
+</span><span class="l" id="493"> 493     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getParam(<span class="php-var">$name</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="494"> 494     {
+</span><span class="l" id="495"> 495         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;params[<span class="php-var">$name</span>])) {
+</span><span class="l" id="496"> 496             <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;params[<span class="php-var">$name</span>];
+</span><span class="l" id="497"> 497         }
+</span><span class="l" id="498"> 498         <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
+</span><span class="l" id="499"> 499     }
+</span><span class="l" id="500"> 500 
+</span><span class="l" id="501"> 501     <span class="php-comment">/**
+</span></span><span class="l" id="502"> 502 <span class="php-comment">     * Allgemeine Bootleneck-Methode um Elemente in das Formular einzufuegen.
+</span></span><span class="l" id="503"> 503 <span class="php-comment">     *
+</span></span><span class="l" id="504"> 504 <span class="php-comment">     * @param rex_form_element $element
+</span></span><span class="l" id="505"> 505 <span class="php-comment">     *
+</span></span><span class="l" id="506"> 506 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="507"> 507 <span class="php-comment">     */</span>
+</span><span class="l" id="508"> 508     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> addElement(rex_form_element <span class="php-var">$element</span>)
+</span><span class="l" id="509"> 509     {
+</span><span class="l" id="510"> 510         <span class="php-var">$this</span>-&gt;elements[<span class="php-var">$this</span>-&gt;fieldset][] = <span class="php-var">$element</span>;
+</span><span class="l" id="511"> 511         <span class="php-keyword1">return</span> <span class="php-var">$element</span>;
+</span><span class="l" id="512"> 512     }
+</span><span class="l" id="513"> 513 
+</span><span class="l" id="514"> 514     <span class="php-comment">/**
+</span></span><span class="l" id="515"> 515 <span class="php-comment">     * Erstellt ein Input-Element anhand des Strings $inputType.
+</span></span><span class="l" id="516"> 516 <span class="php-comment">     *
+</span></span><span class="l" id="517"> 517 <span class="php-comment">     * @param string $inputType
+</span></span><span class="l" id="518"> 518 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="519"> 519 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="520"> 520 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="521"> 521 <span class="php-comment">     *
+</span></span><span class="l" id="522"> 522 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="523"> 523 <span class="php-comment">     */</span>
+</span><span class="l" id="524"> 524     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> createInput(<span class="php-var">$inputType</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span> = <span class="php-keyword1">null</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="525"> 525     {
+</span><span class="l" id="526"> 526         <span class="php-var">$tag</span> = self::getInputTagName(<span class="php-var">$inputType</span>);
+</span><span class="l" id="527"> 527         <span class="php-var">$className</span> = self::getInputClassName(<span class="php-var">$inputType</span>);
+</span><span class="l" id="528"> 528         <span class="php-var">$attributes</span> = <span class="php-keyword2">array_merge</span>(self::getInputAttributes(<span class="php-var">$inputType</span>), <span class="php-var">$attributes</span>);
+</span><span class="l" id="529"> 529         <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>] = <span class="php-var">$className</span>;
+</span><span class="l" id="530"> 530 
+</span><span class="l" id="531"> 531         <span class="php-var">$element</span> = <span class="php-var">$this</span>-&gt;createElement(<span class="php-var">$tag</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-var">$attributes</span>);
+</span><span class="l" id="532"> 532 
+</span><span class="l" id="533"> 533         <span class="php-keyword1">return</span> <span class="php-var">$element</span>;
+</span><span class="l" id="534"> 534     }
+</span><span class="l" id="535"> 535 
+</span><span class="l" id="536"> 536     <span class="php-comment">/**
+</span></span><span class="l" id="537"> 537 <span class="php-comment">     * Erstellt ein Input-Element anhand von $tag.
+</span></span><span class="l" id="538"> 538 <span class="php-comment">     *
+</span></span><span class="l" id="539"> 539 <span class="php-comment">     * @param string $tag
+</span></span><span class="l" id="540"> 540 <span class="php-comment">     * @param string $name
+</span></span><span class="l" id="541"> 541 <span class="php-comment">     * @param mixed  $value
+</span></span><span class="l" id="542"> 542 <span class="php-comment">     * @param array  $attributes
+</span></span><span class="l" id="543"> 543 <span class="php-comment">     *
+</span></span><span class="l" id="544"> 544 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="545"> 545 <span class="php-comment">     */</span>
+</span><span class="l" id="546"> 546     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> createElement(<span class="php-var">$tag</span>, <span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-keyword1">array</span> <span class="php-var">$attributes</span> = [])
+</span><span class="l" id="547"> 547     {
+</span><span class="l" id="548"> 548         <span class="php-var">$id</span> = <span class="php-var">$this</span>-&gt;getId(<span class="php-var">$name</span>);
+</span><span class="l" id="549"> 549 
+</span><span class="l" id="550"> 550         <span class="php-comment">// Evtl postwerte wieder übernehmen (auch externe Werte überschreiben)</span>
+</span><span class="l" id="551"> 551         <span class="php-var">$postValue</span> = <span class="php-var">$this</span>-&gt;elementPostValue(<span class="php-var">$this</span>-&gt;getFieldsetName(), <span class="php-var">$name</span>);
+</span><span class="l" id="552"> 552         <span class="php-keyword1">if</span> (<span class="php-var">$postValue</span> !== <span class="php-keyword1">null</span>) {
+</span><span class="l" id="553"> 553             <span class="php-var">$value</span> = <span class="php-var">$postValue</span>;
+</span><span class="l" id="554"> 554         }
+</span><span class="l" id="555"> 555 
+</span><span class="l" id="556"> 556         <span class="php-comment">// Wert aus Quelle nehmen, falls keiner extern und keiner im POST angegeben</span>
+</span><span class="l" id="557"> 557         <span class="php-keyword1">if</span> (<span class="php-var">$value</span> === <span class="php-keyword1">null</span>) {
+</span><span class="l" id="558"> 558             <span class="php-var">$value</span> = <span class="php-var">$this</span>-&gt;getValue(<span class="php-var">$name</span>);
+</span><span class="l" id="559"> 559         }
+</span><span class="l" id="560"> 560 
+</span><span class="l" id="561"> 561         <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::useArraySyntax'</span>])) {
+</span><span class="l" id="562"> 562             <span class="php-var">$attributes</span>[<span class="php-quote">'internal::useArraySyntax'</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="563"> 563         }
+</span><span class="l" id="564"> 564 
+</span><span class="l" id="565"> 565         <span class="php-comment">// Eigentlichen Feldnamen nochmals speichern</span>
+</span><span class="l" id="566"> 566         <span class="php-var">$fieldName</span> = <span class="php-var">$name</span>;
+</span><span class="l" id="567"> 567         <span class="php-keyword1">if</span> (<span class="php-var">$attributes</span>[<span class="php-quote">'internal::useArraySyntax'</span>] === <span class="php-keyword1">true</span>) {
+</span><span class="l" id="568"> 568             <span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;fieldset . <span class="php-quote">'['</span> . <span class="php-var">$name</span> . <span class="php-quote">']'</span>;
+</span><span class="l" id="569"> 569         } <span class="php-keyword1">elseif</span> (<span class="php-var">$attributes</span>[<span class="php-quote">'internal::useArraySyntax'</span>] === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="570"> 570             <span class="php-var">$name</span> = <span class="php-var">$this</span>-&gt;fieldset . <span class="php-quote">'_'</span> . <span class="php-var">$name</span>;
+</span><span class="l" id="571"> 571         }
+</span><span class="l" id="572"> 572         <span class="php-keyword1">unset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::useArraySyntax'</span>]);
+</span><span class="l" id="573"> 573 
+</span><span class="l" id="574"> 574         <span class="php-var">$class</span> = <span class="php-quote">'rex_form_element'</span>;
+</span><span class="l" id="575"> 575         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>])) {
+</span><span class="l" id="576"> 576             <span class="php-var">$class</span> = <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>];
+</span><span class="l" id="577"> 577             <span class="php-keyword1">unset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldClass'</span>]);
+</span><span class="l" id="578"> 578         }
+</span><span class="l" id="579"> 579 
+</span><span class="l" id="580"> 580         <span class="php-var">$separateEnding</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="581"> 581         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldSeparateEnding'</span>])) {
+</span><span class="l" id="582"> 582             <span class="php-var">$separateEnding</span> = <span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldSeparateEnding'</span>];
+</span><span class="l" id="583"> 583             <span class="php-keyword1">unset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::fieldSeparateEnding'</span>]);
+</span><span class="l" id="584"> 584         }
+</span><span class="l" id="585"> 585 
+</span><span class="l" id="586"> 586         <span class="php-var">$internal_attr</span> = [<span class="php-quote">'name'</span> =&gt; <span class="php-var">$name</span>];
+</span><span class="l" id="587"> 587         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::noNameAttribute'</span>])) {
+</span><span class="l" id="588"> 588             <span class="php-var">$internal_attr</span> = [];
+</span><span class="l" id="589"> 589             <span class="php-keyword1">unset</span>(<span class="php-var">$attributes</span>[<span class="php-quote">'internal::noNameAttribute'</span>]);
+</span><span class="l" id="590"> 590         }
+</span><span class="l" id="591"> 591 
+</span><span class="l" id="592"> 592         <span class="php-comment">// 1. Array: Eigenschaften, die via Parameter Überschrieben werden können/dürfen</span>
+</span><span class="l" id="593"> 593         <span class="php-comment">// 2. Array: Eigenschaften, via Parameter</span>
+</span><span class="l" id="594"> 594         <span class="php-comment">// 3. Array: Eigenschaften, die hier fest definiert sind / nicht veränderbar via Parameter</span>
+</span><span class="l" id="595"> 595         <span class="php-var">$attributes</span> = <span class="php-keyword2">array_merge</span>([<span class="php-quote">'id'</span> =&gt; <span class="php-var">$id</span>], <span class="php-var">$attributes</span>, <span class="php-var">$internal_attr</span>);
+</span><span class="l" id="596"> 596         <span class="php-var">$element</span> = <span class="php-keyword1">new</span> <span class="php-var">$class</span>(<span class="php-var">$tag</span>, <span class="php-var">$this</span>, <span class="php-var">$attributes</span>, <span class="php-var">$separateEnding</span>);
+</span><span class="l" id="597"> 597         <span class="php-var">$element</span>-&gt;setFieldName(<span class="php-var">$fieldName</span>);
+</span><span class="l" id="598"> 598         <span class="php-var">$element</span>-&gt;setValue(<span class="php-var">$value</span>);
+</span><span class="l" id="599"> 599         <span class="php-keyword1">return</span> <span class="php-var">$element</span>;
+</span><span class="l" id="600"> 600     }
+</span><span class="l" id="601"> 601 
+</span><span class="l" id="602"> 602     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getId(<span class="php-var">$name</span>)
+</span><span class="l" id="603"> 603     {
+</span><span class="l" id="604"> 604         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fieldset . <span class="php-quote">'_'</span> . <span class="php-var">$name</span>;
+</span><span class="l" id="605"> 605     }
+</span><span class="l" id="606"> 606 
+</span><span class="l" id="607"> 607     <span class="php-keyword1">abstract</span> <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getValue(<span class="php-var">$name</span>);
+</span><span class="l" id="608"> 608 
+</span><span class="l" id="609"> 609     <span class="php-comment">/**
+</span></span><span class="l" id="610"> 610 <span class="php-comment">     * Setzt die Url die bei der apply-action genutzt wird.
+</span></span><span class="l" id="611"> 611 <span class="php-comment">     */</span>
+</span><span class="l" id="612"> 612     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setApplyUrl(<span class="php-var">$url</span>)
+</span><span class="l" id="613"> 613     {
+</span><span class="l" id="614"> 614         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$url</span>)) {
+</span><span class="l" id="615"> 615             <span class="php-var">$url</span> = <span class="php-var">$this</span>-&gt;getUrl(<span class="php-var">$url</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="616"> 616         }
+</span><span class="l" id="617"> 617 
+</span><span class="l" id="618"> 618         <span class="php-var">$this</span>-&gt;applyUrl = <span class="php-var">$url</span>;
+</span><span class="l" id="619"> 619     }
+</span><span class="l" id="620"> 620 
+</span><span class="l" id="621"> 621     <span class="php-comment">// --------- Static Methods</span>
+</span><span class="l" id="622"> 622 
+</span><span class="l" id="623"> 623     <span class="php-comment">/**
+</span></span><span class="l" id="624"> 624 <span class="php-comment">     * @param string $inputType
+</span></span><span class="l" id="625"> 625 <span class="php-comment">     *
+</span></span><span class="l" id="626"> 626 <span class="php-comment">     * @throws rex_exception
+</span></span><span class="l" id="627"> 627 <span class="php-comment">     *
+</span></span><span class="l" id="628"> 628 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="629"> 629 <span class="php-comment">     */</span>
+</span><span class="l" id="630"> 630     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getInputClassName(<span class="php-var">$inputType</span>)
+</span><span class="l" id="631"> 631     {
+</span><span class="l" id="632"> 632         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="633"> 633         <span class="php-var">$className</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'REX_FORM_INPUT_CLASS'</span>, <span class="php-quote">''</span>, [<span class="php-quote">'inputType'</span> =&gt; <span class="php-var">$inputType</span>]));
+</span><span class="l" id="634"> 634 
+</span><span class="l" id="635"> 635         <span class="php-keyword1">if</span> (<span class="php-var">$className</span>) {
+</span><span class="l" id="636"> 636             <span class="php-keyword1">return</span> <span class="php-var">$className</span>;
+</span><span class="l" id="637"> 637         }
+</span><span class="l" id="638"> 638 
+</span><span class="l" id="639"> 639         <span class="php-keyword1">switch</span> (<span class="php-var">$inputType</span>) {
+</span><span class="l" id="640"> 640             <span class="php-keyword1">case</span> <span class="php-quote">'control'</span>:
+</span><span class="l" id="641"> 641                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_control_element'</span>;
+</span><span class="l" id="642"> 642                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="643"> 643             <span class="php-keyword1">case</span> <span class="php-quote">'checkbox'</span>:
+</span><span class="l" id="644"> 644                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_checkbox_element'</span>;
+</span><span class="l" id="645"> 645                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="646"> 646             <span class="php-keyword1">case</span> <span class="php-quote">'radio'</span>:
+</span><span class="l" id="647"> 647                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_radio_element'</span>;
+</span><span class="l" id="648"> 648                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="649"> 649             <span class="php-keyword1">case</span> <span class="php-quote">'select'</span>:
+</span><span class="l" id="650"> 650                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_select_element'</span>;
+</span><span class="l" id="651"> 651                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="652"> 652             <span class="php-keyword1">case</span> <span class="php-quote">'media'</span>:
+</span><span class="l" id="653"> 653                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_widget_media_element'</span>;
+</span><span class="l" id="654"> 654                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="655"> 655             <span class="php-keyword1">case</span> <span class="php-quote">'medialist'</span>:
+</span><span class="l" id="656"> 656                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_widget_medialist_element'</span>;
+</span><span class="l" id="657"> 657                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="658"> 658             <span class="php-keyword1">case</span> <span class="php-quote">'link'</span>:
+</span><span class="l" id="659"> 659                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_widget_linkmap_element'</span>;
+</span><span class="l" id="660"> 660                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="661"> 661             <span class="php-keyword1">case</span> <span class="php-quote">'linklist'</span>:
+</span><span class="l" id="662"> 662                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_widget_linklist_element'</span>;
+</span><span class="l" id="663"> 663                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="664"> 664             <span class="php-keyword1">case</span> <span class="php-quote">'hidden'</span>:
+</span><span class="l" id="665"> 665             <span class="php-keyword1">case</span> <span class="php-quote">'readonly'</span>:
+</span><span class="l" id="666"> 666             <span class="php-keyword1">case</span> <span class="php-quote">'readonlytext'</span>:
+</span><span class="l" id="667"> 667             <span class="php-keyword1">case</span> <span class="php-quote">'text'</span>:
+</span><span class="l" id="668"> 668             <span class="php-keyword1">case</span> <span class="php-quote">'textarea'</span>:
+</span><span class="l" id="669"> 669                 <span class="php-var">$className</span> = <span class="php-quote">'rex_form_element'</span>;
+</span><span class="l" id="670"> 670                 <span class="php-keyword1">break</span>;
+</span><span class="l" id="671"> 671             <span class="php-keyword1">default</span>:
+</span><span class="l" id="672"> 672                 <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(<span class="php-quote">"Unexpected inputType '"</span> . <span class="php-var">$inputType</span> . <span class="php-quote">"'!"</span>);
+</span><span class="l" id="673"> 673         }
+</span><span class="l" id="674"> 674 
+</span><span class="l" id="675"> 675         <span class="php-keyword1">return</span> <span class="php-var">$className</span>;
+</span><span class="l" id="676"> 676     }
+</span><span class="l" id="677"> 677 
+</span><span class="l" id="678"> 678     <span class="php-comment">/**
+</span></span><span class="l" id="679"> 679 <span class="php-comment">     * @param string $inputType
+</span></span><span class="l" id="680"> 680 <span class="php-comment">     *
+</span></span><span class="l" id="681"> 681 <span class="php-comment">     * @return string
+</span></span><span class="l" id="682"> 682 <span class="php-comment">     */</span>
+</span><span class="l" id="683"> 683     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getInputTagName(<span class="php-var">$inputType</span>)
+</span><span class="l" id="684"> 684     {
+</span><span class="l" id="685"> 685         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="686"> 686         <span class="php-var">$inputTag</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'REX_FORM_INPUT_TAG'</span>, <span class="php-quote">''</span>, [<span class="php-quote">'inputType'</span> =&gt; <span class="php-var">$inputType</span>]));
+</span><span class="l" id="687"> 687 
+</span><span class="l" id="688"> 688         <span class="php-keyword1">if</span> (<span class="php-var">$inputTag</span>) {
+</span><span class="l" id="689"> 689             <span class="php-keyword1">return</span> <span class="php-var">$inputTag</span>;
+</span><span class="l" id="690"> 690         }
+</span><span class="l" id="691"> 691 
+</span><span class="l" id="692"> 692         <span class="php-keyword1">switch</span> (<span class="php-var">$inputType</span>) {
+</span><span class="l" id="693"> 693             <span class="php-keyword1">case</span> <span class="php-quote">'checkbox'</span>:
+</span><span class="l" id="694"> 694             <span class="php-keyword1">case</span> <span class="php-quote">'hidden'</span>:
+</span><span class="l" id="695"> 695             <span class="php-keyword1">case</span> <span class="php-quote">'radio'</span>:
+</span><span class="l" id="696"> 696             <span class="php-keyword1">case</span> <span class="php-quote">'readonlytext'</span>:
+</span><span class="l" id="697"> 697             <span class="php-keyword1">case</span> <span class="php-quote">'text'</span>:
+</span><span class="l" id="698"> 698                 <span class="php-keyword1">return</span> <span class="php-quote">'input'</span>;
+</span><span class="l" id="699"> 699             <span class="php-keyword1">case</span> <span class="php-quote">'textarea'</span>:
+</span><span class="l" id="700"> 700                 <span class="php-keyword1">return</span> <span class="php-var">$inputType</span>;
+</span><span class="l" id="701"> 701             <span class="php-keyword1">case</span> <span class="php-quote">'readonly'</span>:
+</span><span class="l" id="702"> 702                 <span class="php-keyword1">return</span> <span class="php-quote">'p'</span>;
+</span><span class="l" id="703"> 703             <span class="php-keyword1">default</span>:
+</span><span class="l" id="704"> 704                 <span class="php-var">$inputTag</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="705"> 705         }
+</span><span class="l" id="706"> 706         <span class="php-keyword1">return</span> <span class="php-var">$inputTag</span>;
+</span><span class="l" id="707"> 707     }
+</span><span class="l" id="708"> 708 
+</span><span class="l" id="709"> 709     <span class="php-comment">/**
+</span></span><span class="l" id="710"> 710 <span class="php-comment">     * @param string $inputType
+</span></span><span class="l" id="711"> 711 <span class="php-comment">     *
+</span></span><span class="l" id="712"> 712 <span class="php-comment">     * @return array
+</span></span><span class="l" id="713"> 713 <span class="php-comment">     */</span>
+</span><span class="l" id="714"> 714     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getInputAttributes(<span class="php-var">$inputType</span>)
+</span><span class="l" id="715"> 715     {
+</span><span class="l" id="716"> 716         <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="717"> 717         <span class="php-var">$inputAttr</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'REX_FORM_INPUT_ATTRIBUTES'</span>, [], [<span class="php-quote">'inputType'</span> =&gt; <span class="php-var">$inputType</span>]));
+</span><span class="l" id="718"> 718 
+</span><span class="l" id="719"> 719         <span class="php-keyword1">if</span> (<span class="php-var">$inputAttr</span>) {
+</span><span class="l" id="720"> 720             <span class="php-keyword1">return</span> <span class="php-var">$inputAttr</span>;
+</span><span class="l" id="721"> 721         }
+</span><span class="l" id="722"> 722 
+</span><span class="l" id="723"> 723         <span class="php-keyword1">switch</span> (<span class="php-var">$inputType</span>) {
+</span><span class="l" id="724"> 724             <span class="php-keyword1">case</span> <span class="php-quote">'checkbox'</span>:
+</span><span class="l" id="725"> 725             <span class="php-keyword1">case</span> <span class="php-quote">'hidden'</span>:
+</span><span class="l" id="726"> 726             <span class="php-keyword1">case</span> <span class="php-quote">'radio'</span>:
+</span><span class="l" id="727"> 727                 <span class="php-keyword1">return</span> [
+</span><span class="l" id="728"> 728                     <span class="php-quote">'type'</span> =&gt; <span class="php-var">$inputType</span>,
+</span><span class="l" id="729"> 729                 ];
+</span><span class="l" id="730"> 730             <span class="php-keyword1">case</span> <span class="php-quote">'select'</span>:
+</span><span class="l" id="731"> 731                 <span class="php-keyword1">return</span> [
+</span><span class="l" id="732"> 732                     <span class="php-quote">'class'</span> =&gt; <span class="php-quote">'form-control'</span>,
+</span><span class="l" id="733"> 733                 ];
+</span><span class="l" id="734"> 734             <span class="php-keyword1">case</span> <span class="php-quote">'text'</span>:
+</span><span class="l" id="735"> 735                 <span class="php-keyword1">return</span> [
+</span><span class="l" id="736"> 736                     <span class="php-quote">'type'</span> =&gt; <span class="php-var">$inputType</span>,
+</span><span class="l" id="737"> 737                     <span class="php-quote">'class'</span> =&gt; <span class="php-quote">'form-control'</span>,
+</span><span class="l" id="738"> 738                 ];
+</span><span class="l" id="739"> 739             <span class="php-keyword1">case</span> <span class="php-quote">'textarea'</span>:
+</span><span class="l" id="740"> 740                 <span class="php-keyword1">return</span> [
+</span><span class="l" id="741"> 741                     <span class="php-quote">'internal::fieldSeparateEnding'</span> =&gt; <span class="php-keyword1">true</span>,
+</span><span class="l" id="742"> 742                     <span class="php-quote">'class'</span> =&gt; <span class="php-quote">'form-control'</span>,
+</span><span class="l" id="743"> 743                     <span class="php-comment">//'cols' =&gt; 50,</span>
+</span><span class="l" id="744"> 744                     <span class="php-quote">'rows'</span> =&gt; <span class="php-num">6</span>,
+</span><span class="l" id="745"> 745                 ];
+</span><span class="l" id="746"> 746             <span class="php-keyword1">case</span> <span class="php-quote">'readonly'</span>:
+</span><span class="l" id="747"> 747                 <span class="php-keyword1">return</span> [
+</span><span class="l" id="748"> 748                     <span class="php-quote">'internal::fieldSeparateEnding'</span> =&gt; <span class="php-keyword1">true</span>,
+</span><span class="l" id="749"> 749                     <span class="php-quote">'internal::noNameAttribute'</span> =&gt; <span class="php-keyword1">true</span>,
+</span><span class="l" id="750"> 750                     <span class="php-quote">'class'</span> =&gt; <span class="php-quote">'form-control-static'</span>,
+</span><span class="l" id="751"> 751                 ];
+</span><span class="l" id="752"> 752             <span class="php-keyword1">case</span> <span class="php-quote">'readonlytext'</span>:
+</span><span class="l" id="753"> 753                 <span class="php-keyword1">return</span> [
+</span><span class="l" id="754"> 754                     <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'text'</span>,
+</span><span class="l" id="755"> 755                     <span class="php-quote">'readonly'</span> =&gt; <span class="php-quote">'readonly'</span>,
+</span><span class="l" id="756"> 756                     <span class="php-quote">'class'</span> =&gt; <span class="php-quote">'form-control-static'</span>,
+</span><span class="l" id="757"> 757                 ];
+</span><span class="l" id="758"> 758             <span class="php-keyword1">default</span>:
+</span><span class="l" id="759"> 759                 <span class="php-var">$inputAttr</span> = [];
+</span><span class="l" id="760"> 760         }
+</span><span class="l" id="761"> 761 
+</span><span class="l" id="762"> 762         <span class="php-keyword1">return</span> <span class="php-var">$inputAttr</span>;
+</span><span class="l" id="763"> 763     }
+</span><span class="l" id="764"> 764 
+</span><span class="l" id="765"> 765     <span class="php-comment">// --------- Form Methods</span>
+</span><span class="l" id="766"> 766 
+</span><span class="l" id="767"> 767     <span class="php-comment">/**
+</span></span><span class="l" id="768"> 768 <span class="php-comment">     * @param rex_form_element $element
+</span></span><span class="l" id="769"> 769 <span class="php-comment">     *
+</span></span><span class="l" id="770"> 770 <span class="php-comment">     * @return bool
+</span></span><span class="l" id="771"> 771 <span class="php-comment">     */</span>
+</span><span class="l" id="772"> 772     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> isHeaderElement(rex_form_element <span class="php-var">$element</span>)
+</span><span class="l" id="773"> 773     {
+</span><span class="l" id="774"> 774         <span class="php-keyword1">return</span> <span class="php-var">$element</span>-&gt;getTag() == <span class="php-quote">'input'</span> &amp;&amp; <span class="php-var">$element</span>-&gt;getAttribute(<span class="php-quote">'type'</span>) == <span class="php-quote">'hidden'</span>;
+</span><span class="l" id="775"> 775     }
+</span><span class="l" id="776"> 776 
+</span><span class="l" id="777"> 777     <span class="php-comment">/**
+</span></span><span class="l" id="778"> 778 <span class="php-comment">     * @param rex_form_element $element
+</span></span><span class="l" id="779"> 779 <span class="php-comment">     *
+</span></span><span class="l" id="780"> 780 <span class="php-comment">     * @return bool
+</span></span><span class="l" id="781"> 781 <span class="php-comment">     */</span>
+</span><span class="l" id="782"> 782     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> isFooterElement(rex_form_element <span class="php-var">$element</span>)
+</span><span class="l" id="783"> 783     {
+</span><span class="l" id="784"> 784         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;isControlElement(<span class="php-var">$element</span>);
+</span><span class="l" id="785"> 785     }
+</span><span class="l" id="786"> 786 
+</span><span class="l" id="787"> 787     <span class="php-comment">/**
+</span></span><span class="l" id="788"> 788 <span class="php-comment">     * @param rex_form_element $element
+</span></span><span class="l" id="789"> 789 <span class="php-comment">     *
+</span></span><span class="l" id="790"> 790 <span class="php-comment">     * @return bool
+</span></span><span class="l" id="791"> 791 <span class="php-comment">     */</span>
+</span><span class="l" id="792"> 792     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> isControlElement(rex_form_element <span class="php-var">$element</span>)
+</span><span class="l" id="793"> 793     {
+</span><span class="l" id="794"> 794         <span class="php-keyword1">return</span> <span class="php-keyword2">is_a</span>(<span class="php-var">$element</span>, <span class="php-quote">'rex_form_control_element'</span>);
+</span><span class="l" id="795"> 795     }
+</span><span class="l" id="796"> 796 
+</span><span class="l" id="797"> 797     <span class="php-comment">/**
+</span></span><span class="l" id="798"> 798 <span class="php-comment">     * @param rex_form_element $element
+</span></span><span class="l" id="799"> 799 <span class="php-comment">     *
+</span></span><span class="l" id="800"> 800 <span class="php-comment">     * @return bool
+</span></span><span class="l" id="801"> 801 <span class="php-comment">     */</span>
+</span><span class="l" id="802"> 802     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> isRawElement(rex_form_element <span class="php-var">$element</span>)
+</span><span class="l" id="803"> 803     {
+</span><span class="l" id="804"> 804         <span class="php-keyword1">return</span> <span class="php-keyword2">is_a</span>(<span class="php-var">$element</span>, <span class="php-quote">'rex_form_raw_element'</span>);
+</span><span class="l" id="805"> 805     }
+</span><span class="l" id="806"> 806 
+</span><span class="l" id="807"> 807     <span class="php-comment">/**
+</span></span><span class="l" id="808"> 808 <span class="php-comment">     * @return rex_form_element[]
+</span></span><span class="l" id="809"> 809 <span class="php-comment">     */</span>
+</span><span class="l" id="810"> 810     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getHeaderElements()
+</span><span class="l" id="811"> 811     {
+</span><span class="l" id="812"> 812         <span class="php-var">$headerElements</span> = [];
+</span><span class="l" id="813"> 813         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;elements <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElementsArray</span>) {
+</span><span class="l" id="814"> 814             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElementsArray</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="815"> 815                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isHeaderElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="816"> 816                     <span class="php-var">$headerElements</span>[] = <span class="php-var">$element</span>;
+</span><span class="l" id="817"> 817                 }
+</span><span class="l" id="818"> 818             }
+</span><span class="l" id="819"> 819         }
+</span><span class="l" id="820"> 820         <span class="php-keyword1">return</span> <span class="php-var">$headerElements</span>;
+</span><span class="l" id="821"> 821     }
+</span><span class="l" id="822"> 822 
+</span><span class="l" id="823"> 823     <span class="php-comment">/**
+</span></span><span class="l" id="824"> 824 <span class="php-comment">     * @return rex_form_element[]
+</span></span><span class="l" id="825"> 825 <span class="php-comment">     */</span>
+</span><span class="l" id="826"> 826     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getFooterElements()
+</span><span class="l" id="827"> 827     {
+</span><span class="l" id="828"> 828         <span class="php-var">$footerElements</span> = [];
+</span><span class="l" id="829"> 829         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;elements <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElementsArray</span>) {
+</span><span class="l" id="830"> 830             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElementsArray</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="831"> 831                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isFooterElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="832"> 832                     <span class="php-var">$footerElements</span>[] = <span class="php-var">$element</span>;
+</span><span class="l" id="833"> 833                 }
+</span><span class="l" id="834"> 834             }
+</span><span class="l" id="835"> 835         }
+</span><span class="l" id="836"> 836         <span class="php-keyword1">return</span> <span class="php-var">$footerElements</span>;
+</span><span class="l" id="837"> 837     }
+</span><span class="l" id="838"> 838 
+</span><span class="l" id="839"> 839     <span class="php-comment">/**
+</span></span><span class="l" id="840"> 840 <span class="php-comment">     * @return string
+</span></span><span class="l" id="841"> 841 <span class="php-comment">     */</span>
+</span><span class="l" id="842"> 842     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getFieldsetName()
+</span><span class="l" id="843"> 843     {
+</span><span class="l" id="844"> 844         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fieldset;
+</span><span class="l" id="845"> 845     }
+</span><span class="l" id="846"> 846 
+</span><span class="l" id="847"> 847     <span class="php-comment">/**
+</span></span><span class="l" id="848"> 848 <span class="php-comment">     * @return array
+</span></span><span class="l" id="849"> 849 <span class="php-comment">     */</span>
+</span><span class="l" id="850"> 850     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getFieldsets()
+</span><span class="l" id="851"> 851     {
+</span><span class="l" id="852"> 852         <span class="php-var">$fieldsets</span> = [];
+</span><span class="l" id="853"> 853         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;elements <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElementsArray</span>) {
+</span><span class="l" id="854"> 854             <span class="php-var">$fieldsets</span>[] = <span class="php-var">$fieldsetName</span>;
+</span><span class="l" id="855"> 855         }
+</span><span class="l" id="856"> 856         <span class="php-keyword1">return</span> <span class="php-var">$fieldsets</span>;
+</span><span class="l" id="857"> 857     }
+</span><span class="l" id="858"> 858 
+</span><span class="l" id="859"> 859     <span class="php-comment">/**
+</span></span><span class="l" id="860"> 860 <span class="php-comment">     * @return array
+</span></span><span class="l" id="861"> 861 <span class="php-comment">     */</span>
+</span><span class="l" id="862"> 862     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getFieldsetElements()
+</span><span class="l" id="863"> 863     {
+</span><span class="l" id="864"> 864         <span class="php-var">$fieldsetElements</span> = [];
+</span><span class="l" id="865"> 865         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;elements <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElementsArray</span>) {
+</span><span class="l" id="866"> 866             <span class="php-var">$fieldsetElements</span>[<span class="php-var">$fieldsetName</span>] = [];
+</span><span class="l" id="867"> 867 
+</span><span class="l" id="868"> 868             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElementsArray</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="869"> 869                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isHeaderElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="870"> 870                     <span class="php-keyword1">continue</span>;
+</span><span class="l" id="871"> 871                 }
+</span><span class="l" id="872"> 872                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isFooterElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="873"> 873                     <span class="php-keyword1">continue</span>;
+</span><span class="l" id="874"> 874                 }
+</span><span class="l" id="875"> 875 
+</span><span class="l" id="876"> 876                 <span class="php-var">$fieldsetElements</span>[<span class="php-var">$fieldsetName</span>][] = <span class="php-var">$element</span>;
+</span><span class="l" id="877"> 877             }
+</span><span class="l" id="878"> 878         }
+</span><span class="l" id="879"> 879         <span class="php-keyword1">return</span> <span class="php-var">$fieldsetElements</span>;
+</span><span class="l" id="880"> 880     }
+</span><span class="l" id="881"> 881 
+</span><span class="l" id="882"> 882     <span class="php-comment">/**
+</span></span><span class="l" id="883"> 883 <span class="php-comment">     * @return array
+</span></span><span class="l" id="884"> 884 <span class="php-comment">     */</span>
+</span><span class="l" id="885"> 885     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getSaveElements()
+</span><span class="l" id="886"> 886     {
+</span><span class="l" id="887"> 887         <span class="php-var">$fieldsetElements</span> = [];
+</span><span class="l" id="888"> 888         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;elements <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElementsArray</span>) {
+</span><span class="l" id="889"> 889             <span class="php-var">$fieldsetElements</span>[<span class="php-var">$fieldsetName</span>] = [];
+</span><span class="l" id="890"> 890 
+</span><span class="l" id="891"> 891             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElementsArray</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$element</span>) {
+</span><span class="l" id="892"> 892                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isFooterElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="893"> 893                     <span class="php-keyword1">continue</span>;
+</span><span class="l" id="894"> 894                 }
+</span><span class="l" id="895"> 895                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isRawElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="896"> 896                     <span class="php-keyword1">continue</span>;
+</span><span class="l" id="897"> 897                 }
+</span><span class="l" id="898"> 898 
+</span><span class="l" id="899"> 899                 <span class="php-var">$fieldsetElements</span>[<span class="php-var">$fieldsetName</span>][] = <span class="php-var">$element</span>;
+</span><span class="l" id="900"> 900             }
+</span><span class="l" id="901"> 901         }
+</span><span class="l" id="902"> 902         <span class="php-keyword1">return</span> <span class="php-var">$fieldsetElements</span>;
+</span><span class="l" id="903"> 903     }
+</span><span class="l" id="904"> 904 
+</span><span class="l" id="905"> 905     <span class="php-comment">/**
+</span></span><span class="l" id="906"> 906 <span class="php-comment">     * @return rex_form_control_element
+</span></span><span class="l" id="907"> 907 <span class="php-comment">     */</span>
+</span><span class="l" id="908"> 908     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getControlElement()
+</span><span class="l" id="909"> 909     {
+</span><span class="l" id="910"> 910         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;elements <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElementsArray</span>) {
+</span><span class="l" id="911"> 911             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElementsArray</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="912"> 912                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;isControlElement(<span class="php-var">$element</span>)) {
+</span><span class="l" id="913"> 913                     <span class="php-keyword1">return</span> <span class="php-var">$element</span>;
+</span><span class="l" id="914"> 914                 }
+</span><span class="l" id="915"> 915             }
+</span><span class="l" id="916"> 916         }
+</span><span class="l" id="917"> 917         <span class="php-var">$noElement</span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="918"> 918         <span class="php-keyword1">return</span> <span class="php-var">$noElement</span>;
+</span><span class="l" id="919"> 919     }
+</span><span class="l" id="920"> 920 
+</span><span class="l" id="921"> 921     <span class="php-comment">/**
+</span></span><span class="l" id="922"> 922 <span class="php-comment">     * @param string $fieldsetName
+</span></span><span class="l" id="923"> 923 <span class="php-comment">     * @param string $elementName
+</span></span><span class="l" id="924"> 924 <span class="php-comment">     *
+</span></span><span class="l" id="925"> 925 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="926"> 926 <span class="php-comment">     */</span>
+</span><span class="l" id="927"> 927     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getElement(<span class="php-var">$fieldsetName</span>, <span class="php-var">$elementName</span>)
+</span><span class="l" id="928"> 928     {
+</span><span class="l" id="929"> 929         <span class="php-var">$normalizedName</span> = rex_string::normalize(<span class="php-var">$fieldsetName</span> . <span class="php-quote">'['</span> . <span class="php-var">$elementName</span> . <span class="php-quote">']'</span>, <span class="php-quote">'_'</span>, <span class="php-quote">'[]'</span>);
+</span><span class="l" id="930"> 930         <span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;_getElement(<span class="php-var">$fieldsetName</span>, <span class="php-var">$normalizedName</span>);
+</span><span class="l" id="931"> 931         <span class="php-keyword1">return</span> <span class="php-var">$result</span>;
+</span><span class="l" id="932"> 932     }
+</span><span class="l" id="933"> 933 
+</span><span class="l" id="934"> 934     <span class="php-comment">/**
+</span></span><span class="l" id="935"> 935 <span class="php-comment">     * @param string $fieldsetName
+</span></span><span class="l" id="936"> 936 <span class="php-comment">     * @param string $elementName
+</span></span><span class="l" id="937"> 937 <span class="php-comment">     *
+</span></span><span class="l" id="938"> 938 <span class="php-comment">     * @return rex_form_element
+</span></span><span class="l" id="939"> 939 <span class="php-comment">     */</span>
+</span><span class="l" id="940"> 940     <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> _getElement(<span class="php-var">$fieldsetName</span>, <span class="php-var">$elementName</span>)
+</span><span class="l" id="941"> 941     {
+</span><span class="l" id="942"> 942         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$this</span>-&gt;elements[<span class="php-var">$fieldsetName</span>])) {
+</span><span class="l" id="943"> 943             <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-keyword2">count</span>(<span class="php-var">$this</span>-&gt;elements[<span class="php-var">$fieldsetName</span>]); ++<span class="php-var">$i</span>) {
+</span><span class="l" id="944"> 944                 <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;elements[<span class="php-var">$fieldsetName</span>][<span class="php-var">$i</span>]-&gt;getAttribute(<span class="php-quote">'name'</span>) == <span class="php-var">$elementName</span>) {
+</span><span class="l" id="945"> 945                     <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;elements[<span class="php-var">$fieldsetName</span>][<span class="php-var">$i</span>];
+</span><span class="l" id="946"> 946                 }
+</span><span class="l" id="947"> 947             }
+</span><span class="l" id="948"> 948         }
+</span><span class="l" id="949"> 949         <span class="php-var">$result</span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="950"> 950         <span class="php-keyword1">return</span> <span class="php-var">$result</span>;
+</span><span class="l" id="951"> 951     }
+</span><span class="l" id="952"> 952 
+</span><span class="l" id="953"> 953     <span class="php-comment">/**
+</span></span><span class="l" id="954"> 954 <span class="php-comment">     * @return string
+</span></span><span class="l" id="955"> 955 <span class="php-comment">     */</span>
+</span><span class="l" id="956"> 956     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getName()
+</span><span class="l" id="957"> 957     {
+</span><span class="l" id="958"> 958         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;name;
+</span><span class="l" id="959"> 959     }
+</span><span class="l" id="960"> 960 
+</span><span class="l" id="961"> 961     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setWarning(<span class="php-var">$warning</span>)
+</span><span class="l" id="962"> 962     {
+</span><span class="l" id="963"> 963         <span class="php-var">$this</span>-&gt;warning = <span class="php-var">$warning</span>;
+</span><span class="l" id="964"> 964     }
+</span><span class="l" id="965"> 965 
+</span><span class="l" id="966"> 966     <span class="php-comment">/**
+</span></span><span class="l" id="967"> 967 <span class="php-comment">     * @return string
+</span></span><span class="l" id="968"> 968 <span class="php-comment">     */</span>
+</span><span class="l" id="969"> 969     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getWarning()
+</span><span class="l" id="970"> 970     {
+</span><span class="l" id="971"> 971         <span class="php-var">$warning</span> = rex_request(<span class="php-var">$this</span>-&gt;getName() . <span class="php-quote">'_warning'</span>, <span class="php-quote">'string'</span>);
+</span><span class="l" id="972"> 972         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;warning != <span class="php-quote">''</span>) {
+</span><span class="l" id="973"> 973             <span class="php-var">$warning</span> .= <span class="php-quote">"\n"</span> . <span class="php-var">$this</span>-&gt;warning;
+</span><span class="l" id="974"> 974         }
+</span><span class="l" id="975"> 975         <span class="php-keyword1">return</span> <span class="php-var">$warning</span>;
+</span><span class="l" id="976"> 976     }
+</span><span class="l" id="977"> 977 
+</span><span class="l" id="978"> 978     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setMessage(<span class="php-var">$message</span>)
+</span><span class="l" id="979"> 979     {
+</span><span class="l" id="980"> 980         <span class="php-var">$this</span>-&gt;message = <span class="php-var">$message</span>;
+</span><span class="l" id="981"> 981     }
+</span><span class="l" id="982"> 982 
+</span><span class="l" id="983"> 983     <span class="php-comment">/**
+</span></span><span class="l" id="984"> 984 <span class="php-comment">     * @return string
+</span></span><span class="l" id="985"> 985 <span class="php-comment">     */</span>
+</span><span class="l" id="986"> 986     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getMessage()
+</span><span class="l" id="987"> 987     {
+</span><span class="l" id="988"> 988         <span class="php-var">$message</span> = rex_request(<span class="php-var">$this</span>-&gt;getName() . <span class="php-quote">'_msg'</span>, <span class="php-quote">'string'</span>);
+</span><span class="l" id="989"> 989         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;message != <span class="php-quote">''</span>) {
+</span><span class="l" id="990"> 990             <span class="php-var">$message</span> .= <span class="php-quote">"\n"</span> . <span class="php-var">$this</span>-&gt;message;
+</span><span class="l" id="991"> 991         }
+</span><span class="l" id="992"> 992         <span class="php-keyword1">return</span> <span class="php-var">$message</span>;
+</span><span class="l" id="993"> 993     }
+</span><span class="l" id="994"> 994 
+</span><span class="l" id="995"> 995     <span class="php-comment">/**
+</span></span><span class="l" id="996"> 996 <span class="php-comment">     * Callbackfunktion, damit in subklassen der Value noch beeinflusst werden kann
+</span></span><span class="l" id="997"> 997 <span class="php-comment">     * wenn das Feld mit Datenbankwerten angezeigt wird.
+</span></span><span class="l" id="998"> 998 <span class="php-comment">     */</span>
+</span><span class="l" id="999"> 999     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> preView(<span class="php-var">$fieldsetName</span>, <span class="php-var">$fieldName</span>, <span class="php-var">$fieldValue</span>)
+</span><span class="l" id="1000">1000     {
+</span><span class="l" id="1001">1001         <span class="php-keyword1">return</span> <span class="php-var">$fieldValue</span>;
+</span><span class="l" id="1002">1002     }
+</span><span class="l" id="1003">1003 
+</span><span class="l" id="1004">1004     <span class="php-comment">/**
+</span></span><span class="l" id="1005">1005 <span class="php-comment">     * @param string $fieldsetName
+</span></span><span class="l" id="1006">1006 <span class="php-comment">     *
+</span></span><span class="l" id="1007">1007 <span class="php-comment">     * @return array
+</span></span><span class="l" id="1008">1008 <span class="php-comment">     */</span>
+</span><span class="l" id="1009">1009     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> fieldsetPostValues(<span class="php-var">$fieldsetName</span>)
+</span><span class="l" id="1010">1010     {
+</span><span class="l" id="1011">1011         <span class="php-comment">// Name normalisieren, da der gepostete Name auch zuvor normalisiert wurde</span>
+</span><span class="l" id="1012">1012         <span class="php-var">$normalizedFieldsetName</span> = rex_string::normalize(<span class="php-var">$fieldsetName</span>, <span class="php-quote">'_'</span>, <span class="php-quote">'[]'</span>);
+</span><span class="l" id="1013">1013 
+</span><span class="l" id="1014">1014         <span class="php-keyword1">return</span> rex_post(<span class="php-var">$normalizedFieldsetName</span>, <span class="php-quote">'array'</span>);
+</span><span class="l" id="1015">1015     }
+</span><span class="l" id="1016">1016 
+</span><span class="l" id="1017">1017     <span class="php-comment">/**
+</span></span><span class="l" id="1018">1018 <span class="php-comment">     * @param string $fieldsetName
+</span></span><span class="l" id="1019">1019 <span class="php-comment">     * @param string $fieldName
+</span></span><span class="l" id="1020">1020 <span class="php-comment">     * @param mixed  $default
+</span></span><span class="l" id="1021">1021 <span class="php-comment">     *
+</span></span><span class="l" id="1022">1022 <span class="php-comment">     * @return string
+</span></span><span class="l" id="1023">1023 <span class="php-comment">     */</span>
+</span><span class="l" id="1024">1024     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> elementPostValue(<span class="php-var">$fieldsetName</span>, <span class="php-var">$fieldName</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1025">1025     {
+</span><span class="l" id="1026">1026         <span class="php-var">$fields</span> = <span class="php-var">$this</span>-&gt;fieldsetPostValues(<span class="php-var">$fieldsetName</span>);
+</span><span class="l" id="1027">1027 
+</span><span class="l" id="1028">1028         <span class="php-comment">// name attributes are normalized</span>
+</span><span class="l" id="1029">1029         <span class="php-var">$normalizedFieldName</span> = rex_string::normalize(<span class="php-var">$fieldName</span>, <span class="php-quote">'_'</span>, <span class="php-quote">'[]'</span>);
+</span><span class="l" id="1030">1030 
+</span><span class="l" id="1031">1031         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$fields</span>[<span class="php-var">$normalizedFieldName</span>])) {
+</span><span class="l" id="1032">1032             <span class="php-keyword1">return</span> <span class="php-var">$fields</span>[<span class="php-var">$normalizedFieldName</span>];
+</span><span class="l" id="1033">1033         }
+</span><span class="l" id="1034">1034 
+</span><span class="l" id="1035">1035         <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
+</span><span class="l" id="1036">1036     }
+</span><span class="l" id="1037">1037 
+</span><span class="l" id="1038">1038     <span class="php-comment">/**
+</span></span><span class="l" id="1039">1039 <span class="php-comment">     * Validiert die Eingaben.
+</span></span><span class="l" id="1040">1040 <span class="php-comment">     * Gibt true zurück wenn alles ok war, false bei einem allgemeinen Fehler oder
+</span></span><span class="l" id="1041">1041 <span class="php-comment">     * einen String mit einer Fehlermeldung.
+</span></span><span class="l" id="1042">1042 <span class="php-comment">     *
+</span></span><span class="l" id="1043">1043 <span class="php-comment">     * Eingaben sind via
+</span></span><span class="l" id="1044">1044 <span class="php-comment">     *   $el    = $this-&gt;getElement($fieldSetName, $fieldName);
+</span></span><span class="l" id="1045">1045 <span class="php-comment">     *   $val   = $el-&gt;getValue();
+</span></span><span class="l" id="1046">1046 <span class="php-comment">     * erreichbar.
+</span></span><span class="l" id="1047">1047 <span class="php-comment">     *
+</span></span><span class="l" id="1048">1048 <span class="php-comment">     * @return bool
+</span></span><span class="l" id="1049">1049 <span class="php-comment">     */</span>
+</span><span class="l" id="1050">1050     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> validate()
+</span><span class="l" id="1051">1051     {
+</span><span class="l" id="1052">1052         <span class="php-var">$messages</span> = [];
+</span><span class="l" id="1053">1053 
+</span><span class="l" id="1054">1054         <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;csrfToken-&gt;isValid()) {
+</span><span class="l" id="1055">1055             <span class="php-var">$messages</span>[] = rex_i18n::msg(<span class="php-quote">'csrf_token_invalid'</span>);
+</span><span class="l" id="1056">1056         }
+</span><span class="l" id="1057">1057 
+</span><span class="l" id="1058">1058         <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;getSaveElements() <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElements</span>) {
+</span><span class="l" id="1059">1059             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElements</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="1060">1060                 <span class="php-comment">/** @var rex_form_element $element */</span>
+</span><span class="l" id="1061">1061                 <span class="php-comment">// read-only-fields</span>
+</span><span class="l" id="1062">1062                 <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$element</span>-&gt;getAttribute(<span class="php-quote">'class'</span>), <span class="php-quote">'form-control-static'</span>) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="1063">1063                     <span class="php-keyword1">continue</span>;
+</span><span class="l" id="1064">1064                 }
+</span><span class="l" id="1065">1065 
+</span><span class="l" id="1066">1066                 <span class="php-var">$validator</span> = <span class="php-var">$element</span>-&gt;getValidator();
+</span><span class="l" id="1067">1067                 <span class="php-keyword1">if</span> (!<span class="php-var">$validator</span>-&gt;isValid(<span class="php-var">$element</span>-&gt;getSaveValue())) {
+</span><span class="l" id="1068">1068                     <span class="php-var">$messages</span>[] = <span class="php-var">$validator</span>-&gt;getMessage();
+</span><span class="l" id="1069">1069                 }
+</span><span class="l" id="1070">1070             }
+</span><span class="l" id="1071">1071         }
+</span><span class="l" id="1072">1072         <span class="php-keyword1">return</span> <span class="php-keyword1">empty</span>(<span class="php-var">$messages</span>) ? <span class="php-keyword1">true</span> : <span class="php-keyword2">implode</span>(<span class="php-quote">'&lt;br /&gt;'</span>, <span class="php-var">$messages</span>);
+</span><span class="l" id="1073">1073     }
+</span><span class="l" id="1074">1074 
+</span><span class="l" id="1075">1075     <span class="php-comment">/**
+</span></span><span class="l" id="1076">1076 <span class="php-comment">     * Übernimmt die POST-Werte in die FormElemente.
+</span></span><span class="l" id="1077">1077 <span class="php-comment">     */</span>
+</span><span class="l" id="1078">1078     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> processPostValues()
+</span><span class="l" id="1079">1079     {
+</span><span class="l" id="1080">1080         <span class="php-var">$saveElements</span> = <span class="php-var">$this</span>-&gt;getSaveElements();
+</span><span class="l" id="1081">1081         <span class="php-keyword1">foreach</span> (<span class="php-var">$saveElements</span> <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElements</span>) {
+</span><span class="l" id="1082">1082             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElements</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$element</span>) {
+</span><span class="l" id="1083">1083                 <span class="php-comment">// read-only-fields nicht speichern</span>
+</span><span class="l" id="1084">1084                 <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$element</span>-&gt;getAttribute(<span class="php-quote">'class'</span>), <span class="php-quote">'form-control-static'</span>) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="1085">1085                     <span class="php-keyword1">continue</span>;
+</span><span class="l" id="1086">1086                 }
+</span><span class="l" id="1087">1087 
+</span><span class="l" id="1088">1088                 <span class="php-var">$fieldName</span> = <span class="php-var">$element</span>-&gt;getFieldName();
+</span><span class="l" id="1089">1089                 <span class="php-var">$fieldValue</span> = <span class="php-var">$this</span>-&gt;elementPostValue(<span class="php-var">$fieldsetName</span>, <span class="php-var">$fieldName</span>);
+</span><span class="l" id="1090">1090 
+</span><span class="l" id="1091">1091                 <span class="php-var">$element</span>-&gt;setValue(<span class="php-var">$fieldValue</span>);
+</span><span class="l" id="1092">1092             }
+</span><span class="l" id="1093">1093         }
+</span><span class="l" id="1094">1094     }
+</span><span class="l" id="1095">1095 
+</span><span class="l" id="1096">1096     <span class="php-comment">/**
+</span></span><span class="l" id="1097">1097 <span class="php-comment">     * Saves the form.
+</span></span><span class="l" id="1098">1098 <span class="php-comment">     *
+</span></span><span class="l" id="1099">1099 <span class="php-comment">     * @return bool|string|int `true` on success, an error message or an error code otherwise
+</span></span><span class="l" id="1100">1100 <span class="php-comment">     */</span>
+</span><span class="l" id="1101">1101     <span class="php-keyword1">abstract</span> <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> save();
+</span><span class="l" id="1102">1102 
+</span><span class="l" id="1103">1103     <span class="php-comment">/**
+</span></span><span class="l" id="1104">1104 <span class="php-comment">     * @return bool
+</span></span><span class="l" id="1105">1105 <span class="php-comment">     */</span>
+</span><span class="l" id="1106">1106     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>()
+</span><span class="l" id="1107">1107     {
+</span><span class="l" id="1108">1108         <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> BadMethodCallException(<span class="php-quote">'delete() is not implemented.'</span>);
+</span><span class="l" id="1109">1109     }
+</span><span class="l" id="1110">1110 
+</span><span class="l" id="1111">1111     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> redirect(<span class="php-var">$listMessage</span> = <span class="php-quote">''</span>, <span class="php-var">$listWarning</span> = <span class="php-quote">''</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span> = [])
+</span><span class="l" id="1112">1112     {
+</span><span class="l" id="1113">1113         <span class="php-keyword1">if</span> (<span class="php-var">$listMessage</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1114">1114             <span class="php-var">$listName</span> = rex_request(<span class="php-quote">'list'</span>, <span class="php-quote">'string'</span>);
+</span><span class="l" id="1115">1115             <span class="php-var">$params</span>[<span class="php-var">$listName</span> . <span class="php-quote">'_msg'</span>] = <span class="php-var">$listMessage</span>;
+</span><span class="l" id="1116">1116         }
+</span><span class="l" id="1117">1117 
+</span><span class="l" id="1118">1118         <span class="php-keyword1">if</span> (<span class="php-var">$listWarning</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1119">1119             <span class="php-var">$listName</span> = rex_request(<span class="php-quote">'list'</span>, <span class="php-quote">'string'</span>);
+</span><span class="l" id="1120">1120             <span class="php-var">$params</span>[<span class="php-var">$listName</span> . <span class="php-quote">'_warning'</span>] = <span class="php-var">$listWarning</span>;
+</span><span class="l" id="1121">1121         }
+</span><span class="l" id="1122">1122 
+</span><span class="l" id="1123">1123         <span class="php-var">$paramString</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="1124">1124         <span class="php-keyword1">foreach</span> (<span class="php-var">$params</span> <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="1125">1125             <span class="php-var">$paramString</span> .= <span class="php-quote">'&amp;'</span> . <span class="php-var">$name</span> . <span class="php-quote">'='</span> . <span class="php-var">$value</span>;
+</span><span class="l" id="1126">1126         }
+</span><span class="l" id="1127">1127 
+</span><span class="l" id="1128">1128         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;debug) {
+</span><span class="l" id="1129">1129             <span class="php-keyword1">echo</span> <span class="php-quote">'redirect to: '</span> . <span class="php-var">$this</span>-&gt;applyUrl . <span class="php-var">$paramString</span>;
+</span><span class="l" id="1130">1130             <span class="php-keyword1">exit</span>();
+</span><span class="l" id="1131">1131         }
+</span><span class="l" id="1132">1132 
+</span><span class="l" id="1133">1133         <span class="php-keyword2">header</span>(<span class="php-quote">'Location: '</span> . <span class="php-var">$this</span>-&gt;applyUrl . <span class="php-var">$paramString</span>);
+</span><span class="l" id="1134">1134         <span class="php-keyword1">exit</span>();
+</span><span class="l" id="1135">1135     }
+</span><span class="l" id="1136">1136 
+</span><span class="l" id="1137">1137     <span class="php-comment">/**
+</span></span><span class="l" id="1138">1138 <span class="php-comment">     * @return string
+</span></span><span class="l" id="1139">1139 <span class="php-comment">     */</span>
+</span><span class="l" id="1140">1140     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> get()
+</span><span class="l" id="1141">1141     {
+</span><span class="l" id="1142">1142         <span class="php-var">$this</span>-&gt;init();
+</span><span class="l" id="1143">1143 
+</span><span class="l" id="1144">1144         rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'REX_FORM_GET'</span>, <span class="php-var">$this</span>, [], <span class="php-keyword1">true</span>));
+</span><span class="l" id="1145">1145 
+</span><span class="l" id="1146">1146         <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;applyUrl) {
+</span><span class="l" id="1147">1147             <span class="php-var">$this</span>-&gt;setApplyUrl(<span class="php-var">$this</span>-&gt;getUrl([<span class="php-quote">'func'</span> =&gt; <span class="php-quote">''</span>], <span class="php-keyword1">false</span>));
+</span><span class="l" id="1148">1148         }
+</span><span class="l" id="1149">1149 
+</span><span class="l" id="1150">1150         <span class="php-keyword1">if</span> ((<span class="php-var">$controlElement</span> = <span class="php-var">$this</span>-&gt;getControlElement()) !== <span class="php-keyword1">null</span>) {
+</span><span class="l" id="1151">1151             <span class="php-keyword1">if</span> (<span class="php-var">$controlElement</span>-&gt;saved()) {
+</span><span class="l" id="1152">1152                 <span class="php-var">$this</span>-&gt;processPostValues();
+</span><span class="l" id="1153">1153 
+</span><span class="l" id="1154">1154                 <span class="php-comment">// speichern und umleiten</span>
+</span><span class="l" id="1155">1155                 <span class="php-comment">// Nachricht in der Liste anzeigen</span>
+</span><span class="l" id="1156">1156                 <span class="php-keyword1">if</span> ((<span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;validate()) === <span class="php-keyword1">true</span> &amp;&amp; (<span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;save()) === <span class="php-keyword1">true</span>) {
+</span><span class="l" id="1157">1157                     <span class="php-var">$this</span>-&gt;redirect(rex_i18n::msg(<span class="php-quote">'form_saved'</span>));
+</span><span class="l" id="1158">1158                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_int</span>(<span class="php-var">$result</span>) &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;errorMessages[<span class="php-var">$result</span>])) {
+</span><span class="l" id="1159">1159                     <span class="php-var">$this</span>-&gt;setWarning(<span class="php-var">$this</span>-&gt;errorMessages[<span class="php-var">$result</span>]);
+</span><span class="l" id="1160">1160                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$result</span>) &amp;&amp; <span class="php-var">$result</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1161">1161                     <span class="php-var">$this</span>-&gt;setWarning(<span class="php-var">$result</span>);
+</span><span class="l" id="1162">1162                 } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1163">1163                     <span class="php-var">$this</span>-&gt;setWarning(rex_i18n::msg(<span class="php-quote">'form_save_error'</span>));
+</span><span class="l" id="1164">1164                 }
+</span><span class="l" id="1165">1165             } <span class="php-keyword1">elseif</span> (<span class="php-var">$controlElement</span>-&gt;applied()) {
+</span><span class="l" id="1166">1166                 <span class="php-var">$this</span>-&gt;processPostValues();
+</span><span class="l" id="1167">1167 
+</span><span class="l" id="1168">1168                 <span class="php-comment">// speichern und wiederanzeigen</span>
+</span><span class="l" id="1169">1169                 <span class="php-comment">// Nachricht im Formular anzeigen</span>
+</span><span class="l" id="1170">1170                 <span class="php-keyword1">if</span> ((<span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;validate()) === <span class="php-keyword1">true</span> &amp;&amp; (<span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;save()) === <span class="php-keyword1">true</span>) {
+</span><span class="l" id="1171">1171                     <span class="php-var">$this</span>-&gt;setMessage(rex_i18n::msg(<span class="php-quote">'form_applied'</span>));
+</span><span class="l" id="1172">1172                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_int</span>(<span class="php-var">$result</span>) &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;errorMessages[<span class="php-var">$result</span>])) {
+</span><span class="l" id="1173">1173                     <span class="php-var">$this</span>-&gt;setWarning(<span class="php-var">$this</span>-&gt;errorMessages[<span class="php-var">$result</span>]);
+</span><span class="l" id="1174">1174                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$result</span>) &amp;&amp; <span class="php-var">$result</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1175">1175                     <span class="php-var">$this</span>-&gt;setWarning(<span class="php-var">$result</span>);
+</span><span class="l" id="1176">1176                 } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1177">1177                     <span class="php-var">$this</span>-&gt;setWarning(rex_i18n::msg(<span class="php-quote">'form_save_error'</span>));
+</span><span class="l" id="1178">1178                 }
+</span><span class="l" id="1179">1179             } <span class="php-keyword1">elseif</span> (<span class="php-var">$controlElement</span>-&gt;deleted()) {
+</span><span class="l" id="1180">1180                 <span class="php-comment">// speichern und wiederanzeigen</span>
+</span><span class="l" id="1181">1181                 <span class="php-comment">// Nachricht in der Liste anzeigen</span>
+</span><span class="l" id="1182">1182                 <span class="php-keyword1">if</span> ((<span class="php-var">$result</span> = <span class="php-var">$this</span>-&gt;<span class="php-keyword2">delete</span>()) === <span class="php-keyword1">true</span>) {
+</span><span class="l" id="1183">1183                     <span class="php-var">$this</span>-&gt;redirect(rex_i18n::msg(<span class="php-quote">'form_deleted'</span>));
+</span><span class="l" id="1184">1184                 } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$result</span>) &amp;&amp; <span class="php-var">$result</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1185">1185                     <span class="php-var">$this</span>-&gt;setWarning(<span class="php-var">$result</span>);
+</span><span class="l" id="1186">1186                 } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1187">1187                     <span class="php-var">$this</span>-&gt;setWarning(rex_i18n::msg(<span class="php-quote">'form_delete_error'</span>));
+</span><span class="l" id="1188">1188                 }
+</span><span class="l" id="1189">1189             } <span class="php-keyword1">elseif</span> (<span class="php-var">$controlElement</span>-&gt;resetted()) {
+</span><span class="l" id="1190">1190                 <span class="php-comment">// verwerfen und wiederanzeigen</span>
+</span><span class="l" id="1191">1191                 <span class="php-comment">// Nachricht im Formular anzeigen</span>
+</span><span class="l" id="1192">1192                 <span class="php-var">$this</span>-&gt;setMessage(rex_i18n::msg(<span class="php-quote">'form_resetted'</span>));
+</span><span class="l" id="1193">1193             } <span class="php-keyword1">elseif</span> (<span class="php-var">$controlElement</span>-&gt;aborted()) {
+</span><span class="l" id="1194">1194                 <span class="php-comment">// verwerfen und umleiten</span>
+</span><span class="l" id="1195">1195                 <span class="php-comment">// Nachricht in der Liste anzeigen</span>
+</span><span class="l" id="1196">1196                 <span class="php-var">$this</span>-&gt;redirect(rex_i18n::msg(<span class="php-quote">'form_resetted'</span>));
+</span><span class="l" id="1197">1197             }
+</span><span class="l" id="1198">1198         }
+</span><span class="l" id="1199">1199 
+</span><span class="l" id="1200">1200         <span class="php-var">$actionParams</span> = [];
+</span><span class="l" id="1201">1201         <span class="php-keyword1">if</span> (<span class="php-quote">'get'</span> == <span class="php-keyword2">strtolower</span>(<span class="php-var">$this</span>-&gt;method)) {
+</span><span class="l" id="1202">1202             <span class="php-comment">// Parameter dem Formular hinzufügen</span>
+</span><span class="l" id="1203">1203             <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;getParams() <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="1204">1204                 <span class="php-var">$this</span>-&gt;addHiddenField(<span class="php-var">$name</span>, <span class="php-var">$value</span>, [<span class="php-quote">'internal::useArraySyntax'</span> =&gt; <span class="php-quote">'none'</span>]);
+</span><span class="l" id="1205">1205             }
+</span><span class="l" id="1206">1206         } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1207">1207             <span class="php-var">$actionParams</span> = <span class="php-var">$this</span>-&gt;getParams();
+</span><span class="l" id="1208">1208         }
+</span><span class="l" id="1209">1209 
+</span><span class="l" id="1210">1210         <span class="php-var">$s</span> = <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1211">1211 
+</span><span class="l" id="1212">1212         <span class="php-var">$warning</span> = <span class="php-var">$this</span>-&gt;getWarning();
+</span><span class="l" id="1213">1213         <span class="php-var">$message</span> = <span class="php-var">$this</span>-&gt;getMessage();
+</span><span class="l" id="1214">1214         <span class="php-keyword1">if</span> (<span class="php-var">$warning</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1215">1215             <span class="php-var">$s</span> .= <span class="php-quote">'  '</span> . rex_view::error(<span class="php-var">$warning</span>) . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1216">1216         } <span class="php-keyword1">elseif</span> (<span class="php-var">$message</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="1217">1217             <span class="php-var">$s</span> .= <span class="php-quote">'  '</span> . rex_view::success(<span class="php-var">$message</span>) . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1218">1218         }
+</span><span class="l" id="1219">1219 
+</span><span class="l" id="1220">1220         <span class="php-var">$i</span> = <span class="php-num">0</span>;
+</span><span class="l" id="1221">1221         <span class="php-var">$addHeaders</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="1222">1222         <span class="php-var">$fieldsets</span> = <span class="php-var">$this</span>-&gt;getFieldsetElements();
+</span><span class="l" id="1223">1223         <span class="php-var">$last</span> = <span class="php-keyword2">count</span>(<span class="php-var">$fieldsets</span>);
+</span><span class="l" id="1224">1224 
+</span><span class="l" id="1225">1225         <span class="php-var">$id</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="1226">1226         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;formId) {
+</span><span class="l" id="1227">1227             <span class="php-var">$id</span> = <span class="php-quote">' id="'</span>.rex_escape(<span class="php-var">$this</span>-&gt;formId).<span class="php-quote">'"'</span>;
+</span><span class="l" id="1228">1228         }
+</span><span class="l" id="1229">1229 
+</span><span class="l" id="1230">1230         <span class="php-var">$s</span> .= <span class="php-quote">'&lt;form'</span> . <span class="php-var">$id</span> . <span class="php-quote">' action="'</span> . rex_url::backendController(<span class="php-var">$actionParams</span>) . <span class="php-quote">'" method="'</span> . <span class="php-var">$this</span>-&gt;method . <span class="php-quote">'"&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1231">1231         <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsets</span> <span class="php-keyword1">as</span> <span class="php-var">$fieldsetName</span> =&gt; <span class="php-var">$fieldsetElements</span>) {
+</span><span class="l" id="1232">1232             <span class="php-var">$s</span> .= <span class="php-quote">'&lt;fieldset&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1233">1233 
+</span><span class="l" id="1234">1234             <span class="php-keyword1">if</span> (<span class="php-var">$fieldsetName</span> != <span class="php-quote">''</span> &amp;&amp; <span class="php-var">$fieldsetName</span> != <span class="php-var">$this</span>-&gt;name) {
+</span><span class="l" id="1235">1235                 <span class="php-var">$s</span> .= <span class="php-quote">'&lt;legend&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$fieldsetName</span>) . <span class="php-quote">'&lt;/legend&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1236">1236             }
+</span><span class="l" id="1237">1237 
+</span><span class="l" id="1238">1238             <span class="php-comment">// Die HeaderElemente nur im 1. Fieldset ganz am Anfang einfügen</span>
+</span><span class="l" id="1239">1239             <span class="php-keyword1">if</span> (<span class="php-var">$i</span> == <span class="php-num">0</span> &amp;&amp; <span class="php-var">$addHeaders</span>) {
+</span><span class="l" id="1240">1240                 <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;getHeaderElements() <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="1241">1241                     <span class="php-comment">// Callback</span>
+</span><span class="l" id="1242">1242                     <span class="php-var">$element</span>-&gt;setValue(<span class="php-var">$this</span>-&gt;preView(<span class="php-var">$fieldsetName</span>, <span class="php-var">$element</span>-&gt;getFieldName(), <span class="php-var">$element</span>-&gt;getValue()));
+</span><span class="l" id="1243">1243                     <span class="php-comment">// HeaderElemente immer ohne &lt;p&gt;</span>
+</span><span class="l" id="1244">1244                     <span class="php-var">$s</span> .= <span class="php-var">$element</span>-&gt;formatElement();
+</span><span class="l" id="1245">1245                 }
+</span><span class="l" id="1246">1246                 <span class="php-var">$addHeaders</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="1247">1247             }
+</span><span class="l" id="1248">1248 
+</span><span class="l" id="1249">1249             <span class="php-keyword1">foreach</span> (<span class="php-var">$fieldsetElements</span> <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="1250">1250                 <span class="php-comment">// Callback</span>
+</span><span class="l" id="1251">1251                 <span class="php-var">$element</span>-&gt;setValue(<span class="php-var">$this</span>-&gt;preView(<span class="php-var">$fieldsetName</span>, <span class="php-var">$element</span>-&gt;getFieldName(), <span class="php-var">$element</span>-&gt;getValue()));
+</span><span class="l" id="1252">1252                 <span class="php-var">$s</span> .= <span class="php-var">$element</span>-&gt;get();
+</span><span class="l" id="1253">1253             }
+</span><span class="l" id="1254">1254 
+</span><span class="l" id="1255">1255             <span class="php-comment">// Die FooterElemente nur innerhalb des letzten Fieldsets</span>
+</span><span class="l" id="1256">1256             <span class="php-keyword1">if</span> ((<span class="php-var">$i</span> + <span class="php-num">1</span>) == <span class="php-var">$last</span>) {
+</span><span class="l" id="1257">1257                 <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;getFooterElements() <span class="php-keyword1">as</span> <span class="php-var">$element</span>) {
+</span><span class="l" id="1258">1258                     <span class="php-comment">// Callback</span>
+</span><span class="l" id="1259">1259                     <span class="php-var">$element</span>-&gt;setValue(<span class="php-var">$this</span>-&gt;preView(<span class="php-var">$fieldsetName</span>, <span class="php-var">$element</span>-&gt;getFieldName(), <span class="php-var">$element</span>-&gt;getValue()));
+</span><span class="l" id="1260">1260                     <span class="php-var">$s</span> .= <span class="php-var">$element</span>-&gt;get();
+</span><span class="l" id="1261">1261                 }
+</span><span class="l" id="1262">1262             }
+</span><span class="l" id="1263">1263 
+</span><span class="l" id="1264">1264             <span class="php-var">$s</span> .= <span class="php-quote">'&lt;/fieldset&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1265">1265 
+</span><span class="l" id="1266">1266             ++<span class="php-var">$i</span>;
+</span><span class="l" id="1267">1267         }
+</span><span class="l" id="1268">1268 
+</span><span class="l" id="1269">1269         <span class="php-var">$s</span> .= <span class="php-var">$this</span>-&gt;csrfToken-&gt;getHiddenField() . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1270">1270         <span class="php-var">$s</span> .= <span class="php-quote">'&lt;/form&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="1271">1271 
+</span><span class="l" id="1272">1272         <span class="php-keyword1">return</span> <span class="php-var">$s</span>;
+</span><span class="l" id="1273">1273     }
+</span><span class="l" id="1274">1274 
+</span><span class="l" id="1275">1275     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> show()
+</span><span class="l" id="1276">1276     {
+</span><span class="l" id="1277">1277         <span class="php-keyword1">echo</span> <span class="php-var">$this</span>-&gt;get();
+</span><span class="l" id="1278">1278     }
+</span><span class="l" id="1279">1279 }
+</span><span class="l" id="1280">1280 </span></code></pre>
+ </body>
+</html>

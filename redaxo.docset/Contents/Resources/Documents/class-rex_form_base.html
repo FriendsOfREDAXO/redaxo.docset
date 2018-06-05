@@ -1,0 +1,1741 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_form_base</h1>
+<div>
+<h3>Direct known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_config_form.html">rex_config_form</a></code>, 
+			<code><a href="class-rex_form.html">rex_form</a></code>
+</p>
+</div>
+<div class="alert alert-info">
+<b>Abstract</b><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_form_base.html#3-1279" title="Go to source code">redaxo/src/core/lib/form/form_base.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="__construct" id="___construct">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#___construct">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_form_base.html?44,63#44" title="Go to source code">__construct</a>( <span>mixed <var>$fieldset</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$method</var> = <span class="php-quote">'post'</span></span>, <span>mixed <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<div class="description short">
+<p>Diese Konstruktor sollte nicht verwendet werden. Instanzen muessen ueber die
+facotry() Methode erstellt werden!</p>
+</div>
+<div class="description detailed hidden">
+<p>Diese Konstruktor sollte nicht verwendet werden. Instanzen muessen ueber die
+facotry() Methode erstellt werden!</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="init" id="_init">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_init">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_form_base.html?65,71#65" title="Go to source code">init</a>( )</code>
+<div class="description short">
+<p>Initialisiert das Formular.</p>
+</div>
+<div class="description detailed hidden">
+<p>Initialisiert das Formular.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="loadBackendConfig" id="_loadBackendConfig">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_loadBackendConfig">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/loadBackendConfig"></a><a href="source-class-rex_form_base.html?73,79#73" title="Go to source code">loadBackendConfig</a>( )</code>
+<div class="description short">
+<p>Laedt die Konfiguration die noetig ist um rex_form im REDAXO Backend zu
+verwenden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Laedt die Konfiguration die noetig ist um rex_form im REDAXO Backend zu
+verwenden.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="setFormId" id="_setFormId">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setFormId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFormId"></a><a href="source-class-rex_form_base.html?81,84#81" title="Go to source code">setFormId</a>( <span>mixed <var>$id</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getUrl" id="_getUrl">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUrl"></a><a href="source-class-rex_form_base.html?86,102#86" title="Go to source code">getUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Gibt eine Formular-Url zurück.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt eine Formular-Url zurück.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$params</var></dt>
+<dd></dd>
+<dt><var>$escape</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addFieldset" id="_addFieldset">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addFieldset">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addFieldset"></a><a href="source-class-rex_form_base.html?106,113#106" title="Go to source code">addFieldset</a>( <span>mixed <var>$fieldset</var></span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Fieldset hinzu. Dieses dient dazu ein Formular in
+mehrere Abschnitte zu gliedern.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Fieldset hinzu. Dieses dient dazu ein Formular in
+mehrere Abschnitte zu gliedern.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="addField" id="_addField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addField"></a><a href="source-class-rex_form_base.html?117,138#117" title="Go to source code">addField</a>( <span>string <var>$tag</var></span>, <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span>, <span>boolean <var>$addElement</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Input-Feld hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Input-Feld hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$tag</var></dt>
+<dd></dd>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+<dt><var>$addElement</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addContainerField" id="_addContainerField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_container_element.html">rex_form_container_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addContainerField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addContainerField"></a><a href="source-class-rex_form_base.html?140,160#140" title="Go to source code">addContainerField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Container-Feld hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Container-Feld hinzu.</p>
+<p>Ein Container-Feld wiederrum kann weitere Felder enthalten.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_container_element.html">rex_form_container_element</a></code></code><br/>rex_form_container_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addInputField" id="_addInputField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addInputField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addInputField"></a><a href="source-class-rex_form_base.html?162,178#162" title="Go to source code">addInputField</a>( <span>string <var>$type</var></span>, <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span>, <span>boolean <var>$addElement</var> = <span class="php-keyword1">true</span></span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Input-Feld mit dem Type $type hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Input-Feld mit dem Type $type hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$type</var></dt>
+<dd></dd>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+<dt><var>$addElement</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addTextField" id="_addTextField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addTextField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTextField"></a><a href="source-class-rex_form_base.html?180,196#180" title="Go to source code">addTextField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Text-Feld hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Text-Feld hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addReadOnlyTextField" id="_addReadOnlyTextField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addReadOnlyTextField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addReadOnlyTextField"></a><a href="source-class-rex_form_base.html?198,216#198" title="Go to source code">addReadOnlyTextField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Read-Only-Text-Feld hinzu. Dazu wird ein input-Element
+verwendet.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Read-Only-Text-Feld hinzu. Dazu wird ein input-Element
+verwendet.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addReadOnlyField" id="_addReadOnlyField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addReadOnlyField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addReadOnlyField"></a><a href="source-class-rex_form_base.html?218,240#218" title="Go to source code">addReadOnlyField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Read-Only-Feld hinzu. Dazu wird ein span-Element
+verwendet.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Read-Only-Feld hinzu. Dazu wird ein span-Element
+verwendet.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addHiddenField" id="_addHiddenField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addHiddenField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addHiddenField"></a><a href="source-class-rex_form_base.html?242,255#242" title="Go to source code">addHiddenField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Fomular ein Hidden-Feld hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Fomular ein Hidden-Feld hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addCheckboxField" id="_addCheckboxField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_checkbox_element.html">rex_form_checkbox_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addCheckboxField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addCheckboxField"></a><a href="source-class-rex_form_base.html?257,272#257" title="Go to source code">addCheckboxField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Fomular ein Checkbox-Feld hinzu. Dies ermoeglicht die
+Mehrfach-Selektion aus einer vorgegeben Auswahl an Werten.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Fomular ein Checkbox-Feld hinzu. Dies ermoeglicht die
+Mehrfach-Selektion aus einer vorgegeben Auswahl an Werten.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_checkbox_element.html">rex_form_checkbox_element</a></code></code><br/>rex_form_checkbox_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addRadioField" id="_addRadioField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_radio_element.html">rex_form_radio_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addRadioField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addRadioField"></a><a href="source-class-rex_form_base.html?274,289#274" title="Go to source code">addRadioField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Radio-Feld hinzu. Dies ermoeglicht eine
+Einfache-Selektion aus einer vorgegeben Auswahl an Werten.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Radio-Feld hinzu. Dies ermoeglicht eine
+Einfache-Selektion aus einer vorgegeben Auswahl an Werten.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_radio_element.html">rex_form_radio_element</a></code></code><br/>rex_form_radio_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addTextAreaField" id="_addTextAreaField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addTextAreaField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTextAreaField"></a><a href="source-class-rex_form_base.html?291,317#291" title="Go to source code">addTextAreaField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Textarea-Feld hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Textarea-Feld hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addSelectField" id="_addSelectField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_select_element.html">rex_form_select_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addSelectField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addSelectField"></a><a href="source-class-rex_form_base.html?319,336#319" title="Go to source code">addSelectField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Select/Auswahl-Feld hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Select/Auswahl-Feld hinzu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_select_element.html">rex_form_select_element</a></code></code><br/>rex_form_select_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addMediaField" id="_addMediaField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_widget_media_element.html">rex_form_widget_media_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addMediaField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addMediaField"></a><a href="source-class-rex_form_base.html?338,358#338" title="Go to source code">addMediaField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Feld hinzu mit dem der Medienpool angebunden werden
+kann. Es kann nur ein Element aus dem Medienpool eingefuegt werden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Feld hinzu mit dem der Medienpool angebunden werden
+kann. Es kann nur ein Element aus dem Medienpool eingefuegt werden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_widget_media_element.html">rex_form_widget_media_element</a></code></code><br/>rex_form_widget_media_element<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addMedialistField" id="_addMedialistField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_widget_medialist_element.html">rex_form_widget_medialist_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addMedialistField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addMedialistField"></a><a href="source-class-rex_form_base.html?360,380#360" title="Go to source code">addMedialistField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Feld hinzu mit dem der Medienpool angebunden werden
+kann. Damit koennen mehrere Elemente aus dem Medienpool eingefuegt werden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Feld hinzu mit dem der Medienpool angebunden werden
+kann. Damit koennen mehrere Elemente aus dem Medienpool eingefuegt werden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_widget_medialist_element.html">rex_form_widget_medialist_element</a></code></code><br/>rex_form_widget_medialist_element<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addLinkmapField" id="_addLinkmapField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_widget_linkmap_element.html">rex_form_widget_linkmap_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addLinkmapField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addLinkmapField"></a><a href="source-class-rex_form_base.html?382,402#382" title="Go to source code">addLinkmapField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Feld hinzu mit dem die Struktur-Verwaltung angebunden
+werden kann. Es kann nur ein Element aus der Struktur eingefuegt werden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Feld hinzu mit dem die Struktur-Verwaltung angebunden
+werden kann. Es kann nur ein Element aus der Struktur eingefuegt werden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_widget_linkmap_element.html">rex_form_widget_linkmap_element</a></code></code><br/>rex_form_widget_linkmap_element<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addLinklistField" id="_addLinklistField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_widget_linklist_element.html">rex_form_widget_linklist_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addLinklistField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addLinklistField"></a><a href="source-class-rex_form_base.html?404,424#404" title="Go to source code">addLinklistField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular ein Feld hinzu mit dem die Struktur-Verwaltung angebunden
+werden kann. Damit koennen mehrere Elemente aus der Struktur eingefuegt
+werden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular ein Feld hinzu mit dem die Struktur-Verwaltung angebunden
+werden kann. Damit koennen mehrere Elemente aus der Struktur eingefuegt
+werden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_widget_linklist_element.html">rex_form_widget_linklist_element</a></code></code><br/>rex_form_widget_linklist_element<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addControlField" id="_addControlField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_control_element.html">rex_form_control_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addControlField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addControlField"></a><a href="source-class-rex_form_base.html?426,442#426" title="Go to source code">addControlField</a>( <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$saveElement</var> = <span class="php-keyword1">null</span></span>, <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$applyElement</var> = <span class="php-keyword1">null</span></span>, <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$deleteElement</var> = <span class="php-keyword1">null</span></span>, <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$resetElement</var> = <span class="php-keyword1">null</span></span>, <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$abortElement</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Fuegt dem Fomualar ein Control-Feld hinzu. Damit koennen versch. Aktionen mit
+dem Fomular durchgefuert werden.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Fomualar ein Control-Feld hinzu. Damit koennen versch. Aktionen mit
+dem Fomular durchgefuert werden.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$saveElement</var></dt>
+<dd></dd>
+<dt><var>$applyElement</var></dt>
+<dd></dd>
+<dt><var>$deleteElement</var></dt>
+<dd></dd>
+<dt><var>$resetElement</var></dt>
+<dd></dd>
+<dt><var>$abortElement</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_control_element.html">rex_form_control_element</a></code></code><br/>rex_form_control_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addRawField" id="_addRawField">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_raw_element.html">rex_form_raw_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addRawField">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addRawField"></a><a href="source-class-rex_form_base.html?444,455#444" title="Go to source code">addRawField</a>( <span>string <var>$html</var></span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular beliebiges HTML zu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular beliebiges HTML zu.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$html</var></dt>
+<dd>HTML code</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_raw_element.html">rex_form_raw_element</a></code></code><br/>rex_form_raw_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addErrorMessage" id="_addErrorMessage">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addErrorMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addErrorMessage"></a><a href="source-class-rex_form_base.html?457,463#457" title="Go to source code">addErrorMessage</a>( <span>mixed <var>$errorCode</var></span>, <span>mixed <var>$errorMessage</var></span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular eine Fehlermeldung hinzu.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular eine Fehlermeldung hinzu.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="addParam" id="_addParam">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addParam">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addParam"></a><a href="source-class-rex_form_base.html?465,472#465" title="Go to source code">addParam</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+<div class="description short">
+<p>Fuegt dem Formular einen Parameter hinzu. Diese an den Stellen eingefuegt, an
+denen das Fomular neue Requests erzeugt.</p>
+</div>
+<div class="description detailed hidden">
+<p>Fuegt dem Formular einen Parameter hinzu. Diese an den Stellen eingefuegt, an
+denen das Fomular neue Requests erzeugt.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="getParams" id="_getParams">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getParams">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParams"></a><a href="source-class-rex_form_base.html?474,482#474" title="Go to source code">getParams</a>( )</code>
+<div class="description short">
+<p>Gibt alle Parameter des Fomulars zurueck.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt alle Parameter des Fomulars zurueck.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getParam" id="_getParam">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getParam">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParam"></a><a href="source-class-rex_form_base.html?484,499#484" title="Go to source code">getParam</a>( <span>string <var>$name</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Gibt den Wert des Parameters $name zurueck, oder $default kein Parameter mit
+dem Namen exisitiert.</p>
+</div>
+<div class="description detailed hidden">
+<p>Gibt den Wert des Parameters $name zurueck, oder $default kein Parameter mit
+dem Namen exisitiert.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$default</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="addElement" id="_addElement">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_addElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addElement"></a><a href="source-class-rex_form_base.html?501,512#501" title="Go to source code">addElement</a>( <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$element</var></span> )</code>
+<div class="description short">
+<p>Allgemeine Bootleneck-Methode um Elemente in das Formular einzufuegen.</p>
+</div>
+<div class="description detailed hidden">
+<p>Allgemeine Bootleneck-Methode um Elemente in das Formular einzufuegen.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$element</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="createInput" id="_createInput">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_createInput">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/createInput"></a><a href="source-class-rex_form_base.html?514,534#514" title="Go to source code">createInput</a>( <span>string <var>$inputType</var></span>, <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Erstellt ein Input-Element anhand des Strings $inputType.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt ein Input-Element anhand des Strings $inputType.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$inputType</var></dt>
+<dd></dd>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="createElement" id="_createElement">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_createElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/createElement"></a><a href="source-class-rex_form_base.html?536,600#536" title="Go to source code">createElement</a>( <span>string <var>$tag</var></span>, <span>string <var>$name</var></span>, <span>mixed <var>$value</var></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<div class="description short">
+<p>Erstellt ein Input-Element anhand von $tag.</p>
+</div>
+<div class="description detailed hidden">
+<p>Erstellt ein Input-Element anhand von $tag.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$tag</var></dt>
+<dd></dd>
+<dt><var>$name</var></dt>
+<dd></dd>
+<dt><var>$value</var></dt>
+<dd></dd>
+<dt><var>$attributes</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getId" id="_getId">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getId">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getId"></a><a href="source-class-rex_form_base.html?602,605#602" title="Go to source code">getId</a>( <span>mixed <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getValue" id="_getValue">
+<td class="attributes"><code>
+				abstract protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_form_base.html#607" title="Go to source code">getValue</a>( <span>mixed <var>$name</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="setApplyUrl" id="_setApplyUrl">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setApplyUrl">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setApplyUrl"></a><a href="source-class-rex_form_base.html?609,619#609" title="Go to source code">setApplyUrl</a>( <span>mixed <var>$url</var></span> )</code>
+<div class="description short">
+<p>Setzt die Url die bei der apply-action genutzt wird.</p>
+</div>
+<div class="description detailed hidden">
+<p>Setzt die Url die bei der apply-action genutzt wird.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInputClassName" id="_getInputClassName">
+<td class="attributes"><code>
+				 public static
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInputClassName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInputClassName"></a><a href="source-class-rex_form_base.html?623,676#623" title="Go to source code">getInputClassName</a>( <span>string <var>$inputType</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$inputType</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInputTagName" id="_getInputTagName">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInputTagName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInputTagName"></a><a href="source-class-rex_form_base.html?678,707#678" title="Go to source code">getInputTagName</a>( <span>string <var>$inputType</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$inputType</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getInputAttributes" id="_getInputAttributes">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getInputAttributes">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getInputAttributes"></a><a href="source-class-rex_form_base.html?709,763#709" title="Go to source code">getInputAttributes</a>( <span>string <var>$inputType</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$inputType</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isHeaderElement" id="_isHeaderElement">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isHeaderElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isHeaderElement"></a><a href="source-class-rex_form_base.html?767,775#767" title="Go to source code">isHeaderElement</a>( <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$element</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$element</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isFooterElement" id="_isFooterElement">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isFooterElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isFooterElement"></a><a href="source-class-rex_form_base.html?777,785#777" title="Go to source code">isFooterElement</a>( <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$element</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$element</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isControlElement" id="_isControlElement">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isControlElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isControlElement"></a><a href="source-class-rex_form_base.html?787,795#787" title="Go to source code">isControlElement</a>( <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$element</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$element</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="isRawElement" id="_isRawElement">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_isRawElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isRawElement"></a><a href="source-class-rex_form_base.html?797,805#797" title="Go to source code">isRawElement</a>( <span><code><a href="class-rex_form_element.html">rex_form_element</a></code> <var>$element</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$element</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getHeaderElements" id="_getHeaderElements">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_form_element.html">rex_form_element</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getHeaderElements">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeaderElements"></a><a href="source-class-rex_form_base.html?807,821#807" title="Go to source code">getHeaderElements</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a>[]</code></code><br/>rex_form_element[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFooterElements" id="_getFooterElements">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_form_element.html">rex_form_element</a>[]</code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFooterElements">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFooterElements"></a><a href="source-class-rex_form_base.html?823,837#823" title="Go to source code">getFooterElements</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a>[]</code></code><br/>rex_form_element[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFieldsetName" id="_getFieldsetName">
+<td class="attributes"><code>
+				 protected 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFieldsetName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFieldsetName"></a><a href="source-class-rex_form_base.html?839,845#839" title="Go to source code">getFieldsetName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFieldsets" id="_getFieldsets">
+<td class="attributes"><code>
+				 protected 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFieldsets">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFieldsets"></a><a href="source-class-rex_form_base.html?847,857#847" title="Go to source code">getFieldsets</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getFieldsetElements" id="_getFieldsetElements">
+<td class="attributes"><code>
+				 protected 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getFieldsetElements">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFieldsetElements"></a><a href="source-class-rex_form_base.html?859,880#859" title="Go to source code">getFieldsetElements</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSaveElements" id="_getSaveElements">
+<td class="attributes"><code>
+				 protected 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSaveElements">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSaveElements"></a><a href="source-class-rex_form_base.html?882,903#882" title="Go to source code">getSaveElements</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getControlElement" id="_getControlElement">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_form_control_element.html">rex_form_control_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getControlElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getControlElement"></a><a href="source-class-rex_form_base.html?905,919#905" title="Go to source code">getControlElement</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_control_element.html">rex_form_control_element</a></code></code><br/>rex_form_control_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getElement" id="_getElement">
+<td class="attributes"><code>
+				 protected 
+				<code><a href="class-rex_form_element.html">rex_form_element</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getElement">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getElement"></a><a href="source-class-rex_form_base.html?921,932#921" title="Go to source code">getElement</a>( <span>string <var>$fieldsetName</var></span>, <span>string <var>$elementName</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$fieldsetName</var></dt>
+<dd></dd>
+<dt><var>$elementName</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_form_element.html">rex_form_element</a></code></code><br/>rex_form_element<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getName" id="_getName">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getName">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_form_base.html?953,959#953" title="Go to source code">getName</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setWarning" id="_setWarning">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setWarning">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setWarning"></a><a href="source-class-rex_form_base.html?961,964#961" title="Go to source code">setWarning</a>( <span>mixed <var>$warning</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getWarning" id="_getWarning">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getWarning">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWarning"></a><a href="source-class-rex_form_base.html?966,976#966" title="Go to source code">getWarning</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="setMessage" id="_setMessage">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_setMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setMessage"></a><a href="source-class-rex_form_base.html?978,981#978" title="Go to source code">setMessage</a>( <span>mixed <var>$message</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="getMessage" id="_getMessage">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getMessage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMessage"></a><a href="source-class-rex_form_base.html?983,993#983" title="Go to source code">getMessage</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="preView" id="_preView">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_preView">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preView"></a><a href="source-class-rex_form_base.html?995,1002#995" title="Go to source code">preView</a>( <span>mixed <var>$fieldsetName</var></span>, <span>mixed <var>$fieldName</var></span>, <span>mixed <var>$fieldValue</var></span> )</code>
+<div class="description short">
+<p>Callbackfunktion, damit in subklassen der Value noch beeinflusst werden kann
+wenn das Feld mit Datenbankwerten angezeigt wird.</p>
+</div>
+<div class="description detailed hidden">
+<p>Callbackfunktion, damit in subklassen der Value noch beeinflusst werden kann
+wenn das Feld mit Datenbankwerten angezeigt wird.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="fieldsetPostValues" id="_fieldsetPostValues">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_fieldsetPostValues">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/fieldsetPostValues"></a><a href="source-class-rex_form_base.html?1004,1015#1004" title="Go to source code">fieldsetPostValues</a>( <span>string <var>$fieldsetName</var></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$fieldsetName</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="elementPostValue" id="_elementPostValue">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_elementPostValue">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/elementPostValue"></a><a href="source-class-rex_form_base.html?1017,1036#1017" title="Go to source code">elementPostValue</a>( <span>string <var>$fieldsetName</var></span>, <span>string <var>$fieldName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$fieldsetName</var></dt>
+<dd></dd>
+<dt><var>$fieldName</var></dt>
+<dd></dd>
+<dt><var>$default</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="validate" id="_validate">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_validate">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/validate"></a><a href="source-class-rex_form_base.html?1038,1073#1038" title="Go to source code">validate</a>( )</code>
+<div class="description short">
+<p>Validiert die Eingaben. Gibt true zurück wenn alles ok war, false bei einem
+allgemeinen Fehler oder einen String mit einer Fehlermeldung.</p>
+</div>
+<div class="description detailed hidden">
+<p>Validiert die Eingaben. Gibt true zurück wenn alles ok war, false bei einem
+allgemeinen Fehler oder einen String mit einer Fehlermeldung.</p>
+<p>Eingaben sind via $el = $this-&gt;getElement($fieldSetName, $fieldName); $val
+= $el-&gt;getValue(); erreichbar.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="processPostValues" id="_processPostValues">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_processPostValues">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/processPostValues"></a><a href="source-class-rex_form_base.html?1075,1094#1075" title="Go to source code">processPostValues</a>( )</code>
+<div class="description short">
+<p>Übernimmt die POST-Werte in die FormElemente.</p>
+</div>
+<div class="description detailed hidden">
+<p>Übernimmt die POST-Werte in die FormElemente.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="save" id="_save">
+<td class="attributes"><code>
+				abstract protected 
+				boolean|string|integer
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_save">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/save"></a><a href="source-class-rex_form_base.html?1096,1101#1096" title="Go to source code">save</a>( )</code>
+<div class="description short">
+<p>Saves the form.</p>
+</div>
+<div class="description detailed hidden">
+<p>Saves the form.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean|string|integer</code><br/><code>true</code> on success, an error message or an error code otherwise<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="delete" id="_delete">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_delete">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/delete"></a><a href="source-class-rex_form_base.html?1103,1109#1103" title="Go to source code">delete</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="redirect" id="_redirect">
+<td class="attributes"><code>
+				 protected 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_redirect">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/redirect"></a><a href="source-class-rex_form_base.html?1111,1135#1111" title="Go to source code">redirect</a>( <span>mixed <var>$listMessage</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$listWarning</var> = <span class="php-quote">''</span></span>, <span>array <var>$params</var> = []</span> )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+<tr data-order="get" id="_get">
+<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_get">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_form_base.html?1137,1273#1137" title="Go to source code">get</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="show" id="_show">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_show">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/show"></a><a href="source-class-rex_form_base.html?1275,1278#1275" title="Go to source code">show</a>( )</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="name" id="$name">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24name"></a><a href="source-class-rex_form_base.html?8,9#8" title="Go to source code"><var>$name</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$name">#</a><code></code></div></td>
+</tr>
+<tr data-order="method" id="$method">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24method"></a><a href="source-class-rex_form_base.html?11,12#11" title="Go to source code"><var>$method</var></a>
+<div class="description short">
+<p>"get" or "post"</p>
+</div>
+<div class="description detailed hidden">
+<p>"get" or "post"</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$method">#</a><code></code></div></td>
+</tr>
+<tr data-order="fieldset" id="$fieldset">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24fieldset"></a><a href="source-class-rex_form_base.html?14,15#14" title="Go to source code"><var>$fieldset</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$fieldset">#</a><code></code></div></td>
+</tr>
+<tr data-order="elements" id="$elements">
+<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24elements"></a><a href="source-class-rex_form_base.html?17,18#17" title="Go to source code"><var>$elements</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$elements">#</a><code></code></div></td>
+</tr>
+<tr data-order="params" id="$params">
+<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24params"></a><a href="source-class-rex_form_base.html?20,21#20" title="Go to source code"><var>$params</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$params">#</a><code></code></div></td>
+</tr>
+<tr data-order="debug" id="$debug">
+<td class="attributes"><code>
+				protected  
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24debug"></a><a href="source-class-rex_form_base.html?23,24#23" title="Go to source code"><var>$debug</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$debug">#</a><code></code></div></td>
+</tr>
+<tr data-order="applyUrl" id="$applyUrl">
+<td class="attributes"><code>
+				protected  
+				null|string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24applyUrl"></a><a href="source-class-rex_form_base.html?26,27#26" title="Go to source code"><var>$applyUrl</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$applyUrl">#</a><code></code></div></td>
+</tr>
+<tr data-order="message" id="$message">
+<td class="attributes"><code>
+				protected  
+				null|string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24message"></a><a href="source-class-rex_form_base.html?29,30#29" title="Go to source code"><var>$message</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$message">#</a><code></code></div></td>
+</tr>
+<tr data-order="errorMessages" id="$errorMessages">
+<td class="attributes"><code>
+				protected  
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24errorMessages"></a><a href="source-class-rex_form_base.html?32,33#32" title="Go to source code"><var>$errorMessages</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$errorMessages">#</a><code></code></div></td>
+</tr>
+<tr data-order="warning" id="$warning">
+<td class="attributes"><code>
+				protected  
+				string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24warning"></a><a href="source-class-rex_form_base.html?35,36#35" title="Go to source code"><var>$warning</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$warning">#</a><code></code></div></td>
+</tr>
+<tr data-order="formId" id="$formId">
+<td class="attributes"><code>
+				protected  
+				null|string
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24formId"></a><a href="source-class-rex_form_base.html?38,39#38" title="Go to source code"><var>$formId</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$formId">#</a><code></code></div></td>
+</tr>
+</table>
+</div></body>
+</html>

@@ -237,26 +237,28 @@
 </span><span class="l" id="228">228                 <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>)) {
 </span><span class="l" id="229">229                     <span class="php-var">$value</span> = <span class="php-keyword2">implode</span>(<span class="php-quote">' '</span>, <span class="php-var">$value</span>);
 </span><span class="l" id="230">230                 }
-</span><span class="l" id="231">231                 <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$key</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'"'</span>;
-</span><span class="l" id="232">232             }
-</span><span class="l" id="233">233         }
-</span><span class="l" id="234">234 
-</span><span class="l" id="235">235         <span class="php-keyword1">return</span> <span class="php-var">$attr</span>;
-</span><span class="l" id="236">236     }
-</span><span class="l" id="237">237 
-</span><span class="l" id="238">238     <span class="php-comment">/**
-</span></span><span class="l" id="239">239 <span class="php-comment">     * Highlights a string.
-</span></span><span class="l" id="240">240 <span class="php-comment">     *
-</span></span><span class="l" id="241">241 <span class="php-comment">     * @param string $string
+</span><span class="l" id="231">231                 <span class="php-comment">// for bc reasons avoid double escaping of "&amp;", especially in already escaped urls</span>
+</span><span class="l" id="232">232                 <span class="php-var">$value</span> = <span class="php-keyword2">str_replace</span>(<span class="php-quote">'&amp;amp;'</span>, <span class="php-quote">'&amp;'</span>, <span class="php-var">$value</span>);
+</span><span class="l" id="233">233                 <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$key</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="234">234             }
+</span><span class="l" id="235">235         }
+</span><span class="l" id="236">236 
+</span><span class="l" id="237">237         <span class="php-keyword1">return</span> <span class="php-var">$attr</span>;
+</span><span class="l" id="238">238     }
+</span><span class="l" id="239">239 
+</span><span class="l" id="240">240     <span class="php-comment">/**
+</span></span><span class="l" id="241">241 <span class="php-comment">     * Highlights a string.
 </span></span><span class="l" id="242">242 <span class="php-comment">     *
-</span></span><span class="l" id="243">243 <span class="php-comment">     * @return string
-</span></span><span class="l" id="244">244 <span class="php-comment">     */</span>
-</span><span class="l" id="245">245     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> highlight(<span class="php-var">$string</span>)
-</span><span class="l" id="246">246     {
-</span><span class="l" id="247">247         <span class="php-var">$return</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">"\r"</span>, <span class="php-quote">"\n"</span>], [<span class="php-quote">''</span>, <span class="php-quote">''</span>], <span class="php-keyword2">highlight_string</span>(<span class="php-var">$string</span>, <span class="php-keyword1">true</span>));
-</span><span class="l" id="248">248         <span class="php-keyword1">return</span> <span class="php-quote">'&lt;pre class="rex-code"&gt;'</span> . <span class="php-var">$return</span> . <span class="php-quote">'&lt;/pre&gt;'</span>;
-</span><span class="l" id="249">249     }
-</span><span class="l" id="250">250 }
-</span><span class="l" id="251">251 </span></code></pre>
+</span></span><span class="l" id="243">243 <span class="php-comment">     * @param string $string
+</span></span><span class="l" id="244">244 <span class="php-comment">     *
+</span></span><span class="l" id="245">245 <span class="php-comment">     * @return string
+</span></span><span class="l" id="246">246 <span class="php-comment">     */</span>
+</span><span class="l" id="247">247     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> highlight(<span class="php-var">$string</span>)
+</span><span class="l" id="248">248     {
+</span><span class="l" id="249">249         <span class="php-var">$return</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">"\r"</span>, <span class="php-quote">"\n"</span>], [<span class="php-quote">''</span>, <span class="php-quote">''</span>], <span class="php-keyword2">highlight_string</span>(<span class="php-var">$string</span>, <span class="php-keyword1">true</span>));
+</span><span class="l" id="250">250         <span class="php-keyword1">return</span> <span class="php-quote">'&lt;pre class="rex-code"&gt;'</span> . <span class="php-var">$return</span> . <span class="php-quote">'&lt;/pre&gt;'</span>;
+</span><span class="l" id="251">251     }
+</span><span class="l" id="252">252 }
+</span><span class="l" id="253">253 </span></code></pre>
  </body>
 </html>

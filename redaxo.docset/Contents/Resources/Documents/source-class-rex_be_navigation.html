@@ -121,7 +121,7 @@
 </span><span class="l" id="112">112                 <span class="php-var">$n</span>[<span class="php-quote">'linkAttr'</span>][<span class="php-var">$name</span>] = <span class="php-keyword2">trim</span>(<span class="php-var">$value</span>);
 </span><span class="l" id="113">113             }
 </span><span class="l" id="114">114 
-</span><span class="l" id="115">115             <span class="php-var">$n</span>[<span class="php-quote">'href'</span>] = <span class="php-keyword2">str_replace</span>(<span class="php-quote">'&amp;'</span>, <span class="php-quote">'&amp;amp;'</span>, <span class="php-var">$page</span>-&gt;getHref());
+</span><span class="l" id="115">115             <span class="php-var">$n</span>[<span class="php-quote">'href'</span>] = <span class="php-var">$page</span>-&gt;getHref();
 </span><span class="l" id="116">116             <span class="php-var">$n</span>[<span class="php-quote">'title'</span>] = <span class="php-var">$page</span>-&gt;getTitle();
 </span><span class="l" id="117">117             <span class="php-var">$n</span>[<span class="php-quote">'active'</span>] = <span class="php-var">$page</span>-&gt;isActive();
 </span><span class="l" id="118">118 

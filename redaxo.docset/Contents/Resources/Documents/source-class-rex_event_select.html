@@ -148,7 +148,7 @@
 </span><span class="l" id="139">139             <span class="php-var">$error</span> = <span class="php-var">$e</span>-&gt;getMessage();
 </span><span class="l" id="140">140         }
 </span><span class="l" id="141">141 
-</span><span class="l" id="142">142         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$goon</span>) <span class="php-keyword1">and</span> <span class="php-var">$goon</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="142">142         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$goon</span>) &amp;&amp; <span class="php-var">$goon</span> != <span class="php-quote">''</span>) {
 </span><span class="l" id="143">143             <span class="php-var">$save</span> = <span class="php-quote">'0'</span>;
 </span><span class="l" id="144">144         } <span class="php-keyword1">else</span> {
 </span><span class="l" id="145">145             <span class="php-var">$function</span> = <span class="php-quote">''</span>;
@@ -262,7 +262,7 @@
 </span><span class="l" id="253">253         <span class="php-var">$formElements</span> = [];
 </span><span class="l" id="254">254         <span class="php-var">$n</span> = [];
 </span><span class="l" id="255">255         <span class="php-var">$n</span>[<span class="php-quote">'label'</span>] = <span class="php-quote">'&lt;label for="previewaction"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'input'</span>) . <span class="php-quote">'&lt;/label&gt;'</span>;
-</span><span class="l" id="256">256         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;textarea class="form-control" name="previewaction" id="previewaction"&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$previewaction</span>) . <span class="php-quote">'&lt;/textarea&gt;'</span>;
+</span><span class="l" id="256">256         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;textarea class="form-control" name="previewaction" id="previewaction" spellcheck="false"&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$previewaction</span>) . <span class="php-quote">'&lt;/textarea&gt;'</span>;
 </span><span class="l" id="257">257         <span class="php-var">$n</span>[<span class="php-quote">'note'</span>] = rex_i18n::msg(<span class="php-quote">'action_hint'</span>, <span class="php-quote">'&lt;var&gt;rex_article_action $this&lt;/var&gt;'</span>);
 </span><span class="l" id="258">258         <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
 </span><span class="l" id="259">259 
@@ -304,7 +304,7 @@
 </span><span class="l" id="295">295         <span class="php-var">$formElements</span> = [];
 </span><span class="l" id="296">296         <span class="php-var">$n</span> = [];
 </span><span class="l" id="297">297         <span class="php-var">$n</span>[<span class="php-quote">'label'</span>] = <span class="php-quote">'&lt;label for="presaveaction"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'input'</span>) . <span class="php-quote">'&lt;/label&gt;'</span>;
-</span><span class="l" id="298">298         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;textarea class="form-control" name="presaveaction" id="presaveaction"&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$presaveaction</span>) . <span class="php-quote">'&lt;/textarea&gt;'</span>;
+</span><span class="l" id="298">298         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;textarea class="form-control" name="presaveaction" id="presaveaction" spellcheck="false"&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$presaveaction</span>) . <span class="php-quote">'&lt;/textarea&gt;'</span>;
 </span><span class="l" id="299">299         <span class="php-var">$n</span>[<span class="php-quote">'note'</span>] = rex_i18n::msg(<span class="php-quote">'action_hint'</span>, <span class="php-quote">'&lt;var&gt;rex_article_action $this&lt;/var&gt;'</span>);
 </span><span class="l" id="300">300         <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
 </span><span class="l" id="301">301 
@@ -346,7 +346,7 @@
 </span><span class="l" id="337">337         <span class="php-var">$formElements</span> = [];
 </span><span class="l" id="338">338         <span class="php-var">$n</span> = [];
 </span><span class="l" id="339">339         <span class="php-var">$n</span>[<span class="php-quote">'label'</span>] = <span class="php-quote">'&lt;label for="postsaveaction"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'input'</span>) . <span class="php-quote">'&lt;/label&gt;'</span>;
-</span><span class="l" id="340">340         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;textarea class="form-control" name="postsaveaction" id="postsaveaction"&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$postsaveaction</span>) . <span class="php-quote">'&lt;/textarea&gt;'</span>;
+</span><span class="l" id="340">340         <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;textarea class="form-control" name="postsaveaction" id="postsaveaction" spellcheck="false"&gt;'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$postsaveaction</span>) . <span class="php-quote">'&lt;/textarea&gt;'</span>;
 </span><span class="l" id="341">341         <span class="php-var">$n</span>[<span class="php-quote">'note'</span>] = rex_i18n::msg(<span class="php-quote">'action_hint'</span>, <span class="php-quote">'&lt;var&gt;rex_article_action $this&lt;/var&gt;'</span>);
 </span><span class="l" id="342">342         <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
 </span><span class="l" id="343">343 

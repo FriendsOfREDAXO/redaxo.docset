@@ -16,7 +16,7 @@
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
 <b>Author:</b>
 				gharlan<br/>
-<b>Located at</b> <a href="source-class-rex.html#3-402" title="Go to source code">redaxo/src/core/lib/rex.php</a><br/>
+<b>Located at</b> <a href="source-class-rex.html#3-414" title="Go to source code">redaxo/src/core/lib/rex.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -430,7 +430,7 @@
 <tr data-order="getUser" id="_getUser">
 <td class="attributes"><code>
 				 public static
-				<code><a href="class-rex_user.html">rex_user</a></code>
+				null|<code><a href="class-rex_user.html">rex_user</a></code>
 </code>
 </td>
 <td class="name"><div>
@@ -443,7 +443,28 @@
 <p>Returns the current user.</p>
 <h4>Returns</h4>
 <div class="list">
-<code><code><a href="class-rex_user.html">rex_user</a></code></code><br/>rex_user<br/>
+<code>null|<code><a href="class-rex_user.html">rex_user</a></code></code><br/>null|rex_user<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getImpersonator" id="_getImpersonator">
+<td class="attributes"><code>
+				 public static
+				null|<code><a href="class-rex_user.html">rex_user</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getImpersonator">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getImpersonator"></a><a href="source-class-rex.html?271,281#271" title="Go to source code">getImpersonator</a>( )</code>
+<div class="description short">
+<p>Returns the current impersonator user.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the current impersonator user.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>null|<code><a href="class-rex_user.html">rex_user</a></code></code><br/>null|rex_user<br/>
 </div>
 </div>
 </div></td>
@@ -456,7 +477,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getConsole">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getConsole"></a><a href="source-class-rex.html?271,279#271" title="Go to source code">getConsole</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getConsole"></a><a href="source-class-rex.html?283,291#283" title="Go to source code">getConsole</a>( )</code>
 <div class="description short">
 <p>Returns the console application.</p>
 </div>
@@ -478,7 +499,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getServer">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getServer"></a><a href="source-class-rex.html?281,295#281" title="Go to source code">getServer</a>( <span>null|string <var>$protocol</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getServer"></a><a href="source-class-rex.html?293,307#293" title="Go to source code">getServer</a>( <span>null|string <var>$protocol</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Returns the server URL.</p>
 </div>
@@ -505,7 +526,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getServerName">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getServerName"></a><a href="source-class-rex.html?297,305#297" title="Go to source code">getServerName</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getServerName"></a><a href="source-class-rex.html?309,317#309" title="Go to source code">getServerName</a>( )</code>
 <div class="description short">
 <p>Returns the server name.</p>
 </div>
@@ -527,7 +548,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getErrorEmail">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getErrorEmail"></a><a href="source-class-rex.html?307,315#307" title="Go to source code">getErrorEmail</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getErrorEmail"></a><a href="source-class-rex.html?319,327#319" title="Go to source code">getErrorEmail</a>( )</code>
 <div class="description short">
 <p>Returns the error email.</p>
 </div>
@@ -549,7 +570,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getVersion">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersion"></a><a href="source-class-rex.html?317,332#317" title="Go to source code">getVersion</a>( <span>string <var>$format</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersion"></a><a href="source-class-rex.html?329,344#329" title="Go to source code">getVersion</a>( <span>string <var>$format</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Returns the redaxo version.</p>
 </div>
@@ -576,7 +597,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getVersionHash">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersionHash"></a><a href="source-class-rex.html?334,361#334" title="Go to source code">getVersionHash</a>( <span>string <var>$path</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersionHash"></a><a href="source-class-rex.html?346,373#346" title="Go to source code">getVersionHash</a>( <span>string <var>$path</var></span> )</code>
 <div class="description short">
 <p>Returns the current git version hash for the given path.</p>
 </div>
@@ -603,7 +624,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getAccesskey">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAccesskey"></a><a href="source-class-rex.html?363,381#363" title="Go to source code">getAccesskey</a>( <span>string <var>$title</var></span>, <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAccesskey"></a><a href="source-class-rex.html?375,393#375" title="Go to source code">getAccesskey</a>( <span>string <var>$title</var></span>, <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Returns the title tag and if the property "use_accesskeys" is true, the
 accesskey tag.</p>
@@ -634,7 +655,7 @@ accesskey tag.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getFilePerm">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFilePerm"></a><a href="source-class-rex.html?383,391#383" title="Go to source code">getFilePerm</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFilePerm"></a><a href="source-class-rex.html?395,403#395" title="Go to source code">getFilePerm</a>( )</code>
 <div class="description short">
 <p>Returns the file perm.</p>
 </div>
@@ -656,7 +677,7 @@ accesskey tag.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getDirPerm">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDirPerm"></a><a href="source-class-rex.html?393,401#393" title="Go to source code">getDirPerm</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDirPerm"></a><a href="source-class-rex.html?405,413#405" title="Go to source code">getDirPerm</a>( )</code>
 <div class="description short">
 <p>Returns the dir perm.</p>
 </div>
