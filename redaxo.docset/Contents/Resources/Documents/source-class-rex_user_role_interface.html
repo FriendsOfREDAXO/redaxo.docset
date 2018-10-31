@@ -7,43 +7,43 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"> 1 <span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"> 2 
-</span><span class="l" id="3"> 3 <span class="php-comment">/**
-</span></span><span class="l" id="4"> 4 <span class="php-comment"> * Interface for user roles.
-</span></span><span class="l" id="5"> 5 <span class="php-comment"> *
-</span></span><span class="l" id="6"> 6 <span class="php-comment"> * @author gharlan
-</span></span><span class="l" id="7"> 7 <span class="php-comment"> *
-</span></span><span class="l" id="8"> 8 <span class="php-comment"> * @package redaxo\core
-</span></span><span class="l" id="9"> 9 <span class="php-comment"> */</span>
-</span><span class="l" id="10">10 <span class="php-keyword1">interface</span> rex_user_role_interface
-</span><span class="l" id="11">11 {
-</span><span class="l" id="12">12     <span class="php-comment">/**
-</span></span><span class="l" id="13">13 <span class="php-comment">     * Returns if the role has the given permission.
-</span></span><span class="l" id="14">14 <span class="php-comment">     *
-</span></span><span class="l" id="15">15 <span class="php-comment">     * @param string $perm Perm key
-</span></span><span class="l" id="16">16 <span class="php-comment">     */</span>
-</span><span class="l" id="17">17     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> hasPerm(<span class="php-var">$perm</span>);
-</span><span class="l" id="18">18 
-</span><span class="l" id="19">19     <span class="php-comment">/**
-</span></span><span class="l" id="20">20 <span class="php-comment">     * Returns the complex perm.
-</span></span><span class="l" id="21">21 <span class="php-comment">     *
-</span></span><span class="l" id="22">22 <span class="php-comment">     * @param rex_user $user User instance
-</span></span><span class="l" id="23">23 <span class="php-comment">     * @param string   $key  Complex perm key
-</span></span><span class="l" id="24">24 <span class="php-comment">     *
-</span></span><span class="l" id="25">25 <span class="php-comment">     * @return rex_complex_perm Complex perm
-</span></span><span class="l" id="26">26 <span class="php-comment">     */</span>
-</span><span class="l" id="27">27     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getComplexPerm(rex_user <span class="php-var">$user</span>, <span class="php-var">$key</span>);
-</span><span class="l" id="28">28 
-</span><span class="l" id="29">29     <span class="php-comment">/**
-</span></span><span class="l" id="30">30 <span class="php-comment">     * Returns the role for the given ID.
-</span></span><span class="l" id="31">31 <span class="php-comment">     *
-</span></span><span class="l" id="32">32 <span class="php-comment">     * @param string $id IDs comma seperated
-</span></span><span class="l" id="33">33 <span class="php-comment">     *
-</span></span><span class="l" id="34">34 <span class="php-comment">     * @return static Role instance
-</span></span><span class="l" id="35">35 <span class="php-comment">     */</span>
-</span><span class="l" id="36">36     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> get(<span class="php-var">$id</span>);
-</span><span class="l" id="37">37 }
-</span><span class="l" id="38">38 </span></code></pre>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
+</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * Interface for user roles.
+</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> *
+</span></span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-comment"> * @author gharlan
+</span></span><span class="l" id="7"><a class="l" href="#7"> 7 </a><span class="php-comment"> *
+</span></span><span class="l" id="8"><a class="l" href="#8"> 8 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="9"><a class="l" href="#9"> 9 </a><span class="php-comment"> */</span>
+</span><span class="l" id="10"><a class="l" href="#10">10 </a><span class="php-keyword1">interface</span> <a href="#rex_user_role_interface" id="rex_user_role_interface">rex_user_role_interface</a>
+</span><span class="l" id="11"><a class="l" href="#11">11 </a>{
+</span><span class="l" id="12"><a class="l" href="#12">12 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="13"><a class="l" href="#13">13 </a><span class="php-comment">     * Returns if the role has the given permission.
+</span></span><span class="l" id="14"><a class="l" href="#14">14 </a><span class="php-comment">     *
+</span></span><span class="l" id="15"><a class="l" href="#15">15 </a><span class="php-comment">     * @param string $perm Perm key
+</span></span><span class="l" id="16"><a class="l" href="#16">16 </a><span class="php-comment">     */</span>
+</span><span class="l" id="17"><a class="l" href="#17">17 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_hasPerm" id="_hasPerm">hasPerm</a>(<span class="php-var">$perm</span>);
+</span><span class="l" id="18"><a class="l" href="#18">18 </a>
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="20"><a class="l" href="#20">20 </a><span class="php-comment">     * Returns the complex perm.
+</span></span><span class="l" id="21"><a class="l" href="#21">21 </a><span class="php-comment">     *
+</span></span><span class="l" id="22"><a class="l" href="#22">22 </a><span class="php-comment">     * @param rex_user $user User instance
+</span></span><span class="l" id="23"><a class="l" href="#23">23 </a><span class="php-comment">     * @param string   $key  Complex perm key
+</span></span><span class="l" id="24"><a class="l" href="#24">24 </a><span class="php-comment">     *
+</span></span><span class="l" id="25"><a class="l" href="#25">25 </a><span class="php-comment">     * @return rex_complex_perm Complex perm
+</span></span><span class="l" id="26"><a class="l" href="#26">26 </a><span class="php-comment">     */</span>
+</span><span class="l" id="27"><a class="l" href="#27">27 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getComplexPerm" id="_getComplexPerm">getComplexPerm</a>(rex_user <span class="php-var">$user</span>, <span class="php-var">$key</span>);
+</span><span class="l" id="28"><a class="l" href="#28">28 </a>
+</span><span class="l" id="29"><a class="l" href="#29">29 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="30"><a class="l" href="#30">30 </a><span class="php-comment">     * Returns the role for the given ID.
+</span></span><span class="l" id="31"><a class="l" href="#31">31 </a><span class="php-comment">     *
+</span></span><span class="l" id="32"><a class="l" href="#32">32 </a><span class="php-comment">     * @param string $id IDs comma seperated
+</span></span><span class="l" id="33"><a class="l" href="#33">33 </a><span class="php-comment">     *
+</span></span><span class="l" id="34"><a class="l" href="#34">34 </a><span class="php-comment">     * @return static Role instance
+</span></span><span class="l" id="35"><a class="l" href="#35">35 </a><span class="php-comment">     */</span>
+</span><span class="l" id="36"><a class="l" href="#36">36 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_get" id="_get">get</a>(<span class="php-var">$id</span>);
+</span><span class="l" id="37"><a class="l" href="#37">37 </a>}
+</span><span class="l" id="38"><a class="l" href="#38">38 </a></span></code></pre>
  </body>
 </html>

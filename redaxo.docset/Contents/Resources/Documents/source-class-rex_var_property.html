@@ -7,35 +7,35 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"> 1 <span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"> 2 
-</span><span class="l" id="3"> 3 <span class="php-comment">/**
-</span></span><span class="l" id="4"> 4 <span class="php-comment"> * REX_PROPERTY[key=xzy].
-</span></span><span class="l" id="5"> 5 <span class="php-comment"> *
-</span></span><span class="l" id="6"> 6 <span class="php-comment"> * Arguments:
-</span></span><span class="l" id="7"> 7 <span class="php-comment"> *   - key
-</span></span><span class="l" id="8"> 8 <span class="php-comment"> *   - namespace
-</span></span><span class="l" id="9"> 9 <span class="php-comment"> *
-</span></span><span class="l" id="10">10 <span class="php-comment"> * @author gharlan
-</span></span><span class="l" id="11">11 <span class="php-comment"> *
-</span></span><span class="l" id="12">12 <span class="php-comment"> * @package redaxo\core
-</span></span><span class="l" id="13">13 <span class="php-comment"> */</span>
-</span><span class="l" id="14">14 <span class="php-keyword1">class</span> rex_var_property <span class="php-keyword1">extends</span> rex_var
-</span><span class="l" id="15">15 {
-</span><span class="l" id="16">16     <span class="php-comment">/**
-</span></span><span class="l" id="17">17 <span class="php-comment">     * {@inheritdoc}
-</span></span><span class="l" id="18">18 <span class="php-comment">     */</span>
-</span><span class="l" id="19">19     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> getOutput()
-</span><span class="l" id="20">20     {
-</span><span class="l" id="21">21         <span class="php-var">$key</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'key'</span>, <span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>);
-</span><span class="l" id="22">22         <span class="php-keyword1">if</span> (<span class="php-var">$key</span> === <span class="php-keyword1">null</span>) {
-</span><span class="l" id="23">23             <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="24">24         }
-</span><span class="l" id="25">25         <span class="php-var">$namespace</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'namespace'</span>);
-</span><span class="l" id="26">26         <span class="php-var">$base</span> = <span class="php-var">$namespace</span> ? <span class="php-quote">'rex_package::get('</span> . <span class="php-var">$namespace</span> . <span class="php-quote">')-&gt;'</span> : <span class="php-quote">'rex::'</span>;
-</span><span class="l" id="27">27         <span class="php-keyword1">return</span> <span class="php-quote">'htmlspecialchars('</span> . <span class="php-var">$base</span> . <span class="php-quote">'getProperty('</span> . <span class="php-var">$key</span> . <span class="php-quote">'))'</span>;
-</span><span class="l" id="28">28     }
-</span><span class="l" id="29">29 }
-</span><span class="l" id="30">30 </span></code></pre>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
+</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * REX_PROPERTY[key=xzy].
+</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> *
+</span></span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-comment"> * Arguments:
+</span></span><span class="l" id="7"><a class="l" href="#7"> 7 </a><span class="php-comment"> *   - key
+</span></span><span class="l" id="8"><a class="l" href="#8"> 8 </a><span class="php-comment"> *   - namespace
+</span></span><span class="l" id="9"><a class="l" href="#9"> 9 </a><span class="php-comment"> *
+</span></span><span class="l" id="10"><a class="l" href="#10">10 </a><span class="php-comment"> * @author gharlan
+</span></span><span class="l" id="11"><a class="l" href="#11">11 </a><span class="php-comment"> *
+</span></span><span class="l" id="12"><a class="l" href="#12">12 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="13"><a class="l" href="#13">13 </a><span class="php-comment"> */</span>
+</span><span class="l" id="14"><a class="l" href="#14">14 </a><span class="php-keyword1">class</span> <a href="#rex_var_property" id="rex_var_property">rex_var_property</a> <span class="php-keyword1">extends</span> rex_var
+</span><span class="l" id="15"><a class="l" href="#15">15 </a>{
+</span><span class="l" id="16"><a class="l" href="#16">16 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="17"><a class="l" href="#17">17 </a><span class="php-comment">     * {@inheritdoc}
+</span></span><span class="l" id="18"><a class="l" href="#18">18 </a><span class="php-comment">     */</span>
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getOutput" id="_getOutput">getOutput</a>()
+</span><span class="l" id="20"><a class="l" href="#20">20 </a>    {
+</span><span class="l" id="21"><a class="l" href="#21">21 </a>        <span class="php-var">$key</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'key'</span>, <span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="22"><a class="l" href="#22">22 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$key</span> === <span class="php-keyword1">null</span>) {
+</span><span class="l" id="23"><a class="l" href="#23">23 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="24"><a class="l" href="#24">24 </a>        }
+</span><span class="l" id="25"><a class="l" href="#25">25 </a>        <span class="php-var">$namespace</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'namespace'</span>);
+</span><span class="l" id="26"><a class="l" href="#26">26 </a>        <span class="php-var">$base</span> = <span class="php-var">$namespace</span> ? <span class="php-quote">'rex_package::get('</span> . <span class="php-var">$namespace</span> . <span class="php-quote">')-&gt;'</span> : <span class="php-quote">'rex::'</span>;
+</span><span class="l" id="27"><a class="l" href="#27">27 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'htmlspecialchars('</span> . <span class="php-var">$base</span> . <span class="php-quote">'getProperty('</span> . <span class="php-var">$key</span> . <span class="php-quote">'))'</span>;
+</span><span class="l" id="28"><a class="l" href="#28">28 </a>    }
+</span><span class="l" id="29"><a class="l" href="#29">29 </a>}
+</span><span class="l" id="30"><a class="l" href="#30">30 </a></span></code></pre>
  </body>
 </html>

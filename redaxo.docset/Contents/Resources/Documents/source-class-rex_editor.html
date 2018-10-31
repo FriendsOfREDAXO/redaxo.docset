@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="../Assets/css/styles.css" rel="stylesheet"/>
+  <script src="../Assets/js/script.js">
+  </script>
+ </head>
+ <body>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
+</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> */</span>
+</span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-keyword1">class</span> <a href="#rex_editor" id="rex_editor">rex_editor</a>
+</span><span class="l" id="7"><a class="l" href="#7"> 7 </a>{
+</span><span class="l" id="8"><a class="l" href="#8"> 8 </a>    <span class="php-keyword1">use</span> rex_factory_trait;
+</span><span class="l" id="9"><a class="l" href="#9"> 9 </a>
+</span><span class="l" id="10"><a class="l" href="#10">10 </a>    <span class="php-comment">// see https://github.com/filp/whoops/blob/master/docs/Open%20Files%20In%20An%20Editor.md</span>
+</span><span class="l" id="11"><a class="l" href="#11">11 </a>    <span class="php-comment">// keep this list in sync with the array in getSupportedEditors()</span>
+</span><span class="l" id="12"><a class="l" href="#12">12 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$editors" id="$editors">$editors</a></span> = [
+</span><span class="l" id="13"><a class="l" href="#13">13 </a>        <span class="php-quote">'atom'</span> =&gt; <span class="php-quote">'atom://core/open/file?filename=%f&amp;line=%l'</span>,
+</span><span class="l" id="14"><a class="l" href="#14">14 </a>        <span class="php-quote">'emacs'</span> =&gt; <span class="php-quote">'emacs://open?url=file://%f&amp;line=%l'</span>,
+</span><span class="l" id="15"><a class="l" href="#15">15 </a>        <span class="php-quote">'idea'</span> =&gt; <span class="php-quote">'idea://open?file=%f&amp;line=%l'</span>,
+</span><span class="l" id="16"><a class="l" href="#16">16 </a>        <span class="php-quote">'macvim'</span> =&gt; <span class="php-quote">'mvim://open/?url=file://%f&amp;line=%l'</span>,
+</span><span class="l" id="17"><a class="l" href="#17">17 </a>        <span class="php-quote">'phpstorm'</span> =&gt; <span class="php-quote">'phpstorm://open?file=%f&amp;line=%l'</span>,
+</span><span class="l" id="18"><a class="l" href="#18">18 </a>        <span class="php-quote">'sublime'</span> =&gt; <span class="php-quote">'subl://open?url=file://%f&amp;line=%l'</span>,
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>        <span class="php-quote">'textmate'</span> =&gt; <span class="php-quote">'txmt://open?url=file://%f&amp;line=%l'</span>,
+</span><span class="l" id="20"><a class="l" href="#20">20 </a>        <span class="php-quote">'vscode'</span> =&gt; <span class="php-quote">'vscode://file/%f:%l'</span>,
+</span><span class="l" id="21"><a class="l" href="#21">21 </a>    ];
+</span><span class="l" id="22"><a class="l" href="#22">22 </a>
+</span><span class="l" id="23"><a class="l" href="#23">23 </a>    <span class="php-comment">// we expect instantiation via factory()</span>
+</span><span class="l" id="24"><a class="l" href="#24">24 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#___construct" id="___construct">__construct</a>()
+</span><span class="l" id="25"><a class="l" href="#25">25 </a>    {
+</span><span class="l" id="26"><a class="l" href="#26">26 </a>    }
+</span><span class="l" id="27"><a class="l" href="#27">27 </a>
+</span><span class="l" id="28"><a class="l" href="#28">28 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="29"><a class="l" href="#29">29 </a><span class="php-comment">     * Creates a rex_editor instance.
+</span></span><span class="l" id="30"><a class="l" href="#30">30 </a><span class="php-comment">     *
+</span></span><span class="l" id="31"><a class="l" href="#31">31 </a><span class="php-comment">     * @return static Returns a rex_editor instance
+</span></span><span class="l" id="32"><a class="l" href="#32">32 </a><span class="php-comment">     */</span>
+</span><span class="l" id="33"><a class="l" href="#33">33 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_factory" id="_factory">factory</a>()
+</span><span class="l" id="34"><a class="l" href="#34">34 </a>    {
+</span><span class="l" id="35"><a class="l" href="#35">35 </a>        <span class="php-var">$class</span> = <span class="php-keyword1">static</span>::getFactoryClass();
+</span><span class="l" id="36"><a class="l" href="#36">36 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> <span class="php-var">$class</span>();
+</span><span class="l" id="37"><a class="l" href="#37">37 </a>    }
+</span><span class="l" id="38"><a class="l" href="#38">38 </a>
+</span><span class="l" id="39"><a class="l" href="#39">39 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getUrl" id="_getUrl">getUrl</a>(<span class="php-var">$filePath</span>, <span class="php-var">$line</span>)
+</span><span class="l" id="40"><a class="l" href="#40">40 </a>    {
+</span><span class="l" id="41"><a class="l" href="#41">41 </a>        <span class="php-var">$editor</span> = rex::getProperty(<span class="php-quote">'editor'</span>);
+</span><span class="l" id="42"><a class="l" href="#42">42 </a>
+</span><span class="l" id="43"><a class="l" href="#43">43 </a>        <span class="php-var">$editorUrl</span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="44"><a class="l" href="#44">44 </a>
+</span><span class="l" id="45"><a class="l" href="#45">45 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$filePath</span>, <span class="php-quote">'://'</span>)) {
+</span><span class="l" id="46"><a class="l" href="#46">46 </a>            <span class="php-comment">// don't provide editor urls for paths containing "://", like "rex://..."</span>
+</span><span class="l" id="47"><a class="l" href="#47">47 </a>            <span class="php-comment">// but they can be converted into an url by the extension point below</span>
+</span><span class="l" id="48"><a class="l" href="#48">48 </a>        } <span class="php-keyword1">elseif</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;editors[<span class="php-var">$editor</span>]) || <span class="php-quote">'xdebug'</span> === <span class="php-var">$editor</span>) {
+</span><span class="l" id="49"><a class="l" href="#49">49 </a>            <span class="php-keyword1">if</span> (<span class="php-quote">'xdebug'</span> === <span class="php-var">$editor</span>) {
+</span><span class="l" id="50"><a class="l" href="#50">50 </a>                <span class="php-comment">// if xdebug is not enabled, use `get_cfg_var` to get the value directly from php.ini</span>
+</span><span class="l" id="51"><a class="l" href="#51">51 </a>                <span class="php-var">$editorUrl</span> = <span class="php-keyword2">ini_get</span>(<span class="php-quote">'xdebug.file_link_format'</span>) ?: <span class="php-keyword2">get_cfg_var</span>(<span class="php-quote">'xdebug.file_link_format'</span>);
+</span><span class="l" id="52"><a class="l" href="#52">52 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="53"><a class="l" href="#53">53 </a>                <span class="php-var">$editorUrl</span> = <span class="php-var">$this</span>-&gt;editors[<span class="php-var">$editor</span>];
+</span><span class="l" id="54"><a class="l" href="#54">54 </a>            }
+</span><span class="l" id="55"><a class="l" href="#55">55 </a>
+</span><span class="l" id="56"><a class="l" href="#56">56 </a>            <span class="php-var">$editorUrl</span> = <span class="php-keyword2">str_replace</span>(<span class="php-quote">'%l'</span>, <span class="php-var">$line</span>, <span class="php-var">$editorUrl</span>);
+</span><span class="l" id="57"><a class="l" href="#57">57 </a>            <span class="php-var">$editorUrl</span> = <span class="php-keyword2">str_replace</span>(<span class="php-quote">'%f'</span>, <span class="php-var">$filePath</span>, <span class="php-var">$editorUrl</span>);
+</span><span class="l" id="58"><a class="l" href="#58">58 </a>        }
+</span><span class="l" id="59"><a class="l" href="#59">59 </a>
+</span><span class="l" id="60"><a class="l" href="#60">60 </a>        <span class="php-var">$editorUrl</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'EDITOR_URL'</span>, <span class="php-var">$editorUrl</span>, [
+</span><span class="l" id="61"><a class="l" href="#61">61 </a>            <span class="php-quote">'file'</span> =&gt; <span class="php-var">$filePath</span>,
+</span><span class="l" id="62"><a class="l" href="#62">62 </a>            <span class="php-quote">'line'</span> =&gt; <span class="php-var">$line</span>,
+</span><span class="l" id="63"><a class="l" href="#63">63 </a>        ]));
+</span><span class="l" id="64"><a class="l" href="#64">64 </a>
+</span><span class="l" id="65"><a class="l" href="#65">65 </a>        <span class="php-keyword1">return</span> <span class="php-var">$editorUrl</span>;
+</span><span class="l" id="66"><a class="l" href="#66">66 </a>    }
+</span><span class="l" id="67"><a class="l" href="#67">67 </a>
+</span><span class="l" id="68"><a class="l" href="#68">68 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getSupportedEditors" id="_getSupportedEditors">getSupportedEditors</a>()
+</span><span class="l" id="69"><a class="l" href="#69">69 </a>    {
+</span><span class="l" id="70"><a class="l" href="#70">70 </a>        <span class="php-keyword1">return</span> [
+</span><span class="l" id="71"><a class="l" href="#71">71 </a>            <span class="php-quote">'atom'</span> =&gt; <span class="php-quote">'Atom'</span>,
+</span><span class="l" id="72"><a class="l" href="#72">72 </a>            <span class="php-quote">'emacs'</span> =&gt; <span class="php-quote">'Emacs'</span>,
+</span><span class="l" id="73"><a class="l" href="#73">73 </a>            <span class="php-quote">'idea'</span> =&gt; <span class="php-quote">'IDEA'</span>,
+</span><span class="l" id="74"><a class="l" href="#74">74 </a>            <span class="php-quote">'macvim'</span> =&gt; <span class="php-quote">'MacVim'</span>,
+</span><span class="l" id="75"><a class="l" href="#75">75 </a>            <span class="php-quote">'phpstorm'</span> =&gt; <span class="php-quote">'PhpStorm'</span>,
+</span><span class="l" id="76"><a class="l" href="#76">76 </a>            <span class="php-quote">'sublime'</span> =&gt; <span class="php-quote">'Sublime Text'</span>,
+</span><span class="l" id="77"><a class="l" href="#77">77 </a>            <span class="php-quote">'textmate'</span> =&gt; <span class="php-quote">'Textmate'</span>,
+</span><span class="l" id="78"><a class="l" href="#78">78 </a>            <span class="php-quote">'vscode'</span> =&gt; <span class="php-quote">'Visual Studio Code'</span>,
+</span><span class="l" id="79"><a class="l" href="#79">79 </a>            <span class="php-quote">'xdebug'</span> =&gt; <span class="php-quote">'Xdebug via xdebug.file_link_format (php.ini)'</span>,
+</span><span class="l" id="80"><a class="l" href="#80">80 </a>        ];
+</span><span class="l" id="81"><a class="l" href="#81">81 </a>    }
+</span><span class="l" id="82"><a class="l" href="#82">82 </a>}
+</span><span class="l" id="83"><a class="l" href="#83">83 </a></span></code></pre>
+ </body>
+</html>

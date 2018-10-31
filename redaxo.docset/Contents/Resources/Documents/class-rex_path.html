@@ -16,7 +16,7 @@
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
 <b>Author:</b>
 				gharlan<br/>
-<b>Located at</b> <a href="source-class-rex_path.html#3-359" title="Go to source code">redaxo/src/core/lib/util/path.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_path.html#3-389" title="Go to source code">redaxo/src/core/lib/util/path.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -721,6 +721,36 @@ addon.</p>
 </div>
 </div></td>
 </tr>
+<tr data-order="relative" id="_relative">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_relative">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/relative"></a><a href="source-class-rex_path.html?344,372#344" title="Go to source code">relative</a>( <span>string <var>$absPath</var></span>, <span>null|string <var>$basePath</var> = <span class="php-keyword1">null</span></span> )</code>
+<div class="description short">
+<p>Converts an absolute path to a relative one.</p>
+</div>
+<div class="description detailed hidden">
+<p>Converts an absolute path to a relative one.</p>
+<p>If the path is outside of the base path, the absolute path will be kept.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$absPath</var></dt>
+<dd></dd>
+<dt><var>$basePath</var></dt>
+<dd>Defaults to &lt;code&gt;rex_path::base()&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
+</div>
+</div>
+</div></td>
+</tr>
 <tr data-order="basename" id="_basename">
 <td class="attributes"><code>
 				 public static
@@ -730,7 +760,7 @@ addon.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_basename">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/basename"></a><a href="source-class-rex_path.html?344,358#344" title="Go to source code">basename</a>( <span>string <var>$path</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/basename"></a><a href="source-class-rex_path.html?374,388#374" title="Go to source code">basename</a>( <span>string <var>$path</var></span> )</code>
 <div class="description short">
 <p>Returns the basename (filename) of the path independent of directory
 separator (/ or ).</p>

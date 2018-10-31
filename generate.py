@@ -33,12 +33,17 @@ cur.execute("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);")
 # API-Daten in DB eintragen
 
 categories = soup.find(id="elements").find_all("h3")
+packages = soup.find(id="packages").find_all("a")
+
+
 entry_types = {
     "Classes": "Class",
     "Interfaces": "Interface",
     "Traits": "Trait",
     "Exceptions": "Exception",
     "Functions": "Function",
+    "Packages": "Package",
+    "Guides": "Guide",
 }
 chapters = {"methods": "Method", "constants": "Constant", "properties": "Property"}
 api_docs = []
@@ -60,7 +65,17 @@ for cat in categories:
             conn.commit()
             api_docs.append(link["href"])
 
+for package in packages:
+    cur.execute(
+        'INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?,"Packages",?)',
+        (package.contents[0], package["href"]),
+    )
+    conn.commit()
+    api_docs.append(package["href"])
+
 conn.close()
+
+# exit()
 
 categories_list = [cat.contents[0] for cat in categories]
 print(

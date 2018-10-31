@@ -14,7 +14,7 @@
 </div>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_i18n.html#3-351" title="Go to source code">redaxo/src/core/lib/util/i18n.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_i18n.html#3-421" title="Go to source code">redaxo/src/core/lib/util/i18n.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -27,7 +27,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setLocale">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setLocale"></a><a href="source-class-rex_i18n.html?16,47#16" title="Go to source code">setLocale</a>( <span>string <var>$locale</var></span>, <span>boolean <var>$phpSetLocale</var> = <span class="php-keyword1">true</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setLocale"></a><a href="source-class-rex_i18n.html?22,53#22" title="Go to source code">setLocale</a>( <span>string <var>$locale</var></span>, <span>boolean <var>$phpSetLocale</var> = <span class="php-keyword1">true</span></span> )</code>
 <div class="description short">
 <p>Switches the current locale.</p>
 </div>
@@ -56,15 +56,37 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getLocale">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLocale"></a><a href="source-class-rex_i18n.html?49,57#49" title="Go to source code">getLocale</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLocale"></a><a href="source-class-rex_i18n.html?55,63#55" title="Go to source code">getLocale</a>( )</code>
 <div class="description short">
-<p>Returns the current locale.</p>
+<p>Returns the current locale, e.g. de_de.</p>
 </div>
 <div class="description detailed hidden">
-<p>Returns the current locale.</p>
+<p>Returns the current locale, e.g. de_de.</p>
 <h4>Returns</h4>
 <div class="list">
 <code>string</code><br/>The current locale<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getLanguage" id="_getLanguage">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getLanguage">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLanguage"></a><a href="source-class-rex_i18n.html?65,74#65" title="Go to source code">getLanguage</a>( )</code>
+<div class="description short">
+<p>Returns the current language, e.g. "de".</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the current language, e.g. "de".</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>The current language<br/>
 </div>
 </div>
 </div></td>
@@ -78,7 +100,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addDirectory">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addDirectory"></a><a href="source-class-rex_i18n.html?59,77#59" title="Go to source code">addDirectory</a>( <span>string <var>$dir</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addDirectory"></a><a href="source-class-rex_i18n.html?76,94#76" title="Go to source code">addDirectory</a>( <span>string <var>$dir</var></span> )</code>
 <div class="description short">
 <p>Adds a directory with lang files.</p>
 </div>
@@ -101,7 +123,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_msg">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/msg"></a><a href="source-class-rex_i18n.html?79,89#79" title="Go to source code">msg</a>( <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/msg"></a><a href="source-class-rex_i18n.html?96,107#96" title="Go to source code">msg</a>( <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Returns the translation htmlspecialchared for the given key.</p>
 </div>
@@ -110,7 +132,7 @@
 <h4>Parameters</h4>
 <div class="list"><dl>
 <dt><var>$key</var></dt>
-<dd>Key</dd>
+<dd>A Language-Key</dd>
 </dl></div>
 <h4>Returns</h4>
 <div class="list">
@@ -128,7 +150,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_rawMsg">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/rawMsg"></a><a href="source-class-rex_i18n.html?91,101#91" title="Go to source code">rawMsg</a>( <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/rawMsg"></a><a href="source-class-rex_i18n.html?109,120#109" title="Go to source code">rawMsg</a>( <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Returns the translation for the given key.</p>
 </div>
@@ -137,7 +159,65 @@
 <h4>Parameters</h4>
 <div class="list"><dl>
 <dt><var>$key</var></dt>
-<dd>Key</dd>
+<dd>A Language-Key</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Translation for the key<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="msgInLocale" id="_msgInLocale">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_msgInLocale">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/msgInLocale"></a><a href="source-class-rex_i18n.html?122,138#122" title="Go to source code">msgInLocale</a>( <span>string <var>$key</var></span>, <span>string <var>$locale</var></span> )</code>
+<div class="description short">
+<p>Returns the translation htmlspecialchared for the given key and locale.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the translation htmlspecialchared for the given key and locale.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>A Language-Key</dd>
+<dt><var>$locale</var></dt>
+<dd>A Locale</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>Translation for the key<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="rawMsgInLocale" id="_rawMsgInLocale">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_rawMsgInLocale">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/rawMsgInLocale"></a><a href="source-class-rex_i18n.html?140,156#140" title="Go to source code">rawMsgInLocale</a>( <span>string <var>$key</var></span>, <span>string <var>$locale</var></span> )</code>
+<div class="description short">
+<p>Returns the translation for the given key and locale.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the translation for the given key and locale.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$key</var></dt>
+<dd>A Language-Key</dd>
+<dt><var>$locale</var></dt>
+<dd>A Locale</dd>
 </dl></div>
 <h4>Returns</h4>
 <div class="list">
@@ -155,7 +235,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_hasMsg">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasMsg"></a><a href="source-class-rex_i18n.html?186,196#186" title="Go to source code">hasMsg</a>( <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasMsg"></a><a href="source-class-rex_i18n.html?197,207#197" title="Go to source code">hasMsg</a>( <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Checks if there is a translation for the given key.</p>
 </div>
@@ -182,7 +262,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_hasMsgOrFallback">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasMsgOrFallback"></a><a href="source-class-rex_i18n.html?198,226#198" title="Go to source code">hasMsgOrFallback</a>( <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasMsgOrFallback"></a><a href="source-class-rex_i18n.html?260,288#260" title="Go to source code">hasMsgOrFallback</a>( <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Checks if there is a translation for the given key in current language or any
 fallback language.</p>
@@ -211,7 +291,7 @@ fallback language.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addMsg">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addMsg"></a><a href="source-class-rex_i18n.html?228,237#228" title="Go to source code">addMsg</a>( <span>string <var>$key</var></span>, <span>string <var>$msg</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addMsg"></a><a href="source-class-rex_i18n.html?290,299#290" title="Go to source code">addMsg</a>( <span>string <var>$key</var></span>, <span>string <var>$msg</var></span> )</code>
 <div class="description short">
 <p>Adds a new translation to the catalogue.</p>
 </div>
@@ -236,7 +316,7 @@ fallback language.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getLocales">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLocales"></a><a href="source-class-rex_i18n.html?239,257#239" title="Go to source code">getLocales</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLocales"></a><a href="source-class-rex_i18n.html?301,319#301" title="Go to source code">getLocales</a>( )</code>
 <div class="description short">
 <p>Returns the locales.</p>
 </div>
@@ -258,7 +338,7 @@ fallback language.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_translate">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/translate"></a><a href="source-class-rex_i18n.html?259,288#259" title="Go to source code">translate</a>( <span>string <var>$text</var></span>, <span>boolean <var>$use_htmlspecialchars</var> = <span class="php-keyword1">true</span></span>, <span>callable <var>$i18nFunction</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/translate"></a><a href="source-class-rex_i18n.html?321,354#321" title="Go to source code">translate</a>( <span>string <var>$text</var></span>, <span>boolean <var>$use_htmlspecialchars</var> = <span class="php-keyword1">true</span></span>, <span>callable <var>$i18nFunction</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Translates the $text, if it begins with 'translate:', else it returns
 $text.</p>
@@ -295,7 +375,7 @@ $text.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_translateArray">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/translateArray"></a><a href="source-class-rex_i18n.html?290,316#290" title="Go to source code">translateArray</a>( <span>mixed <var>$array</var></span>, <span>boolean <var>$use_htmlspecialchars</var> = <span class="php-keyword1">true</span></span>, <span>callable <var>$i18nFunction</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/translateArray"></a><a href="source-class-rex_i18n.html?356,386#356" title="Go to source code">translateArray</a>( <span>mixed <var>$array</var></span>, <span>boolean <var>$use_htmlspecialchars</var> = <span class="php-keyword1">true</span></span>, <span>callable <var>$i18nFunction</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Translates all array elements.</p>
 </div>

@@ -7,47 +7,47 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1"> 1 <span class="xlang">&lt;?php</span>
-</span><span class="l" id="2"> 2 
-</span><span class="l" id="3"> 3 <span class="php-keyword1">class</span> rex_effect_filter_brightness <span class="php-keyword1">extends</span> rex_effect_abstract
-</span><span class="l" id="4"> 4 {
-</span><span class="l" id="5"> 5     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> execute()
-</span><span class="l" id="6"> 6     {
-</span><span class="l" id="7"> 7         <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = (int) <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>];
-</span><span class="l" id="8"> 8         <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>]) {
-</span><span class="l" id="9"> 9             <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = <span class="php-num">0</span>;
-</span><span class="l" id="10">10         }
-</span><span class="l" id="11">11         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] &lt; -<span class="php-num">255</span>) {
-</span><span class="l" id="12">12             <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = -<span class="php-num">255</span>;
-</span><span class="l" id="13">13         }
-</span><span class="l" id="14">14         <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] &gt; <span class="php-num">255</span>) {
-</span><span class="l" id="15">15             <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = <span class="php-num">255</span>;
-</span><span class="l" id="16">16         }
-</span><span class="l" id="17">17         <span class="php-var">$this</span>-&gt;media-&gt;asImage();
-</span><span class="l" id="18">18         <span class="php-var">$img</span> = <span class="php-var">$this</span>-&gt;media-&gt;getImage();
-</span><span class="l" id="19">19 
-</span><span class="l" id="20">20         <span class="php-keyword2">imagefilter</span>(<span class="php-var">$img</span>, IMG_FILTER_BRIGHTNESS, <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>]);
-</span><span class="l" id="21">21         <span class="php-var">$this</span>-&gt;media-&gt;setImage(<span class="php-var">$img</span>);
-</span><span class="l" id="22">22     }
-</span><span class="l" id="23">23 
-</span><span class="l" id="24">24     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getName()
-</span><span class="l" id="25">25     {
-</span><span class="l" id="26">26         <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'media_manager_effect_brightness'</span>);
-</span><span class="l" id="27">27     }
-</span><span class="l" id="28">28 
-</span><span class="l" id="29">29     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getParams()
-</span><span class="l" id="30">30     {
-</span><span class="l" id="31">31         <span class="php-keyword1">return</span> [
-</span><span class="l" id="32">32             [
-</span><span class="l" id="33">33                 <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_brightness_value'</span>),
-</span><span class="l" id="34">34                 <span class="php-quote">'notice'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_brightness_notice'</span>),
-</span><span class="l" id="35">35                 <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'brightness'</span>,
-</span><span class="l" id="36">36                 <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'int'</span>,
-</span><span class="l" id="37">37                 <span class="php-quote">'default'</span> =&gt; <span class="php-quote">''</span>,
-</span><span class="l" id="38">38             ],
-</span><span class="l" id="39">39         ];
-</span><span class="l" id="40">40     }
-</span><span class="l" id="41">41 }
-</span><span class="l" id="42">42 </span></code></pre>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
+</span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-keyword1">class</span> <a href="#rex_effect_filter_brightness" id="rex_effect_filter_brightness">rex_effect_filter_brightness</a> <span class="php-keyword1">extends</span> rex_effect_abstract
+</span><span class="l" id="4"><a class="l" href="#4"> 4 </a>{
+</span><span class="l" id="5"><a class="l" href="#5"> 5 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_execute" id="_execute">execute</a>()
+</span><span class="l" id="6"><a class="l" href="#6"> 6 </a>    {
+</span><span class="l" id="7"><a class="l" href="#7"> 7 </a>        <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = (int) <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>];
+</span><span class="l" id="8"><a class="l" href="#8"> 8 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>]) {
+</span><span class="l" id="9"><a class="l" href="#9"> 9 </a>            <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = <span class="php-num">0</span>;
+</span><span class="l" id="10"><a class="l" href="#10">10 </a>        }
+</span><span class="l" id="11"><a class="l" href="#11">11 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] &lt; -<span class="php-num">255</span>) {
+</span><span class="l" id="12"><a class="l" href="#12">12 </a>            <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = -<span class="php-num">255</span>;
+</span><span class="l" id="13"><a class="l" href="#13">13 </a>        }
+</span><span class="l" id="14"><a class="l" href="#14">14 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] &gt; <span class="php-num">255</span>) {
+</span><span class="l" id="15"><a class="l" href="#15">15 </a>            <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>] = <span class="php-num">255</span>;
+</span><span class="l" id="16"><a class="l" href="#16">16 </a>        }
+</span><span class="l" id="17"><a class="l" href="#17">17 </a>        <span class="php-var">$this</span>-&gt;media-&gt;asImage();
+</span><span class="l" id="18"><a class="l" href="#18">18 </a>        <span class="php-var">$img</span> = <span class="php-var">$this</span>-&gt;media-&gt;getImage();
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>
+</span><span class="l" id="20"><a class="l" href="#20">20 </a>        <span class="php-keyword2">imagefilter</span>(<span class="php-var">$img</span>, IMG_FILTER_BRIGHTNESS, <span class="php-var">$this</span>-&gt;params[<span class="php-quote">'brightness'</span>]);
+</span><span class="l" id="21"><a class="l" href="#21">21 </a>        <span class="php-var">$this</span>-&gt;media-&gt;setImage(<span class="php-var">$img</span>);
+</span><span class="l" id="22"><a class="l" href="#22">22 </a>    }
+</span><span class="l" id="23"><a class="l" href="#23">23 </a>
+</span><span class="l" id="24"><a class="l" href="#24">24 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getName" id="_getName">getName</a>()
+</span><span class="l" id="25"><a class="l" href="#25">25 </a>    {
+</span><span class="l" id="26"><a class="l" href="#26">26 </a>        <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'media_manager_effect_brightness'</span>);
+</span><span class="l" id="27"><a class="l" href="#27">27 </a>    }
+</span><span class="l" id="28"><a class="l" href="#28">28 </a>
+</span><span class="l" id="29"><a class="l" href="#29">29 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getParams" id="_getParams">getParams</a>()
+</span><span class="l" id="30"><a class="l" href="#30">30 </a>    {
+</span><span class="l" id="31"><a class="l" href="#31">31 </a>        <span class="php-keyword1">return</span> [
+</span><span class="l" id="32"><a class="l" href="#32">32 </a>            [
+</span><span class="l" id="33"><a class="l" href="#33">33 </a>                <span class="php-quote">'label'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_brightness_value'</span>),
+</span><span class="l" id="34"><a class="l" href="#34">34 </a>                <span class="php-quote">'notice'</span> =&gt; rex_i18n::msg(<span class="php-quote">'media_manager_effect_brightness_notice'</span>),
+</span><span class="l" id="35"><a class="l" href="#35">35 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-quote">'brightness'</span>,
+</span><span class="l" id="36"><a class="l" href="#36">36 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-quote">'int'</span>,
+</span><span class="l" id="37"><a class="l" href="#37">37 </a>                <span class="php-quote">'default'</span> =&gt; <span class="php-quote">''</span>,
+</span><span class="l" id="38"><a class="l" href="#38">38 </a>            ],
+</span><span class="l" id="39"><a class="l" href="#39">39 </a>        ];
+</span><span class="l" id="40"><a class="l" href="#40">40 </a>    }
+</span><span class="l" id="41"><a class="l" href="#41">41 </a>}
+</span><span class="l" id="42"><a class="l" href="#42">42 </a></span></code></pre>
  </body>
 </html>

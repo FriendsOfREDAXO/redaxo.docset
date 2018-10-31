@@ -16,7 +16,7 @@
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
 <b>Author:</b>
 				gharlan<br/>
-<b>Located at</b> <a href="source-class-rex.html#3-414" title="Go to source code">redaxo/src/core/lib/rex.php</a><br/>
+<b>Located at</b> <a href="source-class-rex.html#3-419" title="Go to source code">redaxo/src/core/lib/rex.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -111,10 +111,12 @@
 <a class="anchor" href="#_setProperty">#</a>
 <code><a class="dashAnchor" name="//apple_ref/cpp/Method/setProperty"></a><a href="source-class-rex.html?53,109#53" title="Go to source code">setProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
 <div class="description short">
-<p>Sets a property.</p>
+<p>Sets a property. Changes will not be persisted accross http request
+boundaries.</p>
 </div>
 <div class="description detailed hidden">
-<p>Sets a property.</p>
+<p>Sets a property. Changes will not be persisted accross http request
+boundaries.</p>
 <h4>Parameters</h4>
 <div class="list"><dl>
 <dt><var>$key</var></dt>
@@ -597,7 +599,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getVersionHash">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersionHash"></a><a href="source-class-rex.html?346,373#346" title="Go to source code">getVersionHash</a>( <span>string <var>$path</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getVersionHash"></a><a href="source-class-rex.html?346,378#346" title="Go to source code">getVersionHash</a>( <span>string <var>$path</var></span> )</code>
 <div class="description short">
 <p>Returns the current git version hash for the given path.</p>
 </div>
@@ -624,7 +626,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getAccesskey">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAccesskey"></a><a href="source-class-rex.html?375,393#375" title="Go to source code">getAccesskey</a>( <span>string <var>$title</var></span>, <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getAccesskey"></a><a href="source-class-rex.html?380,398#380" title="Go to source code">getAccesskey</a>( <span>string <var>$title</var></span>, <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Returns the title tag and if the property "use_accesskeys" is true, the
 accesskey tag.</p>
@@ -655,7 +657,7 @@ accesskey tag.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getFilePerm">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFilePerm"></a><a href="source-class-rex.html?395,403#395" title="Go to source code">getFilePerm</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFilePerm"></a><a href="source-class-rex.html?400,408#400" title="Go to source code">getFilePerm</a>( )</code>
 <div class="description short">
 <p>Returns the file perm.</p>
 </div>
@@ -677,7 +679,7 @@ accesskey tag.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getDirPerm">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDirPerm"></a><a href="source-class-rex.html?405,413#405" title="Go to source code">getDirPerm</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDirPerm"></a><a href="source-class-rex.html?410,418#410" title="Go to source code">getDirPerm</a>( )</code>
 <div class="description short">
 <p>Returns the dir perm.</p>
 </div>

@@ -7,455 +7,455 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1">  1 <span class="xlang">&lt;?php</span>
-</span><span class="l" id="2">  2 
-</span><span class="l" id="3">  3 <span class="php-comment">/**
-</span></span><span class="l" id="4">  4 <span class="php-comment"> * The rex_article_slice class is an object wrapper over the database table rex_articel_slice.
-</span></span><span class="l" id="5">  5 <span class="php-comment"> * Together with rex_article and rex_category it provides an object oriented
-</span></span><span class="l" id="6">  6 <span class="php-comment"> * Framework for accessing vital parts of your website.
-</span></span><span class="l" id="7">  7 <span class="php-comment"> * This framework can be used in Modules, Templates and PHP-Slices!
-</span></span><span class="l" id="8">  8 <span class="php-comment"> *
-</span></span><span class="l" id="9">  9 <span class="php-comment"> * @package redaxo\structure\content
-</span></span><span class="l" id="10"> 10 <span class="php-comment"> */</span>
-</span><span class="l" id="11"> 11 <span class="php-keyword1">class</span> rex_article_slice
-</span><span class="l" id="12"> 12 {
-</span><span class="l" id="13"> 13     <span class="php-keyword1">private</span> <span class="php-var">$_id</span>;
-</span><span class="l" id="14"> 14     <span class="php-keyword1">private</span> <span class="php-var">$_article_id</span>;
-</span><span class="l" id="15"> 15     <span class="php-keyword1">private</span> <span class="php-var">$_clang</span>;
-</span><span class="l" id="16"> 16     <span class="php-keyword1">private</span> <span class="php-var">$_ctype</span>;
-</span><span class="l" id="17"> 17     <span class="php-keyword1">private</span> <span class="php-var">$_priority</span>;
-</span><span class="l" id="18"> 18     <span class="php-keyword1">private</span> <span class="php-var">$_module_id</span>;
-</span><span class="l" id="19"> 19 
-</span><span class="l" id="20"> 20     <span class="php-keyword1">private</span> <span class="php-var">$_createdate</span>;
-</span><span class="l" id="21"> 21     <span class="php-keyword1">private</span> <span class="php-var">$_updatedate</span>;
-</span><span class="l" id="22"> 22     <span class="php-keyword1">private</span> <span class="php-var">$_createuser</span>;
-</span><span class="l" id="23"> 23     <span class="php-keyword1">private</span> <span class="php-var">$_updateuser</span>;
-</span><span class="l" id="24"> 24     <span class="php-keyword1">private</span> <span class="php-var">$_revision</span>;
-</span><span class="l" id="25"> 25 
-</span><span class="l" id="26"> 26     <span class="php-keyword1">private</span> <span class="php-var">$_values</span>;
-</span><span class="l" id="27"> 27     <span class="php-keyword1">private</span> <span class="php-var">$_media</span>;
-</span><span class="l" id="28"> 28     <span class="php-keyword1">private</span> <span class="php-var">$_medialists</span>;
-</span><span class="l" id="29"> 29     <span class="php-keyword1">private</span> <span class="php-var">$_links</span>;
-</span><span class="l" id="30"> 30     <span class="php-keyword1">private</span> <span class="php-var">$_linklists</span>;
-</span><span class="l" id="31"> 31 
-</span><span class="l" id="32"> 32     <span class="php-comment">/**
-</span></span><span class="l" id="33"> 33 <span class="php-comment">     * Constructor.
-</span></span><span class="l" id="34"> 34 <span class="php-comment">     *
-</span></span><span class="l" id="35"> 35 <span class="php-comment">     * @param int    $id
-</span></span><span class="l" id="36"> 36 <span class="php-comment">     * @param int    $article_id
-</span></span><span class="l" id="37"> 37 <span class="php-comment">     * @param int    $clang
-</span></span><span class="l" id="38"> 38 <span class="php-comment">     * @param int    $ctype
-</span></span><span class="l" id="39"> 39 <span class="php-comment">     * @param int    $module_id
-</span></span><span class="l" id="40"> 40 <span class="php-comment">     * @param int    $priority
-</span></span><span class="l" id="41"> 41 <span class="php-comment">     * @param int    $createdate
-</span></span><span class="l" id="42"> 42 <span class="php-comment">     * @param int    $updatedate
-</span></span><span class="l" id="43"> 43 <span class="php-comment">     * @param string $createuser
-</span></span><span class="l" id="44"> 44 <span class="php-comment">     * @param string $updateuser
-</span></span><span class="l" id="45"> 45 <span class="php-comment">     * @param int    $revision
-</span></span><span class="l" id="46"> 46 <span class="php-comment">     * @param array  $values
-</span></span><span class="l" id="47"> 47 <span class="php-comment">     * @param array  $media
-</span></span><span class="l" id="48"> 48 <span class="php-comment">     * @param array  $medialists
-</span></span><span class="l" id="49"> 49 <span class="php-comment">     * @param array  $links
-</span></span><span class="l" id="50"> 50 <span class="php-comment">     * @param array  $linklists
-</span></span><span class="l" id="51"> 51 <span class="php-comment">     */</span>
-</span><span class="l" id="52"> 52     <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> __construct(
-</span><span class="l" id="53"> 53         <span class="php-var">$id</span>, <span class="php-var">$article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$ctype</span>, <span class="php-var">$module_id</span>, <span class="php-var">$priority</span>,
-</span><span class="l" id="54"> 54         <span class="php-var">$createdate</span>, <span class="php-var">$updatedate</span>, <span class="php-var">$createuser</span>, <span class="php-var">$updateuser</span>, <span class="php-var">$revision</span>,
-</span><span class="l" id="55"> 55         <span class="php-var">$values</span>, <span class="php-var">$media</span>, <span class="php-var">$medialists</span>, <span class="php-var">$links</span>, <span class="php-var">$linklists</span>)
-</span><span class="l" id="56"> 56     {
-</span><span class="l" id="57"> 57         <span class="php-var">$this</span>-&gt;_id = <span class="php-var">$id</span>;
-</span><span class="l" id="58"> 58         <span class="php-var">$this</span>-&gt;_article_id = <span class="php-var">$article_id</span>;
-</span><span class="l" id="59"> 59         <span class="php-var">$this</span>-&gt;_clang = <span class="php-var">$clang</span>;
-</span><span class="l" id="60"> 60         <span class="php-var">$this</span>-&gt;_ctype = <span class="php-var">$ctype</span>;
-</span><span class="l" id="61"> 61         <span class="php-var">$this</span>-&gt;_priority = <span class="php-var">$priority</span>;
-</span><span class="l" id="62"> 62         <span class="php-var">$this</span>-&gt;_module_id = <span class="php-var">$module_id</span>;
-</span><span class="l" id="63"> 63 
-</span><span class="l" id="64"> 64         <span class="php-var">$this</span>-&gt;_createdate = <span class="php-var">$createdate</span>;
-</span><span class="l" id="65"> 65         <span class="php-var">$this</span>-&gt;_updatedate = <span class="php-var">$updatedate</span>;
-</span><span class="l" id="66"> 66         <span class="php-var">$this</span>-&gt;_createuser = <span class="php-var">$createuser</span>;
-</span><span class="l" id="67"> 67         <span class="php-var">$this</span>-&gt;_updateuser = <span class="php-var">$updateuser</span>;
-</span><span class="l" id="68"> 68         <span class="php-var">$this</span>-&gt;_revision = <span class="php-var">$revision</span>;
-</span><span class="l" id="69"> 69 
-</span><span class="l" id="70"> 70         <span class="php-var">$this</span>-&gt;_values = <span class="php-var">$values</span>;
-</span><span class="l" id="71"> 71         <span class="php-var">$this</span>-&gt;_media = <span class="php-var">$media</span>;
-</span><span class="l" id="72"> 72         <span class="php-var">$this</span>-&gt;_medialists = <span class="php-var">$medialists</span>;
-</span><span class="l" id="73"> 73         <span class="php-var">$this</span>-&gt;_links = <span class="php-var">$links</span>;
-</span><span class="l" id="74"> 74         <span class="php-var">$this</span>-&gt;_linklists = <span class="php-var">$linklists</span>;
-</span><span class="l" id="75"> 75     }
-</span><span class="l" id="76"> 76 
-</span><span class="l" id="77"> 77     <span class="php-comment">/**
-</span></span><span class="l" id="78"> 78 <span class="php-comment">     * Return an ArticleSlice by its id.
-</span></span><span class="l" id="79"> 79 <span class="php-comment">     *
-</span></span><span class="l" id="80"> 80 <span class="php-comment">     * @param int      $an_id
-</span></span><span class="l" id="81"> 81 <span class="php-comment">     * @param bool|int $clang
-</span></span><span class="l" id="82"> 82 <span class="php-comment">     * @param int      $revision
-</span></span><span class="l" id="83"> 83 <span class="php-comment">     *
-</span></span><span class="l" id="84"> 84 <span class="php-comment">     * @return self
-</span></span><span class="l" id="85"> 85 <span class="php-comment">     */</span>
-</span><span class="l" id="86"> 86     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getArticleSliceById(<span class="php-var">$an_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
-</span><span class="l" id="87"> 87     {
-</span><span class="l" id="88"> 88         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
-</span><span class="l" id="89"> 89             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
-</span><span class="l" id="90"> 90         }
-</span><span class="l" id="91"> 91 
-</span><span class="l" id="92"> 92         <span class="php-keyword1">return</span> self::getSliceWhere(
-</span><span class="l" id="93"> 93             <span class="php-quote">'id=? AND clang_id=? and revision=?'</span>,
-</span><span class="l" id="94"> 94             [<span class="php-var">$an_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$revision</span>]
-</span><span class="l" id="95"> 95         );
-</span><span class="l" id="96"> 96     }
-</span><span class="l" id="97"> 97 
-</span><span class="l" id="98"> 98     <span class="php-comment">/**
-</span></span><span class="l" id="99"> 99 <span class="php-comment">     * Return the first slice for an article.
-</span></span><span class="l" id="100">100 <span class="php-comment">     * This can then be used to iterate over all the
-</span></span><span class="l" id="101">101 <span class="php-comment">     * slices in the order as they appear using the
-</span></span><span class="l" id="102">102 <span class="php-comment">     * getNextSlice() function.
-</span></span><span class="l" id="103">103 <span class="php-comment">     *
-</span></span><span class="l" id="104">104 <span class="php-comment">     * @param int      $an_article_id
-</span></span><span class="l" id="105">105 <span class="php-comment">     * @param bool|int $clang
-</span></span><span class="l" id="106">106 <span class="php-comment">     * @param int      $revision
-</span></span><span class="l" id="107">107 <span class="php-comment">     *
-</span></span><span class="l" id="108">108 <span class="php-comment">     * @return self
-</span></span><span class="l" id="109">109 <span class="php-comment">     */</span>
-</span><span class="l" id="110">110     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getFirstSliceForArticle(<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
-</span><span class="l" id="111">111     {
-</span><span class="l" id="112">112         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
-</span><span class="l" id="113">113             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
-</span><span class="l" id="114">114         }
-</span><span class="l" id="115">115 
-</span><span class="l" id="116">116         <span class="php-keyword1">foreach</span> (<span class="php-keyword2">range</span>(<span class="php-num">1</span>, <span class="php-num">20</span>) <span class="php-keyword1">as</span> <span class="php-var">$ctype</span>) {
-</span><span class="l" id="117">117             <span class="php-var">$slice</span> = self::getFirstSliceForCtype(<span class="php-var">$ctype</span>, <span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$revision</span>);
-</span><span class="l" id="118">118             <span class="php-keyword1">if</span> (<span class="php-var">$slice</span> !== <span class="php-keyword1">null</span>) {
-</span><span class="l" id="119">119                 <span class="php-keyword1">return</span> <span class="php-var">$slice</span>;
-</span><span class="l" id="120">120             }
-</span><span class="l" id="121">121         }
-</span><span class="l" id="122">122 
-</span><span class="l" id="123">123         <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
-</span><span class="l" id="124">124     }
-</span><span class="l" id="125">125 
-</span><span class="l" id="126">126     <span class="php-comment">/**
-</span></span><span class="l" id="127">127 <span class="php-comment">     * Returns the first slice of the given ctype of an article.
-</span></span><span class="l" id="128">128 <span class="php-comment">     *
-</span></span><span class="l" id="129">129 <span class="php-comment">     * @param int      $ctype
-</span></span><span class="l" id="130">130 <span class="php-comment">     * @param int      $an_article_id
-</span></span><span class="l" id="131">131 <span class="php-comment">     * @param bool|int $clang
-</span></span><span class="l" id="132">132 <span class="php-comment">     * @param int      $revision
-</span></span><span class="l" id="133">133 <span class="php-comment">     *
-</span></span><span class="l" id="134">134 <span class="php-comment">     * @return self
-</span></span><span class="l" id="135">135 <span class="php-comment">     */</span>
-</span><span class="l" id="136">136     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getFirstSliceForCtype(<span class="php-var">$ctype</span>, <span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
-</span><span class="l" id="137">137     {
-</span><span class="l" id="138">138         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
-</span><span class="l" id="139">139             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
-</span><span class="l" id="140">140         }
-</span><span class="l" id="141">141 
-</span><span class="l" id="142">142         <span class="php-keyword1">return</span> self::getSliceWhere(
-</span><span class="l" id="143">143             <span class="php-quote">'article_id=? AND clang_id=? AND ctype_id=? AND priority=1 AND revision=?'</span>,
-</span><span class="l" id="144">144             [<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$ctype</span>, <span class="php-var">$revision</span>]
-</span><span class="l" id="145">145         );
-</span><span class="l" id="146">146     }
-</span><span class="l" id="147">147 
-</span><span class="l" id="148">148     <span class="php-comment">/**
-</span></span><span class="l" id="149">149 <span class="php-comment">     * Return all slices for an article that have a certain
-</span></span><span class="l" id="150">150 <span class="php-comment">     * clang or revision.
-</span></span><span class="l" id="151">151 <span class="php-comment">     *
-</span></span><span class="l" id="152">152 <span class="php-comment">     * @param int      $an_article_id
-</span></span><span class="l" id="153">153 <span class="php-comment">     * @param bool|int $clang
-</span></span><span class="l" id="154">154 <span class="php-comment">     * @param int      $revision
-</span></span><span class="l" id="155">155 <span class="php-comment">     *
-</span></span><span class="l" id="156">156 <span class="php-comment">     * @return self[]
-</span></span><span class="l" id="157">157 <span class="php-comment">     */</span>
-</span><span class="l" id="158">158     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getSlicesForArticle(<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
-</span><span class="l" id="159">159     {
-</span><span class="l" id="160">160         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
-</span><span class="l" id="161">161             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
-</span><span class="l" id="162">162         }
-</span><span class="l" id="163">163 
-</span><span class="l" id="164">164         <span class="php-keyword1">return</span> self::getSlicesWhere(
-</span><span class="l" id="165">165             <span class="php-quote">'article_id=? AND clang_id=? AND revision=?'</span>,
-</span><span class="l" id="166">166             [<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$revision</span>]
-</span><span class="l" id="167">167         );
-</span><span class="l" id="168">168     }
-</span><span class="l" id="169">169 
-</span><span class="l" id="170">170     <span class="php-comment">/**
-</span></span><span class="l" id="171">171 <span class="php-comment">     * Return all slices for an article that have a certain
-</span></span><span class="l" id="172">172 <span class="php-comment">     * module type.
-</span></span><span class="l" id="173">173 <span class="php-comment">     *
-</span></span><span class="l" id="174">174 <span class="php-comment">     * @param int      $an_article_id
-</span></span><span class="l" id="175">175 <span class="php-comment">     * @param int      $a_moduletype_id
-</span></span><span class="l" id="176">176 <span class="php-comment">     * @param bool|int $clang
-</span></span><span class="l" id="177">177 <span class="php-comment">     * @param int      $revision
-</span></span><span class="l" id="178">178 <span class="php-comment">     *
-</span></span><span class="l" id="179">179 <span class="php-comment">     * @return self[]
-</span></span><span class="l" id="180">180 <span class="php-comment">     */</span>
-</span><span class="l" id="181">181     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getSlicesForArticleOfType(<span class="php-var">$an_article_id</span>, <span class="php-var">$a_moduletype_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
-</span><span class="l" id="182">182     {
-</span><span class="l" id="183">183         <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
-</span><span class="l" id="184">184             <span class="php-var">$clang</span> = rex_clang::getCurrentId();
-</span><span class="l" id="185">185         }
-</span><span class="l" id="186">186 
-</span><span class="l" id="187">187         <span class="php-keyword1">return</span> self::getSlicesWhere(
-</span><span class="l" id="188">188             <span class="php-quote">'article_id=? AND clang_id=? AND module_id=? AND revision=?'</span>,
-</span><span class="l" id="189">189             [<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$a_moduletype_id</span>, <span class="php-var">$revision</span>]
-</span><span class="l" id="190">190         );
-</span><span class="l" id="191">191     }
-</span><span class="l" id="192">192 
-</span><span class="l" id="193">193     <span class="php-comment">/**
-</span></span><span class="l" id="194">194 <span class="php-comment">     * Return the next slice for this article.
-</span></span><span class="l" id="195">195 <span class="php-comment">     *
-</span></span><span class="l" id="196">196 <span class="php-comment">     * @return self
-</span></span><span class="l" id="197">197 <span class="php-comment">     */</span>
-</span><span class="l" id="198">198     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getNextSlice()
-</span><span class="l" id="199">199     {
-</span><span class="l" id="200">200         <span class="php-keyword1">return</span> self::getSliceWhere(
-</span><span class="l" id="201">201             <span class="php-quote">'priority = ? AND article_id=? AND clang_id = ? AND ctype_id = ? AND revision=?'</span>,
-</span><span class="l" id="202">202             [<span class="php-var">$this</span>-&gt;_priority + <span class="php-num">1</span>, <span class="php-var">$this</span>-&gt;_article_id, <span class="php-var">$this</span>-&gt;_clang, <span class="php-var">$this</span>-&gt;_ctype, <span class="php-var">$this</span>-&gt;_revision]
-</span><span class="l" id="203">203         );
-</span><span class="l" id="204">204     }
-</span><span class="l" id="205">205 
-</span><span class="l" id="206">206     <span class="php-comment">/**
-</span></span><span class="l" id="207">207 <span class="php-comment">     * @return self
-</span></span><span class="l" id="208">208 <span class="php-comment">     */</span>
-</span><span class="l" id="209">209     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getPreviousSlice()
-</span><span class="l" id="210">210     {
-</span><span class="l" id="211">211         <span class="php-keyword1">return</span> self::getSliceWhere(
-</span><span class="l" id="212">212             <span class="php-quote">'priority = ? AND article_id=? AND clang_id = ? AND ctype_id = ? AND revision=?'</span>,
-</span><span class="l" id="213">213             [<span class="php-var">$this</span>-&gt;_priority - <span class="php-num">1</span>, <span class="php-var">$this</span>-&gt;_article_id, <span class="php-var">$this</span>-&gt;_clang, <span class="php-var">$this</span>-&gt;_ctype, <span class="php-var">$this</span>-&gt;_revision]
-</span><span class="l" id="214">214         );
-</span><span class="l" id="215">215     }
-</span><span class="l" id="216">216 
-</span><span class="l" id="217">217     <span class="php-comment">/**
-</span></span><span class="l" id="218">218 <span class="php-comment">     * Gibt den Slice formatiert zurück.
-</span></span><span class="l" id="219">219 <span class="php-comment">     *
-</span></span><span class="l" id="220">220 <span class="php-comment">     * @since 4.1 - 29.05.2008
-</span></span><span class="l" id="221">221 <span class="php-comment">     * @see rex_article_content::getSlice()
-</span></span><span class="l" id="222">222 <span class="php-comment">     *
-</span></span><span class="l" id="223">223 <span class="php-comment">     * @return string
-</span></span><span class="l" id="224">224 <span class="php-comment">     */</span>
-</span><span class="l" id="225">225     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getSlice()
-</span><span class="l" id="226">226     {
-</span><span class="l" id="227">227         <span class="php-var">$art</span> = <span class="php-keyword1">new</span> rex_article_content();
-</span><span class="l" id="228">228         <span class="php-var">$art</span>-&gt;setArticleId(<span class="php-var">$this</span>-&gt;getArticleId());
-</span><span class="l" id="229">229         <span class="php-var">$art</span>-&gt;setClang(<span class="php-var">$this</span>-&gt;getClang());
-</span><span class="l" id="230">230         <span class="php-var">$art</span>-&gt;setSliceRevision(<span class="php-var">$this</span>-&gt;getRevision());
-</span><span class="l" id="231">231         <span class="php-keyword1">return</span> <span class="php-var">$art</span>-&gt;getSlice(<span class="php-var">$this</span>-&gt;getId());
-</span><span class="l" id="232">232     }
-</span><span class="l" id="233">233 
-</span><span class="l" id="234">234     <span class="php-comment">/**
-</span></span><span class="l" id="235">235 <span class="php-comment">     * @param string $where
-</span></span><span class="l" id="236">236 <span class="php-comment">     * @param array  $params
-</span></span><span class="l" id="237">237 <span class="php-comment">     *
-</span></span><span class="l" id="238">238 <span class="php-comment">     * @return self
-</span></span><span class="l" id="239">239 <span class="php-comment">     */</span>
-</span><span class="l" id="240">240     <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getSliceWhere(<span class="php-var">$where</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span> = [])
-</span><span class="l" id="241">241     {
-</span><span class="l" id="242">242         <span class="php-var">$slices</span> = self::getSlicesWhere(<span class="php-var">$where</span>, <span class="php-var">$params</span>);
-</span><span class="l" id="243">243         <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$slices</span>[<span class="php-num">0</span>]) ? <span class="php-var">$slices</span>[<span class="php-num">0</span>] : <span class="php-keyword1">null</span>;
-</span><span class="l" id="244">244     }
-</span><span class="l" id="245">245 
-</span><span class="l" id="246">246     <span class="php-comment">/**
-</span></span><span class="l" id="247">247 <span class="php-comment">     * @param string $where
-</span></span><span class="l" id="248">248 <span class="php-comment">     * @param array  $params
-</span></span><span class="l" id="249">249 <span class="php-comment">     *
-</span></span><span class="l" id="250">250 <span class="php-comment">     * @return self[]
-</span></span><span class="l" id="251">251 <span class="php-comment">     */</span>
-</span><span class="l" id="252">252     <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getSlicesWhere(<span class="php-var">$where</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span> = [])
-</span><span class="l" id="253">253     {
-</span><span class="l" id="254">254         <span class="php-var">$sql</span> = rex_sql::factory();
-</span><span class="l" id="255">255         <span class="php-comment">// $sql-&gt;setDebug();</span>
-</span><span class="l" id="256">256         <span class="php-var">$query</span> = <span class="php-quote">'
-</span></span><span class="l" id="257">257 <span class="php-quote">            SELECT *
-</span></span><span class="l" id="258">258 <span class="php-quote">            FROM '</span> . rex::getTable(<span class="php-quote">'article_slice'</span>) . <span class="php-quote">'
-</span></span><span class="l" id="259">259 <span class="php-quote">            WHERE '</span> . <span class="php-var">$where</span> . <span class="php-quote">'
-</span></span><span class="l" id="260">260 <span class="php-quote">            ORDER BY ctype_id, priority'</span>;
-</span><span class="l" id="261">261 
-</span><span class="l" id="262">262         <span class="php-var">$sql</span>-&gt;setQuery(<span class="php-var">$query</span>, <span class="php-var">$params</span>);
-</span><span class="l" id="263">263         <span class="php-var">$rows</span> = <span class="php-var">$sql</span>-&gt;getRows();
-</span><span class="l" id="264">264         <span class="php-var">$slices</span> = [];
-</span><span class="l" id="265">265         <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$rows</span>; ++<span class="php-var">$i</span>) {
-</span><span class="l" id="266">266             <span class="php-var">$slices</span>[] = <span class="php-keyword1">new</span> self(
-</span><span class="l" id="267">267                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'id'</span>),
-</span><span class="l" id="268">268                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'article_id'</span>),
-</span><span class="l" id="269">269                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'clang_id'</span>),
-</span><span class="l" id="270">270                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'ctype_id'</span>),
-</span><span class="l" id="271">271                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'module_id'</span>),
-</span><span class="l" id="272">272                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'priority'</span>),
-</span><span class="l" id="273">273                 <span class="php-var">$sql</span>-&gt;getDateTimeValue(<span class="php-quote">'createdate'</span>),
-</span><span class="l" id="274">274                 <span class="php-var">$sql</span>-&gt;getDateTimeValue(<span class="php-quote">'updatedate'</span>),
-</span><span class="l" id="275">275                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'createuser'</span>),
-</span><span class="l" id="276">276                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'updateuser'</span>),
-</span><span class="l" id="277">277                 <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'revision'</span>),
-</span><span class="l" id="278">278                 [
-</span><span class="l" id="279">279                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value1'</span>),
-</span><span class="l" id="280">280                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value2'</span>),
-</span><span class="l" id="281">281                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value3'</span>),
-</span><span class="l" id="282">282                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value4'</span>),
-</span><span class="l" id="283">283                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value5'</span>),
-</span><span class="l" id="284">284                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value6'</span>),
-</span><span class="l" id="285">285                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value7'</span>),
-</span><span class="l" id="286">286                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value8'</span>),
-</span><span class="l" id="287">287                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value9'</span>),
-</span><span class="l" id="288">288                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value10'</span>),
-</span><span class="l" id="289">289                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value11'</span>),
-</span><span class="l" id="290">290                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value12'</span>),
-</span><span class="l" id="291">291                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value13'</span>),
-</span><span class="l" id="292">292                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value14'</span>),
-</span><span class="l" id="293">293                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value15'</span>),
-</span><span class="l" id="294">294                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value16'</span>),
-</span><span class="l" id="295">295                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value17'</span>),
-</span><span class="l" id="296">296                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value18'</span>),
-</span><span class="l" id="297">297                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value19'</span>),
-</span><span class="l" id="298">298                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value20'</span>),
-</span><span class="l" id="299">299                 ],
-</span><span class="l" id="300">300                 [
-</span><span class="l" id="301">301                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media1'</span>),
-</span><span class="l" id="302">302                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media2'</span>),
-</span><span class="l" id="303">303                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media3'</span>),
-</span><span class="l" id="304">304                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media4'</span>),
-</span><span class="l" id="305">305                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media5'</span>),
-</span><span class="l" id="306">306                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media6'</span>),
-</span><span class="l" id="307">307                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media7'</span>),
-</span><span class="l" id="308">308                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media8'</span>),
-</span><span class="l" id="309">309                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media9'</span>),
-</span><span class="l" id="310">310                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media10'</span>),
-</span><span class="l" id="311">311                 ],
-</span><span class="l" id="312">312                 [
-</span><span class="l" id="313">313                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist1'</span>),
-</span><span class="l" id="314">314                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist2'</span>),
-</span><span class="l" id="315">315                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist3'</span>),
-</span><span class="l" id="316">316                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist4'</span>),
-</span><span class="l" id="317">317                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist5'</span>),
-</span><span class="l" id="318">318                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist6'</span>),
-</span><span class="l" id="319">319                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist7'</span>),
-</span><span class="l" id="320">320                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist8'</span>),
-</span><span class="l" id="321">321                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist9'</span>),
-</span><span class="l" id="322">322                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist10'</span>),
-</span><span class="l" id="323">323                 ],
-</span><span class="l" id="324">324                 [
-</span><span class="l" id="325">325                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link1'</span>),
-</span><span class="l" id="326">326                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link2'</span>),
-</span><span class="l" id="327">327                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link3'</span>),
-</span><span class="l" id="328">328                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link4'</span>),
-</span><span class="l" id="329">329                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link5'</span>),
-</span><span class="l" id="330">330                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link6'</span>),
-</span><span class="l" id="331">331                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link7'</span>),
-</span><span class="l" id="332">332                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link8'</span>),
-</span><span class="l" id="333">333                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link9'</span>),
-</span><span class="l" id="334">334                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link10'</span>),
-</span><span class="l" id="335">335                 ],
-</span><span class="l" id="336">336                 [
-</span><span class="l" id="337">337                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist1'</span>),
-</span><span class="l" id="338">338                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist2'</span>),
-</span><span class="l" id="339">339                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist3'</span>),
-</span><span class="l" id="340">340                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist4'</span>),
-</span><span class="l" id="341">341                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist5'</span>),
-</span><span class="l" id="342">342                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist6'</span>),
-</span><span class="l" id="343">343                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist7'</span>),
-</span><span class="l" id="344">344                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist8'</span>),
-</span><span class="l" id="345">345                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist9'</span>),
-</span><span class="l" id="346">346                     <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist10'</span>),
-</span><span class="l" id="347">347                 ]
-</span><span class="l" id="348">348             );
-</span><span class="l" id="349">349 
-</span><span class="l" id="350">350             <span class="php-var">$sql</span>-&gt;<span class="php-keyword2">next</span>();
-</span><span class="l" id="351">351         }
-</span><span class="l" id="352">352         <span class="php-keyword1">return</span> <span class="php-var">$slices</span>;
-</span><span class="l" id="353">353     }
-</span><span class="l" id="354">354 
-</span><span class="l" id="355">355     <span class="php-comment">/**
-</span></span><span class="l" id="356">356 <span class="php-comment">     * @return rex_article
-</span></span><span class="l" id="357">357 <span class="php-comment">     */</span>
-</span><span class="l" id="358">358     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getArticle()
-</span><span class="l" id="359">359     {
-</span><span class="l" id="360">360         <span class="php-keyword1">return</span> rex_article::get(<span class="php-var">$this</span>-&gt;getArticleId());
-</span><span class="l" id="361">361     }
-</span><span class="l" id="362">362 
-</span><span class="l" id="363">363     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getArticleId()
-</span><span class="l" id="364">364     {
-</span><span class="l" id="365">365         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_article_id;
-</span><span class="l" id="366">366     }
-</span><span class="l" id="367">367 
-</span><span class="l" id="368">368     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getClangId()
-</span><span class="l" id="369">369     {
-</span><span class="l" id="370">370         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_clang;
-</span><span class="l" id="371">371     }
-</span><span class="l" id="372">372 
-</span><span class="l" id="373">373     <span class="php-comment">/**
-</span></span><span class="l" id="374">374 <span class="php-comment">     * @deprecated since redaxo 5.6, use getClangId() instead
-</span></span><span class="l" id="375">375 <span class="php-comment">     */</span>
-</span><span class="l" id="376">376     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getClang()
-</span><span class="l" id="377">377     {
-</span><span class="l" id="378">378         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_clang;
-</span><span class="l" id="379">379     }
-</span><span class="l" id="380">380 
-</span><span class="l" id="381">381     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getCtype()
-</span><span class="l" id="382">382     {
-</span><span class="l" id="383">383         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_ctype;
-</span><span class="l" id="384">384     }
-</span><span class="l" id="385">385 
-</span><span class="l" id="386">386     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getRevision()
-</span><span class="l" id="387">387     {
-</span><span class="l" id="388">388         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_revision;
-</span><span class="l" id="389">389     }
-</span><span class="l" id="390">390 
-</span><span class="l" id="391">391     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getModuleId()
-</span><span class="l" id="392">392     {
-</span><span class="l" id="393">393         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_module_id;
-</span><span class="l" id="394">394     }
-</span><span class="l" id="395">395 
-</span><span class="l" id="396">396     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getId()
-</span><span class="l" id="397">397     {
-</span><span class="l" id="398">398         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_id;
-</span><span class="l" id="399">399     }
-</span><span class="l" id="400">400 
-</span><span class="l" id="401">401     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getValue(<span class="php-var">$index</span>)
-</span><span class="l" id="402">402     {
-</span><span class="l" id="403">403         <span class="php-keyword1">if</span> (<span class="php-keyword2">is_int</span>(<span class="php-var">$index</span>)) {
-</span><span class="l" id="404">404             <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_values[<span class="php-var">$index</span> - <span class="php-num">1</span>];
-</span><span class="l" id="405">405         }
-</span><span class="l" id="406">406 
-</span><span class="l" id="407">407         <span class="php-var">$attrName</span> = <span class="php-quote">'_'</span> . <span class="php-var">$index</span>;
-</span><span class="l" id="408">408         <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$attrName</span>)) {
-</span><span class="l" id="409">409             <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$attrName</span>;
-</span><span class="l" id="410">410         }
-</span><span class="l" id="411">411 
-</span><span class="l" id="412">412         <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
-</span><span class="l" id="413">413     }
-</span><span class="l" id="414">414 
-</span><span class="l" id="415">415     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getLink(<span class="php-var">$index</span>)
-</span><span class="l" id="416">416     {
-</span><span class="l" id="417">417         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_links[<span class="php-var">$index</span> - <span class="php-num">1</span>];
-</span><span class="l" id="418">418     }
-</span><span class="l" id="419">419 
-</span><span class="l" id="420">420     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getLinkUrl(<span class="php-var">$index</span>)
-</span><span class="l" id="421">421     {
-</span><span class="l" id="422">422         <span class="php-keyword1">return</span> rex_getUrl(<span class="php-var">$this</span>-&gt;getLink(<span class="php-var">$index</span>));
-</span><span class="l" id="423">423     }
-</span><span class="l" id="424">424 
-</span><span class="l" id="425">425     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getLinkList(<span class="php-var">$index</span>)
-</span><span class="l" id="426">426     {
-</span><span class="l" id="427">427         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_linklists[<span class="php-var">$index</span> - <span class="php-num">1</span>];
-</span><span class="l" id="428">428     }
-</span><span class="l" id="429">429 
-</span><span class="l" id="430">430     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getMedia(<span class="php-var">$index</span>)
-</span><span class="l" id="431">431     {
-</span><span class="l" id="432">432         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_media[<span class="php-var">$index</span> - <span class="php-num">1</span>];
-</span><span class="l" id="433">433     }
-</span><span class="l" id="434">434 
-</span><span class="l" id="435">435     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getMediaUrl(<span class="php-var">$index</span>)
-</span><span class="l" id="436">436     {
-</span><span class="l" id="437">437         <span class="php-keyword1">return</span> rex_url::media(<span class="php-var">$this</span>-&gt;getMedia(<span class="php-var">$index</span>));
-</span><span class="l" id="438">438     }
-</span><span class="l" id="439">439 
-</span><span class="l" id="440">440     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getMediaList(<span class="php-var">$index</span>)
-</span><span class="l" id="441">441     {
-</span><span class="l" id="442">442         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_medialists[<span class="php-var">$index</span> - <span class="php-num">1</span>];
-</span><span class="l" id="443">443     }
-</span><span class="l" id="444">444 
-</span><span class="l" id="445">445     <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getPriority()
-</span><span class="l" id="446">446     {
-</span><span class="l" id="447">447         <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_priority;
-</span><span class="l" id="448">448     }
-</span><span class="l" id="449">449 }
-</span><span class="l" id="450">450 </span></code></pre>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1">  1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2">  2 </a>
+</span><span class="l" id="3"><a class="l" href="#3">  3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4">  4 </a><span class="php-comment"> * The rex_article_slice class is an object wrapper over the database table rex_article_slice.
+</span></span><span class="l" id="5"><a class="l" href="#5">  5 </a><span class="php-comment"> * Together with rex_article and rex_category it provides an object oriented
+</span></span><span class="l" id="6"><a class="l" href="#6">  6 </a><span class="php-comment"> * Framework for accessing vital parts of your website.
+</span></span><span class="l" id="7"><a class="l" href="#7">  7 </a><span class="php-comment"> * This framework can be used in Modules, Templates and PHP-Slices!
+</span></span><span class="l" id="8"><a class="l" href="#8">  8 </a><span class="php-comment"> *
+</span></span><span class="l" id="9"><a class="l" href="#9">  9 </a><span class="php-comment"> * @package redaxo\structure\content
+</span></span><span class="l" id="10"><a class="l" href="#10"> 10 </a><span class="php-comment"> */</span>
+</span><span class="l" id="11"><a class="l" href="#11"> 11 </a><span class="php-keyword1">class</span> <a href="#rex_article_slice" id="rex_article_slice">rex_article_slice</a>
+</span><span class="l" id="12"><a class="l" href="#12"> 12 </a>{
+</span><span class="l" id="13"><a class="l" href="#13"> 13 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_id" id="$_id">$_id</a></span>;
+</span><span class="l" id="14"><a class="l" href="#14"> 14 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_article_id" id="$_article_id">$_article_id</a></span>;
+</span><span class="l" id="15"><a class="l" href="#15"> 15 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_clang" id="$_clang">$_clang</a></span>;
+</span><span class="l" id="16"><a class="l" href="#16"> 16 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_ctype" id="$_ctype">$_ctype</a></span>;
+</span><span class="l" id="17"><a class="l" href="#17"> 17 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_priority" id="$_priority">$_priority</a></span>;
+</span><span class="l" id="18"><a class="l" href="#18"> 18 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_module_id" id="$_module_id">$_module_id</a></span>;
+</span><span class="l" id="19"><a class="l" href="#19"> 19 </a>
+</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_createdate" id="$_createdate">$_createdate</a></span>;
+</span><span class="l" id="21"><a class="l" href="#21"> 21 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_updatedate" id="$_updatedate">$_updatedate</a></span>;
+</span><span class="l" id="22"><a class="l" href="#22"> 22 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_createuser" id="$_createuser">$_createuser</a></span>;
+</span><span class="l" id="23"><a class="l" href="#23"> 23 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_updateuser" id="$_updateuser">$_updateuser</a></span>;
+</span><span class="l" id="24"><a class="l" href="#24"> 24 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_revision" id="$_revision">$_revision</a></span>;
+</span><span class="l" id="25"><a class="l" href="#25"> 25 </a>
+</span><span class="l" id="26"><a class="l" href="#26"> 26 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_values" id="$_values">$_values</a></span>;
+</span><span class="l" id="27"><a class="l" href="#27"> 27 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_media" id="$_media">$_media</a></span>;
+</span><span class="l" id="28"><a class="l" href="#28"> 28 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_medialists" id="$_medialists">$_medialists</a></span>;
+</span><span class="l" id="29"><a class="l" href="#29"> 29 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_links" id="$_links">$_links</a></span>;
+</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>    <span class="php-keyword1">private</span> <span class="php-var"><a href="#$_linklists" id="$_linklists">$_linklists</a></span>;
+</span><span class="l" id="31"><a class="l" href="#31"> 31 </a>
+</span><span class="l" id="32"><a class="l" href="#32"> 32 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="33"><a class="l" href="#33"> 33 </a><span class="php-comment">     * Constructor.
+</span></span><span class="l" id="34"><a class="l" href="#34"> 34 </a><span class="php-comment">     *
+</span></span><span class="l" id="35"><a class="l" href="#35"> 35 </a><span class="php-comment">     * @param int    $id
+</span></span><span class="l" id="36"><a class="l" href="#36"> 36 </a><span class="php-comment">     * @param int    $article_id
+</span></span><span class="l" id="37"><a class="l" href="#37"> 37 </a><span class="php-comment">     * @param int    $clang
+</span></span><span class="l" id="38"><a class="l" href="#38"> 38 </a><span class="php-comment">     * @param int    $ctype
+</span></span><span class="l" id="39"><a class="l" href="#39"> 39 </a><span class="php-comment">     * @param int    $module_id
+</span></span><span class="l" id="40"><a class="l" href="#40"> 40 </a><span class="php-comment">     * @param int    $priority
+</span></span><span class="l" id="41"><a class="l" href="#41"> 41 </a><span class="php-comment">     * @param int    $createdate
+</span></span><span class="l" id="42"><a class="l" href="#42"> 42 </a><span class="php-comment">     * @param int    $updatedate
+</span></span><span class="l" id="43"><a class="l" href="#43"> 43 </a><span class="php-comment">     * @param string $createuser
+</span></span><span class="l" id="44"><a class="l" href="#44"> 44 </a><span class="php-comment">     * @param string $updateuser
+</span></span><span class="l" id="45"><a class="l" href="#45"> 45 </a><span class="php-comment">     * @param int    $revision
+</span></span><span class="l" id="46"><a class="l" href="#46"> 46 </a><span class="php-comment">     * @param array  $values
+</span></span><span class="l" id="47"><a class="l" href="#47"> 47 </a><span class="php-comment">     * @param array  $media
+</span></span><span class="l" id="48"><a class="l" href="#48"> 48 </a><span class="php-comment">     * @param array  $medialists
+</span></span><span class="l" id="49"><a class="l" href="#49"> 49 </a><span class="php-comment">     * @param array  $links
+</span></span><span class="l" id="50"><a class="l" href="#50"> 50 </a><span class="php-comment">     * @param array  $linklists
+</span></span><span class="l" id="51"><a class="l" href="#51"> 51 </a><span class="php-comment">     */</span>
+</span><span class="l" id="52"><a class="l" href="#52"> 52 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#___construct" id="___construct">__construct</a>(
+</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>        <span class="php-var">$id</span>, <span class="php-var">$article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$ctype</span>, <span class="php-var">$module_id</span>, <span class="php-var">$priority</span>,
+</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>        <span class="php-var">$createdate</span>, <span class="php-var">$updatedate</span>, <span class="php-var">$createuser</span>, <span class="php-var">$updateuser</span>, <span class="php-var">$revision</span>,
+</span><span class="l" id="55"><a class="l" href="#55"> 55 </a>        <span class="php-var">$values</span>, <span class="php-var">$media</span>, <span class="php-var">$medialists</span>, <span class="php-var">$links</span>, <span class="php-var">$linklists</span>)
+</span><span class="l" id="56"><a class="l" href="#56"> 56 </a>    {
+</span><span class="l" id="57"><a class="l" href="#57"> 57 </a>        <span class="php-var">$this</span>-&gt;_id = <span class="php-var">$id</span>;
+</span><span class="l" id="58"><a class="l" href="#58"> 58 </a>        <span class="php-var">$this</span>-&gt;_article_id = <span class="php-var">$article_id</span>;
+</span><span class="l" id="59"><a class="l" href="#59"> 59 </a>        <span class="php-var">$this</span>-&gt;_clang = <span class="php-var">$clang</span>;
+</span><span class="l" id="60"><a class="l" href="#60"> 60 </a>        <span class="php-var">$this</span>-&gt;_ctype = <span class="php-var">$ctype</span>;
+</span><span class="l" id="61"><a class="l" href="#61"> 61 </a>        <span class="php-var">$this</span>-&gt;_priority = <span class="php-var">$priority</span>;
+</span><span class="l" id="62"><a class="l" href="#62"> 62 </a>        <span class="php-var">$this</span>-&gt;_module_id = <span class="php-var">$module_id</span>;
+</span><span class="l" id="63"><a class="l" href="#63"> 63 </a>
+</span><span class="l" id="64"><a class="l" href="#64"> 64 </a>        <span class="php-var">$this</span>-&gt;_createdate = <span class="php-var">$createdate</span>;
+</span><span class="l" id="65"><a class="l" href="#65"> 65 </a>        <span class="php-var">$this</span>-&gt;_updatedate = <span class="php-var">$updatedate</span>;
+</span><span class="l" id="66"><a class="l" href="#66"> 66 </a>        <span class="php-var">$this</span>-&gt;_createuser = <span class="php-var">$createuser</span>;
+</span><span class="l" id="67"><a class="l" href="#67"> 67 </a>        <span class="php-var">$this</span>-&gt;_updateuser = <span class="php-var">$updateuser</span>;
+</span><span class="l" id="68"><a class="l" href="#68"> 68 </a>        <span class="php-var">$this</span>-&gt;_revision = <span class="php-var">$revision</span>;
+</span><span class="l" id="69"><a class="l" href="#69"> 69 </a>
+</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>        <span class="php-var">$this</span>-&gt;_values = <span class="php-var">$values</span>;
+</span><span class="l" id="71"><a class="l" href="#71"> 71 </a>        <span class="php-var">$this</span>-&gt;_media = <span class="php-var">$media</span>;
+</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>        <span class="php-var">$this</span>-&gt;_medialists = <span class="php-var">$medialists</span>;
+</span><span class="l" id="73"><a class="l" href="#73"> 73 </a>        <span class="php-var">$this</span>-&gt;_links = <span class="php-var">$links</span>;
+</span><span class="l" id="74"><a class="l" href="#74"> 74 </a>        <span class="php-var">$this</span>-&gt;_linklists = <span class="php-var">$linklists</span>;
+</span><span class="l" id="75"><a class="l" href="#75"> 75 </a>    }
+</span><span class="l" id="76"><a class="l" href="#76"> 76 </a>
+</span><span class="l" id="77"><a class="l" href="#77"> 77 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="78"><a class="l" href="#78"> 78 </a><span class="php-comment">     * Return an ArticleSlice by its id.
+</span></span><span class="l" id="79"><a class="l" href="#79"> 79 </a><span class="php-comment">     *
+</span></span><span class="l" id="80"><a class="l" href="#80"> 80 </a><span class="php-comment">     * @param int      $an_id
+</span></span><span class="l" id="81"><a class="l" href="#81"> 81 </a><span class="php-comment">     * @param bool|int $clang
+</span></span><span class="l" id="82"><a class="l" href="#82"> 82 </a><span class="php-comment">     * @param int      $revision
+</span></span><span class="l" id="83"><a class="l" href="#83"> 83 </a><span class="php-comment">     *
+</span></span><span class="l" id="84"><a class="l" href="#84"> 84 </a><span class="php-comment">     * @return self
+</span></span><span class="l" id="85"><a class="l" href="#85"> 85 </a><span class="php-comment">     */</span>
+</span><span class="l" id="86"><a class="l" href="#86"> 86 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getArticleSliceById" id="_getArticleSliceById">getArticleSliceById</a>(<span class="php-var">$an_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
+</span><span class="l" id="87"><a class="l" href="#87"> 87 </a>    {
+</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="89"><a class="l" href="#89"> 89 </a>            <span class="php-var">$clang</span> = rex_clang::getCurrentId();
+</span><span class="l" id="90"><a class="l" href="#90"> 90 </a>        }
+</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>
+</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>        <span class="php-keyword1">return</span> self::getSliceWhere(
+</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>            <span class="php-quote">'id=? AND clang_id=? and revision=?'</span>,
+</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>            [<span class="php-var">$an_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$revision</span>]
+</span><span class="l" id="95"><a class="l" href="#95"> 95 </a>        );
+</span><span class="l" id="96"><a class="l" href="#96"> 96 </a>    }
+</span><span class="l" id="97"><a class="l" href="#97"> 97 </a>
+</span><span class="l" id="98"><a class="l" href="#98"> 98 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="99"><a class="l" href="#99"> 99 </a><span class="php-comment">     * Return the first slice for an article.
+</span></span><span class="l" id="100"><a class="l" href="#100">100 </a><span class="php-comment">     * This can then be used to iterate over all the
+</span></span><span class="l" id="101"><a class="l" href="#101">101 </a><span class="php-comment">     * slices in the order as they appear using the
+</span></span><span class="l" id="102"><a class="l" href="#102">102 </a><span class="php-comment">     * getNextSlice() function.
+</span></span><span class="l" id="103"><a class="l" href="#103">103 </a><span class="php-comment">     *
+</span></span><span class="l" id="104"><a class="l" href="#104">104 </a><span class="php-comment">     * @param int      $an_article_id
+</span></span><span class="l" id="105"><a class="l" href="#105">105 </a><span class="php-comment">     * @param bool|int $clang
+</span></span><span class="l" id="106"><a class="l" href="#106">106 </a><span class="php-comment">     * @param int      $revision
+</span></span><span class="l" id="107"><a class="l" href="#107">107 </a><span class="php-comment">     *
+</span></span><span class="l" id="108"><a class="l" href="#108">108 </a><span class="php-comment">     * @return self
+</span></span><span class="l" id="109"><a class="l" href="#109">109 </a><span class="php-comment">     */</span>
+</span><span class="l" id="110"><a class="l" href="#110">110 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getFirstSliceForArticle" id="_getFirstSliceForArticle">getFirstSliceForArticle</a>(<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
+</span><span class="l" id="111"><a class="l" href="#111">111 </a>    {
+</span><span class="l" id="112"><a class="l" href="#112">112 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="113"><a class="l" href="#113">113 </a>            <span class="php-var">$clang</span> = rex_clang::getCurrentId();
+</span><span class="l" id="114"><a class="l" href="#114">114 </a>        }
+</span><span class="l" id="115"><a class="l" href="#115">115 </a>
+</span><span class="l" id="116"><a class="l" href="#116">116 </a>        <span class="php-keyword1">foreach</span> (<span class="php-keyword2">range</span>(<span class="php-num">1</span>, <span class="php-num">20</span>) <span class="php-keyword1">as</span> <span class="php-var">$ctype</span>) {
+</span><span class="l" id="117"><a class="l" href="#117">117 </a>            <span class="php-var">$slice</span> = self::getFirstSliceForCtype(<span class="php-var">$ctype</span>, <span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$revision</span>);
+</span><span class="l" id="118"><a class="l" href="#118">118 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$slice</span> !== <span class="php-keyword1">null</span>) {
+</span><span class="l" id="119"><a class="l" href="#119">119 </a>                <span class="php-keyword1">return</span> <span class="php-var">$slice</span>;
+</span><span class="l" id="120"><a class="l" href="#120">120 </a>            }
+</span><span class="l" id="121"><a class="l" href="#121">121 </a>        }
+</span><span class="l" id="122"><a class="l" href="#122">122 </a>
+</span><span class="l" id="123"><a class="l" href="#123">123 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
+</span><span class="l" id="124"><a class="l" href="#124">124 </a>    }
+</span><span class="l" id="125"><a class="l" href="#125">125 </a>
+</span><span class="l" id="126"><a class="l" href="#126">126 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="127"><a class="l" href="#127">127 </a><span class="php-comment">     * Returns the first slice of the given ctype of an article.
+</span></span><span class="l" id="128"><a class="l" href="#128">128 </a><span class="php-comment">     *
+</span></span><span class="l" id="129"><a class="l" href="#129">129 </a><span class="php-comment">     * @param int      $ctype
+</span></span><span class="l" id="130"><a class="l" href="#130">130 </a><span class="php-comment">     * @param int      $an_article_id
+</span></span><span class="l" id="131"><a class="l" href="#131">131 </a><span class="php-comment">     * @param bool|int $clang
+</span></span><span class="l" id="132"><a class="l" href="#132">132 </a><span class="php-comment">     * @param int      $revision
+</span></span><span class="l" id="133"><a class="l" href="#133">133 </a><span class="php-comment">     *
+</span></span><span class="l" id="134"><a class="l" href="#134">134 </a><span class="php-comment">     * @return self
+</span></span><span class="l" id="135"><a class="l" href="#135">135 </a><span class="php-comment">     */</span>
+</span><span class="l" id="136"><a class="l" href="#136">136 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getFirstSliceForCtype" id="_getFirstSliceForCtype">getFirstSliceForCtype</a>(<span class="php-var">$ctype</span>, <span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
+</span><span class="l" id="137"><a class="l" href="#137">137 </a>    {
+</span><span class="l" id="138"><a class="l" href="#138">138 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="139"><a class="l" href="#139">139 </a>            <span class="php-var">$clang</span> = rex_clang::getCurrentId();
+</span><span class="l" id="140"><a class="l" href="#140">140 </a>        }
+</span><span class="l" id="141"><a class="l" href="#141">141 </a>
+</span><span class="l" id="142"><a class="l" href="#142">142 </a>        <span class="php-keyword1">return</span> self::getSliceWhere(
+</span><span class="l" id="143"><a class="l" href="#143">143 </a>            <span class="php-quote">'article_id=? AND clang_id=? AND ctype_id=? AND priority=1 AND revision=?'</span>,
+</span><span class="l" id="144"><a class="l" href="#144">144 </a>            [<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$ctype</span>, <span class="php-var">$revision</span>]
+</span><span class="l" id="145"><a class="l" href="#145">145 </a>        );
+</span><span class="l" id="146"><a class="l" href="#146">146 </a>    }
+</span><span class="l" id="147"><a class="l" href="#147">147 </a>
+</span><span class="l" id="148"><a class="l" href="#148">148 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="149"><a class="l" href="#149">149 </a><span class="php-comment">     * Return all slices for an article that have a certain
+</span></span><span class="l" id="150"><a class="l" href="#150">150 </a><span class="php-comment">     * clang or revision.
+</span></span><span class="l" id="151"><a class="l" href="#151">151 </a><span class="php-comment">     *
+</span></span><span class="l" id="152"><a class="l" href="#152">152 </a><span class="php-comment">     * @param int      $an_article_id
+</span></span><span class="l" id="153"><a class="l" href="#153">153 </a><span class="php-comment">     * @param bool|int $clang
+</span></span><span class="l" id="154"><a class="l" href="#154">154 </a><span class="php-comment">     * @param int      $revision
+</span></span><span class="l" id="155"><a class="l" href="#155">155 </a><span class="php-comment">     *
+</span></span><span class="l" id="156"><a class="l" href="#156">156 </a><span class="php-comment">     * @return self[]
+</span></span><span class="l" id="157"><a class="l" href="#157">157 </a><span class="php-comment">     */</span>
+</span><span class="l" id="158"><a class="l" href="#158">158 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSlicesForArticle" id="_getSlicesForArticle">getSlicesForArticle</a>(<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
+</span><span class="l" id="159"><a class="l" href="#159">159 </a>    {
+</span><span class="l" id="160"><a class="l" href="#160">160 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="161"><a class="l" href="#161">161 </a>            <span class="php-var">$clang</span> = rex_clang::getCurrentId();
+</span><span class="l" id="162"><a class="l" href="#162">162 </a>        }
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>        <span class="php-keyword1">return</span> self::getSlicesWhere(
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>            <span class="php-quote">'article_id=? AND clang_id=? AND revision=?'</span>,
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>            [<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$revision</span>]
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>        );
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>    }
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>
+</span><span class="l" id="170"><a class="l" href="#170">170 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="171"><a class="l" href="#171">171 </a><span class="php-comment">     * Return all slices for an article that have a certain
+</span></span><span class="l" id="172"><a class="l" href="#172">172 </a><span class="php-comment">     * module type.
+</span></span><span class="l" id="173"><a class="l" href="#173">173 </a><span class="php-comment">     *
+</span></span><span class="l" id="174"><a class="l" href="#174">174 </a><span class="php-comment">     * @param int      $an_article_id
+</span></span><span class="l" id="175"><a class="l" href="#175">175 </a><span class="php-comment">     * @param int      $a_moduletype_id
+</span></span><span class="l" id="176"><a class="l" href="#176">176 </a><span class="php-comment">     * @param bool|int $clang
+</span></span><span class="l" id="177"><a class="l" href="#177">177 </a><span class="php-comment">     * @param int      $revision
+</span></span><span class="l" id="178"><a class="l" href="#178">178 </a><span class="php-comment">     *
+</span></span><span class="l" id="179"><a class="l" href="#179">179 </a><span class="php-comment">     * @return self[]
+</span></span><span class="l" id="180"><a class="l" href="#180">180 </a><span class="php-comment">     */</span>
+</span><span class="l" id="181"><a class="l" href="#181">181 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSlicesForArticleOfType" id="_getSlicesForArticleOfType">getSlicesForArticleOfType</a>(<span class="php-var">$an_article_id</span>, <span class="php-var">$a_moduletype_id</span>, <span class="php-var">$clang</span> = <span class="php-keyword1">false</span>, <span class="php-var">$revision</span> = <span class="php-num">0</span>)
+</span><span class="l" id="182"><a class="l" href="#182">182 </a>    {
+</span><span class="l" id="183"><a class="l" href="#183">183 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$clang</span> === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="184"><a class="l" href="#184">184 </a>            <span class="php-var">$clang</span> = rex_clang::getCurrentId();
+</span><span class="l" id="185"><a class="l" href="#185">185 </a>        }
+</span><span class="l" id="186"><a class="l" href="#186">186 </a>
+</span><span class="l" id="187"><a class="l" href="#187">187 </a>        <span class="php-keyword1">return</span> self::getSlicesWhere(
+</span><span class="l" id="188"><a class="l" href="#188">188 </a>            <span class="php-quote">'article_id=? AND clang_id=? AND module_id=? AND revision=?'</span>,
+</span><span class="l" id="189"><a class="l" href="#189">189 </a>            [<span class="php-var">$an_article_id</span>, <span class="php-var">$clang</span>, <span class="php-var">$a_moduletype_id</span>, <span class="php-var">$revision</span>]
+</span><span class="l" id="190"><a class="l" href="#190">190 </a>        );
+</span><span class="l" id="191"><a class="l" href="#191">191 </a>    }
+</span><span class="l" id="192"><a class="l" href="#192">192 </a>
+</span><span class="l" id="193"><a class="l" href="#193">193 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="194"><a class="l" href="#194">194 </a><span class="php-comment">     * Return the next slice for this article.
+</span></span><span class="l" id="195"><a class="l" href="#195">195 </a><span class="php-comment">     *
+</span></span><span class="l" id="196"><a class="l" href="#196">196 </a><span class="php-comment">     * @return self
+</span></span><span class="l" id="197"><a class="l" href="#197">197 </a><span class="php-comment">     */</span>
+</span><span class="l" id="198"><a class="l" href="#198">198 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getNextSlice" id="_getNextSlice">getNextSlice</a>()
+</span><span class="l" id="199"><a class="l" href="#199">199 </a>    {
+</span><span class="l" id="200"><a class="l" href="#200">200 </a>        <span class="php-keyword1">return</span> self::getSliceWhere(
+</span><span class="l" id="201"><a class="l" href="#201">201 </a>            <span class="php-quote">'priority = ? AND article_id=? AND clang_id = ? AND ctype_id = ? AND revision=?'</span>,
+</span><span class="l" id="202"><a class="l" href="#202">202 </a>            [<span class="php-var">$this</span>-&gt;_priority + <span class="php-num">1</span>, <span class="php-var">$this</span>-&gt;_article_id, <span class="php-var">$this</span>-&gt;_clang, <span class="php-var">$this</span>-&gt;_ctype, <span class="php-var">$this</span>-&gt;_revision]
+</span><span class="l" id="203"><a class="l" href="#203">203 </a>        );
+</span><span class="l" id="204"><a class="l" href="#204">204 </a>    }
+</span><span class="l" id="205"><a class="l" href="#205">205 </a>
+</span><span class="l" id="206"><a class="l" href="#206">206 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="207"><a class="l" href="#207">207 </a><span class="php-comment">     * @return self
+</span></span><span class="l" id="208"><a class="l" href="#208">208 </a><span class="php-comment">     */</span>
+</span><span class="l" id="209"><a class="l" href="#209">209 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getPreviousSlice" id="_getPreviousSlice">getPreviousSlice</a>()
+</span><span class="l" id="210"><a class="l" href="#210">210 </a>    {
+</span><span class="l" id="211"><a class="l" href="#211">211 </a>        <span class="php-keyword1">return</span> self::getSliceWhere(
+</span><span class="l" id="212"><a class="l" href="#212">212 </a>            <span class="php-quote">'priority = ? AND article_id=? AND clang_id = ? AND ctype_id = ? AND revision=?'</span>,
+</span><span class="l" id="213"><a class="l" href="#213">213 </a>            [<span class="php-var">$this</span>-&gt;_priority - <span class="php-num">1</span>, <span class="php-var">$this</span>-&gt;_article_id, <span class="php-var">$this</span>-&gt;_clang, <span class="php-var">$this</span>-&gt;_ctype, <span class="php-var">$this</span>-&gt;_revision]
+</span><span class="l" id="214"><a class="l" href="#214">214 </a>        );
+</span><span class="l" id="215"><a class="l" href="#215">215 </a>    }
+</span><span class="l" id="216"><a class="l" href="#216">216 </a>
+</span><span class="l" id="217"><a class="l" href="#217">217 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="218"><a class="l" href="#218">218 </a><span class="php-comment">     * Gibt den Slice formatiert zurück.
+</span></span><span class="l" id="219"><a class="l" href="#219">219 </a><span class="php-comment">     *
+</span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     * @since 4.1 - 29.05.2008
+</span></span><span class="l" id="221"><a class="l" href="#221">221 </a><span class="php-comment">     * @see rex_article_content::getSlice()
+</span></span><span class="l" id="222"><a class="l" href="#222">222 </a><span class="php-comment">     *
+</span></span><span class="l" id="223"><a class="l" href="#223">223 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="224"><a class="l" href="#224">224 </a><span class="php-comment">     */</span>
+</span><span class="l" id="225"><a class="l" href="#225">225 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getSlice" id="_getSlice">getSlice</a>()
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>    {
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>        <span class="php-var">$art</span> = <span class="php-keyword1">new</span> rex_article_content();
+</span><span class="l" id="228"><a class="l" href="#228">228 </a>        <span class="php-var">$art</span>-&gt;setArticleId(<span class="php-var">$this</span>-&gt;getArticleId());
+</span><span class="l" id="229"><a class="l" href="#229">229 </a>        <span class="php-var">$art</span>-&gt;setClang(<span class="php-var">$this</span>-&gt;getClang());
+</span><span class="l" id="230"><a class="l" href="#230">230 </a>        <span class="php-var">$art</span>-&gt;setSliceRevision(<span class="php-var">$this</span>-&gt;getRevision());
+</span><span class="l" id="231"><a class="l" href="#231">231 </a>        <span class="php-keyword1">return</span> <span class="php-var">$art</span>-&gt;getSlice(<span class="php-var">$this</span>-&gt;getId());
+</span><span class="l" id="232"><a class="l" href="#232">232 </a>    }
+</span><span class="l" id="233"><a class="l" href="#233">233 </a>
+</span><span class="l" id="234"><a class="l" href="#234">234 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     * @param string $where
+</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     * @param array  $params
+</span></span><span class="l" id="237"><a class="l" href="#237">237 </a><span class="php-comment">     *
+</span></span><span class="l" id="238"><a class="l" href="#238">238 </a><span class="php-comment">     * @return self
+</span></span><span class="l" id="239"><a class="l" href="#239">239 </a><span class="php-comment">     */</span>
+</span><span class="l" id="240"><a class="l" href="#240">240 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSliceWhere" id="_getSliceWhere">getSliceWhere</a>(<span class="php-var">$where</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span> = [])
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>    {
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>        <span class="php-var">$slices</span> = self::getSlicesWhere(<span class="php-var">$where</span>, <span class="php-var">$params</span>);
+</span><span class="l" id="243"><a class="l" href="#243">243 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$slices</span>[<span class="php-num">0</span>]) ? <span class="php-var">$slices</span>[<span class="php-num">0</span>] : <span class="php-keyword1">null</span>;
+</span><span class="l" id="244"><a class="l" href="#244">244 </a>    }
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="247"><a class="l" href="#247">247 </a><span class="php-comment">     * @param string $where
+</span></span><span class="l" id="248"><a class="l" href="#248">248 </a><span class="php-comment">     * @param array  $params
+</span></span><span class="l" id="249"><a class="l" href="#249">249 </a><span class="php-comment">     *
+</span></span><span class="l" id="250"><a class="l" href="#250">250 </a><span class="php-comment">     * @return self[]
+</span></span><span class="l" id="251"><a class="l" href="#251">251 </a><span class="php-comment">     */</span>
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSlicesWhere" id="_getSlicesWhere">getSlicesWhere</a>(<span class="php-var">$where</span>, <span class="php-keyword1">array</span> <span class="php-var">$params</span> = [])
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>    {
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>        <span class="php-var">$sql</span> = rex_sql::factory();
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>        <span class="php-comment">// $sql-&gt;setDebug();</span>
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>        <span class="php-var">$query</span> = <span class="php-quote">'
+</span></span><span class="l" id="257"><a class="l" href="#257">257 </a><span class="php-quote">            SELECT *
+</span></span><span class="l" id="258"><a class="l" href="#258">258 </a><span class="php-quote">            FROM '</span> . rex::getTable(<span class="php-quote">'article_slice'</span>) . <span class="php-quote">'
+</span></span><span class="l" id="259"><a class="l" href="#259">259 </a><span class="php-quote">            WHERE '</span> . <span class="php-var">$where</span> . <span class="php-quote">'
+</span></span><span class="l" id="260"><a class="l" href="#260">260 </a><span class="php-quote">            ORDER BY ctype_id, priority'</span>;
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>
+</span><span class="l" id="262"><a class="l" href="#262">262 </a>        <span class="php-var">$sql</span>-&gt;setQuery(<span class="php-var">$query</span>, <span class="php-var">$params</span>);
+</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-var">$rows</span> = <span class="php-var">$sql</span>-&gt;getRows();
+</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-var">$slices</span> = [];
+</span><span class="l" id="265"><a class="l" href="#265">265 </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-var">$rows</span>; ++<span class="php-var">$i</span>) {
+</span><span class="l" id="266"><a class="l" href="#266">266 </a>            <span class="php-var">$slices</span>[] = <span class="php-keyword1">new</span> self(
+</span><span class="l" id="267"><a class="l" href="#267">267 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'id'</span>),
+</span><span class="l" id="268"><a class="l" href="#268">268 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'article_id'</span>),
+</span><span class="l" id="269"><a class="l" href="#269">269 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'clang_id'</span>),
+</span><span class="l" id="270"><a class="l" href="#270">270 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'ctype_id'</span>),
+</span><span class="l" id="271"><a class="l" href="#271">271 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'module_id'</span>),
+</span><span class="l" id="272"><a class="l" href="#272">272 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'priority'</span>),
+</span><span class="l" id="273"><a class="l" href="#273">273 </a>                <span class="php-var">$sql</span>-&gt;getDateTimeValue(<span class="php-quote">'createdate'</span>),
+</span><span class="l" id="274"><a class="l" href="#274">274 </a>                <span class="php-var">$sql</span>-&gt;getDateTimeValue(<span class="php-quote">'updatedate'</span>),
+</span><span class="l" id="275"><a class="l" href="#275">275 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'createuser'</span>),
+</span><span class="l" id="276"><a class="l" href="#276">276 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'updateuser'</span>),
+</span><span class="l" id="277"><a class="l" href="#277">277 </a>                <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'revision'</span>),
+</span><span class="l" id="278"><a class="l" href="#278">278 </a>                [
+</span><span class="l" id="279"><a class="l" href="#279">279 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value1'</span>),
+</span><span class="l" id="280"><a class="l" href="#280">280 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value2'</span>),
+</span><span class="l" id="281"><a class="l" href="#281">281 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value3'</span>),
+</span><span class="l" id="282"><a class="l" href="#282">282 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value4'</span>),
+</span><span class="l" id="283"><a class="l" href="#283">283 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value5'</span>),
+</span><span class="l" id="284"><a class="l" href="#284">284 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value6'</span>),
+</span><span class="l" id="285"><a class="l" href="#285">285 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value7'</span>),
+</span><span class="l" id="286"><a class="l" href="#286">286 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value8'</span>),
+</span><span class="l" id="287"><a class="l" href="#287">287 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value9'</span>),
+</span><span class="l" id="288"><a class="l" href="#288">288 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value10'</span>),
+</span><span class="l" id="289"><a class="l" href="#289">289 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value11'</span>),
+</span><span class="l" id="290"><a class="l" href="#290">290 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value12'</span>),
+</span><span class="l" id="291"><a class="l" href="#291">291 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value13'</span>),
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value14'</span>),
+</span><span class="l" id="293"><a class="l" href="#293">293 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value15'</span>),
+</span><span class="l" id="294"><a class="l" href="#294">294 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value16'</span>),
+</span><span class="l" id="295"><a class="l" href="#295">295 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value17'</span>),
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value18'</span>),
+</span><span class="l" id="297"><a class="l" href="#297">297 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value19'</span>),
+</span><span class="l" id="298"><a class="l" href="#298">298 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'value20'</span>),
+</span><span class="l" id="299"><a class="l" href="#299">299 </a>                ],
+</span><span class="l" id="300"><a class="l" href="#300">300 </a>                [
+</span><span class="l" id="301"><a class="l" href="#301">301 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media1'</span>),
+</span><span class="l" id="302"><a class="l" href="#302">302 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media2'</span>),
+</span><span class="l" id="303"><a class="l" href="#303">303 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media3'</span>),
+</span><span class="l" id="304"><a class="l" href="#304">304 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media4'</span>),
+</span><span class="l" id="305"><a class="l" href="#305">305 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media5'</span>),
+</span><span class="l" id="306"><a class="l" href="#306">306 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media6'</span>),
+</span><span class="l" id="307"><a class="l" href="#307">307 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media7'</span>),
+</span><span class="l" id="308"><a class="l" href="#308">308 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media8'</span>),
+</span><span class="l" id="309"><a class="l" href="#309">309 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media9'</span>),
+</span><span class="l" id="310"><a class="l" href="#310">310 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'media10'</span>),
+</span><span class="l" id="311"><a class="l" href="#311">311 </a>                ],
+</span><span class="l" id="312"><a class="l" href="#312">312 </a>                [
+</span><span class="l" id="313"><a class="l" href="#313">313 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist1'</span>),
+</span><span class="l" id="314"><a class="l" href="#314">314 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist2'</span>),
+</span><span class="l" id="315"><a class="l" href="#315">315 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist3'</span>),
+</span><span class="l" id="316"><a class="l" href="#316">316 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist4'</span>),
+</span><span class="l" id="317"><a class="l" href="#317">317 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist5'</span>),
+</span><span class="l" id="318"><a class="l" href="#318">318 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist6'</span>),
+</span><span class="l" id="319"><a class="l" href="#319">319 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist7'</span>),
+</span><span class="l" id="320"><a class="l" href="#320">320 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist8'</span>),
+</span><span class="l" id="321"><a class="l" href="#321">321 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist9'</span>),
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'medialist10'</span>),
+</span><span class="l" id="323"><a class="l" href="#323">323 </a>                ],
+</span><span class="l" id="324"><a class="l" href="#324">324 </a>                [
+</span><span class="l" id="325"><a class="l" href="#325">325 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link1'</span>),
+</span><span class="l" id="326"><a class="l" href="#326">326 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link2'</span>),
+</span><span class="l" id="327"><a class="l" href="#327">327 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link3'</span>),
+</span><span class="l" id="328"><a class="l" href="#328">328 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link4'</span>),
+</span><span class="l" id="329"><a class="l" href="#329">329 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link5'</span>),
+</span><span class="l" id="330"><a class="l" href="#330">330 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link6'</span>),
+</span><span class="l" id="331"><a class="l" href="#331">331 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link7'</span>),
+</span><span class="l" id="332"><a class="l" href="#332">332 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link8'</span>),
+</span><span class="l" id="333"><a class="l" href="#333">333 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link9'</span>),
+</span><span class="l" id="334"><a class="l" href="#334">334 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'link10'</span>),
+</span><span class="l" id="335"><a class="l" href="#335">335 </a>                ],
+</span><span class="l" id="336"><a class="l" href="#336">336 </a>                [
+</span><span class="l" id="337"><a class="l" href="#337">337 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist1'</span>),
+</span><span class="l" id="338"><a class="l" href="#338">338 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist2'</span>),
+</span><span class="l" id="339"><a class="l" href="#339">339 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist3'</span>),
+</span><span class="l" id="340"><a class="l" href="#340">340 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist4'</span>),
+</span><span class="l" id="341"><a class="l" href="#341">341 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist5'</span>),
+</span><span class="l" id="342"><a class="l" href="#342">342 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist6'</span>),
+</span><span class="l" id="343"><a class="l" href="#343">343 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist7'</span>),
+</span><span class="l" id="344"><a class="l" href="#344">344 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist8'</span>),
+</span><span class="l" id="345"><a class="l" href="#345">345 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist9'</span>),
+</span><span class="l" id="346"><a class="l" href="#346">346 </a>                    <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'linklist10'</span>),
+</span><span class="l" id="347"><a class="l" href="#347">347 </a>                ]
+</span><span class="l" id="348"><a class="l" href="#348">348 </a>            );
+</span><span class="l" id="349"><a class="l" href="#349">349 </a>
+</span><span class="l" id="350"><a class="l" href="#350">350 </a>            <span class="php-var">$sql</span>-&gt;<span class="php-keyword2">next</span>();
+</span><span class="l" id="351"><a class="l" href="#351">351 </a>        }
+</span><span class="l" id="352"><a class="l" href="#352">352 </a>        <span class="php-keyword1">return</span> <span class="php-var">$slices</span>;
+</span><span class="l" id="353"><a class="l" href="#353">353 </a>    }
+</span><span class="l" id="354"><a class="l" href="#354">354 </a>
+</span><span class="l" id="355"><a class="l" href="#355">355 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="356"><a class="l" href="#356">356 </a><span class="php-comment">     * @return rex_article
+</span></span><span class="l" id="357"><a class="l" href="#357">357 </a><span class="php-comment">     */</span>
+</span><span class="l" id="358"><a class="l" href="#358">358 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getArticle" id="_getArticle">getArticle</a>()
+</span><span class="l" id="359"><a class="l" href="#359">359 </a>    {
+</span><span class="l" id="360"><a class="l" href="#360">360 </a>        <span class="php-keyword1">return</span> rex_article::get(<span class="php-var">$this</span>-&gt;getArticleId());
+</span><span class="l" id="361"><a class="l" href="#361">361 </a>    }
+</span><span class="l" id="362"><a class="l" href="#362">362 </a>
+</span><span class="l" id="363"><a class="l" href="#363">363 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getArticleId" id="_getArticleId">getArticleId</a>()
+</span><span class="l" id="364"><a class="l" href="#364">364 </a>    {
+</span><span class="l" id="365"><a class="l" href="#365">365 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_article_id;
+</span><span class="l" id="366"><a class="l" href="#366">366 </a>    }
+</span><span class="l" id="367"><a class="l" href="#367">367 </a>
+</span><span class="l" id="368"><a class="l" href="#368">368 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getClangId" id="_getClangId">getClangId</a>()
+</span><span class="l" id="369"><a class="l" href="#369">369 </a>    {
+</span><span class="l" id="370"><a class="l" href="#370">370 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_clang;
+</span><span class="l" id="371"><a class="l" href="#371">371 </a>    }
+</span><span class="l" id="372"><a class="l" href="#372">372 </a>
+</span><span class="l" id="373"><a class="l" href="#373">373 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="374"><a class="l" href="#374">374 </a><span class="php-comment">     * @deprecated since redaxo 5.6, use getClangId() instead
+</span></span><span class="l" id="375"><a class="l" href="#375">375 </a><span class="php-comment">     */</span>
+</span><span class="l" id="376"><a class="l" href="#376">376 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getClang" id="_getClang">getClang</a>()
+</span><span class="l" id="377"><a class="l" href="#377">377 </a>    {
+</span><span class="l" id="378"><a class="l" href="#378">378 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_clang;
+</span><span class="l" id="379"><a class="l" href="#379">379 </a>    }
+</span><span class="l" id="380"><a class="l" href="#380">380 </a>
+</span><span class="l" id="381"><a class="l" href="#381">381 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getCtype" id="_getCtype">getCtype</a>()
+</span><span class="l" id="382"><a class="l" href="#382">382 </a>    {
+</span><span class="l" id="383"><a class="l" href="#383">383 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_ctype;
+</span><span class="l" id="384"><a class="l" href="#384">384 </a>    }
+</span><span class="l" id="385"><a class="l" href="#385">385 </a>
+</span><span class="l" id="386"><a class="l" href="#386">386 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getRevision" id="_getRevision">getRevision</a>()
+</span><span class="l" id="387"><a class="l" href="#387">387 </a>    {
+</span><span class="l" id="388"><a class="l" href="#388">388 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_revision;
+</span><span class="l" id="389"><a class="l" href="#389">389 </a>    }
+</span><span class="l" id="390"><a class="l" href="#390">390 </a>
+</span><span class="l" id="391"><a class="l" href="#391">391 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getModuleId" id="_getModuleId">getModuleId</a>()
+</span><span class="l" id="392"><a class="l" href="#392">392 </a>    {
+</span><span class="l" id="393"><a class="l" href="#393">393 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_module_id;
+</span><span class="l" id="394"><a class="l" href="#394">394 </a>    }
+</span><span class="l" id="395"><a class="l" href="#395">395 </a>
+</span><span class="l" id="396"><a class="l" href="#396">396 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getId" id="_getId">getId</a>()
+</span><span class="l" id="397"><a class="l" href="#397">397 </a>    {
+</span><span class="l" id="398"><a class="l" href="#398">398 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_id;
+</span><span class="l" id="399"><a class="l" href="#399">399 </a>    }
+</span><span class="l" id="400"><a class="l" href="#400">400 </a>
+</span><span class="l" id="401"><a class="l" href="#401">401 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getValue" id="_getValue">getValue</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="402"><a class="l" href="#402">402 </a>    {
+</span><span class="l" id="403"><a class="l" href="#403">403 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_int</span>(<span class="php-var">$index</span>)) {
+</span><span class="l" id="404"><a class="l" href="#404">404 </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_values[<span class="php-var">$index</span> - <span class="php-num">1</span>];
+</span><span class="l" id="405"><a class="l" href="#405">405 </a>        }
+</span><span class="l" id="406"><a class="l" href="#406">406 </a>
+</span><span class="l" id="407"><a class="l" href="#407">407 </a>        <span class="php-var">$attrName</span> = <span class="php-quote">'_'</span> . <span class="php-var">$index</span>;
+</span><span class="l" id="408"><a class="l" href="#408">408 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;<span class="php-var">$attrName</span>)) {
+</span><span class="l" id="409"><a class="l" href="#409">409 </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;<span class="php-var">$attrName</span>;
+</span><span class="l" id="410"><a class="l" href="#410">410 </a>        }
+</span><span class="l" id="411"><a class="l" href="#411">411 </a>
+</span><span class="l" id="412"><a class="l" href="#412">412 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
+</span><span class="l" id="413"><a class="l" href="#413">413 </a>    }
+</span><span class="l" id="414"><a class="l" href="#414">414 </a>
+</span><span class="l" id="415"><a class="l" href="#415">415 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getLink" id="_getLink">getLink</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="416"><a class="l" href="#416">416 </a>    {
+</span><span class="l" id="417"><a class="l" href="#417">417 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_links[<span class="php-var">$index</span> - <span class="php-num">1</span>];
+</span><span class="l" id="418"><a class="l" href="#418">418 </a>    }
+</span><span class="l" id="419"><a class="l" href="#419">419 </a>
+</span><span class="l" id="420"><a class="l" href="#420">420 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getLinkUrl" id="_getLinkUrl">getLinkUrl</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="421"><a class="l" href="#421">421 </a>    {
+</span><span class="l" id="422"><a class="l" href="#422">422 </a>        <span class="php-keyword1">return</span> rex_getUrl(<span class="php-var">$this</span>-&gt;getLink(<span class="php-var">$index</span>));
+</span><span class="l" id="423"><a class="l" href="#423">423 </a>    }
+</span><span class="l" id="424"><a class="l" href="#424">424 </a>
+</span><span class="l" id="425"><a class="l" href="#425">425 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getLinkList" id="_getLinkList">getLinkList</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="426"><a class="l" href="#426">426 </a>    {
+</span><span class="l" id="427"><a class="l" href="#427">427 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_linklists[<span class="php-var">$index</span> - <span class="php-num">1</span>];
+</span><span class="l" id="428"><a class="l" href="#428">428 </a>    }
+</span><span class="l" id="429"><a class="l" href="#429">429 </a>
+</span><span class="l" id="430"><a class="l" href="#430">430 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getMedia" id="_getMedia">getMedia</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="431"><a class="l" href="#431">431 </a>    {
+</span><span class="l" id="432"><a class="l" href="#432">432 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_media[<span class="php-var">$index</span> - <span class="php-num">1</span>];
+</span><span class="l" id="433"><a class="l" href="#433">433 </a>    }
+</span><span class="l" id="434"><a class="l" href="#434">434 </a>
+</span><span class="l" id="435"><a class="l" href="#435">435 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getMediaUrl" id="_getMediaUrl">getMediaUrl</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="436"><a class="l" href="#436">436 </a>    {
+</span><span class="l" id="437"><a class="l" href="#437">437 </a>        <span class="php-keyword1">return</span> rex_url::media(<span class="php-var">$this</span>-&gt;getMedia(<span class="php-var">$index</span>));
+</span><span class="l" id="438"><a class="l" href="#438">438 </a>    }
+</span><span class="l" id="439"><a class="l" href="#439">439 </a>
+</span><span class="l" id="440"><a class="l" href="#440">440 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getMediaList" id="_getMediaList">getMediaList</a>(<span class="php-var">$index</span>)
+</span><span class="l" id="441"><a class="l" href="#441">441 </a>    {
+</span><span class="l" id="442"><a class="l" href="#442">442 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_medialists[<span class="php-var">$index</span> - <span class="php-num">1</span>];
+</span><span class="l" id="443"><a class="l" href="#443">443 </a>    }
+</span><span class="l" id="444"><a class="l" href="#444">444 </a>
+</span><span class="l" id="445"><a class="l" href="#445">445 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getPriority" id="_getPriority">getPriority</a>()
+</span><span class="l" id="446"><a class="l" href="#446">446 </a>    {
+</span><span class="l" id="447"><a class="l" href="#447">447 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_priority;
+</span><span class="l" id="448"><a class="l" href="#448">448 </a>    }
+</span><span class="l" id="449"><a class="l" href="#449">449 </a>}
+</span><span class="l" id="450"><a class="l" href="#450">450 </a></span></code></pre>
  </body>
 </html>

@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<link href="../Assets/css/styles.css" rel="stylesheet"/>
+<script src="../Assets/js/script.js"></script>
+</head>
+<body><div class="class" id="content">
+<h1>Class rex_api_minibar</h1>
+<dl class="tree well">
+<dd style="padding-left:0px">
+<a href="class-rex_api_function.html"><span>rex_api_function</span></a>
+			
+			
+			 uses 
+				<a href="class-rex_factory_trait.html"><span>rex_factory_trait</span></a>
+</dd>
+<dd style="padding-left:30px">
+<img alt="Extended by" src="../Assets/images/inherit.png"/>
+<b><span>rex_api_minibar</span></b>
+</dd>
+</dl>
+<div class="alert alert-info">
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
+<b>Located at</b> <a href="source-class-rex_api_minibar.html#3-25" title="Go to source code">redaxo/src/core/lib/minibar/api_minibar.php</a><br/>
+</div>
+<h2>Methods summary</h2>
+<table class="summary table table-bordered table-striped methods" id="methods">
+<tr data-order="execute" id="_execute">
+<td class="attributes"><code>
+				 public 
+				<code><a href="class-rex_api_result.html">rex_api_result</a></code>
+</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_execute">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/execute"></a><a href="source-class-rex_api_minibar.html?10,19#10" title="Go to source code">execute</a>( )</code>
+<div class="description short">
+<p>This method have to be overriden by a subclass and does all logic which the
+api function represents.</p>
+</div>
+<div class="description detailed hidden">
+<p>This method have to be overriden by a subclass and does all logic which the
+api function represents.</p>
+<p>In the first place this method may retrieve and validate parameters from the
+request. Afterwards the actual logic should be executed.</p>
+<p>This function may also throw exceptions e.g. in case when permissions are
+missing or the provided parameters are invalid.</p>
+<h4>Returns</h4>
+<div class="list">
+<code><code><a href="class-rex_api_result.html">rex_api_result</a></code></code><br/>The result of the api-function<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="requiresCsrfProtection" id="_requiresCsrfProtection">
+<td class="attributes"><code>
+				 protected 
+				boolean
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_requiresCsrfProtection">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/requiresCsrfProtection"></a><a href="source-class-rex_api_minibar.html?21,24#21" title="Go to source code">requiresCsrfProtection</a>( )</code>
+<div class="description short">
+<p>Csrf validation is disabled by default for backwards compatiblity reasons.
+This default will change in a future version. Prepare all your api functions to
+work with csrf token by using your-api-class::getUrlParams()/getHiddenFields(),
+otherwise they will stop work.</p>
+</div>
+<div class="description detailed hidden">
+<p>Csrf validation is disabled by default for backwards compatiblity reasons.
+This default will change in a future version. Prepare all your api functions to
+work with csrf token by using your-api-class::getUrlParams()/getHiddenFields(),
+otherwise they will stop work.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>boolean</code><br/>bool<br/>
+</div>
+<h4>Overrides</h4>
+<div class="list"><code><a href="class-rex_api_function.html#_requiresCsrfProtection">rex_api_function::requiresCsrfProtection</a></code></div>
+</div>
+</div></td>
+</tr>
+</table>
+<h3>Methods inherited from <a href="class-rex_api_function.html#methods">rex_api_function</a></h3>
+<p class="elementList">
+<code><a href="class-rex_api_function.html#___construct">__construct()</a></code>, 
+			<code><a href="class-rex_api_function.html#_factory">factory()</a></code>, 
+			<code><a href="class-rex_api_function.html#_getHiddenFields">getHiddenFields()</a></code>, 
+			<code><a href="class-rex_api_function.html#_getMessage">getMessage()</a></code>, 
+			<code><a href="class-rex_api_function.html#_getResult">getResult()</a></code>, 
+			<code><a href="class-rex_api_function.html#_getUrlParams">getUrlParams()</a></code>, 
+			<code><a href="class-rex_api_function.html#_handleCall">handleCall()</a></code>, 
+			<code><a href="class-rex_api_function.html#_hasMessage">hasMessage()</a></code>
+</p>
+<h3>Methods used from <a href="class-rex_factory_trait.html#methods">rex_factory_trait</a></h3>
+<p class="elementList">
+<code><a href="class-rex_factory_trait.html#_callFactoryClass">callFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_getFactoryClass">getFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_hasFactoryClass">hasFactoryClass()</a></code>, 
+			<code><a href="class-rex_factory_trait.html#_setFactoryClass">setFactoryClass()</a></code>
+</p>
+<h2>Constants summary</h2>
+<h3>Constants inherited from <a href="class-rex_api_function.html#constants">rex_api_function</a></h3>
+<p class="elementList">
+<code><a href="class-rex_api_function.html#REQ_CALL_PARAM"><b>REQ_CALL_PARAM</b></a></code>, 
+			<code><a href="class-rex_api_function.html#REQ_RESULT_PARAM"><b>REQ_RESULT_PARAM</b></a></code>
+</p>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="published" id="$published">
+<td class="attributes"><code>
+				protected  
+				boolean
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24published"></a><a href="source-class-rex_api_minibar.html#8" title="Go to source code"><var>$published</var></a>
+<div class="description short">
+<p>Flag, indicating if this api function may be called from the frontend. False
+by default.</p>
+</div>
+<div class="description detailed hidden">
+<p>Flag, indicating if this api function may be called from the frontend. False
+by default.</p>
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$published">#</a><code><span class="php-keyword1">true</span></code></div></td>
+</tr>
+</table>
+<h3>Properties inherited from <a href="class-rex_api_function.html#properties">rex_api_function</a></h3>
+<p class="elementList">
+<code><a href="class-rex_api_function.html#$result"><var>$result</var></a></code>
+</p>
+</div></body>
+</html>

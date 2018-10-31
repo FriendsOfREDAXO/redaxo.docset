@@ -7,266 +7,329 @@
   </script>
  </head>
  <body>
-  <pre id="source"><code><span class="l" id="1">  1 <span class="xlang">&lt;?php</span>
-</span><span class="l" id="2">  2 
-</span><span class="l" id="3">  3 <span class="php-comment">/**
-</span></span><span class="l" id="4">  4 <span class="php-comment"> * @package redaxo\core
-</span></span><span class="l" id="5">  5 <span class="php-comment"> */</span>
-</span><span class="l" id="6">  6 <span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> rex_error_handler
-</span><span class="l" id="7">  7 {
-</span><span class="l" id="8">  8     <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var">$registered</span>;
-</span><span class="l" id="9">  9 
-</span><span class="l" id="10"> 10     <span class="php-comment">/**
-</span></span><span class="l" id="11"> 11 <span class="php-comment">     * Registers the class as php-error/exception handler.
-</span></span><span class="l" id="12"> 12 <span class="php-comment">     */</span>
-</span><span class="l" id="13"> 13     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> register()
-</span><span class="l" id="14"> 14     {
-</span><span class="l" id="15"> 15         <span class="php-keyword1">if</span> (self::<span class="php-var">$registered</span>) {
-</span><span class="l" id="16"> 16             <span class="php-keyword1">return</span>;
-</span><span class="l" id="17"> 17         }
-</span><span class="l" id="18"> 18 
-</span><span class="l" id="19"> 19         self::<span class="php-var">$registered</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="20"> 20 
-</span><span class="l" id="21"> 21         <span class="php-keyword2">set_error_handler</span>([__CLASS__, <span class="php-quote">'handleError'</span>]);
-</span><span class="l" id="22"> 22         <span class="php-keyword2">set_exception_handler</span>([__CLASS__, <span class="php-quote">'handleException'</span>]);
-</span><span class="l" id="23"> 23         <span class="php-keyword2">register_shutdown_function</span>([__CLASS__, <span class="php-quote">'shutdown'</span>]);
-</span><span class="l" id="24"> 24     }
-</span><span class="l" id="25"> 25 
-</span><span class="l" id="26"> 26     <span class="php-comment">/**
-</span></span><span class="l" id="27"> 27 <span class="php-comment">     * Unregisters the logger instance as php-error/exception handler.
-</span></span><span class="l" id="28"> 28 <span class="php-comment">     */</span>
-</span><span class="l" id="29"> 29     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> unregister()
-</span><span class="l" id="30"> 30     {
-</span><span class="l" id="31"> 31         <span class="php-keyword1">if</span> (!self::<span class="php-var">$registered</span>) {
-</span><span class="l" id="32"> 32             <span class="php-keyword1">return</span>;
-</span><span class="l" id="33"> 33         }
-</span><span class="l" id="34"> 34 
-</span><span class="l" id="35"> 35         self::<span class="php-var">$registered</span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="36"> 36 
-</span><span class="l" id="37"> 37         <span class="php-keyword2">restore_error_handler</span>();
-</span><span class="l" id="38"> 38         <span class="php-keyword2">restore_exception_handler</span>();
-</span><span class="l" id="39"> 39         <span class="php-comment">// unregister of shutdown function is not possible</span>
-</span><span class="l" id="40"> 40     }
-</span><span class="l" id="41"> 41 
-</span><span class="l" id="42"> 42     <span class="php-comment">/**
-</span></span><span class="l" id="43"> 43 <span class="php-comment">     * Handles the given Exception.
-</span></span><span class="l" id="44"> 44 <span class="php-comment">     *
-</span></span><span class="l" id="45"> 45 <span class="php-comment">     * @param Throwable|Exception $exception The Exception to handle
-</span></span><span class="l" id="46"> 46 <span class="php-comment">     */</span>
-</span><span class="l" id="47"> 47     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> handleException(<span class="php-var">$exception</span>)
-</span><span class="l" id="48"> 48     {
-</span><span class="l" id="49"> 49         rex_logger::logException(<span class="php-var">$exception</span>);
-</span><span class="l" id="50"> 50 
-</span><span class="l" id="51"> 51         <span class="php-keyword1">while</span> (<span class="php-keyword2">ob_get_level</span>()) {
-</span><span class="l" id="52"> 52             <span class="php-keyword2">ob_end_clean</span>();
-</span><span class="l" id="53"> 53         }
-</span><span class="l" id="54"> 54 
-</span><span class="l" id="55"> 55         <span class="php-var">$status</span> = rex_response::HTTP_INTERNAL_ERROR;
-</span><span class="l" id="56"> 56         <span class="php-keyword1">if</span> (<span class="php-var">$exception</span> <span class="php-keyword1">instanceof</span> rex_http_exception &amp;&amp; <span class="php-var">$exception</span>-&gt;getHttpCode()) {
-</span><span class="l" id="57"> 57             <span class="php-var">$status</span> = <span class="php-var">$exception</span>-&gt;getHttpCode();
-</span><span class="l" id="58"> 58         }
-</span><span class="l" id="59"> 59         rex_response::setStatus(<span class="php-var">$status</span>);
-</span><span class="l" id="60"> 60 
-</span><span class="l" id="61"> 61         <span class="php-keyword1">if</span> (rex::isSetup() || rex::isDebugMode() || (<span class="php-var">$user</span> = rex_backend_login::createUser()) &amp;&amp; <span class="php-var">$user</span>-&gt;isAdmin()) {
-</span><span class="l" id="62"> 62             <span class="php-var">$whoops</span> = <span class="php-keyword1">new</span> \Whoops\Run();
-</span><span class="l" id="63"> 63             <span class="php-var">$whoops</span>-&gt;writeToOutput(<span class="php-keyword1">false</span>);
-</span><span class="l" id="64"> 64             <span class="php-var">$whoops</span>-&gt;allowQuit(<span class="php-keyword1">false</span>);
-</span><span class="l" id="65"> 65 
-</span><span class="l" id="66"> 66             <span class="php-var">$handler</span> = <span class="php-keyword1">new</span> \Whoops\Handler\PrettyPageHandler();
-</span><span class="l" id="67"> 67             <span class="php-var">$handler</span>-&gt;setApplicationRootPath(<span class="php-keyword2">rtrim</span>(rex_path::base(), <span class="php-quote">'/\\'</span>));
-</span><span class="l" id="68"> 68             <span class="php-keyword1">if</span> (<span class="php-keyword2">ini_get</span>(<span class="php-quote">'xdebug.file_link_format'</span>)) {
-</span><span class="l" id="69"> 69                 <span class="php-var">$handler</span>-&gt;setEditor(<span class="php-quote">'xdebug'</span>);
-</span><span class="l" id="70"> 70             }
-</span><span class="l" id="71"> 71 
-</span><span class="l" id="72"> 72             <span class="php-var">$whoops</span>-&gt;pushHandler(<span class="php-var">$handler</span>);
-</span><span class="l" id="73"> 73 
-</span><span class="l" id="74"> 74             <span class="php-var">$errPage</span> = <span class="php-var">$whoops</span>-&gt;handleException(<span class="php-var">$exception</span>);
-</span><span class="l" id="75"> 75 
-</span><span class="l" id="76"> 76             <span class="php-var">$errPageLogo</span> = <span class="php-quote">'
-</span></span><span class="l" id="77"> 77 <span class="php-quote">                &lt;svg xmlns="http://www.w3.org/2000/svg" width="250px" height="30px" viewBox="0 0 250 30"&gt;
-</span></span><span class="l" id="78"> 78 <span class="php-quote">                    &lt;path fill="#FFFFFF" d="M147.414,8.221c-0.344,0-5.73,0.003-5.73,0.003c-2.375,0-3.768,2.152-4.281,7.117c-0.571,5.528,1.038,6.839,3.428,6.787c0,0,4.383-0.018,4.983-0.018c2.578,0,3.868-1.401,4.424-6.75C150.776,9.795,150.006,8.221,147.414,8.221z M147.576,1.085c6.356,0,10.716,4.8,9.78,14.12c-0.93,9.264-4.338,14.051-11.097,14.039l-5.618,0.018c-7.919-0.022-11.169-6.19-10.311-14.756c0.813-8.112,4.823-13.417,10.842-13.417L147.576,1.085z M88.31,14.004h11.837l0.239-2.326c0.263-2.215-0.569-3.44-2.919-3.449h-5.445c-2.204,0.074-3.232,1.037-3.548,4.148L88.31,14.004z M99.5,20.268H87.678l-0.888,8.813h-7.095l1.755-17.412c0.727-6.39,4.402-10.456,10.553-10.456h5.471c6.285,0.021,10.614,4.443,9.936,11.176l-1.723,16.691H98.59L99.5,20.268L99.5,20.268z"/&gt;
-</span></span><span class="l" id="79"> 79 <span class="php-quote">                    &lt;path fill="#FFFFFF" d="M69.432,8.269h-6.758l-1.384,13.73h6.813c2.196,0,4.068-2.377,4.554-7.492C73.008,10.791,71.503,8.269,69.432,8.269z M69.713,1.213c14.65,0,12.27,27.844-1.457,27.844l-14.773,0.001l2.811-27.845H69.713L69.713,1.213z M53.957,8.239L40.618,8.237c-1.725,0-2.939,0.975-3.532,3.49h14.123l-0.631,6.263H36.413c0.11,2.896,1.056,3.845,3.481,3.854c2.037,0.009,8.634,0.106,12.677,0.127l-0.726,7.088H39.672c-7.177,0-11.146-5.596-10.233-14.52C30.402,5.116,34.176,1.21,40.609,1.21l14.05,0.003L53.957,8.239L53.957,8.239z M9.655,13.577h8.266c2.082,0,3.532-1.039,3.532-2.756c0-1.301-1.005-2.543-2.819-2.543c-1.406,0-5.36-0.021-8.44-0.038L9.655,13.577z M23.032,19.573l4.207,9.485h-7.722l-3.735-8.423H8.944l-0.85,8.423H1L3.802,1.215l14.655-0.006c6.585,0,10.478,5.11,10.075,9.686C28.215,14.502,26.893,17.467,23.032,19.573z"/&gt;
-</span></span><span class="l" id="80"> 80 <span class="php-quote">                    &lt;path fill="#FFFFFF" d="M114.552,1.279l5.167,8.52l5.461-8.52h8.835l-10.004,15.089l8.675,12.667h-8.309l-4.2-6.607l-4.398,6.607h-9.147l9.056-13.276l-9.043-14.479H114.552L114.552,1.279z"/&gt;
-</span></span><span class="l" id="81"> 81 <span class="php-quote">                    &lt;path fill="#FFFFFF" d="M167.358,21.674l-3.909-0.001c-0.938,0-1.487,0.334-1.746,2.553c-0.229,1.97,0.399,2.474,1.338,2.474c0.732,0,2.414,0.016,3.81,0.008l-0.26,2.581c-1.424,0.008-3.024-0.009-3.726-0.009c-2.691,0-4.008-2.053-3.729-5.312c0.258-3.015,1.581-4.874,4.075-4.874l4.408,0.001L167.358,21.674z M188.539,21.634l-4.229,0.002c-1.084,0-1.028,1.299-0.163,1.299l1.786,0.003c4.288,0,3.99,6.319-0.339,6.319l-5.103-0.008l0.261-2.581l4.935,0.008c0.994,0,0.983-1.383,0.154-1.383l-1.694-0.002c-4.316,0-4.096-6.236,0.33-6.236l4.321-0.002L188.539,21.634L188.539,21.634z M175.543,21.67l-0.769,7.624h-2.595l0.77-7.624l-1.809-0.017l-0.712,7.641h-2.591l0.954-10.255l7.51,0.051c2.297,0.008,3.88,1.641,3.632,4.102l-0.629,6.103h-2.595l0.657-6.363c0.093-0.923-0.276-1.256-1.067-1.26L175.543,21.67L175.543,21.67z"/&gt;
-</span></span><span class="l" id="82"> 82 <span class="php-quote">                    &lt;path fill="#FFFFFF" d="M165.465,1c2.893,0,5.236,2.345,5.236,5.25c0,2.891-2.344,5.236-5.236,5.236c-2.891,0-5.236-2.345-5.236-5.236C160.229,3.345,162.574,1,165.465,1z M162.703,9.082c1.515,1.553,4.011,1.554,5.539,0c1.557-1.57,1.557-4.109,0-5.679c-1.528-1.554-4.024-1.553-5.539,0c-0.752,0.752-1.175,1.773-1.175,2.846C161.528,7.308,161.95,8.329,162.703,9.082z M166.391,6.713l1.448,2.647h-1.78l-1.122-2.222l-0.272,2.222h-1.517l0.779-6.33h1.903c1.558,0,2.373,0.925,1.917,2.369C167.545,6.075,167.067,6.516,166.391,6.713L166.391,6.713z M165.318,5.761c0.533,0,0.822-0.219,0.935-0.577c0.188-0.528-0.034-0.854-0.652-0.854h-0.318l-0.175,1.432H165.318L165.318,5.761z"/&gt;
-</span></span><span class="l" id="83"> 83 <span class="php-quote">                    &lt;text fill="#FFFFFF" x="193" y="29" font-size="10"&gt;'</span>. rex::getVersion() .<span class="php-quote">'&lt;/text&gt;
-</span></span><span class="l" id="84"> 84 <span class="php-quote">                &lt;/svg&gt;'</span>;
-</span><span class="l" id="85"> 85             <span class="php-var">$errPageStyle</span> = <span class="php-quote">'
-</span></span><span class="l" id="86"> 86 <span class="php-quote">                &lt;style&gt;
-</span></span><span class="l" id="87"> 87 <span class="php-quote">                    .Whoops {
-</span></span><span class="l" id="88"> 88 <span class="php-quote">                        padding-top: 70px;
-</span></span><span class="l" id="89"> 89 <span class="php-quote">                    }
-</span></span><span class="l" id="90"> 90 <span class="php-quote">                    .panel {
-</span></span><span class="l" id="91"> 91 <span class="php-quote">                        top: 70px;
-</span></span><span class="l" id="92"> 92 <span class="php-quote">                        bottom: 0;
-</span></span><span class="l" id="93"> 93 <span class="php-quote">                        height: auto;
-</span></span><span class="l" id="94"> 94 <span class="php-quote">                    }
-</span></span><span class="l" id="95"> 95 <span class="php-quote">                    .rex-whoops-header {
-</span></span><span class="l" id="96"> 96 <span class="php-quote">                        position: fixed;
-</span></span><span class="l" id="97"> 97 <span class="php-quote">                        top: 0;
-</span></span><span class="l" id="98"> 98 <span class="php-quote">                        left: 0;
-</span></span><span class="l" id="99"> 99 <span class="php-quote">                        right: 0;
-</span></span><span class="l" id="100">100 <span class="php-quote">                        height: 70px;
-</span></span><span class="l" id="101">101 <span class="php-quote">                        background: #b00;                            
-</span></span><span class="l" id="102">102 <span class="php-quote">                    }
-</span></span><span class="l" id="103">103 <span class="php-quote">                    .rex-logo {
-</span></span><span class="l" id="104">104 <span class="php-quote">                        padding-left: 40px;
-</span></span><span class="l" id="105">105 <span class="php-quote">                        line-height: 70px;
-</span></span><span class="l" id="106">106 <span class="php-quote">                    }
-</span></span><span class="l" id="107">107 <span class="php-quote">                    .rex-logo &gt; svg {
-</span></span><span class="l" id="108">108 <span class="php-quote">                        vertical-align: middle;
-</span></span><span class="l" id="109">109 <span class="php-quote">                    }
-</span></span><span class="l" id="110">110 <span class="php-quote">                    .rex-safemode {
-</span></span><span class="l" id="111">111 <span class="php-quote">                        position: absolute;
-</span></span><span class="l" id="112">112 <span class="php-quote">                        top: 17px;
-</span></span><span class="l" id="113">113 <span class="php-quote">                        right: 40px;
-</span></span><span class="l" id="114">114 <span class="php-quote">                        display: inline-block;
-</span></span><span class="l" id="115">115 <span class="php-quote">                        padding: 10px;
-</span></span><span class="l" id="116">116 <span class="php-quote">                        background-color: #f90;
-</span></span><span class="l" id="117">117 <span class="php-quote">                        border-radius: 4px;
-</span></span><span class="l" id="118">118 <span class="php-quote">                        color: #754600;
-</span></span><span class="l" id="119">119 <span class="php-quote">                        font-size: .875rem;
-</span></span><span class="l" id="120">120 <span class="php-quote">                        font-weight: 700;
-</span></span><span class="l" id="121">121 <span class="php-quote">                        transition: 0.2s ease-out;
-</span></span><span class="l" id="122">122 <span class="php-quote">                    }
-</span></span><span class="l" id="123">123 <span class="php-quote">                    .rex-safemode:hover {
-</span></span><span class="l" id="124">124 <span class="php-quote">                        background-color: #754600;
-</span></span><span class="l" id="125">125 <span class="php-quote">                        color: #f90;
-</span></span><span class="l" id="126">126 <span class="php-quote">                    }
-</span></span><span class="l" id="127">127 <span class="php-quote">                &lt;/style&gt;'</span>;
-</span><span class="l" id="128">128 
-</span><span class="l" id="129">129             <span class="php-var">$errPageSaveModeLink</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="130">130             <span class="php-keyword1">if</span> (!rex::isSetup() &amp;&amp; rex::isBackend() &amp;&amp; !rex::isSafeMode()) {
-</span><span class="l" id="131">131                 <span class="php-var">$errPageSaveModeLink</span> = <span class="php-quote">'&lt;a class="rex-safemode" href="'</span> . rex_url::backendPage(<span class="php-quote">'packages'</span>, [<span class="php-quote">'safemode'</span> =&gt; <span class="php-num">1</span>]) . <span class="php-quote">'"&gt;activate safe mode&lt;/a&gt;'</span>;
-</span><span class="l" id="132">132             }
-</span><span class="l" id="133">133 
-</span><span class="l" id="134">134             <span class="php-var">$errPage</span> = <span class="php-keyword2">str_replace</span>(
-</span><span class="l" id="135">135                 [
-</span><span class="l" id="136">136                     <span class="php-quote">'&lt;/head&gt;'</span>,
-</span><span class="l" id="137">137                     <span class="php-quote">'&lt;/body&gt;'</span>,
-</span><span class="l" id="138">138                 ], [
-</span><span class="l" id="139">139                     <span class="php-var">$errPageStyle</span> . <span class="php-quote">'&lt;/head&gt;'</span>,
-</span><span class="l" id="140">140                     <span class="php-quote">'&lt;div class="rex-whoops-header"&gt;&lt;div class="rex-logo"&gt;'</span> . <span class="php-var">$errPageLogo</span> . <span class="php-quote">'&lt;/div&gt;'</span> . <span class="php-var">$errPageSaveModeLink</span> . <span class="php-quote">'&lt;/div&gt;&lt;/body&gt;'</span>,
-</span><span class="l" id="141">141                 ],
-</span><span class="l" id="142">142                 <span class="php-var">$errPage</span>
-</span><span class="l" id="143">143             );
-</span><span class="l" id="144">144 
-</span><span class="l" id="145">145             <span class="php-var">$errPage</span> = <span class="php-keyword2">str_replace</span>(
-</span><span class="l" id="146">146                 <span class="php-quote">'&lt;ul class="search-for-help"&gt;'</span>,
-</span><span class="l" id="147">147                 <span class="php-quote">'&lt;ul class="search-for-help"&gt;
-</span></span><span class="l" id="148">148 <span class="php-quote">                            &lt;li&gt;
-</span></span><span class="l" id="149">149 <span class="php-quote">                                &lt;a rel="noopener noreferrer" target="_blank" href="https://redaxo.org/doku/master" title="Search for help in the REDAXO Docs."&gt;
-</span></span><span class="l" id="150">150 <span class="php-quote">                                    &lt;svg version="1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 700 700"&gt;&lt;path d="M27.9 85.7c0 .4-.2 1.5-.3 2.3-.2.8-.7 4.9-1.1 9-.4 4.1-.8 8.2-1 9-.1.8-.6 5.1-.9 9.5-.4 4.4-.9 9.6-1.1 11.5-.2 1.9-.6 6-.9 9-1.2 12.5-2.7 26.7-3.1 30-.2 1.9-.7 6.9-1 11-.4 4.1-.8 8.6-1 10-.4 2.4-.7 5.2-2 19.5-.3 3.3-.8 7.6-1 9.5-.2 1.9-.7 6.4-1 10-.3 3.6-.8 8.1-1 10-.2 1.9-.6 6.4-1 10-.3 3.6-.8 8.1-1 10-.9 7.8-1.8 16.6-3 29.5-.3 3.3-.7 7.6-1 9.5-.2 1.9-.7 6.2-1 9.5-.3 3.3-.8 8-1 10.5-.3 2.5-.7 6.9-1 9.7l-.6 5.3H34c19.9 0 31-.4 31.1-1 .1-.6.2-1.3.3-1.8.1-.4.6-5 1-10.2.5-5.2 1-10.2 1.1-11 .4-2 1.5-12.3 2-18.5.2-2.8.6-6.8.9-9 .3-2.2.8-7.3 1.1-11.2.4-4 .8-8.1.9-9 .3-1.7 2.4-1.8 30.6-1.8h30.3l5.9 13.5c3.2 7.4 6.5 14.8 7.3 16.5.7 1.6 3.4 7.7 6 13.5s5.3 11.8 6 13.5c.8 1.6 2.7 6 4.4 9.7l3 6.8H200c18.8 0 33.9-.3 33.7-.8-.3-.4-4.2-9-8.7-19.2-4.4-10.2-8.7-19.9-9.5-21.5-8.4-18.4-18.6-41.8-18.3-42 .2-.1 3.5-2.2 7.3-4.7 7.3-4.6 19.3-15.7 23.7-21.9 13.9-19.1 20.4-49.6 15.3-71.5-3.1-13.5-12.8-30-22.8-39-12.6-11.3-22.9-16.8-40.7-21.7-7.2-2-10.4-2.1-79.7-2.4-39.8-.2-72.3-.1-72.4.4zm139.9 63.5c8.8 3.3 14.2 10.2 14.7 19 .7 11.8-6.6 20.8-20 24.6-1.1.3-20.3.6-42.8.8l-40.7.2.5-4.1c.3-2.3.8-7.1 1.1-10.7.3-3.6.7-7.5.9-8.7.2-1.2.7-6.1 1-10.8.6-7.3 1-10.4 1.4-12.3.1-.2 17.8-.2 39.4-.1 36.1.1 39.7.3 44.5 2.1zM337 85.6c-2 .3-12.7 2.4-15 3-.3 0-1.2.3-2 .6s-3.5 1.3-6 2.2c-11.4 4-24.5 14.1-33.1 25.4-11.7 15.5-22.5 44.2-25.4 67.7-.4 2.7-.8 5.7-1 6.5-1.1 4.5-2 17.3-2 31 0 19.7 1 28.3 4.6 41.5 5.2 18.8 11.8 30.6 23.8 42.5 11.9 11.8 23.7 18 42 22 7.6 1.7 14.1 1.9 67.7 2 32.6 0 59.4-.3 59.7-.7.3-.4.8-4.9 1.2-9.8.4-5 .8-9.2 1-9.5.1-.3.6-4.1.9-8.5.4-4.4.8-9.1 1.1-10.5.2-1.4.6-5.4 1-9 .3-3.6.7-8.2 1-10.3.3-2.5.1-3.7-.8-3.8-2.2-.2-39.3-.7-76.7-1-20.1-.2-38.9-.7-41.8-1.1-7-1.1-12.4-3.9-15.8-8.3-3-4-6.3-14.9-6.4-21v-4h62.2c61.3 0 62.1 0 62.4-2 .2-1.1.6-5.2 1-9 .3-3.9.7-8.1.9-9.5.2-2.5 1.5-15.3 2-20 .1-1.4.6-5.2.9-8.5l.7-6h-62c-34.2 0-62.1-.4-62.1-.8 0-1.7 4.2-13.1 5.7-15.6 4.4-7.1 11-12 18.2-13.6 1.8-.4 30.5-.7 63.7-.7 44.1 0 60.4-.3 60.5-1.2 0-.6.2-2.7.4-4.6.1-1.9.5-5.8.8-8.5.4-2.8.9-7.9 1.2-11.5.3-3.6.8-8.8 1.1-11.5.3-2.8.7-7.3.9-10 .3-2.8.7-7.1 1-9.8l.6-4.7-67.8.1c-37.3.1-68.9.3-70.3.5zm152.2.1c.2.8-1.1 14.5-1.7 18.8-.2 1.1-.6 5.1-.9 9-.4 3.8-.8 8.3-1 10-.3 1.6-.7 6.4-1.1 10.5-.4 4.1-.8 8.6-1 10-.1 1.4-.6 5.9-.9 10-.4 4.1-.9 8.6-1.1 10-.4 3.1-1.3 11.3-2 20-.3 3.6-.8 8.1-1 10-.9 8.2-1.5 13.9-2 20-.3 3.6-.8 8.1-1 10-.2 1.9-.9 8.2-1.5 14-1 10.1-1.4 13.7-2.6 26-.8 8.4-1.4 14.1-1.9 18.5-.2 2.2-.7 6.7-1 10-.3 3.3-.8 7.8-1 10-.7 5.7-1.3 12-2.1 20.3l-.6 7.3 71.3-.4c39.3-.1 72.8-.6 74.4-1 20.2-5 37.1-15 49-29.3 2.8-3.2 5.2-6.1 5.5-6.4 2.1-2.1 8.7-13.2 12.8-21.5 7.9-15.8 13.9-35.9 15.7-52 .4-3.3.9-6.9 1.1-8 .6-2.7.5-28.3 0-31.5-.2-1.4-.7-5.2-1.1-8.5-1.3-12.4-8.8-35.9-13.5-42.5-1.1-1.6-2-3.2-2-3.7 0-1.5-7.6-11.4-13.3-17.2-8.1-8.3-17.8-14.5-28.6-18.3-12.5-4.3-17.4-4.6-83.9-4.7-34.8-.1-63.1.2-63 .6zm123.4 62.8c8.6 3.6 15.2 12.2 18.8 24.7 2.1 7.3 2.4 10 2.1 21.8-.5 28.4-7.9 51.2-20.6 64-8.7 8.6-9.4 8.8-47.3 8.8l-31.8.1.7-8.7c.3-4.8.8-9.4 1-10.2.2-.8.6-5.1 1-9.5.3-4.4.8-8.7 1-9.5.2-.8.6-5.3 1-10 .3-4.7.8-9.4 1-10.5.2-1.1.7-5.4 1-9.5.3-4.1 1-11.6 1.6-16.5 1.6-14.4 1.8-16.6 2.4-25 .4-4.4.9-8.8 1.1-9.8.5-1.6 2.9-1.7 32-1.7 25.6 0 32.1.3 35 1.5zm-72.8 223c-.1.1-2.1.6-4.3.9-4.3.6-5.1.8-10.4 2-5.2 1.2-15.5 6.1-21.9 10.3-11.7 7.8-25.6 24.2-33.2 39.2-7.1 14.2-14.5 39.1-16.6 56.2-.3 3-.8 6.7-1 8.4-.9 6.6-1.1 36.4-.3 42 2.1 14.5 3.3 20.5 6 28.7 6.8 20.8 17.9 36 34 46.4 3.7 2.4 7 4.4 7.3 4.4.4 0 2.5.9 4.9 2 2.4 1.1 9 3.1 14.7 4.4 10.1 2.3 12 2.4 47 2.4 40.4 0 47.6-.7 61.3-6 22.5-8.7 40.1-28.5 50.3-56.8 4-11.1 8.5-29.3 9.8-39 .3-2.5.8-5.5 1-6.7.3-1.2.8-5.3 1.2-9 .4-3.7.8-8.2 1-9.8.6-5.4.5-28.8-.2-35-3.1-30.9-16.9-57.6-36.7-71-8.1-5.5-21.2-11-31.7-13.1-3.4-.7-81.5-1.6-82.2-.9zm69.2 62.9c9 1.2 14 5.5 17.5 15.1 3.3 9 2.8 38.6-.9 63.1-1.3 8.3-6.1 23.2-9.3 28.6-5.1 8.6-11.8 13.1-21.7 14.2-7.8.9-55.8.7-59.8-.3-8.8-2.1-15-8.5-18.4-18.7-1.5-4.8-1.9-8.8-1.9-21.9 0-18.1.7-26.1 3.6-39 6.1-27.5 15.5-39.7 31.7-41.2 3.1-.3 5.8-.6 5.9-.7.6-.4 49.2.3 53.3.8zm-504.1-62c-.2.2-3.1.7-6.3 1.1-12.8 1.4-29.5 8.3-39.6 16.3-15.5 12.2-27 30.7-32.8 52.7-1.1 4.4-2.3 9.6-2.6 11.5-.3 1.9-.8 5.1-1.1 7-.5 3.8-1.1 9.6-2 20-.3 3.6-.8 7.6-1 9-.2 1.4-.7 5.9-1 10-.4 4.1-.8 8.6-1 10-.2 1.4-.7 5.9-1 10-.3 4.1-.8 8.6-1 10-.2 1.4-.6 5.9-1 10-.3 4.1-.8 8.6-1 10-.3 1.4-.7 5.9-1 10-.3 4.1-.7 8.6-1 10-.2 1.4-.7 5.8-1 9.8-.4 4.1-.8 8.1-1 9-.5 2.8-1.8 19.4-1.9 24.1l-.1 4.5h30.3c16.7.1 30.6-.2 30.9-.6.7-1.3 1.2-4.8 1.9-12.7.3-4.2.7-8.2.9-9.1.2-.9.6-5.6 1-10.6.4-4.9.9-9.6 1-10.4.2-.8.6-5.1 1-9.5s.8-9.1 1-10.5c.2-1.4.7-5.1 1-8.3l.7-5.7h4.7c2.5-.1 25.9-.2 51.9-.3l47.4-.2-.7 7c-.4 3.8-.8 8.1-1 9.5-.2 1.4-.6 5.9-1 10s-.8 8.6-1 10c-.2 1.4-.7 5.4-1 9-.3 3.6-.8 7.6-1 9-.2 1.4-.7 5.9-1 10-.3 4.1-.8 8.8-1.1 10.5l-.4 3 31-.1c17 0 31.2-.2 31.4-.5.2-.2.7-4.2 1.1-8.8.4-4.6.8-9.1 1-10 .1-.9.6-5 1-9.1s.9-8.2 1-9.2c.2-.9.6-5.2 1-9.5.3-4.3.8-8.9 1-10.3.2-1.4.7-5.9 1.1-10 1.1-11.7 1.1-12.1 1.8-19 .4-3.6.9-8.5 1.1-11 .4-3.9 2-18.5 3-27.5.2-1.7.6-6.6 1-11s.9-8.9 1.1-10c.8-4 .5-21.2-.5-28-4.1-28.4-20.7-51-46.1-62.7-5.8-2.7-13.4-5.3-18.5-6.2-1.6-.4-4.1-.9-5.5-1.3-2.7-.7-74.4-1.6-75.1-.9zM173 435c8 2.2 13.4 7.3 15.5 14.8.8 2.7.8 13 .1 18.2-.3 1.9-.8 6.2-1.1 9.5-.4 3.3-.9 6.2-1.2 6.5-.2.3-23.7.5-52 .6H82.8l.6-7.9c.4-4.4 1.3-11.4 2.2-15.6 3.8-18.4 10.6-25.4 26.4-26.9 11.1-1.2 56.1-.5 61 .8z"/&gt;&lt;path d="M249.1 381.2c2.9 4.6 9.7 15.5 15.2 24.3s11 17.6 12.2 19.5c17.4 27.1 46.5 74.2 46.5 75.2 0 .8-16.4 25.3-43.5 64.8-2.8 4.1-8.7 12.7-13 19-4.3 6.3-11.2 16.3-15.2 22.3l-7.4 10.7h80.6l19.3-29.1 19.4-29 12.5 19.8c6.9 10.9 14 22 15.8 24.8 1.8 2.7 4.4 6.9 5.9 9.3l2.6 4.2h73l-8-11.8c-4.4-6.4-9.3-13.5-10.8-15.7-1.5-2.2-8-11.7-14.4-21-17.7-26-30.1-44.1-36.8-53.7-3.8-5.5-5.8-9.3-5.4-10 2-3.3 26-39.6 54.4-82.3 17.2-25.9 31.4-47.6 31.7-48.3.4-1-7.4-1.2-38.3-1l-38.8.3-13.7 21.5c-7.6 11.8-17.7 27.6-22.4 35-9.6 15-11.3 17.5-11.8 16.9-.2-.2-6.4-10.3-13.7-22.4-7.3-12.1-17.3-28.6-22.3-36.8l-8.9-14.7H244l5.1 8.2z"/&gt;&lt;/svg&gt;
-</span></span><span class="l" id="151">151 <span class="php-quote">                                &lt;/a&gt;
-</span></span><span class="l" id="152">152 <span class="php-quote">                            &lt;/li&gt;'</span>,
-</span><span class="l" id="153">153                 <span class="php-var">$errPage</span>
-</span><span class="l" id="154">154             );
-</span><span class="l" id="155">155 
-</span><span class="l" id="156">156             rex_response::sendContent(<span class="php-var">$errPage</span>, <span class="php-var">$handler</span>-&gt;contentType());
-</span><span class="l" id="157">157             <span class="php-keyword1">exit</span>;
-</span><span class="l" id="158">158         }
-</span><span class="l" id="159">159 
-</span><span class="l" id="160">160         <span class="php-comment">// TODO small error page, without debug infos</span>
-</span><span class="l" id="161">161         <span class="php-var">$buf</span> = <span class="php-quote">'Oooops, an internal error occured!'</span>;
-</span><span class="l" id="162">162         rex_response::sendContent(<span class="php-var">$buf</span>);
-</span><span class="l" id="163">163         <span class="php-keyword1">exit</span>;
-</span><span class="l" id="164">164     }
-</span><span class="l" id="165">165 
-</span><span class="l" id="166">166     <span class="php-comment">/**
-</span></span><span class="l" id="167">167 <span class="php-comment">     * Handles a error message.
-</span></span><span class="l" id="168">168 <span class="php-comment">     *
-</span></span><span class="l" id="169">169 <span class="php-comment">     * @param int    $errno   The error code to handle
-</span></span><span class="l" id="170">170 <span class="php-comment">     * @param string $errstr  The error message
-</span></span><span class="l" id="171">171 <span class="php-comment">     * @param string $errfile The file in which the error occured
-</span></span><span class="l" id="172">172 <span class="php-comment">     * @param int    $errline The line of the file in which the error occured
-</span></span><span class="l" id="173">173 <span class="php-comment">     *
-</span></span><span class="l" id="174">174 <span class="php-comment">     * @throws ErrorException
-</span></span><span class="l" id="175">175 <span class="php-comment">     */</span>
-</span><span class="l" id="176">176     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> handleError(<span class="php-var">$errno</span>, <span class="php-var">$errstr</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>)
-</span><span class="l" id="177">177     {
-</span><span class="l" id="178">178         <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$errno</span>, [E_USER_ERROR, E_ERROR, E_COMPILE_ERROR, E_RECOVERABLE_ERROR, E_PARSE])) {
-</span><span class="l" id="179">179             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ErrorException(<span class="php-var">$errstr</span>, <span class="php-num">0</span>, <span class="php-var">$errno</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>);
-</span><span class="l" id="180">180         }
-</span><span class="l" id="181">181 
-</span><span class="l" id="182">182         <span class="php-comment">// silenced errors ("@" operator)</span>
-</span><span class="l" id="183">183         <span class="php-keyword1">if</span> (<span class="php-num">0</span> === <span class="php-keyword2">error_reporting</span>()) {
-</span><span class="l" id="184">184             <span class="php-keyword1">return</span>;
-</span><span class="l" id="185">185         }
-</span><span class="l" id="186">186 
-</span><span class="l" id="187">187         <span class="php-var">$debug</span> = rex::getDebugFlags();
-</span><span class="l" id="188">188 
-</span><span class="l" id="189">189         <span class="php-keyword1">if</span> (
-</span><span class="l" id="190">190             <span class="php-keyword1">isset</span>(<span class="php-var">$debug</span>[<span class="php-quote">'throw_always_exception'</span>]) &amp;&amp;
-</span><span class="l" id="191">191             (<span class="php-keyword1">true</span> === <span class="php-var">$debug</span>[<span class="php-quote">'throw_always_exception'</span>] || <span class="php-var">$errno</span> === (<span class="php-var">$errno</span> &amp; <span class="php-var">$debug</span>[<span class="php-quote">'throw_always_exception'</span>]))
-</span><span class="l" id="192">192         ) {
-</span><span class="l" id="193">193             <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ErrorException(<span class="php-var">$errstr</span>, <span class="php-num">0</span>, <span class="php-var">$errno</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>);
-</span><span class="l" id="194">194         }
-</span><span class="l" id="195">195 
-</span><span class="l" id="196">196         <span class="php-keyword1">if</span> ((<span class="php-keyword2">error_reporting</span>() &amp; <span class="php-var">$errno</span>) !== <span class="php-var">$errno</span>) {
-</span><span class="l" id="197">197             <span class="php-keyword1">return</span>;
-</span><span class="l" id="198">198         }
-</span><span class="l" id="199">199 
-</span><span class="l" id="200">200         <span class="php-keyword1">if</span> (<span class="php-keyword2">ini_get</span>(<span class="php-quote">'display_errors'</span>) &amp;&amp; (rex::isSetup() || rex::isDebugMode() || (<span class="php-var">$user</span> = rex_backend_login::createUser()) &amp;&amp; <span class="php-var">$user</span>-&gt;isAdmin())) {
-</span><span class="l" id="201">201             <span class="php-keyword1">echo</span> <span class="php-quote">'&lt;div&gt;&lt;b&gt;'</span> . self::getErrorType(<span class="php-var">$errno</span>) . <span class="php-quote">"&lt;/b&gt;: </span><span class="php-var">$errstr</span><span class="php-quote"> in &lt;b&gt;</span><span class="php-var">$errfile</span><span class="php-quote">&lt;/b&gt; on line &lt;b&gt;</span><span class="php-var">$errline</span><span class="php-quote">&lt;/b&gt;&lt;/div&gt;"</span>;
-</span><span class="l" id="202">202         }
-</span><span class="l" id="203">203 
-</span><span class="l" id="204">204         rex_logger::logError(<span class="php-var">$errno</span>, <span class="php-var">$errstr</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>);
-</span><span class="l" id="205">205     }
-</span><span class="l" id="206">206 
-</span><span class="l" id="207">207     <span class="php-comment">/**
-</span></span><span class="l" id="208">208 <span class="php-comment">     * Shutdown-handler which is called at the very end of the request.
-</span></span><span class="l" id="209">209 <span class="php-comment">     */</span>
-</span><span class="l" id="210">210     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> shutdown()
-</span><span class="l" id="211">211     {
-</span><span class="l" id="212">212         <span class="php-comment">// catch fatal/parse errors</span>
-</span><span class="l" id="213">213         <span class="php-keyword1">if</span> (self::<span class="php-var">$registered</span>) {
-</span><span class="l" id="214">214             <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
-</span><span class="l" id="215">215             <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$error</span>) &amp;&amp; <span class="php-keyword2">in_array</span>(<span class="php-var">$error</span>[<span class="php-quote">'type'</span>], [E_USER_ERROR, E_ERROR, E_COMPILE_ERROR, E_RECOVERABLE_ERROR, E_PARSE])) {
-</span><span class="l" id="216">216                 self::handleException(<span class="php-keyword1">new</span> ErrorException(<span class="php-var">$error</span>[<span class="php-quote">'message'</span>], <span class="php-num">0</span>, <span class="php-var">$error</span>[<span class="php-quote">'type'</span>], <span class="php-var">$error</span>[<span class="php-quote">'file'</span>], <span class="php-var">$error</span>[<span class="php-quote">'line'</span>]));
-</span><span class="l" id="217">217             }
-</span><span class="l" id="218">218         }
-</span><span class="l" id="219">219     }
-</span><span class="l" id="220">220 
-</span><span class="l" id="221">221     <span class="php-comment">/**
-</span></span><span class="l" id="222">222 <span class="php-comment">     * Get a human readable string representing the given php error code.
-</span></span><span class="l" id="223">223 <span class="php-comment">     *
-</span></span><span class="l" id="224">224 <span class="php-comment">     * @param int $errno a php error code, e.g. E_ERROR
-</span></span><span class="l" id="225">225 <span class="php-comment">     *
-</span></span><span class="l" id="226">226 <span class="php-comment">     * @return string
-</span></span><span class="l" id="227">227 <span class="php-comment">     */</span>
-</span><span class="l" id="228">228     <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> getErrorType(<span class="php-var">$errno</span>)
-</span><span class="l" id="229">229     {
-</span><span class="l" id="230">230         <span class="php-keyword1">switch</span> (<span class="php-var">$errno</span>) {
-</span><span class="l" id="231">231             <span class="php-keyword1">case</span> E_USER_ERROR:
-</span><span class="l" id="232">232             <span class="php-keyword1">case</span> E_ERROR:
-</span><span class="l" id="233">233             <span class="php-keyword1">case</span> E_COMPILE_ERROR:
-</span><span class="l" id="234">234             <span class="php-keyword1">case</span> E_RECOVERABLE_ERROR:
-</span><span class="l" id="235">235                 <span class="php-keyword1">return</span> <span class="php-quote">'Fatal error'</span>;
-</span><span class="l" id="236">236 
-</span><span class="l" id="237">237             <span class="php-keyword1">case</span> E_PARSE:
-</span><span class="l" id="238">238                 <span class="php-keyword1">return</span> <span class="php-quote">'Parse error'</span>;
-</span><span class="l" id="239">239 
-</span><span class="l" id="240">240             <span class="php-keyword1">case</span> E_USER_WARNING:
-</span><span class="l" id="241">241             <span class="php-keyword1">case</span> E_WARNING:
-</span><span class="l" id="242">242             <span class="php-keyword1">case</span> E_COMPILE_WARNING:
-</span><span class="l" id="243">243                 <span class="php-keyword1">return</span> <span class="php-quote">'Warning'</span>;
-</span><span class="l" id="244">244 
-</span><span class="l" id="245">245             <span class="php-keyword1">case</span> E_USER_NOTICE:
-</span><span class="l" id="246">246             <span class="php-keyword1">case</span> E_NOTICE:
-</span><span class="l" id="247">247                 <span class="php-keyword1">return</span> <span class="php-quote">'Notice'</span>;
-</span><span class="l" id="248">248 
-</span><span class="l" id="249">249             <span class="php-keyword1">case</span> E_USER_DEPRECATED:
-</span><span class="l" id="250">250             <span class="php-keyword1">case</span> E_DEPRECATED:
-</span><span class="l" id="251">251                 <span class="php-keyword1">return</span> <span class="php-quote">'Deprecated'</span>;
-</span><span class="l" id="252">252 
-</span><span class="l" id="253">253             <span class="php-keyword1">case</span> E_STRICT:
-</span><span class="l" id="254">254                 <span class="php-keyword1">return</span> <span class="php-quote">'Strict'</span>;
-</span><span class="l" id="255">255 
-</span><span class="l" id="256">256             <span class="php-keyword1">default</span>:
-</span><span class="l" id="257">257                 <span class="php-keyword1">return</span> <span class="php-quote">'Unknown'</span>;
-</span><span class="l" id="258">258         }
-</span><span class="l" id="259">259     }
-</span><span class="l" id="260">260 }
-</span><span class="l" id="261">261 </span></code></pre>
+  <pre id="source"><code><span class="l" id="1"><a class="l" href="#1">  1 </a><span class="xlang">&lt;?php</span>
+</span><span class="l" id="2"><a class="l" href="#2">  2 </a>
+</span><span class="l" id="3"><a class="l" href="#3">  3 </a><span class="php-comment">/**
+</span></span><span class="l" id="4"><a class="l" href="#4">  4 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="5"><a class="l" href="#5">  5 </a><span class="php-comment"> */</span>
+</span><span class="l" id="6"><a class="l" href="#6">  6 </a><span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> <a href="#rex_error_handler" id="rex_error_handler">rex_error_handler</a>
+</span><span class="l" id="7"><a class="l" href="#7">  7 </a>{
+</span><span class="l" id="8"><a class="l" href="#8">  8 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$registered" id="$registered">$registered</a></span>;
+</span><span class="l" id="9"><a class="l" href="#9">  9 </a>
+</span><span class="l" id="10"><a class="l" href="#10"> 10 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="11"><a class="l" href="#11"> 11 </a><span class="php-comment">     * Registers the class as php-error/exception handler.
+</span></span><span class="l" id="12"><a class="l" href="#12"> 12 </a><span class="php-comment">     */</span>
+</span><span class="l" id="13"><a class="l" href="#13"> 13 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_register" id="_register">register</a>()
+</span><span class="l" id="14"><a class="l" href="#14"> 14 </a>    {
+</span><span class="l" id="15"><a class="l" href="#15"> 15 </a>        <span class="php-keyword1">if</span> (self::<span class="php-var">$registered</span>) {
+</span><span class="l" id="16"><a class="l" href="#16"> 16 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="17"><a class="l" href="#17"> 17 </a>        }
+</span><span class="l" id="18"><a class="l" href="#18"> 18 </a>
+</span><span class="l" id="19"><a class="l" href="#19"> 19 </a>        self::<span class="php-var">$registered</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>
+</span><span class="l" id="21"><a class="l" href="#21"> 21 </a>        <span class="php-keyword2">set_error_handler</span>([self::<span class="php-keyword1">class</span>, <span class="php-quote">'handleError'</span>]);
+</span><span class="l" id="22"><a class="l" href="#22"> 22 </a>        <span class="php-keyword2">set_exception_handler</span>([self::<span class="php-keyword1">class</span>, <span class="php-quote">'handleException'</span>]);
+</span><span class="l" id="23"><a class="l" href="#23"> 23 </a>        <span class="php-keyword2">register_shutdown_function</span>([self::<span class="php-keyword1">class</span>, <span class="php-quote">'shutdown'</span>]);
+</span><span class="l" id="24"><a class="l" href="#24"> 24 </a>    }
+</span><span class="l" id="25"><a class="l" href="#25"> 25 </a>
+</span><span class="l" id="26"><a class="l" href="#26"> 26 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="27"><a class="l" href="#27"> 27 </a><span class="php-comment">     * Unregisters the logger instance as php-error/exception handler.
+</span></span><span class="l" id="28"><a class="l" href="#28"> 28 </a><span class="php-comment">     */</span>
+</span><span class="l" id="29"><a class="l" href="#29"> 29 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_unregister" id="_unregister">unregister</a>()
+</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>    {
+</span><span class="l" id="31"><a class="l" href="#31"> 31 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$registered</span>) {
+</span><span class="l" id="32"><a class="l" href="#32"> 32 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="33"><a class="l" href="#33"> 33 </a>        }
+</span><span class="l" id="34"><a class="l" href="#34"> 34 </a>
+</span><span class="l" id="35"><a class="l" href="#35"> 35 </a>        self::<span class="php-var">$registered</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="36"><a class="l" href="#36"> 36 </a>
+</span><span class="l" id="37"><a class="l" href="#37"> 37 </a>        <span class="php-keyword2">restore_error_handler</span>();
+</span><span class="l" id="38"><a class="l" href="#38"> 38 </a>        <span class="php-keyword2">restore_exception_handler</span>();
+</span><span class="l" id="39"><a class="l" href="#39"> 39 </a>        <span class="php-comment">// unregister of shutdown function is not possible</span>
+</span><span class="l" id="40"><a class="l" href="#40"> 40 </a>    }
+</span><span class="l" id="41"><a class="l" href="#41"> 41 </a>
+</span><span class="l" id="42"><a class="l" href="#42"> 42 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="43"><a class="l" href="#43"> 43 </a><span class="php-comment">     * Handles the given Exception.
+</span></span><span class="l" id="44"><a class="l" href="#44"> 44 </a><span class="php-comment">     *
+</span></span><span class="l" id="45"><a class="l" href="#45"> 45 </a><span class="php-comment">     * @param Throwable|Exception $exception The Exception to handle
+</span></span><span class="l" id="46"><a class="l" href="#46"> 46 </a><span class="php-comment">     */</span>
+</span><span class="l" id="47"><a class="l" href="#47"> 47 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_handleException" id="_handleException">handleException</a>(<span class="php-var">$exception</span>)
+</span><span class="l" id="48"><a class="l" href="#48"> 48 </a>    {
+</span><span class="l" id="49"><a class="l" href="#49"> 49 </a>        rex_logger::logException(<span class="php-var">$exception</span>);
+</span><span class="l" id="50"><a class="l" href="#50"> 50 </a>
+</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>        <span class="php-keyword1">while</span> (<span class="php-keyword2">ob_get_level</span>()) {
+</span><span class="l" id="52"><a class="l" href="#52"> 52 </a>            <span class="php-keyword2">ob_end_clean</span>();
+</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>        }
+</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>
+</span><span class="l" id="55"><a class="l" href="#55"> 55 </a>        <span class="php-var">$status</span> = rex_response::HTTP_INTERNAL_ERROR;
+</span><span class="l" id="56"><a class="l" href="#56"> 56 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$exception</span> <span class="php-keyword1">instanceof</span> rex_http_exception &amp;&amp; <span class="php-var">$exception</span>-&gt;getHttpCode()) {
+</span><span class="l" id="57"><a class="l" href="#57"> 57 </a>            <span class="php-var">$status</span> = <span class="php-var">$exception</span>-&gt;getHttpCode();
+</span><span class="l" id="58"><a class="l" href="#58"> 58 </a>        }
+</span><span class="l" id="59"><a class="l" href="#59"> 59 </a>        rex_response::setStatus(<span class="php-var">$status</span>);
+</span><span class="l" id="60"><a class="l" href="#60"> 60 </a>
+</span><span class="l" id="61"><a class="l" href="#61"> 61 </a>        <span class="php-keyword1">if</span> (rex::isSetup() || rex::isDebugMode() || (<span class="php-var">$user</span> = rex_backend_login::createUser()) &amp;&amp; <span class="php-var">$user</span>-&gt;isAdmin()) {
+</span><span class="l" id="62"><a class="l" href="#62"> 62 </a>            <span class="php-var">$whoops</span> = <span class="php-keyword1">new</span> \Whoops\Run();
+</span><span class="l" id="63"><a class="l" href="#63"> 63 </a>            <span class="php-var">$whoops</span>-&gt;writeToOutput(<span class="php-keyword1">false</span>);
+</span><span class="l" id="64"><a class="l" href="#64"> 64 </a>            <span class="php-var">$whoops</span>-&gt;allowQuit(<span class="php-keyword1">false</span>);
+</span><span class="l" id="65"><a class="l" href="#65"> 65 </a>
+</span><span class="l" id="66"><a class="l" href="#66"> 66 </a>            <span class="php-var">$handler</span> = <span class="php-keyword1">new</span> \Whoops\Handler\PrettyPageHandler();
+</span><span class="l" id="67"><a class="l" href="#67"> 67 </a>            <span class="php-var">$handler</span>-&gt;setApplicationRootPath(<span class="php-keyword2">rtrim</span>(rex_path::base(), <span class="php-quote">'/\\'</span>));
+</span><span class="l" id="68"><a class="l" href="#68"> 68 </a>
+</span><span class="l" id="69"><a class="l" href="#69"> 69 </a>            <span class="php-var">$handler</span>-&gt;setEditor([rex_editor::factory(), <span class="php-quote">'getUrl'</span>]);
+</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>
+</span><span class="l" id="71"><a class="l" href="#71"> 71 </a>            <span class="php-var">$whoops</span>-&gt;pushHandler(<span class="php-var">$handler</span>);
+</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>
+</span><span class="l" id="73"><a class="l" href="#73"> 73 </a>            <span class="php-var">$errPage</span> = <span class="php-var">$whoops</span>-&gt;handleException(<span class="php-var">$exception</span>);
+</span><span class="l" id="74"><a class="l" href="#74"> 74 </a>
+</span><span class="l" id="75"><a class="l" href="#75"> 75 </a>            <span class="php-var">$errPageLogo</span> = <span class="php-quote">'
+</span></span><span class="l" id="76"><a class="l" href="#76"> 76 </a><span class="php-quote">                &lt;svg xmlns="http://www.w3.org/2000/svg" width="250px" height="30px" viewBox="0 0 250 30"&gt;
+</span></span><span class="l" id="77"><a class="l" href="#77"> 77 </a><span class="php-quote">                    &lt;path fill="#FFFFFF" d="M147.414,8.221c-0.344,0-5.73,0.003-5.73,0.003c-2.375,0-3.768,2.152-4.281,7.117c-0.571,5.528,1.038,6.839,3.428,6.787c0,0,4.383-0.018,4.983-0.018c2.578,0,3.868-1.401,4.424-6.75C150.776,9.795,150.006,8.221,147.414,8.221z M147.576,1.085c6.356,0,10.716,4.8,9.78,14.12c-0.93,9.264-4.338,14.051-11.097,14.039l-5.618,0.018c-7.919-0.022-11.169-6.19-10.311-14.756c0.813-8.112,4.823-13.417,10.842-13.417L147.576,1.085z M88.31,14.004h11.837l0.239-2.326c0.263-2.215-0.569-3.44-2.919-3.449h-5.445c-2.204,0.074-3.232,1.037-3.548,4.148L88.31,14.004z M99.5,20.268H87.678l-0.888,8.813h-7.095l1.755-17.412c0.727-6.39,4.402-10.456,10.553-10.456h5.471c6.285,0.021,10.614,4.443,9.936,11.176l-1.723,16.691H98.59L99.5,20.268L99.5,20.268z"/&gt;
+</span></span><span class="l" id="78"><a class="l" href="#78"> 78 </a><span class="php-quote">                    &lt;path fill="#FFFFFF" d="M69.432,8.269h-6.758l-1.384,13.73h6.813c2.196,0,4.068-2.377,4.554-7.492C73.008,10.791,71.503,8.269,69.432,8.269z M69.713,1.213c14.65,0,12.27,27.844-1.457,27.844l-14.773,0.001l2.811-27.845H69.713L69.713,1.213z M53.957,8.239L40.618,8.237c-1.725,0-2.939,0.975-3.532,3.49h14.123l-0.631,6.263H36.413c0.11,2.896,1.056,3.845,3.481,3.854c2.037,0.009,8.634,0.106,12.677,0.127l-0.726,7.088H39.672c-7.177,0-11.146-5.596-10.233-14.52C30.402,5.116,34.176,1.21,40.609,1.21l14.05,0.003L53.957,8.239L53.957,8.239z M9.655,13.577h8.266c2.082,0,3.532-1.039,3.532-2.756c0-1.301-1.005-2.543-2.819-2.543c-1.406,0-5.36-0.021-8.44-0.038L9.655,13.577z M23.032,19.573l4.207,9.485h-7.722l-3.735-8.423H8.944l-0.85,8.423H1L3.802,1.215l14.655-0.006c6.585,0,10.478,5.11,10.075,9.686C28.215,14.502,26.893,17.467,23.032,19.573z"/&gt;
+</span></span><span class="l" id="79"><a class="l" href="#79"> 79 </a><span class="php-quote">                    &lt;path fill="#FFFFFF" d="M114.552,1.279l5.167,8.52l5.461-8.52h8.835l-10.004,15.089l8.675,12.667h-8.309l-4.2-6.607l-4.398,6.607h-9.147l9.056-13.276l-9.043-14.479H114.552L114.552,1.279z"/&gt;
+</span></span><span class="l" id="80"><a class="l" href="#80"> 80 </a><span class="php-quote">                    &lt;path fill="#FFFFFF" d="M167.358,21.674l-3.909-0.001c-0.938,0-1.487,0.334-1.746,2.553c-0.229,1.97,0.399,2.474,1.338,2.474c0.732,0,2.414,0.016,3.81,0.008l-0.26,2.581c-1.424,0.008-3.024-0.009-3.726-0.009c-2.691,0-4.008-2.053-3.729-5.312c0.258-3.015,1.581-4.874,4.075-4.874l4.408,0.001L167.358,21.674z M188.539,21.634l-4.229,0.002c-1.084,0-1.028,1.299-0.163,1.299l1.786,0.003c4.288,0,3.99,6.319-0.339,6.319l-5.103-0.008l0.261-2.581l4.935,0.008c0.994,0,0.983-1.383,0.154-1.383l-1.694-0.002c-4.316,0-4.096-6.236,0.33-6.236l4.321-0.002L188.539,21.634L188.539,21.634z M175.543,21.67l-0.769,7.624h-2.595l0.77-7.624l-1.809-0.017l-0.712,7.641h-2.591l0.954-10.255l7.51,0.051c2.297,0.008,3.88,1.641,3.632,4.102l-0.629,6.103h-2.595l0.657-6.363c0.093-0.923-0.276-1.256-1.067-1.26L175.543,21.67L175.543,21.67z"/&gt;
+</span></span><span class="l" id="81"><a class="l" href="#81"> 81 </a><span class="php-quote">                    &lt;path fill="#FFFFFF" d="M165.465,1c2.893,0,5.236,2.345,5.236,5.25c0,2.891-2.344,5.236-5.236,5.236c-2.891,0-5.236-2.345-5.236-5.236C160.229,3.345,162.574,1,165.465,1z M162.703,9.082c1.515,1.553,4.011,1.554,5.539,0c1.557-1.57,1.557-4.109,0-5.679c-1.528-1.554-4.024-1.553-5.539,0c-0.752,0.752-1.175,1.773-1.175,2.846C161.528,7.308,161.95,8.329,162.703,9.082z M166.391,6.713l1.448,2.647h-1.78l-1.122-2.222l-0.272,2.222h-1.517l0.779-6.33h1.903c1.558,0,2.373,0.925,1.917,2.369C167.545,6.075,167.067,6.516,166.391,6.713L166.391,6.713z M165.318,5.761c0.533,0,0.822-0.219,0.935-0.577c0.188-0.528-0.034-0.854-0.652-0.854h-0.318l-0.175,1.432H165.318L165.318,5.761z"/&gt;
+</span></span><span class="l" id="82"><a class="l" href="#82"> 82 </a><span class="php-quote">                    &lt;text fill="#FFFFFF" x="193" y="29" font-size="10"&gt;'</span>. rex::getVersion() .<span class="php-quote">'&lt;/text&gt;
+</span></span><span class="l" id="83"><a class="l" href="#83"> 83 </a><span class="php-quote">                &lt;/svg&gt;'</span>;
+</span><span class="l" id="84"><a class="l" href="#84"> 84 </a>            <span class="php-var">$errPageStyle</span> = <span class="php-quote">'
+</span></span><span class="l" id="85"><a class="l" href="#85"> 85 </a><span class="php-quote">                &lt;style&gt;
+</span></span><span class="l" id="86"><a class="l" href="#86"> 86 </a><span class="php-quote">                    .Whoops {
+</span></span><span class="l" id="87"><a class="l" href="#87"> 87 </a><span class="php-quote">                        padding-top: 70px;
+</span></span><span class="l" id="88"><a class="l" href="#88"> 88 </a><span class="php-quote">                    }
+</span></span><span class="l" id="89"><a class="l" href="#89"> 89 </a><span class="php-quote">                    .panel {
+</span></span><span class="l" id="90"><a class="l" href="#90"> 90 </a><span class="php-quote">                        top: 70px;
+</span></span><span class="l" id="91"><a class="l" href="#91"> 91 </a><span class="php-quote">                        bottom: 0;
+</span></span><span class="l" id="92"><a class="l" href="#92"> 92 </a><span class="php-quote">                        height: auto;
+</span></span><span class="l" id="93"><a class="l" href="#93"> 93 </a><span class="php-quote">                    }
+</span></span><span class="l" id="94"><a class="l" href="#94"> 94 </a><span class="php-quote">                    .rex-whoops-header {
+</span></span><span class="l" id="95"><a class="l" href="#95"> 95 </a><span class="php-quote">                        position: fixed;
+</span></span><span class="l" id="96"><a class="l" href="#96"> 96 </a><span class="php-quote">                        top: 0;
+</span></span><span class="l" id="97"><a class="l" href="#97"> 97 </a><span class="php-quote">                        left: 0;
+</span></span><span class="l" id="98"><a class="l" href="#98"> 98 </a><span class="php-quote">                        right: 0;
+</span></span><span class="l" id="99"><a class="l" href="#99"> 99 </a><span class="php-quote">                        height: 70px;
+</span></span><span class="l" id="100"><a class="l" href="#100">100 </a><span class="php-quote">                        background: #b00;                            
+</span></span><span class="l" id="101"><a class="l" href="#101">101 </a><span class="php-quote">                    }
+</span></span><span class="l" id="102"><a class="l" href="#102">102 </a><span class="php-quote">                    .rex-logo {
+</span></span><span class="l" id="103"><a class="l" href="#103">103 </a><span class="php-quote">                        padding-left: 40px;
+</span></span><span class="l" id="104"><a class="l" href="#104">104 </a><span class="php-quote">                        line-height: 70px;
+</span></span><span class="l" id="105"><a class="l" href="#105">105 </a><span class="php-quote">                    }
+</span></span><span class="l" id="106"><a class="l" href="#106">106 </a><span class="php-quote">                    .rex-logo &gt; svg {
+</span></span><span class="l" id="107"><a class="l" href="#107">107 </a><span class="php-quote">                        vertical-align: middle;
+</span></span><span class="l" id="108"><a class="l" href="#108">108 </a><span class="php-quote">                    }
+</span></span><span class="l" id="109"><a class="l" href="#109">109 </a><span class="php-quote">                    .rex-safemode {
+</span></span><span class="l" id="110"><a class="l" href="#110">110 </a><span class="php-quote">                        position: absolute;
+</span></span><span class="l" id="111"><a class="l" href="#111">111 </a><span class="php-quote">                        top: 17px;
+</span></span><span class="l" id="112"><a class="l" href="#112">112 </a><span class="php-quote">                        right: 40px;
+</span></span><span class="l" id="113"><a class="l" href="#113">113 </a><span class="php-quote">                        display: inline-block;
+</span></span><span class="l" id="114"><a class="l" href="#114">114 </a><span class="php-quote">                        padding: 10px;
+</span></span><span class="l" id="115"><a class="l" href="#115">115 </a><span class="php-quote">                        background-color: #f90;
+</span></span><span class="l" id="116"><a class="l" href="#116">116 </a><span class="php-quote">                        border-radius: 4px;
+</span></span><span class="l" id="117"><a class="l" href="#117">117 </a><span class="php-quote">                        color: #754600;
+</span></span><span class="l" id="118"><a class="l" href="#118">118 </a><span class="php-quote">                        font-size: .875rem;
+</span></span><span class="l" id="119"><a class="l" href="#119">119 </a><span class="php-quote">                        font-weight: 700;
+</span></span><span class="l" id="120"><a class="l" href="#120">120 </a><span class="php-quote">                        transition: 0.2s ease-out;
+</span></span><span class="l" id="121"><a class="l" href="#121">121 </a><span class="php-quote">                    }
+</span></span><span class="l" id="122"><a class="l" href="#122">122 </a><span class="php-quote">                    .rex-safemode:hover {
+</span></span><span class="l" id="123"><a class="l" href="#123">123 </a><span class="php-quote">                        background-color: #754600;
+</span></span><span class="l" id="124"><a class="l" href="#124">124 </a><span class="php-quote">                        color: #f90;
+</span></span><span class="l" id="125"><a class="l" href="#125">125 </a><span class="php-quote">                    }
+</span></span><span class="l" id="126"><a class="l" href="#126">126 </a><span class="php-quote">                &lt;/style&gt;'</span>;
+</span><span class="l" id="127"><a class="l" href="#127">127 </a>
+</span><span class="l" id="128"><a class="l" href="#128">128 </a>            <span class="php-var">$errPageSaveModeLink</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="129"><a class="l" href="#129">129 </a>            <span class="php-keyword1">if</span> (!rex::isSetup() &amp;&amp; rex::isBackend() &amp;&amp; !rex::isSafeMode()) {
+</span><span class="l" id="130"><a class="l" href="#130">130 </a>                <span class="php-var">$errPageSaveModeLink</span> = <span class="php-quote">'&lt;a class="rex-safemode" href="'</span> . rex_url::backendPage(<span class="php-quote">'packages'</span>, [<span class="php-quote">'safemode'</span> =&gt; <span class="php-num">1</span>]) . <span class="php-quote">'"&gt;activate safe mode&lt;/a&gt;'</span>;
+</span><span class="l" id="131"><a class="l" href="#131">131 </a>            }
+</span><span class="l" id="132"><a class="l" href="#132">132 </a>
+</span><span class="l" id="133"><a class="l" href="#133">133 </a>            <span class="php-var">$errPage</span> = <span class="php-keyword2">str_replace</span>(
+</span><span class="l" id="134"><a class="l" href="#134">134 </a>                [
+</span><span class="l" id="135"><a class="l" href="#135">135 </a>                    <span class="php-quote">'&lt;/head&gt;'</span>,
+</span><span class="l" id="136"><a class="l" href="#136">136 </a>                    <span class="php-quote">'&lt;/body&gt;'</span>,
+</span><span class="l" id="137"><a class="l" href="#137">137 </a>                ], [
+</span><span class="l" id="138"><a class="l" href="#138">138 </a>                    <span class="php-var">$errPageStyle</span> . <span class="php-quote">'&lt;/head&gt;'</span>,
+</span><span class="l" id="139"><a class="l" href="#139">139 </a>                    <span class="php-quote">'&lt;div class="rex-whoops-header"&gt;&lt;div class="rex-logo"&gt;'</span> . <span class="php-var">$errPageLogo</span> . <span class="php-quote">'&lt;/div&gt;'</span> . <span class="php-var">$errPageSaveModeLink</span> . <span class="php-quote">'&lt;/div&gt;&lt;/body&gt;'</span>,
+</span><span class="l" id="140"><a class="l" href="#140">140 </a>                ],
+</span><span class="l" id="141"><a class="l" href="#141">141 </a>                <span class="php-var">$errPage</span>
+</span><span class="l" id="142"><a class="l" href="#142">142 </a>            );
+</span><span class="l" id="143"><a class="l" href="#143">143 </a>
+</span><span class="l" id="144"><a class="l" href="#144">144 </a>            <span class="php-var">$errPage</span> = <span class="php-keyword2">str_replace</span>(
+</span><span class="l" id="145"><a class="l" href="#145">145 </a>                <span class="php-quote">'&lt;ul class="search-for-help"&gt;'</span>,
+</span><span class="l" id="146"><a class="l" href="#146">146 </a>                <span class="php-quote">'&lt;ul class="search-for-help"&gt;
+</span></span><span class="l" id="147"><a class="l" href="#147">147 </a><span class="php-quote">                            &lt;li&gt;
+</span></span><span class="l" id="148"><a class="l" href="#148">148 </a><span class="php-quote">                                &lt;a rel="noopener noreferrer" target="_blank" href="https://redaxo.org/doku/master" title="Search for help in the REDAXO Docs."&gt;
+</span></span><span class="l" id="149"><a class="l" href="#149">149 </a><span class="php-quote">                                    &lt;svg version="1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 700 700"&gt;&lt;path d="M27.9 85.7c0 .4-.2 1.5-.3 2.3-.2.8-.7 4.9-1.1 9-.4 4.1-.8 8.2-1 9-.1.8-.6 5.1-.9 9.5-.4 4.4-.9 9.6-1.1 11.5-.2 1.9-.6 6-.9 9-1.2 12.5-2.7 26.7-3.1 30-.2 1.9-.7 6.9-1 11-.4 4.1-.8 8.6-1 10-.4 2.4-.7 5.2-2 19.5-.3 3.3-.8 7.6-1 9.5-.2 1.9-.7 6.4-1 10-.3 3.6-.8 8.1-1 10-.2 1.9-.6 6.4-1 10-.3 3.6-.8 8.1-1 10-.9 7.8-1.8 16.6-3 29.5-.3 3.3-.7 7.6-1 9.5-.2 1.9-.7 6.2-1 9.5-.3 3.3-.8 8-1 10.5-.3 2.5-.7 6.9-1 9.7l-.6 5.3H34c19.9 0 31-.4 31.1-1 .1-.6.2-1.3.3-1.8.1-.4.6-5 1-10.2.5-5.2 1-10.2 1.1-11 .4-2 1.5-12.3 2-18.5.2-2.8.6-6.8.9-9 .3-2.2.8-7.3 1.1-11.2.4-4 .8-8.1.9-9 .3-1.7 2.4-1.8 30.6-1.8h30.3l5.9 13.5c3.2 7.4 6.5 14.8 7.3 16.5.7 1.6 3.4 7.7 6 13.5s5.3 11.8 6 13.5c.8 1.6 2.7 6 4.4 9.7l3 6.8H200c18.8 0 33.9-.3 33.7-.8-.3-.4-4.2-9-8.7-19.2-4.4-10.2-8.7-19.9-9.5-21.5-8.4-18.4-18.6-41.8-18.3-42 .2-.1 3.5-2.2 7.3-4.7 7.3-4.6 19.3-15.7 23.7-21.9 13.9-19.1 20.4-49.6 15.3-71.5-3.1-13.5-12.8-30-22.8-39-12.6-11.3-22.9-16.8-40.7-21.7-7.2-2-10.4-2.1-79.7-2.4-39.8-.2-72.3-.1-72.4.4zm139.9 63.5c8.8 3.3 14.2 10.2 14.7 19 .7 11.8-6.6 20.8-20 24.6-1.1.3-20.3.6-42.8.8l-40.7.2.5-4.1c.3-2.3.8-7.1 1.1-10.7.3-3.6.7-7.5.9-8.7.2-1.2.7-6.1 1-10.8.6-7.3 1-10.4 1.4-12.3.1-.2 17.8-.2 39.4-.1 36.1.1 39.7.3 44.5 2.1zM337 85.6c-2 .3-12.7 2.4-15 3-.3 0-1.2.3-2 .6s-3.5 1.3-6 2.2c-11.4 4-24.5 14.1-33.1 25.4-11.7 15.5-22.5 44.2-25.4 67.7-.4 2.7-.8 5.7-1 6.5-1.1 4.5-2 17.3-2 31 0 19.7 1 28.3 4.6 41.5 5.2 18.8 11.8 30.6 23.8 42.5 11.9 11.8 23.7 18 42 22 7.6 1.7 14.1 1.9 67.7 2 32.6 0 59.4-.3 59.7-.7.3-.4.8-4.9 1.2-9.8.4-5 .8-9.2 1-9.5.1-.3.6-4.1.9-8.5.4-4.4.8-9.1 1.1-10.5.2-1.4.6-5.4 1-9 .3-3.6.7-8.2 1-10.3.3-2.5.1-3.7-.8-3.8-2.2-.2-39.3-.7-76.7-1-20.1-.2-38.9-.7-41.8-1.1-7-1.1-12.4-3.9-15.8-8.3-3-4-6.3-14.9-6.4-21v-4h62.2c61.3 0 62.1 0 62.4-2 .2-1.1.6-5.2 1-9 .3-3.9.7-8.1.9-9.5.2-2.5 1.5-15.3 2-20 .1-1.4.6-5.2.9-8.5l.7-6h-62c-34.2 0-62.1-.4-62.1-.8 0-1.7 4.2-13.1 5.7-15.6 4.4-7.1 11-12 18.2-13.6 1.8-.4 30.5-.7 63.7-.7 44.1 0 60.4-.3 60.5-1.2 0-.6.2-2.7.4-4.6.1-1.9.5-5.8.8-8.5.4-2.8.9-7.9 1.2-11.5.3-3.6.8-8.8 1.1-11.5.3-2.8.7-7.3.9-10 .3-2.8.7-7.1 1-9.8l.6-4.7-67.8.1c-37.3.1-68.9.3-70.3.5zm152.2.1c.2.8-1.1 14.5-1.7 18.8-.2 1.1-.6 5.1-.9 9-.4 3.8-.8 8.3-1 10-.3 1.6-.7 6.4-1.1 10.5-.4 4.1-.8 8.6-1 10-.1 1.4-.6 5.9-.9 10-.4 4.1-.9 8.6-1.1 10-.4 3.1-1.3 11.3-2 20-.3 3.6-.8 8.1-1 10-.9 8.2-1.5 13.9-2 20-.3 3.6-.8 8.1-1 10-.2 1.9-.9 8.2-1.5 14-1 10.1-1.4 13.7-2.6 26-.8 8.4-1.4 14.1-1.9 18.5-.2 2.2-.7 6.7-1 10-.3 3.3-.8 7.8-1 10-.7 5.7-1.3 12-2.1 20.3l-.6 7.3 71.3-.4c39.3-.1 72.8-.6 74.4-1 20.2-5 37.1-15 49-29.3 2.8-3.2 5.2-6.1 5.5-6.4 2.1-2.1 8.7-13.2 12.8-21.5 7.9-15.8 13.9-35.9 15.7-52 .4-3.3.9-6.9 1.1-8 .6-2.7.5-28.3 0-31.5-.2-1.4-.7-5.2-1.1-8.5-1.3-12.4-8.8-35.9-13.5-42.5-1.1-1.6-2-3.2-2-3.7 0-1.5-7.6-11.4-13.3-17.2-8.1-8.3-17.8-14.5-28.6-18.3-12.5-4.3-17.4-4.6-83.9-4.7-34.8-.1-63.1.2-63 .6zm123.4 62.8c8.6 3.6 15.2 12.2 18.8 24.7 2.1 7.3 2.4 10 2.1 21.8-.5 28.4-7.9 51.2-20.6 64-8.7 8.6-9.4 8.8-47.3 8.8l-31.8.1.7-8.7c.3-4.8.8-9.4 1-10.2.2-.8.6-5.1 1-9.5.3-4.4.8-8.7 1-9.5.2-.8.6-5.3 1-10 .3-4.7.8-9.4 1-10.5.2-1.1.7-5.4 1-9.5.3-4.1 1-11.6 1.6-16.5 1.6-14.4 1.8-16.6 2.4-25 .4-4.4.9-8.8 1.1-9.8.5-1.6 2.9-1.7 32-1.7 25.6 0 32.1.3 35 1.5zm-72.8 223c-.1.1-2.1.6-4.3.9-4.3.6-5.1.8-10.4 2-5.2 1.2-15.5 6.1-21.9 10.3-11.7 7.8-25.6 24.2-33.2 39.2-7.1 14.2-14.5 39.1-16.6 56.2-.3 3-.8 6.7-1 8.4-.9 6.6-1.1 36.4-.3 42 2.1 14.5 3.3 20.5 6 28.7 6.8 20.8 17.9 36 34 46.4 3.7 2.4 7 4.4 7.3 4.4.4 0 2.5.9 4.9 2 2.4 1.1 9 3.1 14.7 4.4 10.1 2.3 12 2.4 47 2.4 40.4 0 47.6-.7 61.3-6 22.5-8.7 40.1-28.5 50.3-56.8 4-11.1 8.5-29.3 9.8-39 .3-2.5.8-5.5 1-6.7.3-1.2.8-5.3 1.2-9 .4-3.7.8-8.2 1-9.8.6-5.4.5-28.8-.2-35-3.1-30.9-16.9-57.6-36.7-71-8.1-5.5-21.2-11-31.7-13.1-3.4-.7-81.5-1.6-82.2-.9zm69.2 62.9c9 1.2 14 5.5 17.5 15.1 3.3 9 2.8 38.6-.9 63.1-1.3 8.3-6.1 23.2-9.3 28.6-5.1 8.6-11.8 13.1-21.7 14.2-7.8.9-55.8.7-59.8-.3-8.8-2.1-15-8.5-18.4-18.7-1.5-4.8-1.9-8.8-1.9-21.9 0-18.1.7-26.1 3.6-39 6.1-27.5 15.5-39.7 31.7-41.2 3.1-.3 5.8-.6 5.9-.7.6-.4 49.2.3 53.3.8zm-504.1-62c-.2.2-3.1.7-6.3 1.1-12.8 1.4-29.5 8.3-39.6 16.3-15.5 12.2-27 30.7-32.8 52.7-1.1 4.4-2.3 9.6-2.6 11.5-.3 1.9-.8 5.1-1.1 7-.5 3.8-1.1 9.6-2 20-.3 3.6-.8 7.6-1 9-.2 1.4-.7 5.9-1 10-.4 4.1-.8 8.6-1 10-.2 1.4-.7 5.9-1 10-.3 4.1-.8 8.6-1 10-.2 1.4-.6 5.9-1 10-.3 4.1-.8 8.6-1 10-.3 1.4-.7 5.9-1 10-.3 4.1-.7 8.6-1 10-.2 1.4-.7 5.8-1 9.8-.4 4.1-.8 8.1-1 9-.5 2.8-1.8 19.4-1.9 24.1l-.1 4.5h30.3c16.7.1 30.6-.2 30.9-.6.7-1.3 1.2-4.8 1.9-12.7.3-4.2.7-8.2.9-9.1.2-.9.6-5.6 1-10.6.4-4.9.9-9.6 1-10.4.2-.8.6-5.1 1-9.5s.8-9.1 1-10.5c.2-1.4.7-5.1 1-8.3l.7-5.7h4.7c2.5-.1 25.9-.2 51.9-.3l47.4-.2-.7 7c-.4 3.8-.8 8.1-1 9.5-.2 1.4-.6 5.9-1 10s-.8 8.6-1 10c-.2 1.4-.7 5.4-1 9-.3 3.6-.8 7.6-1 9-.2 1.4-.7 5.9-1 10-.3 4.1-.8 8.8-1.1 10.5l-.4 3 31-.1c17 0 31.2-.2 31.4-.5.2-.2.7-4.2 1.1-8.8.4-4.6.8-9.1 1-10 .1-.9.6-5 1-9.1s.9-8.2 1-9.2c.2-.9.6-5.2 1-9.5.3-4.3.8-8.9 1-10.3.2-1.4.7-5.9 1.1-10 1.1-11.7 1.1-12.1 1.8-19 .4-3.6.9-8.5 1.1-11 .4-3.9 2-18.5 3-27.5.2-1.7.6-6.6 1-11s.9-8.9 1.1-10c.8-4 .5-21.2-.5-28-4.1-28.4-20.7-51-46.1-62.7-5.8-2.7-13.4-5.3-18.5-6.2-1.6-.4-4.1-.9-5.5-1.3-2.7-.7-74.4-1.6-75.1-.9zM173 435c8 2.2 13.4 7.3 15.5 14.8.8 2.7.8 13 .1 18.2-.3 1.9-.8 6.2-1.1 9.5-.4 3.3-.9 6.2-1.2 6.5-.2.3-23.7.5-52 .6H82.8l.6-7.9c.4-4.4 1.3-11.4 2.2-15.6 3.8-18.4 10.6-25.4 26.4-26.9 11.1-1.2 56.1-.5 61 .8z"/&gt;&lt;path d="M249.1 381.2c2.9 4.6 9.7 15.5 15.2 24.3s11 17.6 12.2 19.5c17.4 27.1 46.5 74.2 46.5 75.2 0 .8-16.4 25.3-43.5 64.8-2.8 4.1-8.7 12.7-13 19-4.3 6.3-11.2 16.3-15.2 22.3l-7.4 10.7h80.6l19.3-29.1 19.4-29 12.5 19.8c6.9 10.9 14 22 15.8 24.8 1.8 2.7 4.4 6.9 5.9 9.3l2.6 4.2h73l-8-11.8c-4.4-6.4-9.3-13.5-10.8-15.7-1.5-2.2-8-11.7-14.4-21-17.7-26-30.1-44.1-36.8-53.7-3.8-5.5-5.8-9.3-5.4-10 2-3.3 26-39.6 54.4-82.3 17.2-25.9 31.4-47.6 31.7-48.3.4-1-7.4-1.2-38.3-1l-38.8.3-13.7 21.5c-7.6 11.8-17.7 27.6-22.4 35-9.6 15-11.3 17.5-11.8 16.9-.2-.2-6.4-10.3-13.7-22.4-7.3-12.1-17.3-28.6-22.3-36.8l-8.9-14.7H244l5.1 8.2z"/&gt;&lt;/svg&gt;
+</span></span><span class="l" id="150"><a class="l" href="#150">150 </a><span class="php-quote">                                &lt;/a&gt;
+</span></span><span class="l" id="151"><a class="l" href="#151">151 </a><span class="php-quote">                            &lt;/li&gt;'</span>,
+</span><span class="l" id="152"><a class="l" href="#152">152 </a>                <span class="php-var">$errPage</span>
+</span><span class="l" id="153"><a class="l" href="#153">153 </a>            );
+</span><span class="l" id="154"><a class="l" href="#154">154 </a>
+</span><span class="l" id="155"><a class="l" href="#155">155 </a>            <span class="php-var">$errPage</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'@&lt;button id="copy-button" .*?&lt;/button&gt;@s'</span>, <span class="php-quote">'$0&lt;button id="copy-button" class="clipboard" data-clipboard-text="'</span>.rex_escape(self::getMarkdownReport(<span class="php-var">$exception</span>)).<span class="php-quote">'" title="Copy exception details and system report as markdown to clipboard"&gt;
+</span></span><span class="l" id="156"><a class="l" href="#156">156 </a><span class="php-quote">      COPY MARKDOWN
+</span></span><span class="l" id="157"><a class="l" href="#157">157 </a><span class="php-quote">    &lt;/button&gt;'</span>, <span class="php-var">$errPage</span>);
+</span><span class="l" id="158"><a class="l" href="#158">158 </a>
+</span><span class="l" id="159"><a class="l" href="#159">159 </a>            rex_response::sendContent(<span class="php-var">$errPage</span>, <span class="php-var">$handler</span>-&gt;contentType());
+</span><span class="l" id="160"><a class="l" href="#160">160 </a>            <span class="php-keyword1">exit</span>(<span class="php-num">1</span>);
+</span><span class="l" id="161"><a class="l" href="#161">161 </a>        }
+</span><span class="l" id="162"><a class="l" href="#162">162 </a>
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>        <span class="php-comment">// TODO small error page, without debug infos</span>
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>        <span class="php-var">$buf</span> = <span class="php-quote">'Oooops, an internal error occured!'</span>;
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>        rex_response::sendContent(<span class="php-var">$buf</span>);
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>        <span class="php-keyword1">exit</span>(<span class="php-num">1</span>);
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>    }
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="170"><a class="l" href="#170">170 </a><span class="php-comment">     * Handles a error message.
+</span></span><span class="l" id="171"><a class="l" href="#171">171 </a><span class="php-comment">     *
+</span></span><span class="l" id="172"><a class="l" href="#172">172 </a><span class="php-comment">     * @param int    $errno   The error code to handle
+</span></span><span class="l" id="173"><a class="l" href="#173">173 </a><span class="php-comment">     * @param string $errstr  The error message
+</span></span><span class="l" id="174"><a class="l" href="#174">174 </a><span class="php-comment">     * @param string $errfile The file in which the error occured
+</span></span><span class="l" id="175"><a class="l" href="#175">175 </a><span class="php-comment">     * @param int    $errline The line of the file in which the error occured
+</span></span><span class="l" id="176"><a class="l" href="#176">176 </a><span class="php-comment">     *
+</span></span><span class="l" id="177"><a class="l" href="#177">177 </a><span class="php-comment">     * @throws ErrorException
+</span></span><span class="l" id="178"><a class="l" href="#178">178 </a><span class="php-comment">     */</span>
+</span><span class="l" id="179"><a class="l" href="#179">179 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_handleError" id="_handleError">handleError</a>(<span class="php-var">$errno</span>, <span class="php-var">$errstr</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>)
+</span><span class="l" id="180"><a class="l" href="#180">180 </a>    {
+</span><span class="l" id="181"><a class="l" href="#181">181 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$errno</span>, [E_USER_ERROR, E_ERROR, E_COMPILE_ERROR, E_RECOVERABLE_ERROR, E_PARSE])) {
+</span><span class="l" id="182"><a class="l" href="#182">182 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ErrorException(<span class="php-var">$errstr</span>, <span class="php-num">0</span>, <span class="php-var">$errno</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>);
+</span><span class="l" id="183"><a class="l" href="#183">183 </a>        }
+</span><span class="l" id="184"><a class="l" href="#184">184 </a>
+</span><span class="l" id="185"><a class="l" href="#185">185 </a>        <span class="php-comment">// silenced errors ("@" operator)</span>
+</span><span class="l" id="186"><a class="l" href="#186">186 </a>        <span class="php-keyword1">if</span> (<span class="php-num">0</span> === <span class="php-keyword2">error_reporting</span>()) {
+</span><span class="l" id="187"><a class="l" href="#187">187 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="188"><a class="l" href="#188">188 </a>        }
+</span><span class="l" id="189"><a class="l" href="#189">189 </a>
+</span><span class="l" id="190"><a class="l" href="#190">190 </a>        <span class="php-var">$debug</span> = rex::getDebugFlags();
+</span><span class="l" id="191"><a class="l" href="#191">191 </a>
+</span><span class="l" id="192"><a class="l" href="#192">192 </a>        <span class="php-keyword1">if</span> (
+</span><span class="l" id="193"><a class="l" href="#193">193 </a>            <span class="php-keyword1">isset</span>(<span class="php-var">$debug</span>[<span class="php-quote">'throw_always_exception'</span>]) &amp;&amp;
+</span><span class="l" id="194"><a class="l" href="#194">194 </a>            (<span class="php-keyword1">true</span> === <span class="php-var">$debug</span>[<span class="php-quote">'throw_always_exception'</span>] || <span class="php-var">$errno</span> === (<span class="php-var">$errno</span> &amp; <span class="php-var">$debug</span>[<span class="php-quote">'throw_always_exception'</span>]))
+</span><span class="l" id="195"><a class="l" href="#195">195 </a>        ) {
+</span><span class="l" id="196"><a class="l" href="#196">196 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> ErrorException(<span class="php-var">$errstr</span>, <span class="php-num">0</span>, <span class="php-var">$errno</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>);
+</span><span class="l" id="197"><a class="l" href="#197">197 </a>        }
+</span><span class="l" id="198"><a class="l" href="#198">198 </a>
+</span><span class="l" id="199"><a class="l" href="#199">199 </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword2">error_reporting</span>() &amp; <span class="php-var">$errno</span>) !== <span class="php-var">$errno</span>) {
+</span><span class="l" id="200"><a class="l" href="#200">200 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="201"><a class="l" href="#201">201 </a>        }
+</span><span class="l" id="202"><a class="l" href="#202">202 </a>
+</span><span class="l" id="203"><a class="l" href="#203">203 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">ini_get</span>(<span class="php-quote">'display_errors'</span>) &amp;&amp; (rex::isSetup() || rex::isDebugMode() || (<span class="php-var">$user</span> = rex_backend_login::createUser()) &amp;&amp; <span class="php-var">$user</span>-&gt;isAdmin())) {
+</span><span class="l" id="204"><a class="l" href="#204">204 </a>            <span class="php-var">$file</span> = rex_path::relative(<span class="php-var">$errfile</span>);
+</span><span class="l" id="205"><a class="l" href="#205">205 </a>            <span class="php-keyword1">if</span> (<span class="php-quote">'cli'</span> === PHP_SAPI) {
+</span><span class="l" id="206"><a class="l" href="#206">206 </a>                <span class="php-keyword1">echo</span> self::getErrorType(<span class="php-var">$errno</span>) . <span class="php-quote">": </span><span class="php-var">$errstr</span><span class="php-quote"> in </span><span class="php-var">$file</span><span class="php-quote"> on line </span><span class="php-var">$errline</span><span class="php-quote">"</span>;
+</span><span class="l" id="207"><a class="l" href="#207">207 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="208"><a class="l" href="#208">208 </a>                <span class="php-var">$file</span> = rex_escape(<span class="php-var">$file</span>);
+</span><span class="l" id="209"><a class="l" href="#209">209 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$url</span> = rex_editor::factory()-&gt;getUrl(<span class="php-var">$errfile</span>, <span class="php-var">$errline</span>)) {
+</span><span class="l" id="210"><a class="l" href="#210">210 </a>                    <span class="php-var">$file</span> = <span class="php-quote">'&lt;a href="'</span>.rex_escape(<span class="php-var">$url</span>).<span class="php-quote">'"&gt;'</span>.<span class="php-var">$file</span>.<span class="php-quote">'&lt;/a&gt;'</span>;
+</span><span class="l" id="211"><a class="l" href="#211">211 </a>                }
+</span><span class="l" id="212"><a class="l" href="#212">212 </a>                <span class="php-keyword1">echo</span> <span class="php-quote">'&lt;div&gt;&lt;b&gt;'</span> . self::getErrorType(<span class="php-var">$errno</span>) . <span class="php-quote">'&lt;/b&gt;: '</span>.rex_escape(<span class="php-var">$errstr</span>).<span class="php-quote">" in &lt;b&gt;</span><span class="php-var">$file</span><span class="php-quote">&lt;/b&gt; on line &lt;b&gt;</span><span class="php-var">$errline</span><span class="php-quote">&lt;/b&gt;&lt;/div&gt;"</span>;
+</span><span class="l" id="213"><a class="l" href="#213">213 </a>            }
+</span><span class="l" id="214"><a class="l" href="#214">214 </a>        }
+</span><span class="l" id="215"><a class="l" href="#215">215 </a>
+</span><span class="l" id="216"><a class="l" href="#216">216 </a>        rex_logger::logError(<span class="php-var">$errno</span>, <span class="php-var">$errstr</span>, <span class="php-var">$errfile</span>, <span class="php-var">$errline</span>);
+</span><span class="l" id="217"><a class="l" href="#217">217 </a>    }
+</span><span class="l" id="218"><a class="l" href="#218">218 </a>
+</span><span class="l" id="219"><a class="l" href="#219">219 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     * Shutdown-handler which is called at the very end of the request.
+</span></span><span class="l" id="221"><a class="l" href="#221">221 </a><span class="php-comment">     */</span>
+</span><span class="l" id="222"><a class="l" href="#222">222 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_shutdown" id="_shutdown">shutdown</a>()
+</span><span class="l" id="223"><a class="l" href="#223">223 </a>    {
+</span><span class="l" id="224"><a class="l" href="#224">224 </a>        <span class="php-comment">// catch fatal/parse errors</span>
+</span><span class="l" id="225"><a class="l" href="#225">225 </a>        <span class="php-keyword1">if</span> (self::<span class="php-var">$registered</span>) {
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>            <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$error</span>) &amp;&amp; <span class="php-keyword2">in_array</span>(<span class="php-var">$error</span>[<span class="php-quote">'type'</span>], [E_USER_ERROR, E_ERROR, E_COMPILE_ERROR, E_RECOVERABLE_ERROR, E_PARSE])) {
+</span><span class="l" id="228"><a class="l" href="#228">228 </a>                self::handleException(<span class="php-keyword1">new</span> ErrorException(<span class="php-var">$error</span>[<span class="php-quote">'message'</span>], <span class="php-num">0</span>, <span class="php-var">$error</span>[<span class="php-quote">'type'</span>], <span class="php-var">$error</span>[<span class="php-quote">'file'</span>], <span class="php-var">$error</span>[<span class="php-quote">'line'</span>]));
+</span><span class="l" id="229"><a class="l" href="#229">229 </a>            }
+</span><span class="l" id="230"><a class="l" href="#230">230 </a>        }
+</span><span class="l" id="231"><a class="l" href="#231">231 </a>    }
+</span><span class="l" id="232"><a class="l" href="#232">232 </a>
+</span><span class="l" id="233"><a class="l" href="#233">233 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="234"><a class="l" href="#234">234 </a><span class="php-comment">     * Get a human readable string representing the given php error code.
+</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     *
+</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     * @param int $errno a php error code, e.g. E_ERROR
+</span></span><span class="l" id="237"><a class="l" href="#237">237 </a><span class="php-comment">     *
+</span></span><span class="l" id="238"><a class="l" href="#238">238 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="239"><a class="l" href="#239">239 </a><span class="php-comment">     */</span>
+</span><span class="l" id="240"><a class="l" href="#240">240 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getErrorType" id="_getErrorType">getErrorType</a>(<span class="php-var">$errno</span>)
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>    {
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>        <span class="php-keyword1">switch</span> (<span class="php-var">$errno</span>) {
+</span><span class="l" id="243"><a class="l" href="#243">243 </a>            <span class="php-keyword1">case</span> E_USER_ERROR:
+</span><span class="l" id="244"><a class="l" href="#244">244 </a>            <span class="php-keyword1">case</span> E_ERROR:
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>            <span class="php-keyword1">case</span> E_COMPILE_ERROR:
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>            <span class="php-keyword1">case</span> E_RECOVERABLE_ERROR:
+</span><span class="l" id="247"><a class="l" href="#247">247 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Fatal error'</span>;
+</span><span class="l" id="248"><a class="l" href="#248">248 </a>
+</span><span class="l" id="249"><a class="l" href="#249">249 </a>            <span class="php-keyword1">case</span> E_PARSE:
+</span><span class="l" id="250"><a class="l" href="#250">250 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Parse error'</span>;
+</span><span class="l" id="251"><a class="l" href="#251">251 </a>
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>            <span class="php-keyword1">case</span> E_USER_WARNING:
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>            <span class="php-keyword1">case</span> E_WARNING:
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>            <span class="php-keyword1">case</span> E_COMPILE_WARNING:
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Warning'</span>;
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>            <span class="php-keyword1">case</span> E_USER_NOTICE:
+</span><span class="l" id="258"><a class="l" href="#258">258 </a>            <span class="php-keyword1">case</span> E_NOTICE:
+</span><span class="l" id="259"><a class="l" href="#259">259 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Notice'</span>;
+</span><span class="l" id="260"><a class="l" href="#260">260 </a>
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>            <span class="php-keyword1">case</span> E_USER_DEPRECATED:
+</span><span class="l" id="262"><a class="l" href="#262">262 </a>            <span class="php-keyword1">case</span> E_DEPRECATED:
+</span><span class="l" id="263"><a class="l" href="#263">263 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Deprecated'</span>;
+</span><span class="l" id="264"><a class="l" href="#264">264 </a>
+</span><span class="l" id="265"><a class="l" href="#265">265 </a>            <span class="php-keyword1">case</span> E_STRICT:
+</span><span class="l" id="266"><a class="l" href="#266">266 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Strict'</span>;
+</span><span class="l" id="267"><a class="l" href="#267">267 </a>
+</span><span class="l" id="268"><a class="l" href="#268">268 </a>            <span class="php-keyword1">default</span>:
+</span><span class="l" id="269"><a class="l" href="#269">269 </a>                <span class="php-keyword1">return</span> <span class="php-quote">'Unknown'</span>;
+</span><span class="l" id="270"><a class="l" href="#270">270 </a>        }
+</span><span class="l" id="271"><a class="l" href="#271">271 </a>    }
+</span><span class="l" id="272"><a class="l" href="#272">272 </a>
+</span><span class="l" id="273"><a class="l" href="#273">273 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="274"><a class="l" href="#274">274 </a><span class="php-comment">     * @param Throwable|Exception $exception
+</span></span><span class="l" id="275"><a class="l" href="#275">275 </a><span class="php-comment">     */</span>
+</span><span class="l" id="276"><a class="l" href="#276">276 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMarkdownReport" id="_getMarkdownReport">getMarkdownReport</a>(<span class="php-var">$exception</span>)
+</span><span class="l" id="277"><a class="l" href="#277">277 </a>    {
+</span><span class="l" id="278"><a class="l" href="#278">278 </a>        <span class="php-var">$file</span> = rex_path::relative(<span class="php-var">$exception</span>-&gt;getFile());
+</span><span class="l" id="279"><a class="l" href="#279">279 </a>        <span class="php-var">$markdown</span> = <span class="php-quote">'**'</span>.<span class="php-keyword2">get_class</span>(<span class="php-var">$exception</span>).<span class="php-quote">":** </span><span class="php-var">{$exception-&gt;getMessage()}</span><span class="php-quote">\n"</span>;
+</span><span class="l" id="280"><a class="l" href="#280">280 </a>        <span class="php-var">$markdown</span> .= <span class="php-quote">"**File:** </span><span class="php-var">{$file}</span><span class="php-quote">\n"</span>;
+</span><span class="l" id="281"><a class="l" href="#281">281 </a>        <span class="php-var">$markdown</span> .= <span class="php-quote">"**Line:** </span><span class="php-var">{$exception-&gt;getLine()}</span><span class="php-quote">\n\n"</span>;
+</span><span class="l" id="282"><a class="l" href="#282">282 </a>
+</span><span class="l" id="283"><a class="l" href="#283">283 </a>        <span class="php-var">$trace</span> = [];
+</span><span class="l" id="284"><a class="l" href="#284">284 </a>
+</span><span class="l" id="285"><a class="l" href="#285">285 </a>        <span class="php-var">$headers</span> = [<span class="php-quote">'Function'</span>, <span class="php-quote">'File'</span>, <span class="php-quote">'Line'</span>];
+</span><span class="l" id="286"><a class="l" href="#286">286 </a>        <span class="php-var">$widths</span> = [<span class="php-keyword2">mb_strlen</span>(<span class="php-var">$headers</span>[<span class="php-num">0</span>]), <span class="php-keyword2">mb_strlen</span>(<span class="php-var">$headers</span>[<span class="php-num">0</span>]), <span class="php-keyword2">mb_strlen</span>(<span class="php-var">$headers</span>[<span class="php-num">0</span>])];
+</span><span class="l" id="287"><a class="l" href="#287">287 </a>
+</span><span class="l" id="288"><a class="l" href="#288">288 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$exception</span>-&gt;getTrace() <span class="php-keyword1">as</span> <span class="php-var">$frame</span>) {
+</span><span class="l" id="289"><a class="l" href="#289">289 </a>            <span class="php-var">$function</span> = <span class="php-var">$frame</span>[<span class="php-quote">'function'</span>];
+</span><span class="l" id="290"><a class="l" href="#290">290 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$frame</span>[<span class="php-quote">'class'</span>])) {
+</span><span class="l" id="291"><a class="l" href="#291">291 </a>                <span class="php-var">$function</span> = <span class="php-var">$frame</span>[<span class="php-quote">'class'</span>].<span class="php-var">$frame</span>[<span class="php-quote">'type'</span>].<span class="php-var">$function</span>;
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>            }
+</span><span class="l" id="293"><a class="l" href="#293">293 </a>
+</span><span class="l" id="294"><a class="l" href="#294">294 </a>            <span class="php-var">$file</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$frame</span>[<span class="php-quote">'file'</span>]) ? rex_path::relative(<span class="php-var">$frame</span>[<span class="php-quote">'file'</span>]) : <span class="php-quote">''</span>;
+</span><span class="l" id="295"><a class="l" href="#295">295 </a>            <span class="php-var">$line</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$frame</span>[<span class="php-quote">'line'</span>]) ? <span class="php-var">$frame</span>[<span class="php-quote">'line'</span>] : <span class="php-quote">''</span>;
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>
+</span><span class="l" id="297"><a class="l" href="#297">297 </a>            <span class="php-var">$trace</span>[] = [<span class="php-var">$function</span>, <span class="php-var">$file</span>, <span class="php-var">$line</span>];
+</span><span class="l" id="298"><a class="l" href="#298">298 </a>
+</span><span class="l" id="299"><a class="l" href="#299">299 </a>            <span class="php-var">$widths</span>[<span class="php-num">0</span>] = <span class="php-keyword2">max</span>(<span class="php-var">$widths</span>[<span class="php-num">0</span>], <span class="php-keyword2">mb_strlen</span>(<span class="php-var">$function</span>));
+</span><span class="l" id="300"><a class="l" href="#300">300 </a>            <span class="php-var">$widths</span>[<span class="php-num">1</span>] = <span class="php-keyword2">max</span>(<span class="php-var">$widths</span>[<span class="php-num">1</span>], <span class="php-keyword2">mb_strlen</span>(<span class="php-var">$file</span>));
+</span><span class="l" id="301"><a class="l" href="#301">301 </a>            <span class="php-var">$widths</span>[<span class="php-num">2</span>] = <span class="php-keyword2">max</span>(<span class="php-var">$widths</span>[<span class="php-num">2</span>], <span class="php-keyword2">mb_strlen</span>(<span class="php-var">$line</span>));
+</span><span class="l" id="302"><a class="l" href="#302">302 </a>        }
+</span><span class="l" id="303"><a class="l" href="#303">303 </a>
+</span><span class="l" id="304"><a class="l" href="#304">304 </a>        <span class="php-var">$table</span> = <span class="php-quote">'| '</span>.<span class="php-keyword2">str_pad</span>(<span class="php-var">$headers</span>[<span class="php-num">0</span>], <span class="php-var">$widths</span>[<span class="php-num">0</span>]).<span class="php-quote">' | '</span>.<span class="php-keyword2">str_pad</span>(<span class="php-var">$headers</span>[<span class="php-num">1</span>], <span class="php-var">$widths</span>[<span class="php-num">1</span>]).<span class="php-quote">' | '</span>.<span class="php-keyword2">str_pad</span>(<span class="php-var">$headers</span>[<span class="php-num">2</span>], <span class="php-var">$widths</span>[<span class="php-num">2</span>]).<span class="php-quote">" |\n"</span>;
+</span><span class="l" id="305"><a class="l" href="#305">305 </a>        <span class="php-var">$table</span> .= <span class="php-quote">'| '</span>.<span class="php-keyword2">str_repeat</span>(<span class="php-quote">'-'</span>, <span class="php-var">$widths</span>[<span class="php-num">0</span>]).<span class="php-quote">' | '</span>.<span class="php-keyword2">str_repeat</span>(<span class="php-quote">'-'</span>, <span class="php-var">$widths</span>[<span class="php-num">1</span>]).<span class="php-quote">' | '</span>.<span class="php-keyword2">str_repeat</span>(<span class="php-quote">'-'</span>, <span class="php-var">$widths</span>[<span class="php-num">2</span>]).<span class="php-quote">" |\n"</span>;
+</span><span class="l" id="306"><a class="l" href="#306">306 </a>
+</span><span class="l" id="307"><a class="l" href="#307">307 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$trace</span> <span class="php-keyword1">as</span> <span class="php-var">$row</span>) {
+</span><span class="l" id="308"><a class="l" href="#308">308 </a>            <span class="php-var">$table</span> .= <span class="php-quote">'| '</span>.<span class="php-keyword2">str_pad</span>(<span class="php-var">$row</span>[<span class="php-num">0</span>], <span class="php-var">$widths</span>[<span class="php-num">0</span>]).<span class="php-quote">' | '</span>.<span class="php-keyword2">str_pad</span>(<span class="php-var">$row</span>[<span class="php-num">1</span>], <span class="php-var">$widths</span>[<span class="php-num">1</span>]).<span class="php-quote">' | '</span>.<span class="php-keyword2">str_pad</span>(<span class="php-var">$row</span>[<span class="php-num">2</span>], <span class="php-var">$widths</span>[<span class="php-num">2</span>]).<span class="php-quote">" |\n"</span>;
+</span><span class="l" id="309"><a class="l" href="#309">309 </a>        }
+</span><span class="l" id="310"><a class="l" href="#310">310 </a>
+</span><span class="l" id="311"><a class="l" href="#311">311 </a>        <span class="php-var">$markdown</span> .= <span class="php-quote">&lt;&lt;&lt;OUTPUT
+</span></span><span class="l" id="312"><a class="l" href="#312">312 </a><span class="php-quote">&lt;details&gt;
+</span></span><span class="l" id="313"><a class="l" href="#313">313 </a><span class="php-quote">&lt;summary&gt;Stacktrace&lt;/summary&gt;
+</span></span><span class="l" id="314"><a class="l" href="#314">314 </a><span class="php-quote">
+</span></span><span class="l" id="315"><a class="l" href="#315">315 </a><span class="php-var">$table</span><span class="php-quote">
+</span></span><span class="l" id="316"><a class="l" href="#316">316 </a><span class="php-quote">&lt;/details&gt;
+</span></span><span class="l" id="317"><a class="l" href="#317">317 </a><span class="php-quote">
+</span></span><span class="l" id="318"><a class="l" href="#318">318 </a><span class="php-quote">OUTPUT;
+</span></span><span class="l" id="319"><a class="l" href="#319">319 </a>        <span class="php-var">$markdown</span> .= rex_system_report::factory()-&gt;asMarkdown();
+</span><span class="l" id="320"><a class="l" href="#320">320 </a>
+</span><span class="l" id="321"><a class="l" href="#321">321 </a>        <span class="php-keyword1">return</span> <span class="php-var">$markdown</span>;
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>    }
+</span><span class="l" id="323"><a class="l" href="#323">323 </a>}
+</span><span class="l" id="324"><a class="l" href="#324">324 </a></span></code></pre>
  </body>
 </html>

@@ -11,7 +11,7 @@
 <h1>Class rex_fragment</h1>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_fragment.html#3-251" title="Go to source code">redaxo/src/core/lib/fragment.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_fragment.html#3-245" title="Go to source code">redaxo/src/core/lib/fragment.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -111,7 +111,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_parse">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parse"></a><a href="source-class-rex_fragment.html?82,123#82" title="Go to source code">parse</a>( <span>string <var>$filename</var></span>, <span>boolean <var>$delete_whitespaces</var> = <span class="php-keyword1">true</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parse"></a><a href="source-class-rex_fragment.html?82,117#82" title="Go to source code">parse</a>( <span>string <var>$filename</var></span> )</code>
 <div class="description short">
 <p>Parses the variables of the fragment into the file $filename.</p>
 </div>
@@ -121,8 +121,6 @@
 <div class="list"><dl>
 <dt><var>$filename</var></dt>
 <dd>the filename of the fragment to parse</dd>
-<dt><var>$delete_whitespaces</var></dt>
-<dd></dd>
 </dl></div>
 <h4>Returns</h4>
 <div class="list">
@@ -145,7 +143,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_decorate">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/decorate"></a><a href="source-class-rex_fragment.html?125,140#125" title="Go to source code">decorate</a>( <span>string <var>$filename</var></span>, <span>array <var>$params</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/decorate"></a><a href="source-class-rex_fragment.html?119,134#119" title="Go to source code">decorate</a>( <span>string <var>$filename</var></span>, <span>array <var>$params</var></span> )</code>
 <div class="description short">
 <p>Decorate the current fragment, with another fragment. The decorated fragment
 receives the parameters which are passed to this method.</p>
@@ -176,7 +174,7 @@ receives the parameters which are passed to this method.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_escape">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/escape"></a><a href="source-class-rex_fragment.html?144,157#144" title="Go to source code">escape</a>( <span>mixed <var>$value</var></span>, <span>string <var>$strategy</var> = <span class="php-quote">'html'</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/escape"></a><a href="source-class-rex_fragment.html?138,151#138" title="Go to source code">escape</a>( <span>mixed <var>$value</var></span>, <span>string <var>$strategy</var> = <span class="php-quote">'html'</span></span> )</code>
 <div class="description short">
 <p>Escapes the value $val for proper use in the gui.</p>
 </div>
@@ -209,7 +207,7 @@ receives the parameters which are passed to this method.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_subfragment">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/subfragment"></a><a href="source-class-rex_fragment.html?159,171#159" title="Go to source code">subfragment</a>( <span>string <var>$filename</var></span>, <span>array <var>$params</var> = []</span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/subfragment"></a><a href="source-class-rex_fragment.html?153,165#153" title="Go to source code">subfragment</a>( <span>string <var>$filename</var></span>, <span>array <var>$params</var> = []</span> )</code>
 <div class="description short">
 <p>Include a Subfragment from within a fragment.</p>
 </div>
@@ -236,7 +234,7 @@ overrides from $params</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_i18n">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/i18n"></a><a href="source-class-rex_fragment.html?173,198#173" title="Go to source code">i18n</a>( <span>string <var>$key</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/i18n"></a><a href="source-class-rex_fragment.html?167,192#167" title="Go to source code">i18n</a>( <span>string <var>$key</var></span> )</code>
 <div class="description short">
 <p>Translate the given key $key.</p>
 </div>
@@ -267,7 +265,7 @@ overrides from $params</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#___get">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__get"></a><a href="source-class-rex_fragment.html?200,216#200" title="Go to source code">__get</a>( <span>string <var>$name</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__get"></a><a href="source-class-rex_fragment.html?194,210#194" title="Go to source code">__get</a>( <span>string <var>$name</var></span> )</code>
 <div class="description short">
 <p>Magic getter to reference variables from within the fragment.</p>
 </div>
@@ -294,7 +292,7 @@ overrides from $params</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#___isset">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__isset"></a><a href="source-class-rex_fragment.html?218,228#218" title="Go to source code">__isset</a>( <span>string <var>$name</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__isset"></a><a href="source-class-rex_fragment.html?212,222#212" title="Go to source code">__isset</a>( <span>string <var>$name</var></span> )</code>
 <div class="description short">
 <p>Magic method to check if a variable is set.</p>
 </div>
@@ -321,7 +319,7 @@ overrides from $params</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addDirectory">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addDirectory"></a><a href="source-class-rex_fragment.html?239,250#239" title="Go to source code">addDirectory</a>( <span>string <var>$dir</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addDirectory"></a><a href="source-class-rex_fragment.html?233,244#233" title="Go to source code">addDirectory</a>( <span>string <var>$dir</var></span> )</code>
 <div class="description short">
 <p>Add a path to the fragment search path.</p>
 </div>

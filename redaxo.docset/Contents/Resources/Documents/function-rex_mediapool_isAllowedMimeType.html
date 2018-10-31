@@ -15,14 +15,20 @@
 </div>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.mediapool.html">mediapool</a><br/>
-<b>Located at</b> <a href="source-function-rex_mediapool_isAllowedMimeType.html#594-618" title="Go to source code">redaxo/src/addons/mediapool/functions/function_rex_mediapool.php</a><br/>
+<b>Located at</b> <a href="source-function-rex_mediapool_isAllowedMimeType.html#594-620" title="Go to source code">redaxo/src/addons/mediapool/functions/function_rex_mediapool.php</a><br/>
 </div>
 <h2>Parameters summary</h2>
 <table class="summary table table-bordered table-striped" id="parameters">
 <tr id="$path">
 <td class="name"><code>string</code></td>
 <td class="value"><code><var>$path</var></code></td>
-<td></td>
+<td>Path to the physical file</td>
+</tr>
+<tr id="$filename">
+<td class="name"><code>null|string</code></td>
+<td class="value"><code><var>$filename</var> = <span class="php-keyword1">null</span></code></td>
+<td>Optional filename, will be used for extracting the file extension. If not given,
+the extension is extracted from &lt;code&gt;$path&lt;/code&gt;.</td>
 </tr>
 </table>
 <h2>Return value summary</h2>
