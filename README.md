@@ -3,7 +3,7 @@
 Ein "Dash-Docset" für die Redaxo-API-Doku.  
 [Dash](http://kapeli.com/dash/) ist ein API-Browser für den Mac (und iOS).
 
-Für Windows und Linux gibt ähnliche Programme, die auch Docsets verarbeiten können (habe ich aber nicht getestet). Docsets gibt es für mehr als 200 APIs (JavaScript, PHP, HTML, VueJS, Python ... uswusf) und es gibt mehr als 100 Cheat-Sheets zu allen möglichen Themen (RegEx, Tmux, HTTP Statuscodes ... uswusf, auch sehr praktisch).
+Für Windows und Linux gibt es ähnliche Programme, die auch Docsets verarbeiten können (habe ich aber nicht getestet). Docsets gibt es für mehr als 200 APIs (JavaScript, PHP, HTML, VueJS, Python ... uswusf) und es gibt mehr als 100 Cheat-Sheets zu allen möglichen Themen (RegEx, Tmux, HTTP Statuscodes ... uswusf, auch sehr praktisch).
 
 ## English
 
