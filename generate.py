@@ -12,7 +12,7 @@ http = urllib3.PoolManager()
 response = http.request("GET", api_url)
 soup = bs(response.data, "html.parser")
 
-# Datenbank einrichten
+# database setup
 
 db_file = "redaxo.docset/Contents/Resources/docSet.dsidx"
 os.remove(db_file)
@@ -75,15 +75,13 @@ for package in packages:
 
 conn.close()
 
-# exit()
-
 categories_list = [cat.contents[0] for cat in categories]
 print(
     f"Generated database index with {', '.join(categories_list[:-1])} and {categories_list[-1]}"
 )
 
 
-# Templating
+# templating
 
 images = set()
 
@@ -105,14 +103,14 @@ imagesPath = "redaxo.docset/Contents/Resources/Assets/images"
 for f in glob.glob("redaxo.docset/Contents/Resources/Documents/*"):
     os.remove(f)
 
-# HTML laden und manipulieren
+# load and manipulate HTML
 
 num_docs_to_process = len(api_docs) * 2
 docs_processed = 0
 
 for page in api_docs:
 
-    # Doku laden
+    # load docs
     response = http.request("GET", api_url + page)
     doc_soup = bs(response.data, "html.parser")
 
@@ -147,14 +145,14 @@ for page in api_docs:
                 toc["class"] = "dashAnchor"
                 anchor.insert_before(toc)
 
-    # modifizierte Doku speichern
+    # save modified docs
     target_doc_soup = bs(template % page_content, "html.parser")
     htmlOut = str(target_doc_soup)
 
     with open("%s/%s" % (htmlDestPath, page), "w") as file:
         file.write(htmlOut)
 
-    # Source laden
+    # load sources
     response = http.request("GET", api_url + "source-" + page)
     source_soup = bs(response.data, "html.parser")
     page_content = source_soup.find(id="source")
@@ -162,7 +160,7 @@ for page in api_docs:
     # for a in page_content.find_all("a"):
     #    del a['href']
 
-    # modifizierten Source speichern
+    # save modified sources
     taret_source_soup = bs(template % page_content, "html.parser")
     htmlOut = taret_source_soup.prettify("utf-8")
     with open("%s/%s" % (htmlDestPath, "source-" + page), "wb") as file:
@@ -173,7 +171,7 @@ for page in api_docs:
     if docs_processed % 50 == 0:
         print(f"{docs_processed} of {num_docs_to_process} documents processed")
 
-# Bilder speichern
+# save images
 
 for i in images:
     response = http.request("GET", api_url + i)
