@@ -97,33 +97,35 @@
 </span><span class="l" id="88"><a class="l" href="#88"> 88 </a>            <span class="php-keyword2">ob_implicit_flush</span>(<span class="php-num">0</span>);
 </span><span class="l" id="89"><a class="l" href="#89"> 89 </a>
 </span><span class="l" id="90"><a class="l" href="#90"> 90 </a>            <span class="php-var">$article_content_file</span> = rex_path::addonCache(<span class="php-quote">'structure'</span>, <span class="php-var">$this</span>-&gt;article_id . <span class="php-quote">'.'</span> . <span class="php-var">$this</span>-&gt;clang . <span class="php-quote">'.content'</span>);
-</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$article_content_file</span>)) {
-</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>                <span class="php-var">$generated</span> = rex_content_service::generateArticleContent(<span class="php-var">$this</span>-&gt;article_id, <span class="php-var">$this</span>-&gt;clang);
-</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$generated</span> !== <span class="php-keyword1">true</span>) {
-</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>                    <span class="php-comment">// fehlermeldung ausgeben</span>
-</span><span class="l" id="95"><a class="l" href="#95"> 95 </a>                    <span class="php-keyword1">echo</span> <span class="php-var">$generated</span>;
-</span><span class="l" id="96"><a class="l" href="#96"> 96 </a>                }
-</span><span class="l" id="97"><a class="l" href="#97"> 97 </a>            }
-</span><span class="l" id="98"><a class="l" href="#98"> 98 </a>
-</span><span class="l" id="99"><a class="l" href="#99"> 99 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">file_exists</span>(<span class="php-var">$article_content_file</span>)) {
-</span><span class="l" id="100"><a class="l" href="#100">100 </a>                <span class="php-keyword1">require</span> <span class="php-var">$article_content_file</span>;
-</span><span class="l" id="101"><a class="l" href="#101">101 </a>            }
-</span><span class="l" id="102"><a class="l" href="#102">102 </a>
-</span><span class="l" id="103"><a class="l" href="#103">103 </a>            <span class="php-comment">// ----- end: article caching</span>
-</span><span class="l" id="104"><a class="l" href="#104">104 </a>            <span class="php-var">$CONTENT</span> = <span class="php-keyword2">ob_get_clean</span>();
-</span><span class="l" id="105"><a class="l" href="#105">105 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="106"><a class="l" href="#106">106 </a>            <span class="php-comment">// Inhalt ueber sql generierens</span>
-</span><span class="l" id="107"><a class="l" href="#107">107 </a>            <span class="php-var">$CONTENT</span> = parent::getArticle(<span class="php-var">$curctype</span>);
-</span><span class="l" id="108"><a class="l" href="#108">108 </a>        }
-</span><span class="l" id="109"><a class="l" href="#109">109 </a>
-</span><span class="l" id="110"><a class="l" href="#110">110 </a>        <span class="php-var">$CONTENT</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'ART_CONTENT'</span>, <span class="php-var">$CONTENT</span>, [
-</span><span class="l" id="111"><a class="l" href="#111">111 </a>            <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$curctype</span>,
-</span><span class="l" id="112"><a class="l" href="#112">112 </a>            <span class="php-quote">'article'</span> =&gt; <span class="php-var">$this</span>,
-</span><span class="l" id="113"><a class="l" href="#113">113 </a>        ]));
-</span><span class="l" id="114"><a class="l" href="#114">114 </a>
-</span><span class="l" id="115"><a class="l" href="#115">115 </a>        <span class="php-keyword1">return</span> <span class="php-var">$CONTENT</span>;
-</span><span class="l" id="116"><a class="l" href="#116">116 </a>    }
-</span><span class="l" id="117"><a class="l" href="#117">117 </a>}
-</span><span class="l" id="118"><a class="l" href="#118">118 </a></span></code></pre>
+</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>
+</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>            <span class="php-var">$generated</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$article_content_file</span>)) {
+</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>                <span class="php-var">$generated</span> = rex_content_service::generateArticleContent(<span class="php-var">$this</span>-&gt;article_id, <span class="php-var">$this</span>-&gt;clang);
+</span><span class="l" id="95"><a class="l" href="#95"> 95 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$generated</span> !== <span class="php-keyword1">true</span>) {
+</span><span class="l" id="96"><a class="l" href="#96"> 96 </a>                    <span class="php-comment">// fehlermeldung ausgeben</span>
+</span><span class="l" id="97"><a class="l" href="#97"> 97 </a>                    <span class="php-keyword1">echo</span> <span class="php-var">$generated</span>;
+</span><span class="l" id="98"><a class="l" href="#98"> 98 </a>                }
+</span><span class="l" id="99"><a class="l" href="#99"> 99 </a>            }
+</span><span class="l" id="100"><a class="l" href="#100">100 </a>
+</span><span class="l" id="101"><a class="l" href="#101">101 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$generated</span> === <span class="php-keyword1">true</span>) {
+</span><span class="l" id="102"><a class="l" href="#102">102 </a>                <span class="php-keyword1">require</span> <span class="php-var">$article_content_file</span>;
+</span><span class="l" id="103"><a class="l" href="#103">103 </a>            }
+</span><span class="l" id="104"><a class="l" href="#104">104 </a>
+</span><span class="l" id="105"><a class="l" href="#105">105 </a>            <span class="php-comment">// ----- end: article caching</span>
+</span><span class="l" id="106"><a class="l" href="#106">106 </a>            <span class="php-var">$CONTENT</span> = <span class="php-keyword2">ob_get_clean</span>();
+</span><span class="l" id="107"><a class="l" href="#107">107 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="108"><a class="l" href="#108">108 </a>            <span class="php-comment">// Inhalt ueber sql generierens</span>
+</span><span class="l" id="109"><a class="l" href="#109">109 </a>            <span class="php-var">$CONTENT</span> = parent::getArticle(<span class="php-var">$curctype</span>);
+</span><span class="l" id="110"><a class="l" href="#110">110 </a>        }
+</span><span class="l" id="111"><a class="l" href="#111">111 </a>
+</span><span class="l" id="112"><a class="l" href="#112">112 </a>        <span class="php-var">$CONTENT</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'ART_CONTENT'</span>, <span class="php-var">$CONTENT</span>, [
+</span><span class="l" id="113"><a class="l" href="#113">113 </a>            <span class="php-quote">'ctype'</span> =&gt; <span class="php-var">$curctype</span>,
+</span><span class="l" id="114"><a class="l" href="#114">114 </a>            <span class="php-quote">'article'</span> =&gt; <span class="php-var">$this</span>,
+</span><span class="l" id="115"><a class="l" href="#115">115 </a>        ]));
+</span><span class="l" id="116"><a class="l" href="#116">116 </a>
+</span><span class="l" id="117"><a class="l" href="#117">117 </a>        <span class="php-keyword1">return</span> <span class="php-var">$CONTENT</span>;
+</span><span class="l" id="118"><a class="l" href="#118">118 </a>    }
+</span><span class="l" id="119"><a class="l" href="#119">119 </a>}
+</span><span class="l" id="120"><a class="l" href="#120">120 </a></span></code></pre>
  </body>
 </html>

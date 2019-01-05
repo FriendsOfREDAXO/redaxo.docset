@@ -52,10 +52,10 @@
 </span><span class="l" id="43"><a class="l" href="#43">43 </a>            } <span class="php-keyword1">else</span> {
 </span><span class="l" id="44"><a class="l" href="#44">44 </a>                <span class="php-var">$styleAll</span> = <span class="php-quote">'font-family: "Fira Code", Menlo, Monaco, Consolas, monospace; font-size: 14px; line-height: 1.4 !important;'</span>;
 </span><span class="l" id="45"><a class="l" href="#45">45 </a>                self::<span class="php-var">$dumper</span> = <span class="php-keyword1">new</span> HtmlDumper();
-</span><span class="l" id="46"><a class="l" href="#46">46 </a>                self::<span class="php-var">$dumper</span>-&gt;setDumpBoundaries(<span class="php-quote">'&lt;pre class="rex-var-dumper sf-dump" id="%s" data-indent-pad="%s"&gt;'</span>, <span class="php-quote">'&lt;/pre&gt;&lt;script&gt;Sfdump(%s)&lt;/script&gt;'</span>);
+</span><span class="l" id="46"><a class="l" href="#46">46 </a>                self::<span class="php-var">$dumper</span>-&gt;setDumpBoundaries(<span class="php-quote">'&lt;pre class="rex-var-dumper sf-dump" id="%s" data-indent-pad="%s"&gt;&lt;div class="sf-dump-rex-container"&gt;'</span>, <span class="php-quote">'&lt;/div&gt;&lt;/pre&gt;&lt;script&gt;Sfdump(%s)&lt;/script&gt;'</span>);
 </span><span class="l" id="47"><a class="l" href="#47">47 </a>                self::<span class="php-var">$dumper</span>-&gt;setIndentPad(<span class="php-quote">'    '</span>);
 </span><span class="l" id="48"><a class="l" href="#48">48 </a>                self::<span class="php-var">$dumper</span>-&gt;setStyles([
-</span><span class="l" id="49"><a class="l" href="#49">49 </a>                    <span class="php-quote">'default'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'
+</span><span class="l" id="49"><a class="l" href="#49">49 </a>                    <span class="php-quote">'rex-container'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'
 </span></span><span class="l" id="50"><a class="l" href="#50">50 </a><span class="php-quote">                        position: relative;
 </span></span><span class="l" id="51"><a class="l" href="#51">51 </a><span class="php-quote">                        z-index: 99999;
 </span></span><span class="l" id="52"><a class="l" href="#52">52 </a><span class="php-quote">                        padding: 10px;
@@ -66,25 +66,29 @@
 </span></span><span class="l" id="57"><a class="l" href="#57">57 </a><span class="php-quote">                        word-break: normal;
 </span></span><span class="l" id="58"><a class="l" href="#58">58 </a><span class="php-quote">                        word-wrap: break-word;
 </span></span><span class="l" id="59"><a class="l" href="#59">59 </a><span class="php-quote">                    '</span>,
-</span><span class="l" id="60"><a class="l" href="#60">60 </a>                    <span class="php-quote">'const'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #F78C6C; font-weight: 700;'</span>,
-</span><span class="l" id="61"><a class="l" href="#61">61 </a>                    <span class="php-quote">'ellipsis'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #eeffff;'</span>,
-</span><span class="l" id="62"><a class="l" href="#62">62 </a>                    <span class="php-quote">'index'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C3E88D;'</span>,
-</span><span class="l" id="63"><a class="l" href="#63">63 </a>                    <span class="php-quote">'key'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C3E88D;'</span>,
-</span><span class="l" id="64"><a class="l" href="#64">64 </a>                    <span class="php-quote">'meta'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #89DDFF;'</span>,
-</span><span class="l" id="65"><a class="l" href="#65">65 </a>                    <span class="php-quote">'note'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #FFB62C;'</span>,
-</span><span class="l" id="66"><a class="l" href="#66">66 </a>                    <span class="php-quote">'num'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #F78C6C;'</span>,
-</span><span class="l" id="67"><a class="l" href="#67">67 </a>                    <span class="php-quote">'protected'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C792EA;'</span>,
-</span><span class="l" id="68"><a class="l" href="#68">68 </a>                    <span class="php-quote">'private'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C792EA;'</span>,
-</span><span class="l" id="69"><a class="l" href="#69">69 </a>                    <span class="php-quote">'public'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C792EA;'</span>,
-</span><span class="l" id="70"><a class="l" href="#70">70 </a>                    <span class="php-quote">'ref'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #eeffff;'</span>,
-</span><span class="l" id="71"><a class="l" href="#71">71 </a>                    <span class="php-quote">'str'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #FF5370;'</span>,
-</span><span class="l" id="72"><a class="l" href="#72">72 </a>                ]);
-</span><span class="l" id="73"><a class="l" href="#73">73 </a>            }
-</span><span class="l" id="74"><a class="l" href="#74">74 </a>        }
-</span><span class="l" id="75"><a class="l" href="#75">75 </a>
-</span><span class="l" id="76"><a class="l" href="#76">76 </a>        self::<span class="php-var">$dumper</span>-&gt;dump(self::<span class="php-var">$cloner</span>-&gt;cloneVar(<span class="php-var">$var</span>));
-</span><span class="l" id="77"><a class="l" href="#77">77 </a>    }
-</span><span class="l" id="78"><a class="l" href="#78">78 </a>}
-</span><span class="l" id="79"><a class="l" href="#79">79 </a></span></code></pre>
+</span><span class="l" id="60"><a class="l" href="#60">60 </a>                    <span class="php-quote">'default'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'
+</span></span><span class="l" id="61"><a class="l" href="#61">61 </a><span class="php-quote">                        background-color: transparent;
+</span></span><span class="l" id="62"><a class="l" href="#62">62 </a><span class="php-quote">                        color: #eeffff;
+</span></span><span class="l" id="63"><a class="l" href="#63">63 </a><span class="php-quote">                    '</span>,
+</span><span class="l" id="64"><a class="l" href="#64">64 </a>                    <span class="php-quote">'const'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #F78C6C; font-weight: 700;'</span>,
+</span><span class="l" id="65"><a class="l" href="#65">65 </a>                    <span class="php-quote">'ellipsis'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #eeffff;'</span>,
+</span><span class="l" id="66"><a class="l" href="#66">66 </a>                    <span class="php-quote">'index'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C3E88D;'</span>,
+</span><span class="l" id="67"><a class="l" href="#67">67 </a>                    <span class="php-quote">'key'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C3E88D;'</span>,
+</span><span class="l" id="68"><a class="l" href="#68">68 </a>                    <span class="php-quote">'meta'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #89DDFF;'</span>,
+</span><span class="l" id="69"><a class="l" href="#69">69 </a>                    <span class="php-quote">'note'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #FFB62C;'</span>,
+</span><span class="l" id="70"><a class="l" href="#70">70 </a>                    <span class="php-quote">'num'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #F78C6C;'</span>,
+</span><span class="l" id="71"><a class="l" href="#71">71 </a>                    <span class="php-quote">'protected'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C792EA;'</span>,
+</span><span class="l" id="72"><a class="l" href="#72">72 </a>                    <span class="php-quote">'private'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C792EA;'</span>,
+</span><span class="l" id="73"><a class="l" href="#73">73 </a>                    <span class="php-quote">'public'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #C792EA;'</span>,
+</span><span class="l" id="74"><a class="l" href="#74">74 </a>                    <span class="php-quote">'ref'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #eeffff;'</span>,
+</span><span class="l" id="75"><a class="l" href="#75">75 </a>                    <span class="php-quote">'str'</span> =&gt; <span class="php-var">$styleAll</span> . <span class="php-quote">'color: #FF5370;'</span>,
+</span><span class="l" id="76"><a class="l" href="#76">76 </a>                ]);
+</span><span class="l" id="77"><a class="l" href="#77">77 </a>            }
+</span><span class="l" id="78"><a class="l" href="#78">78 </a>        }
+</span><span class="l" id="79"><a class="l" href="#79">79 </a>
+</span><span class="l" id="80"><a class="l" href="#80">80 </a>        self::<span class="php-var">$dumper</span>-&gt;dump(self::<span class="php-var">$cloner</span>-&gt;cloneVar(<span class="php-var">$var</span>));
+</span><span class="l" id="81"><a class="l" href="#81">81 </a>    }
+</span><span class="l" id="82"><a class="l" href="#82">82 </a>}
+</span><span class="l" id="83"><a class="l" href="#83">83 </a></span></code></pre>
  </body>
 </html>

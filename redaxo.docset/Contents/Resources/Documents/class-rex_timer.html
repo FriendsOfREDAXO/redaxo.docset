@@ -16,7 +16,7 @@
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
 <b>Author:</b>
 				gharlan<br/>
-<b>Located at</b> <a href="source-class-rex_timer.html#3-65" title="Go to source code">redaxo/src/core/lib/util/timer.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_timer.html#3-115" title="Go to source code">redaxo/src/core/lib/util/timer.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -29,7 +29,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#___construct">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_timer.html?18,30#18" title="Go to source code">__construct</a>( <span>float <var>$start</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_timer.html?21,33#21" title="Go to source code">__construct</a>( <span>float <var>$start</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Constructor.</p>
 </div>
@@ -43,6 +43,37 @@
 </div>
 </div></td>
 </tr>
+<tr data-order="measure" id="_measure">
+<td class="attributes"><code>
+				 public static
+				mixed
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_measure">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/measure"></a><a href="source-class-rex_timer.html?35,70#35" title="Go to source code">measure</a>( <span>string <var>$label</var></span>, <span>callable <var>$callable</var></span> )</code>
+<div class="description short">
+<p>Measures the runtime of the given callable.</p>
+</div>
+<div class="description detailed hidden">
+<p>Measures the runtime of the given callable.</p>
+<p>On sufficient user permissions - or in debug mode - this timings will be sent
+over the wire to the browser via server timing api http headers.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$label</var></dt>
+<dd></dd>
+<dt><var>$callable</var></dt>
+<dd></dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>mixed</code><br/>result of callable<br/>
+</div>
+</div>
+</div></td>
+</tr>
 <tr data-order="reset" id="_reset">
 <td class="attributes"><code>
 				 public 
@@ -52,12 +83,30 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_reset">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/reset"></a><a href="source-class-rex_timer.html?32,38#32" title="Go to source code">reset</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/reset"></a><a href="source-class-rex_timer.html?72,78#72" title="Go to source code">reset</a>( )</code>
 <div class="description short">
 <p>Resets the timer.</p>
 </div>
 <div class="description detailed hidden">
 <p>Resets the timer.</p>
+</div>
+</div></td>
+</tr>
+<tr data-order="stop" id="_stop">
+<td class="attributes"><code>
+				 public 
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_stop">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/stop"></a><a href="source-class-rex_timer.html?80,86#80" title="Go to source code">stop</a>( )</code>
+<div class="description short">
+<p>Stops the timer.</p>
+</div>
+<div class="description detailed hidden">
+<p>Stops the timer.</p>
 </div>
 </div></td>
 </tr>
@@ -70,7 +119,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getDelta">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDelta"></a><a href="source-class-rex_timer.html?40,50#40" title="Go to source code">getDelta</a>( <span>integer <var>$precision</var> = <code><a href="class-rex_timer.html#MILLISEC">rex_timer::<b>MILLISEC</b></a></code></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getDelta"></a><a href="source-class-rex_timer.html?88,100#88" title="Go to source code">getDelta</a>( <span>integer <var>$precision</var> = <code><a href="class-rex_timer.html#MILLISEC">rex_timer::<b>MILLISEC</b></a></code></span> )</code>
 <div class="description short">
 <p>Returns the time difference.</p>
 </div>
@@ -98,7 +147,7 @@ for milli,...)</dd>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getFormattedDelta">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormattedDelta"></a><a href="source-class-rex_timer.html?52,64#52" title="Go to source code">getFormattedDelta</a>( <span>integer <var>$precision</var> = <code><a href="class-rex_timer.html#MILLISEC">rex_timer::<b>MILLISEC</b></a></code></span>, <span>integer <var>$decimals</var> = <span class="php-num">3</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormattedDelta"></a><a href="source-class-rex_timer.html?102,114#102" title="Go to source code">getFormattedDelta</a>( <span>integer <var>$precision</var> = <code><a href="class-rex_timer.html#MILLISEC">rex_timer::<b>MILLISEC</b></a></code></span>, <span>integer <var>$decimals</var> = <span class="php-num">3</span></span> )</code>
 <div class="description short">
 <p>Returns the formatted time difference.</p>
 </div>
@@ -160,6 +209,23 @@ for milli,...)</dd>
 </div>
 </td>
 <td class="value"><div><a class="anchor" href="#MICROSEC">#</a><code><span class="php-num">1000000</span></code></div></td>
+</tr>
+</table>
+<h2>Properties summary</h2>
+<table class="summary table table-bordered table-striped properties" id="properties">
+<tr data-order="serverTimings" id="$serverTimings">
+<td class="attributes"><code>
+				public static 
+				array
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24serverTimings"></a><a href="source-class-rex_timer.html#16" title="Go to source code"><var>$serverTimings</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$serverTimings">#</a><code>[]</code></div></td>
 </tr>
 </table>
 </div></body>

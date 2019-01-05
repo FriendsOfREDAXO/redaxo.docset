@@ -11,7 +11,7 @@
 <h1>Class rex_view</h1>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_view.html#3-415" title="Go to source code">redaxo/src/core/lib/view.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_view.html#3-436" title="Go to source code">redaxo/src/core/lib/view.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -24,7 +24,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addCssFile">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addCssFile"></a><a href="source-class-rex_view.html?13,28#13" title="Go to source code">addCssFile</a>( <span>string <var>$file</var></span>, <span>string <var>$media</var> = <span class="php-quote">'all'</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addCssFile"></a><a href="source-class-rex_view.html?17,32#17" title="Go to source code">addCssFile</a>( <span>string <var>$file</var></span>, <span>string <var>$media</var> = <span class="php-quote">'all'</span></span> )</code>
 <div class="description short">
 <p>Adds a CSS file.</p>
 </div>
@@ -53,7 +53,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getCssFiles">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCssFiles"></a><a href="source-class-rex_view.html?30,38#30" title="Go to source code">getCssFiles</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCssFiles"></a><a href="source-class-rex_view.html?34,42#34" title="Go to source code">getCssFiles</a>( )</code>
 <div class="description short">
 <p>Returns the CSS files.</p>
 </div>
@@ -75,7 +75,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addJsFile">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addJsFile"></a><a href="source-class-rex_view.html?40,54#40" title="Go to source code">addJsFile</a>( <span>string <var>$file</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addJsFile"></a><a href="source-class-rex_view.html?44,62#44" title="Go to source code">addJsFile</a>( <span>string <var>$file</var></span>, <span>array <var>$options</var> = []</span> )</code>
 <div class="description short">
 <p>Adds a JS file.</p>
 </div>
@@ -84,6 +84,8 @@
 <h4>Parameters</h4>
 <div class="list"><dl>
 <dt><var>$file</var></dt>
+<dd></dd>
+<dt><var>$options</var></dt>
 <dd></dd>
 </dl></div>
 <h4>Throws</h4>
@@ -102,7 +104,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getJsFiles">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getJsFiles"></a><a href="source-class-rex_view.html?56,64#56" title="Go to source code">getJsFiles</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getJsFiles"></a><a href="source-class-rex_view.html?64,75#64" title="Go to source code">getJsFiles</a>( )</code>
 <div class="description short">
 <p>Returns the JS files.</p>
 </div>
@@ -111,6 +113,28 @@
 <h4>Returns</h4>
 <div class="list">
 <code>string[]</code><br/>string[]<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getJsFilesWithOptions" id="_getJsFilesWithOptions">
+<td class="attributes"><code>
+				 public static
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getJsFilesWithOptions">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getJsFilesWithOptions"></a><a href="source-class-rex_view.html?77,85#77" title="Go to source code">getJsFilesWithOptions</a>( )</code>
+<div class="description short">
+<p>Returns all JS files besides their options.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns all JS files besides their options.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>array<br/>
 </div>
 </div>
 </div></td>
@@ -124,7 +148,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setJsProperty">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setJsProperty"></a><a href="source-class-rex_view.html?66,75#66" title="Go to source code">setJsProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setJsProperty"></a><a href="source-class-rex_view.html?87,96#87" title="Go to source code">setJsProperty</a>( <span>string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
 <div class="description short">
 <p>Sets a JS property.</p>
 </div>
@@ -149,7 +173,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getJsProperties">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getJsProperties"></a><a href="source-class-rex_view.html?77,85#77" title="Go to source code">getJsProperties</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getJsProperties"></a><a href="source-class-rex_view.html?98,106#98" title="Go to source code">getJsProperties</a>( )</code>
 <div class="description short">
 <p>Returns the JS properties.</p>
 </div>
@@ -171,7 +195,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setFavicon">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFavicon"></a><a href="source-class-rex_view.html?87,95#87" title="Go to source code">setFavicon</a>( <span>string <var>$file</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setFavicon"></a><a href="source-class-rex_view.html?108,116#108" title="Go to source code">setFavicon</a>( <span>string <var>$file</var></span> )</code>
 <div class="description short">
 <p>Sets the favicon path.</p>
 </div>
@@ -194,7 +218,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getFavicon">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFavicon"></a><a href="source-class-rex_view.html?97,105#97" title="Go to source code">getFavicon</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFavicon"></a><a href="source-class-rex_view.html?118,126#118" title="Go to source code">getFavicon</a>( )</code>
 <div class="description short">
 <p>Returns the favicon.</p>
 </div>
@@ -216,7 +240,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_info">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/info"></a><a href="source-class-rex_view.html?107,123#107" title="Go to source code">info</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/info"></a><a href="source-class-rex_view.html?128,144#128" title="Go to source code">info</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns an info message.</p>
 </div>
@@ -245,7 +269,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_success">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/success"></a><a href="source-class-rex_view.html?125,141#125" title="Go to source code">success</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/success"></a><a href="source-class-rex_view.html?146,162#146" title="Go to source code">success</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns a success message.</p>
 </div>
@@ -274,7 +298,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_warning">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/warning"></a><a href="source-class-rex_view.html?143,159#143" title="Go to source code">warning</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/warning"></a><a href="source-class-rex_view.html?164,180#164" title="Go to source code">warning</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns an warning message.</p>
 </div>
@@ -303,7 +327,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_error">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/error"></a><a href="source-class-rex_view.html?161,177#161" title="Go to source code">error</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/error"></a><a href="source-class-rex_view.html?182,198#182" title="Go to source code">error</a>( <span>string <var>$message</var></span>, <span>string <var>$cssClass</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns an error message.</p>
 </div>
@@ -332,7 +356,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_toolbar">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/toolbar"></a><a href="source-class-rex_view.html?205,224#205" title="Go to source code">toolbar</a>( <span>string <var>$content</var></span>, <span>string <var>$brand</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$cssClass</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$inverse</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/toolbar"></a><a href="source-class-rex_view.html?226,245#226" title="Go to source code">toolbar</a>( <span>string <var>$content</var></span>, <span>string <var>$brand</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$cssClass</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$inverse</var> = <span class="php-keyword1">false</span></span> )</code>
 <div class="description short">
 <p>Returns a toolbar.</p>
 </div>
@@ -365,7 +389,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_content">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/content"></a><a href="source-class-rex_view.html?226,240#226" title="Go to source code">content</a>( <span>string <var>$content</var></span>, <span>string <var>$title</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/content"></a><a href="source-class-rex_view.html?247,261#247" title="Go to source code">content</a>( <span>string <var>$content</var></span>, <span>string <var>$title</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns a content block.</p>
 </div>
@@ -394,7 +418,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_title">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/title"></a><a href="source-class-rex_view.html?242,296#242" title="Go to source code">title</a>( <span>string <var>$head</var></span>, <span>null|string|array <var>$subtitle</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/title"></a><a href="source-class-rex_view.html?263,317#263" title="Go to source code">title</a>( <span>string <var>$head</var></span>, <span>null|string|array <var>$subtitle</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Returns the formatted title.</p>
 </div>
@@ -427,7 +451,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_clangSwitch">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clangSwitch"></a><a href="source-class-rex_view.html?298,333#298" title="Go to source code">clangSwitch</a>( <span><code><a href="class-rex_context.html">rex_context</a></code> <var>$context</var></span>, <span>boolean <var>$drop</var> = <span class="php-keyword1">true</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clangSwitch"></a><a href="source-class-rex_view.html?319,354#319" title="Go to source code">clangSwitch</a>( <span><code><a href="class-rex_context.html">rex_context</a></code> <var>$context</var></span>, <span>boolean <var>$drop</var> = <span class="php-keyword1">true</span></span> )</code>
 <div class="description short">
 <p>Returns a clang switch.</p>
 </div>
@@ -456,7 +480,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_clangSwitchAsButtons">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clangSwitchAsButtons"></a><a href="source-class-rex_view.html?335,372#335" title="Go to source code">clangSwitchAsButtons</a>( <span><code><a href="class-rex_context.html">rex_context</a></code> <var>$context</var></span>, <span>boolean <var>$drop</var> = <span class="php-keyword1">true</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clangSwitchAsButtons"></a><a href="source-class-rex_view.html?356,393#356" title="Go to source code">clangSwitchAsButtons</a>( <span><code><a href="class-rex_context.html">rex_context</a></code> <var>$context</var></span>, <span>boolean <var>$drop</var> = <span class="php-keyword1">true</span></span> )</code>
 <div class="description short">
 <p>Returns a clang switch.</p>
 </div>
@@ -485,7 +509,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_clangSwitchAsDropdown">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clangSwitchAsDropdown"></a><a href="source-class-rex_view.html?374,414#374" title="Go to source code">clangSwitchAsDropdown</a>( <span><code><a href="class-rex_context.html">rex_context</a></code> <var>$context</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clangSwitchAsDropdown"></a><a href="source-class-rex_view.html?395,435#395" title="Go to source code">clangSwitchAsDropdown</a>( <span><code><a href="class-rex_context.html">rex_context</a></code> <var>$context</var></span> )</code>
 <div class="description short">
 <p>Returns a clang switch.</p>
 </div>
@@ -502,6 +526,48 @@
 </div>
 </div>
 </div></td>
+</tr>
+</table>
+<h2>Constants summary</h2>
+<table class="summary table table-bordered table-striped constants" id="constants">
+<tr data-order="JS_DEFERED" id="JS_DEFERED">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/JS_DEFERED"></a><a href="source-class-rex_view.html#8" title="Go to source code"><b>JS_DEFERED</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#JS_DEFERED">#</a><code><span class="php-quote">'defer'</span></code></div></td>
+</tr>
+<tr data-order="JS_ASYNC" id="JS_ASYNC">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/JS_ASYNC"></a><a href="source-class-rex_view.html#9" title="Go to source code"><b>JS_ASYNC</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#JS_ASYNC">#</a><code><span class="php-quote">'async'</span></code></div></td>
+</tr>
+<tr data-order="JS_IMMUTABLE" id="JS_IMMUTABLE">
+<td class="attributes"><code>string</code></td>
+<td class="name">
+<code>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/JS_IMMUTABLE"></a><a href="source-class-rex_view.html#10" title="Go to source code"><b>JS_IMMUTABLE</b></a>
+</code>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#JS_IMMUTABLE">#</a><code><span class="php-quote">'immutable'</span></code></div></td>
 </tr>
 </table>
 </div></body>

@@ -17,497 +17,548 @@
 </span><span class="l" id="8"><a class="l" href="#8">  8 </a><span class="php-keyword1">class</span> <a href="#rex_response" id="rex_response">rex_response</a>
 </span><span class="l" id="9"><a class="l" href="#9">  9 </a>{
 </span><span class="l" id="10"><a class="l" href="#10"> 10 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_OK" id="HTTP_OK">HTTP_OK</a> = <span class="php-quote">'200 OK'</span>;
-</span><span class="l" id="11"><a class="l" href="#11"> 11 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_MOVED_PERMANENTLY" id="HTTP_MOVED_PERMANENTLY">HTTP_MOVED_PERMANENTLY</a> = <span class="php-quote">'301 Moved Permanently'</span>;
-</span><span class="l" id="12"><a class="l" href="#12"> 12 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_NOT_MODIFIED" id="HTTP_NOT_MODIFIED">HTTP_NOT_MODIFIED</a> = <span class="php-quote">'304 Not Modified'</span>;
-</span><span class="l" id="13"><a class="l" href="#13"> 13 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_MOVED_TEMPORARILY" id="HTTP_MOVED_TEMPORARILY">HTTP_MOVED_TEMPORARILY</a> = <span class="php-quote">'307 Temporary Redirect'</span>;
-</span><span class="l" id="14"><a class="l" href="#14"> 14 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_NOT_FOUND" id="HTTP_NOT_FOUND">HTTP_NOT_FOUND</a> = <span class="php-quote">'404 Not Found'</span>;
-</span><span class="l" id="15"><a class="l" href="#15"> 15 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_FORBIDDEN" id="HTTP_FORBIDDEN">HTTP_FORBIDDEN</a> = <span class="php-quote">'403 Forbidden'</span>;
-</span><span class="l" id="16"><a class="l" href="#16"> 16 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_UNAUTHORIZED" id="HTTP_UNAUTHORIZED">HTTP_UNAUTHORIZED</a> = <span class="php-quote">'401 Unauthorized'</span>;
-</span><span class="l" id="17"><a class="l" href="#17"> 17 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_INTERNAL_ERROR" id="HTTP_INTERNAL_ERROR">HTTP_INTERNAL_ERROR</a> = <span class="php-quote">'500 Internal Server Error'</span>;
-</span><span class="l" id="18"><a class="l" href="#18"> 18 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_SERVICE_UNAVAILABLE" id="HTTP_SERVICE_UNAVAILABLE">HTTP_SERVICE_UNAVAILABLE</a> = <span class="php-quote">'503 Service Unavailable'</span>;
-</span><span class="l" id="19"><a class="l" href="#19"> 19 </a>
-</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$httpStatus" id="$httpStatus">$httpStatus</a></span> = self::HTTP_OK;
-</span><span class="l" id="21"><a class="l" href="#21"> 21 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentLastModified" id="$sentLastModified">$sentLastModified</a></span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="22"><a class="l" href="#22"> 22 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentEtag" id="$sentEtag">$sentEtag</a></span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="23"><a class="l" href="#23"> 23 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentContentType" id="$sentContentType">$sentContentType</a></span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="24"><a class="l" href="#24"> 24 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentCacheControl" id="$sentCacheControl">$sentCacheControl</a></span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="25"><a class="l" href="#25"> 25 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$additionalHeaders" id="$additionalHeaders">$additionalHeaders</a></span> = [];
-</span><span class="l" id="26"><a class="l" href="#26"> 26 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$preloadFiles" id="$preloadFiles">$preloadFiles</a></span> = [];
-</span><span class="l" id="27"><a class="l" href="#27"> 27 </a>
-</span><span class="l" id="28"><a class="l" href="#28"> 28 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="29"><a class="l" href="#29"> 29 </a><span class="php-comment">     * Sets the HTTP Status code.
-</span></span><span class="l" id="30"><a class="l" href="#30"> 30 </a><span class="php-comment">     *
-</span></span><span class="l" id="31"><a class="l" href="#31"> 31 </a><span class="php-comment">     * @param int $httpStatus
+</span><span class="l" id="11"><a class="l" href="#11"> 11 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_PARTIAL_CONTENT" id="HTTP_PARTIAL_CONTENT">HTTP_PARTIAL_CONTENT</a> = <span class="php-quote">'206 Partial Content'</span>;
+</span><span class="l" id="12"><a class="l" href="#12"> 12 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_MOVED_PERMANENTLY" id="HTTP_MOVED_PERMANENTLY">HTTP_MOVED_PERMANENTLY</a> = <span class="php-quote">'301 Moved Permanently'</span>;
+</span><span class="l" id="13"><a class="l" href="#13"> 13 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_NOT_MODIFIED" id="HTTP_NOT_MODIFIED">HTTP_NOT_MODIFIED</a> = <span class="php-quote">'304 Not Modified'</span>;
+</span><span class="l" id="14"><a class="l" href="#14"> 14 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_MOVED_TEMPORARILY" id="HTTP_MOVED_TEMPORARILY">HTTP_MOVED_TEMPORARILY</a> = <span class="php-quote">'307 Temporary Redirect'</span>;
+</span><span class="l" id="15"><a class="l" href="#15"> 15 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_NOT_FOUND" id="HTTP_NOT_FOUND">HTTP_NOT_FOUND</a> = <span class="php-quote">'404 Not Found'</span>;
+</span><span class="l" id="16"><a class="l" href="#16"> 16 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_FORBIDDEN" id="HTTP_FORBIDDEN">HTTP_FORBIDDEN</a> = <span class="php-quote">'403 Forbidden'</span>;
+</span><span class="l" id="17"><a class="l" href="#17"> 17 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_UNAUTHORIZED" id="HTTP_UNAUTHORIZED">HTTP_UNAUTHORIZED</a> = <span class="php-quote">'401 Unauthorized'</span>;
+</span><span class="l" id="18"><a class="l" href="#18"> 18 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_RANGE_NOT_SATISFIABLE" id="HTTP_RANGE_NOT_SATISFIABLE">HTTP_RANGE_NOT_SATISFIABLE</a> = <span class="php-quote">'416 Range Not Satisfiable'</span>;
+</span><span class="l" id="19"><a class="l" href="#19"> 19 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_INTERNAL_ERROR" id="HTTP_INTERNAL_ERROR">HTTP_INTERNAL_ERROR</a> = <span class="php-quote">'500 Internal Server Error'</span>;
+</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>    <span class="php-keyword1">const</span> <a href="#HTTP_SERVICE_UNAVAILABLE" id="HTTP_SERVICE_UNAVAILABLE">HTTP_SERVICE_UNAVAILABLE</a> = <span class="php-quote">'503 Service Unavailable'</span>;
+</span><span class="l" id="21"><a class="l" href="#21"> 21 </a>
+</span><span class="l" id="22"><a class="l" href="#22"> 22 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$httpStatus" id="$httpStatus">$httpStatus</a></span> = self::HTTP_OK;
+</span><span class="l" id="23"><a class="l" href="#23"> 23 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentLastModified" id="$sentLastModified">$sentLastModified</a></span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="24"><a class="l" href="#24"> 24 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentEtag" id="$sentEtag">$sentEtag</a></span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="25"><a class="l" href="#25"> 25 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentContentType" id="$sentContentType">$sentContentType</a></span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="26"><a class="l" href="#26"> 26 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$sentCacheControl" id="$sentCacheControl">$sentCacheControl</a></span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="27"><a class="l" href="#27"> 27 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$additionalHeaders" id="$additionalHeaders">$additionalHeaders</a></span> = [];
+</span><span class="l" id="28"><a class="l" href="#28"> 28 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a href="#$preloadFiles" id="$preloadFiles">$preloadFiles</a></span> = [];
+</span><span class="l" id="29"><a class="l" href="#29"> 29 </a>
+</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="31"><a class="l" href="#31"> 31 </a><span class="php-comment">     * Sets the HTTP Status code.
 </span></span><span class="l" id="32"><a class="l" href="#32"> 32 </a><span class="php-comment">     *
-</span></span><span class="l" id="33"><a class="l" href="#33"> 33 </a><span class="php-comment">     * @throws InvalidArgumentException
-</span></span><span class="l" id="34"><a class="l" href="#34"> 34 </a><span class="php-comment">     */</span>
-</span><span class="l" id="35"><a class="l" href="#35"> 35 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_setStatus" id="_setStatus">setStatus</a>(<span class="php-var">$httpStatus</span>)
-</span><span class="l" id="36"><a class="l" href="#36"> 36 </a>    {
-</span><span class="l" id="37"><a class="l" href="#37"> 37 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$httpStatus</span>, <span class="php-quote">"\n"</span>) !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="38"><a class="l" href="#38"> 38 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Illegal http-status "'</span> . <span class="php-var">$httpStatus</span> . <span class="php-quote">'", contains newlines'</span>);
-</span><span class="l" id="39"><a class="l" href="#39"> 39 </a>        }
-</span><span class="l" id="40"><a class="l" href="#40"> 40 </a>
-</span><span class="l" id="41"><a class="l" href="#41"> 41 </a>        self::<span class="php-var">$httpStatus</span> = <span class="php-var">$httpStatus</span>;
-</span><span class="l" id="42"><a class="l" href="#42"> 42 </a>    }
-</span><span class="l" id="43"><a class="l" href="#43"> 43 </a>
-</span><span class="l" id="44"><a class="l" href="#44"> 44 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="45"><a class="l" href="#45"> 45 </a><span class="php-comment">     * Returns the HTTP Status code.
-</span></span><span class="l" id="46"><a class="l" href="#46"> 46 </a><span class="php-comment">     *
-</span></span><span class="l" id="47"><a class="l" href="#47"> 47 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="48"><a class="l" href="#48"> 48 </a><span class="php-comment">     */</span>
-</span><span class="l" id="49"><a class="l" href="#49"> 49 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getStatus" id="_getStatus">getStatus</a>()
-</span><span class="l" id="50"><a class="l" href="#50"> 50 </a>    {
-</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$httpStatus</span>;
-</span><span class="l" id="52"><a class="l" href="#52"> 52 </a>    }
-</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>
-</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="55"><a class="l" href="#55"> 55 </a><span class="php-comment">     * Set a http response header. A existing header with the same name will be overridden.
-</span></span><span class="l" id="56"><a class="l" href="#56"> 56 </a><span class="php-comment">     *
-</span></span><span class="l" id="57"><a class="l" href="#57"> 57 </a><span class="php-comment">     * @param string $name
-</span></span><span class="l" id="58"><a class="l" href="#58"> 58 </a><span class="php-comment">     * @param string $value
-</span></span><span class="l" id="59"><a class="l" href="#59"> 59 </a><span class="php-comment">     */</span>
-</span><span class="l" id="60"><a class="l" href="#60"> 60 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_setHeader" id="_setHeader">setHeader</a>(<span class="php-var">$name</span>, <span class="php-var">$value</span>)
-</span><span class="l" id="61"><a class="l" href="#61"> 61 </a>    {
-</span><span class="l" id="62"><a class="l" href="#62"> 62 </a>        self::<span class="php-var">$additionalHeaders</span>[<span class="php-var">$name</span>] = <span class="php-var">$value</span>;
-</span><span class="l" id="63"><a class="l" href="#63"> 63 </a>    }
-</span><span class="l" id="64"><a class="l" href="#64"> 64 </a>
-</span><span class="l" id="65"><a class="l" href="#65"> 65 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendAdditionalHeaders" id="_sendAdditionalHeaders">sendAdditionalHeaders</a>()
-</span><span class="l" id="66"><a class="l" href="#66"> 66 </a>    {
-</span><span class="l" id="67"><a class="l" href="#67"> 67 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$additionalHeaders</span> <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="68"><a class="l" href="#68"> 68 </a>            <span class="php-keyword2">header</span>(<span class="php-var">$name</span> .<span class="php-quote">': '</span> . <span class="php-var">$value</span>);
-</span><span class="l" id="69"><a class="l" href="#69"> 69 </a>        }
-</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>    }
-</span><span class="l" id="71"><a class="l" href="#71"> 71 </a>
-</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="73"><a class="l" href="#73"> 73 </a><span class="php-comment">     * Set a file to be preload via http link header.
-</span></span><span class="l" id="74"><a class="l" href="#74"> 74 </a><span class="php-comment">     *
-</span></span><span class="l" id="75"><a class="l" href="#75"> 75 </a><span class="php-comment">     * @param string $file
-</span></span><span class="l" id="76"><a class="l" href="#76"> 76 </a><span class="php-comment">     * @param string $type
-</span></span><span class="l" id="77"><a class="l" href="#77"> 77 </a><span class="php-comment">     * @param string $mimeType
-</span></span><span class="l" id="78"><a class="l" href="#78"> 78 </a><span class="php-comment">     */</span>
-</span><span class="l" id="79"><a class="l" href="#79"> 79 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_preload" id="_preload">preload</a>(<span class="php-var">$file</span>, <span class="php-var">$type</span>, <span class="php-var">$mimeType</span>)
-</span><span class="l" id="80"><a class="l" href="#80"> 80 </a>    {
-</span><span class="l" id="81"><a class="l" href="#81"> 81 </a>        self::<span class="php-var">$preloadFiles</span>[] = [
-</span><span class="l" id="82"><a class="l" href="#82"> 82 </a>            <span class="php-quote">'file'</span> =&gt; <span class="php-var">$file</span>,
-</span><span class="l" id="83"><a class="l" href="#83"> 83 </a>            <span class="php-quote">'type'</span> =&gt; <span class="php-var">$type</span>,
-</span><span class="l" id="84"><a class="l" href="#84"> 84 </a>            <span class="php-quote">'mimeType'</span> =&gt; <span class="php-var">$mimeType</span>,
-</span><span class="l" id="85"><a class="l" href="#85"> 85 </a>        ];
-</span><span class="l" id="86"><a class="l" href="#86"> 86 </a>    }
-</span><span class="l" id="87"><a class="l" href="#87"> 87 </a>
-</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendPreloadHeaders" id="_sendPreloadHeaders">sendPreloadHeaders</a>()
-</span><span class="l" id="89"><a class="l" href="#89"> 89 </a>    {
-</span><span class="l" id="90"><a class="l" href="#90"> 90 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$preloadFiles</span> <span class="php-keyword1">as</span> <span class="php-var">$preloadFile</span>) {
-</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Link: &lt;'</span> . <span class="php-var">$preloadFile</span>[<span class="php-quote">'file'</span>] . <span class="php-quote">'&gt;; rel=preload; as='</span> . <span class="php-var">$preloadFile</span>[<span class="php-quote">'type'</span>] . <span class="php-quote">'; type="'</span> . <span class="php-var">$preloadFile</span>[<span class="php-quote">'mimeType'</span>].<span class="php-quote">'"; crossorigin; nopush'</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>        }
-</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>    }
-</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>
-</span><span class="l" id="95"><a class="l" href="#95"> 95 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="96"><a class="l" href="#96"> 96 </a><span class="php-comment">     * Redirects to a URL.
-</span></span><span class="l" id="97"><a class="l" href="#97"> 97 </a><span class="php-comment">     *
-</span></span><span class="l" id="98"><a class="l" href="#98"> 98 </a><span class="php-comment">     * NOTE: Execution will stop within this method!
-</span></span><span class="l" id="99"><a class="l" href="#99"> 99 </a><span class="php-comment">     *
-</span></span><span class="l" id="100"><a class="l" href="#100">100 </a><span class="php-comment">     * @param string $url URL
-</span></span><span class="l" id="101"><a class="l" href="#101">101 </a><span class="php-comment">     *
-</span></span><span class="l" id="102"><a class="l" href="#102">102 </a><span class="php-comment">     * @throws InvalidArgumentException
-</span></span><span class="l" id="103"><a class="l" href="#103">103 </a><span class="php-comment">     */</span>
-</span><span class="l" id="104"><a class="l" href="#104">104 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendRedirect" id="_sendRedirect">sendRedirect</a>(<span class="php-var">$url</span>)
-</span><span class="l" id="105"><a class="l" href="#105">105 </a>    {
-</span><span class="l" id="106"><a class="l" href="#106">106 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$url</span>, <span class="php-quote">"\n"</span>) !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="107"><a class="l" href="#107">107 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Illegal redirect url "'</span> . <span class="php-var">$url</span> . <span class="php-quote">'", contains newlines'</span>);
-</span><span class="l" id="108"><a class="l" href="#108">108 </a>        }
-</span><span class="l" id="109"><a class="l" href="#109">109 </a>
-</span><span class="l" id="110"><a class="l" href="#110">110 </a>        self::cleanOutputBuffers();
-</span><span class="l" id="111"><a class="l" href="#111">111 </a>        self::sendAdditionalHeaders();
-</span><span class="l" id="112"><a class="l" href="#112">112 </a>        self::sendPreloadHeaders();
-</span><span class="l" id="113"><a class="l" href="#113">113 </a>
-</span><span class="l" id="114"><a class="l" href="#114">114 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::<span class="php-var">$httpStatus</span>);
-</span><span class="l" id="115"><a class="l" href="#115">115 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Location: '</span> . <span class="php-var">$url</span>);
-</span><span class="l" id="116"><a class="l" href="#116">116 </a>        <span class="php-keyword1">exit</span>;
-</span><span class="l" id="117"><a class="l" href="#117">117 </a>    }
-</span><span class="l" id="118"><a class="l" href="#118">118 </a>
-</span><span class="l" id="119"><a class="l" href="#119">119 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="120"><a class="l" href="#120">120 </a><span class="php-comment">     * Sends a file to client.
-</span></span><span class="l" id="121"><a class="l" href="#121">121 </a><span class="php-comment">     *
-</span></span><span class="l" id="122"><a class="l" href="#122">122 </a><span class="php-comment">     * @param string      $file               File path
-</span></span><span class="l" id="123"><a class="l" href="#123">123 </a><span class="php-comment">     * @param string      $contentType        Content type
-</span></span><span class="l" id="124"><a class="l" href="#124">124 </a><span class="php-comment">     * @param string      $contentDisposition Content disposition ("inline" or "attachment")
-</span></span><span class="l" id="125"><a class="l" href="#125">125 </a><span class="php-comment">     * @param null|string $filename           Custom Filename
-</span></span><span class="l" id="126"><a class="l" href="#126">126 </a><span class="php-comment">     */</span>
-</span><span class="l" id="127"><a class="l" href="#127">127 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendFile" id="_sendFile">sendFile</a>(<span class="php-var">$file</span>, <span class="php-var">$contentType</span>, <span class="php-var">$contentDisposition</span> = <span class="php-quote">'inline'</span>, <span class="php-var">$filename</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="128"><a class="l" href="#128">128 </a>    {
-</span><span class="l" id="129"><a class="l" href="#129">129 </a>        self::cleanOutputBuffers();
+</span></span><span class="l" id="33"><a class="l" href="#33"> 33 </a><span class="php-comment">     * @param int $httpStatus
+</span></span><span class="l" id="34"><a class="l" href="#34"> 34 </a><span class="php-comment">     *
+</span></span><span class="l" id="35"><a class="l" href="#35"> 35 </a><span class="php-comment">     * @throws InvalidArgumentException
+</span></span><span class="l" id="36"><a class="l" href="#36"> 36 </a><span class="php-comment">     */</span>
+</span><span class="l" id="37"><a class="l" href="#37"> 37 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_setStatus" id="_setStatus">setStatus</a>(<span class="php-var">$httpStatus</span>)
+</span><span class="l" id="38"><a class="l" href="#38"> 38 </a>    {
+</span><span class="l" id="39"><a class="l" href="#39"> 39 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$httpStatus</span>, <span class="php-quote">"\n"</span>) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="40"><a class="l" href="#40"> 40 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Illegal http-status "'</span> . <span class="php-var">$httpStatus</span> . <span class="php-quote">'", contains newlines'</span>);
+</span><span class="l" id="41"><a class="l" href="#41"> 41 </a>        }
+</span><span class="l" id="42"><a class="l" href="#42"> 42 </a>
+</span><span class="l" id="43"><a class="l" href="#43"> 43 </a>        self::<span class="php-var">$httpStatus</span> = <span class="php-var">$httpStatus</span>;
+</span><span class="l" id="44"><a class="l" href="#44"> 44 </a>    }
+</span><span class="l" id="45"><a class="l" href="#45"> 45 </a>
+</span><span class="l" id="46"><a class="l" href="#46"> 46 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="47"><a class="l" href="#47"> 47 </a><span class="php-comment">     * Returns the HTTP Status code.
+</span></span><span class="l" id="48"><a class="l" href="#48"> 48 </a><span class="php-comment">     *
+</span></span><span class="l" id="49"><a class="l" href="#49"> 49 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="50"><a class="l" href="#50"> 50 </a><span class="php-comment">     */</span>
+</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getStatus" id="_getStatus">getStatus</a>()
+</span><span class="l" id="52"><a class="l" href="#52"> 52 </a>    {
+</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$httpStatus</span>;
+</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>    }
+</span><span class="l" id="55"><a class="l" href="#55"> 55 </a>
+</span><span class="l" id="56"><a class="l" href="#56"> 56 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="57"><a class="l" href="#57"> 57 </a><span class="php-comment">     * Set a http response header. A existing header with the same name will be overridden.
+</span></span><span class="l" id="58"><a class="l" href="#58"> 58 </a><span class="php-comment">     *
+</span></span><span class="l" id="59"><a class="l" href="#59"> 59 </a><span class="php-comment">     * @param string $name
+</span></span><span class="l" id="60"><a class="l" href="#60"> 60 </a><span class="php-comment">     * @param string $value
+</span></span><span class="l" id="61"><a class="l" href="#61"> 61 </a><span class="php-comment">     */</span>
+</span><span class="l" id="62"><a class="l" href="#62"> 62 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_setHeader" id="_setHeader">setHeader</a>(<span class="php-var">$name</span>, <span class="php-var">$value</span>)
+</span><span class="l" id="63"><a class="l" href="#63"> 63 </a>    {
+</span><span class="l" id="64"><a class="l" href="#64"> 64 </a>        self::<span class="php-var">$additionalHeaders</span>[<span class="php-var">$name</span>] = <span class="php-var">$value</span>;
+</span><span class="l" id="65"><a class="l" href="#65"> 65 </a>    }
+</span><span class="l" id="66"><a class="l" href="#66"> 66 </a>
+</span><span class="l" id="67"><a class="l" href="#67"> 67 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendAdditionalHeaders" id="_sendAdditionalHeaders">sendAdditionalHeaders</a>()
+</span><span class="l" id="68"><a class="l" href="#68"> 68 </a>    {
+</span><span class="l" id="69"><a class="l" href="#69"> 69 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$additionalHeaders</span> <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>            <span class="php-keyword2">header</span>(<span class="php-var">$name</span> .<span class="php-quote">': '</span> . <span class="php-var">$value</span>);
+</span><span class="l" id="71"><a class="l" href="#71"> 71 </a>        }
+</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>    }
+</span><span class="l" id="73"><a class="l" href="#73"> 73 </a>
+</span><span class="l" id="74"><a class="l" href="#74"> 74 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="75"><a class="l" href="#75"> 75 </a><span class="php-comment">     * Set a file to be preload via http link header.
+</span></span><span class="l" id="76"><a class="l" href="#76"> 76 </a><span class="php-comment">     *
+</span></span><span class="l" id="77"><a class="l" href="#77"> 77 </a><span class="php-comment">     * @param string $file
+</span></span><span class="l" id="78"><a class="l" href="#78"> 78 </a><span class="php-comment">     * @param string $type
+</span></span><span class="l" id="79"><a class="l" href="#79"> 79 </a><span class="php-comment">     * @param string $mimeType
+</span></span><span class="l" id="80"><a class="l" href="#80"> 80 </a><span class="php-comment">     */</span>
+</span><span class="l" id="81"><a class="l" href="#81"> 81 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_preload" id="_preload">preload</a>(<span class="php-var">$file</span>, <span class="php-var">$type</span>, <span class="php-var">$mimeType</span>)
+</span><span class="l" id="82"><a class="l" href="#82"> 82 </a>    {
+</span><span class="l" id="83"><a class="l" href="#83"> 83 </a>        self::<span class="php-var">$preloadFiles</span>[] = [
+</span><span class="l" id="84"><a class="l" href="#84"> 84 </a>            <span class="php-quote">'file'</span> =&gt; <span class="php-var">$file</span>,
+</span><span class="l" id="85"><a class="l" href="#85"> 85 </a>            <span class="php-quote">'type'</span> =&gt; <span class="php-var">$type</span>,
+</span><span class="l" id="86"><a class="l" href="#86"> 86 </a>            <span class="php-quote">'mimeType'</span> =&gt; <span class="php-var">$mimeType</span>,
+</span><span class="l" id="87"><a class="l" href="#87"> 87 </a>        ];
+</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>    }
+</span><span class="l" id="89"><a class="l" href="#89"> 89 </a>
+</span><span class="l" id="90"><a class="l" href="#90"> 90 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendPreloadHeaders" id="_sendPreloadHeaders">sendPreloadHeaders</a>()
+</span><span class="l" id="91"><a class="l" href="#91"> 91 </a>    {
+</span><span class="l" id="92"><a class="l" href="#92"> 92 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$preloadFiles</span> <span class="php-keyword1">as</span> <span class="php-var">$preloadFile</span>) {
+</span><span class="l" id="93"><a class="l" href="#93"> 93 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Link: &lt;'</span> . <span class="php-var">$preloadFile</span>[<span class="php-quote">'file'</span>] . <span class="php-quote">'&gt;; rel=preload; as='</span> . <span class="php-var">$preloadFile</span>[<span class="php-quote">'type'</span>] . <span class="php-quote">'; type="'</span> . <span class="php-var">$preloadFile</span>[<span class="php-quote">'mimeType'</span>].<span class="php-quote">'"; crossorigin; nopush'</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>        }
+</span><span class="l" id="95"><a class="l" href="#95"> 95 </a>    }
+</span><span class="l" id="96"><a class="l" href="#96"> 96 </a>
+</span><span class="l" id="97"><a class="l" href="#97"> 97 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendServerTimingHeaders" id="_sendServerTimingHeaders">sendServerTimingHeaders</a>()
+</span><span class="l" id="98"><a class="l" href="#98"> 98 </a>    {
+</span><span class="l" id="99"><a class="l" href="#99"> 99 </a>        <span class="php-comment">// see https://w3c.github.io/server-timing/#the-server-timing-header-field</span>
+</span><span class="l" id="100"><a class="l" href="#100">100 </a>        <span class="php-keyword1">foreach</span> (rex_timer::<span class="php-var">$serverTimings</span> <span class="php-keyword1">as</span> <span class="php-var">$label</span> =&gt; <span class="php-var">$durationMs</span>) {
+</span><span class="l" id="101"><a class="l" href="#101">101 </a>            <span class="php-var">$label</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{[^!#$%&amp;\'*+-\.\^_`|~\w]}i'</span>, <span class="php-quote">'_'</span>, <span class="php-var">$label</span>);
+</span><span class="l" id="102"><a class="l" href="#102">102 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Server-Timing: '</span>. <span class="php-var">$label</span> .<span class="php-quote">';dur='</span>. <span class="php-keyword2">number_format</span>(<span class="php-var">$durationMs</span>, <span class="php-num">3</span>, <span class="php-quote">'.'</span>, <span class="php-quote">''</span>), <span class="php-keyword1">false</span>);
+</span><span class="l" id="103"><a class="l" href="#103">103 </a>        }
+</span><span class="l" id="104"><a class="l" href="#104">104 </a>    }
+</span><span class="l" id="105"><a class="l" href="#105">105 </a>
+</span><span class="l" id="106"><a class="l" href="#106">106 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="107"><a class="l" href="#107">107 </a><span class="php-comment">     * Redirects to a URL.
+</span></span><span class="l" id="108"><a class="l" href="#108">108 </a><span class="php-comment">     *
+</span></span><span class="l" id="109"><a class="l" href="#109">109 </a><span class="php-comment">     * NOTE: Execution will stop within this method!
+</span></span><span class="l" id="110"><a class="l" href="#110">110 </a><span class="php-comment">     *
+</span></span><span class="l" id="111"><a class="l" href="#111">111 </a><span class="php-comment">     * @param string $url URL
+</span></span><span class="l" id="112"><a class="l" href="#112">112 </a><span class="php-comment">     *
+</span></span><span class="l" id="113"><a class="l" href="#113">113 </a><span class="php-comment">     * @throws InvalidArgumentException
+</span></span><span class="l" id="114"><a class="l" href="#114">114 </a><span class="php-comment">     */</span>
+</span><span class="l" id="115"><a class="l" href="#115">115 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendRedirect" id="_sendRedirect">sendRedirect</a>(<span class="php-var">$url</span>)
+</span><span class="l" id="116"><a class="l" href="#116">116 </a>    {
+</span><span class="l" id="117"><a class="l" href="#117">117 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$url</span>, <span class="php-quote">"\n"</span>) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="118"><a class="l" href="#118">118 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> InvalidArgumentException(<span class="php-quote">'Illegal redirect url "'</span> . <span class="php-var">$url</span> . <span class="php-quote">'", contains newlines'</span>);
+</span><span class="l" id="119"><a class="l" href="#119">119 </a>        }
+</span><span class="l" id="120"><a class="l" href="#120">120 </a>
+</span><span class="l" id="121"><a class="l" href="#121">121 </a>        self::cleanOutputBuffers();
+</span><span class="l" id="122"><a class="l" href="#122">122 </a>        self::sendAdditionalHeaders();
+</span><span class="l" id="123"><a class="l" href="#123">123 </a>        self::sendPreloadHeaders();
+</span><span class="l" id="124"><a class="l" href="#124">124 </a>        self::sendServerTimingHeaders();
+</span><span class="l" id="125"><a class="l" href="#125">125 </a>
+</span><span class="l" id="126"><a class="l" href="#126">126 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::<span class="php-var">$httpStatus</span>);
+</span><span class="l" id="127"><a class="l" href="#127">127 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Location: '</span> . <span class="php-var">$url</span>);
+</span><span class="l" id="128"><a class="l" href="#128">128 </a>        <span class="php-keyword1">exit</span>;
+</span><span class="l" id="129"><a class="l" href="#129">129 </a>    }
 </span><span class="l" id="130"><a class="l" href="#130">130 </a>
-</span><span class="l" id="131"><a class="l" href="#131">131 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$file</span>)) {
-</span><span class="l" id="132"><a class="l" href="#132">132 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_NOT_FOUND);
-</span><span class="l" id="133"><a class="l" href="#133">133 </a>            <span class="php-keyword1">exit</span>;
-</span><span class="l" id="134"><a class="l" href="#134">134 </a>        }
-</span><span class="l" id="135"><a class="l" href="#135">135 </a>
-</span><span class="l" id="136"><a class="l" href="#136">136 </a>        <span class="php-comment">// prevent session locking while sending huge files</span>
-</span><span class="l" id="137"><a class="l" href="#137">137 </a>        <span class="php-keyword2">session_write_close</span>();
-</span><span class="l" id="138"><a class="l" href="#138">138 </a>
-</span><span class="l" id="139"><a class="l" href="#139">139 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$filename</span>) {
-</span><span class="l" id="140"><a class="l" href="#140">140 </a>            <span class="php-var">$filename</span> = <span class="php-keyword2">basename</span>(<span class="php-var">$file</span>);
-</span><span class="l" id="141"><a class="l" href="#141">141 </a>        }
+</span><span class="l" id="131"><a class="l" href="#131">131 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="132"><a class="l" href="#132">132 </a><span class="php-comment">     * Sends a file to client.
+</span></span><span class="l" id="133"><a class="l" href="#133">133 </a><span class="php-comment">     *
+</span></span><span class="l" id="134"><a class="l" href="#134">134 </a><span class="php-comment">     * @param string      $file               File path
+</span></span><span class="l" id="135"><a class="l" href="#135">135 </a><span class="php-comment">     * @param string      $contentType        Content type
+</span></span><span class="l" id="136"><a class="l" href="#136">136 </a><span class="php-comment">     * @param string      $contentDisposition Content disposition ("inline" or "attachment")
+</span></span><span class="l" id="137"><a class="l" href="#137">137 </a><span class="php-comment">     * @param null|string $filename           Custom Filename
+</span></span><span class="l" id="138"><a class="l" href="#138">138 </a><span class="php-comment">     */</span>
+</span><span class="l" id="139"><a class="l" href="#139">139 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendFile" id="_sendFile">sendFile</a>(<span class="php-var">$file</span>, <span class="php-var">$contentType</span>, <span class="php-var">$contentDisposition</span> = <span class="php-quote">'inline'</span>, <span class="php-var">$filename</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="140"><a class="l" href="#140">140 </a>    {
+</span><span class="l" id="141"><a class="l" href="#141">141 </a>        self::cleanOutputBuffers();
 </span><span class="l" id="142"><a class="l" href="#142">142 </a>
-</span><span class="l" id="143"><a class="l" href="#143">143 </a>        self::sendContentType(<span class="php-var">$contentType</span>);
-</span><span class="l" id="144"><a class="l" href="#144">144 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Disposition: '</span> . <span class="php-var">$contentDisposition</span> . <span class="php-quote">'; filename="'</span> . <span class="php-var">$filename</span> . <span class="php-quote">'"'</span>);
-</span><span class="l" id="145"><a class="l" href="#145">145 </a>
-</span><span class="l" id="146"><a class="l" href="#146">146 </a>        self::sendLastModified(<span class="php-keyword2">filemtime</span>(<span class="php-var">$file</span>));
+</span><span class="l" id="143"><a class="l" href="#143">143 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$file</span>)) {
+</span><span class="l" id="144"><a class="l" href="#144">144 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_NOT_FOUND);
+</span><span class="l" id="145"><a class="l" href="#145">145 </a>            <span class="php-keyword1">exit</span>;
+</span><span class="l" id="146"><a class="l" href="#146">146 </a>        }
 </span><span class="l" id="147"><a class="l" href="#147">147 </a>
-</span><span class="l" id="148"><a class="l" href="#148">148 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::<span class="php-var">$httpStatus</span>);
-</span><span class="l" id="149"><a class="l" href="#149">149 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentCacheControl</span>) {
-</span><span class="l" id="150"><a class="l" href="#150">150 </a>            self::sendCacheControl(<span class="php-quote">'max-age=3600, must-revalidate, proxy-revalidate, private'</span>);
-</span><span class="l" id="151"><a class="l" href="#151">151 </a>        }
-</span><span class="l" id="152"><a class="l" href="#152">152 </a>
-</span><span class="l" id="153"><a class="l" href="#153">153 </a>        <span class="php-comment">// content length schicken, damit der browser einen ladebalken anzeigen kann</span>
-</span><span class="l" id="154"><a class="l" href="#154">154 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">ini_get</span>(<span class="php-quote">'zlib.output_compression'</span>)) {
-</span><span class="l" id="155"><a class="l" href="#155">155 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Length: '</span> . <span class="php-keyword2">filesize</span>(<span class="php-var">$file</span>));
-</span><span class="l" id="156"><a class="l" href="#156">156 </a>        }
+</span><span class="l" id="148"><a class="l" href="#148">148 </a>        <span class="php-comment">// prevent session locking while sending huge files</span>
+</span><span class="l" id="149"><a class="l" href="#149">149 </a>        <span class="php-keyword2">session_write_close</span>();
+</span><span class="l" id="150"><a class="l" href="#150">150 </a>
+</span><span class="l" id="151"><a class="l" href="#151">151 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$filename</span>) {
+</span><span class="l" id="152"><a class="l" href="#152">152 </a>            <span class="php-var">$filename</span> = <span class="php-keyword2">basename</span>(<span class="php-var">$file</span>);
+</span><span class="l" id="153"><a class="l" href="#153">153 </a>        }
+</span><span class="l" id="154"><a class="l" href="#154">154 </a>
+</span><span class="l" id="155"><a class="l" href="#155">155 </a>        self::sendContentType(<span class="php-var">$contentType</span>);
+</span><span class="l" id="156"><a class="l" href="#156">156 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Disposition: '</span> . <span class="php-var">$contentDisposition</span> . <span class="php-quote">'; filename="'</span> . <span class="php-var">$filename</span> . <span class="php-quote">'"'</span>);
 </span><span class="l" id="157"><a class="l" href="#157">157 </a>
-</span><span class="l" id="158"><a class="l" href="#158">158 </a>        self::sendAdditionalHeaders();
-</span><span class="l" id="159"><a class="l" href="#159">159 </a>        self::sendPreloadHeaders();
-</span><span class="l" id="160"><a class="l" href="#160">160 </a>
-</span><span class="l" id="161"><a class="l" href="#161">161 </a>        <span class="php-keyword2">readfile</span>(<span class="php-var">$file</span>);
-</span><span class="l" id="162"><a class="l" href="#162">162 </a>    }
-</span><span class="l" id="163"><a class="l" href="#163">163 </a>
-</span><span class="l" id="164"><a class="l" href="#164">164 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="165"><a class="l" href="#165">165 </a><span class="php-comment">     * Sends a resource to the client.
-</span></span><span class="l" id="166"><a class="l" href="#166">166 </a><span class="php-comment">     *
-</span></span><span class="l" id="167"><a class="l" href="#167">167 </a><span class="php-comment">     * @param string      $content            Content
-</span></span><span class="l" id="168"><a class="l" href="#168">168 </a><span class="php-comment">     * @param null|string $contentType        Content type
-</span></span><span class="l" id="169"><a class="l" href="#169">169 </a><span class="php-comment">     * @param null|int    $lastModified       HTTP Last-Modified Timestamp
-</span></span><span class="l" id="170"><a class="l" href="#170">170 </a><span class="php-comment">     * @param null|string $etag               HTTP Cachekey to identify the cache
-</span></span><span class="l" id="171"><a class="l" href="#171">171 </a><span class="php-comment">     * @param null|string $contentDisposition Content disposition ("inline" or "attachment")
-</span></span><span class="l" id="172"><a class="l" href="#172">172 </a><span class="php-comment">     * @param null|string $filename           Filename
-</span></span><span class="l" id="173"><a class="l" href="#173">173 </a><span class="php-comment">     */</span>
-</span><span class="l" id="174"><a class="l" href="#174">174 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendResource" id="_sendResource">sendResource</a>(<span class="php-var">$content</span>, <span class="php-var">$contentType</span> = <span class="php-keyword1">null</span>, <span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>, <span class="php-var">$etag</span> = <span class="php-keyword1">null</span>, <span class="php-var">$contentDisposition</span> = <span class="php-keyword1">null</span>, <span class="php-var">$filename</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="175"><a class="l" href="#175">175 </a>    {
-</span><span class="l" id="176"><a class="l" href="#176">176 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$contentDisposition</span>) {
-</span><span class="l" id="177"><a class="l" href="#177">177 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Disposition: '</span> . <span class="php-var">$contentDisposition</span> . <span class="php-quote">'; filename="'</span> . <span class="php-var">$filename</span> . <span class="php-quote">'"'</span>);
-</span><span class="l" id="178"><a class="l" href="#178">178 </a>        }
-</span><span class="l" id="179"><a class="l" href="#179">179 </a>
-</span><span class="l" id="180"><a class="l" href="#180">180 </a>        self::sendCacheControl(<span class="php-quote">'max-age=3600, must-revalidate, proxy-revalidate, private'</span>);
-</span><span class="l" id="181"><a class="l" href="#181">181 </a>        self::sendContent(<span class="php-var">$content</span>, <span class="php-var">$contentType</span>, <span class="php-var">$lastModified</span>, <span class="php-var">$etag</span>);
-</span><span class="l" id="182"><a class="l" href="#182">182 </a>    }
-</span><span class="l" id="183"><a class="l" href="#183">183 </a>
-</span><span class="l" id="184"><a class="l" href="#184">184 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="185"><a class="l" href="#185">185 </a><span class="php-comment">     * Sends a page to client.
-</span></span><span class="l" id="186"><a class="l" href="#186">186 </a><span class="php-comment">     *
-</span></span><span class="l" id="187"><a class="l" href="#187">187 </a><span class="php-comment">     * The page content can be modified by the Extension Point OUTPUT_FILTER
-</span></span><span class="l" id="188"><a class="l" href="#188">188 </a><span class="php-comment">     *
-</span></span><span class="l" id="189"><a class="l" href="#189">189 </a><span class="php-comment">     * @param string $content      Content of page
-</span></span><span class="l" id="190"><a class="l" href="#190">190 </a><span class="php-comment">     * @param int    $lastModified HTTP Last-Modified Timestamp
-</span></span><span class="l" id="191"><a class="l" href="#191">191 </a><span class="php-comment">     */</span>
-</span><span class="l" id="192"><a class="l" href="#192">192 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendPage" id="_sendPage">sendPage</a>(<span class="php-var">$content</span>, <span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="193"><a class="l" href="#193">193 </a>    {
-</span><span class="l" id="194"><a class="l" href="#194">194 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="195"><a class="l" href="#195">195 </a>        <span class="php-var">$content</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'OUTPUT_FILTER'</span>, <span class="php-var">$content</span>));
-</span><span class="l" id="196"><a class="l" href="#196">196 </a>
-</span><span class="l" id="197"><a class="l" href="#197">197 </a>        <span class="php-var">$hasShutdownExtension</span> = rex_extension::isRegistered(<span class="php-quote">'RESPONSE_SHUTDOWN'</span>);
-</span><span class="l" id="198"><a class="l" href="#198">198 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$hasShutdownExtension</span>) {
-</span><span class="l" id="199"><a class="l" href="#199">199 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Connection: close'</span>);
-</span><span class="l" id="200"><a class="l" href="#200">200 </a>        }
-</span><span class="l" id="201"><a class="l" href="#201">201 </a>
-</span><span class="l" id="202"><a class="l" href="#202">202 </a>        self::sendContent(<span class="php-var">$content</span>, <span class="php-keyword1">null</span>, <span class="php-var">$lastModified</span>);
-</span><span class="l" id="203"><a class="l" href="#203">203 </a>
-</span><span class="l" id="204"><a class="l" href="#204">204 </a>        <span class="php-comment">// ----- EXTENSION POINT - (read only)</span>
-</span><span class="l" id="205"><a class="l" href="#205">205 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$hasShutdownExtension</span>) {
-</span><span class="l" id="206"><a class="l" href="#206">206 </a>            <span class="php-comment">// unlock session</span>
-</span><span class="l" id="207"><a class="l" href="#207">207 </a>            <span class="php-keyword2">session_write_close</span>();
-</span><span class="l" id="208"><a class="l" href="#208">208 </a>
-</span><span class="l" id="209"><a class="l" href="#209">209 </a>            rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'RESPONSE_SHUTDOWN'</span>, <span class="php-var">$content</span>, [], <span class="php-keyword1">true</span>));
-</span><span class="l" id="210"><a class="l" href="#210">210 </a>        }
-</span><span class="l" id="211"><a class="l" href="#211">211 </a>    }
-</span><span class="l" id="212"><a class="l" href="#212">212 </a>
-</span><span class="l" id="213"><a class="l" href="#213">213 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="214"><a class="l" href="#214">214 </a><span class="php-comment">     * Sends content to the client.
-</span></span><span class="l" id="215"><a class="l" href="#215">215 </a><span class="php-comment">     *
-</span></span><span class="l" id="216"><a class="l" href="#216">216 </a><span class="php-comment">     * @param string $content      Content
-</span></span><span class="l" id="217"><a class="l" href="#217">217 </a><span class="php-comment">     * @param string $contentType  Content type
-</span></span><span class="l" id="218"><a class="l" href="#218">218 </a><span class="php-comment">     * @param int    $lastModified HTTP Last-Modified Timestamp
-</span></span><span class="l" id="219"><a class="l" href="#219">219 </a><span class="php-comment">     * @param string $etag         HTTP Cachekey to identify the cache
-</span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     */</span>
-</span><span class="l" id="221"><a class="l" href="#221">221 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendContent" id="_sendContent">sendContent</a>(<span class="php-var">$content</span>, <span class="php-var">$contentType</span> = <span class="php-keyword1">null</span>, <span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>, <span class="php-var">$etag</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="222"><a class="l" href="#222">222 </a>    {
-</span><span class="l" id="223"><a class="l" href="#223">223 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentContentType</span>) {
-</span><span class="l" id="224"><a class="l" href="#224">224 </a>            self::sendContentType(<span class="php-var">$contentType</span>);
-</span><span class="l" id="225"><a class="l" href="#225">225 </a>        }
-</span><span class="l" id="226"><a class="l" href="#226">226 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentCacheControl</span>) {
-</span><span class="l" id="227"><a class="l" href="#227">227 </a>            self::sendCacheControl();
+</span><span class="l" id="158"><a class="l" href="#158">158 </a>        self::sendLastModified(<span class="php-keyword2">filemtime</span>(<span class="php-var">$file</span>));
+</span><span class="l" id="159"><a class="l" href="#159">159 </a>
+</span><span class="l" id="160"><a class="l" href="#160">160 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::<span class="php-var">$httpStatus</span>);
+</span><span class="l" id="161"><a class="l" href="#161">161 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentCacheControl</span>) {
+</span><span class="l" id="162"><a class="l" href="#162">162 </a>            self::sendCacheControl(<span class="php-quote">'max-age=3600, must-revalidate, proxy-revalidate, private'</span>);
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>        }
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>        <span class="php-comment">// content length schicken, damit der browser einen ladebalken anzeigen kann</span>
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">ini_get</span>(<span class="php-quote">'zlib.output_compression'</span>)) {
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Length: '</span> . <span class="php-keyword2">filesize</span>(<span class="php-var">$file</span>));
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>        }
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>
+</span><span class="l" id="170"><a class="l" href="#170">170 </a>        self::sendAdditionalHeaders();
+</span><span class="l" id="171"><a class="l" href="#171">171 </a>        self::sendPreloadHeaders();
+</span><span class="l" id="172"><a class="l" href="#172">172 </a>        self::sendServerTimingHeaders();
+</span><span class="l" id="173"><a class="l" href="#173">173 </a>
+</span><span class="l" id="174"><a class="l" href="#174">174 </a>        <span class="php-comment">// dependency ramsey/http-range requires PHP &gt;=5.6</span>
+</span><span class="l" id="175"><a class="l" href="#175">175 </a>        <span class="php-keyword1">if</span> (PHP_VERSION_ID &gt;= <span class="php-num">50600</span>) {
+</span><span class="l" id="176"><a class="l" href="#176">176 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Accept-Ranges: bytes'</span>);
+</span><span class="l" id="177"><a class="l" href="#177">177 </a>            <span class="php-var">$rangeHeader</span> = rex_request::server(<span class="php-quote">'HTTP_RANGE'</span>, <span class="php-quote">'string'</span>, <span class="php-keyword1">null</span>);
+</span><span class="l" id="178"><a class="l" href="#178">178 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$rangeHeader</span>) {
+</span><span class="l" id="179"><a class="l" href="#179">179 </a>                <span class="php-keyword1">try</span> {
+</span><span class="l" id="180"><a class="l" href="#180">180 </a>                    <span class="php-var">$filesize</span> = <span class="php-keyword2">filesize</span>(<span class="php-var">$file</span>);
+</span><span class="l" id="181"><a class="l" href="#181">181 </a>                    <span class="php-var">$unitFactory</span> = <span class="php-keyword1">new</span> \Ramsey\Http\<span class="php-keyword2">Range</span>\UnitFactory();
+</span><span class="l" id="182"><a class="l" href="#182">182 </a>                    <span class="php-var">$ranges</span> = <span class="php-var">$unitFactory</span>-&gt;getUnit(<span class="php-keyword2">trim</span>(<span class="php-var">$rangeHeader</span>), <span class="php-var">$filesize</span>)-&gt;getRanges();
+</span><span class="l" id="183"><a class="l" href="#183">183 </a>                    <span class="php-var">$handle</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$file</span>, <span class="php-quote">'rb'</span>);
+</span><span class="l" id="184"><a class="l" href="#184">184 </a>                    <span class="php-keyword1">if</span> (<span class="php-keyword2">is_resource</span>(<span class="php-var">$handle</span>)) {
+</span><span class="l" id="185"><a class="l" href="#185">185 </a>                        <span class="php-keyword1">foreach</span> (<span class="php-var">$ranges</span> <span class="php-keyword1">as</span> <span class="php-var">$range</span>) {
+</span><span class="l" id="186"><a class="l" href="#186">186 </a>                            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_PARTIAL_CONTENT);
+</span><span class="l" id="187"><a class="l" href="#187">187 </a>                            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Length: '</span> . <span class="php-var">$range</span>-&gt;getLength());
+</span><span class="l" id="188"><a class="l" href="#188">188 </a>                            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Range: bytes '</span> . <span class="php-var">$range</span>-&gt;getStart() . <span class="php-quote">'-'</span> . <span class="php-var">$range</span>-&gt;getEnd() . <span class="php-quote">'/'</span> . <span class="php-var">$filesize</span>);
+</span><span class="l" id="189"><a class="l" href="#189">189 </a>
+</span><span class="l" id="190"><a class="l" href="#190">190 </a>                            <span class="php-comment">// Don't output more bytes as requested</span>
+</span><span class="l" id="191"><a class="l" href="#191">191 </a>                            <span class="php-comment">// default chunk size is usually 8192 bytes</span>
+</span><span class="l" id="192"><a class="l" href="#192">192 </a>                            <span class="php-var">$chunkSize</span> = <span class="php-var">$range</span>-&gt;getLength() &gt; <span class="php-num">8192</span> ? <span class="php-num">8192</span> : <span class="php-var">$range</span>-&gt;getLength();
+</span><span class="l" id="193"><a class="l" href="#193">193 </a>
+</span><span class="l" id="194"><a class="l" href="#194">194 </a>                            <span class="php-keyword2">fseek</span>(<span class="php-var">$handle</span>, <span class="php-var">$range</span>-&gt;getStart());
+</span><span class="l" id="195"><a class="l" href="#195">195 </a>                            <span class="php-keyword1">while</span> (<span class="php-keyword2">ftell</span>(<span class="php-var">$handle</span>) &lt; <span class="php-var">$range</span>-&gt;getEnd()) {
+</span><span class="l" id="196"><a class="l" href="#196">196 </a>                                <span class="php-keyword1">echo</span> <span class="php-keyword2">fread</span>(<span class="php-var">$handle</span>, <span class="php-var">$chunkSize</span>);
+</span><span class="l" id="197"><a class="l" href="#197">197 </a>                            }
+</span><span class="l" id="198"><a class="l" href="#198">198 </a>                        }
+</span><span class="l" id="199"><a class="l" href="#199">199 </a>                        <span class="php-keyword2">fclose</span>(<span class="php-var">$handle</span>);
+</span><span class="l" id="200"><a class="l" href="#200">200 </a>                    } <span class="php-keyword1">else</span> {
+</span><span class="l" id="201"><a class="l" href="#201">201 </a>                        <span class="php-comment">// Send Error if file couldn't be read</span>
+</span><span class="l" id="202"><a class="l" href="#202">202 </a>                        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_INTERNAL_ERROR);
+</span><span class="l" id="203"><a class="l" href="#203">203 </a>                    }
+</span><span class="l" id="204"><a class="l" href="#204">204 </a>                } <span class="php-keyword1">catch</span> (\Ramsey\Http\<span class="php-keyword2">Range</span>\Exception\HttpRangeException <span class="php-var">$exception</span>) {
+</span><span class="l" id="205"><a class="l" href="#205">205 </a>                    <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_RANGE_NOT_SATISFIABLE);
+</span><span class="l" id="206"><a class="l" href="#206">206 </a>                }
+</span><span class="l" id="207"><a class="l" href="#207">207 </a>                <span class="php-keyword1">return</span>;
+</span><span class="l" id="208"><a class="l" href="#208">208 </a>            }
+</span><span class="l" id="209"><a class="l" href="#209">209 </a>        }
+</span><span class="l" id="210"><a class="l" href="#210">210 </a>
+</span><span class="l" id="211"><a class="l" href="#211">211 </a>        <span class="php-keyword2">readfile</span>(<span class="php-var">$file</span>);
+</span><span class="l" id="212"><a class="l" href="#212">212 </a>    }
+</span><span class="l" id="213"><a class="l" href="#213">213 </a>
+</span><span class="l" id="214"><a class="l" href="#214">214 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="215"><a class="l" href="#215">215 </a><span class="php-comment">     * Sends a resource to the client.
+</span></span><span class="l" id="216"><a class="l" href="#216">216 </a><span class="php-comment">     *
+</span></span><span class="l" id="217"><a class="l" href="#217">217 </a><span class="php-comment">     * @param string      $content            Content
+</span></span><span class="l" id="218"><a class="l" href="#218">218 </a><span class="php-comment">     * @param null|string $contentType        Content type
+</span></span><span class="l" id="219"><a class="l" href="#219">219 </a><span class="php-comment">     * @param null|int    $lastModified       HTTP Last-Modified Timestamp
+</span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     * @param null|string $etag               HTTP Cachekey to identify the cache
+</span></span><span class="l" id="221"><a class="l" href="#221">221 </a><span class="php-comment">     * @param null|string $contentDisposition Content disposition ("inline" or "attachment")
+</span></span><span class="l" id="222"><a class="l" href="#222">222 </a><span class="php-comment">     * @param null|string $filename           Filename
+</span></span><span class="l" id="223"><a class="l" href="#223">223 </a><span class="php-comment">     */</span>
+</span><span class="l" id="224"><a class="l" href="#224">224 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendResource" id="_sendResource">sendResource</a>(<span class="php-var">$content</span>, <span class="php-var">$contentType</span> = <span class="php-keyword1">null</span>, <span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>, <span class="php-var">$etag</span> = <span class="php-keyword1">null</span>, <span class="php-var">$contentDisposition</span> = <span class="php-keyword1">null</span>, <span class="php-var">$filename</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="225"><a class="l" href="#225">225 </a>    {
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$contentDisposition</span>) {
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Disposition: '</span> . <span class="php-var">$contentDisposition</span> . <span class="php-quote">'; filename="'</span> . <span class="php-var">$filename</span> . <span class="php-quote">'"'</span>);
 </span><span class="l" id="228"><a class="l" href="#228">228 </a>        }
 </span><span class="l" id="229"><a class="l" href="#229">229 </a>
-</span><span class="l" id="230"><a class="l" href="#230">230 </a>        <span class="php-var">$environment</span> = rex::isBackend() ? <span class="php-quote">'backend'</span> : <span class="php-quote">'frontend'</span>;
-</span><span class="l" id="231"><a class="l" href="#231">231 </a>
-</span><span class="l" id="232"><a class="l" href="#232">232 </a>        <span class="php-keyword1">if</span> (
-</span><span class="l" id="233"><a class="l" href="#233">233 </a>            self::<span class="php-var">$httpStatus</span> == self::HTTP_OK &amp;&amp;
-</span><span class="l" id="234"><a class="l" href="#234">234 </a>            <span class="php-comment">// Safari incorrectly caches 304s as empty pages, so don't serve it 304s</span>
-</span><span class="l" id="235"><a class="l" href="#235">235 </a>            <span class="php-comment">// http://tech.vg.no/2013/10/02/ios7-bug-shows-white-page-when-getting-304-not-modified-from-server/</span>
-</span><span class="l" id="236"><a class="l" href="#236">236 </a>            <span class="php-comment">// https://bugs.webkit.org/show_bug.cgi?id=32829</span>
-</span><span class="l" id="237"><a class="l" href="#237">237 </a>            (!<span class="php-keyword1">empty</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>]) &amp;&amp; (<span class="php-keyword1">false</span> === <span class="php-keyword2">strpos</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>], <span class="php-quote">'Safari'</span>) || <span class="php-keyword1">false</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>], <span class="php-quote">'Chrome'</span>)))
-</span><span class="l" id="238"><a class="l" href="#238">238 </a>        ) {
-</span><span class="l" id="239"><a class="l" href="#239">239 </a>            <span class="php-comment">// ----- Last-Modified</span>
-</span><span class="l" id="240"><a class="l" href="#240">240 </a>            <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentLastModified</span>
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>                &amp;&amp; (rex::getProperty(<span class="php-quote">'use_last_modified'</span>) === <span class="php-keyword1">true</span> || rex::getProperty(<span class="php-quote">'use_last_modified'</span>) === <span class="php-var">$environment</span>)
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>            ) {
-</span><span class="l" id="243"><a class="l" href="#243">243 </a>                self::sendLastModified(<span class="php-var">$lastModified</span>);
-</span><span class="l" id="244"><a class="l" href="#244">244 </a>            }
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>            <span class="php-comment">// ----- ETAG</span>
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>            <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentEtag</span>
-</span><span class="l" id="248"><a class="l" href="#248">248 </a>                &amp;&amp; (rex::getProperty(<span class="php-quote">'use_etag'</span>) === <span class="php-keyword1">true</span> || rex::getProperty(<span class="php-quote">'use_etag'</span>) === <span class="php-var">$environment</span>)
-</span><span class="l" id="249"><a class="l" href="#249">249 </a>            ) {
-</span><span class="l" id="250"><a class="l" href="#250">250 </a>                self::sendEtag(<span class="php-var">$etag</span> ?: self::<span class="php-keyword2">md5</span>(<span class="php-var">$content</span>));
-</span><span class="l" id="251"><a class="l" href="#251">251 </a>            }
-</span><span class="l" id="252"><a class="l" href="#252">252 </a>        }
+</span><span class="l" id="230"><a class="l" href="#230">230 </a>        self::sendCacheControl(<span class="php-quote">'max-age=3600, must-revalidate, proxy-revalidate, private'</span>);
+</span><span class="l" id="231"><a class="l" href="#231">231 </a>        self::sendContent(<span class="php-var">$content</span>, <span class="php-var">$contentType</span>, <span class="php-var">$lastModified</span>, <span class="php-var">$etag</span>);
+</span><span class="l" id="232"><a class="l" href="#232">232 </a>    }
+</span><span class="l" id="233"><a class="l" href="#233">233 </a>
+</span><span class="l" id="234"><a class="l" href="#234">234 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     * Sends a page to client.
+</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     *
+</span></span><span class="l" id="237"><a class="l" href="#237">237 </a><span class="php-comment">     * The page content can be modified by the Extension Point OUTPUT_FILTER
+</span></span><span class="l" id="238"><a class="l" href="#238">238 </a><span class="php-comment">     *
+</span></span><span class="l" id="239"><a class="l" href="#239">239 </a><span class="php-comment">     * @param string $content      Content of page
+</span></span><span class="l" id="240"><a class="l" href="#240">240 </a><span class="php-comment">     * @param int    $lastModified HTTP Last-Modified Timestamp
+</span></span><span class="l" id="241"><a class="l" href="#241">241 </a><span class="php-comment">     */</span>
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendPage" id="_sendPage">sendPage</a>(<span class="php-var">$content</span>, <span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="243"><a class="l" href="#243">243 </a>    {
+</span><span class="l" id="244"><a class="l" href="#244">244 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>        <span class="php-var">$content</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'OUTPUT_FILTER'</span>, <span class="php-var">$content</span>));
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>
+</span><span class="l" id="247"><a class="l" href="#247">247 </a>        <span class="php-var">$hasShutdownExtension</span> = rex_extension::isRegistered(<span class="php-quote">'RESPONSE_SHUTDOWN'</span>);
+</span><span class="l" id="248"><a class="l" href="#248">248 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$hasShutdownExtension</span>) {
+</span><span class="l" id="249"><a class="l" href="#249">249 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Connection: close'</span>);
+</span><span class="l" id="250"><a class="l" href="#250">250 </a>        }
+</span><span class="l" id="251"><a class="l" href="#251">251 </a>
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>        self::sendContent(<span class="php-var">$content</span>, <span class="php-keyword1">null</span>, <span class="php-var">$lastModified</span>);
 </span><span class="l" id="253"><a class="l" href="#253">253 </a>
-</span><span class="l" id="254"><a class="l" href="#254">254 </a>        <span class="php-comment">// ----- GZIP</span>
-</span><span class="l" id="255"><a class="l" href="#255">255 </a>        <span class="php-keyword1">if</span> (rex::getProperty(<span class="php-quote">'use_gzip'</span>) === <span class="php-keyword1">true</span> || rex::getProperty(<span class="php-quote">'use_gzip'</span>) === <span class="php-var">$environment</span>) {
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>            <span class="php-var">$content</span> = self::sendGzip(<span class="php-var">$content</span>);
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>        }
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>        <span class="php-comment">// ----- EXTENSION POINT - (read only)</span>
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$hasShutdownExtension</span>) {
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>            <span class="php-comment">// unlock session</span>
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>            <span class="php-keyword2">session_write_close</span>();
 </span><span class="l" id="258"><a class="l" href="#258">258 </a>
-</span><span class="l" id="259"><a class="l" href="#259">259 </a>        self::cleanOutputBuffers();
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>
-</span><span class="l" id="261"><a class="l" href="#261">261 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::<span class="php-var">$httpStatus</span>);
+</span><span class="l" id="259"><a class="l" href="#259">259 </a>            rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'RESPONSE_SHUTDOWN'</span>, <span class="php-var">$content</span>, [], <span class="php-keyword1">true</span>));
+</span><span class="l" id="260"><a class="l" href="#260">260 </a>        }
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>    }
 </span><span class="l" id="262"><a class="l" href="#262">262 </a>
-</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-comment">// content length schicken, damit der browser einen ladebalken anzeigen kann</span>
-</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Length: '</span> . rex_string::size(<span class="php-var">$content</span>));
-</span><span class="l" id="265"><a class="l" href="#265">265 </a>
-</span><span class="l" id="266"><a class="l" href="#266">266 </a>        self::sendAdditionalHeaders();
-</span><span class="l" id="267"><a class="l" href="#267">267 </a>        self::sendPreloadHeaders();
-</span><span class="l" id="268"><a class="l" href="#268">268 </a>
-</span><span class="l" id="269"><a class="l" href="#269">269 </a>        <span class="php-keyword1">echo</span> <span class="php-var">$content</span>;
-</span><span class="l" id="270"><a class="l" href="#270">270 </a>
-</span><span class="l" id="271"><a class="l" href="#271">271 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">function_exists</span>(<span class="php-quote">'fastcgi_finish_request'</span>)) {
-</span><span class="l" id="272"><a class="l" href="#272">272 </a>            fastcgi_finish_request();
-</span><span class="l" id="273"><a class="l" href="#273">273 </a>        }
-</span><span class="l" id="274"><a class="l" href="#274">274 </a>    }
-</span><span class="l" id="275"><a class="l" href="#275">275 </a>
-</span><span class="l" id="276"><a class="l" href="#276">276 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="277"><a class="l" href="#277">277 </a><span class="php-comment">     * Cleans all output buffers.
-</span></span><span class="l" id="278"><a class="l" href="#278">278 </a><span class="php-comment">     */</span>
-</span><span class="l" id="279"><a class="l" href="#279">279 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_cleanOutputBuffers" id="_cleanOutputBuffers">cleanOutputBuffers</a>()
-</span><span class="l" id="280"><a class="l" href="#280">280 </a>    {
-</span><span class="l" id="281"><a class="l" href="#281">281 </a>        <span class="php-keyword1">while</span> (<span class="php-keyword2">ob_get_level</span>()) {
-</span><span class="l" id="282"><a class="l" href="#282">282 </a>            <span class="php-keyword2">ob_end_clean</span>();
-</span><span class="l" id="283"><a class="l" href="#283">283 </a>        }
-</span><span class="l" id="284"><a class="l" href="#284">284 </a>    }
-</span><span class="l" id="285"><a class="l" href="#285">285 </a>
-</span><span class="l" id="286"><a class="l" href="#286">286 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="287"><a class="l" href="#287">287 </a><span class="php-comment">     * Sends the content type header.
-</span></span><span class="l" id="288"><a class="l" href="#288">288 </a><span class="php-comment">     *
-</span></span><span class="l" id="289"><a class="l" href="#289">289 </a><span class="php-comment">     * @param string $contentType
-</span></span><span class="l" id="290"><a class="l" href="#290">290 </a><span class="php-comment">     */</span>
-</span><span class="l" id="291"><a class="l" href="#291">291 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendContentType" id="_sendContentType">sendContentType</a>(<span class="php-var">$contentType</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="292"><a class="l" href="#292">292 </a>    {
-</span><span class="l" id="293"><a class="l" href="#293">293 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Type: '</span> . (<span class="php-var">$contentType</span> ?: <span class="php-quote">'text/html; charset=utf-8'</span>));
-</span><span class="l" id="294"><a class="l" href="#294">294 </a>        self::<span class="php-var">$sentContentType</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="295"><a class="l" href="#295">295 </a>    }
-</span><span class="l" id="296"><a class="l" href="#296">296 </a>
-</span><span class="l" id="297"><a class="l" href="#297">297 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="298"><a class="l" href="#298">298 </a><span class="php-comment">     * Sends the cache control header.
-</span></span><span class="l" id="299"><a class="l" href="#299">299 </a><span class="php-comment">     */</span>
-</span><span class="l" id="300"><a class="l" href="#300">300 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendCacheControl" id="_sendCacheControl">sendCacheControl</a>(<span class="php-var">$cacheControl</span> = <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span>)
-</span><span class="l" id="301"><a class="l" href="#301">301 </a>    {
-</span><span class="l" id="302"><a class="l" href="#302">302 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Cache-Control: '</span> . <span class="php-var">$cacheControl</span>);
-</span><span class="l" id="303"><a class="l" href="#303">303 </a>        self::<span class="php-var">$sentCacheControl</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="304"><a class="l" href="#304">304 </a>    }
-</span><span class="l" id="305"><a class="l" href="#305">305 </a>
-</span><span class="l" id="306"><a class="l" href="#306">306 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="307"><a class="l" href="#307">307 </a><span class="php-comment">     * Checks if content has changed by the last modified timestamp.
-</span></span><span class="l" id="308"><a class="l" href="#308">308 </a><span class="php-comment">     *
-</span></span><span class="l" id="309"><a class="l" href="#309">309 </a><span class="php-comment">     * HTTP_IF_MODIFIED_SINCE feature
-</span></span><span class="l" id="310"><a class="l" href="#310">310 </a><span class="php-comment">     *
-</span></span><span class="l" id="311"><a class="l" href="#311">311 </a><span class="php-comment">     * @param int $lastModified HTTP Last-Modified Timestamp
-</span></span><span class="l" id="312"><a class="l" href="#312">312 </a><span class="php-comment">     */</span>
-</span><span class="l" id="313"><a class="l" href="#313">313 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendLastModified" id="_sendLastModified">sendLastModified</a>(<span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="314"><a class="l" href="#314">314 </a>    {
-</span><span class="l" id="315"><a class="l" href="#315">315 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$lastModified</span>) {
-</span><span class="l" id="316"><a class="l" href="#316">316 </a>            <span class="php-var">$lastModified</span> = <span class="php-keyword2">time</span>();
-</span><span class="l" id="317"><a class="l" href="#317">317 </a>        }
-</span><span class="l" id="318"><a class="l" href="#318">318 </a>
-</span><span class="l" id="319"><a class="l" href="#319">319 </a>        <span class="php-var">$lastModified</span> = <span class="php-keyword2">gmdate</span>(<span class="php-quote">'D, d M Y H:i:s T'</span>, (float) <span class="php-var">$lastModified</span>);
-</span><span class="l" id="320"><a class="l" href="#320">320 </a>
-</span><span class="l" id="321"><a class="l" href="#321">321 </a>        <span class="php-comment">// Sende Last-Modification time</span>
-</span><span class="l" id="322"><a class="l" href="#322">322 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Last-Modified: '</span> . <span class="php-var">$lastModified</span>);
-</span><span class="l" id="323"><a class="l" href="#323">323 </a>
-</span><span class="l" id="324"><a class="l" href="#324">324 </a>        <span class="php-comment">// Last-Modified Timestamp gefunden</span>
-</span><span class="l" id="325"><a class="l" href="#325">325 </a>        <span class="php-comment">// =&gt; den Browser anweisen, den Cache zu verwenden</span>
-</span><span class="l" id="326"><a class="l" href="#326">326 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_MODIFIED_SINCE'</span>]) &amp;&amp; <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_MODIFIED_SINCE'</span>] == <span class="php-var">$lastModified</span>) {
-</span><span class="l" id="327"><a class="l" href="#327">327 </a>            self::cleanOutputBuffers();
-</span><span class="l" id="328"><a class="l" href="#328">328 </a>
-</span><span class="l" id="329"><a class="l" href="#329">329 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_NOT_MODIFIED);
-</span><span class="l" id="330"><a class="l" href="#330">330 </a>            <span class="php-keyword1">exit</span>;
-</span><span class="l" id="331"><a class="l" href="#331">331 </a>        }
-</span><span class="l" id="332"><a class="l" href="#332">332 </a>        self::<span class="php-var">$sentLastModified</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="333"><a class="l" href="#333">333 </a>    }
-</span><span class="l" id="334"><a class="l" href="#334">334 </a>
-</span><span class="l" id="335"><a class="l" href="#335">335 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="336"><a class="l" href="#336">336 </a><span class="php-comment">     * Checks if content has changed by the etag cachekey.
-</span></span><span class="l" id="337"><a class="l" href="#337">337 </a><span class="php-comment">     *
-</span></span><span class="l" id="338"><a class="l" href="#338">338 </a><span class="php-comment">     * HTTP_IF_NONE_MATCH feature
+</span><span class="l" id="263"><a class="l" href="#263">263 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="264"><a class="l" href="#264">264 </a><span class="php-comment">     * Sends content to the client.
+</span></span><span class="l" id="265"><a class="l" href="#265">265 </a><span class="php-comment">     *
+</span></span><span class="l" id="266"><a class="l" href="#266">266 </a><span class="php-comment">     * @param string $content      Content
+</span></span><span class="l" id="267"><a class="l" href="#267">267 </a><span class="php-comment">     * @param string $contentType  Content type
+</span></span><span class="l" id="268"><a class="l" href="#268">268 </a><span class="php-comment">     * @param int    $lastModified HTTP Last-Modified Timestamp
+</span></span><span class="l" id="269"><a class="l" href="#269">269 </a><span class="php-comment">     * @param string $etag         HTTP Cachekey to identify the cache
+</span></span><span class="l" id="270"><a class="l" href="#270">270 </a><span class="php-comment">     */</span>
+</span><span class="l" id="271"><a class="l" href="#271">271 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendContent" id="_sendContent">sendContent</a>(<span class="php-var">$content</span>, <span class="php-var">$contentType</span> = <span class="php-keyword1">null</span>, <span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>, <span class="php-var">$etag</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="272"><a class="l" href="#272">272 </a>    {
+</span><span class="l" id="273"><a class="l" href="#273">273 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentContentType</span>) {
+</span><span class="l" id="274"><a class="l" href="#274">274 </a>            self::sendContentType(<span class="php-var">$contentType</span>);
+</span><span class="l" id="275"><a class="l" href="#275">275 </a>        }
+</span><span class="l" id="276"><a class="l" href="#276">276 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentCacheControl</span>) {
+</span><span class="l" id="277"><a class="l" href="#277">277 </a>            self::sendCacheControl();
+</span><span class="l" id="278"><a class="l" href="#278">278 </a>        }
+</span><span class="l" id="279"><a class="l" href="#279">279 </a>
+</span><span class="l" id="280"><a class="l" href="#280">280 </a>        <span class="php-var">$environment</span> = rex::isBackend() ? <span class="php-quote">'backend'</span> : <span class="php-quote">'frontend'</span>;
+</span><span class="l" id="281"><a class="l" href="#281">281 </a>
+</span><span class="l" id="282"><a class="l" href="#282">282 </a>        <span class="php-keyword1">if</span> (
+</span><span class="l" id="283"><a class="l" href="#283">283 </a>            self::<span class="php-var">$httpStatus</span> == self::HTTP_OK &amp;&amp;
+</span><span class="l" id="284"><a class="l" href="#284">284 </a>            <span class="php-comment">// Safari incorrectly caches 304s as empty pages, so don't serve it 304s</span>
+</span><span class="l" id="285"><a class="l" href="#285">285 </a>            <span class="php-comment">// http://tech.vg.no/2013/10/02/ios7-bug-shows-white-page-when-getting-304-not-modified-from-server/</span>
+</span><span class="l" id="286"><a class="l" href="#286">286 </a>            <span class="php-comment">// https://bugs.webkit.org/show_bug.cgi?id=32829</span>
+</span><span class="l" id="287"><a class="l" href="#287">287 </a>            (!<span class="php-keyword1">empty</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>]) &amp;&amp; (<span class="php-keyword1">false</span> === <span class="php-keyword2">strpos</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>], <span class="php-quote">'Safari'</span>) || <span class="php-keyword1">false</span> !== <span class="php-keyword2">strpos</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_USER_AGENT'</span>], <span class="php-quote">'Chrome'</span>)))
+</span><span class="l" id="288"><a class="l" href="#288">288 </a>        ) {
+</span><span class="l" id="289"><a class="l" href="#289">289 </a>            <span class="php-comment">// ----- Last-Modified</span>
+</span><span class="l" id="290"><a class="l" href="#290">290 </a>            <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentLastModified</span>
+</span><span class="l" id="291"><a class="l" href="#291">291 </a>                &amp;&amp; (rex::getProperty(<span class="php-quote">'use_last_modified'</span>) === <span class="php-keyword1">true</span> || rex::getProperty(<span class="php-quote">'use_last_modified'</span>) === <span class="php-var">$environment</span>)
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>            ) {
+</span><span class="l" id="293"><a class="l" href="#293">293 </a>                self::sendLastModified(<span class="php-var">$lastModified</span>);
+</span><span class="l" id="294"><a class="l" href="#294">294 </a>            }
+</span><span class="l" id="295"><a class="l" href="#295">295 </a>
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>            <span class="php-comment">// ----- ETAG</span>
+</span><span class="l" id="297"><a class="l" href="#297">297 </a>            <span class="php-keyword1">if</span> (!self::<span class="php-var">$sentEtag</span>
+</span><span class="l" id="298"><a class="l" href="#298">298 </a>                &amp;&amp; (rex::getProperty(<span class="php-quote">'use_etag'</span>) === <span class="php-keyword1">true</span> || rex::getProperty(<span class="php-quote">'use_etag'</span>) === <span class="php-var">$environment</span>)
+</span><span class="l" id="299"><a class="l" href="#299">299 </a>            ) {
+</span><span class="l" id="300"><a class="l" href="#300">300 </a>                self::sendEtag(<span class="php-var">$etag</span> ?: self::<span class="php-keyword2">md5</span>(<span class="php-var">$content</span>));
+</span><span class="l" id="301"><a class="l" href="#301">301 </a>            }
+</span><span class="l" id="302"><a class="l" href="#302">302 </a>        }
+</span><span class="l" id="303"><a class="l" href="#303">303 </a>
+</span><span class="l" id="304"><a class="l" href="#304">304 </a>        <span class="php-comment">// ----- GZIP</span>
+</span><span class="l" id="305"><a class="l" href="#305">305 </a>        <span class="php-keyword1">if</span> (rex::getProperty(<span class="php-quote">'use_gzip'</span>) === <span class="php-keyword1">true</span> || rex::getProperty(<span class="php-quote">'use_gzip'</span>) === <span class="php-var">$environment</span>) {
+</span><span class="l" id="306"><a class="l" href="#306">306 </a>            <span class="php-var">$content</span> = self::sendGzip(<span class="php-var">$content</span>);
+</span><span class="l" id="307"><a class="l" href="#307">307 </a>        }
+</span><span class="l" id="308"><a class="l" href="#308">308 </a>
+</span><span class="l" id="309"><a class="l" href="#309">309 </a>        self::cleanOutputBuffers();
+</span><span class="l" id="310"><a class="l" href="#310">310 </a>
+</span><span class="l" id="311"><a class="l" href="#311">311 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::<span class="php-var">$httpStatus</span>);
+</span><span class="l" id="312"><a class="l" href="#312">312 </a>
+</span><span class="l" id="313"><a class="l" href="#313">313 </a>        <span class="php-comment">// content length schicken, damit der browser einen ladebalken anzeigen kann</span>
+</span><span class="l" id="314"><a class="l" href="#314">314 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Length: '</span> . rex_string::size(<span class="php-var">$content</span>));
+</span><span class="l" id="315"><a class="l" href="#315">315 </a>
+</span><span class="l" id="316"><a class="l" href="#316">316 </a>        self::sendAdditionalHeaders();
+</span><span class="l" id="317"><a class="l" href="#317">317 </a>        self::sendPreloadHeaders();
+</span><span class="l" id="318"><a class="l" href="#318">318 </a>        self::sendServerTimingHeaders();
+</span><span class="l" id="319"><a class="l" href="#319">319 </a>
+</span><span class="l" id="320"><a class="l" href="#320">320 </a>        <span class="php-keyword1">echo</span> <span class="php-var">$content</span>;
+</span><span class="l" id="321"><a class="l" href="#321">321 </a>
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">function_exists</span>(<span class="php-quote">'fastcgi_finish_request'</span>)) {
+</span><span class="l" id="323"><a class="l" href="#323">323 </a>            fastcgi_finish_request();
+</span><span class="l" id="324"><a class="l" href="#324">324 </a>        }
+</span><span class="l" id="325"><a class="l" href="#325">325 </a>    }
+</span><span class="l" id="326"><a class="l" href="#326">326 </a>
+</span><span class="l" id="327"><a class="l" href="#327">327 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="328"><a class="l" href="#328">328 </a><span class="php-comment">     * Cleans all output buffers.
+</span></span><span class="l" id="329"><a class="l" href="#329">329 </a><span class="php-comment">     */</span>
+</span><span class="l" id="330"><a class="l" href="#330">330 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_cleanOutputBuffers" id="_cleanOutputBuffers">cleanOutputBuffers</a>()
+</span><span class="l" id="331"><a class="l" href="#331">331 </a>    {
+</span><span class="l" id="332"><a class="l" href="#332">332 </a>        <span class="php-keyword1">while</span> (<span class="php-keyword2">ob_get_level</span>()) {
+</span><span class="l" id="333"><a class="l" href="#333">333 </a>            <span class="php-keyword2">ob_end_clean</span>();
+</span><span class="l" id="334"><a class="l" href="#334">334 </a>        }
+</span><span class="l" id="335"><a class="l" href="#335">335 </a>    }
+</span><span class="l" id="336"><a class="l" href="#336">336 </a>
+</span><span class="l" id="337"><a class="l" href="#337">337 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="338"><a class="l" href="#338">338 </a><span class="php-comment">     * Sends the content type header.
 </span></span><span class="l" id="339"><a class="l" href="#339">339 </a><span class="php-comment">     *
-</span></span><span class="l" id="340"><a class="l" href="#340">340 </a><span class="php-comment">     * @param string $cacheKey HTTP Cachekey to identify the cache
+</span></span><span class="l" id="340"><a class="l" href="#340">340 </a><span class="php-comment">     * @param string $contentType
 </span></span><span class="l" id="341"><a class="l" href="#341">341 </a><span class="php-comment">     */</span>
-</span><span class="l" id="342"><a class="l" href="#342">342 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendEtag" id="_sendEtag">sendEtag</a>(<span class="php-var">$cacheKey</span>)
+</span><span class="l" id="342"><a class="l" href="#342">342 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendContentType" id="_sendContentType">sendContentType</a>(<span class="php-var">$contentType</span> = <span class="php-keyword1">null</span>)
 </span><span class="l" id="343"><a class="l" href="#343">343 </a>    {
-</span><span class="l" id="344"><a class="l" href="#344">344 </a>        <span class="php-comment">// Laut HTTP Spec muss der Etag in " sein</span>
-</span><span class="l" id="345"><a class="l" href="#345">345 </a>        <span class="php-var">$cacheKey</span> = <span class="php-quote">'"'</span> . <span class="php-var">$cacheKey</span> . <span class="php-quote">'"'</span>;
-</span><span class="l" id="346"><a class="l" href="#346">346 </a>
-</span><span class="l" id="347"><a class="l" href="#347">347 </a>        <span class="php-comment">// Sende CacheKey als ETag</span>
-</span><span class="l" id="348"><a class="l" href="#348">348 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'ETag: '</span> . <span class="php-var">$cacheKey</span>);
-</span><span class="l" id="349"><a class="l" href="#349">349 </a>
-</span><span class="l" id="350"><a class="l" href="#350">350 </a>        <span class="php-comment">// CacheKey gefunden</span>
-</span><span class="l" id="351"><a class="l" href="#351">351 </a>        <span class="php-comment">// =&gt; den Browser anweisen, den Cache zu verwenden</span>
-</span><span class="l" id="352"><a class="l" href="#352">352 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_NONE_MATCH'</span>]) &amp;&amp; <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_NONE_MATCH'</span>] == <span class="php-var">$cacheKey</span>) {
-</span><span class="l" id="353"><a class="l" href="#353">353 </a>            self::cleanOutputBuffers();
-</span><span class="l" id="354"><a class="l" href="#354">354 </a>
-</span><span class="l" id="355"><a class="l" href="#355">355 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_NOT_MODIFIED);
-</span><span class="l" id="356"><a class="l" href="#356">356 </a>            <span class="php-keyword1">exit</span>;
-</span><span class="l" id="357"><a class="l" href="#357">357 </a>        }
-</span><span class="l" id="358"><a class="l" href="#358">358 </a>        self::<span class="php-var">$sentEtag</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="359"><a class="l" href="#359">359 </a>    }
-</span><span class="l" id="360"><a class="l" href="#360">360 </a>
-</span><span class="l" id="361"><a class="l" href="#361">361 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="362"><a class="l" href="#362">362 </a><span class="php-comment">     * Encodes the content with GZIP/X-GZIP if the browser supports one of them.
-</span></span><span class="l" id="363"><a class="l" href="#363">363 </a><span class="php-comment">     *
-</span></span><span class="l" id="364"><a class="l" href="#364">364 </a><span class="php-comment">     * HTTP_ACCEPT_ENCODING feature
-</span></span><span class="l" id="365"><a class="l" href="#365">365 </a><span class="php-comment">     *
-</span></span><span class="l" id="366"><a class="l" href="#366">366 </a><span class="php-comment">     * @param string $content Content
-</span></span><span class="l" id="367"><a class="l" href="#367">367 </a><span class="php-comment">     *
-</span></span><span class="l" id="368"><a class="l" href="#368">368 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="369"><a class="l" href="#369">369 </a><span class="php-comment">     */</span>
-</span><span class="l" id="370"><a class="l" href="#370">370 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendGzip" id="_sendGzip">sendGzip</a>(<span class="php-var">$content</span>)
-</span><span class="l" id="371"><a class="l" href="#371">371 </a>    {
-</span><span class="l" id="372"><a class="l" href="#372">372 </a>        <span class="php-var">$enc</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="373"><a class="l" href="#373">373 </a>        <span class="php-var">$encodings</span> = [];
-</span><span class="l" id="374"><a class="l" href="#374">374 </a>        <span class="php-var">$supportsGzip</span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="375"><a class="l" href="#375">375 </a>
-</span><span class="l" id="376"><a class="l" href="#376">376 </a>        <span class="php-comment">// Check if it supports gzip</span>
-</span><span class="l" id="377"><a class="l" href="#377">377 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_ACCEPT_ENCODING'</span>])) {
-</span><span class="l" id="378"><a class="l" href="#378">378 </a>            <span class="php-var">$encodings</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">','</span>, <span class="php-keyword2">strtolower</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'/\s+/'</span>, <span class="php-quote">''</span>, <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_ACCEPT_ENCODING'</span>])));
-</span><span class="l" id="379"><a class="l" href="#379">379 </a>        }
-</span><span class="l" id="380"><a class="l" href="#380">380 </a>
-</span><span class="l" id="381"><a class="l" href="#381">381 </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword2">in_array</span>(<span class="php-quote">'gzip'</span>, <span class="php-var">$encodings</span>) || <span class="php-keyword2">in_array</span>(<span class="php-quote">'x-gzip'</span>, <span class="php-var">$encodings</span>) || <span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'---------------'</span>]))
-</span><span class="l" id="382"><a class="l" href="#382">382 </a>            &amp;&amp; <span class="php-keyword2">function_exists</span>(<span class="php-quote">'ob_gzhandler'</span>)
-</span><span class="l" id="383"><a class="l" href="#383">383 </a>            &amp;&amp; !<span class="php-keyword2">ini_get</span>(<span class="php-quote">'zlib.output_compression'</span>)
-</span><span class="l" id="384"><a class="l" href="#384">384 </a>        ) {
-</span><span class="l" id="385"><a class="l" href="#385">385 </a>            <span class="php-var">$enc</span> = <span class="php-keyword2">in_array</span>(<span class="php-quote">'x-gzip'</span>, <span class="php-var">$encodings</span>) ? <span class="php-quote">'x-gzip'</span> : <span class="php-quote">'gzip'</span>;
-</span><span class="l" id="386"><a class="l" href="#386">386 </a>            <span class="php-var">$supportsGzip</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="387"><a class="l" href="#387">387 </a>        }
-</span><span class="l" id="388"><a class="l" href="#388">388 </a>
-</span><span class="l" id="389"><a class="l" href="#389">389 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$supportsGzip</span>) {
-</span><span class="l" id="390"><a class="l" href="#390">390 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Encoding: '</span> . <span class="php-var">$enc</span>);
-</span><span class="l" id="391"><a class="l" href="#391">391 </a>            <span class="php-var">$content</span> = <span class="php-keyword2">gzencode</span>(<span class="php-var">$content</span>, <span class="php-num">9</span>, FORCE_GZIP);
-</span><span class="l" id="392"><a class="l" href="#392">392 </a>        }
-</span><span class="l" id="393"><a class="l" href="#393">393 </a>
-</span><span class="l" id="394"><a class="l" href="#394">394 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
-</span><span class="l" id="395"><a class="l" href="#395">395 </a>    }
-</span><span class="l" id="396"><a class="l" href="#396">396 </a>
-</span><span class="l" id="397"><a class="l" href="#397">397 </a>    <span class="php-comment">// method inspired by https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Cookie.php</span>
-</span><span class="l" id="398"><a class="l" href="#398">398 </a>
-</span><span class="l" id="399"><a class="l" href="#399">399 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="400"><a class="l" href="#400">400 </a><span class="php-comment">     * @param string      $name    The name of the cookie
-</span></span><span class="l" id="401"><a class="l" href="#401">401 </a><span class="php-comment">     * @param string|null $value   The value of the cookie, a empty value to delete the cookie.
-</span></span><span class="l" id="402"><a class="l" href="#402">402 </a><span class="php-comment">     * @param array       $options Different cookie Options. Supported keys are:
-</span></span><span class="l" id="403"><a class="l" href="#403">403 </a><span class="php-comment">     *                             "expires" int|string|\DateTimeInterface The time the cookie expires
-</span></span><span class="l" id="404"><a class="l" href="#404">404 </a><span class="php-comment">     *                             "path" string                           The path on the server in which the cookie will be available on
-</span></span><span class="l" id="405"><a class="l" href="#405">405 </a><span class="php-comment">     *                             "domain" string|null                    The domain that the cookie is available to
-</span></span><span class="l" id="406"><a class="l" href="#406">406 </a><span class="php-comment">     *                             "secure" bool                           Whether the cookie should only be transmitted over a secure HTTPS connection from the client
-</span></span><span class="l" id="407"><a class="l" href="#407">407 </a><span class="php-comment">     *                             "httponly" bool                         Whether the cookie will be made accessible only through the HTTP protocol
-</span></span><span class="l" id="408"><a class="l" href="#408">408 </a><span class="php-comment">     *                             "samesite" string|null                  Whether the cookie will be available for cross-site requests
-</span></span><span class="l" id="409"><a class="l" href="#409">409 </a><span class="php-comment">     *                             "raw" bool                              Whether the cookie value should be sent with no url encoding
-</span></span><span class="l" id="410"><a class="l" href="#410">410 </a><span class="php-comment">     *
-</span></span><span class="l" id="411"><a class="l" href="#411">411 </a><span class="php-comment">     * @throws \InvalidArgumentException
-</span></span><span class="l" id="412"><a class="l" href="#412">412 </a><span class="php-comment">     */</span>
-</span><span class="l" id="413"><a class="l" href="#413">413 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendCookie" id="_sendCookie">sendCookie</a>(<span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-keyword1">array</span> <span class="php-var">$options</span> = [])
-</span><span class="l" id="414"><a class="l" href="#414">414 </a>    {
-</span><span class="l" id="415"><a class="l" href="#415">415 </a>        <span class="php-var">$expire</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'expires'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'expires'</span>] : <span class="php-num">0</span>;
-</span><span class="l" id="416"><a class="l" href="#416">416 </a>        <span class="php-var">$path</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'path'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'path'</span>] : <span class="php-quote">'/'</span>;
-</span><span class="l" id="417"><a class="l" href="#417">417 </a>        <span class="php-var">$domain</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'domain'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'domain'</span>] : <span class="php-keyword1">null</span>;
-</span><span class="l" id="418"><a class="l" href="#418">418 </a>        <span class="php-var">$secure</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'secure'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'secure'</span>] : <span class="php-keyword1">false</span>;
-</span><span class="l" id="419"><a class="l" href="#419">419 </a>        <span class="php-var">$httpOnly</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'httponly'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'httponly'</span>] : <span class="php-keyword1">true</span>;
-</span><span class="l" id="420"><a class="l" href="#420">420 </a>        <span class="php-var">$sameSite</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'samesite'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'samesite'</span>] : <span class="php-keyword1">null</span>;
-</span><span class="l" id="421"><a class="l" href="#421">421 </a>        <span class="php-var">$raw</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'raw'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'raw'</span>] : <span class="php-keyword1">false</span>;
-</span><span class="l" id="422"><a class="l" href="#422">422 </a>
-</span><span class="l" id="423"><a class="l" href="#423">423 </a>        <span class="php-comment">// from PHP source code</span>
-</span><span class="l" id="424"><a class="l" href="#424">424 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">"/[=,; \t\r\n\013\014]/"</span>, <span class="php-var">$name</span>)) {
-</span><span class="l" id="425"><a class="l" href="#425">425 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'The cookie name "%s" contains invalid characters.'</span>, <span class="php-var">$name</span>));
-</span><span class="l" id="426"><a class="l" href="#426">426 </a>        }
-</span><span class="l" id="427"><a class="l" href="#427">427 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$name</span>)) {
-</span><span class="l" id="428"><a class="l" href="#428">428 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'The cookie name cannot be empty.'</span>);
-</span><span class="l" id="429"><a class="l" href="#429">429 </a>        }
-</span><span class="l" id="430"><a class="l" href="#430">430 </a>        <span class="php-comment">// convert expiration time to a Unix timestamp</span>
-</span><span class="l" id="431"><a class="l" href="#431">431 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$expire</span> <span class="php-keyword1">instanceof</span> \DateTimeInterface) {
-</span><span class="l" id="432"><a class="l" href="#432">432 </a>            <span class="php-var">$expire</span> = <span class="php-var">$expire</span>-&gt;format(<span class="php-quote">'U'</span>);
-</span><span class="l" id="433"><a class="l" href="#433">433 </a>        } <span class="php-keyword1">elseif</span> (!<span class="php-keyword2">is_numeric</span>(<span class="php-var">$expire</span>)) {
-</span><span class="l" id="434"><a class="l" href="#434">434 </a>            <span class="php-var">$expire</span> = <span class="php-keyword2">strtotime</span>(<span class="php-var">$expire</span>);
-</span><span class="l" id="435"><a class="l" href="#435">435 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$expire</span>) {
-</span><span class="l" id="436"><a class="l" href="#436">436 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'The cookie expiration time is not valid.'</span>);
-</span><span class="l" id="437"><a class="l" href="#437">437 </a>            }
+</span><span class="l" id="344"><a class="l" href="#344">344 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Type: '</span> . (<span class="php-var">$contentType</span> ?: <span class="php-quote">'text/html; charset=utf-8'</span>));
+</span><span class="l" id="345"><a class="l" href="#345">345 </a>        self::<span class="php-var">$sentContentType</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="346"><a class="l" href="#346">346 </a>    }
+</span><span class="l" id="347"><a class="l" href="#347">347 </a>
+</span><span class="l" id="348"><a class="l" href="#348">348 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="349"><a class="l" href="#349">349 </a><span class="php-comment">     * Sends the cache control header.
+</span></span><span class="l" id="350"><a class="l" href="#350">350 </a><span class="php-comment">     */</span>
+</span><span class="l" id="351"><a class="l" href="#351">351 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendCacheControl" id="_sendCacheControl">sendCacheControl</a>(<span class="php-var">$cacheControl</span> = <span class="php-quote">'must-revalidate, proxy-revalidate, private, no-cache, max-age=0'</span>)
+</span><span class="l" id="352"><a class="l" href="#352">352 </a>    {
+</span><span class="l" id="353"><a class="l" href="#353">353 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Cache-Control: '</span> . <span class="php-var">$cacheControl</span>);
+</span><span class="l" id="354"><a class="l" href="#354">354 </a>        self::<span class="php-var">$sentCacheControl</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="355"><a class="l" href="#355">355 </a>    }
+</span><span class="l" id="356"><a class="l" href="#356">356 </a>
+</span><span class="l" id="357"><a class="l" href="#357">357 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="358"><a class="l" href="#358">358 </a><span class="php-comment">     * Checks if content has changed by the last modified timestamp.
+</span></span><span class="l" id="359"><a class="l" href="#359">359 </a><span class="php-comment">     *
+</span></span><span class="l" id="360"><a class="l" href="#360">360 </a><span class="php-comment">     * HTTP_IF_MODIFIED_SINCE feature
+</span></span><span class="l" id="361"><a class="l" href="#361">361 </a><span class="php-comment">     *
+</span></span><span class="l" id="362"><a class="l" href="#362">362 </a><span class="php-comment">     * @param int $lastModified HTTP Last-Modified Timestamp
+</span></span><span class="l" id="363"><a class="l" href="#363">363 </a><span class="php-comment">     */</span>
+</span><span class="l" id="364"><a class="l" href="#364">364 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendLastModified" id="_sendLastModified">sendLastModified</a>(<span class="php-var">$lastModified</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="365"><a class="l" href="#365">365 </a>    {
+</span><span class="l" id="366"><a class="l" href="#366">366 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$lastModified</span>) {
+</span><span class="l" id="367"><a class="l" href="#367">367 </a>            <span class="php-var">$lastModified</span> = <span class="php-keyword2">time</span>();
+</span><span class="l" id="368"><a class="l" href="#368">368 </a>        }
+</span><span class="l" id="369"><a class="l" href="#369">369 </a>
+</span><span class="l" id="370"><a class="l" href="#370">370 </a>        <span class="php-var">$lastModified</span> = <span class="php-keyword2">gmdate</span>(<span class="php-quote">'D, d M Y H:i:s T'</span>, (float) <span class="php-var">$lastModified</span>);
+</span><span class="l" id="371"><a class="l" href="#371">371 </a>
+</span><span class="l" id="372"><a class="l" href="#372">372 </a>        <span class="php-comment">// Sende Last-Modification time</span>
+</span><span class="l" id="373"><a class="l" href="#373">373 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'Last-Modified: '</span> . <span class="php-var">$lastModified</span>);
+</span><span class="l" id="374"><a class="l" href="#374">374 </a>
+</span><span class="l" id="375"><a class="l" href="#375">375 </a>        <span class="php-comment">// Last-Modified Timestamp gefunden</span>
+</span><span class="l" id="376"><a class="l" href="#376">376 </a>        <span class="php-comment">// =&gt; den Browser anweisen, den Cache zu verwenden</span>
+</span><span class="l" id="377"><a class="l" href="#377">377 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_MODIFIED_SINCE'</span>]) &amp;&amp; <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_MODIFIED_SINCE'</span>] == <span class="php-var">$lastModified</span>) {
+</span><span class="l" id="378"><a class="l" href="#378">378 </a>            self::cleanOutputBuffers();
+</span><span class="l" id="379"><a class="l" href="#379">379 </a>
+</span><span class="l" id="380"><a class="l" href="#380">380 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_NOT_MODIFIED);
+</span><span class="l" id="381"><a class="l" href="#381">381 </a>            <span class="php-keyword1">exit</span>;
+</span><span class="l" id="382"><a class="l" href="#382">382 </a>        }
+</span><span class="l" id="383"><a class="l" href="#383">383 </a>        self::<span class="php-var">$sentLastModified</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="384"><a class="l" href="#384">384 </a>    }
+</span><span class="l" id="385"><a class="l" href="#385">385 </a>
+</span><span class="l" id="386"><a class="l" href="#386">386 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="387"><a class="l" href="#387">387 </a><span class="php-comment">     * Checks if content has changed by the etag cachekey.
+</span></span><span class="l" id="388"><a class="l" href="#388">388 </a><span class="php-comment">     *
+</span></span><span class="l" id="389"><a class="l" href="#389">389 </a><span class="php-comment">     * HTTP_IF_NONE_MATCH feature
+</span></span><span class="l" id="390"><a class="l" href="#390">390 </a><span class="php-comment">     *
+</span></span><span class="l" id="391"><a class="l" href="#391">391 </a><span class="php-comment">     * @param string $cacheKey HTTP Cachekey to identify the cache
+</span></span><span class="l" id="392"><a class="l" href="#392">392 </a><span class="php-comment">     */</span>
+</span><span class="l" id="393"><a class="l" href="#393">393 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendEtag" id="_sendEtag">sendEtag</a>(<span class="php-var">$cacheKey</span>)
+</span><span class="l" id="394"><a class="l" href="#394">394 </a>    {
+</span><span class="l" id="395"><a class="l" href="#395">395 </a>        <span class="php-comment">// Laut HTTP Spec muss der Etag in " sein</span>
+</span><span class="l" id="396"><a class="l" href="#396">396 </a>        <span class="php-var">$cacheKey</span> = <span class="php-quote">'"'</span> . <span class="php-var">$cacheKey</span> . <span class="php-quote">'"'</span>;
+</span><span class="l" id="397"><a class="l" href="#397">397 </a>
+</span><span class="l" id="398"><a class="l" href="#398">398 </a>        <span class="php-comment">// Sende CacheKey als ETag</span>
+</span><span class="l" id="399"><a class="l" href="#399">399 </a>        <span class="php-keyword2">header</span>(<span class="php-quote">'ETag: '</span> . <span class="php-var">$cacheKey</span>);
+</span><span class="l" id="400"><a class="l" href="#400">400 </a>
+</span><span class="l" id="401"><a class="l" href="#401">401 </a>        <span class="php-comment">// CacheKey gefunden</span>
+</span><span class="l" id="402"><a class="l" href="#402">402 </a>        <span class="php-comment">// =&gt; den Browser anweisen, den Cache zu verwenden</span>
+</span><span class="l" id="403"><a class="l" href="#403">403 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_NONE_MATCH'</span>]) &amp;&amp; <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_IF_NONE_MATCH'</span>] == <span class="php-var">$cacheKey</span>) {
+</span><span class="l" id="404"><a class="l" href="#404">404 </a>            self::cleanOutputBuffers();
+</span><span class="l" id="405"><a class="l" href="#405">405 </a>
+</span><span class="l" id="406"><a class="l" href="#406">406 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'HTTP/1.1 '</span> . self::HTTP_NOT_MODIFIED);
+</span><span class="l" id="407"><a class="l" href="#407">407 </a>            <span class="php-keyword1">exit</span>;
+</span><span class="l" id="408"><a class="l" href="#408">408 </a>        }
+</span><span class="l" id="409"><a class="l" href="#409">409 </a>        self::<span class="php-var">$sentEtag</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="410"><a class="l" href="#410">410 </a>    }
+</span><span class="l" id="411"><a class="l" href="#411">411 </a>
+</span><span class="l" id="412"><a class="l" href="#412">412 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="413"><a class="l" href="#413">413 </a><span class="php-comment">     * Encodes the content with GZIP/X-GZIP if the browser supports one of them.
+</span></span><span class="l" id="414"><a class="l" href="#414">414 </a><span class="php-comment">     *
+</span></span><span class="l" id="415"><a class="l" href="#415">415 </a><span class="php-comment">     * HTTP_ACCEPT_ENCODING feature
+</span></span><span class="l" id="416"><a class="l" href="#416">416 </a><span class="php-comment">     *
+</span></span><span class="l" id="417"><a class="l" href="#417">417 </a><span class="php-comment">     * @param string $content Content
+</span></span><span class="l" id="418"><a class="l" href="#418">418 </a><span class="php-comment">     *
+</span></span><span class="l" id="419"><a class="l" href="#419">419 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="420"><a class="l" href="#420">420 </a><span class="php-comment">     */</span>
+</span><span class="l" id="421"><a class="l" href="#421">421 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendGzip" id="_sendGzip">sendGzip</a>(<span class="php-var">$content</span>)
+</span><span class="l" id="422"><a class="l" href="#422">422 </a>    {
+</span><span class="l" id="423"><a class="l" href="#423">423 </a>        <span class="php-var">$enc</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="424"><a class="l" href="#424">424 </a>        <span class="php-var">$encodings</span> = [];
+</span><span class="l" id="425"><a class="l" href="#425">425 </a>        <span class="php-var">$supportsGzip</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="426"><a class="l" href="#426">426 </a>
+</span><span class="l" id="427"><a class="l" href="#427">427 </a>        <span class="php-comment">// Check if it supports gzip</span>
+</span><span class="l" id="428"><a class="l" href="#428">428 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_ACCEPT_ENCODING'</span>])) {
+</span><span class="l" id="429"><a class="l" href="#429">429 </a>            <span class="php-var">$encodings</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">','</span>, <span class="php-keyword2">strtolower</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'/\s+/'</span>, <span class="php-quote">''</span>, <span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_ACCEPT_ENCODING'</span>])));
+</span><span class="l" id="430"><a class="l" href="#430">430 </a>        }
+</span><span class="l" id="431"><a class="l" href="#431">431 </a>
+</span><span class="l" id="432"><a class="l" href="#432">432 </a>        <span class="php-keyword1">if</span> ((<span class="php-keyword2">in_array</span>(<span class="php-quote">'gzip'</span>, <span class="php-var">$encodings</span>) || <span class="php-keyword2">in_array</span>(<span class="php-quote">'x-gzip'</span>, <span class="php-var">$encodings</span>) || <span class="php-keyword1">isset</span>(<span class="php-var">$_SERVER</span>[<span class="php-quote">'---------------'</span>]))
+</span><span class="l" id="433"><a class="l" href="#433">433 </a>            &amp;&amp; <span class="php-keyword2">function_exists</span>(<span class="php-quote">'ob_gzhandler'</span>)
+</span><span class="l" id="434"><a class="l" href="#434">434 </a>            &amp;&amp; !<span class="php-keyword2">ini_get</span>(<span class="php-quote">'zlib.output_compression'</span>)
+</span><span class="l" id="435"><a class="l" href="#435">435 </a>        ) {
+</span><span class="l" id="436"><a class="l" href="#436">436 </a>            <span class="php-var">$enc</span> = <span class="php-keyword2">in_array</span>(<span class="php-quote">'x-gzip'</span>, <span class="php-var">$encodings</span>) ? <span class="php-quote">'x-gzip'</span> : <span class="php-quote">'gzip'</span>;
+</span><span class="l" id="437"><a class="l" href="#437">437 </a>            <span class="php-var">$supportsGzip</span> = <span class="php-keyword1">true</span>;
 </span><span class="l" id="438"><a class="l" href="#438">438 </a>        }
 </span><span class="l" id="439"><a class="l" href="#439">439 </a>
-</span><span class="l" id="440"><a class="l" href="#440">440 </a>        <span class="php-var">$expire</span> = <span class="php-num">0</span> &lt; <span class="php-var">$expire</span> ? (int) <span class="php-var">$expire</span> : <span class="php-num">0</span>;
-</span><span class="l" id="441"><a class="l" href="#441">441 </a>        <span class="php-var">$maxAge</span> = <span class="php-var">$expire</span> - <span class="php-keyword2">time</span>();
-</span><span class="l" id="442"><a class="l" href="#442">442 </a>        <span class="php-var">$maxAge</span> = <span class="php-num">0</span> &gt;= <span class="php-var">$maxAge</span> ? <span class="php-num">0</span> : <span class="php-var">$maxAge</span>;
-</span><span class="l" id="443"><a class="l" href="#443">443 </a>        <span class="php-var">$path</span> = <span class="php-keyword1">empty</span>(<span class="php-var">$path</span>) ? <span class="php-quote">'/'</span> : <span class="php-var">$path</span>;
+</span><span class="l" id="440"><a class="l" href="#440">440 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$supportsGzip</span>) {
+</span><span class="l" id="441"><a class="l" href="#441">441 </a>            <span class="php-keyword2">header</span>(<span class="php-quote">'Content-Encoding: '</span> . <span class="php-var">$enc</span>);
+</span><span class="l" id="442"><a class="l" href="#442">442 </a>            <span class="php-var">$content</span> = <span class="php-keyword2">gzencode</span>(<span class="php-var">$content</span>, <span class="php-num">9</span>, FORCE_GZIP);
+</span><span class="l" id="443"><a class="l" href="#443">443 </a>        }
 </span><span class="l" id="444"><a class="l" href="#444">444 </a>
-</span><span class="l" id="445"><a class="l" href="#445">445 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> !== <span class="php-var">$sameSite</span>) {
-</span><span class="l" id="446"><a class="l" href="#446">446 </a>            <span class="php-var">$sameSite</span> = <span class="php-keyword2">strtolower</span>(<span class="php-var">$sameSite</span>);
-</span><span class="l" id="447"><a class="l" href="#447">447 </a>        }
-</span><span class="l" id="448"><a class="l" href="#448">448 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$sameSite</span>, [<span class="php-quote">'lax'</span>, <span class="php-quote">'strict'</span>, <span class="php-keyword1">null</span>], <span class="php-keyword1">true</span>)) {
-</span><span class="l" id="449"><a class="l" href="#449">449 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'The "sameSite" parameter value is not valid.'</span>);
-</span><span class="l" id="450"><a class="l" href="#450">450 </a>        }
-</span><span class="l" id="451"><a class="l" href="#451">451 </a>
-</span><span class="l" id="452"><a class="l" href="#452">452 </a>        <span class="php-var">$str</span> = <span class="php-quote">'Set-Cookie: '</span>. (<span class="php-var">$raw</span> ? <span class="php-var">$name</span> : <span class="php-keyword2">urlencode</span>(<span class="php-var">$name</span>)).<span class="php-quote">'='</span>;
-</span><span class="l" id="453"><a class="l" href="#453">453 </a>        <span class="php-keyword1">if</span> (<span class="php-quote">''</span> === (string) <span class="php-var">$value</span>) {
-</span><span class="l" id="454"><a class="l" href="#454">454 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'deleted; expires='</span>.<span class="php-keyword2">gmdate</span>(<span class="php-quote">'D, d-M-Y H:i:s T'</span>, <span class="php-keyword2">time</span>() - <span class="php-num">31536001</span>).<span class="php-quote">'; Max-Age=0'</span>;
-</span><span class="l" id="455"><a class="l" href="#455">455 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="456"><a class="l" href="#456">456 </a>            <span class="php-var">$str</span> .= <span class="php-var">$raw</span> ? <span class="php-var">$value</span> : <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$value</span>);
-</span><span class="l" id="457"><a class="l" href="#457">457 </a>            <span class="php-keyword1">if</span> (<span class="php-num">0</span> !== <span class="php-var">$expire</span>) {
-</span><span class="l" id="458"><a class="l" href="#458">458 </a>                <span class="php-var">$str</span> .= <span class="php-quote">'; expires='</span>.<span class="php-keyword2">gmdate</span>(<span class="php-quote">'D, d-M-Y H:i:s T'</span>, <span class="php-var">$expire</span>).<span class="php-quote">'; Max-Age='</span>.<span class="php-var">$maxAge</span>;
-</span><span class="l" id="459"><a class="l" href="#459">459 </a>            }
-</span><span class="l" id="460"><a class="l" href="#460">460 </a>        }
-</span><span class="l" id="461"><a class="l" href="#461">461 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$path</span>) {
-</span><span class="l" id="462"><a class="l" href="#462">462 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; path='</span>.<span class="php-var">$path</span>;
-</span><span class="l" id="463"><a class="l" href="#463">463 </a>        }
-</span><span class="l" id="464"><a class="l" href="#464">464 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$domain</span>) {
-</span><span class="l" id="465"><a class="l" href="#465">465 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; domain='</span>.<span class="php-var">$domain</span>;
-</span><span class="l" id="466"><a class="l" href="#466">466 </a>        }
-</span><span class="l" id="467"><a class="l" href="#467">467 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$secure</span>) {
-</span><span class="l" id="468"><a class="l" href="#468">468 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; secure'</span>;
-</span><span class="l" id="469"><a class="l" href="#469">469 </a>        }
-</span><span class="l" id="470"><a class="l" href="#470">470 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$httpOnly</span>) {
-</span><span class="l" id="471"><a class="l" href="#471">471 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; httponly'</span>;
-</span><span class="l" id="472"><a class="l" href="#472">472 </a>        }
-</span><span class="l" id="473"><a class="l" href="#473">473 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$sameSite</span>) {
-</span><span class="l" id="474"><a class="l" href="#474">474 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; samesite='</span>.<span class="php-var">$sameSite</span>;
-</span><span class="l" id="475"><a class="l" href="#475">475 </a>        }
-</span><span class="l" id="476"><a class="l" href="#476">476 </a>
-</span><span class="l" id="477"><a class="l" href="#477">477 </a>        <span class="php-keyword2">header</span>(<span class="php-var">$str</span>, <span class="php-keyword1">false</span>);
-</span><span class="l" id="478"><a class="l" href="#478">478 </a>    }
-</span><span class="l" id="479"><a class="l" href="#479">479 </a>
-</span><span class="l" id="480"><a class="l" href="#480">480 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="481"><a class="l" href="#481">481 </a><span class="php-comment">     * Creates the md5 checksum for the content.
-</span></span><span class="l" id="482"><a class="l" href="#482">482 </a><span class="php-comment">     *
-</span></span><span class="l" id="483"><a class="l" href="#483">483 </a><span class="php-comment">     * Dynamic content surrounded by `&lt;!--DYN--&gt;…&lt;!--/DYN--&gt;` is ignored.
-</span></span><span class="l" id="484"><a class="l" href="#484">484 </a><span class="php-comment">     *
-</span></span><span class="l" id="485"><a class="l" href="#485">485 </a><span class="php-comment">     * @param string $content
-</span></span><span class="l" id="486"><a class="l" href="#486">486 </a><span class="php-comment">     *
-</span></span><span class="l" id="487"><a class="l" href="#487">487 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="488"><a class="l" href="#488">488 </a><span class="php-comment">     */</span>
-</span><span class="l" id="489"><a class="l" href="#489">489 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>)
-</span><span class="l" id="490"><a class="l" href="#490">490 </a>    {
-</span><span class="l" id="491"><a class="l" href="#491">491 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">md5</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'@&lt;!--DYN--&gt;.*&lt;!--/DYN--&gt;@U'</span>, <span class="php-quote">''</span>, <span class="php-var">$content</span>));
-</span><span class="l" id="492"><a class="l" href="#492">492 </a>    }
-</span><span class="l" id="493"><a class="l" href="#493">493 </a>
-</span><span class="l" id="494"><a class="l" href="#494">494 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_enforceHttps" id="_enforceHttps">enforceHttps</a>()
-</span><span class="l" id="495"><a class="l" href="#495">495 </a>    {
-</span><span class="l" id="496"><a class="l" href="#496">496 </a>        <span class="php-keyword1">if</span> (!rex_request::isHttps()) {
-</span><span class="l" id="497"><a class="l" href="#497">497 </a>            self::setStatus(self::HTTP_MOVED_PERMANENTLY);
-</span><span class="l" id="498"><a class="l" href="#498">498 </a>            self::sendRedirect(<span class="php-quote">'https://'</span>.<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_HOST'</span>].<span class="php-var">$_SERVER</span>[<span class="php-quote">'REQUEST_URI'</span>]);
-</span><span class="l" id="499"><a class="l" href="#499">499 </a>        }
-</span><span class="l" id="500"><a class="l" href="#500">500 </a>    }
-</span><span class="l" id="501"><a class="l" href="#501">501 </a>}
-</span><span class="l" id="502"><a class="l" href="#502">502 </a></span></code></pre>
+</span><span class="l" id="445"><a class="l" href="#445">445 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span class="l" id="446"><a class="l" href="#446">446 </a>    }
+</span><span class="l" id="447"><a class="l" href="#447">447 </a>
+</span><span class="l" id="448"><a class="l" href="#448">448 </a>    <span class="php-comment">// method inspired by https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Cookie.php</span>
+</span><span class="l" id="449"><a class="l" href="#449">449 </a>
+</span><span class="l" id="450"><a class="l" href="#450">450 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="451"><a class="l" href="#451">451 </a><span class="php-comment">     * @param string      $name    The name of the cookie
+</span></span><span class="l" id="452"><a class="l" href="#452">452 </a><span class="php-comment">     * @param string|null $value   The value of the cookie, a empty value to delete the cookie.
+</span></span><span class="l" id="453"><a class="l" href="#453">453 </a><span class="php-comment">     * @param array       $options Different cookie Options. Supported keys are:
+</span></span><span class="l" id="454"><a class="l" href="#454">454 </a><span class="php-comment">     *                             "expires" int|string|\DateTimeInterface The time the cookie expires
+</span></span><span class="l" id="455"><a class="l" href="#455">455 </a><span class="php-comment">     *                             "path" string                           The path on the server in which the cookie will be available on
+</span></span><span class="l" id="456"><a class="l" href="#456">456 </a><span class="php-comment">     *                             "domain" string|null                    The domain that the cookie is available to
+</span></span><span class="l" id="457"><a class="l" href="#457">457 </a><span class="php-comment">     *                             "secure" bool                           Whether the cookie should only be transmitted over a secure HTTPS connection from the client
+</span></span><span class="l" id="458"><a class="l" href="#458">458 </a><span class="php-comment">     *                             "httponly" bool                         Whether the cookie will be made accessible only through the HTTP protocol
+</span></span><span class="l" id="459"><a class="l" href="#459">459 </a><span class="php-comment">     *                             "samesite" string|null                  Whether the cookie will be available for cross-site requests
+</span></span><span class="l" id="460"><a class="l" href="#460">460 </a><span class="php-comment">     *                             "raw" bool                              Whether the cookie value should be sent with no url encoding
+</span></span><span class="l" id="461"><a class="l" href="#461">461 </a><span class="php-comment">     *
+</span></span><span class="l" id="462"><a class="l" href="#462">462 </a><span class="php-comment">     * @throws \InvalidArgumentException
+</span></span><span class="l" id="463"><a class="l" href="#463">463 </a><span class="php-comment">     */</span>
+</span><span class="l" id="464"><a class="l" href="#464">464 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_sendCookie" id="_sendCookie">sendCookie</a>(<span class="php-var">$name</span>, <span class="php-var">$value</span>, <span class="php-keyword1">array</span> <span class="php-var">$options</span> = [])
+</span><span class="l" id="465"><a class="l" href="#465">465 </a>    {
+</span><span class="l" id="466"><a class="l" href="#466">466 </a>        <span class="php-var">$expire</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'expires'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'expires'</span>] : <span class="php-num">0</span>;
+</span><span class="l" id="467"><a class="l" href="#467">467 </a>        <span class="php-var">$path</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'path'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'path'</span>] : <span class="php-quote">'/'</span>;
+</span><span class="l" id="468"><a class="l" href="#468">468 </a>        <span class="php-var">$domain</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'domain'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'domain'</span>] : <span class="php-keyword1">null</span>;
+</span><span class="l" id="469"><a class="l" href="#469">469 </a>        <span class="php-var">$secure</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'secure'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'secure'</span>] : <span class="php-keyword1">false</span>;
+</span><span class="l" id="470"><a class="l" href="#470">470 </a>        <span class="php-var">$httpOnly</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'httponly'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'httponly'</span>] : <span class="php-keyword1">true</span>;
+</span><span class="l" id="471"><a class="l" href="#471">471 </a>        <span class="php-var">$sameSite</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'samesite'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'samesite'</span>] : <span class="php-keyword1">null</span>;
+</span><span class="l" id="472"><a class="l" href="#472">472 </a>        <span class="php-var">$raw</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$options</span>[<span class="php-quote">'raw'</span>]) ? <span class="php-var">$options</span>[<span class="php-quote">'raw'</span>] : <span class="php-keyword1">false</span>;
+</span><span class="l" id="473"><a class="l" href="#473">473 </a>
+</span><span class="l" id="474"><a class="l" href="#474">474 </a>        <span class="php-comment">// from PHP source code</span>
+</span><span class="l" id="475"><a class="l" href="#475">475 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">"/[=,; \t\r\n\013\014]/"</span>, <span class="php-var">$name</span>)) {
+</span><span class="l" id="476"><a class="l" href="#476">476 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'The cookie name "%s" contains invalid characters.'</span>, <span class="php-var">$name</span>));
+</span><span class="l" id="477"><a class="l" href="#477">477 </a>        }
+</span><span class="l" id="478"><a class="l" href="#478">478 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$name</span>)) {
+</span><span class="l" id="479"><a class="l" href="#479">479 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'The cookie name cannot be empty.'</span>);
+</span><span class="l" id="480"><a class="l" href="#480">480 </a>        }
+</span><span class="l" id="481"><a class="l" href="#481">481 </a>        <span class="php-comment">// convert expiration time to a Unix timestamp</span>
+</span><span class="l" id="482"><a class="l" href="#482">482 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$expire</span> <span class="php-keyword1">instanceof</span> \DateTimeInterface) {
+</span><span class="l" id="483"><a class="l" href="#483">483 </a>            <span class="php-var">$expire</span> = <span class="php-var">$expire</span>-&gt;format(<span class="php-quote">'U'</span>);
+</span><span class="l" id="484"><a class="l" href="#484">484 </a>        } <span class="php-keyword1">elseif</span> (!<span class="php-keyword2">is_numeric</span>(<span class="php-var">$expire</span>)) {
+</span><span class="l" id="485"><a class="l" href="#485">485 </a>            <span class="php-var">$expire</span> = <span class="php-keyword2">strtotime</span>(<span class="php-var">$expire</span>);
+</span><span class="l" id="486"><a class="l" href="#486">486 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> === <span class="php-var">$expire</span>) {
+</span><span class="l" id="487"><a class="l" href="#487">487 </a>                <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'The cookie expiration time is not valid.'</span>);
+</span><span class="l" id="488"><a class="l" href="#488">488 </a>            }
+</span><span class="l" id="489"><a class="l" href="#489">489 </a>        }
+</span><span class="l" id="490"><a class="l" href="#490">490 </a>
+</span><span class="l" id="491"><a class="l" href="#491">491 </a>        <span class="php-var">$expire</span> = <span class="php-num">0</span> &lt; <span class="php-var">$expire</span> ? (int) <span class="php-var">$expire</span> : <span class="php-num">0</span>;
+</span><span class="l" id="492"><a class="l" href="#492">492 </a>        <span class="php-var">$maxAge</span> = <span class="php-var">$expire</span> - <span class="php-keyword2">time</span>();
+</span><span class="l" id="493"><a class="l" href="#493">493 </a>        <span class="php-var">$maxAge</span> = <span class="php-num">0</span> &gt;= <span class="php-var">$maxAge</span> ? <span class="php-num">0</span> : <span class="php-var">$maxAge</span>;
+</span><span class="l" id="494"><a class="l" href="#494">494 </a>        <span class="php-var">$path</span> = <span class="php-keyword1">empty</span>(<span class="php-var">$path</span>) ? <span class="php-quote">'/'</span> : <span class="php-var">$path</span>;
+</span><span class="l" id="495"><a class="l" href="#495">495 </a>
+</span><span class="l" id="496"><a class="l" href="#496">496 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> !== <span class="php-var">$sameSite</span>) {
+</span><span class="l" id="497"><a class="l" href="#497">497 </a>            <span class="php-var">$sameSite</span> = <span class="php-keyword2">strtolower</span>(<span class="php-var">$sameSite</span>);
+</span><span class="l" id="498"><a class="l" href="#498">498 </a>        }
+</span><span class="l" id="499"><a class="l" href="#499">499 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$sameSite</span>, [<span class="php-quote">'lax'</span>, <span class="php-quote">'strict'</span>, <span class="php-keyword1">null</span>], <span class="php-keyword1">true</span>)) {
+</span><span class="l" id="500"><a class="l" href="#500">500 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \InvalidArgumentException(<span class="php-quote">'The "sameSite" parameter value is not valid.'</span>);
+</span><span class="l" id="501"><a class="l" href="#501">501 </a>        }
+</span><span class="l" id="502"><a class="l" href="#502">502 </a>
+</span><span class="l" id="503"><a class="l" href="#503">503 </a>        <span class="php-var">$str</span> = <span class="php-quote">'Set-Cookie: '</span>. (<span class="php-var">$raw</span> ? <span class="php-var">$name</span> : <span class="php-keyword2">urlencode</span>(<span class="php-var">$name</span>)).<span class="php-quote">'='</span>;
+</span><span class="l" id="504"><a class="l" href="#504">504 </a>        <span class="php-keyword1">if</span> (<span class="php-quote">''</span> === (string) <span class="php-var">$value</span>) {
+</span><span class="l" id="505"><a class="l" href="#505">505 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'deleted; expires='</span>.<span class="php-keyword2">gmdate</span>(<span class="php-quote">'D, d-M-Y H:i:s T'</span>, <span class="php-keyword2">time</span>() - <span class="php-num">31536001</span>).<span class="php-quote">'; Max-Age=0'</span>;
+</span><span class="l" id="506"><a class="l" href="#506">506 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="507"><a class="l" href="#507">507 </a>            <span class="php-var">$str</span> .= <span class="php-var">$raw</span> ? <span class="php-var">$value</span> : <span class="php-keyword2">rawurlencode</span>(<span class="php-var">$value</span>);
+</span><span class="l" id="508"><a class="l" href="#508">508 </a>            <span class="php-keyword1">if</span> (<span class="php-num">0</span> !== <span class="php-var">$expire</span>) {
+</span><span class="l" id="509"><a class="l" href="#509">509 </a>                <span class="php-var">$str</span> .= <span class="php-quote">'; expires='</span>.<span class="php-keyword2">gmdate</span>(<span class="php-quote">'D, d-M-Y H:i:s T'</span>, <span class="php-var">$expire</span>).<span class="php-quote">'; Max-Age='</span>.<span class="php-var">$maxAge</span>;
+</span><span class="l" id="510"><a class="l" href="#510">510 </a>            }
+</span><span class="l" id="511"><a class="l" href="#511">511 </a>        }
+</span><span class="l" id="512"><a class="l" href="#512">512 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$path</span>) {
+</span><span class="l" id="513"><a class="l" href="#513">513 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; path='</span>.<span class="php-var">$path</span>;
+</span><span class="l" id="514"><a class="l" href="#514">514 </a>        }
+</span><span class="l" id="515"><a class="l" href="#515">515 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$domain</span>) {
+</span><span class="l" id="516"><a class="l" href="#516">516 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; domain='</span>.<span class="php-var">$domain</span>;
+</span><span class="l" id="517"><a class="l" href="#517">517 </a>        }
+</span><span class="l" id="518"><a class="l" href="#518">518 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$secure</span>) {
+</span><span class="l" id="519"><a class="l" href="#519">519 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; secure'</span>;
+</span><span class="l" id="520"><a class="l" href="#520">520 </a>        }
+</span><span class="l" id="521"><a class="l" href="#521">521 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$httpOnly</span>) {
+</span><span class="l" id="522"><a class="l" href="#522">522 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; httponly'</span>;
+</span><span class="l" id="523"><a class="l" href="#523">523 </a>        }
+</span><span class="l" id="524"><a class="l" href="#524">524 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$sameSite</span>) {
+</span><span class="l" id="525"><a class="l" href="#525">525 </a>            <span class="php-var">$str</span> .= <span class="php-quote">'; samesite='</span>.<span class="php-var">$sameSite</span>;
+</span><span class="l" id="526"><a class="l" href="#526">526 </a>        }
+</span><span class="l" id="527"><a class="l" href="#527">527 </a>
+</span><span class="l" id="528"><a class="l" href="#528">528 </a>        <span class="php-keyword2">header</span>(<span class="php-var">$str</span>, <span class="php-keyword1">false</span>);
+</span><span class="l" id="529"><a class="l" href="#529">529 </a>    }
+</span><span class="l" id="530"><a class="l" href="#530">530 </a>
+</span><span class="l" id="531"><a class="l" href="#531">531 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="532"><a class="l" href="#532">532 </a><span class="php-comment">     * Creates the md5 checksum for the content.
+</span></span><span class="l" id="533"><a class="l" href="#533">533 </a><span class="php-comment">     *
+</span></span><span class="l" id="534"><a class="l" href="#534">534 </a><span class="php-comment">     * Dynamic content surrounded by `&lt;!--DYN--&gt;…&lt;!--/DYN--&gt;` is ignored.
+</span></span><span class="l" id="535"><a class="l" href="#535">535 </a><span class="php-comment">     *
+</span></span><span class="l" id="536"><a class="l" href="#536">536 </a><span class="php-comment">     * @param string $content
+</span></span><span class="l" id="537"><a class="l" href="#537">537 </a><span class="php-comment">     *
+</span></span><span class="l" id="538"><a class="l" href="#538">538 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="539"><a class="l" href="#539">539 </a><span class="php-comment">     */</span>
+</span><span class="l" id="540"><a class="l" href="#540">540 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>)
+</span><span class="l" id="541"><a class="l" href="#541">541 </a>    {
+</span><span class="l" id="542"><a class="l" href="#542">542 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">md5</span>(<span class="php-keyword2">preg_replace</span>(<span class="php-quote">'@&lt;!--DYN--&gt;.*&lt;!--/DYN--&gt;@U'</span>, <span class="php-quote">''</span>, <span class="php-var">$content</span>));
+</span><span class="l" id="543"><a class="l" href="#543">543 </a>    }
+</span><span class="l" id="544"><a class="l" href="#544">544 </a>
+</span><span class="l" id="545"><a class="l" href="#545">545 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_enforceHttps" id="_enforceHttps">enforceHttps</a>()
+</span><span class="l" id="546"><a class="l" href="#546">546 </a>    {
+</span><span class="l" id="547"><a class="l" href="#547">547 </a>        <span class="php-keyword1">if</span> (!rex_request::isHttps()) {
+</span><span class="l" id="548"><a class="l" href="#548">548 </a>            self::setStatus(self::HTTP_MOVED_PERMANENTLY);
+</span><span class="l" id="549"><a class="l" href="#549">549 </a>            self::sendRedirect(<span class="php-quote">'https://'</span>.<span class="php-var">$_SERVER</span>[<span class="php-quote">'HTTP_HOST'</span>].<span class="php-var">$_SERVER</span>[<span class="php-quote">'REQUEST_URI'</span>]);
+</span><span class="l" id="550"><a class="l" href="#550">550 </a>        }
+</span><span class="l" id="551"><a class="l" href="#551">551 </a>    }
+</span><span class="l" id="552"><a class="l" href="#552">552 </a>}
+</span><span class="l" id="553"><a class="l" href="#553">553 </a></span></code></pre>
  </body>
 </html>

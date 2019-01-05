@@ -10,7 +10,7 @@
   <pre id="source"><code><span class="l" id="1"><a class="l" href="#1"> 1 </a><span class="xlang">&lt;?php</span>
 </span><span class="l" id="2"><a class="l" href="#2"> 2 </a>
 </span><span class="l" id="3"><a class="l" href="#3"> 3 </a><span class="php-comment">/**
-</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="4"><a class="l" href="#4"> 4 </a><span class="php-comment"> * @package redaxo\core\form
 </span></span><span class="l" id="5"><a class="l" href="#5"> 5 </a><span class="php-comment"> */</span>
 </span><span class="l" id="6"><a class="l" href="#6"> 6 </a><span class="php-keyword1">class</span> <a href="#rex_form_checkbox_element" id="rex_form_checkbox_element">rex_form_checkbox_element</a> <span class="php-keyword1">extends</span> rex_form_options_element
 </span><span class="l" id="7"><a class="l" href="#7"> 7 </a>{
@@ -48,7 +48,7 @@
 </span><span class="l" id="39"><a class="l" href="#39">39 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$attributeName</span> == <span class="php-quote">'name'</span> || <span class="php-var">$attributeName</span> == <span class="php-quote">'id'</span>) {
 </span><span class="l" id="40"><a class="l" href="#40">40 </a>                <span class="php-keyword1">continue</span>;
 </span><span class="l" id="41"><a class="l" href="#41">41 </a>            }
-</span><span class="l" id="42"><a class="l" href="#42">42 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . <span class="php-keyword2">htmlspecialchars</span>(<span class="php-var">$attributeValue</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="42"><a class="l" href="#42">42 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
 </span><span class="l" id="43"><a class="l" href="#43">43 </a>        }
 </span><span class="l" id="44"><a class="l" href="#44">44 </a>
 </span><span class="l" id="45"><a class="l" href="#45">45 </a>        <span class="php-var">$formElements</span> = [];

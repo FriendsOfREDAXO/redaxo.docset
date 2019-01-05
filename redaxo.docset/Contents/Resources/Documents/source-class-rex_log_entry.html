@@ -57,7 +57,7 @@
 </span><span class="l" id="48"><a class="l" href="#48"> 48 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$path</span>)) {
 </span><span class="l" id="49"><a class="l" href="#49"> 49 </a>            rex_file::put(<span class="php-var">$path</span>, <span class="php-quote">''</span>);
 </span><span class="l" id="50"><a class="l" href="#50"> 50 </a>        }
-</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$maxFileSize</span> &amp;&amp; <span class="php-keyword2">file_exists</span>(<span class="php-var">$path</span>) &amp;&amp; <span class="php-keyword2">filesize</span>(<span class="php-var">$path</span>) &gt; <span class="php-var">$maxFileSize</span>) {
+</span><span class="l" id="51"><a class="l" href="#51"> 51 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$maxFileSize</span> &amp;&amp; <span class="php-keyword2">filesize</span>(<span class="php-var">$path</span>) &gt; <span class="php-var">$maxFileSize</span>) {
 </span><span class="l" id="52"><a class="l" href="#52"> 52 </a>            <span class="php-keyword2">rename</span>(<span class="php-var">$path</span>, <span class="php-var">$path</span> . <span class="php-quote">'.2'</span>);
 </span><span class="l" id="53"><a class="l" href="#53"> 53 </a>        }
 </span><span class="l" id="54"><a class="l" href="#54"> 54 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">file</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$path</span>, <span class="php-quote">'a+b'</span>);

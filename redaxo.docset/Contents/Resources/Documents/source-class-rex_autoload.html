@@ -114,7 +114,7 @@
 </span><span class="l" id="105"><a class="l" href="#105">105 </a>        <span class="php-comment">// but only if an admin is logged in</span>
 </span><span class="l" id="106"><a class="l" href="#106">106 </a>        <span class="php-keyword1">if</span> (
 </span><span class="l" id="107"><a class="l" href="#107">107 </a>            (!self::<span class="php-var">$reloaded</span> || <span class="php-var">$force</span>) &amp;&amp;
-</span><span class="l" id="108"><a class="l" href="#108">108 </a>            (rex::getConsole() || (<span class="php-var">$user</span> = rex_backend_login::createUser()) &amp;&amp; <span class="php-var">$user</span>-&gt;isAdmin())
+</span><span class="l" id="108"><a class="l" href="#108">108 </a>            (rex::isSetup() || rex::getConsole() || rex::isDebugMode() || (<span class="php-var">$user</span> = rex_backend_login::createUser()) &amp;&amp; <span class="php-var">$user</span>-&gt;isAdmin())
 </span><span class="l" id="109"><a class="l" href="#109">109 </a>        ) {
 </span><span class="l" id="110"><a class="l" href="#110">110 </a>            self::reload(<span class="php-var">$force</span>);
 </span><span class="l" id="111"><a class="l" href="#111">111 </a>            <span class="php-keyword1">return</span> self::autoload(<span class="php-var">$class</span>);
@@ -156,222 +156,229 @@
 </span><span class="l" id="147"><a class="l" href="#147">147 </a>            <span class="php-keyword1">return</span>;
 </span><span class="l" id="148"><a class="l" href="#148">148 </a>        }
 </span><span class="l" id="149"><a class="l" href="#149">149 </a>
-</span><span class="l" id="150"><a class="l" href="#150">150 </a>        <span class="php-comment">// remove obsolete dirs from cache</span>
-</span><span class="l" id="151"><a class="l" href="#151">151 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$dirs</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span> =&gt; <span class="php-var">$files</span>) {
-</span><span class="l" id="152"><a class="l" href="#152">152 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$dir</span>, self::<span class="php-var">$addedDirs</span>)) {
-</span><span class="l" id="153"><a class="l" href="#153">153 </a>                <span class="php-keyword1">unset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>]);
-</span><span class="l" id="154"><a class="l" href="#154">154 </a>            }
+</span><span class="l" id="150"><a class="l" href="#150">150 </a>        <span class="php-comment">// dont persist a possible incomplete cache, because requests of end-users (which are not allowed to regenerate a existing cache)</span>
+</span><span class="l" id="151"><a class="l" href="#151">151 </a>        <span class="php-comment">// can error in some crazy class-not-found errors which are hard to debug.</span>
+</span><span class="l" id="152"><a class="l" href="#152">152 </a>        <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
+</span><span class="l" id="153"><a class="l" href="#153">153 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$error</span>) &amp;&amp; <span class="php-keyword2">in_array</span>(<span class="php-var">$error</span>[<span class="php-quote">'type'</span>], [E_USER_ERROR, E_ERROR, E_COMPILE_ERROR, E_RECOVERABLE_ERROR, E_PARSE])) {
+</span><span class="l" id="154"><a class="l" href="#154">154 </a>            <span class="php-keyword1">return</span>;
 </span><span class="l" id="155"><a class="l" href="#155">155 </a>        }
 </span><span class="l" id="156"><a class="l" href="#156">156 </a>
-</span><span class="l" id="157"><a class="l" href="#157">157 </a>        <span class="php-keyword1">if</span> (!rex_file::putCache(self::<span class="php-var">$cacheFile</span>, [self::<span class="php-var">$classes</span>, self::<span class="php-var">$dirs</span>])) {
-</span><span class="l" id="158"><a class="l" href="#158">158 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Exception(<span class="php-quote">"Unable to write autoload cachefile '"</span> . self::<span class="php-var">$cacheFile</span> . <span class="php-quote">"'!"</span>);
-</span><span class="l" id="159"><a class="l" href="#159">159 </a>        }
-</span><span class="l" id="160"><a class="l" href="#160">160 </a>        self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="161"><a class="l" href="#161">161 </a>    }
-</span><span class="l" id="162"><a class="l" href="#162">162 </a>
-</span><span class="l" id="163"><a class="l" href="#163">163 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="164"><a class="l" href="#164">164 </a><span class="php-comment">     * Reanalyses all added directories.
-</span></span><span class="l" id="165"><a class="l" href="#165">165 </a><span class="php-comment">     *
-</span></span><span class="l" id="166"><a class="l" href="#166">166 </a><span class="php-comment">     * @param bool $force If true, all files are reanalysed, otherwise only new and changed files
-</span></span><span class="l" id="167"><a class="l" href="#167">167 </a><span class="php-comment">     */</span>
-</span><span class="l" id="168"><a class="l" href="#168">168 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_reload" id="_reload">reload</a>(<span class="php-var">$force</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="169"><a class="l" href="#169">169 </a>    {
-</span><span class="l" id="170"><a class="l" href="#170">170 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$force</span>) {
-</span><span class="l" id="171"><a class="l" href="#171">171 </a>            self::<span class="php-var">$classes</span> = [];
-</span><span class="l" id="172"><a class="l" href="#172">172 </a>            self::<span class="php-var">$dirs</span> = [];
-</span><span class="l" id="173"><a class="l" href="#173">173 </a>        }
-</span><span class="l" id="174"><a class="l" href="#174">174 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$addedDirs</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span>) {
-</span><span class="l" id="175"><a class="l" href="#175">175 </a>            self::_addDirectory(<span class="php-var">$dir</span>);
-</span><span class="l" id="176"><a class="l" href="#176">176 </a>        }
-</span><span class="l" id="177"><a class="l" href="#177">177 </a>        self::<span class="php-var">$reloaded</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="178"><a class="l" href="#178">178 </a>    }
-</span><span class="l" id="179"><a class="l" href="#179">179 </a>
-</span><span class="l" id="180"><a class="l" href="#180">180 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="181"><a class="l" href="#181">181 </a><span class="php-comment">     * Removes the cache.
-</span></span><span class="l" id="182"><a class="l" href="#182">182 </a><span class="php-comment">     */</span>
-</span><span class="l" id="183"><a class="l" href="#183">183 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_removeCache" id="_removeCache">removeCache</a>()
-</span><span class="l" id="184"><a class="l" href="#184">184 </a>    {
-</span><span class="l" id="185"><a class="l" href="#185">185 </a>        rex_file::<span class="php-keyword2">delete</span>(self::<span class="php-var">$cacheFile</span>);
-</span><span class="l" id="186"><a class="l" href="#186">186 </a>    }
-</span><span class="l" id="187"><a class="l" href="#187">187 </a>
-</span><span class="l" id="188"><a class="l" href="#188">188 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="189"><a class="l" href="#189">189 </a><span class="php-comment">     * Adds a directory to the autoloading system if not yet present.
-</span></span><span class="l" id="190"><a class="l" href="#190">190 </a><span class="php-comment">     *
-</span></span><span class="l" id="191"><a class="l" href="#191">191 </a><span class="php-comment">     * @param string $dir The directory to look for classes
-</span></span><span class="l" id="192"><a class="l" href="#192">192 </a><span class="php-comment">     */</span>
-</span><span class="l" id="193"><a class="l" href="#193">193 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addDirectory" id="_addDirectory">addDirectory</a>(<span class="php-var">$dir</span>)
-</span><span class="l" id="194"><a class="l" href="#194">194 </a>    {
-</span><span class="l" id="195"><a class="l" href="#195">195 </a>        <span class="php-var">$dir</span> = <span class="php-keyword2">rtrim</span>(<span class="php-var">$dir</span>, <span class="php-quote">'/\\'</span>) . DIRECTORY_SEPARATOR;
-</span><span class="l" id="196"><a class="l" href="#196">196 </a>        <span class="php-var">$dir</span> = rex_path::relative(<span class="php-var">$dir</span>);
-</span><span class="l" id="197"><a class="l" href="#197">197 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$dir</span>, self::<span class="php-var">$addedDirs</span>)) {
-</span><span class="l" id="198"><a class="l" href="#198">198 </a>            <span class="php-keyword1">return</span>;
-</span><span class="l" id="199"><a class="l" href="#199">199 </a>        }
-</span><span class="l" id="200"><a class="l" href="#200">200 </a>        self::<span class="php-var">$addedDirs</span>[] = <span class="php-var">$dir</span>;
-</span><span class="l" id="201"><a class="l" href="#201">201 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>])) {
-</span><span class="l" id="202"><a class="l" href="#202">202 </a>            self::_addDirectory(<span class="php-var">$dir</span>);
-</span><span class="l" id="203"><a class="l" href="#203">203 </a>            self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="204"><a class="l" href="#204">204 </a>        }
-</span><span class="l" id="205"><a class="l" href="#205">205 </a>    }
-</span><span class="l" id="206"><a class="l" href="#206">206 </a>
-</span><span class="l" id="207"><a class="l" href="#207">207 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="208"><a class="l" href="#208">208 </a><span class="php-comment">     * Returns the classes.
-</span></span><span class="l" id="209"><a class="l" href="#209">209 </a><span class="php-comment">     *
-</span></span><span class="l" id="210"><a class="l" href="#210">210 </a><span class="php-comment">     * @return string[]
-</span></span><span class="l" id="211"><a class="l" href="#211">211 </a><span class="php-comment">     */</span>
-</span><span class="l" id="212"><a class="l" href="#212">212 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getClasses" id="_getClasses">getClasses</a>()
-</span><span class="l" id="213"><a class="l" href="#213">213 </a>    {
-</span><span class="l" id="214"><a class="l" href="#214">214 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_keys</span>(self::<span class="php-var">$classes</span>);
-</span><span class="l" id="215"><a class="l" href="#215">215 </a>    }
-</span><span class="l" id="216"><a class="l" href="#216">216 </a>
-</span><span class="l" id="217"><a class="l" href="#217">217 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="218"><a class="l" href="#218">218 </a><span class="php-comment">     * @param string $dir
-</span></span><span class="l" id="219"><a class="l" href="#219">219 </a><span class="php-comment">     */</span>
-</span><span class="l" id="220"><a class="l" href="#220">220 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#__addDirectory" id="__addDirectory">_addDirectory</a>(<span class="php-var">$dir</span>)
-</span><span class="l" id="221"><a class="l" href="#221">221 </a>    {
-</span><span class="l" id="222"><a class="l" href="#222">222 </a>        <span class="php-var">$dirPath</span> = rex_path::base(<span class="php-var">$dir</span>);
+</span><span class="l" id="157"><a class="l" href="#157">157 </a>        <span class="php-comment">// remove obsolete dirs from cache</span>
+</span><span class="l" id="158"><a class="l" href="#158">158 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$dirs</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span> =&gt; <span class="php-var">$files</span>) {
+</span><span class="l" id="159"><a class="l" href="#159">159 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">in_array</span>(<span class="php-var">$dir</span>, self::<span class="php-var">$addedDirs</span>)) {
+</span><span class="l" id="160"><a class="l" href="#160">160 </a>                <span class="php-keyword1">unset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>]);
+</span><span class="l" id="161"><a class="l" href="#161">161 </a>            }
+</span><span class="l" id="162"><a class="l" href="#162">162 </a>        }
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>        <span class="php-keyword1">if</span> (!rex_file::putCache(self::<span class="php-var">$cacheFile</span>, [self::<span class="php-var">$classes</span>, self::<span class="php-var">$dirs</span>])) {
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Exception(<span class="php-quote">"Unable to write autoload cachefile '"</span> . self::<span class="php-var">$cacheFile</span> . <span class="php-quote">"'!"</span>);
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>        }
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>        self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>    }
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>
+</span><span class="l" id="170"><a class="l" href="#170">170 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="171"><a class="l" href="#171">171 </a><span class="php-comment">     * Reanalyses all added directories.
+</span></span><span class="l" id="172"><a class="l" href="#172">172 </a><span class="php-comment">     *
+</span></span><span class="l" id="173"><a class="l" href="#173">173 </a><span class="php-comment">     * @param bool $force If true, all files are reanalysed, otherwise only new and changed files
+</span></span><span class="l" id="174"><a class="l" href="#174">174 </a><span class="php-comment">     */</span>
+</span><span class="l" id="175"><a class="l" href="#175">175 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_reload" id="_reload">reload</a>(<span class="php-var">$force</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="176"><a class="l" href="#176">176 </a>    {
+</span><span class="l" id="177"><a class="l" href="#177">177 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$force</span>) {
+</span><span class="l" id="178"><a class="l" href="#178">178 </a>            self::<span class="php-var">$classes</span> = [];
+</span><span class="l" id="179"><a class="l" href="#179">179 </a>            self::<span class="php-var">$dirs</span> = [];
+</span><span class="l" id="180"><a class="l" href="#180">180 </a>        }
+</span><span class="l" id="181"><a class="l" href="#181">181 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$addedDirs</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span>) {
+</span><span class="l" id="182"><a class="l" href="#182">182 </a>            self::_addDirectory(<span class="php-var">$dir</span>);
+</span><span class="l" id="183"><a class="l" href="#183">183 </a>        }
+</span><span class="l" id="184"><a class="l" href="#184">184 </a>        self::<span class="php-var">$reloaded</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="185"><a class="l" href="#185">185 </a>    }
+</span><span class="l" id="186"><a class="l" href="#186">186 </a>
+</span><span class="l" id="187"><a class="l" href="#187">187 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="188"><a class="l" href="#188">188 </a><span class="php-comment">     * Removes the cache.
+</span></span><span class="l" id="189"><a class="l" href="#189">189 </a><span class="php-comment">     */</span>
+</span><span class="l" id="190"><a class="l" href="#190">190 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_removeCache" id="_removeCache">removeCache</a>()
+</span><span class="l" id="191"><a class="l" href="#191">191 </a>    {
+</span><span class="l" id="192"><a class="l" href="#192">192 </a>        rex_file::<span class="php-keyword2">delete</span>(self::<span class="php-var">$cacheFile</span>);
+</span><span class="l" id="193"><a class="l" href="#193">193 </a>    }
+</span><span class="l" id="194"><a class="l" href="#194">194 </a>
+</span><span class="l" id="195"><a class="l" href="#195">195 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="196"><a class="l" href="#196">196 </a><span class="php-comment">     * Adds a directory to the autoloading system if not yet present.
+</span></span><span class="l" id="197"><a class="l" href="#197">197 </a><span class="php-comment">     *
+</span></span><span class="l" id="198"><a class="l" href="#198">198 </a><span class="php-comment">     * @param string $dir The directory to look for classes
+</span></span><span class="l" id="199"><a class="l" href="#199">199 </a><span class="php-comment">     */</span>
+</span><span class="l" id="200"><a class="l" href="#200">200 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addDirectory" id="_addDirectory">addDirectory</a>(<span class="php-var">$dir</span>)
+</span><span class="l" id="201"><a class="l" href="#201">201 </a>    {
+</span><span class="l" id="202"><a class="l" href="#202">202 </a>        <span class="php-var">$dir</span> = <span class="php-keyword2">rtrim</span>(<span class="php-var">$dir</span>, <span class="php-quote">'/\\'</span>) . DIRECTORY_SEPARATOR;
+</span><span class="l" id="203"><a class="l" href="#203">203 </a>        <span class="php-var">$dir</span> = rex_path::relative(<span class="php-var">$dir</span>);
+</span><span class="l" id="204"><a class="l" href="#204">204 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$dir</span>, self::<span class="php-var">$addedDirs</span>)) {
+</span><span class="l" id="205"><a class="l" href="#205">205 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="206"><a class="l" href="#206">206 </a>        }
+</span><span class="l" id="207"><a class="l" href="#207">207 </a>        self::<span class="php-var">$addedDirs</span>[] = <span class="php-var">$dir</span>;
+</span><span class="l" id="208"><a class="l" href="#208">208 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>])) {
+</span><span class="l" id="209"><a class="l" href="#209">209 </a>            self::_addDirectory(<span class="php-var">$dir</span>);
+</span><span class="l" id="210"><a class="l" href="#210">210 </a>            self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="211"><a class="l" href="#211">211 </a>        }
+</span><span class="l" id="212"><a class="l" href="#212">212 </a>    }
+</span><span class="l" id="213"><a class="l" href="#213">213 </a>
+</span><span class="l" id="214"><a class="l" href="#214">214 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="215"><a class="l" href="#215">215 </a><span class="php-comment">     * Returns the classes.
+</span></span><span class="l" id="216"><a class="l" href="#216">216 </a><span class="php-comment">     *
+</span></span><span class="l" id="217"><a class="l" href="#217">217 </a><span class="php-comment">     * @return string[]
+</span></span><span class="l" id="218"><a class="l" href="#218">218 </a><span class="php-comment">     */</span>
+</span><span class="l" id="219"><a class="l" href="#219">219 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getClasses" id="_getClasses">getClasses</a>()
+</span><span class="l" id="220"><a class="l" href="#220">220 </a>    {
+</span><span class="l" id="221"><a class="l" href="#221">221 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_keys</span>(self::<span class="php-var">$classes</span>);
+</span><span class="l" id="222"><a class="l" href="#222">222 </a>    }
 </span><span class="l" id="223"><a class="l" href="#223">223 </a>
-</span><span class="l" id="224"><a class="l" href="#224">224 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_dir</span>(<span class="php-var">$dirPath</span>)) {
-</span><span class="l" id="225"><a class="l" href="#225">225 </a>            <span class="php-keyword1">return</span>;
-</span><span class="l" id="226"><a class="l" href="#226">226 </a>        }
-</span><span class="l" id="227"><a class="l" href="#227">227 </a>
-</span><span class="l" id="228"><a class="l" href="#228">228 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>])) {
-</span><span class="l" id="229"><a class="l" href="#229">229 </a>            self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>] = [];
-</span><span class="l" id="230"><a class="l" href="#230">230 </a>        }
-</span><span class="l" id="231"><a class="l" href="#231">231 </a>        <span class="php-var">$files</span> = self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>];
-</span><span class="l" id="232"><a class="l" href="#232">232 </a>        <span class="php-var">$iterator</span> = <span class="php-keyword1">new</span> RecursiveIteratorIterator(<span class="php-keyword1">new</span> RecursiveDirectoryIterator(<span class="php-var">$dirPath</span>, RecursiveDirectoryIterator::SKIP_DOTS));
-</span><span class="l" id="233"><a class="l" href="#233">233 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$iterator</span> <span class="php-keyword1">as</span> <span class="php-var">$path</span> =&gt; <span class="php-var">$file</span>) {
-</span><span class="l" id="234"><a class="l" href="#234">234 </a>            <span class="php-comment">/** @var SplFileInfo $file */</span>
-</span><span class="l" id="235"><a class="l" href="#235">235 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$file</span>-&gt;isFile() || !<span class="php-keyword2">in_array</span>(<span class="php-var">$file</span>-&gt;getExtension(), [<span class="php-quote">'php'</span>, <span class="php-quote">'inc'</span>])) {
-</span><span class="l" id="236"><a class="l" href="#236">236 </a>                <span class="php-keyword1">continue</span>;
-</span><span class="l" id="237"><a class="l" href="#237">237 </a>            }
-</span><span class="l" id="238"><a class="l" href="#238">238 </a>
-</span><span class="l" id="239"><a class="l" href="#239">239 </a>            <span class="php-var">$file</span> = rex_path::relative(<span class="php-var">$path</span>);
-</span><span class="l" id="240"><a class="l" href="#240">240 </a>            <span class="php-keyword1">unset</span>(<span class="php-var">$files</span>[<span class="php-var">$file</span>]);
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>            <span class="php-var">$checksum</span> = <span class="php-keyword2">filemtime</span>(<span class="php-var">$path</span>);
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>][<span class="php-var">$file</span>]) &amp;&amp; self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>][<span class="php-var">$file</span>] === <span class="php-var">$checksum</span>) {
+</span><span class="l" id="224"><a class="l" href="#224">224 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="225"><a class="l" href="#225">225 </a><span class="php-comment">     * @param string $dir
+</span></span><span class="l" id="226"><a class="l" href="#226">226 </a><span class="php-comment">     */</span>
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#__addDirectory" id="__addDirectory">_addDirectory</a>(<span class="php-var">$dir</span>)
+</span><span class="l" id="228"><a class="l" href="#228">228 </a>    {
+</span><span class="l" id="229"><a class="l" href="#229">229 </a>        <span class="php-var">$dirPath</span> = rex_path::base(<span class="php-var">$dir</span>);
+</span><span class="l" id="230"><a class="l" href="#230">230 </a>
+</span><span class="l" id="231"><a class="l" href="#231">231 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_dir</span>(<span class="php-var">$dirPath</span>)) {
+</span><span class="l" id="232"><a class="l" href="#232">232 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="233"><a class="l" href="#233">233 </a>        }
+</span><span class="l" id="234"><a class="l" href="#234">234 </a>
+</span><span class="l" id="235"><a class="l" href="#235">235 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>])) {
+</span><span class="l" id="236"><a class="l" href="#236">236 </a>            self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>] = [];
+</span><span class="l" id="237"><a class="l" href="#237">237 </a>        }
+</span><span class="l" id="238"><a class="l" href="#238">238 </a>        <span class="php-var">$files</span> = self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>];
+</span><span class="l" id="239"><a class="l" href="#239">239 </a>        <span class="php-var">$iterator</span> = <span class="php-keyword1">new</span> RecursiveIteratorIterator(<span class="php-keyword1">new</span> RecursiveDirectoryIterator(<span class="php-var">$dirPath</span>, RecursiveDirectoryIterator::SKIP_DOTS));
+</span><span class="l" id="240"><a class="l" href="#240">240 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$iterator</span> <span class="php-keyword1">as</span> <span class="php-var">$path</span> =&gt; <span class="php-var">$file</span>) {
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>            <span class="php-comment">/** @var SplFileInfo $file */</span>
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$file</span>-&gt;isFile() || !<span class="php-keyword2">in_array</span>(<span class="php-var">$file</span>-&gt;getExtension(), [<span class="php-quote">'php'</span>, <span class="php-quote">'inc'</span>])) {
 </span><span class="l" id="243"><a class="l" href="#243">243 </a>                <span class="php-keyword1">continue</span>;
 </span><span class="l" id="244"><a class="l" href="#244">244 </a>            }
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>            self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>][<span class="php-var">$file</span>] = <span class="php-var">$checksum</span>;
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>            self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>
-</span><span class="l" id="248"><a class="l" href="#248">248 </a>            <span class="php-var">$classes</span> = self::findClasses(<span class="php-var">$path</span>);
-</span><span class="l" id="249"><a class="l" href="#249">249 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$classes</span> <span class="php-keyword1">as</span> <span class="php-var">$class</span>) {
-</span><span class="l" id="250"><a class="l" href="#250">250 </a>                <span class="php-var">$class</span> = <span class="php-keyword2">strtolower</span>(<span class="php-var">$class</span>);
-</span><span class="l" id="251"><a class="l" href="#251">251 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$classes</span>[<span class="php-var">$class</span>])) {
-</span><span class="l" id="252"><a class="l" href="#252">252 </a>                    self::<span class="php-var">$classes</span>[<span class="php-var">$class</span>] = <span class="php-var">$file</span>;
-</span><span class="l" id="253"><a class="l" href="#253">253 </a>                }
-</span><span class="l" id="254"><a class="l" href="#254">254 </a>            }
-</span><span class="l" id="255"><a class="l" href="#255">255 </a>        }
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$files</span> <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>            <span class="php-keyword1">unset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$file</span>]);
-</span><span class="l" id="258"><a class="l" href="#258">258 </a>            self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="259"><a class="l" href="#259">259 </a>        }
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>    }
-</span><span class="l" id="261"><a class="l" href="#261">261 </a>
-</span><span class="l" id="262"><a class="l" href="#262">262 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="263"><a class="l" href="#263">263 </a><span class="php-comment">     * Extract the classes in the given file.
-</span></span><span class="l" id="264"><a class="l" href="#264">264 </a><span class="php-comment">     *
-</span></span><span class="l" id="265"><a class="l" href="#265">265 </a><span class="php-comment">     * The method is copied from Composer (with little changes):
-</span></span><span class="l" id="266"><a class="l" href="#266">266 </a><span class="php-comment">     * https://github.com/composer/composer/blob/f24fcea35b4e8438caa96baccec7ff932c4ac0c3/src/Composer/Autoload/ClassMapGenerator.php#L131
-</span></span><span class="l" id="267"><a class="l" href="#267">267 </a><span class="php-comment">     *
-</span></span><span class="l" id="268"><a class="l" href="#268">268 </a><span class="php-comment">     * @param string $path The file to check
-</span></span><span class="l" id="269"><a class="l" href="#269">269 </a><span class="php-comment">     *
-</span></span><span class="l" id="270"><a class="l" href="#270">270 </a><span class="php-comment">     * @throws \RuntimeException
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>            <span class="php-var">$file</span> = rex_path::relative(<span class="php-var">$path</span>);
+</span><span class="l" id="247"><a class="l" href="#247">247 </a>            <span class="php-keyword1">unset</span>(<span class="php-var">$files</span>[<span class="php-var">$file</span>]);
+</span><span class="l" id="248"><a class="l" href="#248">248 </a>            <span class="php-var">$checksum</span> = <span class="php-keyword2">filemtime</span>(<span class="php-var">$path</span>);
+</span><span class="l" id="249"><a class="l" href="#249">249 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>][<span class="php-var">$file</span>]) &amp;&amp; self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>][<span class="php-var">$file</span>] === <span class="php-var">$checksum</span>) {
+</span><span class="l" id="250"><a class="l" href="#250">250 </a>                <span class="php-keyword1">continue</span>;
+</span><span class="l" id="251"><a class="l" href="#251">251 </a>            }
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>            self::<span class="php-var">$dirs</span>[<span class="php-var">$dir</span>][<span class="php-var">$file</span>] = <span class="php-var">$checksum</span>;
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>            self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>            <span class="php-var">$classes</span> = self::findClasses(<span class="php-var">$path</span>);
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$classes</span> <span class="php-keyword1">as</span> <span class="php-var">$class</span>) {
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>                <span class="php-var">$class</span> = <span class="php-keyword2">strtolower</span>(<span class="php-var">$class</span>);
+</span><span class="l" id="258"><a class="l" href="#258">258 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$classes</span>[<span class="php-var">$class</span>])) {
+</span><span class="l" id="259"><a class="l" href="#259">259 </a>                    self::<span class="php-var">$classes</span>[<span class="php-var">$class</span>] = <span class="php-var">$file</span>;
+</span><span class="l" id="260"><a class="l" href="#260">260 </a>                }
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>            }
+</span><span class="l" id="262"><a class="l" href="#262">262 </a>        }
+</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$files</span> <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
+</span><span class="l" id="264"><a class="l" href="#264">264 </a>            <span class="php-keyword1">unset</span>(self::<span class="php-var">$dirs</span>[<span class="php-var">$file</span>]);
+</span><span class="l" id="265"><a class="l" href="#265">265 </a>            self::<span class="php-var">$cacheChanged</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="266"><a class="l" href="#266">266 </a>        }
+</span><span class="l" id="267"><a class="l" href="#267">267 </a>    }
+</span><span class="l" id="268"><a class="l" href="#268">268 </a>
+</span><span class="l" id="269"><a class="l" href="#269">269 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="270"><a class="l" href="#270">270 </a><span class="php-comment">     * Extract the classes in the given file.
 </span></span><span class="l" id="271"><a class="l" href="#271">271 </a><span class="php-comment">     *
-</span></span><span class="l" id="272"><a class="l" href="#272">272 </a><span class="php-comment">     * @return array The found classes
-</span></span><span class="l" id="273"><a class="l" href="#273">273 </a><span class="php-comment">     */</span>
-</span><span class="l" id="274"><a class="l" href="#274">274 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_findClasses" id="_findClasses">findClasses</a>(<span class="php-var">$path</span>)
-</span><span class="l" id="275"><a class="l" href="#275">275 </a>    {
-</span><span class="l" id="276"><a class="l" href="#276">276 </a>        <span class="php-var">$extraTypes</span> = PHP_VERSION_ID &lt; <span class="php-num">50400</span> ? <span class="php-quote">''</span> : <span class="php-quote">'|trait'</span>;
-</span><span class="l" id="277"><a class="l" href="#277">277 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">defined</span>(<span class="php-quote">'HHVM_VERSION'</span>) &amp;&amp; <span class="php-keyword2">version_compare</span>(HHVM_VERSION, <span class="php-quote">'3.3'</span>, <span class="php-quote">'&gt;='</span>)) {
-</span><span class="l" id="278"><a class="l" href="#278">278 </a>            <span class="php-var">$extraTypes</span> .= <span class="php-quote">'|enum'</span>;
-</span><span class="l" id="279"><a class="l" href="#279">279 </a>        }
-</span><span class="l" id="280"><a class="l" href="#280">280 </a>
-</span><span class="l" id="281"><a class="l" href="#281">281 </a>        <span class="php-comment">// Use @ here instead of Silencer to actively suppress 'unhelpful' output</span>
-</span><span class="l" id="282"><a class="l" href="#282">282 </a>        <span class="php-comment">// @link https://github.com/composer/composer/pull/4886</span>
-</span><span class="l" id="283"><a class="l" href="#283">283 </a>        <span class="php-var">$contents</span> = @<span class="php-keyword2">php_strip_whitespace</span>(<span class="php-var">$path</span>);
-</span><span class="l" id="284"><a class="l" href="#284">284 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$contents</span>) {
-</span><span class="l" id="285"><a class="l" href="#285">285 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$path</span>)) {
-</span><span class="l" id="286"><a class="l" href="#286">286 </a>                <span class="php-var">$message</span> = <span class="php-quote">'File at "%s" does not exist, check your classmap definitions'</span>;
-</span><span class="l" id="287"><a class="l" href="#287">287 </a>            } <span class="php-keyword1">elseif</span> (!<span class="php-keyword2">is_readable</span>(<span class="php-var">$path</span>)) {
-</span><span class="l" id="288"><a class="l" href="#288">288 </a>                <span class="php-var">$message</span> = <span class="php-quote">'File at "%s" is not readable, check its permissions'</span>;
-</span><span class="l" id="289"><a class="l" href="#289">289 </a>            } <span class="php-keyword1">elseif</span> (<span class="php-quote">''</span> === <span class="php-keyword2">trim</span>(<span class="php-keyword2">file_get_contents</span>(<span class="php-var">$path</span>))) {
-</span><span class="l" id="290"><a class="l" href="#290">290 </a>                <span class="php-comment">// The input file was really empty and thus contains no classes</span>
-</span><span class="l" id="291"><a class="l" href="#291">291 </a>                <span class="php-keyword1">return</span> [];
-</span><span class="l" id="292"><a class="l" href="#292">292 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="293"><a class="l" href="#293">293 </a>                <span class="php-var">$message</span> = <span class="php-quote">'File at "%s" could not be parsed as PHP, it may be binary or corrupted'</span>;
-</span><span class="l" id="294"><a class="l" href="#294">294 </a>            }
-</span><span class="l" id="295"><a class="l" href="#295">295 </a>            <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
-</span><span class="l" id="296"><a class="l" href="#296">296 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$error</span>[<span class="php-quote">'message'</span>])) {
-</span><span class="l" id="297"><a class="l" href="#297">297 </a>                <span class="php-var">$message</span> .= PHP_EOL . <span class="php-quote">'The following message may be helpful:'</span> . PHP_EOL . <span class="php-var">$error</span>[<span class="php-quote">'message'</span>];
-</span><span class="l" id="298"><a class="l" href="#298">298 </a>            }
-</span><span class="l" id="299"><a class="l" href="#299">299 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \RuntimeException(<span class="php-keyword2">sprintf</span>(<span class="php-var">$message</span>, <span class="php-var">$path</span>));
-</span><span class="l" id="300"><a class="l" href="#300">300 </a>        }
-</span><span class="l" id="301"><a class="l" href="#301">301 </a>
-</span><span class="l" id="302"><a class="l" href="#302">302 </a>        <span class="php-comment">// return early if there is no chance of matching anything in this file</span>
-</span><span class="l" id="303"><a class="l" href="#303">303 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">preg_match</span>(<span class="php-quote">'{\b(?:class|interface'</span>.<span class="php-var">$extraTypes</span>.<span class="php-quote">')\s}i'</span>, <span class="php-var">$contents</span>)) {
-</span><span class="l" id="304"><a class="l" href="#304">304 </a>            <span class="php-keyword1">return</span> [];
-</span><span class="l" id="305"><a class="l" href="#305">305 </a>        }
-</span><span class="l" id="306"><a class="l" href="#306">306 </a>
-</span><span class="l" id="307"><a class="l" href="#307">307 </a>        <span class="php-comment">// strip heredocs/nowdocs</span>
-</span><span class="l" id="308"><a class="l" href="#308">308 </a>        <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{&lt;&lt;&lt;\s*(\'?)(\w+)\\1(?:\r\n|\n|\r)(?:.*?)(?:\r\n|\n|\r)\\2(?=\r\n|\n|\r|;)}s'</span>, <span class="php-quote">'null'</span>, <span class="php-var">$contents</span>);
-</span><span class="l" id="309"><a class="l" href="#309">309 </a>        <span class="php-comment">// strip strings</span>
-</span><span class="l" id="310"><a class="l" href="#310">310 </a>        <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{"[^"\\\\]*+(\\\\.[^"\\\\]*+)*+"|\'[^\'\\\\]*+(\\\\.[^\'\\\\]*+)*+\'}s'</span>, <span class="php-quote">'null'</span>, <span class="php-var">$contents</span>);
-</span><span class="l" id="311"><a class="l" href="#311">311 </a>        <span class="php-comment">// strip leading non-php code if needed</span>
-</span><span class="l" id="312"><a class="l" href="#312">312 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$contents</span>, <span class="php-num">0</span>, <span class="php-num">2</span>) !== <span class="php-quote">'&lt;?'</span>) {
-</span><span class="l" id="313"><a class="l" href="#313">313 </a>            <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{^.+?&lt;\?}s'</span>, <span class="php-quote">'&lt;?'</span>, <span class="php-var">$contents</span>, <span class="php-num">1</span>, <span class="php-var">$replacements</span>);
-</span><span class="l" id="314"><a class="l" href="#314">314 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$replacements</span> === <span class="php-num">0</span>) {
-</span><span class="l" id="315"><a class="l" href="#315">315 </a>                <span class="php-keyword1">return</span> [];
-</span><span class="l" id="316"><a class="l" href="#316">316 </a>            }
-</span><span class="l" id="317"><a class="l" href="#317">317 </a>        }
-</span><span class="l" id="318"><a class="l" href="#318">318 </a>        <span class="php-comment">// strip non-php blocks in the file</span>
-</span><span class="l" id="319"><a class="l" href="#319">319 </a>        <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{\?&gt;.+&lt;\?}s'</span>, <span class="php-quote">'?&gt;&lt;?'</span>, <span class="php-var">$contents</span>);
-</span><span class="l" id="320"><a class="l" href="#320">320 </a>        <span class="php-comment">// strip trailing non-php code if needed</span>
-</span><span class="l" id="321"><a class="l" href="#321">321 </a>        <span class="php-var">$pos</span> = <span class="php-keyword2">strrpos</span>(<span class="php-var">$contents</span>, <span class="php-quote">'?&gt;'</span>);
-</span><span class="l" id="322"><a class="l" href="#322">322 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> !== <span class="php-var">$pos</span> &amp;&amp; <span class="php-keyword1">false</span> === <span class="php-keyword2">strpos</span>(<span class="php-keyword2">substr</span>(<span class="php-var">$contents</span>, <span class="php-var">$pos</span>), <span class="php-quote">'&lt;?'</span>)) {
-</span><span class="l" id="323"><a class="l" href="#323">323 </a>            <span class="php-var">$contents</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$contents</span>, <span class="php-num">0</span>, <span class="php-var">$pos</span>);
+</span></span><span class="l" id="272"><a class="l" href="#272">272 </a><span class="php-comment">     * The method is copied from Composer (with little changes):
+</span></span><span class="l" id="273"><a class="l" href="#273">273 </a><span class="php-comment">     * https://github.com/composer/composer/blob/f24fcea35b4e8438caa96baccec7ff932c4ac0c3/src/Composer/Autoload/ClassMapGenerator.php#L131
+</span></span><span class="l" id="274"><a class="l" href="#274">274 </a><span class="php-comment">     *
+</span></span><span class="l" id="275"><a class="l" href="#275">275 </a><span class="php-comment">     * @param string $path The file to check
+</span></span><span class="l" id="276"><a class="l" href="#276">276 </a><span class="php-comment">     *
+</span></span><span class="l" id="277"><a class="l" href="#277">277 </a><span class="php-comment">     * @throws \RuntimeException
+</span></span><span class="l" id="278"><a class="l" href="#278">278 </a><span class="php-comment">     *
+</span></span><span class="l" id="279"><a class="l" href="#279">279 </a><span class="php-comment">     * @return array The found classes
+</span></span><span class="l" id="280"><a class="l" href="#280">280 </a><span class="php-comment">     */</span>
+</span><span class="l" id="281"><a class="l" href="#281">281 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_findClasses" id="_findClasses">findClasses</a>(<span class="php-var">$path</span>)
+</span><span class="l" id="282"><a class="l" href="#282">282 </a>    {
+</span><span class="l" id="283"><a class="l" href="#283">283 </a>        <span class="php-var">$extraTypes</span> = PHP_VERSION_ID &lt; <span class="php-num">50400</span> ? <span class="php-quote">''</span> : <span class="php-quote">'|trait'</span>;
+</span><span class="l" id="284"><a class="l" href="#284">284 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">defined</span>(<span class="php-quote">'HHVM_VERSION'</span>) &amp;&amp; <span class="php-keyword2">version_compare</span>(HHVM_VERSION, <span class="php-quote">'3.3'</span>, <span class="php-quote">'&gt;='</span>)) {
+</span><span class="l" id="285"><a class="l" href="#285">285 </a>            <span class="php-var">$extraTypes</span> .= <span class="php-quote">'|enum'</span>;
+</span><span class="l" id="286"><a class="l" href="#286">286 </a>        }
+</span><span class="l" id="287"><a class="l" href="#287">287 </a>
+</span><span class="l" id="288"><a class="l" href="#288">288 </a>        <span class="php-comment">// Use @ here instead of Silencer to actively suppress 'unhelpful' output</span>
+</span><span class="l" id="289"><a class="l" href="#289">289 </a>        <span class="php-comment">// @link https://github.com/composer/composer/pull/4886</span>
+</span><span class="l" id="290"><a class="l" href="#290">290 </a>        <span class="php-var">$contents</span> = @<span class="php-keyword2">php_strip_whitespace</span>(<span class="php-var">$path</span>);
+</span><span class="l" id="291"><a class="l" href="#291">291 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$contents</span>) {
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$path</span>)) {
+</span><span class="l" id="293"><a class="l" href="#293">293 </a>                <span class="php-var">$message</span> = <span class="php-quote">'File at "%s" does not exist, check your classmap definitions'</span>;
+</span><span class="l" id="294"><a class="l" href="#294">294 </a>            } <span class="php-keyword1">elseif</span> (!<span class="php-keyword2">is_readable</span>(<span class="php-var">$path</span>)) {
+</span><span class="l" id="295"><a class="l" href="#295">295 </a>                <span class="php-var">$message</span> = <span class="php-quote">'File at "%s" is not readable, check its permissions'</span>;
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>            } <span class="php-keyword1">elseif</span> (<span class="php-quote">''</span> === <span class="php-keyword2">trim</span>(<span class="php-keyword2">file_get_contents</span>(<span class="php-var">$path</span>))) {
+</span><span class="l" id="297"><a class="l" href="#297">297 </a>                <span class="php-comment">// The input file was really empty and thus contains no classes</span>
+</span><span class="l" id="298"><a class="l" href="#298">298 </a>                <span class="php-keyword1">return</span> [];
+</span><span class="l" id="299"><a class="l" href="#299">299 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="300"><a class="l" href="#300">300 </a>                <span class="php-var">$message</span> = <span class="php-quote">'File at "%s" could not be parsed as PHP, it may be binary or corrupted'</span>;
+</span><span class="l" id="301"><a class="l" href="#301">301 </a>            }
+</span><span class="l" id="302"><a class="l" href="#302">302 </a>            <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
+</span><span class="l" id="303"><a class="l" href="#303">303 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$error</span>[<span class="php-quote">'message'</span>])) {
+</span><span class="l" id="304"><a class="l" href="#304">304 </a>                <span class="php-var">$message</span> .= PHP_EOL . <span class="php-quote">'The following message may be helpful:'</span> . PHP_EOL . <span class="php-var">$error</span>[<span class="php-quote">'message'</span>];
+</span><span class="l" id="305"><a class="l" href="#305">305 </a>            }
+</span><span class="l" id="306"><a class="l" href="#306">306 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \RuntimeException(<span class="php-keyword2">sprintf</span>(<span class="php-var">$message</span>, <span class="php-var">$path</span>));
+</span><span class="l" id="307"><a class="l" href="#307">307 </a>        }
+</span><span class="l" id="308"><a class="l" href="#308">308 </a>
+</span><span class="l" id="309"><a class="l" href="#309">309 </a>        <span class="php-comment">// return early if there is no chance of matching anything in this file</span>
+</span><span class="l" id="310"><a class="l" href="#310">310 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">preg_match</span>(<span class="php-quote">'{\b(?:class|interface'</span>.<span class="php-var">$extraTypes</span>.<span class="php-quote">')\s}i'</span>, <span class="php-var">$contents</span>)) {
+</span><span class="l" id="311"><a class="l" href="#311">311 </a>            <span class="php-keyword1">return</span> [];
+</span><span class="l" id="312"><a class="l" href="#312">312 </a>        }
+</span><span class="l" id="313"><a class="l" href="#313">313 </a>
+</span><span class="l" id="314"><a class="l" href="#314">314 </a>        <span class="php-comment">// strip heredocs/nowdocs</span>
+</span><span class="l" id="315"><a class="l" href="#315">315 </a>        <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{&lt;&lt;&lt;\s*(\'?)(\w+)\\1(?:\r\n|\n|\r)(?:.*?)(?:\r\n|\n|\r)\\2(?=\r\n|\n|\r|;)}s'</span>, <span class="php-quote">'null'</span>, <span class="php-var">$contents</span>);
+</span><span class="l" id="316"><a class="l" href="#316">316 </a>        <span class="php-comment">// strip strings</span>
+</span><span class="l" id="317"><a class="l" href="#317">317 </a>        <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{"[^"\\\\]*+(\\\\.[^"\\\\]*+)*+"|\'[^\'\\\\]*+(\\\\.[^\'\\\\]*+)*+\'}s'</span>, <span class="php-quote">'null'</span>, <span class="php-var">$contents</span>);
+</span><span class="l" id="318"><a class="l" href="#318">318 </a>        <span class="php-comment">// strip leading non-php code if needed</span>
+</span><span class="l" id="319"><a class="l" href="#319">319 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$contents</span>, <span class="php-num">0</span>, <span class="php-num">2</span>) !== <span class="php-quote">'&lt;?'</span>) {
+</span><span class="l" id="320"><a class="l" href="#320">320 </a>            <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{^.+?&lt;\?}s'</span>, <span class="php-quote">'&lt;?'</span>, <span class="php-var">$contents</span>, <span class="php-num">1</span>, <span class="php-var">$replacements</span>);
+</span><span class="l" id="321"><a class="l" href="#321">321 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$replacements</span> === <span class="php-num">0</span>) {
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>                <span class="php-keyword1">return</span> [];
+</span><span class="l" id="323"><a class="l" href="#323">323 </a>            }
 </span><span class="l" id="324"><a class="l" href="#324">324 </a>        }
-</span><span class="l" id="325"><a class="l" href="#325">325 </a>        <span class="php-comment">// strip comments if short open tags are in the file</span>
-</span><span class="l" id="326"><a class="l" href="#326">326 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'{(&lt;\?)(?!(php|hh))}i'</span>, <span class="php-var">$contents</span>)) {
-</span><span class="l" id="327"><a class="l" href="#327">327 </a>            <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{//.* | /\*(?:[^*]++|\*(?!/))*\*/}x'</span>, <span class="php-quote">''</span>, <span class="php-var">$contents</span>);
-</span><span class="l" id="328"><a class="l" href="#328">328 </a>        }
-</span><span class="l" id="329"><a class="l" href="#329">329 </a>
-</span><span class="l" id="330"><a class="l" href="#330">330 </a>        <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'{
-</span></span><span class="l" id="331"><a class="l" href="#331">331 </a><span class="php-quote">            (?:
-</span></span><span class="l" id="332"><a class="l" href="#332">332 </a><span class="php-quote">                 \b(?&lt;![\$:&gt;])(?P&lt;type&gt;class|interface'</span>.<span class="php-var">$extraTypes</span>.<span class="php-quote">') \s++ (?P&lt;name&gt;[a-zA-Z_\x7f-\xff:][a-zA-Z0-9_\x7f-\xff:\-]*+)
-</span></span><span class="l" id="333"><a class="l" href="#333">333 </a><span class="php-quote">               | \b(?&lt;![\$:&gt;])(?P&lt;ns&gt;namespace) (?P&lt;nsname&gt;\s++[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*+(?:\s*+\\\\\s*+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*+)*+)? \s*+ [\{;]
-</span></span><span class="l" id="334"><a class="l" href="#334">334 </a><span class="php-quote">            )
-</span></span><span class="l" id="335"><a class="l" href="#335">335 </a><span class="php-quote">        }ix'</span>, <span class="php-var">$contents</span>, <span class="php-var">$matches</span>);
+</span><span class="l" id="325"><a class="l" href="#325">325 </a>        <span class="php-comment">// strip non-php blocks in the file</span>
+</span><span class="l" id="326"><a class="l" href="#326">326 </a>        <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{\?&gt;.+&lt;\?}s'</span>, <span class="php-quote">'?&gt;&lt;?'</span>, <span class="php-var">$contents</span>);
+</span><span class="l" id="327"><a class="l" href="#327">327 </a>        <span class="php-comment">// strip trailing non-php code if needed</span>
+</span><span class="l" id="328"><a class="l" href="#328">328 </a>        <span class="php-var">$pos</span> = <span class="php-keyword2">strrpos</span>(<span class="php-var">$contents</span>, <span class="php-quote">'?&gt;'</span>);
+</span><span class="l" id="329"><a class="l" href="#329">329 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">false</span> !== <span class="php-var">$pos</span> &amp;&amp; <span class="php-keyword1">false</span> === <span class="php-keyword2">strpos</span>(<span class="php-keyword2">substr</span>(<span class="php-var">$contents</span>, <span class="php-var">$pos</span>), <span class="php-quote">'&lt;?'</span>)) {
+</span><span class="l" id="330"><a class="l" href="#330">330 </a>            <span class="php-var">$contents</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$contents</span>, <span class="php-num">0</span>, <span class="php-var">$pos</span>);
+</span><span class="l" id="331"><a class="l" href="#331">331 </a>        }
+</span><span class="l" id="332"><a class="l" href="#332">332 </a>        <span class="php-comment">// strip comments if short open tags are in the file</span>
+</span><span class="l" id="333"><a class="l" href="#333">333 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'{(&lt;\?)(?!(php|hh))}i'</span>, <span class="php-var">$contents</span>)) {
+</span><span class="l" id="334"><a class="l" href="#334">334 </a>            <span class="php-var">$contents</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'{//.* | /\*(?:[^*]++|\*(?!/))*\*/}x'</span>, <span class="php-quote">''</span>, <span class="php-var">$contents</span>);
+</span><span class="l" id="335"><a class="l" href="#335">335 </a>        }
 </span><span class="l" id="336"><a class="l" href="#336">336 </a>
-</span><span class="l" id="337"><a class="l" href="#337">337 </a>        <span class="php-var">$classes</span> = [];
-</span><span class="l" id="338"><a class="l" href="#338">338 </a>        <span class="php-var">$namespace</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="339"><a class="l" href="#339">339 </a>
-</span><span class="l" id="340"><a class="l" href="#340">340 </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>, <span class="php-var">$len</span> = <span class="php-keyword2">count</span>(<span class="php-var">$matches</span>[<span class="php-quote">'type'</span>]); <span class="php-var">$i</span> &lt; <span class="php-var">$len</span>; ++<span class="php-var">$i</span>) {
-</span><span class="l" id="341"><a class="l" href="#341">341 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$matches</span>[<span class="php-quote">'ns'</span>][<span class="php-var">$i</span>])) {
-</span><span class="l" id="342"><a class="l" href="#342">342 </a>                <span class="php-var">$namespace</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">' '</span>, <span class="php-quote">"\t"</span>, <span class="php-quote">"\r"</span>, <span class="php-quote">"\n"</span>], <span class="php-quote">''</span>, <span class="php-var">$matches</span>[<span class="php-quote">'nsname'</span>][<span class="php-var">$i</span>]) . <span class="php-quote">'\\'</span>;
-</span><span class="l" id="343"><a class="l" href="#343">343 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="344"><a class="l" href="#344">344 </a>                <span class="php-var">$name</span> = <span class="php-var">$matches</span>[<span class="php-quote">'name'</span>][<span class="php-var">$i</span>];
-</span><span class="l" id="345"><a class="l" href="#345">345 </a>                <span class="php-comment">// skip anon classes extending/implementing</span>
-</span><span class="l" id="346"><a class="l" href="#346">346 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$name</span> === <span class="php-quote">'extends'</span> || <span class="php-var">$name</span> === <span class="php-quote">'implements'</span>) {
-</span><span class="l" id="347"><a class="l" href="#347">347 </a>                    <span class="php-keyword1">continue</span>;
-</span><span class="l" id="348"><a class="l" href="#348">348 </a>                }
-</span><span class="l" id="349"><a class="l" href="#349">349 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$name</span>[<span class="php-num">0</span>] === <span class="php-quote">':'</span>) {
-</span><span class="l" id="350"><a class="l" href="#350">350 </a>                    <span class="php-comment">// This is an XHP class, https://github.com/facebook/xhp</span>
-</span><span class="l" id="351"><a class="l" href="#351">351 </a>                    <span class="php-var">$name</span> = <span class="php-quote">'xhp'</span>.<span class="php-keyword2">substr</span>(<span class="php-keyword2">str_replace</span>([<span class="php-quote">'-'</span>, <span class="php-quote">':'</span>], [<span class="php-quote">'_'</span>, <span class="php-quote">'__'</span>], <span class="php-var">$name</span>), <span class="php-num">1</span>);
-</span><span class="l" id="352"><a class="l" href="#352">352 </a>                } <span class="php-keyword1">elseif</span> (<span class="php-var">$matches</span>[<span class="php-quote">'type'</span>][<span class="php-var">$i</span>] === <span class="php-quote">'enum'</span>) {
-</span><span class="l" id="353"><a class="l" href="#353">353 </a>                    <span class="php-comment">// In Hack, something like:</span>
-</span><span class="l" id="354"><a class="l" href="#354">354 </a>                    <span class="php-comment">//   enum Foo: int { HERP = '123'; }</span>
-</span><span class="l" id="355"><a class="l" href="#355">355 </a>                    <span class="php-comment">// The regex above captures the colon, which isn't part of</span>
-</span><span class="l" id="356"><a class="l" href="#356">356 </a>                    <span class="php-comment">// the class name.</span>
-</span><span class="l" id="357"><a class="l" href="#357">357 </a>                    <span class="php-var">$name</span> = <span class="php-keyword2">rtrim</span>(<span class="php-var">$name</span>, <span class="php-quote">':'</span>);
-</span><span class="l" id="358"><a class="l" href="#358">358 </a>                }
-</span><span class="l" id="359"><a class="l" href="#359">359 </a>                <span class="php-var">$classes</span>[] = <span class="php-keyword2">ltrim</span>(<span class="php-var">$namespace</span> . <span class="php-var">$name</span>, <span class="php-quote">'\\'</span>);
-</span><span class="l" id="360"><a class="l" href="#360">360 </a>            }
-</span><span class="l" id="361"><a class="l" href="#361">361 </a>        }
-</span><span class="l" id="362"><a class="l" href="#362">362 </a>
-</span><span class="l" id="363"><a class="l" href="#363">363 </a>        <span class="php-keyword1">return</span> <span class="php-var">$classes</span>;
-</span><span class="l" id="364"><a class="l" href="#364">364 </a>    }
-</span><span class="l" id="365"><a class="l" href="#365">365 </a>}
-</span><span class="l" id="366"><a class="l" href="#366">366 </a></span></code></pre>
+</span><span class="l" id="337"><a class="l" href="#337">337 </a>        <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'{
+</span></span><span class="l" id="338"><a class="l" href="#338">338 </a><span class="php-quote">            (?:
+</span></span><span class="l" id="339"><a class="l" href="#339">339 </a><span class="php-quote">                 \b(?&lt;![\$:&gt;])(?P&lt;type&gt;class|interface'</span>.<span class="php-var">$extraTypes</span>.<span class="php-quote">') \s++ (?P&lt;name&gt;[a-zA-Z_\x7f-\xff:][a-zA-Z0-9_\x7f-\xff:\-]*+)
+</span></span><span class="l" id="340"><a class="l" href="#340">340 </a><span class="php-quote">               | \b(?&lt;![\$:&gt;])(?P&lt;ns&gt;namespace) (?P&lt;nsname&gt;\s++[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*+(?:\s*+\\\\\s*+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*+)*+)? \s*+ [\{;]
+</span></span><span class="l" id="341"><a class="l" href="#341">341 </a><span class="php-quote">            )
+</span></span><span class="l" id="342"><a class="l" href="#342">342 </a><span class="php-quote">        }ix'</span>, <span class="php-var">$contents</span>, <span class="php-var">$matches</span>);
+</span><span class="l" id="343"><a class="l" href="#343">343 </a>
+</span><span class="l" id="344"><a class="l" href="#344">344 </a>        <span class="php-var">$classes</span> = [];
+</span><span class="l" id="345"><a class="l" href="#345">345 </a>        <span class="php-var">$namespace</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="346"><a class="l" href="#346">346 </a>
+</span><span class="l" id="347"><a class="l" href="#347">347 </a>        <span class="php-keyword1">for</span> (<span class="php-var">$i</span> = <span class="php-num">0</span>, <span class="php-var">$len</span> = <span class="php-keyword2">count</span>(<span class="php-var">$matches</span>[<span class="php-quote">'type'</span>]); <span class="php-var">$i</span> &lt; <span class="php-var">$len</span>; ++<span class="php-var">$i</span>) {
+</span><span class="l" id="348"><a class="l" href="#348">348 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$matches</span>[<span class="php-quote">'ns'</span>][<span class="php-var">$i</span>])) {
+</span><span class="l" id="349"><a class="l" href="#349">349 </a>                <span class="php-var">$namespace</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">' '</span>, <span class="php-quote">"\t"</span>, <span class="php-quote">"\r"</span>, <span class="php-quote">"\n"</span>], <span class="php-quote">''</span>, <span class="php-var">$matches</span>[<span class="php-quote">'nsname'</span>][<span class="php-var">$i</span>]) . <span class="php-quote">'\\'</span>;
+</span><span class="l" id="350"><a class="l" href="#350">350 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="351"><a class="l" href="#351">351 </a>                <span class="php-var">$name</span> = <span class="php-var">$matches</span>[<span class="php-quote">'name'</span>][<span class="php-var">$i</span>];
+</span><span class="l" id="352"><a class="l" href="#352">352 </a>                <span class="php-comment">// skip anon classes extending/implementing</span>
+</span><span class="l" id="353"><a class="l" href="#353">353 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$name</span> === <span class="php-quote">'extends'</span> || <span class="php-var">$name</span> === <span class="php-quote">'implements'</span>) {
+</span><span class="l" id="354"><a class="l" href="#354">354 </a>                    <span class="php-keyword1">continue</span>;
+</span><span class="l" id="355"><a class="l" href="#355">355 </a>                }
+</span><span class="l" id="356"><a class="l" href="#356">356 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$name</span>[<span class="php-num">0</span>] === <span class="php-quote">':'</span>) {
+</span><span class="l" id="357"><a class="l" href="#357">357 </a>                    <span class="php-comment">// This is an XHP class, https://github.com/facebook/xhp</span>
+</span><span class="l" id="358"><a class="l" href="#358">358 </a>                    <span class="php-var">$name</span> = <span class="php-quote">'xhp'</span>.<span class="php-keyword2">substr</span>(<span class="php-keyword2">str_replace</span>([<span class="php-quote">'-'</span>, <span class="php-quote">':'</span>], [<span class="php-quote">'_'</span>, <span class="php-quote">'__'</span>], <span class="php-var">$name</span>), <span class="php-num">1</span>);
+</span><span class="l" id="359"><a class="l" href="#359">359 </a>                } <span class="php-keyword1">elseif</span> (<span class="php-var">$matches</span>[<span class="php-quote">'type'</span>][<span class="php-var">$i</span>] === <span class="php-quote">'enum'</span>) {
+</span><span class="l" id="360"><a class="l" href="#360">360 </a>                    <span class="php-comment">// In Hack, something like:</span>
+</span><span class="l" id="361"><a class="l" href="#361">361 </a>                    <span class="php-comment">//   enum Foo: int { HERP = '123'; }</span>
+</span><span class="l" id="362"><a class="l" href="#362">362 </a>                    <span class="php-comment">// The regex above captures the colon, which isn't part of</span>
+</span><span class="l" id="363"><a class="l" href="#363">363 </a>                    <span class="php-comment">// the class name.</span>
+</span><span class="l" id="364"><a class="l" href="#364">364 </a>                    <span class="php-var">$name</span> = <span class="php-keyword2">rtrim</span>(<span class="php-var">$name</span>, <span class="php-quote">':'</span>);
+</span><span class="l" id="365"><a class="l" href="#365">365 </a>                }
+</span><span class="l" id="366"><a class="l" href="#366">366 </a>                <span class="php-var">$classes</span>[] = <span class="php-keyword2">ltrim</span>(<span class="php-var">$namespace</span> . <span class="php-var">$name</span>, <span class="php-quote">'\\'</span>);
+</span><span class="l" id="367"><a class="l" href="#367">367 </a>            }
+</span><span class="l" id="368"><a class="l" href="#368">368 </a>        }
+</span><span class="l" id="369"><a class="l" href="#369">369 </a>
+</span><span class="l" id="370"><a class="l" href="#370">370 </a>        <span class="php-keyword1">return</span> <span class="php-var">$classes</span>;
+</span><span class="l" id="371"><a class="l" href="#371">371 </a>    }
+</span><span class="l" id="372"><a class="l" href="#372">372 </a>}
+</span><span class="l" id="373"><a class="l" href="#373">373 </a></span></code></pre>
  </body>
 </html>

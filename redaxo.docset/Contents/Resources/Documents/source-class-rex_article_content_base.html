@@ -443,104 +443,111 @@
 </span><span class="l" id="434"><a class="l" href="#434">434 </a>
 </span><span class="l" id="435"><a class="l" href="#435">435 </a>        <span class="php-keyword2">ob_start</span>();
 </span><span class="l" id="436"><a class="l" href="#436">436 </a>        <span class="php-keyword2">ob_implicit_flush</span>(<span class="php-num">0</span>);
-</span><span class="l" id="437"><a class="l" href="#437">437 </a>        <span class="php-keyword1">require</span> rex_stream::factory(<span class="php-var">$path</span>, <span class="php-var">$content</span>);
-</span><span class="l" id="438"><a class="l" href="#438">438 </a>        <span class="php-var">$CONTENT</span> = <span class="php-keyword2">ob_get_clean</span>();
+</span><span class="l" id="437"><a class="l" href="#437">437 </a>
+</span><span class="l" id="438"><a class="l" href="#438">438 </a>        <span class="php-var">$__stream</span> = rex_stream::factory(<span class="php-var">$path</span>, <span class="php-var">$content</span>);
 </span><span class="l" id="439"><a class="l" href="#439">439 </a>
-</span><span class="l" id="440"><a class="l" href="#440">440 </a>        <span class="php-keyword1">return</span> <span class="php-var">$CONTENT</span>;
-</span><span class="l" id="441"><a class="l" href="#441">441 </a>    }
-</span><span class="l" id="442"><a class="l" href="#442">442 </a>
-</span><span class="l" id="443"><a class="l" href="#443">443 </a>    <span class="php-comment">// ----- Modulvariablen werden ersetzt</span>
-</span><span class="l" id="444"><a class="l" href="#444">444 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_replaceVars" id="_replaceVars">replaceVars</a>(rex_sql <span class="php-var">$sql</span>, <span class="php-var">$content</span>)
-</span><span class="l" id="445"><a class="l" href="#445">445 </a>    {
-</span><span class="l" id="446"><a class="l" href="#446">446 </a>        <span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;replaceCommonVars(<span class="php-var">$content</span>);
-</span><span class="l" id="447"><a class="l" href="#447">447 </a>        <span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;replaceObjectVars(<span class="php-var">$sql</span>, <span class="php-var">$content</span>);
-</span><span class="l" id="448"><a class="l" href="#448">448 </a>        <span class="php-var">$content</span> = <span class="php-keyword2">str_replace</span>(
-</span><span class="l" id="449"><a class="l" href="#449">449 </a>            [
-</span><span class="l" id="450"><a class="l" href="#450">450 </a>                <span class="php-quote">'REX_MODULE_ID'</span>,
-</span><span class="l" id="451"><a class="l" href="#451">451 </a>                <span class="php-quote">'REX_SLICE_ID'</span>,
-</span><span class="l" id="452"><a class="l" href="#452">452 </a>                <span class="php-quote">'REX_CTYPE_ID'</span>,
-</span><span class="l" id="453"><a class="l" href="#453">453 </a>            ],
-</span><span class="l" id="454"><a class="l" href="#454">454 </a>            [
-</span><span class="l" id="455"><a class="l" href="#455">455 </a>                (int) <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'module_id'</span>),
-</span><span class="l" id="456"><a class="l" href="#456">456 </a>                (int) <span class="php-var">$sql</span>-&gt;getValue(rex::getTable(<span class="php-quote">'article_slice'</span>) . <span class="php-quote">'.id'</span>),
-</span><span class="l" id="457"><a class="l" href="#457">457 </a>                (int) <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'ctype_id'</span>),
-</span><span class="l" id="458"><a class="l" href="#458">458 </a>            ],
-</span><span class="l" id="459"><a class="l" href="#459">459 </a>            <span class="php-var">$content</span>
-</span><span class="l" id="460"><a class="l" href="#460">460 </a>        );
-</span><span class="l" id="461"><a class="l" href="#461">461 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
-</span><span class="l" id="462"><a class="l" href="#462">462 </a>    }
-</span><span class="l" id="463"><a class="l" href="#463">463 </a>
-</span><span class="l" id="464"><a class="l" href="#464">464 </a>    <span class="php-comment">// ----- REX_VAR Ersetzungen</span>
-</span><span class="l" id="465"><a class="l" href="#465">465 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_replaceObjectVars" id="_replaceObjectVars">replaceObjectVars</a>(rex_sql <span class="php-var">$sql</span>, <span class="php-var">$content</span>)
-</span><span class="l" id="466"><a class="l" href="#466">466 </a>    {
-</span><span class="l" id="467"><a class="l" href="#467">467 </a>        <span class="php-var">$sliceId</span> = <span class="php-var">$sql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
-</span><span class="l" id="468"><a class="l" href="#468">468 </a>
-</span><span class="l" id="469"><a class="l" href="#469">469 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode == <span class="php-quote">'edit'</span>) {
-</span><span class="l" id="470"><a class="l" href="#470">470 </a>            <span class="php-var">$env</span> = rex_var::ENV_BACKEND;
-</span><span class="l" id="471"><a class="l" href="#471">471 </a>            <span class="php-keyword1">if</span> ((<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$sliceId</span> == <span class="php-keyword1">null</span>) || (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'edit'</span> &amp;&amp; <span class="php-var">$sliceId</span> == <span class="php-var">$this</span>-&gt;slice_id)) {
-</span><span class="l" id="472"><a class="l" href="#472">472 </a>                <span class="php-var">$env</span> = <span class="php-var">$env</span> | rex_var::ENV_INPUT;
-</span><span class="l" id="473"><a class="l" href="#473">473 </a>            }
-</span><span class="l" id="474"><a class="l" href="#474">474 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="475"><a class="l" href="#475">475 </a>            <span class="php-var">$env</span> = rex_var::ENV_FRONTEND;
-</span><span class="l" id="476"><a class="l" href="#476">476 </a>        }
-</span><span class="l" id="477"><a class="l" href="#477">477 </a>        <span class="php-var">$content</span> = rex_var::parse(<span class="php-var">$content</span>, <span class="php-var">$env</span>, <span class="php-quote">'module'</span>, <span class="php-var">$sql</span>);
-</span><span class="l" id="478"><a class="l" href="#478">478 </a>
-</span><span class="l" id="479"><a class="l" href="#479">479 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
-</span><span class="l" id="480"><a class="l" href="#480">480 </a>    }
-</span><span class="l" id="481"><a class="l" href="#481">481 </a>
-</span><span class="l" id="482"><a class="l" href="#482">482 </a>    <span class="php-comment">// ---- Artikelweite globale variablen werden ersetzt</span>
-</span><span class="l" id="483"><a class="l" href="#483">483 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_replaceCommonVars" id="_replaceCommonVars">replaceCommonVars</a>(<span class="php-var">$content</span>, <span class="php-var">$template_id</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="484"><a class="l" href="#484">484 </a>    {
-</span><span class="l" id="485"><a class="l" href="#485">485 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$user_id" id="$user_id">$user_id</a></span> = <span class="php-keyword1">null</span>;
-</span><span class="l" id="486"><a class="l" href="#486">486 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$user_login" id="$user_login">$user_login</a></span> = <span class="php-keyword1">null</span>;
-</span><span class="l" id="487"><a class="l" href="#487">487 </a>
-</span><span class="l" id="488"><a class="l" href="#488">488 </a>        <span class="php-comment">// UserId gibts nur im Backend</span>
-</span><span class="l" id="489"><a class="l" href="#489">489 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$user_id</span> === <span class="php-keyword1">null</span>) {
-</span><span class="l" id="490"><a class="l" href="#490">490 </a>            <span class="php-keyword1">if</span> (rex::getUser()) {
-</span><span class="l" id="491"><a class="l" href="#491">491 </a>                <span class="php-var">$user_id</span> = rex::getUser()-&gt;getId();
-</span><span class="l" id="492"><a class="l" href="#492">492 </a>                <span class="php-var">$user_login</span> = rex::getUser()-&gt;getLogin();
-</span><span class="l" id="493"><a class="l" href="#493">493 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="494"><a class="l" href="#494">494 </a>                <span class="php-var">$user_id</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="495"><a class="l" href="#495">495 </a>                <span class="php-var">$user_login</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="496"><a class="l" href="#496">496 </a>            }
-</span><span class="l" id="497"><a class="l" href="#497">497 </a>        }
-</span><span class="l" id="498"><a class="l" href="#498">498 </a>
-</span><span class="l" id="499"><a class="l" href="#499">499 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$template_id</span>) {
-</span><span class="l" id="500"><a class="l" href="#500">500 </a>            <span class="php-var">$template_id</span> = <span class="php-var">$this</span>-&gt;getTemplateId();
-</span><span class="l" id="501"><a class="l" href="#501">501 </a>        }
-</span><span class="l" id="502"><a class="l" href="#502">502 </a>
-</span><span class="l" id="503"><a class="l" href="#503">503 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$search" id="$search">$search</a></span> = [
-</span><span class="l" id="504"><a class="l" href="#504">504 </a>            <span class="php-quote">'REX_ARTICLE_ID'</span>,
-</span><span class="l" id="505"><a class="l" href="#505">505 </a>            <span class="php-quote">'REX_CATEGORY_ID'</span>,
-</span><span class="l" id="506"><a class="l" href="#506">506 </a>            <span class="php-quote">'REX_CLANG_ID'</span>,
-</span><span class="l" id="507"><a class="l" href="#507">507 </a>            <span class="php-quote">'REX_TEMPLATE_ID'</span>,
-</span><span class="l" id="508"><a class="l" href="#508">508 </a>            <span class="php-quote">'REX_USER_ID'</span>,
-</span><span class="l" id="509"><a class="l" href="#509">509 </a>            <span class="php-quote">'REX_USER_LOGIN'</span>,
-</span><span class="l" id="510"><a class="l" href="#510">510 </a>        ];
-</span><span class="l" id="511"><a class="l" href="#511">511 </a>
-</span><span class="l" id="512"><a class="l" href="#512">512 </a>        <span class="php-var">$replace</span> = [
-</span><span class="l" id="513"><a class="l" href="#513">513 </a>            <span class="php-var">$this</span>-&gt;article_id,
-</span><span class="l" id="514"><a class="l" href="#514">514 </a>            <span class="php-var">$this</span>-&gt;category_id,
-</span><span class="l" id="515"><a class="l" href="#515">515 </a>            <span class="php-var">$this</span>-&gt;clang,
-</span><span class="l" id="516"><a class="l" href="#516">516 </a>            <span class="php-var">$template_id</span>,
-</span><span class="l" id="517"><a class="l" href="#517">517 </a>            <span class="php-var">$user_id</span>,
-</span><span class="l" id="518"><a class="l" href="#518">518 </a>            <span class="php-var">$user_login</span>,
-</span><span class="l" id="519"><a class="l" href="#519">519 </a>        ];
-</span><span class="l" id="520"><a class="l" href="#520">520 </a>
-</span><span class="l" id="521"><a class="l" href="#521">521 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">str_replace</span>(<span class="php-var">$search</span>, <span class="php-var">$replace</span>, <span class="php-var">$content</span>);
-</span><span class="l" id="522"><a class="l" href="#522">522 </a>    }
-</span><span class="l" id="523"><a class="l" href="#523">523 </a>
-</span><span class="l" id="524"><a class="l" href="#524">524 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_replaceLinks" id="_replaceLinks">replaceLinks</a>(<span class="php-var">$content</span>)
-</span><span class="l" id="525"><a class="l" href="#525">525 </a>    {
-</span><span class="l" id="526"><a class="l" href="#526">526 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">preg_replace_callback</span>(
-</span><span class="l" id="527"><a class="l" href="#527">527 </a>            <span class="php-quote">'@redaxo://(\d+)(?:-(\d+))?/?@i'</span>,
-</span><span class="l" id="528"><a class="l" href="#528">528 </a>            <span class="php-keyword1">function</span> (<span class="php-var">$matches</span>) {
-</span><span class="l" id="529"><a class="l" href="#529">529 </a>                <span class="php-keyword1">return</span> rex_getUrl(<span class="php-var">$matches</span>[<span class="php-num">1</span>], <span class="php-keyword1">isset</span>(<span class="php-var">$matches</span>[<span class="php-num">2</span>]) ? <span class="php-var">$matches</span>[<span class="php-num">2</span>] : (int) <span class="php-var">$this</span>-&gt;clang);
-</span><span class="l" id="530"><a class="l" href="#530">530 </a>            },
-</span><span class="l" id="531"><a class="l" href="#531">531 </a>            <span class="php-var">$content</span>
-</span><span class="l" id="532"><a class="l" href="#532">532 </a>        );
-</span><span class="l" id="533"><a class="l" href="#533">533 </a>    }
-</span><span class="l" id="534"><a class="l" href="#534">534 </a>}
-</span><span class="l" id="535"><a class="l" href="#535">535 </a></span></code></pre>
+</span><span class="l" id="440"><a class="l" href="#440">440 </a>        <span class="php-var">$sandbox</span> = <span class="php-keyword1">function</span> () <span class="php-keyword1">use</span> (<span class="php-var">$__stream</span>) {
+</span><span class="l" id="441"><a class="l" href="#441">441 </a>            <span class="php-keyword1">require</span> <span class="php-var">$__stream</span>;
+</span><span class="l" id="442"><a class="l" href="#442">442 </a>        };
+</span><span class="l" id="443"><a class="l" href="#443">443 </a>        <span class="php-var">$sandbox</span>();
+</span><span class="l" id="444"><a class="l" href="#444">444 </a>
+</span><span class="l" id="445"><a class="l" href="#445">445 </a>        <span class="php-var">$CONTENT</span> = <span class="php-keyword2">ob_get_clean</span>();
+</span><span class="l" id="446"><a class="l" href="#446">446 </a>
+</span><span class="l" id="447"><a class="l" href="#447">447 </a>        <span class="php-keyword1">return</span> <span class="php-var">$CONTENT</span>;
+</span><span class="l" id="448"><a class="l" href="#448">448 </a>    }
+</span><span class="l" id="449"><a class="l" href="#449">449 </a>
+</span><span class="l" id="450"><a class="l" href="#450">450 </a>    <span class="php-comment">// ----- Modulvariablen werden ersetzt</span>
+</span><span class="l" id="451"><a class="l" href="#451">451 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_replaceVars" id="_replaceVars">replaceVars</a>(rex_sql <span class="php-var">$sql</span>, <span class="php-var">$content</span>)
+</span><span class="l" id="452"><a class="l" href="#452">452 </a>    {
+</span><span class="l" id="453"><a class="l" href="#453">453 </a>        <span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;replaceCommonVars(<span class="php-var">$content</span>);
+</span><span class="l" id="454"><a class="l" href="#454">454 </a>        <span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;replaceObjectVars(<span class="php-var">$sql</span>, <span class="php-var">$content</span>);
+</span><span class="l" id="455"><a class="l" href="#455">455 </a>        <span class="php-var">$content</span> = <span class="php-keyword2">str_replace</span>(
+</span><span class="l" id="456"><a class="l" href="#456">456 </a>            [
+</span><span class="l" id="457"><a class="l" href="#457">457 </a>                <span class="php-quote">'REX_MODULE_ID'</span>,
+</span><span class="l" id="458"><a class="l" href="#458">458 </a>                <span class="php-quote">'REX_SLICE_ID'</span>,
+</span><span class="l" id="459"><a class="l" href="#459">459 </a>                <span class="php-quote">'REX_CTYPE_ID'</span>,
+</span><span class="l" id="460"><a class="l" href="#460">460 </a>            ],
+</span><span class="l" id="461"><a class="l" href="#461">461 </a>            [
+</span><span class="l" id="462"><a class="l" href="#462">462 </a>                (int) <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'module_id'</span>),
+</span><span class="l" id="463"><a class="l" href="#463">463 </a>                (int) <span class="php-var">$sql</span>-&gt;getValue(rex::getTable(<span class="php-quote">'article_slice'</span>) . <span class="php-quote">'.id'</span>),
+</span><span class="l" id="464"><a class="l" href="#464">464 </a>                (int) <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'ctype_id'</span>),
+</span><span class="l" id="465"><a class="l" href="#465">465 </a>            ],
+</span><span class="l" id="466"><a class="l" href="#466">466 </a>            <span class="php-var">$content</span>
+</span><span class="l" id="467"><a class="l" href="#467">467 </a>        );
+</span><span class="l" id="468"><a class="l" href="#468">468 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span class="l" id="469"><a class="l" href="#469">469 </a>    }
+</span><span class="l" id="470"><a class="l" href="#470">470 </a>
+</span><span class="l" id="471"><a class="l" href="#471">471 </a>    <span class="php-comment">// ----- REX_VAR Ersetzungen</span>
+</span><span class="l" id="472"><a class="l" href="#472">472 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_replaceObjectVars" id="_replaceObjectVars">replaceObjectVars</a>(rex_sql <span class="php-var">$sql</span>, <span class="php-var">$content</span>)
+</span><span class="l" id="473"><a class="l" href="#473">473 </a>    {
+</span><span class="l" id="474"><a class="l" href="#474">474 </a>        <span class="php-var">$sliceId</span> = <span class="php-var">$sql</span>-&gt;getValue(rex::getTablePrefix() . <span class="php-quote">'article_slice.id'</span>);
+</span><span class="l" id="475"><a class="l" href="#475">475 </a>
+</span><span class="l" id="476"><a class="l" href="#476">476 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;mode == <span class="php-quote">'edit'</span>) {
+</span><span class="l" id="477"><a class="l" href="#477">477 </a>            <span class="php-var">$env</span> = rex_var::ENV_BACKEND;
+</span><span class="l" id="478"><a class="l" href="#478">478 </a>            <span class="php-keyword1">if</span> ((<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'add'</span> &amp;&amp; <span class="php-var">$sliceId</span> == <span class="php-keyword1">null</span>) || (<span class="php-var">$this</span>-&gt;<span class="php-keyword1">function</span> == <span class="php-quote">'edit'</span> &amp;&amp; <span class="php-var">$sliceId</span> == <span class="php-var">$this</span>-&gt;slice_id)) {
+</span><span class="l" id="479"><a class="l" href="#479">479 </a>                <span class="php-var">$env</span> = <span class="php-var">$env</span> | rex_var::ENV_INPUT;
+</span><span class="l" id="480"><a class="l" href="#480">480 </a>            }
+</span><span class="l" id="481"><a class="l" href="#481">481 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="482"><a class="l" href="#482">482 </a>            <span class="php-var">$env</span> = rex_var::ENV_FRONTEND;
+</span><span class="l" id="483"><a class="l" href="#483">483 </a>        }
+</span><span class="l" id="484"><a class="l" href="#484">484 </a>        <span class="php-var">$content</span> = rex_var::parse(<span class="php-var">$content</span>, <span class="php-var">$env</span>, <span class="php-quote">'module'</span>, <span class="php-var">$sql</span>);
+</span><span class="l" id="485"><a class="l" href="#485">485 </a>
+</span><span class="l" id="486"><a class="l" href="#486">486 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span class="l" id="487"><a class="l" href="#487">487 </a>    }
+</span><span class="l" id="488"><a class="l" href="#488">488 </a>
+</span><span class="l" id="489"><a class="l" href="#489">489 </a>    <span class="php-comment">// ---- Artikelweite globale variablen werden ersetzt</span>
+</span><span class="l" id="490"><a class="l" href="#490">490 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_replaceCommonVars" id="_replaceCommonVars">replaceCommonVars</a>(<span class="php-var">$content</span>, <span class="php-var">$template_id</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="491"><a class="l" href="#491">491 </a>    {
+</span><span class="l" id="492"><a class="l" href="#492">492 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$user_id" id="$user_id">$user_id</a></span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="493"><a class="l" href="#493">493 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$user_login" id="$user_login">$user_login</a></span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="494"><a class="l" href="#494">494 </a>
+</span><span class="l" id="495"><a class="l" href="#495">495 </a>        <span class="php-comment">// UserId gibts nur im Backend</span>
+</span><span class="l" id="496"><a class="l" href="#496">496 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$user_id</span> === <span class="php-keyword1">null</span>) {
+</span><span class="l" id="497"><a class="l" href="#497">497 </a>            <span class="php-keyword1">if</span> (rex::getUser()) {
+</span><span class="l" id="498"><a class="l" href="#498">498 </a>                <span class="php-var">$user_id</span> = rex::getUser()-&gt;getId();
+</span><span class="l" id="499"><a class="l" href="#499">499 </a>                <span class="php-var">$user_login</span> = rex::getUser()-&gt;getLogin();
+</span><span class="l" id="500"><a class="l" href="#500">500 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="501"><a class="l" href="#501">501 </a>                <span class="php-var">$user_id</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="502"><a class="l" href="#502">502 </a>                <span class="php-var">$user_login</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="503"><a class="l" href="#503">503 </a>            }
+</span><span class="l" id="504"><a class="l" href="#504">504 </a>        }
+</span><span class="l" id="505"><a class="l" href="#505">505 </a>
+</span><span class="l" id="506"><a class="l" href="#506">506 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$template_id</span>) {
+</span><span class="l" id="507"><a class="l" href="#507">507 </a>            <span class="php-var">$template_id</span> = <span class="php-var">$this</span>-&gt;getTemplateId();
+</span><span class="l" id="508"><a class="l" href="#508">508 </a>        }
+</span><span class="l" id="509"><a class="l" href="#509">509 </a>
+</span><span class="l" id="510"><a class="l" href="#510">510 </a>        <span class="php-keyword1">static</span> <span class="php-var"><a href="#$search" id="$search">$search</a></span> = [
+</span><span class="l" id="511"><a class="l" href="#511">511 </a>            <span class="php-quote">'REX_ARTICLE_ID'</span>,
+</span><span class="l" id="512"><a class="l" href="#512">512 </a>            <span class="php-quote">'REX_CATEGORY_ID'</span>,
+</span><span class="l" id="513"><a class="l" href="#513">513 </a>            <span class="php-quote">'REX_CLANG_ID'</span>,
+</span><span class="l" id="514"><a class="l" href="#514">514 </a>            <span class="php-quote">'REX_TEMPLATE_ID'</span>,
+</span><span class="l" id="515"><a class="l" href="#515">515 </a>            <span class="php-quote">'REX_USER_ID'</span>,
+</span><span class="l" id="516"><a class="l" href="#516">516 </a>            <span class="php-quote">'REX_USER_LOGIN'</span>,
+</span><span class="l" id="517"><a class="l" href="#517">517 </a>        ];
+</span><span class="l" id="518"><a class="l" href="#518">518 </a>
+</span><span class="l" id="519"><a class="l" href="#519">519 </a>        <span class="php-var">$replace</span> = [
+</span><span class="l" id="520"><a class="l" href="#520">520 </a>            <span class="php-var">$this</span>-&gt;article_id,
+</span><span class="l" id="521"><a class="l" href="#521">521 </a>            <span class="php-var">$this</span>-&gt;category_id,
+</span><span class="l" id="522"><a class="l" href="#522">522 </a>            <span class="php-var">$this</span>-&gt;clang,
+</span><span class="l" id="523"><a class="l" href="#523">523 </a>            <span class="php-var">$template_id</span>,
+</span><span class="l" id="524"><a class="l" href="#524">524 </a>            <span class="php-var">$user_id</span>,
+</span><span class="l" id="525"><a class="l" href="#525">525 </a>            <span class="php-var">$user_login</span>,
+</span><span class="l" id="526"><a class="l" href="#526">526 </a>        ];
+</span><span class="l" id="527"><a class="l" href="#527">527 </a>
+</span><span class="l" id="528"><a class="l" href="#528">528 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">str_replace</span>(<span class="php-var">$search</span>, <span class="php-var">$replace</span>, <span class="php-var">$content</span>);
+</span><span class="l" id="529"><a class="l" href="#529">529 </a>    }
+</span><span class="l" id="530"><a class="l" href="#530">530 </a>
+</span><span class="l" id="531"><a class="l" href="#531">531 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_replaceLinks" id="_replaceLinks">replaceLinks</a>(<span class="php-var">$content</span>)
+</span><span class="l" id="532"><a class="l" href="#532">532 </a>    {
+</span><span class="l" id="533"><a class="l" href="#533">533 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">preg_replace_callback</span>(
+</span><span class="l" id="534"><a class="l" href="#534">534 </a>            <span class="php-quote">'@redaxo://(\d+)(?:-(\d+))?/?@i'</span>,
+</span><span class="l" id="535"><a class="l" href="#535">535 </a>            <span class="php-keyword1">function</span> (<span class="php-var">$matches</span>) {
+</span><span class="l" id="536"><a class="l" href="#536">536 </a>                <span class="php-keyword1">return</span> rex_getUrl(<span class="php-var">$matches</span>[<span class="php-num">1</span>], <span class="php-keyword1">isset</span>(<span class="php-var">$matches</span>[<span class="php-num">2</span>]) ? <span class="php-var">$matches</span>[<span class="php-num">2</span>] : (int) <span class="php-var">$this</span>-&gt;clang);
+</span><span class="l" id="537"><a class="l" href="#537">537 </a>            },
+</span><span class="l" id="538"><a class="l" href="#538">538 </a>            <span class="php-var">$content</span>
+</span><span class="l" id="539"><a class="l" href="#539">539 </a>        );
+</span><span class="l" id="540"><a class="l" href="#540">540 </a>    }
+</span><span class="l" id="541"><a class="l" href="#541">541 </a>}
+</span><span class="l" id="542"><a class="l" href="#542">542 </a></span></code></pre>
  </body>
 </html>

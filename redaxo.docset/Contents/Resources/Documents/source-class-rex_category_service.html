@@ -548,39 +548,45 @@
 </span><span class="l" id="539"><a class="l" href="#539">539 </a>
 </span><span class="l" id="540"><a class="l" href="#540">540 </a>        <span class="php-keyword1">foreach</span> (rex_clang::getAllIds() <span class="php-keyword1">as</span> <span class="php-var">$clang</span>) {
 </span><span class="l" id="541"><a class="l" href="#541">541 </a>            self::newCatPrio(<span class="php-var">$fcat</span>-&gt;getValue(<span class="php-quote">'parent_id'</span>), <span class="php-var">$clang</span>, <span class="php-num">0</span>, <span class="php-num">1</span>);
-</span><span class="l" id="542"><a class="l" href="#542">542 </a>        }
-</span><span class="l" id="543"><a class="l" href="#543">543 </a>
-</span><span class="l" id="544"><a class="l" href="#544">544 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
-</span><span class="l" id="545"><a class="l" href="#545">545 </a>    }
-</span><span class="l" id="546"><a class="l" href="#546">546 </a>
-</span><span class="l" id="547"><a class="l" href="#547">547 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="548"><a class="l" href="#548">548 </a><span class="php-comment">     * Checks whether the required array key $keyName isset.
-</span></span><span class="l" id="549"><a class="l" href="#549">549 </a><span class="php-comment">     *
-</span></span><span class="l" id="550"><a class="l" href="#550">550 </a><span class="php-comment">     * @param array  $array   The array
-</span></span><span class="l" id="551"><a class="l" href="#551">551 </a><span class="php-comment">     * @param string $keyName The key
-</span></span><span class="l" id="552"><a class="l" href="#552">552 </a><span class="php-comment">     *
-</span></span><span class="l" id="553"><a class="l" href="#553">553 </a><span class="php-comment">     * @throws rex_api_exception
-</span></span><span class="l" id="554"><a class="l" href="#554">554 </a><span class="php-comment">     */</span>
-</span><span class="l" id="555"><a class="l" href="#555">555 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_reqKey" id="_reqKey">reqKey</a>(<span class="php-keyword1">array</span> <span class="php-var">$array</span>, <span class="php-var">$keyName</span>)
-</span><span class="l" id="556"><a class="l" href="#556">556 </a>    {
-</span><span class="l" id="557"><a class="l" href="#557">557 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$array</span>[<span class="php-var">$keyName</span>])) {
-</span><span class="l" id="558"><a class="l" href="#558">558 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_api_exception(<span class="php-quote">'Missing required parameter "'</span> . <span class="php-var">$keyName</span> . <span class="php-quote">'"!'</span>);
-</span><span class="l" id="559"><a class="l" href="#559">559 </a>        }
-</span><span class="l" id="560"><a class="l" href="#560">560 </a>    }
-</span><span class="l" id="561"><a class="l" href="#561">561 </a>
-</span><span class="l" id="562"><a class="l" href="#562">562 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getUser" id="_getUser">getUser</a>()
-</span><span class="l" id="563"><a class="l" href="#563">563 </a>    {
-</span><span class="l" id="564"><a class="l" href="#564">564 </a>        <span class="php-keyword1">if</span> (rex::getUser()) {
-</span><span class="l" id="565"><a class="l" href="#565">565 </a>            <span class="php-keyword1">return</span> rex::getUser()-&gt;getLogin();
-</span><span class="l" id="566"><a class="l" href="#566">566 </a>        }
+</span><span class="l" id="542"><a class="l" href="#542">542 </a>
+</span><span class="l" id="543"><a class="l" href="#543">543 </a>            rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'CAT_MOVED'</span>, <span class="php-keyword1">null</span>, [
+</span><span class="l" id="544"><a class="l" href="#544">544 </a>                <span class="php-quote">'id'</span> =&gt; <span class="php-var">$from_cat</span>,
+</span><span class="l" id="545"><a class="l" href="#545">545 </a>                <span class="php-quote">'clang_id'</span> =&gt; <span class="php-var">$clang</span>,
+</span><span class="l" id="546"><a class="l" href="#546">546 </a>                <span class="php-quote">'category_id'</span> =&gt; <span class="php-var">$to_cat</span>,
+</span><span class="l" id="547"><a class="l" href="#547">547 </a>            ]));
+</span><span class="l" id="548"><a class="l" href="#548">548 </a>        }
+</span><span class="l" id="549"><a class="l" href="#549">549 </a>
+</span><span class="l" id="550"><a class="l" href="#550">550 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span class="l" id="551"><a class="l" href="#551">551 </a>    }
+</span><span class="l" id="552"><a class="l" href="#552">552 </a>
+</span><span class="l" id="553"><a class="l" href="#553">553 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="554"><a class="l" href="#554">554 </a><span class="php-comment">     * Checks whether the required array key $keyName isset.
+</span></span><span class="l" id="555"><a class="l" href="#555">555 </a><span class="php-comment">     *
+</span></span><span class="l" id="556"><a class="l" href="#556">556 </a><span class="php-comment">     * @param array  $array   The array
+</span></span><span class="l" id="557"><a class="l" href="#557">557 </a><span class="php-comment">     * @param string $keyName The key
+</span></span><span class="l" id="558"><a class="l" href="#558">558 </a><span class="php-comment">     *
+</span></span><span class="l" id="559"><a class="l" href="#559">559 </a><span class="php-comment">     * @throws rex_api_exception
+</span></span><span class="l" id="560"><a class="l" href="#560">560 </a><span class="php-comment">     */</span>
+</span><span class="l" id="561"><a class="l" href="#561">561 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_reqKey" id="_reqKey">reqKey</a>(<span class="php-keyword1">array</span> <span class="php-var">$array</span>, <span class="php-var">$keyName</span>)
+</span><span class="l" id="562"><a class="l" href="#562">562 </a>    {
+</span><span class="l" id="563"><a class="l" href="#563">563 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$array</span>[<span class="php-var">$keyName</span>])) {
+</span><span class="l" id="564"><a class="l" href="#564">564 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_api_exception(<span class="php-quote">'Missing required parameter "'</span> . <span class="php-var">$keyName</span> . <span class="php-quote">'"!'</span>);
+</span><span class="l" id="565"><a class="l" href="#565">565 </a>        }
+</span><span class="l" id="566"><a class="l" href="#566">566 </a>    }
 </span><span class="l" id="567"><a class="l" href="#567">567 </a>
-</span><span class="l" id="568"><a class="l" href="#568">568 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">method_exists</span>(rex::<span class="php-keyword1">class</span>, <span class="php-quote">'getEnvironment'</span>)) {
-</span><span class="l" id="569"><a class="l" href="#569">569 </a>            <span class="php-keyword1">return</span> rex::getEnvironment();
-</span><span class="l" id="570"><a class="l" href="#570">570 </a>        }
-</span><span class="l" id="571"><a class="l" href="#571">571 </a>
-</span><span class="l" id="572"><a class="l" href="#572">572 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'frontend'</span>;
-</span><span class="l" id="573"><a class="l" href="#573">573 </a>    }
-</span><span class="l" id="574"><a class="l" href="#574">574 </a>}
-</span><span class="l" id="575"><a class="l" href="#575">575 </a></span></code></pre>
+</span><span class="l" id="568"><a class="l" href="#568">568 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getUser" id="_getUser">getUser</a>()
+</span><span class="l" id="569"><a class="l" href="#569">569 </a>    {
+</span><span class="l" id="570"><a class="l" href="#570">570 </a>        <span class="php-keyword1">if</span> (rex::getUser()) {
+</span><span class="l" id="571"><a class="l" href="#571">571 </a>            <span class="php-keyword1">return</span> rex::getUser()-&gt;getLogin();
+</span><span class="l" id="572"><a class="l" href="#572">572 </a>        }
+</span><span class="l" id="573"><a class="l" href="#573">573 </a>
+</span><span class="l" id="574"><a class="l" href="#574">574 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">method_exists</span>(rex::<span class="php-keyword1">class</span>, <span class="php-quote">'getEnvironment'</span>)) {
+</span><span class="l" id="575"><a class="l" href="#575">575 </a>            <span class="php-keyword1">return</span> rex::getEnvironment();
+</span><span class="l" id="576"><a class="l" href="#576">576 </a>        }
+</span><span class="l" id="577"><a class="l" href="#577">577 </a>
+</span><span class="l" id="578"><a class="l" href="#578">578 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'frontend'</span>;
+</span><span class="l" id="579"><a class="l" href="#579">579 </a>    }
+</span><span class="l" id="580"><a class="l" href="#580">580 </a>}
+</span><span class="l" id="581"><a class="l" href="#581">581 </a></span></code></pre>
  </body>
 </html>

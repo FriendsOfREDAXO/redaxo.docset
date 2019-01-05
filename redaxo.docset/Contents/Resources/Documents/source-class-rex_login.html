@@ -10,7 +10,7 @@
   <pre id="source"><code><span class="l" id="1"><a class="l" href="#1">  1 </a><span class="xlang">&lt;?php</span>
 </span><span class="l" id="2"><a class="l" href="#2">  2 </a>
 </span><span class="l" id="3"><a class="l" href="#3">  3 </a><span class="php-comment">/**
-</span></span><span class="l" id="4"><a class="l" href="#4">  4 </a><span class="php-comment"> * @package redaxo\core
+</span></span><span class="l" id="4"><a class="l" href="#4">  4 </a><span class="php-comment"> * @package redaxo\core\login
 </span></span><span class="l" id="5"><a class="l" href="#5">  5 </a><span class="php-comment"> */</span>
 </span><span class="l" id="6"><a class="l" href="#6">  6 </a><span class="php-keyword1">class</span> <a href="#rex_login" id="rex_login">rex_login</a>
 </span><span class="l" id="7"><a class="l" href="#7">  7 </a>{
@@ -402,98 +402,103 @@
 </span><span class="l" id="393"><a class="l" href="#393">393 </a>                <span class="php-var">$cookieParams</span>[<span class="php-quote">'httponly'</span>]
 </span><span class="l" id="394"><a class="l" href="#394">394 </a>            );
 </span><span class="l" id="395"><a class="l" href="#395">395 </a>
-</span><span class="l" id="396"><a class="l" href="#396">396 </a>            <span class="php-keyword1">if</span> (!@<span class="php-keyword2">session_start</span>()) {
-</span><span class="l" id="397"><a class="l" href="#397">397 </a>                <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
-</span><span class="l" id="398"><a class="l" href="#398">398 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$error</span>) {
-</span><span class="l" id="399"><a class="l" href="#399">399 </a>                    rex_error_handler::handleError(<span class="php-var">$error</span>[<span class="php-quote">'type'</span>], <span class="php-var">$error</span>[<span class="php-quote">'message'</span>], <span class="php-var">$error</span>[<span class="php-quote">'file'</span>], <span class="php-var">$error</span>[<span class="php-quote">'line'</span>]);
-</span><span class="l" id="400"><a class="l" href="#400">400 </a>                } <span class="php-keyword1">else</span> {
-</span><span class="l" id="401"><a class="l" href="#401">401 </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(<span class="php-quote">'Unable to start session!'</span>);
-</span><span class="l" id="402"><a class="l" href="#402">402 </a>                }
-</span><span class="l" id="403"><a class="l" href="#403">403 </a>            }
-</span><span class="l" id="404"><a class="l" href="#404">404 </a>
-</span><span class="l" id="405"><a class="l" href="#405">405 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$cookieParams</span>[<span class="php-quote">'samesite'</span>]) {
-</span><span class="l" id="406"><a class="l" href="#406">406 </a>                self::rewriteSessionCookie(<span class="php-var">$cookieParams</span>[<span class="php-quote">'samesite'</span>]);
-</span><span class="l" id="407"><a class="l" href="#407">407 </a>            }
-</span><span class="l" id="408"><a class="l" href="#408">408 </a>        }
-</span><span class="l" id="409"><a class="l" href="#409">409 </a>    }
-</span><span class="l" id="410"><a class="l" href="#410">410 </a>
-</span><span class="l" id="411"><a class="l" href="#411">411 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="412"><a class="l" href="#412">412 </a><span class="php-comment">     * Einstellen der Cookie Paramter bevor die session gestartet wird.
-</span></span><span class="l" id="413"><a class="l" href="#413">413 </a><span class="php-comment">     *
-</span></span><span class="l" id="414"><a class="l" href="#414">414 </a><span class="php-comment">     * @return array
-</span></span><span class="l" id="415"><a class="l" href="#415">415 </a><span class="php-comment">     */</span>
-</span><span class="l" id="416"><a class="l" href="#416">416 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getCookieParams" id="_getCookieParams">getCookieParams</a>()
-</span><span class="l" id="417"><a class="l" href="#417">417 </a>    {
-</span><span class="l" id="418"><a class="l" href="#418">418 </a>        <span class="php-var">$cookieParams</span> = <span class="php-keyword2">session_get_cookie_params</span>();
-</span><span class="l" id="419"><a class="l" href="#419">419 </a>
-</span><span class="l" id="420"><a class="l" href="#420">420 </a>        <span class="php-var">$key</span> = rex::isBackend() ? <span class="php-quote">'backend'</span> : <span class="php-quote">'frontend'</span>;
-</span><span class="l" id="421"><a class="l" href="#421">421 </a>        <span class="php-var">$sessionConfig</span> = rex::getProperty(<span class="php-quote">'session'</span>);
+</span><span class="l" id="396"><a class="l" href="#396">396 </a>            <span class="php-var">$started</span> = rex_timer::measure(__METHOD__, <span class="php-keyword1">function</span> () {
+</span><span class="l" id="397"><a class="l" href="#397">397 </a>                <span class="php-keyword1">return</span> @<span class="php-keyword2">session_start</span>();
+</span><span class="l" id="398"><a class="l" href="#398">398 </a>            });
+</span><span class="l" id="399"><a class="l" href="#399">399 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$started</span>) {
+</span><span class="l" id="400"><a class="l" href="#400">400 </a>                <span class="php-var">$error</span> = <span class="php-keyword2">error_get_last</span>();
+</span><span class="l" id="401"><a class="l" href="#401">401 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$error</span>) {
+</span><span class="l" id="402"><a class="l" href="#402">402 </a>                    rex_error_handler::handleError(<span class="php-var">$error</span>[<span class="php-quote">'type'</span>], <span class="php-var">$error</span>[<span class="php-quote">'message'</span>], <span class="php-var">$error</span>[<span class="php-quote">'file'</span>], <span class="php-var">$error</span>[<span class="php-quote">'line'</span>]);
+</span><span class="l" id="403"><a class="l" href="#403">403 </a>                } <span class="php-keyword1">else</span> {
+</span><span class="l" id="404"><a class="l" href="#404">404 </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_exception(<span class="php-quote">'Unable to start session!'</span>);
+</span><span class="l" id="405"><a class="l" href="#405">405 </a>                }
+</span><span class="l" id="406"><a class="l" href="#406">406 </a>            }
+</span><span class="l" id="407"><a class="l" href="#407">407 </a>
+</span><span class="l" id="408"><a class="l" href="#408">408 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$cookieParams</span>[<span class="php-quote">'samesite'</span>]) {
+</span><span class="l" id="409"><a class="l" href="#409">409 </a>                self::rewriteSessionCookie(<span class="php-var">$cookieParams</span>[<span class="php-quote">'samesite'</span>]);
+</span><span class="l" id="410"><a class="l" href="#410">410 </a>            }
+</span><span class="l" id="411"><a class="l" href="#411">411 </a>        }
+</span><span class="l" id="412"><a class="l" href="#412">412 </a>    }
+</span><span class="l" id="413"><a class="l" href="#413">413 </a>
+</span><span class="l" id="414"><a class="l" href="#414">414 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="415"><a class="l" href="#415">415 </a><span class="php-comment">     * Einstellen der Cookie Paramter bevor die session gestartet wird.
+</span></span><span class="l" id="416"><a class="l" href="#416">416 </a><span class="php-comment">     *
+</span></span><span class="l" id="417"><a class="l" href="#417">417 </a><span class="php-comment">     * @return array
+</span></span><span class="l" id="418"><a class="l" href="#418">418 </a><span class="php-comment">     */</span>
+</span><span class="l" id="419"><a class="l" href="#419">419 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getCookieParams" id="_getCookieParams">getCookieParams</a>()
+</span><span class="l" id="420"><a class="l" href="#420">420 </a>    {
+</span><span class="l" id="421"><a class="l" href="#421">421 </a>        <span class="php-var">$cookieParams</span> = <span class="php-keyword2">session_get_cookie_params</span>();
 </span><span class="l" id="422"><a class="l" href="#422">422 </a>
-</span><span class="l" id="423"><a class="l" href="#423">423 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$sessionConfig</span>[<span class="php-var">$key</span>][<span class="php-quote">'cookie'</span>] <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="424"><a class="l" href="#424">424 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$value</span> !== <span class="php-keyword1">null</span>) {
-</span><span class="l" id="425"><a class="l" href="#425">425 </a>                <span class="php-var">$cookieParams</span>[<span class="php-var">$name</span>] = <span class="php-var">$value</span>;
-</span><span class="l" id="426"><a class="l" href="#426">426 </a>            }
-</span><span class="l" id="427"><a class="l" href="#427">427 </a>        }
-</span><span class="l" id="428"><a class="l" href="#428">428 </a>
-</span><span class="l" id="429"><a class="l" href="#429">429 </a>        <span class="php-keyword1">return</span> <span class="php-var">$cookieParams</span>;
-</span><span class="l" id="430"><a class="l" href="#430">430 </a>    }
-</span><span class="l" id="431"><a class="l" href="#431">431 </a>
-</span><span class="l" id="432"><a class="l" href="#432">432 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="433"><a class="l" href="#433">433 </a><span class="php-comment">     * php does not natively support SameSite for cookies yet,
-</span></span><span class="l" id="434"><a class="l" href="#434">434 </a><span class="php-comment">     * rewrite the session cookie manually.
-</span></span><span class="l" id="435"><a class="l" href="#435">435 </a><span class="php-comment">     *
-</span></span><span class="l" id="436"><a class="l" href="#436">436 </a><span class="php-comment">     * see https://wiki.php.net/rfc/same-site-cookie
-</span></span><span class="l" id="437"><a class="l" href="#437">437 </a><span class="php-comment">     *
-</span></span><span class="l" id="438"><a class="l" href="#438">438 </a><span class="php-comment">     * @param "Strict"|"Lax" $sameSite
-</span></span><span class="l" id="439"><a class="l" href="#439">439 </a><span class="php-comment">     */</span>
-</span><span class="l" id="440"><a class="l" href="#440">440 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_rewriteSessionCookie" id="_rewriteSessionCookie">rewriteSessionCookie</a>(<span class="php-var">$sameSite</span>)
-</span><span class="l" id="441"><a class="l" href="#441">441 </a>    {
-</span><span class="l" id="442"><a class="l" href="#442">442 </a>        <span class="php-var">$cookiesHeaders</span> = [];
-</span><span class="l" id="443"><a class="l" href="#443">443 </a>
-</span><span class="l" id="444"><a class="l" href="#444">444 </a>        <span class="php-comment">// since header_remove() will remove all sent cookies, we need to collect all of them,</span>
-</span><span class="l" id="445"><a class="l" href="#445">445 </a>        <span class="php-comment">// rewrite only the session cookie and send all cookies again.</span>
-</span><span class="l" id="446"><a class="l" href="#446">446 </a>        <span class="php-var">$cookieHeadersPrefix</span> = <span class="php-quote">'Set-Cookie: '</span>;
-</span><span class="l" id="447"><a class="l" href="#447">447 </a>        <span class="php-var">$sessionCookiePrefix</span> = <span class="php-quote">'Set-Cookie: '</span>. <span class="php-keyword2">session_name</span>() .<span class="php-quote">'='</span>;
-</span><span class="l" id="448"><a class="l" href="#448">448 </a>        <span class="php-keyword1">foreach</span> (<span class="php-keyword2">headers_list</span>() <span class="php-keyword1">as</span> <span class="php-var">$rawHeader</span>) {
-</span><span class="l" id="449"><a class="l" href="#449">449 </a>            <span class="php-comment">// rewrite the session cookie</span>
-</span><span class="l" id="450"><a class="l" href="#450">450 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$rawHeader</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(<span class="php-var">$sessionCookiePrefix</span>)) === <span class="php-var">$sessionCookiePrefix</span>) {
-</span><span class="l" id="451"><a class="l" href="#451">451 </a>                <span class="php-var">$rawHeader</span> .= <span class="php-quote">'; SameSite='</span>. <span class="php-var">$sameSite</span>;
-</span><span class="l" id="452"><a class="l" href="#452">452 </a>            }
-</span><span class="l" id="453"><a class="l" href="#453">453 </a>            <span class="php-comment">// collect all cookies</span>
-</span><span class="l" id="454"><a class="l" href="#454">454 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$rawHeader</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(<span class="php-var">$cookieHeadersPrefix</span>)) === <span class="php-var">$cookieHeadersPrefix</span>) {
-</span><span class="l" id="455"><a class="l" href="#455">455 </a>                <span class="php-var">$cookiesHeaders</span>[] = <span class="php-var">$rawHeader</span>;
-</span><span class="l" id="456"><a class="l" href="#456">456 </a>            }
-</span><span class="l" id="457"><a class="l" href="#457">457 </a>        }
-</span><span class="l" id="458"><a class="l" href="#458">458 </a>
-</span><span class="l" id="459"><a class="l" href="#459">459 </a>        <span class="php-comment">// remove all cookies</span>
-</span><span class="l" id="460"><a class="l" href="#460">460 </a>        <span class="php-keyword2">header_remove</span>(<span class="php-quote">'Set-Cookie'</span>);
-</span><span class="l" id="461"><a class="l" href="#461">461 </a>
-</span><span class="l" id="462"><a class="l" href="#462">462 </a>        <span class="php-comment">// re-add all (inl. the rewritten session cookie)</span>
-</span><span class="l" id="463"><a class="l" href="#463">463 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$cookiesHeaders</span> <span class="php-keyword1">as</span> <span class="php-var">$rawHeader</span>) {
-</span><span class="l" id="464"><a class="l" href="#464">464 </a>            <span class="php-keyword2">header</span>(<span class="php-var">$rawHeader</span>);
-</span><span class="l" id="465"><a class="l" href="#465">465 </a>        }
-</span><span class="l" id="466"><a class="l" href="#466">466 </a>    }
-</span><span class="l" id="467"><a class="l" href="#467">467 </a>
-</span><span class="l" id="468"><a class="l" href="#468">468 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="469"><a class="l" href="#469">469 </a><span class="php-comment">     * Verschlüsselt den übergebnen String.
-</span></span><span class="l" id="470"><a class="l" href="#470">470 </a><span class="php-comment">     */</span>
-</span><span class="l" id="471"><a class="l" href="#471">471 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_passwordHash" id="_passwordHash">passwordHash</a>(<span class="php-var">$password</span>, <span class="php-var">$isPreHashed</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="472"><a class="l" href="#472">472 </a>    {
-</span><span class="l" id="473"><a class="l" href="#473">473 </a>        <span class="php-var">$password</span> = <span class="php-var">$isPreHashed</span> ? <span class="php-var">$password</span> : <span class="php-keyword2">sha1</span>(<span class="php-var">$password</span>);
-</span><span class="l" id="474"><a class="l" href="#474">474 </a>        <span class="php-keyword1">return</span> password_hash(<span class="php-var">$password</span>, PASSWORD_DEFAULT);
-</span><span class="l" id="475"><a class="l" href="#475">475 </a>    }
-</span><span class="l" id="476"><a class="l" href="#476">476 </a>
-</span><span class="l" id="477"><a class="l" href="#477">477 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_passwordVerify" id="_passwordVerify">passwordVerify</a>(<span class="php-var">$password</span>, <span class="php-var">$hash</span>, <span class="php-var">$isPreHashed</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="478"><a class="l" href="#478">478 </a>    {
-</span><span class="l" id="479"><a class="l" href="#479">479 </a>        <span class="php-var">$password</span> = <span class="php-var">$isPreHashed</span> ? <span class="php-var">$password</span> : <span class="php-keyword2">sha1</span>(<span class="php-var">$password</span>);
-</span><span class="l" id="480"><a class="l" href="#480">480 </a>        <span class="php-keyword1">return</span> password_verify(<span class="php-var">$password</span>, <span class="php-var">$hash</span>);
-</span><span class="l" id="481"><a class="l" href="#481">481 </a>    }
-</span><span class="l" id="482"><a class="l" href="#482">482 </a>
-</span><span class="l" id="483"><a class="l" href="#483">483 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_passwordNeedsRehash" id="_passwordNeedsRehash">passwordNeedsRehash</a>(<span class="php-var">$hash</span>)
-</span><span class="l" id="484"><a class="l" href="#484">484 </a>    {
-</span><span class="l" id="485"><a class="l" href="#485">485 </a>        <span class="php-keyword1">return</span> password_needs_rehash(<span class="php-var">$hash</span>, PASSWORD_DEFAULT);
+</span><span class="l" id="423"><a class="l" href="#423">423 </a>        <span class="php-var">$key</span> = rex::isBackend() ? <span class="php-quote">'backend'</span> : <span class="php-quote">'frontend'</span>;
+</span><span class="l" id="424"><a class="l" href="#424">424 </a>        <span class="php-var">$sessionConfig</span> = rex::getProperty(<span class="php-quote">'session'</span>, []);
+</span><span class="l" id="425"><a class="l" href="#425">425 </a>
+</span><span class="l" id="426"><a class="l" href="#426">426 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$sessionConfig</span>) {
+</span><span class="l" id="427"><a class="l" href="#427">427 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$sessionConfig</span>[<span class="php-var">$key</span>][<span class="php-quote">'cookie'</span>] <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="428"><a class="l" href="#428">428 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$value</span> !== <span class="php-keyword1">null</span>) {
+</span><span class="l" id="429"><a class="l" href="#429">429 </a>                    <span class="php-var">$cookieParams</span>[<span class="php-var">$name</span>] = <span class="php-var">$value</span>;
+</span><span class="l" id="430"><a class="l" href="#430">430 </a>                }
+</span><span class="l" id="431"><a class="l" href="#431">431 </a>            }
+</span><span class="l" id="432"><a class="l" href="#432">432 </a>        }
+</span><span class="l" id="433"><a class="l" href="#433">433 </a>
+</span><span class="l" id="434"><a class="l" href="#434">434 </a>        <span class="php-keyword1">return</span> <span class="php-var">$cookieParams</span>;
+</span><span class="l" id="435"><a class="l" href="#435">435 </a>    }
+</span><span class="l" id="436"><a class="l" href="#436">436 </a>
+</span><span class="l" id="437"><a class="l" href="#437">437 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="438"><a class="l" href="#438">438 </a><span class="php-comment">     * php does not natively support SameSite for cookies yet,
+</span></span><span class="l" id="439"><a class="l" href="#439">439 </a><span class="php-comment">     * rewrite the session cookie manually.
+</span></span><span class="l" id="440"><a class="l" href="#440">440 </a><span class="php-comment">     *
+</span></span><span class="l" id="441"><a class="l" href="#441">441 </a><span class="php-comment">     * see https://wiki.php.net/rfc/same-site-cookie
+</span></span><span class="l" id="442"><a class="l" href="#442">442 </a><span class="php-comment">     *
+</span></span><span class="l" id="443"><a class="l" href="#443">443 </a><span class="php-comment">     * @param "Strict"|"Lax" $sameSite
+</span></span><span class="l" id="444"><a class="l" href="#444">444 </a><span class="php-comment">     */</span>
+</span><span class="l" id="445"><a class="l" href="#445">445 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_rewriteSessionCookie" id="_rewriteSessionCookie">rewriteSessionCookie</a>(<span class="php-var">$sameSite</span>)
+</span><span class="l" id="446"><a class="l" href="#446">446 </a>    {
+</span><span class="l" id="447"><a class="l" href="#447">447 </a>        <span class="php-var">$cookiesHeaders</span> = [];
+</span><span class="l" id="448"><a class="l" href="#448">448 </a>
+</span><span class="l" id="449"><a class="l" href="#449">449 </a>        <span class="php-comment">// since header_remove() will remove all sent cookies, we need to collect all of them,</span>
+</span><span class="l" id="450"><a class="l" href="#450">450 </a>        <span class="php-comment">// rewrite only the session cookie and send all cookies again.</span>
+</span><span class="l" id="451"><a class="l" href="#451">451 </a>        <span class="php-var">$cookieHeadersPrefix</span> = <span class="php-quote">'Set-Cookie: '</span>;
+</span><span class="l" id="452"><a class="l" href="#452">452 </a>        <span class="php-var">$sessionCookiePrefix</span> = <span class="php-quote">'Set-Cookie: '</span>. <span class="php-keyword2">session_name</span>() .<span class="php-quote">'='</span>;
+</span><span class="l" id="453"><a class="l" href="#453">453 </a>        <span class="php-keyword1">foreach</span> (<span class="php-keyword2">headers_list</span>() <span class="php-keyword1">as</span> <span class="php-var">$rawHeader</span>) {
+</span><span class="l" id="454"><a class="l" href="#454">454 </a>            <span class="php-comment">// rewrite the session cookie</span>
+</span><span class="l" id="455"><a class="l" href="#455">455 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$rawHeader</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(<span class="php-var">$sessionCookiePrefix</span>)) === <span class="php-var">$sessionCookiePrefix</span>) {
+</span><span class="l" id="456"><a class="l" href="#456">456 </a>                <span class="php-var">$rawHeader</span> .= <span class="php-quote">'; SameSite='</span>. <span class="php-var">$sameSite</span>;
+</span><span class="l" id="457"><a class="l" href="#457">457 </a>            }
+</span><span class="l" id="458"><a class="l" href="#458">458 </a>            <span class="php-comment">// collect all cookies</span>
+</span><span class="l" id="459"><a class="l" href="#459">459 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$rawHeader</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(<span class="php-var">$cookieHeadersPrefix</span>)) === <span class="php-var">$cookieHeadersPrefix</span>) {
+</span><span class="l" id="460"><a class="l" href="#460">460 </a>                <span class="php-var">$cookiesHeaders</span>[] = <span class="php-var">$rawHeader</span>;
+</span><span class="l" id="461"><a class="l" href="#461">461 </a>            }
+</span><span class="l" id="462"><a class="l" href="#462">462 </a>        }
+</span><span class="l" id="463"><a class="l" href="#463">463 </a>
+</span><span class="l" id="464"><a class="l" href="#464">464 </a>        <span class="php-comment">// remove all cookies</span>
+</span><span class="l" id="465"><a class="l" href="#465">465 </a>        <span class="php-keyword2">header_remove</span>(<span class="php-quote">'Set-Cookie'</span>);
+</span><span class="l" id="466"><a class="l" href="#466">466 </a>
+</span><span class="l" id="467"><a class="l" href="#467">467 </a>        <span class="php-comment">// re-add all (inl. the rewritten session cookie)</span>
+</span><span class="l" id="468"><a class="l" href="#468">468 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$cookiesHeaders</span> <span class="php-keyword1">as</span> <span class="php-var">$rawHeader</span>) {
+</span><span class="l" id="469"><a class="l" href="#469">469 </a>            <span class="php-keyword2">header</span>(<span class="php-var">$rawHeader</span>);
+</span><span class="l" id="470"><a class="l" href="#470">470 </a>        }
+</span><span class="l" id="471"><a class="l" href="#471">471 </a>    }
+</span><span class="l" id="472"><a class="l" href="#472">472 </a>
+</span><span class="l" id="473"><a class="l" href="#473">473 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="474"><a class="l" href="#474">474 </a><span class="php-comment">     * Verschlüsselt den übergebnen String.
+</span></span><span class="l" id="475"><a class="l" href="#475">475 </a><span class="php-comment">     */</span>
+</span><span class="l" id="476"><a class="l" href="#476">476 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_passwordHash" id="_passwordHash">passwordHash</a>(<span class="php-var">$password</span>, <span class="php-var">$isPreHashed</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="477"><a class="l" href="#477">477 </a>    {
+</span><span class="l" id="478"><a class="l" href="#478">478 </a>        <span class="php-var">$password</span> = <span class="php-var">$isPreHashed</span> ? <span class="php-var">$password</span> : <span class="php-keyword2">sha1</span>(<span class="php-var">$password</span>);
+</span><span class="l" id="479"><a class="l" href="#479">479 </a>        <span class="php-keyword1">return</span> password_hash(<span class="php-var">$password</span>, PASSWORD_DEFAULT);
+</span><span class="l" id="480"><a class="l" href="#480">480 </a>    }
+</span><span class="l" id="481"><a class="l" href="#481">481 </a>
+</span><span class="l" id="482"><a class="l" href="#482">482 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_passwordVerify" id="_passwordVerify">passwordVerify</a>(<span class="php-var">$password</span>, <span class="php-var">$hash</span>, <span class="php-var">$isPreHashed</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="483"><a class="l" href="#483">483 </a>    {
+</span><span class="l" id="484"><a class="l" href="#484">484 </a>        <span class="php-var">$password</span> = <span class="php-var">$isPreHashed</span> ? <span class="php-var">$password</span> : <span class="php-keyword2">sha1</span>(<span class="php-var">$password</span>);
+</span><span class="l" id="485"><a class="l" href="#485">485 </a>        <span class="php-keyword1">return</span> password_verify(<span class="php-var">$password</span>, <span class="php-var">$hash</span>);
 </span><span class="l" id="486"><a class="l" href="#486">486 </a>    }
-</span><span class="l" id="487"><a class="l" href="#487">487 </a>}
-</span><span class="l" id="488"><a class="l" href="#488">488 </a></span></code></pre>
+</span><span class="l" id="487"><a class="l" href="#487">487 </a>
+</span><span class="l" id="488"><a class="l" href="#488">488 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_passwordNeedsRehash" id="_passwordNeedsRehash">passwordNeedsRehash</a>(<span class="php-var">$hash</span>)
+</span><span class="l" id="489"><a class="l" href="#489">489 </a>    {
+</span><span class="l" id="490"><a class="l" href="#490">490 </a>        <span class="php-keyword1">return</span> password_needs_rehash(<span class="php-var">$hash</span>, PASSWORD_DEFAULT);
+</span><span class="l" id="491"><a class="l" href="#491">491 </a>    }
+</span><span class="l" id="492"><a class="l" href="#492">492 </a>}
+</span><span class="l" id="493"><a class="l" href="#493">493 </a></span></code></pre>
  </body>
 </html>

@@ -247,130 +247,141 @@
 </span><span class="l" id="238"><a class="l" href="#238">238 </a>
 </span><span class="l" id="239"><a class="l" href="#239">239 </a>        rex_response::cleanOutputBuffers();
 </span><span class="l" id="240"><a class="l" href="#240">240 </a>
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>        <span class="php-comment">// prevent session locking trough other addons</span>
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">function_exists</span>(<span class="php-quote">'session_abort'</span>)) {
-</span><span class="l" id="243"><a class="l" href="#243">243 </a>            session_abort();
-</span><span class="l" id="244"><a class="l" href="#244">244 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>            <span class="php-keyword2">session_write_close</span>();
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>        }
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>
-</span><span class="l" id="248"><a class="l" href="#248">248 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;use_cache &amp;&amp; <span class="php-var">$this</span>-&gt;isCached()) {
-</span><span class="l" id="249"><a class="l" href="#249">249 </a>            <span class="php-var">$header</span> = <span class="php-var">$this</span>-&gt;getHeaderCache()[<span class="php-quote">'headers'</span>];
-</span><span class="l" id="250"><a class="l" href="#250">250 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$header</span>[<span class="php-quote">'Last-Modified'</span>])) {
-</span><span class="l" id="251"><a class="l" href="#251">251 </a>                rex_response::sendLastModified(<span class="php-keyword2">strtotime</span>(<span class="php-var">$header</span>[<span class="php-quote">'Last-Modified'</span>]));
-</span><span class="l" id="252"><a class="l" href="#252">252 </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$header</span>[<span class="php-quote">'Last-Modified'</span>]);
-</span><span class="l" id="253"><a class="l" href="#253">253 </a>            }
-</span><span class="l" id="254"><a class="l" href="#254">254 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$header</span> <span class="php-keyword1">as</span> <span class="php-var">$t</span> =&gt; <span class="php-var">$c</span>) {
-</span><span class="l" id="255"><a class="l" href="#255">255 </a>                <span class="php-keyword2">header</span>(<span class="php-var">$t</span> . <span class="php-quote">': '</span> . <span class="php-var">$c</span>);
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>            }
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>            <span class="php-keyword2">readfile</span>(<span class="php-var">$CacheFilename</span>);
-</span><span class="l" id="258"><a class="l" href="#258">258 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="259"><a class="l" href="#259">259 </a>            <span class="php-var">$this</span>-&gt;media-&gt;sendMedia(<span class="php-var">$CacheFilename</span>, <span class="php-var">$headerCacheFilename</span>, <span class="php-var">$this</span>-&gt;use_cache);
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>        }
-</span><span class="l" id="261"><a class="l" href="#261">261 </a>
-</span><span class="l" id="262"><a class="l" href="#262">262 </a>        rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'MEDIA_MANAGER_AFTER_SEND'</span>, <span class="php-var">$this</span>, []));
-</span><span class="l" id="263"><a class="l" href="#263">263 </a>
-</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-keyword1">exit</span>;
-</span><span class="l" id="265"><a class="l" href="#265">265 </a>    }
-</span><span class="l" id="266"><a class="l" href="#266">266 </a>
-</span><span class="l" id="267"><a class="l" href="#267">267 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSupportedEffects" id="_getSupportedEffects">getSupportedEffects</a>()
-</span><span class="l" id="268"><a class="l" href="#268">268 </a>    {
-</span><span class="l" id="269"><a class="l" href="#269">269 </a>        <span class="php-var">$dirs</span> = [
-</span><span class="l" id="270"><a class="l" href="#270">270 </a>            __DIR__ . <span class="php-quote">'/effects/'</span>,
-</span><span class="l" id="271"><a class="l" href="#271">271 </a>        ];
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>        <span class="php-comment">// check for a cache-buster. this needs to be done, before the session gets closed/aborted.</span>
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>        <span class="php-comment">// the header is sent directly, to make sure it gets not cached with the other media related headers.</span>
+</span><span class="l" id="243"><a class="l" href="#243">243 </a>        <span class="php-keyword1">if</span> (rex_get(<span class="php-quote">'buster'</span>)) {
+</span><span class="l" id="244"><a class="l" href="#244">244 </a>            <span class="php-keyword1">if</span> (PHP_SESSION_ACTIVE == session_status()) {
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>                <span class="php-comment">// short lived cache, for resources which might be affected by e.g. permissions</span>
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>                rex_response::sendCacheControl(<span class="php-quote">'private, max-age=7200'</span>);
+</span><span class="l" id="247"><a class="l" href="#247">247 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="248"><a class="l" href="#248">248 </a>                rex_response::sendCacheControl(<span class="php-quote">'public, max-age=31536000, immutable'</span>);
+</span><span class="l" id="249"><a class="l" href="#249">249 </a>            }
+</span><span class="l" id="250"><a class="l" href="#250">250 </a>        }
+</span><span class="l" id="251"><a class="l" href="#251">251 </a>
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>        <span class="php-comment">// prevent session locking trough other addons</span>
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">function_exists</span>(<span class="php-quote">'session_abort'</span>)) {
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>            session_abort();
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>            <span class="php-keyword2">session_write_close</span>();
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>        }
+</span><span class="l" id="258"><a class="l" href="#258">258 </a>
+</span><span class="l" id="259"><a class="l" href="#259">259 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;use_cache &amp;&amp; <span class="php-var">$this</span>-&gt;isCached()) {
+</span><span class="l" id="260"><a class="l" href="#260">260 </a>            <span class="php-var">$header</span> = <span class="php-var">$this</span>-&gt;getHeaderCache()[<span class="php-quote">'headers'</span>];
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$header</span>[<span class="php-quote">'Last-Modified'</span>])) {
+</span><span class="l" id="262"><a class="l" href="#262">262 </a>                rex_response::sendLastModified(<span class="php-keyword2">strtotime</span>(<span class="php-var">$header</span>[<span class="php-quote">'Last-Modified'</span>]));
+</span><span class="l" id="263"><a class="l" href="#263">263 </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$header</span>[<span class="php-quote">'Last-Modified'</span>]);
+</span><span class="l" id="264"><a class="l" href="#264">264 </a>            }
+</span><span class="l" id="265"><a class="l" href="#265">265 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$header</span> <span class="php-keyword1">as</span> <span class="php-var">$t</span> =&gt; <span class="php-var">$c</span>) {
+</span><span class="l" id="266"><a class="l" href="#266">266 </a>                rex_response::setHeader(<span class="php-var">$t</span>, <span class="php-var">$c</span>);
+</span><span class="l" id="267"><a class="l" href="#267">267 </a>            }
+</span><span class="l" id="268"><a class="l" href="#268">268 </a>            rex_response::sendFile(<span class="php-var">$CacheFilename</span>, <span class="php-var">$header</span>[<span class="php-quote">'Content-Type'</span>]);
+</span><span class="l" id="269"><a class="l" href="#269">269 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="270"><a class="l" href="#270">270 </a>            <span class="php-var">$this</span>-&gt;media-&gt;sendMedia(<span class="php-var">$CacheFilename</span>, <span class="php-var">$headerCacheFilename</span>, <span class="php-var">$this</span>-&gt;use_cache);
+</span><span class="l" id="271"><a class="l" href="#271">271 </a>        }
 </span><span class="l" id="272"><a class="l" href="#272">272 </a>
-</span><span class="l" id="273"><a class="l" href="#273">273 </a>        <span class="php-var">$effects</span> = [];
-</span><span class="l" id="274"><a class="l" href="#274">274 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$dirs</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span>) {
-</span><span class="l" id="275"><a class="l" href="#275">275 </a>            <span class="php-var">$files</span> = <span class="php-keyword2">glob</span>(<span class="php-var">$dir</span> . <span class="php-quote">'effect_*.php'</span>);
-</span><span class="l" id="276"><a class="l" href="#276">276 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$files</span>) {
-</span><span class="l" id="277"><a class="l" href="#277">277 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$files</span> <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
-</span><span class="l" id="278"><a class="l" href="#278">278 </a>                    <span class="php-var">$effects</span>[self::getEffectClass(<span class="php-var">$file</span>)] = self::getEffectName(<span class="php-var">$file</span>);
-</span><span class="l" id="279"><a class="l" href="#279">279 </a>                }
-</span><span class="l" id="280"><a class="l" href="#280">280 </a>            }
-</span><span class="l" id="281"><a class="l" href="#281">281 </a>        }
-</span><span class="l" id="282"><a class="l" href="#282">282 </a>
-</span><span class="l" id="283"><a class="l" href="#283">283 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$effects</span> <span class="php-keyword1">as</span> <span class="php-var">$class</span>) {
-</span><span class="l" id="284"><a class="l" href="#284">284 </a>            <span class="php-var">$effects</span>[<span class="php-var">$class</span>] = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'rex_'</span>, <span class="php-quote">'effect_'</span>], <span class="php-quote">''</span>, <span class="php-var">$class</span>);
-</span><span class="l" id="285"><a class="l" href="#285">285 </a>        }
-</span><span class="l" id="286"><a class="l" href="#286">286 </a>
-</span><span class="l" id="287"><a class="l" href="#287">287 </a>        <span class="php-keyword1">return</span> <span class="php-var">$effects</span>;
-</span><span class="l" id="288"><a class="l" href="#288">288 </a>    }
-</span><span class="l" id="289"><a class="l" href="#289">289 </a>
-</span><span class="l" id="290"><a class="l" href="#290">290 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addEffect" id="_addEffect">addEffect</a>(<span class="php-var">$class</span>)
-</span><span class="l" id="291"><a class="l" href="#291">291 </a>    {
-</span><span class="l" id="292"><a class="l" href="#292">292 </a>        self::<span class="php-var">$effects</span>[] = <span class="php-var">$class</span>;
-</span><span class="l" id="293"><a class="l" href="#293">293 </a>    }
-</span><span class="l" id="294"><a class="l" href="#294">294 </a>
-</span><span class="l" id="295"><a class="l" href="#295">295 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getEffectName" id="_getEffectName">getEffectName</a>(<span class="php-var">$effectFile</span>)
-</span><span class="l" id="296"><a class="l" href="#296">296 </a>    {
-</span><span class="l" id="297"><a class="l" href="#297">297 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">str_replace</span>(
-</span><span class="l" id="298"><a class="l" href="#298">298 </a>            [<span class="php-quote">'effect_'</span>, <span class="php-quote">'.php'</span>],
-</span><span class="l" id="299"><a class="l" href="#299">299 </a>            <span class="php-quote">''</span>,
-</span><span class="l" id="300"><a class="l" href="#300">300 </a>            <span class="php-keyword2">basename</span>(<span class="php-var">$effectFile</span>)
-</span><span class="l" id="301"><a class="l" href="#301">301 </a>        );
-</span><span class="l" id="302"><a class="l" href="#302">302 </a>    }
-</span><span class="l" id="303"><a class="l" href="#303">303 </a>
-</span><span class="l" id="304"><a class="l" href="#304">304 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getEffectClass" id="_getEffectClass">getEffectClass</a>(<span class="php-var">$effectFile</span>)
-</span><span class="l" id="305"><a class="l" href="#305">305 </a>    {
-</span><span class="l" id="306"><a class="l" href="#306">306 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'rex_'</span> . <span class="php-keyword2">str_replace</span>(
-</span><span class="l" id="307"><a class="l" href="#307">307 </a>            <span class="php-quote">'.php'</span>,
-</span><span class="l" id="308"><a class="l" href="#308">308 </a>            <span class="php-quote">''</span>,
-</span><span class="l" id="309"><a class="l" href="#309">309 </a>            <span class="php-keyword2">basename</span>(<span class="php-var">$effectFile</span>)
-</span><span class="l" id="310"><a class="l" href="#310">310 </a>        );
-</span><span class="l" id="311"><a class="l" href="#311">311 </a>    }
-</span><span class="l" id="312"><a class="l" href="#312">312 </a>
-</span><span class="l" id="313"><a class="l" href="#313">313 </a>    <span class="php-comment">/*
-</span></span><span class="l" id="314"><a class="l" href="#314">314 </a><span class="php-comment">     * For ExtensionPoints.
-</span></span><span class="l" id="315"><a class="l" href="#315">315 </a><span class="php-comment">     */</span>
-</span><span class="l" id="316"><a class="l" href="#316">316 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_mediaUpdated" id="_mediaUpdated">mediaUpdated</a>(rex_extension_point <span class="php-var">$ep</span>)
-</span><span class="l" id="317"><a class="l" href="#317">317 </a>    {
-</span><span class="l" id="318"><a class="l" href="#318">318 </a>        self::deleteCache(<span class="php-var">$ep</span>-&gt;getParam(<span class="php-quote">'filename'</span>));
-</span><span class="l" id="319"><a class="l" href="#319">319 </a>    }
-</span><span class="l" id="320"><a class="l" href="#320">320 </a>
-</span><span class="l" id="321"><a class="l" href="#321">321 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_init" id="_init">init</a>()
-</span><span class="l" id="322"><a class="l" href="#322">322 </a>    {
-</span><span class="l" id="323"><a class="l" href="#323">323 </a>        <span class="php-comment">//--- handle image request</span>
-</span><span class="l" id="324"><a class="l" href="#324">324 </a>        <span class="php-var">$rex_media_manager_file</span> = self::getMediaFile();
-</span><span class="l" id="325"><a class="l" href="#325">325 </a>        <span class="php-var">$rex_media_manager_type</span> = self::getMediaType();
-</span><span class="l" id="326"><a class="l" href="#326">326 </a>
-</span><span class="l" id="327"><a class="l" href="#327">327 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$rex_media_manager_file</span> != <span class="php-quote">''</span> &amp;&amp; <span class="php-var">$rex_media_manager_type</span> != <span class="php-quote">''</span>) {
-</span><span class="l" id="328"><a class="l" href="#328">328 </a>            <span class="php-var">$media_path</span> = rex_path::media(<span class="php-var">$rex_media_manager_file</span>);
-</span><span class="l" id="329"><a class="l" href="#329">329 </a>            <span class="php-var">$cache_path</span> = rex_path::addonCache(<span class="php-quote">'media_manager'</span>);
-</span><span class="l" id="330"><a class="l" href="#330">330 </a>
-</span><span class="l" id="331"><a class="l" href="#331">331 </a>            <span class="php-var">$media</span> = <span class="php-keyword1">new</span> rex_managed_media(<span class="php-var">$media_path</span>);
-</span><span class="l" id="332"><a class="l" href="#332">332 </a>            <span class="php-var">$media_manager</span> = <span class="php-keyword1">new</span> self(<span class="php-var">$media</span>);
-</span><span class="l" id="333"><a class="l" href="#333">333 </a>            <span class="php-var">$media_manager</span>-&gt;setCachePath(<span class="php-var">$cache_path</span>);
-</span><span class="l" id="334"><a class="l" href="#334">334 </a>            <span class="php-var">$media_manager</span>-&gt;applyEffects(<span class="php-var">$rex_media_manager_type</span>);
-</span><span class="l" id="335"><a class="l" href="#335">335 </a>            <span class="php-var">$media_manager</span>-&gt;sendMedia();
-</span><span class="l" id="336"><a class="l" href="#336">336 </a>
-</span><span class="l" id="337"><a class="l" href="#337">337 </a>            <span class="php-keyword1">exit</span>();
-</span><span class="l" id="338"><a class="l" href="#338">338 </a>        }
-</span><span class="l" id="339"><a class="l" href="#339">339 </a>    }
-</span><span class="l" id="340"><a class="l" href="#340">340 </a>
-</span><span class="l" id="341"><a class="l" href="#341">341 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMediaFile" id="_getMediaFile">getMediaFile</a>()
-</span><span class="l" id="342"><a class="l" href="#342">342 </a>    {
-</span><span class="l" id="343"><a class="l" href="#343">343 </a>        <span class="php-var">$rex_media_file</span> = rex_get(<span class="php-quote">'rex_media_file'</span>, <span class="php-quote">'string'</span>);
-</span><span class="l" id="344"><a class="l" href="#344">344 </a>
-</span><span class="l" id="345"><a class="l" href="#345">345 </a>        <span class="php-comment">// can be used with REDAXO &gt;= 5.5.1</span>
-</span><span class="l" id="346"><a class="l" href="#346">346 </a>        <span class="php-comment">// $rex_media_file = rex_path::basename($rex_media_file);</span>
-</span><span class="l" id="347"><a class="l" href="#347">347 </a>        <span class="php-var">$rex_media_file</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\\'</span>, <span class="php-quote">'/'</span>], DIRECTORY_SEPARATOR, <span class="php-var">$rex_media_file</span>);
-</span><span class="l" id="348"><a class="l" href="#348">348 </a>        <span class="php-var">$rex_media_file</span> = <span class="php-keyword2">basename</span>(<span class="php-var">$rex_media_file</span>);
-</span><span class="l" id="349"><a class="l" href="#349">349 </a>
-</span><span class="l" id="350"><a class="l" href="#350">350 </a>        <span class="php-keyword1">return</span> <span class="php-var">$rex_media_file</span>;
-</span><span class="l" id="351"><a class="l" href="#351">351 </a>    }
-</span><span class="l" id="352"><a class="l" href="#352">352 </a>
-</span><span class="l" id="353"><a class="l" href="#353">353 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMediaType" id="_getMediaType">getMediaType</a>()
-</span><span class="l" id="354"><a class="l" href="#354">354 </a>    {
-</span><span class="l" id="355"><a class="l" href="#355">355 </a>        <span class="php-var">$type</span> = rex_get(<span class="php-quote">'rex_media_type'</span>, <span class="php-quote">'string'</span>);
-</span><span class="l" id="356"><a class="l" href="#356">356 </a>
-</span><span class="l" id="357"><a class="l" href="#357">357 </a>        <span class="php-comment">// can be used with REDAXO &gt;= 5.5.1</span>
-</span><span class="l" id="358"><a class="l" href="#358">358 </a>        <span class="php-comment">// $type = rex_path::basename($type);</span>
-</span><span class="l" id="359"><a class="l" href="#359">359 </a>        <span class="php-var">$type</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\\'</span>, <span class="php-quote">'/'</span>], DIRECTORY_SEPARATOR, <span class="php-var">$type</span>);
-</span><span class="l" id="360"><a class="l" href="#360">360 </a>        <span class="php-var">$type</span> = <span class="php-keyword2">basename</span>(<span class="php-var">$type</span>);
-</span><span class="l" id="361"><a class="l" href="#361">361 </a>
-</span><span class="l" id="362"><a class="l" href="#362">362 </a>        <span class="php-keyword1">return</span> <span class="php-var">$type</span>;
-</span><span class="l" id="363"><a class="l" href="#363">363 </a>    }
-</span><span class="l" id="364"><a class="l" href="#364">364 </a>}
-</span><span class="l" id="365"><a class="l" href="#365">365 </a></span></code></pre>
+</span><span class="l" id="273"><a class="l" href="#273">273 </a>        rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'MEDIA_MANAGER_AFTER_SEND'</span>, <span class="php-var">$this</span>, []));
+</span><span class="l" id="274"><a class="l" href="#274">274 </a>
+</span><span class="l" id="275"><a class="l" href="#275">275 </a>        <span class="php-keyword1">exit</span>;
+</span><span class="l" id="276"><a class="l" href="#276">276 </a>    }
+</span><span class="l" id="277"><a class="l" href="#277">277 </a>
+</span><span class="l" id="278"><a class="l" href="#278">278 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSupportedEffects" id="_getSupportedEffects">getSupportedEffects</a>()
+</span><span class="l" id="279"><a class="l" href="#279">279 </a>    {
+</span><span class="l" id="280"><a class="l" href="#280">280 </a>        <span class="php-var">$dirs</span> = [
+</span><span class="l" id="281"><a class="l" href="#281">281 </a>            __DIR__ . <span class="php-quote">'/effects/'</span>,
+</span><span class="l" id="282"><a class="l" href="#282">282 </a>        ];
+</span><span class="l" id="283"><a class="l" href="#283">283 </a>
+</span><span class="l" id="284"><a class="l" href="#284">284 </a>        <span class="php-var">$effects</span> = [];
+</span><span class="l" id="285"><a class="l" href="#285">285 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$dirs</span> <span class="php-keyword1">as</span> <span class="php-var">$dir</span>) {
+</span><span class="l" id="286"><a class="l" href="#286">286 </a>            <span class="php-var">$files</span> = <span class="php-keyword2">glob</span>(<span class="php-var">$dir</span> . <span class="php-quote">'effect_*.php'</span>);
+</span><span class="l" id="287"><a class="l" href="#287">287 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$files</span>) {
+</span><span class="l" id="288"><a class="l" href="#288">288 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$files</span> <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
+</span><span class="l" id="289"><a class="l" href="#289">289 </a>                    <span class="php-var">$effects</span>[self::getEffectClass(<span class="php-var">$file</span>)] = self::getEffectName(<span class="php-var">$file</span>);
+</span><span class="l" id="290"><a class="l" href="#290">290 </a>                }
+</span><span class="l" id="291"><a class="l" href="#291">291 </a>            }
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>        }
+</span><span class="l" id="293"><a class="l" href="#293">293 </a>
+</span><span class="l" id="294"><a class="l" href="#294">294 </a>        <span class="php-keyword1">foreach</span> (self::<span class="php-var">$effects</span> <span class="php-keyword1">as</span> <span class="php-var">$class</span>) {
+</span><span class="l" id="295"><a class="l" href="#295">295 </a>            <span class="php-var">$effects</span>[<span class="php-var">$class</span>] = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'rex_'</span>, <span class="php-quote">'effect_'</span>], <span class="php-quote">''</span>, <span class="php-var">$class</span>);
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>        }
+</span><span class="l" id="297"><a class="l" href="#297">297 </a>
+</span><span class="l" id="298"><a class="l" href="#298">298 </a>        <span class="php-keyword1">return</span> <span class="php-var">$effects</span>;
+</span><span class="l" id="299"><a class="l" href="#299">299 </a>    }
+</span><span class="l" id="300"><a class="l" href="#300">300 </a>
+</span><span class="l" id="301"><a class="l" href="#301">301 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addEffect" id="_addEffect">addEffect</a>(<span class="php-var">$class</span>)
+</span><span class="l" id="302"><a class="l" href="#302">302 </a>    {
+</span><span class="l" id="303"><a class="l" href="#303">303 </a>        self::<span class="php-var">$effects</span>[] = <span class="php-var">$class</span>;
+</span><span class="l" id="304"><a class="l" href="#304">304 </a>    }
+</span><span class="l" id="305"><a class="l" href="#305">305 </a>
+</span><span class="l" id="306"><a class="l" href="#306">306 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getEffectName" id="_getEffectName">getEffectName</a>(<span class="php-var">$effectFile</span>)
+</span><span class="l" id="307"><a class="l" href="#307">307 </a>    {
+</span><span class="l" id="308"><a class="l" href="#308">308 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">str_replace</span>(
+</span><span class="l" id="309"><a class="l" href="#309">309 </a>            [<span class="php-quote">'effect_'</span>, <span class="php-quote">'.php'</span>],
+</span><span class="l" id="310"><a class="l" href="#310">310 </a>            <span class="php-quote">''</span>,
+</span><span class="l" id="311"><a class="l" href="#311">311 </a>            <span class="php-keyword2">basename</span>(<span class="php-var">$effectFile</span>)
+</span><span class="l" id="312"><a class="l" href="#312">312 </a>        );
+</span><span class="l" id="313"><a class="l" href="#313">313 </a>    }
+</span><span class="l" id="314"><a class="l" href="#314">314 </a>
+</span><span class="l" id="315"><a class="l" href="#315">315 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getEffectClass" id="_getEffectClass">getEffectClass</a>(<span class="php-var">$effectFile</span>)
+</span><span class="l" id="316"><a class="l" href="#316">316 </a>    {
+</span><span class="l" id="317"><a class="l" href="#317">317 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'rex_'</span> . <span class="php-keyword2">str_replace</span>(
+</span><span class="l" id="318"><a class="l" href="#318">318 </a>            <span class="php-quote">'.php'</span>,
+</span><span class="l" id="319"><a class="l" href="#319">319 </a>            <span class="php-quote">''</span>,
+</span><span class="l" id="320"><a class="l" href="#320">320 </a>            <span class="php-keyword2">basename</span>(<span class="php-var">$effectFile</span>)
+</span><span class="l" id="321"><a class="l" href="#321">321 </a>        );
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>    }
+</span><span class="l" id="323"><a class="l" href="#323">323 </a>
+</span><span class="l" id="324"><a class="l" href="#324">324 </a>    <span class="php-comment">/*
+</span></span><span class="l" id="325"><a class="l" href="#325">325 </a><span class="php-comment">     * For ExtensionPoints.
+</span></span><span class="l" id="326"><a class="l" href="#326">326 </a><span class="php-comment">     */</span>
+</span><span class="l" id="327"><a class="l" href="#327">327 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_mediaUpdated" id="_mediaUpdated">mediaUpdated</a>(rex_extension_point <span class="php-var">$ep</span>)
+</span><span class="l" id="328"><a class="l" href="#328">328 </a>    {
+</span><span class="l" id="329"><a class="l" href="#329">329 </a>        self::deleteCache(<span class="php-var">$ep</span>-&gt;getParam(<span class="php-quote">'filename'</span>));
+</span><span class="l" id="330"><a class="l" href="#330">330 </a>    }
+</span><span class="l" id="331"><a class="l" href="#331">331 </a>
+</span><span class="l" id="332"><a class="l" href="#332">332 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_init" id="_init">init</a>()
+</span><span class="l" id="333"><a class="l" href="#333">333 </a>    {
+</span><span class="l" id="334"><a class="l" href="#334">334 </a>        <span class="php-comment">//--- handle image request</span>
+</span><span class="l" id="335"><a class="l" href="#335">335 </a>        <span class="php-var">$rex_media_manager_file</span> = self::getMediaFile();
+</span><span class="l" id="336"><a class="l" href="#336">336 </a>        <span class="php-var">$rex_media_manager_type</span> = self::getMediaType();
+</span><span class="l" id="337"><a class="l" href="#337">337 </a>
+</span><span class="l" id="338"><a class="l" href="#338">338 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$rex_media_manager_file</span> != <span class="php-quote">''</span> &amp;&amp; <span class="php-var">$rex_media_manager_type</span> != <span class="php-quote">''</span>) {
+</span><span class="l" id="339"><a class="l" href="#339">339 </a>            <span class="php-var">$media_path</span> = rex_path::media(<span class="php-var">$rex_media_manager_file</span>);
+</span><span class="l" id="340"><a class="l" href="#340">340 </a>            <span class="php-var">$cache_path</span> = rex_path::addonCache(<span class="php-quote">'media_manager'</span>);
+</span><span class="l" id="341"><a class="l" href="#341">341 </a>
+</span><span class="l" id="342"><a class="l" href="#342">342 </a>            <span class="php-var">$media</span> = <span class="php-keyword1">new</span> rex_managed_media(<span class="php-var">$media_path</span>);
+</span><span class="l" id="343"><a class="l" href="#343">343 </a>            <span class="php-var">$media_manager</span> = <span class="php-keyword1">new</span> self(<span class="php-var">$media</span>);
+</span><span class="l" id="344"><a class="l" href="#344">344 </a>            <span class="php-var">$media_manager</span>-&gt;setCachePath(<span class="php-var">$cache_path</span>);
+</span><span class="l" id="345"><a class="l" href="#345">345 </a>            <span class="php-var">$media_manager</span>-&gt;applyEffects(<span class="php-var">$rex_media_manager_type</span>);
+</span><span class="l" id="346"><a class="l" href="#346">346 </a>            <span class="php-var">$media_manager</span>-&gt;sendMedia();
+</span><span class="l" id="347"><a class="l" href="#347">347 </a>
+</span><span class="l" id="348"><a class="l" href="#348">348 </a>            <span class="php-keyword1">exit</span>();
+</span><span class="l" id="349"><a class="l" href="#349">349 </a>        }
+</span><span class="l" id="350"><a class="l" href="#350">350 </a>    }
+</span><span class="l" id="351"><a class="l" href="#351">351 </a>
+</span><span class="l" id="352"><a class="l" href="#352">352 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMediaFile" id="_getMediaFile">getMediaFile</a>()
+</span><span class="l" id="353"><a class="l" href="#353">353 </a>    {
+</span><span class="l" id="354"><a class="l" href="#354">354 </a>        <span class="php-var">$rex_media_file</span> = rex_get(<span class="php-quote">'rex_media_file'</span>, <span class="php-quote">'string'</span>);
+</span><span class="l" id="355"><a class="l" href="#355">355 </a>
+</span><span class="l" id="356"><a class="l" href="#356">356 </a>        <span class="php-comment">// can be used with REDAXO &gt;= 5.5.1</span>
+</span><span class="l" id="357"><a class="l" href="#357">357 </a>        <span class="php-comment">// $rex_media_file = rex_path::basename($rex_media_file);</span>
+</span><span class="l" id="358"><a class="l" href="#358">358 </a>        <span class="php-var">$rex_media_file</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\\'</span>, <span class="php-quote">'/'</span>], DIRECTORY_SEPARATOR, <span class="php-var">$rex_media_file</span>);
+</span><span class="l" id="359"><a class="l" href="#359">359 </a>        <span class="php-var">$rex_media_file</span> = <span class="php-keyword2">basename</span>(<span class="php-var">$rex_media_file</span>);
+</span><span class="l" id="360"><a class="l" href="#360">360 </a>
+</span><span class="l" id="361"><a class="l" href="#361">361 </a>        <span class="php-keyword1">return</span> <span class="php-var">$rex_media_file</span>;
+</span><span class="l" id="362"><a class="l" href="#362">362 </a>    }
+</span><span class="l" id="363"><a class="l" href="#363">363 </a>
+</span><span class="l" id="364"><a class="l" href="#364">364 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMediaType" id="_getMediaType">getMediaType</a>()
+</span><span class="l" id="365"><a class="l" href="#365">365 </a>    {
+</span><span class="l" id="366"><a class="l" href="#366">366 </a>        <span class="php-var">$type</span> = rex_get(<span class="php-quote">'rex_media_type'</span>, <span class="php-quote">'string'</span>);
+</span><span class="l" id="367"><a class="l" href="#367">367 </a>
+</span><span class="l" id="368"><a class="l" href="#368">368 </a>        <span class="php-comment">// can be used with REDAXO &gt;= 5.5.1</span>
+</span><span class="l" id="369"><a class="l" href="#369">369 </a>        <span class="php-comment">// $type = rex_path::basename($type);</span>
+</span><span class="l" id="370"><a class="l" href="#370">370 </a>        <span class="php-var">$type</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\\'</span>, <span class="php-quote">'/'</span>], DIRECTORY_SEPARATOR, <span class="php-var">$type</span>);
+</span><span class="l" id="371"><a class="l" href="#371">371 </a>        <span class="php-var">$type</span> = <span class="php-keyword2">basename</span>(<span class="php-var">$type</span>);
+</span><span class="l" id="372"><a class="l" href="#372">372 </a>
+</span><span class="l" id="373"><a class="l" href="#373">373 </a>        <span class="php-keyword1">return</span> <span class="php-var">$type</span>;
+</span><span class="l" id="374"><a class="l" href="#374">374 </a>    }
+</span><span class="l" id="375"><a class="l" href="#375">375 </a>}
+</span><span class="l" id="376"><a class="l" href="#376">376 </a></span></code></pre>
  </body>
 </html>

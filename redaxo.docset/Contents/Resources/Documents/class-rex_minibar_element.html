@@ -9,18 +9,28 @@
 </head>
 <body><div class="class" id="content">
 <h1>Class rex_minibar_element</h1>
+<div class="description">
+<p>Base minibar element. Subclass it to create your custom implementation.</p>
+</div>
 <div>
 <h3>Direct known subclasses</h3>
 <p class="elementList">
-<code><a href="class-rex_minibar_element_structure_content.html">rex_minibar_element_structure_content</a></code>, 
-			<code><a href="class-rex_minibar_element_system.html">rex_minibar_element_system</a></code>, 
-			<code><a href="class-rex_minibar_element_time.html">rex_minibar_element_time</a></code>
+<code><a href="class-rex_minibar_element_system.html">rex_minibar_element_system</a></code>, 
+			<code><a href="class-rex_minibar_element_time.html">rex_minibar_element_time</a></code>, 
+			<code><a href="class-rex_minibar_lazy_element.html">rex_minibar_lazy_element</a></code>
+</p>
+</div>
+<div>
+<h3>Indirect known subclasses</h3>
+<p class="elementList">
+<code><a href="class-rex_minibar_element_structure_article.html">rex_minibar_element_structure_article</a></code>, 
+			<code><a href="class-rex_minibar_element_structure_clang.html">rex_minibar_element_structure_clang</a></code>
 </p>
 </div>
 <div class="alert alert-info">
 <b>Abstract</b><br/>
-<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_minibar_element.html#3-57" title="Go to source code">redaxo/src/core/lib/minibar/minibar_element.php</a><br/>
+<b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a>\<a href="package-redaxo.core.minibar.html">minibar</a><br/>
+<b>Located at</b> <a href="source-class-rex_minibar_element.html#3-59" title="Go to source code">redaxo/src/core/lib/minibar/element/element.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -33,7 +43,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_render">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/render"></a><a href="source-class-rex_minibar_element.html?11,16#11" title="Go to source code">render</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/render"></a><a href="source-class-rex_minibar_element.html?13,18#13" title="Go to source code">render</a>( )</code>
 <div class="description short">
 <p>Returns the html bar item.</p>
 </div>
@@ -55,7 +65,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getOrientation">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOrientation"></a><a href="source-class-rex_minibar_element.html?18,26#18" title="Go to source code">getOrientation</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getOrientation"></a><a href="source-class-rex_minibar_element.html?20,28#20" title="Go to source code">getOrientation</a>( )</code>
 <div class="description short">
 <p>Returns the orientation in the minibar.</p>
 </div>
@@ -78,7 +88,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isDanger">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isDanger"></a><a href="source-class-rex_minibar_element.html?28,36#28" title="Go to source code">isDanger</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isDanger"></a><a href="source-class-rex_minibar_element.html?30,38#30" title="Go to source code">isDanger</a>( )</code>
 <div class="description short">
 <p>Returns the danger status.</p>
 </div>
@@ -100,7 +110,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isPrimary">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPrimary"></a><a href="source-class-rex_minibar_element.html?38,46#38" title="Go to source code">isPrimary</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPrimary"></a><a href="source-class-rex_minibar_element.html?40,48#40" title="Go to source code">isPrimary</a>( )</code>
 <div class="description short">
 <p>Returns the primary status.</p>
 </div>
@@ -122,7 +132,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isWarning">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isWarning"></a><a href="source-class-rex_minibar_element.html?48,56#48" title="Go to source code">isWarning</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isWarning"></a><a href="source-class-rex_minibar_element.html?50,58#50" title="Go to source code">isWarning</a>( )</code>
 <div class="description short">
 <p>Returns the warning status.</p>
 </div>
@@ -142,7 +152,7 @@
 <td class="attributes"><code>string</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/LEFT"></a><a href="source-class-rex_minibar_element.html#8" title="Go to source code"><b>LEFT</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/LEFT"></a><a href="source-class-rex_minibar_element.html#10" title="Go to source code"><b>LEFT</b></a>
 </code>
 <div class="description short">
 </div>
@@ -155,7 +165,7 @@
 <td class="attributes"><code>string</code></td>
 <td class="name">
 <code>
-<a class="dashAnchor" name="//apple_ref/cpp/Constant/RIGHT"></a><a href="source-class-rex_minibar_element.html#9" title="Go to source code"><b>RIGHT</b></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Constant/RIGHT"></a><a href="source-class-rex_minibar_element.html#11" title="Go to source code"><b>RIGHT</b></a>
 </code>
 <div class="description short">
 </div>

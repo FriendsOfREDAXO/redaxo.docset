@@ -366,165 +366,184 @@
 </span><span class="l" id="357"><a class="l" href="#357">357 </a>                    <span class="php-var">$field</span> = <span class="php-quote">'double'</span>;
 </span><span class="l" id="358"><a class="l" href="#358">358 </a>                } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(char|varchar|text|longtext|mediumtext|tinytext)#'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
 </span><span class="l" id="359"><a class="l" href="#359">359 </a>                    <span class="php-var">$field</span> = <span class="php-quote">'string'</span>;
-</span><span class="l" id="360"><a class="l" href="#360">360 </a>                }
-</span><span class="l" id="361"><a class="l" href="#361">361 </a>                <span class="php-comment">// else ?</span>
-</span><span class="l" id="362"><a class="l" href="#362">362 </a>            }
-</span><span class="l" id="363"><a class="l" href="#363">363 </a>
-</span><span class="l" id="364"><a class="l" href="#364">364 </a>            <span class="php-comment">//---- export tabledata</span>
-</span><span class="l" id="365"><a class="l" href="#365">365 </a>            <span class="php-var">$start</span> = <span class="php-num">0</span>;
-</span><span class="l" id="366"><a class="l" href="#366">366 </a>            <span class="php-var">$max</span> = <span class="php-var">$insertSize</span>;
-</span><span class="l" id="367"><a class="l" href="#367">367 </a>
-</span><span class="l" id="368"><a class="l" href="#368">368 </a>            <span class="php-keyword1">do</span> {
-</span><span class="l" id="369"><a class="l" href="#369">369 </a>                <span class="php-var">$array</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'SELECT * FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' LIMIT '</span> . <span class="php-var">$start</span> . <span class="php-quote">','</span> . <span class="php-var">$max</span>, [], PDO::FETCH_NUM);
-</span><span class="l" id="370"><a class="l" href="#370">370 </a>                <span class="php-var">$count</span> = <span class="php-var">$sql</span>-&gt;getRows();
-</span><span class="l" id="371"><a class="l" href="#371">371 </a>
-</span><span class="l" id="372"><a class="l" href="#372">372 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$count</span> &gt; <span class="php-num">0</span> &amp;&amp; <span class="php-var">$start</span> == <span class="php-num">0</span>) {
-</span><span class="l" id="373"><a class="l" href="#373">373 </a>                    <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'LOCK TABLES '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' WRITE;'</span>);
-</span><span class="l" id="374"><a class="l" href="#374">374 </a>                    <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' DISABLE KEYS */;'</span>);
-</span><span class="l" id="375"><a class="l" href="#375">375 </a>                } <span class="php-keyword1">elseif</span> (<span class="php-var">$count</span> == <span class="php-num">0</span>) {
-</span><span class="l" id="376"><a class="l" href="#376">376 </a>                    <span class="php-keyword1">break</span>;
-</span><span class="l" id="377"><a class="l" href="#377">377 </a>                }
-</span><span class="l" id="378"><a class="l" href="#378">378 </a>
-</span><span class="l" id="379"><a class="l" href="#379">379 </a>                <span class="php-var">$start</span> += <span class="php-var">$max</span>;
-</span><span class="l" id="380"><a class="l" href="#380">380 </a>                <span class="php-var">$values</span> = [];
+</span><span class="l" id="360"><a class="l" href="#360">360 </a>                } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">preg_match</span>(<span class="php-quote">'#^(date|datetime|time|timestamp|year)#'</span>, <span class="php-var">$field</span>[<span class="php-quote">'Type'</span>])) {
+</span><span class="l" id="361"><a class="l" href="#361">361 </a>                    <span class="php-comment">// types which can be passed tru 1:1 as escaping isn't necessary, because we know the mysql internal format.</span>
+</span><span class="l" id="362"><a class="l" href="#362">362 </a>                    <span class="php-var">$field</span> = <span class="php-quote">'raw'</span>;
+</span><span class="l" id="363"><a class="l" href="#363">363 </a>                }
+</span><span class="l" id="364"><a class="l" href="#364">364 </a>                <span class="php-comment">// else ?</span>
+</span><span class="l" id="365"><a class="l" href="#365">365 </a>            }
+</span><span class="l" id="366"><a class="l" href="#366">366 </a>
+</span><span class="l" id="367"><a class="l" href="#367">367 </a>            <span class="php-comment">//---- export tabledata</span>
+</span><span class="l" id="368"><a class="l" href="#368">368 </a>            <span class="php-var">$start</span> = <span class="php-num">0</span>;
+</span><span class="l" id="369"><a class="l" href="#369">369 </a>            <span class="php-var">$max</span> = <span class="php-var">$insertSize</span>;
+</span><span class="l" id="370"><a class="l" href="#370">370 </a>
+</span><span class="l" id="371"><a class="l" href="#371">371 </a>            <span class="php-keyword1">do</span> {
+</span><span class="l" id="372"><a class="l" href="#372">372 </a>                <span class="php-var">$array</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'SELECT * FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' LIMIT '</span> . <span class="php-var">$start</span> . <span class="php-quote">','</span> . <span class="php-var">$max</span>, [], PDO::FETCH_NUM);
+</span><span class="l" id="373"><a class="l" href="#373">373 </a>                <span class="php-var">$count</span> = <span class="php-var">$sql</span>-&gt;getRows();
+</span><span class="l" id="374"><a class="l" href="#374">374 </a>
+</span><span class="l" id="375"><a class="l" href="#375">375 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$count</span> &gt; <span class="php-num">0</span> &amp;&amp; <span class="php-var">$start</span> == <span class="php-num">0</span>) {
+</span><span class="l" id="376"><a class="l" href="#376">376 </a>                    <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'LOCK TABLES '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' WRITE;'</span>);
+</span><span class="l" id="377"><a class="l" href="#377">377 </a>                    <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' DISABLE KEYS */;'</span>);
+</span><span class="l" id="378"><a class="l" href="#378">378 </a>                } <span class="php-keyword1">elseif</span> (<span class="php-var">$count</span> == <span class="php-num">0</span>) {
+</span><span class="l" id="379"><a class="l" href="#379">379 </a>                    <span class="php-keyword1">break</span>;
+</span><span class="l" id="380"><a class="l" href="#380">380 </a>                }
 </span><span class="l" id="381"><a class="l" href="#381">381 </a>
-</span><span class="l" id="382"><a class="l" href="#382">382 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$row</span>) {
-</span><span class="l" id="383"><a class="l" href="#383">383 </a>                    <span class="php-var">$record</span> = [];
+</span><span class="l" id="382"><a class="l" href="#382">382 </a>                <span class="php-var">$start</span> += <span class="php-var">$max</span>;
+</span><span class="l" id="383"><a class="l" href="#383">383 </a>                <span class="php-var">$values</span> = [];
 </span><span class="l" id="384"><a class="l" href="#384">384 </a>
-</span><span class="l" id="385"><a class="l" href="#385">385 </a>                    <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$idx</span> =&gt; <span class="php-var">$type</span>) {
-</span><span class="l" id="386"><a class="l" href="#386">386 </a>                        <span class="php-var">$column</span> = <span class="php-var">$row</span>[<span class="php-var">$idx</span>];
+</span><span class="l" id="385"><a class="l" href="#385">385 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$row</span>) {
+</span><span class="l" id="386"><a class="l" href="#386">386 </a>                    <span class="php-var">$record</span> = [];
 </span><span class="l" id="387"><a class="l" href="#387">387 </a>
-</span><span class="l" id="388"><a class="l" href="#388">388 </a>                        <span class="php-keyword1">switch</span> (<span class="php-var">$type</span>) {
-</span><span class="l" id="389"><a class="l" href="#389">389 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'int'</span>:
-</span><span class="l" id="390"><a class="l" href="#390">390 </a>                                <span class="php-var">$record</span>[] = (int) <span class="php-var">$column</span>;
-</span><span class="l" id="391"><a class="l" href="#391">391 </a>                                <span class="php-keyword1">break</span>;
-</span><span class="l" id="392"><a class="l" href="#392">392 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'double'</span>:
-</span><span class="l" id="393"><a class="l" href="#393">393 </a>                                <span class="php-var">$record</span>[] = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%.10F'</span>, (float) <span class="php-var">$column</span>);
-</span><span class="l" id="394"><a class="l" href="#394">394 </a>                                <span class="php-keyword1">break</span>;
-</span><span class="l" id="395"><a class="l" href="#395">395 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'string'</span>:
-</span><span class="l" id="396"><a class="l" href="#396">396 </a>                            <span class="php-keyword1">default</span>:
-</span><span class="l" id="397"><a class="l" href="#397">397 </a>                                <span class="php-var">$record</span>[] = <span class="php-var">$sql</span>-&gt;escape(<span class="php-var">$column</span>, <span class="php-quote">"'"</span>);
+</span><span class="l" id="388"><a class="l" href="#388">388 </a>                    <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$idx</span> =&gt; <span class="php-var">$type</span>) {
+</span><span class="l" id="389"><a class="l" href="#389">389 </a>                        <span class="php-var">$column</span> = <span class="php-var">$row</span>[<span class="php-var">$idx</span>];
+</span><span class="l" id="390"><a class="l" href="#390">390 </a>
+</span><span class="l" id="391"><a class="l" href="#391">391 </a>                        <span class="php-keyword1">switch</span> (<span class="php-var">$type</span>) {
+</span><span class="l" id="392"><a class="l" href="#392">392 </a>                            <span class="php-comment">// prevent calling sql-&gt;escape() on values with a known format</span>
+</span><span class="l" id="393"><a class="l" href="#393">393 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'raw'</span>:
+</span><span class="l" id="394"><a class="l" href="#394">394 </a>                                <span class="php-var">$record</span>[] = <span class="php-quote">"'"</span>. <span class="php-var">$column</span> .<span class="php-quote">"'"</span>;
+</span><span class="l" id="395"><a class="l" href="#395">395 </a>                                <span class="php-keyword1">break</span>;
+</span><span class="l" id="396"><a class="l" href="#396">396 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'int'</span>:
+</span><span class="l" id="397"><a class="l" href="#397">397 </a>                                <span class="php-var">$record</span>[] = (int) <span class="php-var">$column</span>;
 </span><span class="l" id="398"><a class="l" href="#398">398 </a>                                <span class="php-keyword1">break</span>;
-</span><span class="l" id="399"><a class="l" href="#399">399 </a>                        }
-</span><span class="l" id="400"><a class="l" href="#400">400 </a>                    }
-</span><span class="l" id="401"><a class="l" href="#401">401 </a>
-</span><span class="l" id="402"><a class="l" href="#402">402 </a>                    <span class="php-var">$values</span>[] = <span class="php-var">$nl</span> . <span class="php-quote">'  ('</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$record</span>) . <span class="php-quote">')'</span>;
-</span><span class="l" id="403"><a class="l" href="#403">403 </a>                }
-</span><span class="l" id="404"><a class="l" href="#404">404 </a>
-</span><span class="l" id="405"><a class="l" href="#405">405 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$values</span>)) {
-</span><span class="l" id="406"><a class="l" href="#406">406 </a>                    <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'INSERT INTO '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' VALUES '</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$values</span>) . <span class="php-quote">';'</span>);
-</span><span class="l" id="407"><a class="l" href="#407">407 </a>                    <span class="php-keyword1">unset</span>(<span class="php-var">$values</span>);
-</span><span class="l" id="408"><a class="l" href="#408">408 </a>                }
-</span><span class="l" id="409"><a class="l" href="#409">409 </a>            } <span class="php-keyword1">while</span> (<span class="php-var">$count</span> &gt;= <span class="php-var">$max</span>);
-</span><span class="l" id="410"><a class="l" href="#410">410 </a>
-</span><span class="l" id="411"><a class="l" href="#411">411 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$start</span> &gt; <span class="php-num">0</span>) {
-</span><span class="l" id="412"><a class="l" href="#412">412 </a>                <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' ENABLE KEYS */;'</span>);
-</span><span class="l" id="413"><a class="l" href="#413">413 </a>                <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'UNLOCK TABLES;'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="414"><a class="l" href="#414">414 </a>            }
-</span><span class="l" id="415"><a class="l" href="#415">415 </a>        }
-</span><span class="l" id="416"><a class="l" href="#416">416 </a>
-</span><span class="l" id="417"><a class="l" href="#417">417 </a>        <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'SET FOREIGN_KEY_CHECKS = 1;'</span> . <span class="php-var">$nl</span>);
-</span><span class="l" id="418"><a class="l" href="#418">418 </a>
-</span><span class="l" id="419"><a class="l" href="#419">419 </a>        <span class="php-var">$hasContent</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="399"><a class="l" href="#399">399 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'double'</span>:
+</span><span class="l" id="400"><a class="l" href="#400">400 </a>                                <span class="php-var">$record</span>[] = <span class="php-keyword2">sprintf</span>(<span class="php-quote">'%.10F'</span>, (float) <span class="php-var">$column</span>);
+</span><span class="l" id="401"><a class="l" href="#401">401 </a>                                <span class="php-keyword1">break</span>;
+</span><span class="l" id="402"><a class="l" href="#402">402 </a>                            <span class="php-keyword1">case</span> <span class="php-quote">'string'</span>:
+</span><span class="l" id="403"><a class="l" href="#403">403 </a>                                <span class="php-comment">// fast-exit for very frequent used harmless values</span>
+</span><span class="l" id="404"><a class="l" href="#404">404 </a>                                <span class="php-keyword1">if</span> (<span class="php-var">$column</span> === <span class="php-quote">'0'</span> || <span class="php-var">$column</span> === <span class="php-quote">''</span> || <span class="php-var">$column</span> === <span class="php-quote">' '</span> || <span class="php-var">$column</span> === <span class="php-quote">'|'</span> || <span class="php-var">$column</span> === <span class="php-quote">'||'</span>) {
+</span><span class="l" id="405"><a class="l" href="#405">405 </a>                                    <span class="php-var">$record</span>[] = <span class="php-quote">"'"</span>. <span class="php-var">$column</span> .<span class="php-quote">"'"</span>;
+</span><span class="l" id="406"><a class="l" href="#406">406 </a>                                    <span class="php-keyword1">break</span>;
+</span><span class="l" id="407"><a class="l" href="#407">407 </a>                                }
+</span><span class="l" id="408"><a class="l" href="#408">408 </a>
+</span><span class="l" id="409"><a class="l" href="#409">409 </a>                                <span class="php-comment">// fast-exit for very frequent used harmless values</span>
+</span><span class="l" id="410"><a class="l" href="#410">410 </a>                                <span class="php-keyword1">if</span> (<span class="php-keyword2">strlen</span>(<span class="php-var">$column</span>) &lt;= <span class="php-num">3</span> &amp;&amp; <span class="php-keyword2">ctype_alnum</span>(<span class="php-var">$column</span>)) {
+</span><span class="l" id="411"><a class="l" href="#411">411 </a>                                    <span class="php-var">$record</span>[] = <span class="php-quote">"'"</span>. <span class="php-var">$column</span> .<span class="php-quote">"'"</span>;
+</span><span class="l" id="412"><a class="l" href="#412">412 </a>                                    <span class="php-keyword1">break</span>;
+</span><span class="l" id="413"><a class="l" href="#413">413 </a>                                }
+</span><span class="l" id="414"><a class="l" href="#414">414 </a>                                <span class="php-comment">// no break</span>
+</span><span class="l" id="415"><a class="l" href="#415">415 </a>                            <span class="php-keyword1">default</span>:
+</span><span class="l" id="416"><a class="l" href="#416">416 </a>                                <span class="php-var">$record</span>[] = <span class="php-var">$sql</span>-&gt;escape(<span class="php-var">$column</span>);
+</span><span class="l" id="417"><a class="l" href="#417">417 </a>                                <span class="php-keyword1">break</span>;
+</span><span class="l" id="418"><a class="l" href="#418">418 </a>                        }
+</span><span class="l" id="419"><a class="l" href="#419">419 </a>                    }
 </span><span class="l" id="420"><a class="l" href="#420">420 </a>
-</span><span class="l" id="421"><a class="l" href="#421">421 </a>        <span class="php-comment">// Den Dateiinhalt geben wir nur dann weiter, wenn es unbedingt notwendig ist.</span>
-</span><span class="l" id="422"><a class="l" href="#422">422 </a>        <span class="php-keyword1">if</span> (rex_extension::isRegistered(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>)) {
-</span><span class="l" id="423"><a class="l" href="#423">423 </a>            <span class="php-var">$content</span> = rex_file::get(<span class="php-var">$filename</span>);
-</span><span class="l" id="424"><a class="l" href="#424">424 </a>            <span class="php-var">$hashBefore</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="425"><a class="l" href="#425">425 </a>            <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="426"><a class="l" href="#426">426 </a>            <span class="php-var">$content</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>, <span class="php-var">$content</span>));
-</span><span class="l" id="427"><a class="l" href="#427">427 </a>            <span class="php-var">$hashAfter</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="428"><a class="l" href="#428">428 </a>
-</span><span class="l" id="429"><a class="l" href="#429">429 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$hashAfter</span> != <span class="php-var">$hashBefore</span>) {
-</span><span class="l" id="430"><a class="l" href="#430">430 </a>                rex_file::put(<span class="php-var">$filename</span>, <span class="php-var">$content</span>);
-</span><span class="l" id="431"><a class="l" href="#431">431 </a>                <span class="php-var">$hasContent</span> = !<span class="php-keyword1">empty</span>(<span class="php-var">$content</span>);
-</span><span class="l" id="432"><a class="l" href="#432">432 </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="421"><a class="l" href="#421">421 </a>                    <span class="php-var">$values</span>[] = <span class="php-var">$nl</span> . <span class="php-quote">'  ('</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$record</span>) . <span class="php-quote">')'</span>;
+</span><span class="l" id="422"><a class="l" href="#422">422 </a>                }
+</span><span class="l" id="423"><a class="l" href="#423">423 </a>
+</span><span class="l" id="424"><a class="l" href="#424">424 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$values</span>)) {
+</span><span class="l" id="425"><a class="l" href="#425">425 </a>                    <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'INSERT INTO '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' VALUES '</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">','</span>, <span class="php-var">$values</span>) . <span class="php-quote">';'</span>);
+</span><span class="l" id="426"><a class="l" href="#426">426 </a>                    <span class="php-keyword1">unset</span>(<span class="php-var">$values</span>);
+</span><span class="l" id="427"><a class="l" href="#427">427 </a>                }
+</span><span class="l" id="428"><a class="l" href="#428">428 </a>            } <span class="php-keyword1">while</span> (<span class="php-var">$count</span> &gt;= <span class="php-var">$max</span>);
+</span><span class="l" id="429"><a class="l" href="#429">429 </a>
+</span><span class="l" id="430"><a class="l" href="#430">430 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$start</span> &gt; <span class="php-num">0</span>) {
+</span><span class="l" id="431"><a class="l" href="#431">431 </a>                <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'/*!40000 ALTER TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>) . <span class="php-quote">' ENABLE KEYS */;'</span>);
+</span><span class="l" id="432"><a class="l" href="#432">432 </a>                <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-var">$nl</span> . <span class="php-quote">'UNLOCK TABLES;'</span> . <span class="php-var">$nl</span> . <span class="php-var">$nl</span>);
 </span><span class="l" id="433"><a class="l" href="#433">433 </a>            }
 </span><span class="l" id="434"><a class="l" href="#434">434 </a>        }
 </span><span class="l" id="435"><a class="l" href="#435">435 </a>
-</span><span class="l" id="436"><a class="l" href="#436">436 </a>        <span class="php-comment">// Wenn das backup vollständig und erfolgreich erzeugt werden konnte, den Export 1:1 ans Ziel kopieren.</span>
-</span><span class="l" id="437"><a class="l" href="#437">437 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$tempCacheFile</span>) {
-</span><span class="l" id="438"><a class="l" href="#438">438 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
-</span><span class="l" id="439"><a class="l" href="#439">439 </a>            <span class="php-keyword2">rename</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-var">$filename</span>);
-</span><span class="l" id="440"><a class="l" href="#440">440 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="441"><a class="l" href="#441">441 </a>            <span class="php-var">$destination</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$filename</span>, <span class="php-quote">'wb'</span>);
-</span><span class="l" id="442"><a class="l" href="#442">442 </a>            <span class="php-keyword2">rewind</span>(<span class="php-var">$fp</span>);
-</span><span class="l" id="443"><a class="l" href="#443">443 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$destination</span>) {
-</span><span class="l" id="444"><a class="l" href="#444">444 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="445"><a class="l" href="#445">445 </a>            }
-</span><span class="l" id="446"><a class="l" href="#446">446 </a>            <span class="php-keyword2">stream_copy_to_stream</span>(<span class="php-var">$fp</span>, <span class="php-var">$destination</span>);
-</span><span class="l" id="447"><a class="l" href="#447">447 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
-</span><span class="l" id="448"><a class="l" href="#448">448 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$destination</span>);
-</span><span class="l" id="449"><a class="l" href="#449">449 </a>        }
-</span><span class="l" id="450"><a class="l" href="#450">450 </a>
-</span><span class="l" id="451"><a class="l" href="#451">451 </a>        <span class="php-keyword1">return</span> <span class="php-var">$hasContent</span>;
-</span><span class="l" id="452"><a class="l" href="#452">452 </a>    }
-</span><span class="l" id="453"><a class="l" href="#453">453 </a>
-</span><span class="l" id="454"><a class="l" href="#454">454 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="455"><a class="l" href="#455">455 </a><span class="php-comment">     * Exportiert alle Ordner $folders aus dem Verzeichnis /files.
-</span></span><span class="l" id="456"><a class="l" href="#456">456 </a><span class="php-comment">     *
-</span></span><span class="l" id="457"><a class="l" href="#457">457 </a><span class="php-comment">     * @param array $folders Array von Ordnernamen, die exportiert werden sollen
-</span></span><span class="l" id="458"><a class="l" href="#458">458 </a><span class="php-comment">     *
-</span></span><span class="l" id="459"><a class="l" href="#459">459 </a><span class="php-comment">     * @return string Inhalt des Tar-Archives als String
-</span></span><span class="l" id="460"><a class="l" href="#460">460 </a><span class="php-comment">     */</span>
-</span><span class="l" id="461"><a class="l" href="#461">461 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_exportFiles" id="_exportFiles">exportFiles</a>(<span class="php-var">$folders</span>)
-</span><span class="l" id="462"><a class="l" href="#462">462 </a>    {
-</span><span class="l" id="463"><a class="l" href="#463">463 </a>        <span class="php-var">$tar</span> = <span class="php-keyword1">new</span> rex_backup_tar();
-</span><span class="l" id="464"><a class="l" href="#464">464 </a>
-</span><span class="l" id="465"><a class="l" href="#465">465 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="466"><a class="l" href="#466">466 </a>        <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_BEFORE_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
-</span><span class="l" id="467"><a class="l" href="#467">467 </a>
-</span><span class="l" id="468"><a class="l" href="#468">468 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$folders</span> <span class="php-keyword1">as</span> <span class="php-var">$item</span>) {
-</span><span class="l" id="469"><a class="l" href="#469">469 </a>            self::addFolderToTar(<span class="php-var">$tar</span>, rex_url::frontend(), <span class="php-var">$item</span>);
-</span><span class="l" id="470"><a class="l" href="#470">470 </a>        }
-</span><span class="l" id="471"><a class="l" href="#471">471 </a>
-</span><span class="l" id="472"><a class="l" href="#472">472 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
-</span><span class="l" id="473"><a class="l" href="#473">473 </a>        <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
-</span><span class="l" id="474"><a class="l" href="#474">474 </a>
-</span><span class="l" id="475"><a class="l" href="#475">475 </a>        <span class="php-keyword1">return</span> <span class="php-var">$tar</span>-&gt;toTar(<span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>);
-</span><span class="l" id="476"><a class="l" href="#476">476 </a>    }
-</span><span class="l" id="477"><a class="l" href="#477">477 </a>
-</span><span class="l" id="478"><a class="l" href="#478">478 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="479"><a class="l" href="#479">479 </a><span class="php-comment">     * Fügt einem Tar-Archiv ein Ordner von Dateien hinzu.
-</span></span><span class="l" id="480"><a class="l" href="#480">480 </a><span class="php-comment">     */</span>
-</span><span class="l" id="481"><a class="l" href="#481">481 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addFolderToTar" id="_addFolderToTar">addFolderToTar</a>(rex_backup_tar <span class="php-var">$tar</span>, <span class="php-var">$path</span>, <span class="php-var">$dir</span>)
-</span><span class="l" id="482"><a class="l" href="#482">482 </a>    {
-</span><span class="l" id="483"><a class="l" href="#483">483 </a>        <span class="php-var">$handle</span> = <span class="php-keyword2">opendir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>);
-</span><span class="l" id="484"><a class="l" href="#484">484 </a>        <span class="php-var">$isMediafolder</span> = <span class="php-keyword2">realpath</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>) . <span class="php-quote">'/'</span> == rex_path::media();
-</span><span class="l" id="485"><a class="l" href="#485">485 </a>        <span class="php-keyword1">while</span> (<span class="php-keyword1">false</span> !== (<span class="php-var">$file</span> = <span class="php-keyword2">readdir</span>(<span class="php-var">$handle</span>))) {
-</span><span class="l" id="486"><a class="l" href="#486">486 </a>            <span class="php-comment">// Alles exportieren, außer ...</span>
-</span><span class="l" id="487"><a class="l" href="#487">487 </a>            <span class="php-comment">// - addons verzeichnis im mediafolder (wird bei addoninstallation wiedererstellt)</span>
-</span><span class="l" id="488"><a class="l" href="#488">488 </a>            <span class="php-comment">// - svn infos</span>
-</span><span class="l" id="489"><a class="l" href="#489">489 </a>            <span class="php-comment">// - tmp prefix Dateien</span>
+</span><span class="l" id="436"><a class="l" href="#436">436 </a>        <span class="php-keyword2">fwrite</span>(<span class="php-var">$fp</span>, <span class="php-quote">'SET FOREIGN_KEY_CHECKS = 1;'</span> . <span class="php-var">$nl</span>);
+</span><span class="l" id="437"><a class="l" href="#437">437 </a>
+</span><span class="l" id="438"><a class="l" href="#438">438 </a>        <span class="php-var">$hasContent</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="439"><a class="l" href="#439">439 </a>
+</span><span class="l" id="440"><a class="l" href="#440">440 </a>        <span class="php-comment">// Den Dateiinhalt geben wir nur dann weiter, wenn es unbedingt notwendig ist.</span>
+</span><span class="l" id="441"><a class="l" href="#441">441 </a>        <span class="php-keyword1">if</span> (rex_extension::isRegistered(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>)) {
+</span><span class="l" id="442"><a class="l" href="#442">442 </a>            <span class="php-var">$content</span> = rex_file::get(<span class="php-var">$filename</span>);
+</span><span class="l" id="443"><a class="l" href="#443">443 </a>            <span class="php-var">$hashBefore</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="444"><a class="l" href="#444">444 </a>            <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="445"><a class="l" href="#445">445 </a>            <span class="php-var">$content</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_DB_EXPORT'</span>, <span class="php-var">$content</span>));
+</span><span class="l" id="446"><a class="l" href="#446">446 </a>            <span class="php-var">$hashAfter</span> = <span class="php-keyword2">md5</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="447"><a class="l" href="#447">447 </a>
+</span><span class="l" id="448"><a class="l" href="#448">448 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$hashAfter</span> != <span class="php-var">$hashBefore</span>) {
+</span><span class="l" id="449"><a class="l" href="#449">449 </a>                rex_file::put(<span class="php-var">$filename</span>, <span class="php-var">$content</span>);
+</span><span class="l" id="450"><a class="l" href="#450">450 </a>                <span class="php-var">$hasContent</span> = !<span class="php-keyword1">empty</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="451"><a class="l" href="#451">451 </a>                <span class="php-keyword1">unset</span>(<span class="php-var">$content</span>);
+</span><span class="l" id="452"><a class="l" href="#452">452 </a>            }
+</span><span class="l" id="453"><a class="l" href="#453">453 </a>        }
+</span><span class="l" id="454"><a class="l" href="#454">454 </a>
+</span><span class="l" id="455"><a class="l" href="#455">455 </a>        <span class="php-comment">// Wenn das backup vollständig und erfolgreich erzeugt werden konnte, den Export 1:1 ans Ziel kopieren.</span>
+</span><span class="l" id="456"><a class="l" href="#456">456 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$tempCacheFile</span>) {
+</span><span class="l" id="457"><a class="l" href="#457">457 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
+</span><span class="l" id="458"><a class="l" href="#458">458 </a>            <span class="php-keyword2">rename</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-var">$filename</span>);
+</span><span class="l" id="459"><a class="l" href="#459">459 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="460"><a class="l" href="#460">460 </a>            <span class="php-var">$destination</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$filename</span>, <span class="php-quote">'wb'</span>);
+</span><span class="l" id="461"><a class="l" href="#461">461 </a>            <span class="php-keyword2">rewind</span>(<span class="php-var">$fp</span>);
+</span><span class="l" id="462"><a class="l" href="#462">462 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$destination</span>) {
+</span><span class="l" id="463"><a class="l" href="#463">463 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="464"><a class="l" href="#464">464 </a>            }
+</span><span class="l" id="465"><a class="l" href="#465">465 </a>            <span class="php-keyword2">stream_copy_to_stream</span>(<span class="php-var">$fp</span>, <span class="php-var">$destination</span>);
+</span><span class="l" id="466"><a class="l" href="#466">466 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
+</span><span class="l" id="467"><a class="l" href="#467">467 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$destination</span>);
+</span><span class="l" id="468"><a class="l" href="#468">468 </a>        }
+</span><span class="l" id="469"><a class="l" href="#469">469 </a>
+</span><span class="l" id="470"><a class="l" href="#470">470 </a>        <span class="php-keyword1">return</span> <span class="php-var">$hasContent</span>;
+</span><span class="l" id="471"><a class="l" href="#471">471 </a>    }
+</span><span class="l" id="472"><a class="l" href="#472">472 </a>
+</span><span class="l" id="473"><a class="l" href="#473">473 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="474"><a class="l" href="#474">474 </a><span class="php-comment">     * Exportiert alle Ordner $folders aus dem Verzeichnis /files.
+</span></span><span class="l" id="475"><a class="l" href="#475">475 </a><span class="php-comment">     *
+</span></span><span class="l" id="476"><a class="l" href="#476">476 </a><span class="php-comment">     * @param array $folders Array von Ordnernamen, die exportiert werden sollen
+</span></span><span class="l" id="477"><a class="l" href="#477">477 </a><span class="php-comment">     *
+</span></span><span class="l" id="478"><a class="l" href="#478">478 </a><span class="php-comment">     * @return string Inhalt des Tar-Archives als String
+</span></span><span class="l" id="479"><a class="l" href="#479">479 </a><span class="php-comment">     */</span>
+</span><span class="l" id="480"><a class="l" href="#480">480 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_exportFiles" id="_exportFiles">exportFiles</a>(<span class="php-var">$folders</span>)
+</span><span class="l" id="481"><a class="l" href="#481">481 </a>    {
+</span><span class="l" id="482"><a class="l" href="#482">482 </a>        <span class="php-var">$tar</span> = <span class="php-keyword1">new</span> rex_backup_tar();
+</span><span class="l" id="483"><a class="l" href="#483">483 </a>
+</span><span class="l" id="484"><a class="l" href="#484">484 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="485"><a class="l" href="#485">485 </a>        <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_BEFORE_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
+</span><span class="l" id="486"><a class="l" href="#486">486 </a>
+</span><span class="l" id="487"><a class="l" href="#487">487 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$folders</span> <span class="php-keyword1">as</span> <span class="php-var">$item</span>) {
+</span><span class="l" id="488"><a class="l" href="#488">488 </a>            self::addFolderToTar(<span class="php-var">$tar</span>, rex_url::frontend(), <span class="php-var">$item</span>);
+</span><span class="l" id="489"><a class="l" href="#489">489 </a>        }
 </span><span class="l" id="490"><a class="l" href="#490">490 </a>
-</span><span class="l" id="491"><a class="l" href="#491">491 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$file</span> == <span class="php-quote">'.'</span> || <span class="php-var">$file</span> == <span class="php-quote">'..'</span> || <span class="php-var">$file</span> == <span class="php-quote">'.svn'</span>) {
-</span><span class="l" id="492"><a class="l" href="#492">492 </a>                <span class="php-keyword1">continue</span>;
-</span><span class="l" id="493"><a class="l" href="#493">493 </a>            }
-</span><span class="l" id="494"><a class="l" href="#494">494 </a>
-</span><span class="l" id="495"><a class="l" href="#495">495 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$file</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(rex::getTempPrefix())) == rex::getTempPrefix()) {
-</span><span class="l" id="496"><a class="l" href="#496">496 </a>                <span class="php-keyword1">continue</span>;
-</span><span class="l" id="497"><a class="l" href="#497">497 </a>            }
-</span><span class="l" id="498"><a class="l" href="#498">498 </a>
-</span><span class="l" id="499"><a class="l" href="#499">499 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$isMediafolder</span> &amp;&amp; <span class="php-var">$file</span> == <span class="php-quote">'addons'</span>) {
-</span><span class="l" id="500"><a class="l" href="#500">500 </a>                <span class="php-keyword1">continue</span>;
-</span><span class="l" id="501"><a class="l" href="#501">501 </a>            }
-</span><span class="l" id="502"><a class="l" href="#502">502 </a>
-</span><span class="l" id="503"><a class="l" href="#503">503 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_dir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>)) {
-</span><span class="l" id="504"><a class="l" href="#504">504 </a>                self::addFolderToTar(<span class="php-var">$tar</span>, <span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span>, <span class="php-var">$file</span>);
-</span><span class="l" id="505"><a class="l" href="#505">505 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="506"><a class="l" href="#506">506 </a>                <span class="php-var">$tar</span>-&gt;addFile(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>);
-</span><span class="l" id="507"><a class="l" href="#507">507 </a>            }
-</span><span class="l" id="508"><a class="l" href="#508">508 </a>        }
-</span><span class="l" id="509"><a class="l" href="#509">509 </a>        <span class="php-keyword2">closedir</span>(<span class="php-var">$handle</span>);
-</span><span class="l" id="510"><a class="l" href="#510">510 </a>    }
-</span><span class="l" id="511"><a class="l" href="#511">511 </a>
-</span><span class="l" id="512"><a class="l" href="#512">512 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_importScript" id="_importScript">importScript</a>(<span class="php-var">$filename</span>, <span class="php-var">$importType</span>, <span class="php-var">$eventType</span>)
-</span><span class="l" id="513"><a class="l" href="#513">513 </a>    {
-</span><span class="l" id="514"><a class="l" href="#514">514 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">file_exists</span>(<span class="php-var">$filename</span>)) {
-</span><span class="l" id="515"><a class="l" href="#515">515 </a>            <span class="php-keyword1">require</span> <span class="php-var">$filename</span>;
-</span><span class="l" id="516"><a class="l" href="#516">516 </a>        }
-</span><span class="l" id="517"><a class="l" href="#517">517 </a>    }
-</span><span class="l" id="518"><a class="l" href="#518">518 </a>}
-</span><span class="l" id="519"><a class="l" href="#519">519 </a></span></code></pre>
+</span><span class="l" id="491"><a class="l" href="#491">491 </a>        <span class="php-comment">// ----- EXTENSION POINT</span>
+</span><span class="l" id="492"><a class="l" href="#492">492 </a>        <span class="php-var">$tar</span> = rex_extension::registerPoint(<span class="php-keyword1">new</span> rex_extension_point(<span class="php-quote">'BACKUP_AFTER_FILE_EXPORT'</span>, <span class="php-var">$tar</span>));
+</span><span class="l" id="493"><a class="l" href="#493">493 </a>
+</span><span class="l" id="494"><a class="l" href="#494">494 </a>        <span class="php-keyword1">return</span> <span class="php-var">$tar</span>-&gt;toTar(<span class="php-keyword1">null</span>, <span class="php-keyword1">true</span>);
+</span><span class="l" id="495"><a class="l" href="#495">495 </a>    }
+</span><span class="l" id="496"><a class="l" href="#496">496 </a>
+</span><span class="l" id="497"><a class="l" href="#497">497 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="498"><a class="l" href="#498">498 </a><span class="php-comment">     * Fügt einem Tar-Archiv ein Ordner von Dateien hinzu.
+</span></span><span class="l" id="499"><a class="l" href="#499">499 </a><span class="php-comment">     */</span>
+</span><span class="l" id="500"><a class="l" href="#500">500 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addFolderToTar" id="_addFolderToTar">addFolderToTar</a>(rex_backup_tar <span class="php-var">$tar</span>, <span class="php-var">$path</span>, <span class="php-var">$dir</span>)
+</span><span class="l" id="501"><a class="l" href="#501">501 </a>    {
+</span><span class="l" id="502"><a class="l" href="#502">502 </a>        <span class="php-var">$handle</span> = <span class="php-keyword2">opendir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>);
+</span><span class="l" id="503"><a class="l" href="#503">503 </a>        <span class="php-var">$isMediafolder</span> = <span class="php-keyword2">realpath</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span>) . <span class="php-quote">'/'</span> == rex_path::media();
+</span><span class="l" id="504"><a class="l" href="#504">504 </a>        <span class="php-keyword1">while</span> (<span class="php-keyword1">false</span> !== (<span class="php-var">$file</span> = <span class="php-keyword2">readdir</span>(<span class="php-var">$handle</span>))) {
+</span><span class="l" id="505"><a class="l" href="#505">505 </a>            <span class="php-comment">// Alles exportieren, außer ...</span>
+</span><span class="l" id="506"><a class="l" href="#506">506 </a>            <span class="php-comment">// - addons verzeichnis im mediafolder (wird bei addoninstallation wiedererstellt)</span>
+</span><span class="l" id="507"><a class="l" href="#507">507 </a>            <span class="php-comment">// - svn infos</span>
+</span><span class="l" id="508"><a class="l" href="#508">508 </a>            <span class="php-comment">// - tmp prefix Dateien</span>
+</span><span class="l" id="509"><a class="l" href="#509">509 </a>
+</span><span class="l" id="510"><a class="l" href="#510">510 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$file</span> == <span class="php-quote">'.'</span> || <span class="php-var">$file</span> == <span class="php-quote">'..'</span> || <span class="php-var">$file</span> == <span class="php-quote">'.svn'</span>) {
+</span><span class="l" id="511"><a class="l" href="#511">511 </a>                <span class="php-keyword1">continue</span>;
+</span><span class="l" id="512"><a class="l" href="#512">512 </a>            }
+</span><span class="l" id="513"><a class="l" href="#513">513 </a>
+</span><span class="l" id="514"><a class="l" href="#514">514 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">substr</span>(<span class="php-var">$file</span>, <span class="php-num">0</span>, <span class="php-keyword2">strlen</span>(rex::getTempPrefix())) == rex::getTempPrefix()) {
+</span><span class="l" id="515"><a class="l" href="#515">515 </a>                <span class="php-keyword1">continue</span>;
+</span><span class="l" id="516"><a class="l" href="#516">516 </a>            }
+</span><span class="l" id="517"><a class="l" href="#517">517 </a>
+</span><span class="l" id="518"><a class="l" href="#518">518 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$isMediafolder</span> &amp;&amp; <span class="php-var">$file</span> == <span class="php-quote">'addons'</span>) {
+</span><span class="l" id="519"><a class="l" href="#519">519 </a>                <span class="php-keyword1">continue</span>;
+</span><span class="l" id="520"><a class="l" href="#520">520 </a>            }
+</span><span class="l" id="521"><a class="l" href="#521">521 </a>
+</span><span class="l" id="522"><a class="l" href="#522">522 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_dir</span>(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>)) {
+</span><span class="l" id="523"><a class="l" href="#523">523 </a>                self::addFolderToTar(<span class="php-var">$tar</span>, <span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span>, <span class="php-var">$file</span>);
+</span><span class="l" id="524"><a class="l" href="#524">524 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="525"><a class="l" href="#525">525 </a>                <span class="php-var">$tar</span>-&gt;addFile(<span class="php-var">$path</span> . <span class="php-var">$dir</span> . <span class="php-quote">'/'</span> . <span class="php-var">$file</span>);
+</span><span class="l" id="526"><a class="l" href="#526">526 </a>            }
+</span><span class="l" id="527"><a class="l" href="#527">527 </a>        }
+</span><span class="l" id="528"><a class="l" href="#528">528 </a>        <span class="php-keyword2">closedir</span>(<span class="php-var">$handle</span>);
+</span><span class="l" id="529"><a class="l" href="#529">529 </a>    }
+</span><span class="l" id="530"><a class="l" href="#530">530 </a>
+</span><span class="l" id="531"><a class="l" href="#531">531 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_importScript" id="_importScript">importScript</a>(<span class="php-var">$filename</span>, <span class="php-var">$importType</span>, <span class="php-var">$eventType</span>)
+</span><span class="l" id="532"><a class="l" href="#532">532 </a>    {
+</span><span class="l" id="533"><a class="l" href="#533">533 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">file_exists</span>(<span class="php-var">$filename</span>)) {
+</span><span class="l" id="534"><a class="l" href="#534">534 </a>            <span class="php-keyword1">require</span> <span class="php-var">$filename</span>;
+</span><span class="l" id="535"><a class="l" href="#535">535 </a>        }
+</span><span class="l" id="536"><a class="l" href="#536">536 </a>    }
+</span><span class="l" id="537"><a class="l" href="#537">537 </a>}
+</span><span class="l" id="538"><a class="l" href="#538">538 </a></span></code></pre>
  </body>
 </html>

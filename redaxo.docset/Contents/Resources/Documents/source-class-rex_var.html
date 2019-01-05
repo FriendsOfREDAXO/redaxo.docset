@@ -166,235 +166,247 @@
 </span><span class="l" id="157"><a class="l" href="#157">157 </a>        <span class="php-var">$iterator</span> = <span class="php-keyword1">new</span> AppendIterator();
 </span><span class="l" id="158"><a class="l" href="#158">158 </a>        <span class="php-var">$iterator</span>-&gt;append(<span class="php-keyword1">new</span> ArrayIterator(<span class="php-var">$matches</span>));
 </span><span class="l" id="159"><a class="l" href="#159">159 </a>        <span class="php-var">$variables</span> = [];
-</span><span class="l" id="160"><a class="l" href="#160">160 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$iterator</span> <span class="php-keyword1">as</span> <span class="php-var">$match</span>) {
-</span><span class="l" id="161"><a class="l" href="#161">161 </a>            <span class="php-var">$var</span> = self::getVar(<span class="php-var">$match</span>[<span class="php-num">1</span>]);
-</span><span class="l" id="162"><a class="l" href="#162">162 </a>            <span class="php-var">$replaced</span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="163"><a class="l" href="#163">163 </a>
-</span><span class="l" id="164"><a class="l" href="#164">164 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$var</span> !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="165"><a class="l" href="#165">165 </a>                <span class="php-var">$args</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\['</span>, <span class="php-quote">'\]'</span>], [<span class="php-quote">'@@@OPEN_BRACKET@@@'</span>, <span class="php-quote">'@@@CLOSE_BRACKET@@@'</span>], <span class="php-var">$match</span>[<span class="php-num">2</span>]);
-</span><span class="l" id="166"><a class="l" href="#166">166 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$stripslashes</span>) {
-</span><span class="l" id="167"><a class="l" href="#167">167 </a>                    <span class="php-var">$args</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\\'</span> . <span class="php-var">$stripslashes</span>, <span class="php-quote">'\\'</span> . <span class="php-var">$stripslashes</span>], <span class="php-var">$stripslashes</span>, <span class="php-var">$args</span>);
-</span><span class="l" id="168"><a class="l" href="#168">168 </a>                }
-</span><span class="l" id="169"><a class="l" href="#169">169 </a>                <span class="php-var">$var</span>-&gt;setArgs(<span class="php-var">$args</span>);
-</span><span class="l" id="170"><a class="l" href="#170">170 </a>                <span class="php-keyword1">if</span> ((<span class="php-var">$output</span> = <span class="php-var">$var</span>-&gt;getGlobalArgsOutput()) !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="171"><a class="l" href="#171">171 </a>                    <span class="php-var">$output</span> .= <span class="php-keyword2">str_repeat</span>(<span class="php-quote">"\n"</span>, <span class="php-keyword2">max</span>(<span class="php-num">0</span>, <span class="php-keyword2">substr_count</span>(<span class="php-var">$match</span>[<span class="php-num">0</span>], <span class="php-quote">"\n"</span>) - <span class="php-keyword2">substr_count</span>(<span class="php-var">$output</span>, <span class="php-quote">"\n"</span>) - <span class="php-keyword2">substr_count</span>(<span class="php-var">$format</span>, <span class="php-quote">"\n"</span>)));
-</span><span class="l" id="172"><a class="l" href="#172">172 </a>                    <span class="php-keyword1">if</span> (<span class="php-var">$useVariables</span>) {
-</span><span class="l" id="173"><a class="l" href="#173">173 </a>                        <span class="php-var">$replace</span> = <span class="php-quote">'$__rex_var_content_'</span> . ++self::<span class="php-var">$variableIndex</span>;
-</span><span class="l" id="174"><a class="l" href="#174">174 </a>                        <span class="php-var">$variables</span>[] = <span class="php-var">$replace</span> . <span class="php-quote">' = '</span> . <span class="php-var">$output</span>;
-</span><span class="l" id="175"><a class="l" href="#175">175 </a>                    } <span class="php-keyword1">else</span> {
-</span><span class="l" id="176"><a class="l" href="#176">176 </a>                        <span class="php-var">$replace</span> = <span class="php-var">$output</span>;
-</span><span class="l" id="177"><a class="l" href="#177">177 </a>                    }
-</span><span class="l" id="178"><a class="l" href="#178">178 </a>                    <span class="php-var">$content</span> = <span class="php-keyword2">str_replace</span>(<span class="php-var">$match</span>[<span class="php-num">0</span>], <span class="php-keyword2">sprintf</span>(<span class="php-var">$format</span>, <span class="php-var">$replace</span>), <span class="php-var">$content</span>);
-</span><span class="l" id="179"><a class="l" href="#179">179 </a>                    <span class="php-var">$replaced</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="180"><a class="l" href="#180">180 </a>                }
-</span><span class="l" id="181"><a class="l" href="#181">181 </a>            }
-</span><span class="l" id="182"><a class="l" href="#182">182 </a>
-</span><span class="l" id="183"><a class="l" href="#183">183 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$replaced</span> &amp;&amp; <span class="php-var">$matches</span> = self::getMatches(<span class="php-var">$match</span>[<span class="php-num">2</span>])) {
-</span><span class="l" id="184"><a class="l" href="#184">184 </a>                <span class="php-var">$iterator</span>-&gt;append(<span class="php-keyword1">new</span> ArrayIterator(<span class="php-var">$matches</span>));
-</span><span class="l" id="185"><a class="l" href="#185">185 </a>            }
-</span><span class="l" id="186"><a class="l" href="#186">186 </a>        }
-</span><span class="l" id="187"><a class="l" href="#187">187 </a>
-</span><span class="l" id="188"><a class="l" href="#188">188 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$useVariables</span> &amp;&amp; !<span class="php-keyword1">empty</span>(<span class="php-var">$variables</span>)) {
-</span><span class="l" id="189"><a class="l" href="#189">189 </a>            <span class="php-var">$content</span> = <span class="php-quote">'rex_var::nothing('</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$variables</span>) . <span class="php-quote">') . '</span> . <span class="php-var">$content</span>;
-</span><span class="l" id="190"><a class="l" href="#190">190 </a>        }
-</span><span class="l" id="191"><a class="l" href="#191">191 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
-</span><span class="l" id="192"><a class="l" href="#192">192 </a>    }
-</span><span class="l" id="193"><a class="l" href="#193">193 </a>
-</span><span class="l" id="194"><a class="l" href="#194">194 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="195"><a class="l" href="#195">195 </a><span class="php-comment">     * Returns the REX_VAR matches.
-</span></span><span class="l" id="196"><a class="l" href="#196">196 </a><span class="php-comment">     *
-</span></span><span class="l" id="197"><a class="l" href="#197">197 </a><span class="php-comment">     * @param string $content
-</span></span><span class="l" id="198"><a class="l" href="#198">198 </a><span class="php-comment">     *
-</span></span><span class="l" id="199"><a class="l" href="#199">199 </a><span class="php-comment">     * @return array
-</span></span><span class="l" id="200"><a class="l" href="#200">200 </a><span class="php-comment">     */</span>
-</span><span class="l" id="201"><a class="l" href="#201">201 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMatches" id="_getMatches">getMatches</a>(<span class="php-var">$content</span>)
-</span><span class="l" id="202"><a class="l" href="#202">202 </a>    {
-</span><span class="l" id="203"><a class="l" href="#203">203 </a>        <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'/(REX_[A-Z_]+)\[((?:[^\[\]]|\\\\[\[\]]|(?R))*)(?&lt;!\\\\)\]/s'</span>, <span class="php-var">$content</span>, <span class="php-var">$matches</span>, PREG_SET_ORDER);
-</span><span class="l" id="204"><a class="l" href="#204">204 </a>        <span class="php-keyword1">return</span> <span class="php-var">$matches</span>;
-</span><span class="l" id="205"><a class="l" href="#205">205 </a>    }
-</span><span class="l" id="206"><a class="l" href="#206">206 </a>
-</span><span class="l" id="207"><a class="l" href="#207">207 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="208"><a class="l" href="#208">208 </a><span class="php-comment">     * Sets the arguments.
-</span></span><span class="l" id="209"><a class="l" href="#209">209 </a><span class="php-comment">     *
-</span></span><span class="l" id="210"><a class="l" href="#210">210 </a><span class="php-comment">     * @param string $arg_string
-</span></span><span class="l" id="211"><a class="l" href="#211">211 </a><span class="php-comment">     */</span>
-</span><span class="l" id="212"><a class="l" href="#212">212 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_setArgs" id="_setArgs">setArgs</a>(<span class="php-var">$arg_string</span>)
-</span><span class="l" id="213"><a class="l" href="#213">213 </a>    {
-</span><span class="l" id="214"><a class="l" href="#214">214 </a>        <span class="php-var">$this</span>-&gt;args = rex_string::<span class="php-keyword2">split</span>(<span class="php-var">$arg_string</span>);
-</span><span class="l" id="215"><a class="l" href="#215">215 </a>    }
-</span><span class="l" id="216"><a class="l" href="#216">216 </a>
-</span><span class="l" id="217"><a class="l" href="#217">217 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="218"><a class="l" href="#218">218 </a><span class="php-comment">     * Checks whether the given arguments exists.
-</span></span><span class="l" id="219"><a class="l" href="#219">219 </a><span class="php-comment">     *
-</span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     * @param string $key
-</span></span><span class="l" id="221"><a class="l" href="#221">221 </a><span class="php-comment">     * @param bool   $defaultArg
-</span></span><span class="l" id="222"><a class="l" href="#222">222 </a><span class="php-comment">     *
-</span></span><span class="l" id="223"><a class="l" href="#223">223 </a><span class="php-comment">     * @return bool
-</span></span><span class="l" id="224"><a class="l" href="#224">224 </a><span class="php-comment">     */</span>
-</span><span class="l" id="225"><a class="l" href="#225">225 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_hasArg" id="_hasArg">hasArg</a>(<span class="php-var">$key</span>, <span class="php-var">$defaultArg</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="226"><a class="l" href="#226">226 </a>    {
-</span><span class="l" id="227"><a class="l" href="#227">227 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>]) || <span class="php-var">$defaultArg</span> &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-num">0</span>]);
-</span><span class="l" id="228"><a class="l" href="#228">228 </a>    }
-</span><span class="l" id="229"><a class="l" href="#229">229 </a>
-</span><span class="l" id="230"><a class="l" href="#230">230 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="231"><a class="l" href="#231">231 </a><span class="php-comment">     * Returns the argument.
-</span></span><span class="l" id="232"><a class="l" href="#232">232 </a><span class="php-comment">     *
-</span></span><span class="l" id="233"><a class="l" href="#233">233 </a><span class="php-comment">     * @param string      $key
-</span></span><span class="l" id="234"><a class="l" href="#234">234 </a><span class="php-comment">     * @param null|string $default
-</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     * @param bool        $defaultArg
-</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     *
-</span></span><span class="l" id="237"><a class="l" href="#237">237 </a><span class="php-comment">     * @return null|string
-</span></span><span class="l" id="238"><a class="l" href="#238">238 </a><span class="php-comment">     */</span>
-</span><span class="l" id="239"><a class="l" href="#239">239 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getArg" id="_getArg">getArg</a>(<span class="php-var">$key</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>, <span class="php-var">$defaultArg</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="240"><a class="l" href="#240">240 </a>    {
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;hasArg(<span class="php-var">$key</span>, <span class="php-var">$defaultArg</span>)) {
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>            <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
-</span><span class="l" id="243"><a class="l" href="#243">243 </a>        }
-</span><span class="l" id="244"><a class="l" href="#244">244 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>]) ? <span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>] : <span class="php-var">$this</span>-&gt;args[<span class="php-num">0</span>];
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>    }
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="248"><a class="l" href="#248">248 </a><span class="php-comment">     * Returns the (recursive) parsed argument.
-</span></span><span class="l" id="249"><a class="l" href="#249">249 </a><span class="php-comment">     *
-</span></span><span class="l" id="250"><a class="l" href="#250">250 </a><span class="php-comment">     * @param string      $key
-</span></span><span class="l" id="251"><a class="l" href="#251">251 </a><span class="php-comment">     * @param null|string $default
-</span></span><span class="l" id="252"><a class="l" href="#252">252 </a><span class="php-comment">     * @param bool        $defaultArg
-</span></span><span class="l" id="253"><a class="l" href="#253">253 </a><span class="php-comment">     *
-</span></span><span class="l" id="254"><a class="l" href="#254">254 </a><span class="php-comment">     * @return int|null|string
-</span></span><span class="l" id="255"><a class="l" href="#255">255 </a><span class="php-comment">     */</span>
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getParsedArg" id="_getParsedArg">getParsedArg</a>(<span class="php-var">$key</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>, <span class="php-var">$defaultArg</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>    {
-</span><span class="l" id="258"><a class="l" href="#258">258 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;hasArg(<span class="php-var">$key</span>, <span class="php-var">$defaultArg</span>)) {
-</span><span class="l" id="259"><a class="l" href="#259">259 </a>            <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>        }
-</span><span class="l" id="261"><a class="l" href="#261">261 </a>        <span class="php-var">$arg</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>]) ? <span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>] : <span class="php-var">$this</span>-&gt;args[<span class="php-num">0</span>];
-</span><span class="l" id="262"><a class="l" href="#262">262 </a>        <span class="php-var">$begin</span> = <span class="php-quote">'&lt;&lt;&lt;addslashes&gt;&gt;&gt;'</span>;
-</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-var">$end</span> = <span class="php-quote">'&lt;&lt;&lt;/addslashes&gt;&gt;&gt;'</span>;
-</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-var">$arg</span> = <span class="php-var">$begin</span> . self::replaceVars(<span class="php-var">$arg</span>, <span class="php-var">$end</span> . <span class="php-quote">"' . %s . '"</span> . <span class="php-var">$begin</span>) . <span class="php-var">$end</span>;
-</span><span class="l" id="265"><a class="l" href="#265">265 </a>        <span class="php-var">$arg</span> = <span class="php-keyword2">preg_replace_callback</span>(<span class="php-quote">"@</span><span class="php-var">$begin</span><span class="php-quote">(.*)</span><span class="php-var">$end</span><span class="php-quote">@Us"</span>, <span class="php-keyword1">function</span> (<span class="php-var">$match</span>) {
-</span><span class="l" id="266"><a class="l" href="#266">266 </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">addcslashes</span>(<span class="php-var">$match</span>[<span class="php-num">1</span>], <span class="php-quote">"\'"</span>);
-</span><span class="l" id="267"><a class="l" href="#267">267 </a>        }, <span class="php-var">$arg</span>);
-</span><span class="l" id="268"><a class="l" href="#268">268 </a>        <span class="php-var">$arg</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'@@@OPEN_BRACKET@@@'</span>, <span class="php-quote">'@@@CLOSE_BRACKET@@@'</span>], [<span class="php-quote">'['</span>, <span class="php-quote">']'</span>], <span class="php-var">$arg</span>);
-</span><span class="l" id="269"><a class="l" href="#269">269 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">is_numeric</span>(<span class="php-var">$arg</span>) ? <span class="php-var">$arg</span> : <span class="php-quote">"'</span><span class="php-var">$arg</span><span class="php-quote">'"</span>;
-</span><span class="l" id="270"><a class="l" href="#270">270 </a>    }
-</span><span class="l" id="271"><a class="l" href="#271">271 </a>
-</span><span class="l" id="272"><a class="l" href="#272">272 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="273"><a class="l" href="#273">273 </a><span class="php-comment">     * Checks whether the given envirenment is active.
-</span></span><span class="l" id="274"><a class="l" href="#274">274 </a><span class="php-comment">     *
-</span></span><span class="l" id="275"><a class="l" href="#275">275 </a><span class="php-comment">     * @param int $env Environment
-</span></span><span class="l" id="276"><a class="l" href="#276">276 </a><span class="php-comment">     *
-</span></span><span class="l" id="277"><a class="l" href="#277">277 </a><span class="php-comment">     * @return bool
-</span></span><span class="l" id="278"><a class="l" href="#278">278 </a><span class="php-comment">     */</span>
-</span><span class="l" id="279"><a class="l" href="#279">279 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_environmentIs" id="_environmentIs">environmentIs</a>(<span class="php-var">$env</span>)
-</span><span class="l" id="280"><a class="l" href="#280">280 </a>    {
-</span><span class="l" id="281"><a class="l" href="#281">281 </a>        <span class="php-keyword1">return</span> (self::<span class="php-var">$env</span> &amp; <span class="php-var">$env</span>) == <span class="php-var">$env</span>;
+</span><span class="l" id="160"><a class="l" href="#160">160 </a>        <span class="php-var">$replacements</span> = [];
+</span><span class="l" id="161"><a class="l" href="#161">161 </a>
+</span><span class="l" id="162"><a class="l" href="#162">162 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$iterator</span> <span class="php-keyword1">as</span> <span class="php-var">$match</span>) {
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$replacements</span>[<span class="php-var">$match</span>[<span class="php-num">0</span>]])) {
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>                <span class="php-keyword1">continue</span>;
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>            }
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>            <span class="php-var">$var</span> = self::getVar(<span class="php-var">$match</span>[<span class="php-num">1</span>]);
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>            <span class="php-var">$replaced</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>
+</span><span class="l" id="170"><a class="l" href="#170">170 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$var</span> !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="171"><a class="l" href="#171">171 </a>                <span class="php-var">$args</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\['</span>, <span class="php-quote">'\]'</span>], [<span class="php-quote">'@@@OPEN_BRACKET@@@'</span>, <span class="php-quote">'@@@CLOSE_BRACKET@@@'</span>], <span class="php-var">$match</span>[<span class="php-num">2</span>]);
+</span><span class="l" id="172"><a class="l" href="#172">172 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$stripslashes</span>) {
+</span><span class="l" id="173"><a class="l" href="#173">173 </a>                    <span class="php-var">$args</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'\\'</span> . <span class="php-var">$stripslashes</span>, <span class="php-quote">'\\'</span> . <span class="php-var">$stripslashes</span>], <span class="php-var">$stripslashes</span>, <span class="php-var">$args</span>);
+</span><span class="l" id="174"><a class="l" href="#174">174 </a>                }
+</span><span class="l" id="175"><a class="l" href="#175">175 </a>                <span class="php-var">$var</span>-&gt;setArgs(<span class="php-var">$args</span>);
+</span><span class="l" id="176"><a class="l" href="#176">176 </a>                <span class="php-keyword1">if</span> ((<span class="php-var">$output</span> = <span class="php-var">$var</span>-&gt;getGlobalArgsOutput()) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="177"><a class="l" href="#177">177 </a>                    <span class="php-var">$output</span> .= <span class="php-keyword2">str_repeat</span>(<span class="php-quote">"\n"</span>, <span class="php-keyword2">max</span>(<span class="php-num">0</span>, <span class="php-keyword2">substr_count</span>(<span class="php-var">$match</span>[<span class="php-num">0</span>], <span class="php-quote">"\n"</span>) - <span class="php-keyword2">substr_count</span>(<span class="php-var">$output</span>, <span class="php-quote">"\n"</span>) - <span class="php-keyword2">substr_count</span>(<span class="php-var">$format</span>, <span class="php-quote">"\n"</span>)));
+</span><span class="l" id="178"><a class="l" href="#178">178 </a>                    <span class="php-keyword1">if</span> (<span class="php-var">$useVariables</span>) {
+</span><span class="l" id="179"><a class="l" href="#179">179 </a>                        <span class="php-var">$replace</span> = <span class="php-quote">'$__rex_var_content_'</span> . ++self::<span class="php-var">$variableIndex</span>;
+</span><span class="l" id="180"><a class="l" href="#180">180 </a>                        <span class="php-var">$variables</span>[] = <span class="php-quote">'/* '</span>. <span class="php-var">$match</span>[<span class="php-num">0</span>] .<span class="php-quote">' */ '</span> . <span class="php-var">$replace</span> . <span class="php-quote">' = '</span> . <span class="php-var">$output</span>;
+</span><span class="l" id="181"><a class="l" href="#181">181 </a>                    } <span class="php-keyword1">else</span> {
+</span><span class="l" id="182"><a class="l" href="#182">182 </a>                        <span class="php-var">$replace</span> = <span class="php-quote">'/* '</span>. <span class="php-var">$match</span>[<span class="php-num">0</span>] .<span class="php-quote">' */ '</span>. <span class="php-var">$output</span>;
+</span><span class="l" id="183"><a class="l" href="#183">183 </a>                    }
+</span><span class="l" id="184"><a class="l" href="#184">184 </a>
+</span><span class="l" id="185"><a class="l" href="#185">185 </a>                    <span class="php-var">$replacements</span>[<span class="php-var">$match</span>[<span class="php-num">0</span>]] = <span class="php-keyword2">sprintf</span>(<span class="php-var">$format</span>, <span class="php-var">$replace</span>);
+</span><span class="l" id="186"><a class="l" href="#186">186 </a>                    <span class="php-var">$replaced</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="187"><a class="l" href="#187">187 </a>                }
+</span><span class="l" id="188"><a class="l" href="#188">188 </a>            }
+</span><span class="l" id="189"><a class="l" href="#189">189 </a>
+</span><span class="l" id="190"><a class="l" href="#190">190 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$replaced</span> &amp;&amp; <span class="php-var">$matches</span> = self::getMatches(<span class="php-var">$match</span>[<span class="php-num">2</span>])) {
+</span><span class="l" id="191"><a class="l" href="#191">191 </a>                <span class="php-var">$iterator</span>-&gt;append(<span class="php-keyword1">new</span> ArrayIterator(<span class="php-var">$matches</span>));
+</span><span class="l" id="192"><a class="l" href="#192">192 </a>            }
+</span><span class="l" id="193"><a class="l" href="#193">193 </a>        }
+</span><span class="l" id="194"><a class="l" href="#194">194 </a>
+</span><span class="l" id="195"><a class="l" href="#195">195 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$replacements</span>) {
+</span><span class="l" id="196"><a class="l" href="#196">196 </a>            <span class="php-var">$content</span> = <span class="php-keyword2">strtr</span>(<span class="php-var">$content</span>, <span class="php-var">$replacements</span>);
+</span><span class="l" id="197"><a class="l" href="#197">197 </a>        }
+</span><span class="l" id="198"><a class="l" href="#198">198 </a>
+</span><span class="l" id="199"><a class="l" href="#199">199 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$useVariables</span> &amp;&amp; !<span class="php-keyword1">empty</span>(<span class="php-var">$variables</span>)) {
+</span><span class="l" id="200"><a class="l" href="#200">200 </a>            <span class="php-var">$content</span> = <span class="php-quote">'rex_var::nothing('</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$variables</span>) . <span class="php-quote">') . '</span> . <span class="php-var">$content</span>;
+</span><span class="l" id="201"><a class="l" href="#201">201 </a>        }
+</span><span class="l" id="202"><a class="l" href="#202">202 </a>
+</span><span class="l" id="203"><a class="l" href="#203">203 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span class="l" id="204"><a class="l" href="#204">204 </a>    }
+</span><span class="l" id="205"><a class="l" href="#205">205 </a>
+</span><span class="l" id="206"><a class="l" href="#206">206 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="207"><a class="l" href="#207">207 </a><span class="php-comment">     * Returns the REX_VAR matches.
+</span></span><span class="l" id="208"><a class="l" href="#208">208 </a><span class="php-comment">     *
+</span></span><span class="l" id="209"><a class="l" href="#209">209 </a><span class="php-comment">     * @param string $content
+</span></span><span class="l" id="210"><a class="l" href="#210">210 </a><span class="php-comment">     *
+</span></span><span class="l" id="211"><a class="l" href="#211">211 </a><span class="php-comment">     * @return array
+</span></span><span class="l" id="212"><a class="l" href="#212">212 </a><span class="php-comment">     */</span>
+</span><span class="l" id="213"><a class="l" href="#213">213 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getMatches" id="_getMatches">getMatches</a>(<span class="php-var">$content</span>)
+</span><span class="l" id="214"><a class="l" href="#214">214 </a>    {
+</span><span class="l" id="215"><a class="l" href="#215">215 </a>        <span class="php-keyword2">preg_match_all</span>(<span class="php-quote">'/(REX_[A-Z_]+)\[((?:[^\[\]]|\\\\[\[\]]|(?R))*)(?&lt;!\\\\)\]/s'</span>, <span class="php-var">$content</span>, <span class="php-var">$matches</span>, PREG_SET_ORDER);
+</span><span class="l" id="216"><a class="l" href="#216">216 </a>        <span class="php-keyword1">return</span> <span class="php-var">$matches</span>;
+</span><span class="l" id="217"><a class="l" href="#217">217 </a>    }
+</span><span class="l" id="218"><a class="l" href="#218">218 </a>
+</span><span class="l" id="219"><a class="l" href="#219">219 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     * Sets the arguments.
+</span></span><span class="l" id="221"><a class="l" href="#221">221 </a><span class="php-comment">     *
+</span></span><span class="l" id="222"><a class="l" href="#222">222 </a><span class="php-comment">     * @param string $arg_string
+</span></span><span class="l" id="223"><a class="l" href="#223">223 </a><span class="php-comment">     */</span>
+</span><span class="l" id="224"><a class="l" href="#224">224 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_setArgs" id="_setArgs">setArgs</a>(<span class="php-var">$arg_string</span>)
+</span><span class="l" id="225"><a class="l" href="#225">225 </a>    {
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>        <span class="php-var">$this</span>-&gt;args = rex_string::<span class="php-keyword2">split</span>(<span class="php-var">$arg_string</span>);
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>    }
+</span><span class="l" id="228"><a class="l" href="#228">228 </a>
+</span><span class="l" id="229"><a class="l" href="#229">229 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="230"><a class="l" href="#230">230 </a><span class="php-comment">     * Checks whether the given arguments exists.
+</span></span><span class="l" id="231"><a class="l" href="#231">231 </a><span class="php-comment">     *
+</span></span><span class="l" id="232"><a class="l" href="#232">232 </a><span class="php-comment">     * @param string $key
+</span></span><span class="l" id="233"><a class="l" href="#233">233 </a><span class="php-comment">     * @param bool   $defaultArg
+</span></span><span class="l" id="234"><a class="l" href="#234">234 </a><span class="php-comment">     *
+</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     * @return bool
+</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     */</span>
+</span><span class="l" id="237"><a class="l" href="#237">237 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_hasArg" id="_hasArg">hasArg</a>(<span class="php-var">$key</span>, <span class="php-var">$defaultArg</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="238"><a class="l" href="#238">238 </a>    {
+</span><span class="l" id="239"><a class="l" href="#239">239 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>]) || <span class="php-var">$defaultArg</span> &amp;&amp; <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-num">0</span>]);
+</span><span class="l" id="240"><a class="l" href="#240">240 </a>    }
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="243"><a class="l" href="#243">243 </a><span class="php-comment">     * Returns the argument.
+</span></span><span class="l" id="244"><a class="l" href="#244">244 </a><span class="php-comment">     *
+</span></span><span class="l" id="245"><a class="l" href="#245">245 </a><span class="php-comment">     * @param string      $key
+</span></span><span class="l" id="246"><a class="l" href="#246">246 </a><span class="php-comment">     * @param null|string $default
+</span></span><span class="l" id="247"><a class="l" href="#247">247 </a><span class="php-comment">     * @param bool        $defaultArg
+</span></span><span class="l" id="248"><a class="l" href="#248">248 </a><span class="php-comment">     *
+</span></span><span class="l" id="249"><a class="l" href="#249">249 </a><span class="php-comment">     * @return null|string
+</span></span><span class="l" id="250"><a class="l" href="#250">250 </a><span class="php-comment">     */</span>
+</span><span class="l" id="251"><a class="l" href="#251">251 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getArg" id="_getArg">getArg</a>(<span class="php-var">$key</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>, <span class="php-var">$defaultArg</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>    {
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;hasArg(<span class="php-var">$key</span>, <span class="php-var">$defaultArg</span>)) {
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>            <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>        }
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>]) ? <span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>] : <span class="php-var">$this</span>-&gt;args[<span class="php-num">0</span>];
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>    }
+</span><span class="l" id="258"><a class="l" href="#258">258 </a>
+</span><span class="l" id="259"><a class="l" href="#259">259 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="260"><a class="l" href="#260">260 </a><span class="php-comment">     * Returns the (recursive) parsed argument.
+</span></span><span class="l" id="261"><a class="l" href="#261">261 </a><span class="php-comment">     *
+</span></span><span class="l" id="262"><a class="l" href="#262">262 </a><span class="php-comment">     * @param string      $key
+</span></span><span class="l" id="263"><a class="l" href="#263">263 </a><span class="php-comment">     * @param null|string $default
+</span></span><span class="l" id="264"><a class="l" href="#264">264 </a><span class="php-comment">     * @param bool        $defaultArg
+</span></span><span class="l" id="265"><a class="l" href="#265">265 </a><span class="php-comment">     *
+</span></span><span class="l" id="266"><a class="l" href="#266">266 </a><span class="php-comment">     * @return int|null|string
+</span></span><span class="l" id="267"><a class="l" href="#267">267 </a><span class="php-comment">     */</span>
+</span><span class="l" id="268"><a class="l" href="#268">268 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getParsedArg" id="_getParsedArg">getParsedArg</a>(<span class="php-var">$key</span>, <span class="php-var">$default</span> = <span class="php-keyword1">null</span>, <span class="php-var">$defaultArg</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="269"><a class="l" href="#269">269 </a>    {
+</span><span class="l" id="270"><a class="l" href="#270">270 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;hasArg(<span class="php-var">$key</span>, <span class="php-var">$defaultArg</span>)) {
+</span><span class="l" id="271"><a class="l" href="#271">271 </a>            <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
+</span><span class="l" id="272"><a class="l" href="#272">272 </a>        }
+</span><span class="l" id="273"><a class="l" href="#273">273 </a>        <span class="php-var">$arg</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>]) ? <span class="php-var">$this</span>-&gt;args[<span class="php-var">$key</span>] : <span class="php-var">$this</span>-&gt;args[<span class="php-num">0</span>];
+</span><span class="l" id="274"><a class="l" href="#274">274 </a>        <span class="php-var">$begin</span> = <span class="php-quote">'&lt;&lt;&lt;addslashes&gt;&gt;&gt;'</span>;
+</span><span class="l" id="275"><a class="l" href="#275">275 </a>        <span class="php-var">$end</span> = <span class="php-quote">'&lt;&lt;&lt;/addslashes&gt;&gt;&gt;'</span>;
+</span><span class="l" id="276"><a class="l" href="#276">276 </a>        <span class="php-var">$arg</span> = <span class="php-var">$begin</span> . self::replaceVars(<span class="php-var">$arg</span>, <span class="php-var">$end</span> . <span class="php-quote">"' . %s . '"</span> . <span class="php-var">$begin</span>) . <span class="php-var">$end</span>;
+</span><span class="l" id="277"><a class="l" href="#277">277 </a>        <span class="php-var">$arg</span> = <span class="php-keyword2">preg_replace_callback</span>(<span class="php-quote">"@</span><span class="php-var">$begin</span><span class="php-quote">(.*)</span><span class="php-var">$end</span><span class="php-quote">@Us"</span>, <span class="php-keyword1">function</span> (<span class="php-var">$match</span>) {
+</span><span class="l" id="278"><a class="l" href="#278">278 </a>            <span class="php-keyword1">return</span> <span class="php-keyword2">addcslashes</span>(<span class="php-var">$match</span>[<span class="php-num">1</span>], <span class="php-quote">"\'"</span>);
+</span><span class="l" id="279"><a class="l" href="#279">279 </a>        }, <span class="php-var">$arg</span>);
+</span><span class="l" id="280"><a class="l" href="#280">280 </a>        <span class="php-var">$arg</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'@@@OPEN_BRACKET@@@'</span>, <span class="php-quote">'@@@CLOSE_BRACKET@@@'</span>], [<span class="php-quote">'['</span>, <span class="php-quote">']'</span>], <span class="php-var">$arg</span>);
+</span><span class="l" id="281"><a class="l" href="#281">281 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">is_numeric</span>(<span class="php-var">$arg</span>) ? <span class="php-var">$arg</span> : <span class="php-quote">"'</span><span class="php-var">$arg</span><span class="php-quote">'"</span>;
 </span><span class="l" id="282"><a class="l" href="#282">282 </a>    }
 </span><span class="l" id="283"><a class="l" href="#283">283 </a>
 </span><span class="l" id="284"><a class="l" href="#284">284 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="285"><a class="l" href="#285">285 </a><span class="php-comment">     * Returns the context.
+</span></span><span class="l" id="285"><a class="l" href="#285">285 </a><span class="php-comment">     * Checks whether the given envirenment is active.
 </span></span><span class="l" id="286"><a class="l" href="#286">286 </a><span class="php-comment">     *
-</span></span><span class="l" id="287"><a class="l" href="#287">287 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="288"><a class="l" href="#288">288 </a><span class="php-comment">     */</span>
-</span><span class="l" id="289"><a class="l" href="#289">289 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getContext" id="_getContext">getContext</a>()
-</span><span class="l" id="290"><a class="l" href="#290">290 </a>    {
-</span><span class="l" id="291"><a class="l" href="#291">291 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$context</span>;
-</span><span class="l" id="292"><a class="l" href="#292">292 </a>    }
-</span><span class="l" id="293"><a class="l" href="#293">293 </a>
-</span><span class="l" id="294"><a class="l" href="#294">294 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="295"><a class="l" href="#295">295 </a><span class="php-comment">     * Returns the context data.
-</span></span><span class="l" id="296"><a class="l" href="#296">296 </a><span class="php-comment">     *
-</span></span><span class="l" id="297"><a class="l" href="#297">297 </a><span class="php-comment">     * @return mixed
-</span></span><span class="l" id="298"><a class="l" href="#298">298 </a><span class="php-comment">     */</span>
-</span><span class="l" id="299"><a class="l" href="#299">299 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getContextData" id="_getContextData">getContextData</a>()
-</span><span class="l" id="300"><a class="l" href="#300">300 </a>    {
-</span><span class="l" id="301"><a class="l" href="#301">301 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$contextData</span>;
-</span><span class="l" id="302"><a class="l" href="#302">302 </a>    }
-</span><span class="l" id="303"><a class="l" href="#303">303 </a>
-</span><span class="l" id="304"><a class="l" href="#304">304 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="305"><a class="l" href="#305">305 </a><span class="php-comment">     * Returns the output.
-</span></span><span class="l" id="306"><a class="l" href="#306">306 </a><span class="php-comment">     *
-</span></span><span class="l" id="307"><a class="l" href="#307">307 </a><span class="php-comment">     * @return bool|string
-</span></span><span class="l" id="308"><a class="l" href="#308">308 </a><span class="php-comment">     */</span>
-</span><span class="l" id="309"><a class="l" href="#309">309 </a>    <span class="php-keyword1">abstract</span> <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getOutput" id="_getOutput">getOutput</a>();
-</span><span class="l" id="310"><a class="l" href="#310">310 </a>
-</span><span class="l" id="311"><a class="l" href="#311">311 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="312"><a class="l" href="#312">312 </a><span class="php-comment">     * Quotes the string for php context.
-</span></span><span class="l" id="313"><a class="l" href="#313">313 </a><span class="php-comment">     *
-</span></span><span class="l" id="314"><a class="l" href="#314">314 </a><span class="php-comment">     * @param string $string
-</span></span><span class="l" id="315"><a class="l" href="#315">315 </a><span class="php-comment">     *
-</span></span><span class="l" id="316"><a class="l" href="#316">316 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="317"><a class="l" href="#317">317 </a><span class="php-comment">     */</span>
-</span><span class="l" id="318"><a class="l" href="#318">318 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_quote" id="_quote">quote</a>(<span class="php-var">$string</span>)
-</span><span class="l" id="319"><a class="l" href="#319">319 </a>    {
-</span><span class="l" id="320"><a class="l" href="#320">320 </a>        <span class="php-var">$string</span> = <span class="php-keyword2">addcslashes</span>(<span class="php-var">$string</span>, <span class="php-quote">"\\'"</span>);
-</span><span class="l" id="321"><a class="l" href="#321">321 </a>        <span class="php-var">$string</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'/\v+/'</span>, <span class="php-quote">'\' . "$0" . \''</span>, <span class="php-var">$string</span>);
-</span><span class="l" id="322"><a class="l" href="#322">322 </a>        <span class="php-var">$string</span> = <span class="php-keyword2">addcslashes</span>(<span class="php-var">$string</span>, <span class="php-quote">"\r\n"</span>);
-</span><span class="l" id="323"><a class="l" href="#323">323 </a>        <span class="php-keyword1">return</span> <span class="php-quote">"'"</span> . <span class="php-var">$string</span> . <span class="php-quote">"'"</span>;
-</span><span class="l" id="324"><a class="l" href="#324">324 </a>    }
-</span><span class="l" id="325"><a class="l" href="#325">325 </a>
-</span><span class="l" id="326"><a class="l" href="#326">326 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="327"><a class="l" href="#327">327 </a><span class="php-comment">     * Returns the output in consideration of the global args.
-</span></span><span class="l" id="328"><a class="l" href="#328">328 </a><span class="php-comment">     *
-</span></span><span class="l" id="329"><a class="l" href="#329">329 </a><span class="php-comment">     * @return bool|string
-</span></span><span class="l" id="330"><a class="l" href="#330">330 </a><span class="php-comment">     */</span>
-</span><span class="l" id="331"><a class="l" href="#331">331 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getGlobalArgsOutput" id="_getGlobalArgsOutput">getGlobalArgsOutput</a>()
-</span><span class="l" id="332"><a class="l" href="#332">332 </a>    {
-</span><span class="l" id="333"><a class="l" href="#333">333 </a>        <span class="php-keyword1">if</span> ((<span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;getOutput()) === <span class="php-keyword1">false</span>) {
-</span><span class="l" id="334"><a class="l" href="#334">334 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="335"><a class="l" href="#335">335 </a>        }
-</span><span class="l" id="336"><a class="l" href="#336">336 </a>
-</span><span class="l" id="337"><a class="l" href="#337">337 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'callback'</span>)) {
-</span><span class="l" id="338"><a class="l" href="#338">338 </a>            <span class="php-var">$args</span> = [<span class="php-quote">"'subject' =&gt; "</span> . <span class="php-var">$content</span>];
-</span><span class="l" id="339"><a class="l" href="#339">339 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;args <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="340"><a class="l" href="#340">340 </a>                <span class="php-var">$args</span>[] = <span class="php-quote">"'</span><span class="php-var">$key</span><span class="php-quote">' =&gt; "</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-var">$key</span>);
-</span><span class="l" id="341"><a class="l" href="#341">341 </a>            }
-</span><span class="l" id="342"><a class="l" href="#342">342 </a>            <span class="php-var">$args</span> = <span class="php-quote">'['</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$args</span>) . <span class="php-quote">']'</span>;
-</span><span class="l" id="343"><a class="l" href="#343">343 </a>            <span class="php-keyword1">return</span> <span class="php-quote">'call_user_func('</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'callback'</span>) . <span class="php-quote">', '</span> . <span class="php-var">$args</span> . <span class="php-quote">')'</span>;
-</span><span class="l" id="344"><a class="l" href="#344">344 </a>        }
-</span><span class="l" id="345"><a class="l" href="#345">345 </a>
-</span><span class="l" id="346"><a class="l" href="#346">346 </a>        <span class="php-var">$prefix</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'prefix'</span>) ? <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'prefix'</span>) . <span class="php-quote">' . '</span> : <span class="php-quote">''</span>;
-</span><span class="l" id="347"><a class="l" href="#347">347 </a>        <span class="php-var">$suffix</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'suffix'</span>) ? <span class="php-quote">' . '</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'suffix'</span>) : <span class="php-quote">''</span>;
-</span><span class="l" id="348"><a class="l" href="#348">348 </a>        <span class="php-var">$instead</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'instead'</span>);
-</span><span class="l" id="349"><a class="l" href="#349">349 </a>        <span class="php-var">$ifempty</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'ifempty'</span>);
-</span><span class="l" id="350"><a class="l" href="#350">350 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$prefix</span> || <span class="php-var">$suffix</span> || <span class="php-var">$instead</span> || <span class="php-var">$ifempty</span>) {
-</span><span class="l" id="351"><a class="l" href="#351">351 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$instead</span>) {
-</span><span class="l" id="352"><a class="l" href="#352">352 </a>                <span class="php-var">$if</span> = <span class="php-var">$content</span>;
-</span><span class="l" id="353"><a class="l" href="#353">353 </a>                <span class="php-var">$then</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'instead'</span>);
-</span><span class="l" id="354"><a class="l" href="#354">354 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="355"><a class="l" href="#355">355 </a>                <span class="php-var">$if</span> = <span class="php-quote">'$__rex_var_content_'</span> . ++self::<span class="php-var">$variableIndex</span> . <span class="php-quote">' = '</span> . <span class="php-var">$content</span>;
-</span><span class="l" id="356"><a class="l" href="#356">356 </a>                <span class="php-var">$then</span> = <span class="php-quote">'$__rex_var_content_'</span> . self::<span class="php-var">$variableIndex</span>;
-</span><span class="l" id="357"><a class="l" href="#357">357 </a>            }
-</span><span class="l" id="358"><a class="l" href="#358">358 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$ifempty</span>) {
-</span><span class="l" id="359"><a class="l" href="#359">359 </a>                <span class="php-keyword1">return</span> <span class="php-var">$prefix</span> . <span class="php-quote">'(('</span> . <span class="php-var">$if</span> . <span class="php-quote">') ? '</span> . <span class="php-var">$then</span> . <span class="php-quote">' : '</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'ifempty'</span>) . <span class="php-quote">')'</span> . <span class="php-var">$suffix</span>;
-</span><span class="l" id="360"><a class="l" href="#360">360 </a>            }
-</span><span class="l" id="361"><a class="l" href="#361">361 </a>            <span class="php-keyword1">return</span> <span class="php-quote">'(('</span> . <span class="php-var">$if</span> . <span class="php-quote">') ? '</span> . <span class="php-var">$prefix</span> . <span class="php-var">$then</span> . <span class="php-var">$suffix</span> . <span class="php-quote">" : '')"</span>;
-</span><span class="l" id="362"><a class="l" href="#362">362 </a>        }
-</span><span class="l" id="363"><a class="l" href="#363">363 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
-</span><span class="l" id="364"><a class="l" href="#364">364 </a>    }
-</span><span class="l" id="365"><a class="l" href="#365">365 </a>
-</span><span class="l" id="366"><a class="l" href="#366">366 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="367"><a class="l" href="#367">367 </a><span class="php-comment">     * Converts a REX_VAR content to a PHP array.
-</span></span><span class="l" id="368"><a class="l" href="#368">368 </a><span class="php-comment">     *
-</span></span><span class="l" id="369"><a class="l" href="#369">369 </a><span class="php-comment">     * @param string $value
-</span></span><span class="l" id="370"><a class="l" href="#370">370 </a><span class="php-comment">     *
-</span></span><span class="l" id="371"><a class="l" href="#371">371 </a><span class="php-comment">     * @return array|null
-</span></span><span class="l" id="372"><a class="l" href="#372">372 </a><span class="php-comment">     */</span>
-</span><span class="l" id="373"><a class="l" href="#373">373 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_toArray" id="_toArray">toArray</a>(<span class="php-var">$value</span>)
-</span><span class="l" id="374"><a class="l" href="#374">374 </a>    {
-</span><span class="l" id="375"><a class="l" href="#375">375 </a>        <span class="php-var">$value</span> = <span class="php-keyword2">json_decode</span>(<span class="php-keyword2">htmlspecialchars_decode</span>(<span class="php-var">$value</span>), <span class="php-keyword1">true</span>);
-</span><span class="l" id="376"><a class="l" href="#376">376 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>) ? <span class="php-var">$value</span> : <span class="php-keyword1">null</span>;
-</span><span class="l" id="377"><a class="l" href="#377">377 </a>    }
-</span><span class="l" id="378"><a class="l" href="#378">378 </a>
-</span><span class="l" id="379"><a class="l" href="#379">379 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="380"><a class="l" href="#380">380 </a><span class="php-comment">     * Returns empty string.
-</span></span><span class="l" id="381"><a class="l" href="#381">381 </a><span class="php-comment">     *
-</span></span><span class="l" id="382"><a class="l" href="#382">382 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="383"><a class="l" href="#383">383 </a><span class="php-comment">     */</span>
-</span><span class="l" id="384"><a class="l" href="#384">384 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_nothing" id="_nothing">nothing</a>()
-</span><span class="l" id="385"><a class="l" href="#385">385 </a>    {
-</span><span class="l" id="386"><a class="l" href="#386">386 </a>        <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
-</span><span class="l" id="387"><a class="l" href="#387">387 </a>    }
-</span><span class="l" id="388"><a class="l" href="#388">388 </a>}
-</span><span class="l" id="389"><a class="l" href="#389">389 </a></span></code></pre>
+</span></span><span class="l" id="287"><a class="l" href="#287">287 </a><span class="php-comment">     * @param int $env Environment
+</span></span><span class="l" id="288"><a class="l" href="#288">288 </a><span class="php-comment">     *
+</span></span><span class="l" id="289"><a class="l" href="#289">289 </a><span class="php-comment">     * @return bool
+</span></span><span class="l" id="290"><a class="l" href="#290">290 </a><span class="php-comment">     */</span>
+</span><span class="l" id="291"><a class="l" href="#291">291 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_environmentIs" id="_environmentIs">environmentIs</a>(<span class="php-var">$env</span>)
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>    {
+</span><span class="l" id="293"><a class="l" href="#293">293 </a>        <span class="php-keyword1">return</span> (self::<span class="php-var">$env</span> &amp; <span class="php-var">$env</span>) == <span class="php-var">$env</span>;
+</span><span class="l" id="294"><a class="l" href="#294">294 </a>    }
+</span><span class="l" id="295"><a class="l" href="#295">295 </a>
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="297"><a class="l" href="#297">297 </a><span class="php-comment">     * Returns the context.
+</span></span><span class="l" id="298"><a class="l" href="#298">298 </a><span class="php-comment">     *
+</span></span><span class="l" id="299"><a class="l" href="#299">299 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="300"><a class="l" href="#300">300 </a><span class="php-comment">     */</span>
+</span><span class="l" id="301"><a class="l" href="#301">301 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getContext" id="_getContext">getContext</a>()
+</span><span class="l" id="302"><a class="l" href="#302">302 </a>    {
+</span><span class="l" id="303"><a class="l" href="#303">303 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$context</span>;
+</span><span class="l" id="304"><a class="l" href="#304">304 </a>    }
+</span><span class="l" id="305"><a class="l" href="#305">305 </a>
+</span><span class="l" id="306"><a class="l" href="#306">306 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="307"><a class="l" href="#307">307 </a><span class="php-comment">     * Returns the context data.
+</span></span><span class="l" id="308"><a class="l" href="#308">308 </a><span class="php-comment">     *
+</span></span><span class="l" id="309"><a class="l" href="#309">309 </a><span class="php-comment">     * @return mixed
+</span></span><span class="l" id="310"><a class="l" href="#310">310 </a><span class="php-comment">     */</span>
+</span><span class="l" id="311"><a class="l" href="#311">311 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getContextData" id="_getContextData">getContextData</a>()
+</span><span class="l" id="312"><a class="l" href="#312">312 </a>    {
+</span><span class="l" id="313"><a class="l" href="#313">313 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$contextData</span>;
+</span><span class="l" id="314"><a class="l" href="#314">314 </a>    }
+</span><span class="l" id="315"><a class="l" href="#315">315 </a>
+</span><span class="l" id="316"><a class="l" href="#316">316 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="317"><a class="l" href="#317">317 </a><span class="php-comment">     * Returns the output.
+</span></span><span class="l" id="318"><a class="l" href="#318">318 </a><span class="php-comment">     *
+</span></span><span class="l" id="319"><a class="l" href="#319">319 </a><span class="php-comment">     * @return bool|string
+</span></span><span class="l" id="320"><a class="l" href="#320">320 </a><span class="php-comment">     */</span>
+</span><span class="l" id="321"><a class="l" href="#321">321 </a>    <span class="php-keyword1">abstract</span> <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a href="#_getOutput" id="_getOutput">getOutput</a>();
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>
+</span><span class="l" id="323"><a class="l" href="#323">323 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="324"><a class="l" href="#324">324 </a><span class="php-comment">     * Quotes the string for php context.
+</span></span><span class="l" id="325"><a class="l" href="#325">325 </a><span class="php-comment">     *
+</span></span><span class="l" id="326"><a class="l" href="#326">326 </a><span class="php-comment">     * @param string $string
+</span></span><span class="l" id="327"><a class="l" href="#327">327 </a><span class="php-comment">     *
+</span></span><span class="l" id="328"><a class="l" href="#328">328 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="329"><a class="l" href="#329">329 </a><span class="php-comment">     */</span>
+</span><span class="l" id="330"><a class="l" href="#330">330 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_quote" id="_quote">quote</a>(<span class="php-var">$string</span>)
+</span><span class="l" id="331"><a class="l" href="#331">331 </a>    {
+</span><span class="l" id="332"><a class="l" href="#332">332 </a>        <span class="php-var">$string</span> = <span class="php-keyword2">addcslashes</span>(<span class="php-var">$string</span>, <span class="php-quote">"\\'"</span>);
+</span><span class="l" id="333"><a class="l" href="#333">333 </a>        <span class="php-var">$string</span> = <span class="php-keyword2">preg_replace</span>(<span class="php-quote">'/\v+/'</span>, <span class="php-quote">'\' . "$0" . \''</span>, <span class="php-var">$string</span>);
+</span><span class="l" id="334"><a class="l" href="#334">334 </a>        <span class="php-var">$string</span> = <span class="php-keyword2">addcslashes</span>(<span class="php-var">$string</span>, <span class="php-quote">"\r\n"</span>);
+</span><span class="l" id="335"><a class="l" href="#335">335 </a>        <span class="php-keyword1">return</span> <span class="php-quote">"'"</span> . <span class="php-var">$string</span> . <span class="php-quote">"'"</span>;
+</span><span class="l" id="336"><a class="l" href="#336">336 </a>    }
+</span><span class="l" id="337"><a class="l" href="#337">337 </a>
+</span><span class="l" id="338"><a class="l" href="#338">338 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="339"><a class="l" href="#339">339 </a><span class="php-comment">     * Returns the output in consideration of the global args.
+</span></span><span class="l" id="340"><a class="l" href="#340">340 </a><span class="php-comment">     *
+</span></span><span class="l" id="341"><a class="l" href="#341">341 </a><span class="php-comment">     * @return bool|string
+</span></span><span class="l" id="342"><a class="l" href="#342">342 </a><span class="php-comment">     */</span>
+</span><span class="l" id="343"><a class="l" href="#343">343 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getGlobalArgsOutput" id="_getGlobalArgsOutput">getGlobalArgsOutput</a>()
+</span><span class="l" id="344"><a class="l" href="#344">344 </a>    {
+</span><span class="l" id="345"><a class="l" href="#345">345 </a>        <span class="php-keyword1">if</span> ((<span class="php-var">$content</span> = <span class="php-var">$this</span>-&gt;getOutput()) === <span class="php-keyword1">false</span>) {
+</span><span class="l" id="346"><a class="l" href="#346">346 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="347"><a class="l" href="#347">347 </a>        }
+</span><span class="l" id="348"><a class="l" href="#348">348 </a>
+</span><span class="l" id="349"><a class="l" href="#349">349 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'callback'</span>)) {
+</span><span class="l" id="350"><a class="l" href="#350">350 </a>            <span class="php-var">$args</span> = [<span class="php-quote">"'subject' =&gt; "</span> . <span class="php-var">$content</span>];
+</span><span class="l" id="351"><a class="l" href="#351">351 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;args <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="352"><a class="l" href="#352">352 </a>                <span class="php-var">$args</span>[] = <span class="php-quote">"'</span><span class="php-var">$key</span><span class="php-quote">' =&gt; "</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-var">$key</span>);
+</span><span class="l" id="353"><a class="l" href="#353">353 </a>            }
+</span><span class="l" id="354"><a class="l" href="#354">354 </a>            <span class="php-var">$args</span> = <span class="php-quote">'['</span> . <span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$args</span>) . <span class="php-quote">']'</span>;
+</span><span class="l" id="355"><a class="l" href="#355">355 </a>            <span class="php-keyword1">return</span> <span class="php-quote">'call_user_func('</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'callback'</span>) . <span class="php-quote">', '</span> . <span class="php-var">$args</span> . <span class="php-quote">')'</span>;
+</span><span class="l" id="356"><a class="l" href="#356">356 </a>        }
+</span><span class="l" id="357"><a class="l" href="#357">357 </a>
+</span><span class="l" id="358"><a class="l" href="#358">358 </a>        <span class="php-var">$prefix</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'prefix'</span>) ? <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'prefix'</span>) . <span class="php-quote">' . '</span> : <span class="php-quote">''</span>;
+</span><span class="l" id="359"><a class="l" href="#359">359 </a>        <span class="php-var">$suffix</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'suffix'</span>) ? <span class="php-quote">' . '</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'suffix'</span>) : <span class="php-quote">''</span>;
+</span><span class="l" id="360"><a class="l" href="#360">360 </a>        <span class="php-var">$instead</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'instead'</span>);
+</span><span class="l" id="361"><a class="l" href="#361">361 </a>        <span class="php-var">$ifempty</span> = <span class="php-var">$this</span>-&gt;hasArg(<span class="php-quote">'ifempty'</span>);
+</span><span class="l" id="362"><a class="l" href="#362">362 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$prefix</span> || <span class="php-var">$suffix</span> || <span class="php-var">$instead</span> || <span class="php-var">$ifempty</span>) {
+</span><span class="l" id="363"><a class="l" href="#363">363 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$instead</span>) {
+</span><span class="l" id="364"><a class="l" href="#364">364 </a>                <span class="php-var">$if</span> = <span class="php-var">$content</span>;
+</span><span class="l" id="365"><a class="l" href="#365">365 </a>                <span class="php-var">$then</span> = <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'instead'</span>);
+</span><span class="l" id="366"><a class="l" href="#366">366 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="367"><a class="l" href="#367">367 </a>                <span class="php-var">$if</span> = <span class="php-quote">'$__rex_var_content_'</span> . ++self::<span class="php-var">$variableIndex</span> . <span class="php-quote">' = '</span> . <span class="php-var">$content</span>;
+</span><span class="l" id="368"><a class="l" href="#368">368 </a>                <span class="php-var">$then</span> = <span class="php-quote">'$__rex_var_content_'</span> . self::<span class="php-var">$variableIndex</span>;
+</span><span class="l" id="369"><a class="l" href="#369">369 </a>            }
+</span><span class="l" id="370"><a class="l" href="#370">370 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$ifempty</span>) {
+</span><span class="l" id="371"><a class="l" href="#371">371 </a>                <span class="php-keyword1">return</span> <span class="php-var">$prefix</span> . <span class="php-quote">'(('</span> . <span class="php-var">$if</span> . <span class="php-quote">') ? '</span> . <span class="php-var">$then</span> . <span class="php-quote">' : '</span> . <span class="php-var">$this</span>-&gt;getParsedArg(<span class="php-quote">'ifempty'</span>) . <span class="php-quote">')'</span> . <span class="php-var">$suffix</span>;
+</span><span class="l" id="372"><a class="l" href="#372">372 </a>            }
+</span><span class="l" id="373"><a class="l" href="#373">373 </a>            <span class="php-keyword1">return</span> <span class="php-quote">'(('</span> . <span class="php-var">$if</span> . <span class="php-quote">') ? '</span> . <span class="php-var">$prefix</span> . <span class="php-var">$then</span> . <span class="php-var">$suffix</span> . <span class="php-quote">" : '')"</span>;
+</span><span class="l" id="374"><a class="l" href="#374">374 </a>        }
+</span><span class="l" id="375"><a class="l" href="#375">375 </a>        <span class="php-keyword1">return</span> <span class="php-var">$content</span>;
+</span><span class="l" id="376"><a class="l" href="#376">376 </a>    }
+</span><span class="l" id="377"><a class="l" href="#377">377 </a>
+</span><span class="l" id="378"><a class="l" href="#378">378 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="379"><a class="l" href="#379">379 </a><span class="php-comment">     * Converts a REX_VAR content to a PHP array.
+</span></span><span class="l" id="380"><a class="l" href="#380">380 </a><span class="php-comment">     *
+</span></span><span class="l" id="381"><a class="l" href="#381">381 </a><span class="php-comment">     * @param string $value
+</span></span><span class="l" id="382"><a class="l" href="#382">382 </a><span class="php-comment">     *
+</span></span><span class="l" id="383"><a class="l" href="#383">383 </a><span class="php-comment">     * @return array|null
+</span></span><span class="l" id="384"><a class="l" href="#384">384 </a><span class="php-comment">     */</span>
+</span><span class="l" id="385"><a class="l" href="#385">385 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_toArray" id="_toArray">toArray</a>(<span class="php-var">$value</span>)
+</span><span class="l" id="386"><a class="l" href="#386">386 </a>    {
+</span><span class="l" id="387"><a class="l" href="#387">387 </a>        <span class="php-var">$value</span> = <span class="php-keyword2">json_decode</span>(<span class="php-keyword2">htmlspecialchars_decode</span>(<span class="php-var">$value</span>), <span class="php-keyword1">true</span>);
+</span><span class="l" id="388"><a class="l" href="#388">388 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">is_array</span>(<span class="php-var">$value</span>) ? <span class="php-var">$value</span> : <span class="php-keyword1">null</span>;
+</span><span class="l" id="389"><a class="l" href="#389">389 </a>    }
+</span><span class="l" id="390"><a class="l" href="#390">390 </a>
+</span><span class="l" id="391"><a class="l" href="#391">391 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="392"><a class="l" href="#392">392 </a><span class="php-comment">     * Returns empty string.
+</span></span><span class="l" id="393"><a class="l" href="#393">393 </a><span class="php-comment">     *
+</span></span><span class="l" id="394"><a class="l" href="#394">394 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="395"><a class="l" href="#395">395 </a><span class="php-comment">     */</span>
+</span><span class="l" id="396"><a class="l" href="#396">396 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_nothing" id="_nothing">nothing</a>()
+</span><span class="l" id="397"><a class="l" href="#397">397 </a>    {
+</span><span class="l" id="398"><a class="l" href="#398">398 </a>        <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
+</span><span class="l" id="399"><a class="l" href="#399">399 </a>    }
+</span><span class="l" id="400"><a class="l" href="#400">400 </a>}
+</span><span class="l" id="401"><a class="l" href="#401">401 </a></span></code></pre>
  </body>
 </html>
