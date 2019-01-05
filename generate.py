@@ -161,8 +161,8 @@ for page in api_docs:
     #    del a['href']
 
     # save modified sources
-    taret_source_soup = bs(template % page_content, "html.parser")
-    htmlOut = taret_source_soup.prettify("utf-8")
+    target_source_soup = bs(template % page_content, "html.parser")
+    htmlOut = target_source_soup.prettify("utf-8")
     with open("%s/%s" % (htmlDestPath, "source-" + page), "wb") as file:
         file.write(htmlOut)
 
