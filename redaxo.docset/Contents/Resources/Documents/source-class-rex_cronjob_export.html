@@ -36,7 +36,7 @@
 </span><span class="l" id="27"><a class="l" href="#27"> 27 </a>        <span class="php-keyword1">if</span> (rex_backup::exportDb(<span class="php-var">$dir</span> . <span class="php-var">$file</span> . <span class="php-var">$ext</span>)) {
 </span><span class="l" id="28"><a class="l" href="#28"> 28 </a>            <span class="php-var">$message</span> = <span class="php-var">$file</span> . <span class="php-var">$ext</span> . <span class="php-quote">' created'</span>;
 </span><span class="l" id="29"><a class="l" href="#29"> 29 </a>
-</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;delete_interval) {
+</span><span class="l" id="30"><a class="l" href="#30"> 30 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'delete_interval'</span>)) {
 </span><span class="l" id="31"><a class="l" href="#31"> 31 </a>                <span class="php-var">$allSqlfiles</span> = <span class="php-keyword2">glob</span>(rex_path::addonData(<span class="php-quote">'backup'</span>, <span class="php-quote">'*'</span>.<span class="php-var">$ext</span>));
 </span><span class="l" id="32"><a class="l" href="#32"> 32 </a>                <span class="php-var">$backups</span> = [];
 </span><span class="l" id="33"><a class="l" href="#33"> 33 </a>                <span class="php-var">$limit</span> = <span class="php-keyword2">strtotime</span>(<span class="php-quote">'-1 month'</span>); <span class="php-comment">// Generelle Vorhaltezeit: 1 Monat</span>
@@ -59,7 +59,7 @@
 </span><span class="l" id="50"><a class="l" href="#50"> 50 </a>
 </span><span class="l" id="51"><a class="l" href="#51"> 51 </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$backups</span> <span class="php-keyword1">as</span> <span class="php-var">$backup</span> =&gt; <span class="php-var">$timestamp</span>) {
 </span><span class="l" id="52"><a class="l" href="#52"> 52 </a>                    <span class="php-var">$stepLast</span> = <span class="php-var">$step</span>;
-</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>                    <span class="php-var">$step</span> = <span class="php-keyword2">date</span>(<span class="php-var">$this</span>-&gt;delete_interval, (int) <span class="php-var">$timestamp</span>);
+</span><span class="l" id="53"><a class="l" href="#53"> 53 </a>                    <span class="php-var">$step</span> = <span class="php-keyword2">date</span>(<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'delete_interval'</span>), (int) <span class="php-var">$timestamp</span>);
 </span><span class="l" id="54"><a class="l" href="#54"> 54 </a>
 </span><span class="l" id="55"><a class="l" href="#55"> 55 </a>                    <span class="php-keyword1">if</span> (<span class="php-var">$stepLast</span> !== <span class="php-var">$step</span>) {
 </span><span class="l" id="56"><a class="l" href="#56"> 56 </a>                        <span class="php-comment">// wenn es zu diesem Interval schon ein Backup gibt</span>
@@ -76,14 +76,14 @@
 </span><span class="l" id="67"><a class="l" href="#67"> 67 </a>                }
 </span><span class="l" id="68"><a class="l" href="#68"> 68 </a>            }
 </span><span class="l" id="69"><a class="l" href="#69"> 69 </a>
-</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;sendmail) {
+</span><span class="l" id="70"><a class="l" href="#70"> 70 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'sendmail'</span>)) {
 </span><span class="l" id="71"><a class="l" href="#71"> 71 </a>                <span class="php-keyword1">if</span> (!rex_addon::get(<span class="php-quote">'phpmailer'</span>)-&gt;isAvailable()) {
 </span><span class="l" id="72"><a class="l" href="#72"> 72 </a>                    <span class="php-var">$this</span>-&gt;setMessage(<span class="php-var">$message</span> . <span class="php-quote">', mail not sent (addon "phpmailer" isn\'t activated)'</span>);
 </span><span class="l" id="73"><a class="l" href="#73"> 73 </a>
 </span><span class="l" id="74"><a class="l" href="#74"> 74 </a>                    <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 </span><span class="l" id="75"><a class="l" href="#75"> 75 </a>                }
 </span><span class="l" id="76"><a class="l" href="#76"> 76 </a>                <span class="php-var">$mail</span> = <span class="php-keyword1">new</span> rex_mailer();
-</span><span class="l" id="77"><a class="l" href="#77"> 77 </a>                <span class="php-var">$mail</span>-&gt;AddAddress(<span class="php-var">$this</span>-&gt;mailaddress);
+</span><span class="l" id="77"><a class="l" href="#77"> 77 </a>                <span class="php-var">$mail</span>-&gt;AddAddress(<span class="php-var">$this</span>-&gt;getParam(<span class="php-quote">'mailaddress'</span>));
 </span><span class="l" id="78"><a class="l" href="#78"> 78 </a>                <span class="php-var">$mail</span>-&gt;Subject = rex_i18n::rawMsg(<span class="php-quote">'backup_mail_subject'</span>);
 </span><span class="l" id="79"><a class="l" href="#79"> 79 </a>                <span class="php-var">$mail</span>-&gt;Body = rex_i18n::rawMsg(<span class="php-quote">'backup_mail_body'</span>, rex::getServerName());
 </span><span class="l" id="80"><a class="l" href="#80"> 80 </a>                <span class="php-var">$mail</span>-&gt;AddAttachment(<span class="php-var">$dir</span> . <span class="php-var">$file</span> . <span class="php-var">$ext</span>, <span class="php-var">$filename</span> . <span class="php-var">$ext</span>);

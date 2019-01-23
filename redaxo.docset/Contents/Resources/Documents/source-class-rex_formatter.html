@@ -298,7 +298,7 @@
 </span><span class="l" id="289"><a class="l" href="#289">289 </a>            <span class="php-var">$value</span> = <span class="php-quote">'http://'</span> . <span class="php-var">$value</span>;
 </span><span class="l" id="290"><a class="l" href="#290">290 </a>        }
 </span><span class="l" id="291"><a class="l" href="#291">291 </a>
-</span><span class="l" id="292"><a class="l" href="#292">292 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'&lt;a href="'</span> . rex_escape(<span class="php-var">$value</span> . <span class="php-var">$format</span>[<span class="php-quote">'params'</span>], <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span> . <span class="php-var">$format</span>[<span class="php-quote">'attr'</span>] . <span class="php-quote">'&gt;'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
+</span><span class="l" id="292"><a class="l" href="#292">292 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'&lt;a href="'</span> . rex_escape(<span class="php-var">$value</span> . <span class="php-var">$format</span>[<span class="php-quote">'params'</span>]) . <span class="php-quote">'"'</span> . <span class="php-var">$format</span>[<span class="php-quote">'attr'</span>] . <span class="php-quote">'&gt;'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
 </span><span class="l" id="293"><a class="l" href="#293">293 </a>    }
 </span><span class="l" id="294"><a class="l" href="#294">294 </a>
 </span><span class="l" id="295"><a class="l" href="#295">295 </a>    <span class="php-comment">/**
@@ -328,7 +328,7 @@
 </span><span class="l" id="319"><a class="l" href="#319">319 </a>            }
 </span><span class="l" id="320"><a class="l" href="#320">320 </a>        }
 </span><span class="l" id="321"><a class="l" href="#321">321 </a>        <span class="php-comment">// Url formatierung</span>
-</span><span class="l" id="322"><a class="l" href="#322">322 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'&lt;a href="mailto:'</span> . rex_escape(<span class="php-var">$value</span> . <span class="php-var">$format</span>[<span class="php-quote">'params'</span>], <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span> . <span class="php-var">$format</span>[<span class="php-quote">'attr'</span>] . <span class="php-quote">'&gt;'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
+</span><span class="l" id="322"><a class="l" href="#322">322 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'&lt;a href="mailto:'</span> . rex_escape(<span class="php-var">$value</span> . <span class="php-var">$format</span>[<span class="php-quote">'params'</span>]) . <span class="php-quote">'"'</span> . <span class="php-var">$format</span>[<span class="php-quote">'attr'</span>] . <span class="php-quote">'&gt;'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'&lt;/a&gt;'</span>;
 </span><span class="l" id="323"><a class="l" href="#323">323 </a>    }
 </span><span class="l" id="324"><a class="l" href="#324">324 </a>
 </span><span class="l" id="325"><a class="l" href="#325">325 </a>    <span class="php-comment">/**

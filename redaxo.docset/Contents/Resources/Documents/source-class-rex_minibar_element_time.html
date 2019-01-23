@@ -16,30 +16,19 @@
 </span><span class="l" id="7"><a class="l" href="#7"> 7 </a>{
 </span><span class="l" id="8"><a class="l" href="#8"> 8 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_render" id="_render">render</a>()
 </span><span class="l" id="9"><a class="l" href="#9"> 9 </a>    {
-</span><span class="l" id="10"><a class="l" href="#10">10 </a>        <span class="php-var">$date</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="11"><a class="l" href="#11">11 </a>        <span class="php-keyword1">if</span> (rex::isBackend()) {
-</span><span class="l" id="12"><a class="l" href="#12">12 </a>            <span class="php-var">$date</span> =
-</span><span class="l" id="13"><a class="l" href="#13">13 </a>                <span class="php-quote">'&lt;span class="rex-minibar-value"&gt;
-</span></span><span class="l" id="14"><a class="l" href="#14">14 </a><span class="php-quote">                    '</span>.rex_i18n::msg(<span class="php-quote">'footer_datetime'</span>, rex_formatter::<span class="php-keyword2">strftime</span>(<span class="php-keyword2">time</span>(), <span class="php-quote">'date'</span>)).<span class="php-quote">'
-</span></span><span class="l" id="15"><a class="l" href="#15">15 </a><span class="php-quote">                &lt;/span&gt;'</span>;
-</span><span class="l" id="16"><a class="l" href="#16">16 </a>        }
-</span><span class="l" id="17"><a class="l" href="#17">17 </a>        <span class="php-keyword1">return</span>
-</span><span class="l" id="18"><a class="l" href="#18">18 </a>        <span class="php-quote">'&lt;div class="rex-minibar-item"&gt;
-</span></span><span class="l" id="19"><a class="l" href="#19">19 </a><span class="php-quote">            '</span>.<span class="php-var">$date</span>.<span class="php-quote">'
-</span></span><span class="l" id="20"><a class="l" href="#20">20 </a><span class="php-quote">            &lt;span class="rex-minibar-value"&gt;
-</span></span><span class="l" id="21"><a class="l" href="#21">21 </a><span class="php-quote">                &lt;span class="rex-js-script-time"&gt;&lt;!--DYN--&gt;'</span>.rex_i18n::msg(<span class="php-quote">'footer_scripttime'</span>, rex::getProperty(<span class="php-quote">'timer'</span>)-&gt;getFormattedDelta(rex_timer::SEC)).<span class="php-quote">'&lt;!--/DYN--&gt;&lt;/span&gt;
-</span></span><span class="l" id="22"><a class="l" href="#22">22 </a><span class="php-quote">            &lt;/span&gt;
-</span></span><span class="l" id="23"><a class="l" href="#23">23 </a><span class="php-quote">        &lt;/div&gt;'</span>;
-</span><span class="l" id="24"><a class="l" href="#24">24 </a>    }
-</span><span class="l" id="25"><a class="l" href="#25">25 </a>
-</span><span class="l" id="26"><a class="l" href="#26">26 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="27"><a class="l" href="#27">27 </a><span class="php-comment">     * {@inheritdoc}
-</span></span><span class="l" id="28"><a class="l" href="#28">28 </a><span class="php-comment">     */</span>
-</span><span class="l" id="29"><a class="l" href="#29">29 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getOrientation" id="_getOrientation">getOrientation</a>()
-</span><span class="l" id="30"><a class="l" href="#30">30 </a>    {
-</span><span class="l" id="31"><a class="l" href="#31">31 </a>        <span class="php-keyword1">return</span> rex_minibar_element::RIGHT;
-</span><span class="l" id="32"><a class="l" href="#32">32 </a>    }
-</span><span class="l" id="33"><a class="l" href="#33">33 </a>}
-</span><span class="l" id="34"><a class="l" href="#34">34 </a></span></code></pre>
+</span><span class="l" id="10"><a class="l" href="#10">10 </a>        <span class="php-keyword1">return</span>
+</span><span class="l" id="11"><a class="l" href="#11">11 </a>        <span class="php-quote">'&lt;div class="rex-minibar-item"&gt;
+</span></span><span class="l" id="12"><a class="l" href="#12">12 </a><span class="php-quote">            &lt;span class="rex-minibar-value"&gt;
+</span></span><span class="l" id="13"><a class="l" href="#13">13 </a><span class="php-quote">                &lt;span class="rex-js-script-time"&gt;&lt;!--DYN--&gt;'</span>.rex_i18n::msg(<span class="php-quote">'footer_scripttime'</span>, rex::getProperty(<span class="php-quote">'timer'</span>)-&gt;getFormattedDelta(rex_timer::SEC)).<span class="php-quote">'&lt;!--/DYN--&gt;&lt;/span&gt;
+</span></span><span class="l" id="14"><a class="l" href="#14">14 </a><span class="php-quote">            &lt;/span&gt;
+</span></span><span class="l" id="15"><a class="l" href="#15">15 </a><span class="php-quote">        &lt;/div&gt;'</span>;
+</span><span class="l" id="16"><a class="l" href="#16">16 </a>    }
+</span><span class="l" id="17"><a class="l" href="#17">17 </a>
+</span><span class="l" id="18"><a class="l" href="#18">18 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getOrientation" id="_getOrientation">getOrientation</a>()
+</span><span class="l" id="19"><a class="l" href="#19">19 </a>    {
+</span><span class="l" id="20"><a class="l" href="#20">20 </a>        <span class="php-keyword1">return</span> rex_minibar_element::RIGHT;
+</span><span class="l" id="21"><a class="l" href="#21">21 </a>    }
+</span><span class="l" id="22"><a class="l" href="#22">22 </a>}
+</span><span class="l" id="23"><a class="l" href="#23">23 </a></span></code></pre>
  </body>
 </html>

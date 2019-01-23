@@ -865,116 +865,128 @@
 </span><span class="l" id="856"><a class="l" href="#856">856 </a>
 </span><span class="l" id="857"><a class="l" href="#857">857 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getColumnDefinition" id="_getColumnDefinition">getColumnDefinition</a>(rex_sql_column <span class="php-var">$column</span>)
 </span><span class="l" id="858"><a class="l" href="#858">858 </a>    {
-</span><span class="l" id="859"><a class="l" href="#859">859 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(
-</span><span class="l" id="860"><a class="l" href="#860">860 </a>            <span class="php-quote">'%s %s %s %s %s'</span>,
-</span><span class="l" id="861"><a class="l" href="#861">861 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$column</span>-&gt;getName()),
-</span><span class="l" id="862"><a class="l" href="#862">862 </a>            <span class="php-var">$column</span>-&gt;<span class="php-keyword2">getType</span>(),
-</span><span class="l" id="863"><a class="l" href="#863">863 </a>            <span class="php-var">$column</span>-&gt;getDefault() ? <span class="php-quote">'DEFAULT '</span>.<span class="php-var">$this</span>-&gt;sql-&gt;escape(<span class="php-var">$column</span>-&gt;getDefault()) : <span class="php-quote">''</span>,
-</span><span class="l" id="864"><a class="l" href="#864">864 </a>            <span class="php-var">$column</span>-&gt;isNullable() ? <span class="php-quote">''</span> : <span class="php-quote">'NOT NULL'</span>,
-</span><span class="l" id="865"><a class="l" href="#865">865 </a>            <span class="php-var">$column</span>-&gt;getExtra()
-</span><span class="l" id="866"><a class="l" href="#866">866 </a>        );
-</span><span class="l" id="867"><a class="l" href="#867">867 </a>    }
-</span><span class="l" id="868"><a class="l" href="#868">868 </a>
-</span><span class="l" id="869"><a class="l" href="#869">869 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getIndexDefinition" id="_getIndexDefinition">getIndexDefinition</a>(rex_sql_index <span class="php-var">$index</span>)
-</span><span class="l" id="870"><a class="l" href="#870">870 </a>    {
+</span><span class="l" id="859"><a class="l" href="#859">859 </a>        <span class="php-var">$default</span> = <span class="php-var">$column</span>-&gt;getDefault();
+</span><span class="l" id="860"><a class="l" href="#860">860 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$default</span>) {
+</span><span class="l" id="861"><a class="l" href="#861">861 </a>            <span class="php-var">$default</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="862"><a class="l" href="#862">862 </a>        } <span class="php-keyword1">elseif</span> (
+</span><span class="l" id="863"><a class="l" href="#863">863 </a>            <span class="php-keyword2">in_array</span>(<span class="php-keyword2">strtolower</span>(<span class="php-var">$column</span>-&gt;<span class="php-keyword2">getType</span>()), [<span class="php-quote">'timestamp'</span>, <span class="php-quote">'datetime'</span>], <span class="php-keyword1">true</span>) &amp;&amp;
+</span><span class="l" id="864"><a class="l" href="#864">864 </a>            <span class="php-keyword2">in_array</span>(<span class="php-keyword2">strtolower</span>(<span class="php-var">$default</span>), [<span class="php-quote">'current_timestamp'</span>, <span class="php-quote">'current_timestamp()'</span>], <span class="php-keyword1">true</span>)
+</span><span class="l" id="865"><a class="l" href="#865">865 </a>        ) {
+</span><span class="l" id="866"><a class="l" href="#866">866 </a>            <span class="php-var">$default</span> = <span class="php-quote">'DEFAULT '</span>.<span class="php-var">$default</span>;
+</span><span class="l" id="867"><a class="l" href="#867">867 </a>        } <span class="php-keyword1">else</span> {
+</span><span class="l" id="868"><a class="l" href="#868">868 </a>            <span class="php-var">$default</span> = <span class="php-quote">'DEFAULT '</span>.<span class="php-var">$this</span>-&gt;sql-&gt;escape(<span class="php-var">$column</span>-&gt;getDefault());
+</span><span class="l" id="869"><a class="l" href="#869">869 </a>        }
+</span><span class="l" id="870"><a class="l" href="#870">870 </a>
 </span><span class="l" id="871"><a class="l" href="#871">871 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(
-</span><span class="l" id="872"><a class="l" href="#872">872 </a>            <span class="php-quote">'%s %s %s'</span>,
-</span><span class="l" id="873"><a class="l" href="#873">873 </a>            <span class="php-var">$index</span>-&gt;<span class="php-keyword2">getType</span>(),
-</span><span class="l" id="874"><a class="l" href="#874">874 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$index</span>-&gt;getName()),
-</span><span class="l" id="875"><a class="l" href="#875">875 </a>            <span class="php-var">$this</span>-&gt;getKeyColumnsDefintion(<span class="php-var">$index</span>-&gt;getColumns())
-</span><span class="l" id="876"><a class="l" href="#876">876 </a>        );
-</span><span class="l" id="877"><a class="l" href="#877">877 </a>    }
-</span><span class="l" id="878"><a class="l" href="#878">878 </a>
-</span><span class="l" id="879"><a class="l" href="#879">879 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getForeignKeyDefinition" id="_getForeignKeyDefinition">getForeignKeyDefinition</a>(rex_sql_foreign_key <span class="php-var">$foreignKey</span>)
-</span><span class="l" id="880"><a class="l" href="#880">880 </a>    {
-</span><span class="l" id="881"><a class="l" href="#881">881 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(
-</span><span class="l" id="882"><a class="l" href="#882">882 </a>            <span class="php-quote">'CONSTRAINT %s FOREIGN KEY %s REFERENCES %s %s ON UPDATE %s ON DELETE %s'</span>,
-</span><span class="l" id="883"><a class="l" href="#883">883 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$foreignKey</span>-&gt;getName()),
-</span><span class="l" id="884"><a class="l" href="#884">884 </a>            <span class="php-var">$this</span>-&gt;getKeyColumnsDefintion(<span class="php-keyword2">array_keys</span>(<span class="php-var">$foreignKey</span>-&gt;getColumns())),
-</span><span class="l" id="885"><a class="l" href="#885">885 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$foreignKey</span>-&gt;getTable()),
-</span><span class="l" id="886"><a class="l" href="#886">886 </a>            <span class="php-var">$this</span>-&gt;getKeyColumnsDefintion(<span class="php-var">$foreignKey</span>-&gt;getColumns()),
-</span><span class="l" id="887"><a class="l" href="#887">887 </a>            <span class="php-var">$foreignKey</span>-&gt;getOnUpdate(),
-</span><span class="l" id="888"><a class="l" href="#888">888 </a>            <span class="php-var">$foreignKey</span>-&gt;getOnDelete()
-</span><span class="l" id="889"><a class="l" href="#889">889 </a>        );
-</span><span class="l" id="890"><a class="l" href="#890">890 </a>    }
-</span><span class="l" id="891"><a class="l" href="#891">891 </a>
-</span><span class="l" id="892"><a class="l" href="#892">892 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getKeyColumnsDefintion" id="_getKeyColumnsDefintion">getKeyColumnsDefintion</a>(<span class="php-keyword1">array</span> <span class="php-var">$columns</span>)
-</span><span class="l" id="893"><a class="l" href="#893">893 </a>    {
-</span><span class="l" id="894"><a class="l" href="#894">894 </a>        <span class="php-var">$columns</span> = <span class="php-keyword2">array_map</span>([<span class="php-var">$this</span>-&gt;sql, <span class="php-quote">'escapeIdentifier'</span>], <span class="php-var">$columns</span>);
-</span><span class="l" id="895"><a class="l" href="#895">895 </a>
-</span><span class="l" id="896"><a class="l" href="#896">896 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$columns</span>).<span class="php-quote">')'</span>;
-</span><span class="l" id="897"><a class="l" href="#897">897 </a>    }
-</span><span class="l" id="898"><a class="l" href="#898">898 </a>
-</span><span class="l" id="899"><a class="l" href="#899">899 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_sortColumns" id="_sortColumns">sortColumns</a>()
-</span><span class="l" id="900"><a class="l" href="#900">900 </a>    {
-</span><span class="l" id="901"><a class="l" href="#901">901 </a>        <span class="php-var">$columns</span> = [];
-</span><span class="l" id="902"><a class="l" href="#902">902 </a>
-</span><span class="l" id="903"><a class="l" href="#903">903 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;columns <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$column</span>) {
-</span><span class="l" id="904"><a class="l" href="#904">904 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;positions[<span class="php-var">$name</span>])) {
-</span><span class="l" id="905"><a class="l" href="#905">905 </a>                <span class="php-var">$columns</span>[<span class="php-var">$name</span>] = <span class="php-var">$column</span>;
-</span><span class="l" id="906"><a class="l" href="#906">906 </a>            }
-</span><span class="l" id="907"><a class="l" href="#907">907 </a>        }
-</span><span class="l" id="908"><a class="l" href="#908">908 </a>
-</span><span class="l" id="909"><a class="l" href="#909">909 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;positions <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$after</span>) {
-</span><span class="l" id="910"><a class="l" href="#910">910 </a>            <span class="php-var">$insert</span> = [<span class="php-var">$name</span> =&gt; <span class="php-var">$this</span>-&gt;columns[<span class="php-var">$name</span>]];
-</span><span class="l" id="911"><a class="l" href="#911">911 </a>
-</span><span class="l" id="912"><a class="l" href="#912">912 </a>            <span class="php-keyword1">if</span> (self::FIRST === <span class="php-var">$after</span>) {
-</span><span class="l" id="913"><a class="l" href="#913">913 </a>                <span class="php-var">$columns</span> = <span class="php-var">$insert</span> + <span class="php-var">$columns</span>;
+</span><span class="l" id="872"><a class="l" href="#872">872 </a>            <span class="php-quote">'%s %s %s %s %s'</span>,
+</span><span class="l" id="873"><a class="l" href="#873">873 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$column</span>-&gt;getName()),
+</span><span class="l" id="874"><a class="l" href="#874">874 </a>            <span class="php-var">$column</span>-&gt;<span class="php-keyword2">getType</span>(),
+</span><span class="l" id="875"><a class="l" href="#875">875 </a>            <span class="php-var">$default</span>,
+</span><span class="l" id="876"><a class="l" href="#876">876 </a>            <span class="php-var">$column</span>-&gt;isNullable() ? <span class="php-quote">''</span> : <span class="php-quote">'NOT NULL'</span>,
+</span><span class="l" id="877"><a class="l" href="#877">877 </a>            <span class="php-var">$column</span>-&gt;getExtra()
+</span><span class="l" id="878"><a class="l" href="#878">878 </a>        );
+</span><span class="l" id="879"><a class="l" href="#879">879 </a>    }
+</span><span class="l" id="880"><a class="l" href="#880">880 </a>
+</span><span class="l" id="881"><a class="l" href="#881">881 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getIndexDefinition" id="_getIndexDefinition">getIndexDefinition</a>(rex_sql_index <span class="php-var">$index</span>)
+</span><span class="l" id="882"><a class="l" href="#882">882 </a>    {
+</span><span class="l" id="883"><a class="l" href="#883">883 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(
+</span><span class="l" id="884"><a class="l" href="#884">884 </a>            <span class="php-quote">'%s %s %s'</span>,
+</span><span class="l" id="885"><a class="l" href="#885">885 </a>            <span class="php-var">$index</span>-&gt;<span class="php-keyword2">getType</span>(),
+</span><span class="l" id="886"><a class="l" href="#886">886 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$index</span>-&gt;getName()),
+</span><span class="l" id="887"><a class="l" href="#887">887 </a>            <span class="php-var">$this</span>-&gt;getKeyColumnsDefintion(<span class="php-var">$index</span>-&gt;getColumns())
+</span><span class="l" id="888"><a class="l" href="#888">888 </a>        );
+</span><span class="l" id="889"><a class="l" href="#889">889 </a>    }
+</span><span class="l" id="890"><a class="l" href="#890">890 </a>
+</span><span class="l" id="891"><a class="l" href="#891">891 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getForeignKeyDefinition" id="_getForeignKeyDefinition">getForeignKeyDefinition</a>(rex_sql_foreign_key <span class="php-var">$foreignKey</span>)
+</span><span class="l" id="892"><a class="l" href="#892">892 </a>    {
+</span><span class="l" id="893"><a class="l" href="#893">893 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(
+</span><span class="l" id="894"><a class="l" href="#894">894 </a>            <span class="php-quote">'CONSTRAINT %s FOREIGN KEY %s REFERENCES %s %s ON UPDATE %s ON DELETE %s'</span>,
+</span><span class="l" id="895"><a class="l" href="#895">895 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$foreignKey</span>-&gt;getName()),
+</span><span class="l" id="896"><a class="l" href="#896">896 </a>            <span class="php-var">$this</span>-&gt;getKeyColumnsDefintion(<span class="php-keyword2">array_keys</span>(<span class="php-var">$foreignKey</span>-&gt;getColumns())),
+</span><span class="l" id="897"><a class="l" href="#897">897 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;escapeIdentifier(<span class="php-var">$foreignKey</span>-&gt;getTable()),
+</span><span class="l" id="898"><a class="l" href="#898">898 </a>            <span class="php-var">$this</span>-&gt;getKeyColumnsDefintion(<span class="php-var">$foreignKey</span>-&gt;getColumns()),
+</span><span class="l" id="899"><a class="l" href="#899">899 </a>            <span class="php-var">$foreignKey</span>-&gt;getOnUpdate(),
+</span><span class="l" id="900"><a class="l" href="#900">900 </a>            <span class="php-var">$foreignKey</span>-&gt;getOnDelete()
+</span><span class="l" id="901"><a class="l" href="#901">901 </a>        );
+</span><span class="l" id="902"><a class="l" href="#902">902 </a>    }
+</span><span class="l" id="903"><a class="l" href="#903">903 </a>
+</span><span class="l" id="904"><a class="l" href="#904">904 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_getKeyColumnsDefintion" id="_getKeyColumnsDefintion">getKeyColumnsDefintion</a>(<span class="php-keyword1">array</span> <span class="php-var">$columns</span>)
+</span><span class="l" id="905"><a class="l" href="#905">905 </a>    {
+</span><span class="l" id="906"><a class="l" href="#906">906 </a>        <span class="php-var">$columns</span> = <span class="php-keyword2">array_map</span>([<span class="php-var">$this</span>-&gt;sql, <span class="php-quote">'escapeIdentifier'</span>], <span class="php-var">$columns</span>);
+</span><span class="l" id="907"><a class="l" href="#907">907 </a>
+</span><span class="l" id="908"><a class="l" href="#908">908 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$columns</span>).<span class="php-quote">')'</span>;
+</span><span class="l" id="909"><a class="l" href="#909">909 </a>    }
+</span><span class="l" id="910"><a class="l" href="#910">910 </a>
+</span><span class="l" id="911"><a class="l" href="#911">911 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_sortColumns" id="_sortColumns">sortColumns</a>()
+</span><span class="l" id="912"><a class="l" href="#912">912 </a>    {
+</span><span class="l" id="913"><a class="l" href="#913">913 </a>        <span class="php-var">$columns</span> = [];
 </span><span class="l" id="914"><a class="l" href="#914">914 </a>
-</span><span class="l" id="915"><a class="l" href="#915">915 </a>                <span class="php-keyword1">continue</span>;
-</span><span class="l" id="916"><a class="l" href="#916">916 </a>            }
-</span><span class="l" id="917"><a class="l" href="#917">917 </a>
-</span><span class="l" id="918"><a class="l" href="#918">918 </a>            <span class="php-var">$offset</span> = <span class="php-keyword2">array_search</span>(<span class="php-var">$after</span>, <span class="php-keyword2">array_keys</span>(<span class="php-var">$columns</span>)) + <span class="php-num">1</span>;
-</span><span class="l" id="919"><a class="l" href="#919">919 </a>            <span class="php-var">$columns</span> = <span class="php-keyword2">array_slice</span>(<span class="php-var">$columns</span>, <span class="php-num">0</span>, <span class="php-var">$offset</span>) + <span class="php-var">$insert</span> + <span class="php-keyword2">array_slice</span>(<span class="php-var">$columns</span>, <span class="php-var">$offset</span>);
-</span><span class="l" id="920"><a class="l" href="#920">920 </a>        }
-</span><span class="l" id="921"><a class="l" href="#921">921 </a>
-</span><span class="l" id="922"><a class="l" href="#922">922 </a>        <span class="php-var">$this</span>-&gt;columns = <span class="php-var">$columns</span>;
-</span><span class="l" id="923"><a class="l" href="#923">923 </a>    }
-</span><span class="l" id="924"><a class="l" href="#924">924 </a>
-</span><span class="l" id="925"><a class="l" href="#925">925 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_resetModified" id="_resetModified">resetModified</a>()
-</span><span class="l" id="926"><a class="l" href="#926">926 </a>    {
-</span><span class="l" id="927"><a class="l" href="#927">927 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword1">new</span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="928"><a class="l" href="#928">928 </a>
-</span><span class="l" id="929"><a class="l" href="#929">929 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;originalName !== <span class="php-var">$this</span>-&gt;name) {
-</span><span class="l" id="930"><a class="l" href="#930">930 </a>            self::clearInstance(<span class="php-var">$this</span>-&gt;originalName);
-</span><span class="l" id="931"><a class="l" href="#931">931 </a>            self::addInstance(<span class="php-var">$this</span>-&gt;name, <span class="php-var">$this</span>);
+</span><span class="l" id="915"><a class="l" href="#915">915 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;columns <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$column</span>) {
+</span><span class="l" id="916"><a class="l" href="#916">916 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;positions[<span class="php-var">$name</span>])) {
+</span><span class="l" id="917"><a class="l" href="#917">917 </a>                <span class="php-var">$columns</span>[<span class="php-var">$name</span>] = <span class="php-var">$column</span>;
+</span><span class="l" id="918"><a class="l" href="#918">918 </a>            }
+</span><span class="l" id="919"><a class="l" href="#919">919 </a>        }
+</span><span class="l" id="920"><a class="l" href="#920">920 </a>
+</span><span class="l" id="921"><a class="l" href="#921">921 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;positions <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$after</span>) {
+</span><span class="l" id="922"><a class="l" href="#922">922 </a>            <span class="php-var">$insert</span> = [<span class="php-var">$name</span> =&gt; <span class="php-var">$this</span>-&gt;columns[<span class="php-var">$name</span>]];
+</span><span class="l" id="923"><a class="l" href="#923">923 </a>
+</span><span class="l" id="924"><a class="l" href="#924">924 </a>            <span class="php-keyword1">if</span> (self::FIRST === <span class="php-var">$after</span>) {
+</span><span class="l" id="925"><a class="l" href="#925">925 </a>                <span class="php-var">$columns</span> = <span class="php-var">$insert</span> + <span class="php-var">$columns</span>;
+</span><span class="l" id="926"><a class="l" href="#926">926 </a>
+</span><span class="l" id="927"><a class="l" href="#927">927 </a>                <span class="php-keyword1">continue</span>;
+</span><span class="l" id="928"><a class="l" href="#928">928 </a>            }
+</span><span class="l" id="929"><a class="l" href="#929">929 </a>
+</span><span class="l" id="930"><a class="l" href="#930">930 </a>            <span class="php-var">$offset</span> = <span class="php-keyword2">array_search</span>(<span class="php-var">$after</span>, <span class="php-keyword2">array_keys</span>(<span class="php-var">$columns</span>)) + <span class="php-num">1</span>;
+</span><span class="l" id="931"><a class="l" href="#931">931 </a>            <span class="php-var">$columns</span> = <span class="php-keyword2">array_slice</span>(<span class="php-var">$columns</span>, <span class="php-num">0</span>, <span class="php-var">$offset</span>) + <span class="php-var">$insert</span> + <span class="php-keyword2">array_slice</span>(<span class="php-var">$columns</span>, <span class="php-var">$offset</span>);
 </span><span class="l" id="932"><a class="l" href="#932">932 </a>        }
 </span><span class="l" id="933"><a class="l" href="#933">933 </a>
-</span><span class="l" id="934"><a class="l" href="#934">934 </a>        <span class="php-var">$this</span>-&gt;originalName = <span class="php-var">$this</span>-&gt;name;
-</span><span class="l" id="935"><a class="l" href="#935">935 </a>
-</span><span class="l" id="936"><a class="l" href="#936">936 </a>        <span class="php-var">$columns</span> = <span class="php-var">$this</span>-&gt;columns;
-</span><span class="l" id="937"><a class="l" href="#937">937 </a>        <span class="php-var">$this</span>-&gt;columns = [];
-</span><span class="l" id="938"><a class="l" href="#938">938 </a>        <span class="php-var">$this</span>-&gt;columnsExisting = [];
-</span><span class="l" id="939"><a class="l" href="#939">939 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$columns</span> <span class="php-keyword1">as</span> <span class="php-var">$column</span>) {
-</span><span class="l" id="940"><a class="l" href="#940">940 </a>            <span class="php-var">$column</span>-&gt;setModified(<span class="php-keyword1">false</span>);
-</span><span class="l" id="941"><a class="l" href="#941">941 </a>            <span class="php-var">$this</span>-&gt;columns[<span class="php-var">$column</span>-&gt;getName()] = <span class="php-var">$column</span>;
-</span><span class="l" id="942"><a class="l" href="#942">942 </a>            <span class="php-var">$this</span>-&gt;columnsExisting[<span class="php-var">$column</span>-&gt;getName()] = <span class="php-var">$column</span>-&gt;getName();
-</span><span class="l" id="943"><a class="l" href="#943">943 </a>        }
-</span><span class="l" id="944"><a class="l" href="#944">944 </a>
-</span><span class="l" id="945"><a class="l" href="#945">945 </a>        <span class="php-var">$this</span>-&gt;implicitOrder = [];
-</span><span class="l" id="946"><a class="l" href="#946">946 </a>        <span class="php-var">$this</span>-&gt;positions = [];
+</span><span class="l" id="934"><a class="l" href="#934">934 </a>        <span class="php-var">$this</span>-&gt;columns = <span class="php-var">$columns</span>;
+</span><span class="l" id="935"><a class="l" href="#935">935 </a>    }
+</span><span class="l" id="936"><a class="l" href="#936">936 </a>
+</span><span class="l" id="937"><a class="l" href="#937">937 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_resetModified" id="_resetModified">resetModified</a>()
+</span><span class="l" id="938"><a class="l" href="#938">938 </a>    {
+</span><span class="l" id="939"><a class="l" href="#939">939 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword1">new</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="940"><a class="l" href="#940">940 </a>
+</span><span class="l" id="941"><a class="l" href="#941">941 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;originalName !== <span class="php-var">$this</span>-&gt;name) {
+</span><span class="l" id="942"><a class="l" href="#942">942 </a>            self::clearInstance(<span class="php-var">$this</span>-&gt;originalName);
+</span><span class="l" id="943"><a class="l" href="#943">943 </a>            self::addInstance(<span class="php-var">$this</span>-&gt;name, <span class="php-var">$this</span>);
+</span><span class="l" id="944"><a class="l" href="#944">944 </a>        }
+</span><span class="l" id="945"><a class="l" href="#945">945 </a>
+</span><span class="l" id="946"><a class="l" href="#946">946 </a>        <span class="php-var">$this</span>-&gt;originalName = <span class="php-var">$this</span>-&gt;name;
 </span><span class="l" id="947"><a class="l" href="#947">947 </a>
-</span><span class="l" id="948"><a class="l" href="#948">948 </a>        <span class="php-var">$this</span>-&gt;primaryKeyModified = <span class="php-keyword1">false</span>;
-</span><span class="l" id="949"><a class="l" href="#949">949 </a>
-</span><span class="l" id="950"><a class="l" href="#950">950 </a>        <span class="php-var">$indexes</span> = <span class="php-var">$this</span>-&gt;indexes;
-</span><span class="l" id="951"><a class="l" href="#951">951 </a>        <span class="php-var">$this</span>-&gt;indexes = [];
-</span><span class="l" id="952"><a class="l" href="#952">952 </a>        <span class="php-var">$this</span>-&gt;indexesExisting = [];
-</span><span class="l" id="953"><a class="l" href="#953">953 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$indexes</span> <span class="php-keyword1">as</span> <span class="php-var">$index</span>) {
-</span><span class="l" id="954"><a class="l" href="#954">954 </a>            <span class="php-var">$index</span>-&gt;setModified(<span class="php-keyword1">false</span>);
-</span><span class="l" id="955"><a class="l" href="#955">955 </a>            <span class="php-var">$this</span>-&gt;indexes[<span class="php-var">$index</span>-&gt;getName()] = <span class="php-var">$index</span>;
-</span><span class="l" id="956"><a class="l" href="#956">956 </a>            <span class="php-var">$this</span>-&gt;indexesExisting[<span class="php-var">$index</span>-&gt;getName()] = <span class="php-var">$index</span>-&gt;getName();
-</span><span class="l" id="957"><a class="l" href="#957">957 </a>        }
-</span><span class="l" id="958"><a class="l" href="#958">958 </a>
-</span><span class="l" id="959"><a class="l" href="#959">959 </a>        <span class="php-var">$foreignKeys</span> = <span class="php-var">$this</span>-&gt;foreignKeys;
-</span><span class="l" id="960"><a class="l" href="#960">960 </a>        <span class="php-var">$this</span>-&gt;foreignKeys = [];
-</span><span class="l" id="961"><a class="l" href="#961">961 </a>        <span class="php-var">$this</span>-&gt;foreignKeysExisting = [];
-</span><span class="l" id="962"><a class="l" href="#962">962 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$foreignKeys</span> <span class="php-keyword1">as</span> <span class="php-var">$foreignKey</span>) {
-</span><span class="l" id="963"><a class="l" href="#963">963 </a>            <span class="php-var">$foreignKey</span>-&gt;setModified(<span class="php-keyword1">false</span>);
-</span><span class="l" id="964"><a class="l" href="#964">964 </a>            <span class="php-var">$this</span>-&gt;foreignKeys[<span class="php-var">$foreignKey</span>-&gt;getName()] = <span class="php-var">$foreignKey</span>;
-</span><span class="l" id="965"><a class="l" href="#965">965 </a>            <span class="php-var">$this</span>-&gt;foreignKeysExisting[<span class="php-var">$foreignKey</span>-&gt;getName()] = <span class="php-var">$foreignKey</span>-&gt;getName();
-</span><span class="l" id="966"><a class="l" href="#966">966 </a>        }
-</span><span class="l" id="967"><a class="l" href="#967">967 </a>    }
-</span><span class="l" id="968"><a class="l" href="#968">968 </a>}
-</span><span class="l" id="969"><a class="l" href="#969">969 </a></span></code></pre>
+</span><span class="l" id="948"><a class="l" href="#948">948 </a>        <span class="php-var">$columns</span> = <span class="php-var">$this</span>-&gt;columns;
+</span><span class="l" id="949"><a class="l" href="#949">949 </a>        <span class="php-var">$this</span>-&gt;columns = [];
+</span><span class="l" id="950"><a class="l" href="#950">950 </a>        <span class="php-var">$this</span>-&gt;columnsExisting = [];
+</span><span class="l" id="951"><a class="l" href="#951">951 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$columns</span> <span class="php-keyword1">as</span> <span class="php-var">$column</span>) {
+</span><span class="l" id="952"><a class="l" href="#952">952 </a>            <span class="php-var">$column</span>-&gt;setModified(<span class="php-keyword1">false</span>);
+</span><span class="l" id="953"><a class="l" href="#953">953 </a>            <span class="php-var">$this</span>-&gt;columns[<span class="php-var">$column</span>-&gt;getName()] = <span class="php-var">$column</span>;
+</span><span class="l" id="954"><a class="l" href="#954">954 </a>            <span class="php-var">$this</span>-&gt;columnsExisting[<span class="php-var">$column</span>-&gt;getName()] = <span class="php-var">$column</span>-&gt;getName();
+</span><span class="l" id="955"><a class="l" href="#955">955 </a>        }
+</span><span class="l" id="956"><a class="l" href="#956">956 </a>
+</span><span class="l" id="957"><a class="l" href="#957">957 </a>        <span class="php-var">$this</span>-&gt;implicitOrder = [];
+</span><span class="l" id="958"><a class="l" href="#958">958 </a>        <span class="php-var">$this</span>-&gt;positions = [];
+</span><span class="l" id="959"><a class="l" href="#959">959 </a>
+</span><span class="l" id="960"><a class="l" href="#960">960 </a>        <span class="php-var">$this</span>-&gt;primaryKeyModified = <span class="php-keyword1">false</span>;
+</span><span class="l" id="961"><a class="l" href="#961">961 </a>
+</span><span class="l" id="962"><a class="l" href="#962">962 </a>        <span class="php-var">$indexes</span> = <span class="php-var">$this</span>-&gt;indexes;
+</span><span class="l" id="963"><a class="l" href="#963">963 </a>        <span class="php-var">$this</span>-&gt;indexes = [];
+</span><span class="l" id="964"><a class="l" href="#964">964 </a>        <span class="php-var">$this</span>-&gt;indexesExisting = [];
+</span><span class="l" id="965"><a class="l" href="#965">965 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$indexes</span> <span class="php-keyword1">as</span> <span class="php-var">$index</span>) {
+</span><span class="l" id="966"><a class="l" href="#966">966 </a>            <span class="php-var">$index</span>-&gt;setModified(<span class="php-keyword1">false</span>);
+</span><span class="l" id="967"><a class="l" href="#967">967 </a>            <span class="php-var">$this</span>-&gt;indexes[<span class="php-var">$index</span>-&gt;getName()] = <span class="php-var">$index</span>;
+</span><span class="l" id="968"><a class="l" href="#968">968 </a>            <span class="php-var">$this</span>-&gt;indexesExisting[<span class="php-var">$index</span>-&gt;getName()] = <span class="php-var">$index</span>-&gt;getName();
+</span><span class="l" id="969"><a class="l" href="#969">969 </a>        }
+</span><span class="l" id="970"><a class="l" href="#970">970 </a>
+</span><span class="l" id="971"><a class="l" href="#971">971 </a>        <span class="php-var">$foreignKeys</span> = <span class="php-var">$this</span>-&gt;foreignKeys;
+</span><span class="l" id="972"><a class="l" href="#972">972 </a>        <span class="php-var">$this</span>-&gt;foreignKeys = [];
+</span><span class="l" id="973"><a class="l" href="#973">973 </a>        <span class="php-var">$this</span>-&gt;foreignKeysExisting = [];
+</span><span class="l" id="974"><a class="l" href="#974">974 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$foreignKeys</span> <span class="php-keyword1">as</span> <span class="php-var">$foreignKey</span>) {
+</span><span class="l" id="975"><a class="l" href="#975">975 </a>            <span class="php-var">$foreignKey</span>-&gt;setModified(<span class="php-keyword1">false</span>);
+</span><span class="l" id="976"><a class="l" href="#976">976 </a>            <span class="php-var">$this</span>-&gt;foreignKeys[<span class="php-var">$foreignKey</span>-&gt;getName()] = <span class="php-var">$foreignKey</span>;
+</span><span class="l" id="977"><a class="l" href="#977">977 </a>            <span class="php-var">$this</span>-&gt;foreignKeysExisting[<span class="php-var">$foreignKey</span>-&gt;getName()] = <span class="php-var">$foreignKey</span>-&gt;getName();
+</span><span class="l" id="978"><a class="l" href="#978">978 </a>        }
+</span><span class="l" id="979"><a class="l" href="#979">979 </a>    }
+</span><span class="l" id="980"><a class="l" href="#980">980 </a>}
+</span><span class="l" id="981"><a class="l" href="#981">981 </a></span></code></pre>
  </body>
 </html>

@@ -462,12 +462,12 @@
 </span><span class="l" id="453"><a class="l" href="#453">453 </a>
 </span><span class="l" id="454"><a class="l" href="#454">454 </a>    <span class="php-var">$arg_fields</span> = <span class="php-quote">''</span>;
 </span><span class="l" id="455"><a class="l" href="#455">455 </a>    <span class="php-keyword1">foreach</span> (rex_request(<span class="php-quote">'args'</span>, <span class="php-quote">'array'</span>) <span class="php-keyword1">as</span> <span class="php-var">$arg_name</span> =&gt; <span class="php-var">$arg_value</span>) {
-</span><span class="l" id="456"><a class="l" href="#456">456 </a>        <span class="php-var">$arg_fields</span> .= <span class="php-quote">'&lt;input type="hidden" name="args['</span> . rex_escape(<span class="php-var">$arg_name</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">']" value="'</span> . rex_escape(<span class="php-var">$arg_value</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'" /&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="456"><a class="l" href="#456">456 </a>        <span class="php-var">$arg_fields</span> .= <span class="php-quote">'&lt;input type="hidden" name="args['</span> . rex_escape(<span class="php-var">$arg_name</span>) . <span class="php-quote">']" value="'</span> . rex_escape(<span class="php-var">$arg_value</span>) . <span class="php-quote">'" /&gt;'</span> . <span class="php-quote">"\n"</span>;
 </span><span class="l" id="457"><a class="l" href="#457">457 </a>    }
 </span><span class="l" id="458"><a class="l" href="#458">458 </a>
 </span><span class="l" id="459"><a class="l" href="#459">459 </a>    <span class="php-var">$opener_input_field</span> = rex_request(<span class="php-quote">'opener_input_field'</span>, <span class="php-quote">'string'</span>);
 </span><span class="l" id="460"><a class="l" href="#460">460 </a>    <span class="php-keyword1">if</span> (<span class="php-var">$opener_input_field</span> != <span class="php-quote">''</span>) {
-</span><span class="l" id="461"><a class="l" href="#461">461 </a>        <span class="php-var">$arg_fields</span> .= <span class="php-quote">'&lt;input type="hidden" name="opener_input_field" value="'</span> . rex_escape(<span class="php-var">$opener_input_field</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'" /&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="461"><a class="l" href="#461">461 </a>        <span class="php-var">$arg_fields</span> .= <span class="php-quote">'&lt;input type="hidden" name="opener_input_field" value="'</span> . rex_escape(<span class="php-var">$opener_input_field</span>) . <span class="php-quote">'" /&gt;'</span> . <span class="php-quote">"\n"</span>;
 </span><span class="l" id="462"><a class="l" href="#462">462 </a>    }
 </span><span class="l" id="463"><a class="l" href="#463">463 </a>
 </span><span class="l" id="464"><a class="l" href="#464">464 </a>    <span class="php-var">$add_submit</span> = <span class="php-quote">''</span>;
@@ -486,7 +486,7 @@
 </span><span class="l" id="477"><a class="l" href="#477">477 </a>
 </span><span class="l" id="478"><a class="l" href="#478">478 </a>    <span class="php-var">$e</span> = [];
 </span><span class="l" id="479"><a class="l" href="#479">479 </a>    <span class="php-var">$e</span>[<span class="php-quote">'label'</span>] = <span class="php-quote">'&lt;label for="rex-mediapool-title"&gt;'</span> . rex_i18n::msg(<span class="php-quote">'pool_file_title'</span>) . <span class="php-quote">'&lt;/label&gt;'</span>;
-</span><span class="l" id="480"><a class="l" href="#480">480 </a>    <span class="php-var">$e</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;input class="form-control" type="text" id="rex-mediapool-title" name="ftitle" value="'</span> . rex_escape(<span class="php-var">$ftitle</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'" /&gt;'</span>;
+</span><span class="l" id="480"><a class="l" href="#480">480 </a>    <span class="php-var">$e</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;input class="form-control" type="text" id="rex-mediapool-title" name="ftitle" value="'</span> . rex_escape(<span class="php-var">$ftitle</span>) . <span class="php-quote">'" /&gt;'</span>;
 </span><span class="l" id="481"><a class="l" href="#481">481 </a>    <span class="php-var">$formElements</span>[] = <span class="php-var">$e</span>;
 </span><span class="l" id="482"><a class="l" href="#482">482 </a>
 </span><span class="l" id="483"><a class="l" href="#483">483 </a>    <span class="php-var">$fragment</span> = <span class="php-keyword1">new</span> rex_fragment();

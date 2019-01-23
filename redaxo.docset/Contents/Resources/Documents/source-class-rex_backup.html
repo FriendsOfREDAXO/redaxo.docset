@@ -318,7 +318,7 @@
 </span><span class="l" id="309"><a class="l" href="#309">309 </a>        <span class="php-comment">// in case of permission issues/misconfigured tmp-folders</span>
 </span><span class="l" id="310"><a class="l" href="#310">310 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$fp</span>) {
 </span><span class="l" id="311"><a class="l" href="#311">311 </a>            <span class="php-var">$tempCacheFile</span> = rex_path::cache(<span class="php-keyword2">basename</span>(<span class="php-var">$filename</span>));
-</span><span class="l" id="312"><a class="l" href="#312">312 </a>            <span class="php-var">$fp</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-quote">'wb'</span>);
+</span><span class="l" id="312"><a class="l" href="#312">312 </a>            <span class="php-var">$fp</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-quote">'w'</span>);
 </span><span class="l" id="313"><a class="l" href="#313">313 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$fp</span>) {
 </span><span class="l" id="314"><a class="l" href="#314">314 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
 </span><span class="l" id="315"><a class="l" href="#315">315 </a>            }
@@ -466,7 +466,7 @@
 </span><span class="l" id="457"><a class="l" href="#457">457 </a>            <span class="php-keyword2">fclose</span>(<span class="php-var">$fp</span>);
 </span><span class="l" id="458"><a class="l" href="#458">458 </a>            <span class="php-keyword2">rename</span>(<span class="php-var">$tempCacheFile</span>, <span class="php-var">$filename</span>);
 </span><span class="l" id="459"><a class="l" href="#459">459 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="460"><a class="l" href="#460">460 </a>            <span class="php-var">$destination</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$filename</span>, <span class="php-quote">'wb'</span>);
+</span><span class="l" id="460"><a class="l" href="#460">460 </a>            <span class="php-var">$destination</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$filename</span>, <span class="php-quote">'w'</span>);
 </span><span class="l" id="461"><a class="l" href="#461">461 </a>            <span class="php-keyword2">rewind</span>(<span class="php-var">$fp</span>);
 </span><span class="l" id="462"><a class="l" href="#462">462 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$destination</span>) {
 </span><span class="l" id="463"><a class="l" href="#463">463 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;

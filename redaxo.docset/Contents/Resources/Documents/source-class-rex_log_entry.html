@@ -60,7 +60,7 @@
 </span><span class="l" id="51"><a class="l" href="#51"> 51 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$maxFileSize</span> &amp;&amp; <span class="php-keyword2">filesize</span>(<span class="php-var">$path</span>) &gt; <span class="php-var">$maxFileSize</span>) {
 </span><span class="l" id="52"><a class="l" href="#52"> 52 </a>            <span class="php-keyword2">rename</span>(<span class="php-var">$path</span>, <span class="php-var">$path</span> . <span class="php-quote">'.2'</span>);
 </span><span class="l" id="53"><a class="l" href="#53"> 53 </a>        }
-</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">file</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$path</span>, <span class="php-quote">'a+b'</span>);
+</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">file</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$path</span>, <span class="php-quote">'a+'</span>);
 </span><span class="l" id="55"><a class="l" href="#55"> 55 </a>    }
 </span><span class="l" id="56"><a class="l" href="#56"> 56 </a>
 </span><span class="l" id="57"><a class="l" href="#57"> 57 </a>    <span class="php-comment">/**
@@ -100,7 +100,7 @@
 </span><span class="l" id="91"><a class="l" href="#91"> 91 </a>            }
 </span><span class="l" id="92"><a class="l" href="#92"> 92 </a>            <span class="php-comment">// switch to file2 and reset position</span>
 </span><span class="l" id="93"><a class="l" href="#93"> 93 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$this</span>-&gt;file2) {
-</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>                <span class="php-var">$this</span>-&gt;file2 = <span class="php-keyword2">fopen</span>(<span class="php-var">$path2</span>, <span class="php-quote">'rb'</span>);
+</span><span class="l" id="94"><a class="l" href="#94"> 94 </a>                <span class="php-var">$this</span>-&gt;file2 = <span class="php-keyword2">fopen</span>(<span class="php-var">$path2</span>, <span class="php-quote">'r'</span>);
 </span><span class="l" id="95"><a class="l" href="#95"> 95 </a>            }
 </span><span class="l" id="96"><a class="l" href="#96"> 96 </a>            <span class="php-var">$this</span>-&gt;second = <span class="php-keyword1">true</span>;
 </span><span class="l" id="97"><a class="l" href="#97"> 97 </a>            <span class="php-var">$this</span>-&gt;<span class="php-keyword2">pos</span> = <span class="php-keyword1">null</span>;
@@ -229,50 +229,51 @@
 </span></span><span class="l" id="220"><a class="l" href="#220">220 </a><span class="php-comment">     */</span>
 </span><span class="l" id="221"><a class="l" href="#221">221 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_createFromString" id="_createFromString">createFromString</a>(<span class="php-var">$string</span>)
 </span><span class="l" id="222"><a class="l" href="#222">222 </a>    {
-</span><span class="l" id="223"><a class="l" href="#223">223 </a>        <span class="php-keyword1">foreach</span> (<span class="php-keyword2">explode</span>(<span class="php-quote">'|'</span>, <span class="php-var">$string</span>) <span class="php-keyword1">as</span> <span class="php-var">$part</span>) {
-</span><span class="l" id="224"><a class="l" href="#224">224 </a>            <span class="php-var">$data</span>[] = <span class="php-keyword2">str_replace</span>(<span class="php-quote">'\n'</span>, <span class="php-quote">"\n"</span>, <span class="php-keyword2">trim</span>(<span class="php-var">$part</span>));
-</span><span class="l" id="225"><a class="l" href="#225">225 </a>        }
-</span><span class="l" id="226"><a class="l" href="#226">226 </a>
-</span><span class="l" id="227"><a class="l" href="#227">227 </a>        <span class="php-var">$timestamp</span> = <span class="php-keyword2">strtotime</span>(<span class="php-keyword2">array_shift</span>(<span class="php-var">$data</span>));
-</span><span class="l" id="228"><a class="l" href="#228">228 </a>
-</span><span class="l" id="229"><a class="l" href="#229">229 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> self(<span class="php-var">$timestamp</span>, <span class="php-var">$data</span>);
-</span><span class="l" id="230"><a class="l" href="#230">230 </a>    }
-</span><span class="l" id="231"><a class="l" href="#231">231 </a>
-</span><span class="l" id="232"><a class="l" href="#232">232 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="233"><a class="l" href="#233">233 </a><span class="php-comment">     * Returns the timestamp.
-</span></span><span class="l" id="234"><a class="l" href="#234">234 </a><span class="php-comment">     *
-</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     * @param string $format See {@link rex_formatter::strftime}
-</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     *
-</span></span><span class="l" id="237"><a class="l" href="#237">237 </a><span class="php-comment">     * @return int|string Unix timestamp or formatted string if $format is given
-</span></span><span class="l" id="238"><a class="l" href="#238">238 </a><span class="php-comment">     */</span>
-</span><span class="l" id="239"><a class="l" href="#239">239 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTimestamp" id="_getTimestamp">getTimestamp</a>(<span class="php-var">$format</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="240"><a class="l" href="#240">240 </a>    {
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$format</span>) {
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;timestamp;
-</span><span class="l" id="243"><a class="l" href="#243">243 </a>        }
-</span><span class="l" id="244"><a class="l" href="#244">244 </a>        <span class="php-keyword1">return</span> rex_formatter::<span class="php-keyword2">strftime</span>(<span class="php-var">$this</span>-&gt;timestamp, <span class="php-var">$format</span>);
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>    }
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="248"><a class="l" href="#248">248 </a><span class="php-comment">     * Returns the log data.
-</span></span><span class="l" id="249"><a class="l" href="#249">249 </a><span class="php-comment">     *
-</span></span><span class="l" id="250"><a class="l" href="#250">250 </a><span class="php-comment">     * @return array
-</span></span><span class="l" id="251"><a class="l" href="#251">251 </a><span class="php-comment">     */</span>
-</span><span class="l" id="252"><a class="l" href="#252">252 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getData" id="_getData">getData</a>()
-</span><span class="l" id="253"><a class="l" href="#253">253 </a>    {
-</span><span class="l" id="254"><a class="l" href="#254">254 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;data;
-</span><span class="l" id="255"><a class="l" href="#255">255 </a>    }
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="258"><a class="l" href="#258">258 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="259"><a class="l" href="#259">259 </a><span class="php-comment">     */</span>
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#___toString" id="___toString">__toString</a>()
-</span><span class="l" id="261"><a class="l" href="#261">261 </a>    {
-</span><span class="l" id="262"><a class="l" href="#262">262 </a>        <span class="php-var">$data</span> = <span class="php-keyword2">implode</span>(<span class="php-quote">' | '</span>, <span class="php-keyword2">array_map</span>(<span class="php-quote">'trim'</span>, <span class="php-var">$this</span>-&gt;data));
-</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-var">$data</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">"\r"</span>, <span class="php-quote">"\n"</span>], [<span class="php-quote">''</span>, <span class="php-quote">'\n'</span>], <span class="php-var">$data</span>);
-</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">date</span>(<span class="php-quote">'Y-m-d H:i:s'</span>, <span class="php-var">$this</span>-&gt;timestamp) . <span class="php-quote">' | '</span> . <span class="php-var">$data</span>;
-</span><span class="l" id="265"><a class="l" href="#265">265 </a>    }
-</span><span class="l" id="266"><a class="l" href="#266">266 </a>}
-</span><span class="l" id="267"><a class="l" href="#267">267 </a></span></code></pre>
+</span><span class="l" id="223"><a class="l" href="#223">223 </a>        <span class="php-var">$data</span> = [];
+</span><span class="l" id="224"><a class="l" href="#224">224 </a>        <span class="php-keyword1">foreach</span> (<span class="php-keyword2">explode</span>(<span class="php-quote">'|'</span>, <span class="php-var">$string</span>) <span class="php-keyword1">as</span> <span class="php-var">$part</span>) {
+</span><span class="l" id="225"><a class="l" href="#225">225 </a>            <span class="php-var">$data</span>[] = <span class="php-keyword2">str_replace</span>(<span class="php-quote">'\n'</span>, <span class="php-quote">"\n"</span>, <span class="php-keyword2">trim</span>(<span class="php-var">$part</span>));
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>        }
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>
+</span><span class="l" id="228"><a class="l" href="#228">228 </a>        <span class="php-var">$timestamp</span> = <span class="php-keyword2">strtotime</span>(<span class="php-keyword2">array_shift</span>(<span class="php-var">$data</span>));
+</span><span class="l" id="229"><a class="l" href="#229">229 </a>
+</span><span class="l" id="230"><a class="l" href="#230">230 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> self(<span class="php-var">$timestamp</span>, <span class="php-var">$data</span>);
+</span><span class="l" id="231"><a class="l" href="#231">231 </a>    }
+</span><span class="l" id="232"><a class="l" href="#232">232 </a>
+</span><span class="l" id="233"><a class="l" href="#233">233 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="234"><a class="l" href="#234">234 </a><span class="php-comment">     * Returns the timestamp.
+</span></span><span class="l" id="235"><a class="l" href="#235">235 </a><span class="php-comment">     *
+</span></span><span class="l" id="236"><a class="l" href="#236">236 </a><span class="php-comment">     * @param string $format See {@link rex_formatter::strftime}
+</span></span><span class="l" id="237"><a class="l" href="#237">237 </a><span class="php-comment">     *
+</span></span><span class="l" id="238"><a class="l" href="#238">238 </a><span class="php-comment">     * @return int|string Unix timestamp or formatted string if $format is given
+</span></span><span class="l" id="239"><a class="l" href="#239">239 </a><span class="php-comment">     */</span>
+</span><span class="l" id="240"><a class="l" href="#240">240 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTimestamp" id="_getTimestamp">getTimestamp</a>(<span class="php-var">$format</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>    {
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">null</span> === <span class="php-var">$format</span>) {
+</span><span class="l" id="243"><a class="l" href="#243">243 </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;timestamp;
+</span><span class="l" id="244"><a class="l" href="#244">244 </a>        }
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>        <span class="php-keyword1">return</span> rex_formatter::<span class="php-keyword2">strftime</span>(<span class="php-var">$this</span>-&gt;timestamp, <span class="php-var">$format</span>);
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>    }
+</span><span class="l" id="247"><a class="l" href="#247">247 </a>
+</span><span class="l" id="248"><a class="l" href="#248">248 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="249"><a class="l" href="#249">249 </a><span class="php-comment">     * Returns the log data.
+</span></span><span class="l" id="250"><a class="l" href="#250">250 </a><span class="php-comment">     *
+</span></span><span class="l" id="251"><a class="l" href="#251">251 </a><span class="php-comment">     * @return array
+</span></span><span class="l" id="252"><a class="l" href="#252">252 </a><span class="php-comment">     */</span>
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getData" id="_getData">getData</a>()
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>    {
+</span><span class="l" id="255"><a class="l" href="#255">255 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;data;
+</span><span class="l" id="256"><a class="l" href="#256">256 </a>    }
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>
+</span><span class="l" id="258"><a class="l" href="#258">258 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="259"><a class="l" href="#259">259 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="260"><a class="l" href="#260">260 </a><span class="php-comment">     */</span>
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#___toString" id="___toString">__toString</a>()
+</span><span class="l" id="262"><a class="l" href="#262">262 </a>    {
+</span><span class="l" id="263"><a class="l" href="#263">263 </a>        <span class="php-var">$data</span> = <span class="php-keyword2">implode</span>(<span class="php-quote">' | '</span>, <span class="php-keyword2">array_map</span>(<span class="php-quote">'trim'</span>, <span class="php-var">$this</span>-&gt;data));
+</span><span class="l" id="264"><a class="l" href="#264">264 </a>        <span class="php-var">$data</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">"\r"</span>, <span class="php-quote">"\n"</span>], [<span class="php-quote">''</span>, <span class="php-quote">'\n'</span>], <span class="php-var">$data</span>);
+</span><span class="l" id="265"><a class="l" href="#265">265 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">date</span>(<span class="php-quote">'Y-m-d H:i:s'</span>, <span class="php-var">$this</span>-&gt;timestamp) . <span class="php-quote">' | '</span> . <span class="php-var">$data</span>;
+</span><span class="l" id="266"><a class="l" href="#266">266 </a>    }
+</span><span class="l" id="267"><a class="l" href="#267">267 </a>}
+</span><span class="l" id="268"><a class="l" href="#268">268 </a></span></code></pre>
  </body>
 </html>

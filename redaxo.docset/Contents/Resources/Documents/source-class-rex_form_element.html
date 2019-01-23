@@ -232,7 +232,7 @@
 </span><span class="l" id="223"><a class="l" href="#223">223 </a>        <span class="php-var">$tag</span> = rex_escape(<span class="php-var">$this</span>-&gt;getTag(), <span class="php-quote">'html_attr'</span>);
 </span><span class="l" id="224"><a class="l" href="#224">224 </a>
 </span><span class="l" id="225"><a class="l" href="#225">225 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;getAttributes() <span class="php-keyword1">as</span> <span class="php-var">$attributeName</span> =&gt; <span class="php-var">$attributeValue</span>) {
-</span><span class="l" id="226"><a class="l" href="#226">226 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>) . <span class="php-quote">'"'</span>;
 </span><span class="l" id="227"><a class="l" href="#227">227 </a>        }
 </span><span class="l" id="228"><a class="l" href="#228">228 </a>
 </span><span class="l" id="229"><a class="l" href="#229">229 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$this</span>-&gt;hasSeparateEnding()) {
@@ -241,7 +241,7 @@
 </span><span class="l" id="232"><a class="l" href="#232">232 </a>            }
 </span><span class="l" id="233"><a class="l" href="#233">233 </a>            <span class="php-keyword1">return</span> <span class="php-quote">'&lt;'</span> . <span class="php-var">$tag</span> . <span class="php-var">$attr</span> . <span class="php-quote">'&gt;'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'&lt;/'</span> . <span class="php-var">$tag</span> . <span class="php-quote">'&gt;'</span>;
 </span><span class="l" id="234"><a class="l" href="#234">234 </a>        }
-</span><span class="l" id="235"><a class="l" href="#235">235 </a>        <span class="php-var">$attr</span> .= <span class="php-quote">' value="'</span> . rex_escape(<span class="php-var">$value</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="235"><a class="l" href="#235">235 </a>        <span class="php-var">$attr</span> .= <span class="php-quote">' value="'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'"'</span>;
 </span><span class="l" id="236"><a class="l" href="#236">236 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'&lt;'</span> . <span class="php-var">$tag</span> . <span class="php-var">$attr</span> . <span class="php-quote">' /&gt;'</span>;
 </span><span class="l" id="237"><a class="l" href="#237">237 </a>    }
 </span><span class="l" id="238"><a class="l" href="#238">238 </a>

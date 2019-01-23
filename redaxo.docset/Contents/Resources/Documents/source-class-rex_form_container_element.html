@@ -105,12 +105,12 @@
 </span><span class="l" id="96"><a class="l" href="#96"> 96 </a>                <span class="php-keyword1">continue</span>;
 </span><span class="l" id="97"><a class="l" href="#97"> 97 </a>            }
 </span><span class="l" id="98"><a class="l" href="#98"> 98 </a>
-</span><span class="l" id="99"><a class="l" href="#99"> 99 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="99"><a class="l" href="#99"> 99 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>) . <span class="php-quote">'"'</span>;
 </span><span class="l" id="100"><a class="l" href="#100">100 </a>        }
 </span><span class="l" id="101"><a class="l" href="#101">101 </a>
 </span><span class="l" id="102"><a class="l" href="#102">102 </a>        <span class="php-var">$format</span> = <span class="php-quote">''</span>;
 </span><span class="l" id="103"><a class="l" href="#103">103 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;fields <span class="php-keyword1">as</span> <span class="php-var">$group</span> =&gt; <span class="php-var">$groupFields</span>) {
-</span><span class="l" id="104"><a class="l" href="#104">104 </a>            <span class="php-var">$format</span> .= <span class="php-quote">'&lt;div id="rex-'</span> . rex_escape(<span class="php-var">$group</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span> . <span class="php-var">$attr</span> . <span class="php-quote">'&gt;'</span>;
+</span><span class="l" id="104"><a class="l" href="#104">104 </a>            <span class="php-var">$format</span> .= <span class="php-quote">'&lt;div id="rex-'</span> . rex_escape(<span class="php-var">$group</span>) . <span class="php-quote">'"'</span> . <span class="php-var">$attr</span> . <span class="php-quote">'&gt;'</span>;
 </span><span class="l" id="105"><a class="l" href="#105">105 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$groupFields</span> <span class="php-keyword1">as</span> <span class="php-var">$field</span>) {
 </span><span class="l" id="106"><a class="l" href="#106">106 </a>                <span class="php-var">$format</span> .= <span class="php-var">$field</span>-&gt;get();
 </span><span class="l" id="107"><a class="l" href="#107">107 </a>            }

@@ -1260,548 +1260,556 @@
 </span><span class="l" id="1251"><a class="l" href="#1251">1251 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_addGlobalUpdateFields" id="_addGlobalUpdateFields">addGlobalUpdateFields</a>(<span class="php-var">$user</span> = <span class="php-keyword1">null</span>)
 </span><span class="l" id="1252"><a class="l" href="#1252">1252 </a>    {
 </span><span class="l" id="1253"><a class="l" href="#1253">1253 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$user</span>) {
-</span><span class="l" id="1254"><a class="l" href="#1254">1254 </a>            <span class="php-var">$user</span> = rex::getUser()-&gt;getValue(<span class="php-quote">'login'</span>);
-</span><span class="l" id="1255"><a class="l" href="#1255">1255 </a>        }
-</span><span class="l" id="1256"><a class="l" href="#1256">1256 </a>
-</span><span class="l" id="1257"><a class="l" href="#1257">1257 </a>        <span class="php-var">$this</span>-&gt;setDateTimeValue(<span class="php-quote">'updatedate'</span>, <span class="php-keyword2">time</span>());
-</span><span class="l" id="1258"><a class="l" href="#1258">1258 </a>        <span class="php-var">$this</span>-&gt;setValue(<span class="php-quote">'updateuser'</span>, <span class="php-var">$user</span>);
-</span><span class="l" id="1259"><a class="l" href="#1259">1259 </a>
-</span><span class="l" id="1260"><a class="l" href="#1260">1260 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span class="l" id="1261"><a class="l" href="#1261">1261 </a>    }
-</span><span class="l" id="1262"><a class="l" href="#1262">1262 </a>
-</span><span class="l" id="1263"><a class="l" href="#1263">1263 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1264"><a class="l" href="#1264">1264 </a><span class="php-comment">     * @param string $user the name of the user who updated the dataset. Defaults to the current user
-</span></span><span class="l" id="1265"><a class="l" href="#1265">1265 </a><span class="php-comment">     *
-</span></span><span class="l" id="1266"><a class="l" href="#1266">1266 </a><span class="php-comment">     * @return $this the current rex_sql object
-</span></span><span class="l" id="1267"><a class="l" href="#1267">1267 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1268"><a class="l" href="#1268">1268 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_addGlobalCreateFields" id="_addGlobalCreateFields">addGlobalCreateFields</a>(<span class="php-var">$user</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="1269"><a class="l" href="#1269">1269 </a>    {
-</span><span class="l" id="1270"><a class="l" href="#1270">1270 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$user</span>) {
-</span><span class="l" id="1271"><a class="l" href="#1271">1271 </a>            <span class="php-var">$user</span> = rex::getUser()-&gt;getValue(<span class="php-quote">'login'</span>);
-</span><span class="l" id="1272"><a class="l" href="#1272">1272 </a>        }
-</span><span class="l" id="1273"><a class="l" href="#1273">1273 </a>
-</span><span class="l" id="1274"><a class="l" href="#1274">1274 </a>        <span class="php-var">$this</span>-&gt;setDateTimeValue(<span class="php-quote">'createdate'</span>, <span class="php-keyword2">time</span>());
-</span><span class="l" id="1275"><a class="l" href="#1275">1275 </a>        <span class="php-var">$this</span>-&gt;setValue(<span class="php-quote">'createuser'</span>, <span class="php-var">$user</span>);
-</span><span class="l" id="1276"><a class="l" href="#1276">1276 </a>
-</span><span class="l" id="1277"><a class="l" href="#1277">1277 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span class="l" id="1278"><a class="l" href="#1278">1278 </a>    }
-</span><span class="l" id="1279"><a class="l" href="#1279">1279 </a>
-</span><span class="l" id="1280"><a class="l" href="#1280">1280 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1281"><a class="l" href="#1281">1281 </a><span class="php-comment">     * Starts a database transaction.
-</span></span><span class="l" id="1282"><a class="l" href="#1282">1282 </a><span class="php-comment">     *
-</span></span><span class="l" id="1283"><a class="l" href="#1283">1283 </a><span class="php-comment">     * @throws rex_sql_exception when a transaction is already running
-</span></span><span class="l" id="1284"><a class="l" href="#1284">1284 </a><span class="php-comment">     *
-</span></span><span class="l" id="1285"><a class="l" href="#1285">1285 </a><span class="php-comment">     * @return bool Indicating whether the transaction was successfully started
-</span></span><span class="l" id="1286"><a class="l" href="#1286">1286 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1287"><a class="l" href="#1287">1287 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_beginTransaction" id="_beginTransaction">beginTransaction</a>()
-</span><span class="l" id="1288"><a class="l" href="#1288">1288 </a>    {
-</span><span class="l" id="1289"><a class="l" href="#1289">1289 </a>        <span class="php-keyword1">if</span> (self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction()) {
-</span><span class="l" id="1290"><a class="l" href="#1290">1290 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-quote">'Transaction already started'</span>, <span class="php-keyword1">null</span>, <span class="php-var">$this</span>);
-</span><span class="l" id="1291"><a class="l" href="#1291">1291 </a>        }
-</span><span class="l" id="1292"><a class="l" href="#1292">1292 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;beginTransaction();
-</span><span class="l" id="1293"><a class="l" href="#1293">1293 </a>    }
-</span><span class="l" id="1294"><a class="l" href="#1294">1294 </a>
-</span><span class="l" id="1295"><a class="l" href="#1295">1295 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1296"><a class="l" href="#1296">1296 </a><span class="php-comment">     * Rollback a already started database transaction.
-</span></span><span class="l" id="1297"><a class="l" href="#1297">1297 </a><span class="php-comment">     *
-</span></span><span class="l" id="1298"><a class="l" href="#1298">1298 </a><span class="php-comment">     * @throws rex_sql_exception when no transaction was started beforehand
-</span></span><span class="l" id="1299"><a class="l" href="#1299">1299 </a><span class="php-comment">     *
-</span></span><span class="l" id="1300"><a class="l" href="#1300">1300 </a><span class="php-comment">     * @return bool Indicating whether the transaction was successfully rollbacked
-</span></span><span class="l" id="1301"><a class="l" href="#1301">1301 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1302"><a class="l" href="#1302">1302 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_rollBack" id="_rollBack">rollBack</a>()
-</span><span class="l" id="1303"><a class="l" href="#1303">1303 </a>    {
-</span><span class="l" id="1304"><a class="l" href="#1304">1304 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction()) {
-</span><span class="l" id="1305"><a class="l" href="#1305">1305 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-quote">'Unable to rollback, no transaction started before'</span>, <span class="php-keyword1">null</span>, <span class="php-var">$this</span>);
-</span><span class="l" id="1306"><a class="l" href="#1306">1306 </a>        }
-</span><span class="l" id="1307"><a class="l" href="#1307">1307 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;rollBack();
-</span><span class="l" id="1308"><a class="l" href="#1308">1308 </a>    }
-</span><span class="l" id="1309"><a class="l" href="#1309">1309 </a>
-</span><span class="l" id="1310"><a class="l" href="#1310">1310 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1311"><a class="l" href="#1311">1311 </a><span class="php-comment">     * Commit a already started database transaction.
-</span></span><span class="l" id="1312"><a class="l" href="#1312">1312 </a><span class="php-comment">     *
-</span></span><span class="l" id="1313"><a class="l" href="#1313">1313 </a><span class="php-comment">     * @throws rex_sql_exception when no transaction was started beforehand
-</span></span><span class="l" id="1314"><a class="l" href="#1314">1314 </a><span class="php-comment">     *
-</span></span><span class="l" id="1315"><a class="l" href="#1315">1315 </a><span class="php-comment">     * @return bool Indicating whether the transaction was successfully committed
-</span></span><span class="l" id="1316"><a class="l" href="#1316">1316 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1317"><a class="l" href="#1317">1317 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_commit" id="_commit">commit</a>()
-</span><span class="l" id="1318"><a class="l" href="#1318">1318 </a>    {
-</span><span class="l" id="1319"><a class="l" href="#1319">1319 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction()) {
-</span><span class="l" id="1320"><a class="l" href="#1320">1320 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-quote">'Unable to commit, no transaction started before'</span>, <span class="php-keyword1">null</span>, <span class="php-var">$this</span>);
-</span><span class="l" id="1321"><a class="l" href="#1321">1321 </a>        }
-</span><span class="l" id="1322"><a class="l" href="#1322">1322 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;commit();
-</span><span class="l" id="1323"><a class="l" href="#1323">1323 </a>    }
-</span><span class="l" id="1324"><a class="l" href="#1324">1324 </a>
-</span><span class="l" id="1325"><a class="l" href="#1325">1325 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1326"><a class="l" href="#1326">1326 </a><span class="php-comment">     * @return bool Whether a transaction was already started/is already running.
-</span></span><span class="l" id="1327"><a class="l" href="#1327">1327 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1328"><a class="l" href="#1328">1328 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_inTransaction" id="_inTransaction">inTransaction</a>()
-</span><span class="l" id="1329"><a class="l" href="#1329">1329 </a>    {
-</span><span class="l" id="1330"><a class="l" href="#1330">1330 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction();
+</span><span class="l" id="1254"><a class="l" href="#1254">1254 </a>            <span class="php-keyword1">if</span> (rex::getUser()) {
+</span><span class="l" id="1255"><a class="l" href="#1255">1255 </a>                <span class="php-var">$user</span> = rex::getUser()-&gt;getValue(<span class="php-quote">'login'</span>);
+</span><span class="l" id="1256"><a class="l" href="#1256">1256 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1257"><a class="l" href="#1257">1257 </a>                <span class="php-var">$user</span> = rex::getEnvironment();
+</span><span class="l" id="1258"><a class="l" href="#1258">1258 </a>            }
+</span><span class="l" id="1259"><a class="l" href="#1259">1259 </a>        }
+</span><span class="l" id="1260"><a class="l" href="#1260">1260 </a>
+</span><span class="l" id="1261"><a class="l" href="#1261">1261 </a>        <span class="php-var">$this</span>-&gt;setDateTimeValue(<span class="php-quote">'updatedate'</span>, <span class="php-keyword2">time</span>());
+</span><span class="l" id="1262"><a class="l" href="#1262">1262 </a>        <span class="php-var">$this</span>-&gt;setValue(<span class="php-quote">'updateuser'</span>, <span class="php-var">$user</span>);
+</span><span class="l" id="1263"><a class="l" href="#1263">1263 </a>
+</span><span class="l" id="1264"><a class="l" href="#1264">1264 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span class="l" id="1265"><a class="l" href="#1265">1265 </a>    }
+</span><span class="l" id="1266"><a class="l" href="#1266">1266 </a>
+</span><span class="l" id="1267"><a class="l" href="#1267">1267 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1268"><a class="l" href="#1268">1268 </a><span class="php-comment">     * @param string $user the name of the user who updated the dataset. Defaults to the current user
+</span></span><span class="l" id="1269"><a class="l" href="#1269">1269 </a><span class="php-comment">     *
+</span></span><span class="l" id="1270"><a class="l" href="#1270">1270 </a><span class="php-comment">     * @return $this the current rex_sql object
+</span></span><span class="l" id="1271"><a class="l" href="#1271">1271 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1272"><a class="l" href="#1272">1272 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_addGlobalCreateFields" id="_addGlobalCreateFields">addGlobalCreateFields</a>(<span class="php-var">$user</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1273"><a class="l" href="#1273">1273 </a>    {
+</span><span class="l" id="1274"><a class="l" href="#1274">1274 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$user</span>) {
+</span><span class="l" id="1275"><a class="l" href="#1275">1275 </a>            <span class="php-keyword1">if</span> (rex::getUser()) {
+</span><span class="l" id="1276"><a class="l" href="#1276">1276 </a>                <span class="php-var">$user</span> = rex::getUser()-&gt;getValue(<span class="php-quote">'login'</span>);
+</span><span class="l" id="1277"><a class="l" href="#1277">1277 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1278"><a class="l" href="#1278">1278 </a>                <span class="php-var">$user</span> = rex::getEnvironment();
+</span><span class="l" id="1279"><a class="l" href="#1279">1279 </a>            }
+</span><span class="l" id="1280"><a class="l" href="#1280">1280 </a>        }
+</span><span class="l" id="1281"><a class="l" href="#1281">1281 </a>
+</span><span class="l" id="1282"><a class="l" href="#1282">1282 </a>        <span class="php-var">$this</span>-&gt;setDateTimeValue(<span class="php-quote">'createdate'</span>, <span class="php-keyword2">time</span>());
+</span><span class="l" id="1283"><a class="l" href="#1283">1283 </a>        <span class="php-var">$this</span>-&gt;setValue(<span class="php-quote">'createuser'</span>, <span class="php-var">$user</span>);
+</span><span class="l" id="1284"><a class="l" href="#1284">1284 </a>
+</span><span class="l" id="1285"><a class="l" href="#1285">1285 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span class="l" id="1286"><a class="l" href="#1286">1286 </a>    }
+</span><span class="l" id="1287"><a class="l" href="#1287">1287 </a>
+</span><span class="l" id="1288"><a class="l" href="#1288">1288 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1289"><a class="l" href="#1289">1289 </a><span class="php-comment">     * Starts a database transaction.
+</span></span><span class="l" id="1290"><a class="l" href="#1290">1290 </a><span class="php-comment">     *
+</span></span><span class="l" id="1291"><a class="l" href="#1291">1291 </a><span class="php-comment">     * @throws rex_sql_exception when a transaction is already running
+</span></span><span class="l" id="1292"><a class="l" href="#1292">1292 </a><span class="php-comment">     *
+</span></span><span class="l" id="1293"><a class="l" href="#1293">1293 </a><span class="php-comment">     * @return bool Indicating whether the transaction was successfully started
+</span></span><span class="l" id="1294"><a class="l" href="#1294">1294 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1295"><a class="l" href="#1295">1295 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_beginTransaction" id="_beginTransaction">beginTransaction</a>()
+</span><span class="l" id="1296"><a class="l" href="#1296">1296 </a>    {
+</span><span class="l" id="1297"><a class="l" href="#1297">1297 </a>        <span class="php-keyword1">if</span> (self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction()) {
+</span><span class="l" id="1298"><a class="l" href="#1298">1298 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-quote">'Transaction already started'</span>, <span class="php-keyword1">null</span>, <span class="php-var">$this</span>);
+</span><span class="l" id="1299"><a class="l" href="#1299">1299 </a>        }
+</span><span class="l" id="1300"><a class="l" href="#1300">1300 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;beginTransaction();
+</span><span class="l" id="1301"><a class="l" href="#1301">1301 </a>    }
+</span><span class="l" id="1302"><a class="l" href="#1302">1302 </a>
+</span><span class="l" id="1303"><a class="l" href="#1303">1303 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1304"><a class="l" href="#1304">1304 </a><span class="php-comment">     * Rollback a already started database transaction.
+</span></span><span class="l" id="1305"><a class="l" href="#1305">1305 </a><span class="php-comment">     *
+</span></span><span class="l" id="1306"><a class="l" href="#1306">1306 </a><span class="php-comment">     * @throws rex_sql_exception when no transaction was started beforehand
+</span></span><span class="l" id="1307"><a class="l" href="#1307">1307 </a><span class="php-comment">     *
+</span></span><span class="l" id="1308"><a class="l" href="#1308">1308 </a><span class="php-comment">     * @return bool Indicating whether the transaction was successfully rollbacked
+</span></span><span class="l" id="1309"><a class="l" href="#1309">1309 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1310"><a class="l" href="#1310">1310 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_rollBack" id="_rollBack">rollBack</a>()
+</span><span class="l" id="1311"><a class="l" href="#1311">1311 </a>    {
+</span><span class="l" id="1312"><a class="l" href="#1312">1312 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction()) {
+</span><span class="l" id="1313"><a class="l" href="#1313">1313 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-quote">'Unable to rollback, no transaction started before'</span>, <span class="php-keyword1">null</span>, <span class="php-var">$this</span>);
+</span><span class="l" id="1314"><a class="l" href="#1314">1314 </a>        }
+</span><span class="l" id="1315"><a class="l" href="#1315">1315 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;rollBack();
+</span><span class="l" id="1316"><a class="l" href="#1316">1316 </a>    }
+</span><span class="l" id="1317"><a class="l" href="#1317">1317 </a>
+</span><span class="l" id="1318"><a class="l" href="#1318">1318 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1319"><a class="l" href="#1319">1319 </a><span class="php-comment">     * Commit a already started database transaction.
+</span></span><span class="l" id="1320"><a class="l" href="#1320">1320 </a><span class="php-comment">     *
+</span></span><span class="l" id="1321"><a class="l" href="#1321">1321 </a><span class="php-comment">     * @throws rex_sql_exception when no transaction was started beforehand
+</span></span><span class="l" id="1322"><a class="l" href="#1322">1322 </a><span class="php-comment">     *
+</span></span><span class="l" id="1323"><a class="l" href="#1323">1323 </a><span class="php-comment">     * @return bool Indicating whether the transaction was successfully committed
+</span></span><span class="l" id="1324"><a class="l" href="#1324">1324 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1325"><a class="l" href="#1325">1325 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_commit" id="_commit">commit</a>()
+</span><span class="l" id="1326"><a class="l" href="#1326">1326 </a>    {
+</span><span class="l" id="1327"><a class="l" href="#1327">1327 </a>        <span class="php-keyword1">if</span> (!self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction()) {
+</span><span class="l" id="1328"><a class="l" href="#1328">1328 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-quote">'Unable to commit, no transaction started before'</span>, <span class="php-keyword1">null</span>, <span class="php-var">$this</span>);
+</span><span class="l" id="1329"><a class="l" href="#1329">1329 </a>        }
+</span><span class="l" id="1330"><a class="l" href="#1330">1330 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;commit();
 </span><span class="l" id="1331"><a class="l" href="#1331">1331 </a>    }
 </span><span class="l" id="1332"><a class="l" href="#1332">1332 </a>
 </span><span class="l" id="1333"><a class="l" href="#1333">1333 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1334"><a class="l" href="#1334">1334 </a><span class="php-comment">     * Convenience method which executes the given callable within a transaction.
-</span></span><span class="l" id="1335"><a class="l" href="#1335">1335 </a><span class="php-comment">     *
-</span></span><span class="l" id="1336"><a class="l" href="#1336">1336 </a><span class="php-comment">     * In case the callable throws, the transaction will automatically rolled back.
-</span></span><span class="l" id="1337"><a class="l" href="#1337">1337 </a><span class="php-comment">     * In case no error happens, the transaction will be committed after the callable was called.
-</span></span><span class="l" id="1338"><a class="l" href="#1338">1338 </a><span class="php-comment">     *
-</span></span><span class="l" id="1339"><a class="l" href="#1339">1339 </a><span class="php-comment">     * @param callable $callable
-</span></span><span class="l" id="1340"><a class="l" href="#1340">1340 </a><span class="php-comment">     *
-</span></span><span class="l" id="1341"><a class="l" href="#1341">1341 </a><span class="php-comment">     * @return mixed
-</span></span><span class="l" id="1342"><a class="l" href="#1342">1342 </a><span class="php-comment">     *
-</span></span><span class="l" id="1343"><a class="l" href="#1343">1343 </a><span class="php-comment">     * @throws Throwable
-</span></span><span class="l" id="1344"><a class="l" href="#1344">1344 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1345"><a class="l" href="#1345">1345 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_transactional" id="_transactional">transactional</a>(<span class="php-keyword1">callable</span> <span class="php-var">$callable</span>)
-</span><span class="l" id="1346"><a class="l" href="#1346">1346 </a>    {
-</span><span class="l" id="1347"><a class="l" href="#1347">1347 </a>        <span class="php-var">$inTransaction</span> = self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction();
-</span><span class="l" id="1348"><a class="l" href="#1348">1348 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
-</span><span class="l" id="1349"><a class="l" href="#1349">1349 </a>            self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;beginTransaction();
-</span><span class="l" id="1350"><a class="l" href="#1350">1350 </a>        }
-</span><span class="l" id="1351"><a class="l" href="#1351">1351 </a>        <span class="php-keyword1">try</span> {
-</span><span class="l" id="1352"><a class="l" href="#1352">1352 </a>            <span class="php-var">$result</span> = <span class="php-var">$callable</span>();
-</span><span class="l" id="1353"><a class="l" href="#1353">1353 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
-</span><span class="l" id="1354"><a class="l" href="#1354">1354 </a>                self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;commit();
-</span><span class="l" id="1355"><a class="l" href="#1355">1355 </a>            }
-</span><span class="l" id="1356"><a class="l" href="#1356">1356 </a>            <span class="php-keyword1">return</span> <span class="php-var">$result</span>;
-</span><span class="l" id="1357"><a class="l" href="#1357">1357 </a>        } <span class="php-keyword1">catch</span> (\Exception <span class="php-var">$e</span>) {
-</span><span class="l" id="1358"><a class="l" href="#1358">1358 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
-</span><span class="l" id="1359"><a class="l" href="#1359">1359 </a>                self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;rollBack();
-</span><span class="l" id="1360"><a class="l" href="#1360">1360 </a>            }
-</span><span class="l" id="1361"><a class="l" href="#1361">1361 </a>            <span class="php-keyword1">throw</span> <span class="php-var">$e</span>;
-</span><span class="l" id="1362"><a class="l" href="#1362">1362 </a>        } <span class="php-keyword1">catch</span> (\Throwable <span class="php-var">$e</span>) {
-</span><span class="l" id="1363"><a class="l" href="#1363">1363 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
-</span><span class="l" id="1364"><a class="l" href="#1364">1364 </a>                self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;rollBack();
-</span><span class="l" id="1365"><a class="l" href="#1365">1365 </a>            }
-</span><span class="l" id="1366"><a class="l" href="#1366">1366 </a>            <span class="php-keyword1">throw</span> <span class="php-var">$e</span>;
-</span><span class="l" id="1367"><a class="l" href="#1367">1367 </a>        }
-</span><span class="l" id="1368"><a class="l" href="#1368">1368 </a>    }
-</span><span class="l" id="1369"><a class="l" href="#1369">1369 </a>
-</span><span class="l" id="1370"><a class="l" href="#1370">1370 </a>    <span class="php-comment">// ----------------- iterator interface</span>
-</span><span class="l" id="1371"><a class="l" href="#1371">1371 </a>
-</span><span class="l" id="1372"><a class="l" href="#1372">1372 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1373"><a class="l" href="#1373">1373 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.rewind.php
-</span></span><span class="l" id="1374"><a class="l" href="#1374">1374 </a><span class="php-comment">     *
-</span></span><span class="l" id="1375"><a class="l" href="#1375">1375 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1376"><a class="l" href="#1376">1376 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1377"><a class="l" href="#1377">1377 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">rewind</span>()
-</span><span class="l" id="1378"><a class="l" href="#1378">1378 </a>    {
-</span><span class="l" id="1379"><a class="l" href="#1379">1379 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">reset</span>();
-</span><span class="l" id="1380"><a class="l" href="#1380">1380 </a>    }
-</span><span class="l" id="1381"><a class="l" href="#1381">1381 </a>
-</span><span class="l" id="1382"><a class="l" href="#1382">1382 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1383"><a class="l" href="#1383">1383 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.current.php
-</span></span><span class="l" id="1384"><a class="l" href="#1384">1384 </a><span class="php-comment">     *
-</span></span><span class="l" id="1385"><a class="l" href="#1385">1385 </a><span class="php-comment">     * @return $this
-</span></span><span class="l" id="1386"><a class="l" href="#1386">1386 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1387"><a class="l" href="#1387">1387 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">current</span>()
-</span><span class="l" id="1388"><a class="l" href="#1388">1388 </a>    {
-</span><span class="l" id="1389"><a class="l" href="#1389">1389 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span class="l" id="1390"><a class="l" href="#1390">1390 </a>    }
-</span><span class="l" id="1391"><a class="l" href="#1391">1391 </a>
-</span><span class="l" id="1392"><a class="l" href="#1392">1392 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1393"><a class="l" href="#1393">1393 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.key.php
+</span></span><span class="l" id="1334"><a class="l" href="#1334">1334 </a><span class="php-comment">     * @return bool Whether a transaction was already started/is already running.
+</span></span><span class="l" id="1335"><a class="l" href="#1335">1335 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1336"><a class="l" href="#1336">1336 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_inTransaction" id="_inTransaction">inTransaction</a>()
+</span><span class="l" id="1337"><a class="l" href="#1337">1337 </a>    {
+</span><span class="l" id="1338"><a class="l" href="#1338">1338 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction();
+</span><span class="l" id="1339"><a class="l" href="#1339">1339 </a>    }
+</span><span class="l" id="1340"><a class="l" href="#1340">1340 </a>
+</span><span class="l" id="1341"><a class="l" href="#1341">1341 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1342"><a class="l" href="#1342">1342 </a><span class="php-comment">     * Convenience method which executes the given callable within a transaction.
+</span></span><span class="l" id="1343"><a class="l" href="#1343">1343 </a><span class="php-comment">     *
+</span></span><span class="l" id="1344"><a class="l" href="#1344">1344 </a><span class="php-comment">     * In case the callable throws, the transaction will automatically rolled back.
+</span></span><span class="l" id="1345"><a class="l" href="#1345">1345 </a><span class="php-comment">     * In case no error happens, the transaction will be committed after the callable was called.
+</span></span><span class="l" id="1346"><a class="l" href="#1346">1346 </a><span class="php-comment">     *
+</span></span><span class="l" id="1347"><a class="l" href="#1347">1347 </a><span class="php-comment">     * @param callable $callable
+</span></span><span class="l" id="1348"><a class="l" href="#1348">1348 </a><span class="php-comment">     *
+</span></span><span class="l" id="1349"><a class="l" href="#1349">1349 </a><span class="php-comment">     * @return mixed
+</span></span><span class="l" id="1350"><a class="l" href="#1350">1350 </a><span class="php-comment">     *
+</span></span><span class="l" id="1351"><a class="l" href="#1351">1351 </a><span class="php-comment">     * @throws Throwable
+</span></span><span class="l" id="1352"><a class="l" href="#1352">1352 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1353"><a class="l" href="#1353">1353 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_transactional" id="_transactional">transactional</a>(<span class="php-keyword1">callable</span> <span class="php-var">$callable</span>)
+</span><span class="l" id="1354"><a class="l" href="#1354">1354 </a>    {
+</span><span class="l" id="1355"><a class="l" href="#1355">1355 </a>        <span class="php-var">$inTransaction</span> = self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;inTransaction();
+</span><span class="l" id="1356"><a class="l" href="#1356">1356 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
+</span><span class="l" id="1357"><a class="l" href="#1357">1357 </a>            self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;beginTransaction();
+</span><span class="l" id="1358"><a class="l" href="#1358">1358 </a>        }
+</span><span class="l" id="1359"><a class="l" href="#1359">1359 </a>        <span class="php-keyword1">try</span> {
+</span><span class="l" id="1360"><a class="l" href="#1360">1360 </a>            <span class="php-var">$result</span> = <span class="php-var">$callable</span>();
+</span><span class="l" id="1361"><a class="l" href="#1361">1361 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
+</span><span class="l" id="1362"><a class="l" href="#1362">1362 </a>                self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;commit();
+</span><span class="l" id="1363"><a class="l" href="#1363">1363 </a>            }
+</span><span class="l" id="1364"><a class="l" href="#1364">1364 </a>            <span class="php-keyword1">return</span> <span class="php-var">$result</span>;
+</span><span class="l" id="1365"><a class="l" href="#1365">1365 </a>        } <span class="php-keyword1">catch</span> (\Exception <span class="php-var">$e</span>) {
+</span><span class="l" id="1366"><a class="l" href="#1366">1366 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
+</span><span class="l" id="1367"><a class="l" href="#1367">1367 </a>                self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;rollBack();
+</span><span class="l" id="1368"><a class="l" href="#1368">1368 </a>            }
+</span><span class="l" id="1369"><a class="l" href="#1369">1369 </a>            <span class="php-keyword1">throw</span> <span class="php-var">$e</span>;
+</span><span class="l" id="1370"><a class="l" href="#1370">1370 </a>        } <span class="php-keyword1">catch</span> (\Throwable <span class="php-var">$e</span>) {
+</span><span class="l" id="1371"><a class="l" href="#1371">1371 </a>            <span class="php-keyword1">if</span> (!<span class="php-var">$inTransaction</span>) {
+</span><span class="l" id="1372"><a class="l" href="#1372">1372 </a>                self::<span class="php-var">$pdo</span>[<span class="php-var">$this</span>-&gt;DBID]-&gt;rollBack();
+</span><span class="l" id="1373"><a class="l" href="#1373">1373 </a>            }
+</span><span class="l" id="1374"><a class="l" href="#1374">1374 </a>            <span class="php-keyword1">throw</span> <span class="php-var">$e</span>;
+</span><span class="l" id="1375"><a class="l" href="#1375">1375 </a>        }
+</span><span class="l" id="1376"><a class="l" href="#1376">1376 </a>    }
+</span><span class="l" id="1377"><a class="l" href="#1377">1377 </a>
+</span><span class="l" id="1378"><a class="l" href="#1378">1378 </a>    <span class="php-comment">// ----------------- iterator interface</span>
+</span><span class="l" id="1379"><a class="l" href="#1379">1379 </a>
+</span><span class="l" id="1380"><a class="l" href="#1380">1380 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1381"><a class="l" href="#1381">1381 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.rewind.php
+</span></span><span class="l" id="1382"><a class="l" href="#1382">1382 </a><span class="php-comment">     *
+</span></span><span class="l" id="1383"><a class="l" href="#1383">1383 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1384"><a class="l" href="#1384">1384 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1385"><a class="l" href="#1385">1385 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">rewind</span>()
+</span><span class="l" id="1386"><a class="l" href="#1386">1386 </a>    {
+</span><span class="l" id="1387"><a class="l" href="#1387">1387 </a>        <span class="php-var">$this</span>-&gt;<span class="php-keyword2">reset</span>();
+</span><span class="l" id="1388"><a class="l" href="#1388">1388 </a>    }
+</span><span class="l" id="1389"><a class="l" href="#1389">1389 </a>
+</span><span class="l" id="1390"><a class="l" href="#1390">1390 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1391"><a class="l" href="#1391">1391 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.current.php
+</span></span><span class="l" id="1392"><a class="l" href="#1392">1392 </a><span class="php-comment">     *
+</span></span><span class="l" id="1393"><a class="l" href="#1393">1393 </a><span class="php-comment">     * @return $this
 </span></span><span class="l" id="1394"><a class="l" href="#1394">1394 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1395"><a class="l" href="#1395">1395 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">key</span>()
+</span><span class="l" id="1395"><a class="l" href="#1395">1395 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">current</span>()
 </span><span class="l" id="1396"><a class="l" href="#1396">1396 </a>    {
-</span><span class="l" id="1397"><a class="l" href="#1397">1397 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;counter;
+</span><span class="l" id="1397"><a class="l" href="#1397">1397 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
 </span><span class="l" id="1398"><a class="l" href="#1398">1398 </a>    }
 </span><span class="l" id="1399"><a class="l" href="#1399">1399 </a>
 </span><span class="l" id="1400"><a class="l" href="#1400">1400 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1401"><a class="l" href="#1401">1401 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.next.php
+</span></span><span class="l" id="1401"><a class="l" href="#1401">1401 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.key.php
 </span></span><span class="l" id="1402"><a class="l" href="#1402">1402 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1403"><a class="l" href="#1403">1403 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">next</span>()
+</span><span class="l" id="1403"><a class="l" href="#1403">1403 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">key</span>()
 </span><span class="l" id="1404"><a class="l" href="#1404">1404 </a>    {
-</span><span class="l" id="1405"><a class="l" href="#1405">1405 </a>        ++<span class="php-var">$this</span>-&gt;counter;
-</span><span class="l" id="1406"><a class="l" href="#1406">1406 </a>        <span class="php-var">$this</span>-&gt;lastRow = <span class="php-keyword1">null</span>;
-</span><span class="l" id="1407"><a class="l" href="#1407">1407 </a>    }
-</span><span class="l" id="1408"><a class="l" href="#1408">1408 </a>
-</span><span class="l" id="1409"><a class="l" href="#1409">1409 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1410"><a class="l" href="#1410">1410 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.valid.php
-</span></span><span class="l" id="1411"><a class="l" href="#1411">1411 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1412"><a class="l" href="#1412">1412 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_valid" id="_valid">valid</a>()
-</span><span class="l" id="1413"><a class="l" href="#1413">1413 </a>    {
-</span><span class="l" id="1414"><a class="l" href="#1414">1414 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;hasNext();
+</span><span class="l" id="1405"><a class="l" href="#1405">1405 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;counter;
+</span><span class="l" id="1406"><a class="l" href="#1406">1406 </a>    }
+</span><span class="l" id="1407"><a class="l" href="#1407">1407 </a>
+</span><span class="l" id="1408"><a class="l" href="#1408">1408 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1409"><a class="l" href="#1409">1409 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.next.php
+</span></span><span class="l" id="1410"><a class="l" href="#1410">1410 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1411"><a class="l" href="#1411">1411 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">next</span>()
+</span><span class="l" id="1412"><a class="l" href="#1412">1412 </a>    {
+</span><span class="l" id="1413"><a class="l" href="#1413">1413 </a>        ++<span class="php-var">$this</span>-&gt;counter;
+</span><span class="l" id="1414"><a class="l" href="#1414">1414 </a>        <span class="php-var">$this</span>-&gt;lastRow = <span class="php-keyword1">null</span>;
 </span><span class="l" id="1415"><a class="l" href="#1415">1415 </a>    }
 </span><span class="l" id="1416"><a class="l" href="#1416">1416 </a>
-</span><span class="l" id="1417"><a class="l" href="#1417">1417 </a>    <span class="php-comment">// ----------------- /iterator interface</span>
-</span><span class="l" id="1418"><a class="l" href="#1418">1418 </a>
-</span><span class="l" id="1419"><a class="l" href="#1419">1419 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1420"><a class="l" href="#1420">1420 </a><span class="php-comment">     * Erstellt das CREATE TABLE Statement um die Tabelle $table
-</span></span><span class="l" id="1421"><a class="l" href="#1421">1421 </a><span class="php-comment">     * der Datenbankverbindung $DBID zu erstellen.
-</span></span><span class="l" id="1422"><a class="l" href="#1422">1422 </a><span class="php-comment">     *
-</span></span><span class="l" id="1423"><a class="l" href="#1423">1423 </a><span class="php-comment">     * @param string $table Name der Tabelle
-</span></span><span class="l" id="1424"><a class="l" href="#1424">1424 </a><span class="php-comment">     * @param int    $DBID  Id der Datenbankverbindung
-</span></span><span class="l" id="1425"><a class="l" href="#1425">1425 </a><span class="php-comment">     *
-</span></span><span class="l" id="1426"><a class="l" href="#1426">1426 </a><span class="php-comment">     * @return string CREATE TABLE Sql-Statement zu erstsellung der Tabelle
-</span></span><span class="l" id="1427"><a class="l" href="#1427">1427 </a><span class="php-comment">     *
-</span></span><span class="l" id="1428"><a class="l" href="#1428">1428 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1429"><a class="l" href="#1429">1429 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1430"><a class="l" href="#1430">1430 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_showCreateTable" id="_showCreateTable">showCreateTable</a>(<span class="php-var">$table</span>, <span class="php-var">$DBID</span> = <span class="php-num">1</span>)
-</span><span class="l" id="1431"><a class="l" href="#1431">1431 </a>    {
-</span><span class="l" id="1432"><a class="l" href="#1432">1432 </a>        <span class="php-var">$sql</span> = self::factory(<span class="php-var">$DBID</span>);
-</span><span class="l" id="1433"><a class="l" href="#1433">1433 </a>        <span class="php-var">$sql</span>-&gt;setQuery(<span class="php-quote">'SHOW CREATE TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>));
-</span><span class="l" id="1434"><a class="l" href="#1434">1434 </a>
-</span><span class="l" id="1435"><a class="l" href="#1435">1435 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$sql</span>-&gt;getRows()) {
-</span><span class="l" id="1436"><a class="l" href="#1436">1436 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Table "%s" does not exist.'</span>, <span class="php-var">$table</span>));
-</span><span class="l" id="1437"><a class="l" href="#1437">1437 </a>        }
-</span><span class="l" id="1438"><a class="l" href="#1438">1438 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$sql</span>-&gt;hasValue(<span class="php-quote">'Create Table'</span>)) {
-</span><span class="l" id="1439"><a class="l" href="#1439">1439 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Table "%s" does not exist, it is a view instead.'</span>, <span class="php-var">$table</span>));
-</span><span class="l" id="1440"><a class="l" href="#1440">1440 </a>        }
-</span><span class="l" id="1441"><a class="l" href="#1441">1441 </a>
-</span><span class="l" id="1442"><a class="l" href="#1442">1442 </a>        <span class="php-keyword1">return</span> <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'Create Table'</span>);
-</span><span class="l" id="1443"><a class="l" href="#1443">1443 </a>    }
-</span><span class="l" id="1444"><a class="l" href="#1444">1444 </a>
-</span><span class="l" id="1445"><a class="l" href="#1445">1445 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1446"><a class="l" href="#1446">1446 </a><span class="php-comment">     * Sucht alle Tabellen/Views der Datenbankverbindung $DBID.
-</span></span><span class="l" id="1447"><a class="l" href="#1447">1447 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Tabellen gesucht.
-</span></span><span class="l" id="1448"><a class="l" href="#1448">1448 </a><span class="php-comment">     *
-</span></span><span class="l" id="1449"><a class="l" href="#1449">1449 </a><span class="php-comment">     * @param int         $DBID        Id der Datenbankverbindung
-</span></span><span class="l" id="1450"><a class="l" href="#1450">1450 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
-</span></span><span class="l" id="1451"><a class="l" href="#1451">1451 </a><span class="php-comment">     *
-</span></span><span class="l" id="1452"><a class="l" href="#1452">1452 </a><span class="php-comment">     * @return array Ein Array von Tabellennamen
-</span></span><span class="l" id="1453"><a class="l" href="#1453">1453 </a><span class="php-comment">     *
-</span></span><span class="l" id="1454"><a class="l" href="#1454">1454 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1455"><a class="l" href="#1455">1455 </a><span class="php-comment">     *
-</span></span><span class="l" id="1456"><a class="l" href="#1456">1456 </a><span class="php-comment">     * @deprecated since 5.6.2, use non-static getTablesAndViews instead.
-</span></span><span class="l" id="1457"><a class="l" href="#1457">1457 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1458"><a class="l" href="#1458">1458 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_showTables" id="_showTables">showTables</a>(<span class="php-var">$DBID</span> = <span class="php-num">1</span>, <span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="1459"><a class="l" href="#1459">1459 </a>    {
-</span><span class="l" id="1460"><a class="l" href="#1460">1460 </a>        <span class="php-keyword1">return</span> self::factory(<span class="php-var">$DBID</span>)-&gt;getTablesAndViews(<span class="php-var">$tablePrefix</span>);
-</span><span class="l" id="1461"><a class="l" href="#1461">1461 </a>    }
-</span><span class="l" id="1462"><a class="l" href="#1462">1462 </a>
-</span><span class="l" id="1463"><a class="l" href="#1463">1463 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1464"><a class="l" href="#1464">1464 </a><span class="php-comment">     * Sucht alle Tabellen/Views der Datenbankverbindung $DBID.
-</span></span><span class="l" id="1465"><a class="l" href="#1465">1465 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Tabellen gesucht.
-</span></span><span class="l" id="1466"><a class="l" href="#1466">1466 </a><span class="php-comment">     *
-</span></span><span class="l" id="1467"><a class="l" href="#1467">1467 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
-</span></span><span class="l" id="1468"><a class="l" href="#1468">1468 </a><span class="php-comment">     *
-</span></span><span class="l" id="1469"><a class="l" href="#1469">1469 </a><span class="php-comment">     * @return array Ein Array von Tabellennamen
-</span></span><span class="l" id="1470"><a class="l" href="#1470">1470 </a><span class="php-comment">     *
-</span></span><span class="l" id="1471"><a class="l" href="#1471">1471 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1472"><a class="l" href="#1472">1472 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1473"><a class="l" href="#1473">1473 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTablesAndViews" id="_getTablesAndViews">getTablesAndViews</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="1474"><a class="l" href="#1474">1474 </a>    {
-</span><span class="l" id="1475"><a class="l" href="#1475">1475 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fetchTablesAndViews(<span class="php-var">$tablePrefix</span>);
-</span><span class="l" id="1476"><a class="l" href="#1476">1476 </a>    }
-</span><span class="l" id="1477"><a class="l" href="#1477">1477 </a>
-</span><span class="l" id="1478"><a class="l" href="#1478">1478 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1479"><a class="l" href="#1479">1479 </a><span class="php-comment">     * Sucht alle Tabellen der Datenbankverbindung $DBID.
-</span></span><span class="l" id="1480"><a class="l" href="#1480">1480 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Tabellen gesucht.
-</span></span><span class="l" id="1481"><a class="l" href="#1481">1481 </a><span class="php-comment">     *
-</span></span><span class="l" id="1482"><a class="l" href="#1482">1482 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
-</span></span><span class="l" id="1483"><a class="l" href="#1483">1483 </a><span class="php-comment">     *
-</span></span><span class="l" id="1484"><a class="l" href="#1484">1484 </a><span class="php-comment">     * @return array Ein Array von Tabellennamen
-</span></span><span class="l" id="1485"><a class="l" href="#1485">1485 </a><span class="php-comment">     *
-</span></span><span class="l" id="1486"><a class="l" href="#1486">1486 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1487"><a class="l" href="#1487">1487 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1488"><a class="l" href="#1488">1488 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTables" id="_getTables">getTables</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="1489"><a class="l" href="#1489">1489 </a>    {
-</span><span class="l" id="1490"><a class="l" href="#1490">1490 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fetchTablesAndViews(<span class="php-var">$tablePrefix</span>, <span class="php-quote">'Table_type = "BASE TABLE"'</span>);
-</span><span class="l" id="1491"><a class="l" href="#1491">1491 </a>    }
-</span><span class="l" id="1492"><a class="l" href="#1492">1492 </a>
-</span><span class="l" id="1493"><a class="l" href="#1493">1493 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1494"><a class="l" href="#1494">1494 </a><span class="php-comment">     * Sucht alle Views der Datenbankverbindung $DBID.
-</span></span><span class="l" id="1495"><a class="l" href="#1495">1495 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Views gesucht.
-</span></span><span class="l" id="1496"><a class="l" href="#1496">1496 </a><span class="php-comment">     *
-</span></span><span class="l" id="1497"><a class="l" href="#1497">1497 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
-</span></span><span class="l" id="1498"><a class="l" href="#1498">1498 </a><span class="php-comment">     *
-</span></span><span class="l" id="1499"><a class="l" href="#1499">1499 </a><span class="php-comment">     * @return array Ein Array von Viewnamen
-</span></span><span class="l" id="1500"><a class="l" href="#1500">1500 </a><span class="php-comment">     *
-</span></span><span class="l" id="1501"><a class="l" href="#1501">1501 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1502"><a class="l" href="#1502">1502 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1503"><a class="l" href="#1503">1503 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getViews" id="_getViews">getViews</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="1504"><a class="l" href="#1504">1504 </a>    {
-</span><span class="l" id="1505"><a class="l" href="#1505">1505 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fetchTablesAndViews(<span class="php-var">$tablePrefix</span>, <span class="php-quote">'Table_type = "VIEW"'</span>);
-</span><span class="l" id="1506"><a class="l" href="#1506">1506 </a>    }
-</span><span class="l" id="1507"><a class="l" href="#1507">1507 </a>
-</span><span class="l" id="1508"><a class="l" href="#1508">1508 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1509"><a class="l" href="#1509">1509 </a><span class="php-comment">     * @param null|string $tablePrefix
-</span></span><span class="l" id="1510"><a class="l" href="#1510">1510 </a><span class="php-comment">     * @param null|string $where
-</span></span><span class="l" id="1511"><a class="l" href="#1511">1511 </a><span class="php-comment">     *
-</span></span><span class="l" id="1512"><a class="l" href="#1512">1512 </a><span class="php-comment">     * @return array
-</span></span><span class="l" id="1513"><a class="l" href="#1513">1513 </a><span class="php-comment">     *
-</span></span><span class="l" id="1514"><a class="l" href="#1514">1514 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1515"><a class="l" href="#1515">1515 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1516"><a class="l" href="#1516">1516 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_fetchTablesAndViews" id="_fetchTablesAndViews">fetchTablesAndViews</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>, <span class="php-var">$where</span> = <span class="php-keyword1">null</span>)
-</span><span class="l" id="1517"><a class="l" href="#1517">1517 </a>    {
-</span><span class="l" id="1518"><a class="l" href="#1518">1518 </a>        <span class="php-var">$qry</span> = <span class="php-quote">'SHOW FULL TABLES'</span>;
-</span><span class="l" id="1519"><a class="l" href="#1519">1519 </a>
-</span><span class="l" id="1520"><a class="l" href="#1520">1520 </a>        <span class="php-var">$where</span> = <span class="php-var">$where</span> ? [<span class="php-var">$where</span>] : [];
-</span><span class="l" id="1521"><a class="l" href="#1521">1521 </a>
-</span><span class="l" id="1522"><a class="l" href="#1522">1522 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$tablePrefix</span> != <span class="php-keyword1">null</span>) {
-</span><span class="l" id="1523"><a class="l" href="#1523">1523 </a>            <span class="php-comment">// replace LIKE wildcards</span>
-</span><span class="l" id="1524"><a class="l" href="#1524">1524 </a>            <span class="php-var">$tablePrefix</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'_'</span>, <span class="php-quote">'%'</span>], [<span class="php-quote">'\_'</span>, <span class="php-quote">'\%'</span>], <span class="php-var">$tablePrefix</span>);
-</span><span class="l" id="1525"><a class="l" href="#1525">1525 </a>            <span class="php-var">$column</span> = <span class="php-var">$this</span>-&gt;escapeIdentifier(<span class="php-quote">'Tables_in_'</span>.rex::getProperty(<span class="php-quote">'db'</span>)[<span class="php-var">$this</span>-&gt;DBID][<span class="php-quote">'name'</span>]);
-</span><span class="l" id="1526"><a class="l" href="#1526">1526 </a>            <span class="php-var">$where</span>[] = <span class="php-var">$column</span>.<span class="php-quote">' LIKE "'</span> . <span class="php-var">$tablePrefix</span> . <span class="php-quote">'%"'</span>;
-</span><span class="l" id="1527"><a class="l" href="#1527">1527 </a>        }
-</span><span class="l" id="1528"><a class="l" href="#1528">1528 </a>
-</span><span class="l" id="1529"><a class="l" href="#1529">1529 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$where</span>) {
-</span><span class="l" id="1530"><a class="l" href="#1530">1530 </a>            <span class="php-var">$qry</span> .= <span class="php-quote">' WHERE '</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">' AND '</span>, <span class="php-var">$where</span>);
-</span><span class="l" id="1531"><a class="l" href="#1531">1531 </a>        }
-</span><span class="l" id="1532"><a class="l" href="#1532">1532 </a>
-</span><span class="l" id="1533"><a class="l" href="#1533">1533 </a>        <span class="php-var">$tables</span> = <span class="php-var">$this</span>-&gt;getArray(<span class="php-var">$qry</span>);
-</span><span class="l" id="1534"><a class="l" href="#1534">1534 </a>        <span class="php-var">$tables</span> = <span class="php-keyword2">array_map</span>(<span class="php-quote">'reset'</span>, <span class="php-var">$tables</span>);
-</span><span class="l" id="1535"><a class="l" href="#1535">1535 </a>
-</span><span class="l" id="1536"><a class="l" href="#1536">1536 </a>        <span class="php-keyword1">return</span> <span class="php-var">$tables</span>;
-</span><span class="l" id="1537"><a class="l" href="#1537">1537 </a>    }
-</span><span class="l" id="1538"><a class="l" href="#1538">1538 </a>
-</span><span class="l" id="1539"><a class="l" href="#1539">1539 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1540"><a class="l" href="#1540">1540 </a><span class="php-comment">     * Sucht Spalteninformationen der Tabelle $table der Datenbankverbindung $DBID.
-</span></span><span class="l" id="1541"><a class="l" href="#1541">1541 </a><span class="php-comment">     *
-</span></span><span class="l" id="1542"><a class="l" href="#1542">1542 </a><span class="php-comment">     * Beispiel fuer den Rueckgabewert:
-</span></span><span class="l" id="1543"><a class="l" href="#1543">1543 </a><span class="php-comment">     *
-</span></span><span class="l" id="1544"><a class="l" href="#1544">1544 </a><span class="php-comment">     * Array (
-</span></span><span class="l" id="1545"><a class="l" href="#1545">1545 </a><span class="php-comment">     *  [0] =&gt; Array (
-</span></span><span class="l" id="1546"><a class="l" href="#1546">1546 </a><span class="php-comment">     *    [name] =&gt; pid
-</span></span><span class="l" id="1547"><a class="l" href="#1547">1547 </a><span class="php-comment">     *    [type] =&gt; int(11)
-</span></span><span class="l" id="1548"><a class="l" href="#1548">1548 </a><span class="php-comment">     *    [null] =&gt; NO
-</span></span><span class="l" id="1549"><a class="l" href="#1549">1549 </a><span class="php-comment">     *    [key] =&gt; PRI
-</span></span><span class="l" id="1550"><a class="l" href="#1550">1550 </a><span class="php-comment">     *    [default] =&gt;
-</span></span><span class="l" id="1551"><a class="l" href="#1551">1551 </a><span class="php-comment">     *    [extra] =&gt; auto_increment
-</span></span><span class="l" id="1552"><a class="l" href="#1552">1552 </a><span class="php-comment">     *  )
-</span></span><span class="l" id="1553"><a class="l" href="#1553">1553 </a><span class="php-comment">     *  [1] =&gt; Array (
-</span></span><span class="l" id="1554"><a class="l" href="#1554">1554 </a><span class="php-comment">     *    [name] =&gt; id
+</span><span class="l" id="1417"><a class="l" href="#1417">1417 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1418"><a class="l" href="#1418">1418 </a><span class="php-comment">     * @see http://www.php.net/manual/en/iterator.valid.php
+</span></span><span class="l" id="1419"><a class="l" href="#1419">1419 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1420"><a class="l" href="#1420">1420 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_valid" id="_valid">valid</a>()
+</span><span class="l" id="1421"><a class="l" href="#1421">1421 </a>    {
+</span><span class="l" id="1422"><a class="l" href="#1422">1422 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;hasNext();
+</span><span class="l" id="1423"><a class="l" href="#1423">1423 </a>    }
+</span><span class="l" id="1424"><a class="l" href="#1424">1424 </a>
+</span><span class="l" id="1425"><a class="l" href="#1425">1425 </a>    <span class="php-comment">// ----------------- /iterator interface</span>
+</span><span class="l" id="1426"><a class="l" href="#1426">1426 </a>
+</span><span class="l" id="1427"><a class="l" href="#1427">1427 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1428"><a class="l" href="#1428">1428 </a><span class="php-comment">     * Erstellt das CREATE TABLE Statement um die Tabelle $table
+</span></span><span class="l" id="1429"><a class="l" href="#1429">1429 </a><span class="php-comment">     * der Datenbankverbindung $DBID zu erstellen.
+</span></span><span class="l" id="1430"><a class="l" href="#1430">1430 </a><span class="php-comment">     *
+</span></span><span class="l" id="1431"><a class="l" href="#1431">1431 </a><span class="php-comment">     * @param string $table Name der Tabelle
+</span></span><span class="l" id="1432"><a class="l" href="#1432">1432 </a><span class="php-comment">     * @param int    $DBID  Id der Datenbankverbindung
+</span></span><span class="l" id="1433"><a class="l" href="#1433">1433 </a><span class="php-comment">     *
+</span></span><span class="l" id="1434"><a class="l" href="#1434">1434 </a><span class="php-comment">     * @return string CREATE TABLE Sql-Statement zu erstsellung der Tabelle
+</span></span><span class="l" id="1435"><a class="l" href="#1435">1435 </a><span class="php-comment">     *
+</span></span><span class="l" id="1436"><a class="l" href="#1436">1436 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1437"><a class="l" href="#1437">1437 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1438"><a class="l" href="#1438">1438 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_showCreateTable" id="_showCreateTable">showCreateTable</a>(<span class="php-var">$table</span>, <span class="php-var">$DBID</span> = <span class="php-num">1</span>)
+</span><span class="l" id="1439"><a class="l" href="#1439">1439 </a>    {
+</span><span class="l" id="1440"><a class="l" href="#1440">1440 </a>        <span class="php-var">$sql</span> = self::factory(<span class="php-var">$DBID</span>);
+</span><span class="l" id="1441"><a class="l" href="#1441">1441 </a>        <span class="php-var">$sql</span>-&gt;setQuery(<span class="php-quote">'SHOW CREATE TABLE '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>));
+</span><span class="l" id="1442"><a class="l" href="#1442">1442 </a>
+</span><span class="l" id="1443"><a class="l" href="#1443">1443 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$sql</span>-&gt;getRows()) {
+</span><span class="l" id="1444"><a class="l" href="#1444">1444 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Table "%s" does not exist.'</span>, <span class="php-var">$table</span>));
+</span><span class="l" id="1445"><a class="l" href="#1445">1445 </a>        }
+</span><span class="l" id="1446"><a class="l" href="#1446">1446 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$sql</span>-&gt;hasValue(<span class="php-quote">'Create Table'</span>)) {
+</span><span class="l" id="1447"><a class="l" href="#1447">1447 </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> rex_sql_exception(<span class="php-keyword2">sprintf</span>(<span class="php-quote">'Table "%s" does not exist, it is a view instead.'</span>, <span class="php-var">$table</span>));
+</span><span class="l" id="1448"><a class="l" href="#1448">1448 </a>        }
+</span><span class="l" id="1449"><a class="l" href="#1449">1449 </a>
+</span><span class="l" id="1450"><a class="l" href="#1450">1450 </a>        <span class="php-keyword1">return</span> <span class="php-var">$sql</span>-&gt;getValue(<span class="php-quote">'Create Table'</span>);
+</span><span class="l" id="1451"><a class="l" href="#1451">1451 </a>    }
+</span><span class="l" id="1452"><a class="l" href="#1452">1452 </a>
+</span><span class="l" id="1453"><a class="l" href="#1453">1453 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1454"><a class="l" href="#1454">1454 </a><span class="php-comment">     * Sucht alle Tabellen/Views der Datenbankverbindung $DBID.
+</span></span><span class="l" id="1455"><a class="l" href="#1455">1455 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Tabellen gesucht.
+</span></span><span class="l" id="1456"><a class="l" href="#1456">1456 </a><span class="php-comment">     *
+</span></span><span class="l" id="1457"><a class="l" href="#1457">1457 </a><span class="php-comment">     * @param int         $DBID        Id der Datenbankverbindung
+</span></span><span class="l" id="1458"><a class="l" href="#1458">1458 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
+</span></span><span class="l" id="1459"><a class="l" href="#1459">1459 </a><span class="php-comment">     *
+</span></span><span class="l" id="1460"><a class="l" href="#1460">1460 </a><span class="php-comment">     * @return array Ein Array von Tabellennamen
+</span></span><span class="l" id="1461"><a class="l" href="#1461">1461 </a><span class="php-comment">     *
+</span></span><span class="l" id="1462"><a class="l" href="#1462">1462 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1463"><a class="l" href="#1463">1463 </a><span class="php-comment">     *
+</span></span><span class="l" id="1464"><a class="l" href="#1464">1464 </a><span class="php-comment">     * @deprecated since 5.6.2, use non-static getTablesAndViews instead.
+</span></span><span class="l" id="1465"><a class="l" href="#1465">1465 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1466"><a class="l" href="#1466">1466 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_showTables" id="_showTables">showTables</a>(<span class="php-var">$DBID</span> = <span class="php-num">1</span>, <span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1467"><a class="l" href="#1467">1467 </a>    {
+</span><span class="l" id="1468"><a class="l" href="#1468">1468 </a>        <span class="php-keyword1">return</span> self::factory(<span class="php-var">$DBID</span>)-&gt;getTablesAndViews(<span class="php-var">$tablePrefix</span>);
+</span><span class="l" id="1469"><a class="l" href="#1469">1469 </a>    }
+</span><span class="l" id="1470"><a class="l" href="#1470">1470 </a>
+</span><span class="l" id="1471"><a class="l" href="#1471">1471 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1472"><a class="l" href="#1472">1472 </a><span class="php-comment">     * Sucht alle Tabellen/Views der Datenbankverbindung $DBID.
+</span></span><span class="l" id="1473"><a class="l" href="#1473">1473 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Tabellen gesucht.
+</span></span><span class="l" id="1474"><a class="l" href="#1474">1474 </a><span class="php-comment">     *
+</span></span><span class="l" id="1475"><a class="l" href="#1475">1475 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
+</span></span><span class="l" id="1476"><a class="l" href="#1476">1476 </a><span class="php-comment">     *
+</span></span><span class="l" id="1477"><a class="l" href="#1477">1477 </a><span class="php-comment">     * @return array Ein Array von Tabellennamen
+</span></span><span class="l" id="1478"><a class="l" href="#1478">1478 </a><span class="php-comment">     *
+</span></span><span class="l" id="1479"><a class="l" href="#1479">1479 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1480"><a class="l" href="#1480">1480 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1481"><a class="l" href="#1481">1481 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTablesAndViews" id="_getTablesAndViews">getTablesAndViews</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1482"><a class="l" href="#1482">1482 </a>    {
+</span><span class="l" id="1483"><a class="l" href="#1483">1483 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fetchTablesAndViews(<span class="php-var">$tablePrefix</span>);
+</span><span class="l" id="1484"><a class="l" href="#1484">1484 </a>    }
+</span><span class="l" id="1485"><a class="l" href="#1485">1485 </a>
+</span><span class="l" id="1486"><a class="l" href="#1486">1486 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1487"><a class="l" href="#1487">1487 </a><span class="php-comment">     * Sucht alle Tabellen der Datenbankverbindung $DBID.
+</span></span><span class="l" id="1488"><a class="l" href="#1488">1488 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Tabellen gesucht.
+</span></span><span class="l" id="1489"><a class="l" href="#1489">1489 </a><span class="php-comment">     *
+</span></span><span class="l" id="1490"><a class="l" href="#1490">1490 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
+</span></span><span class="l" id="1491"><a class="l" href="#1491">1491 </a><span class="php-comment">     *
+</span></span><span class="l" id="1492"><a class="l" href="#1492">1492 </a><span class="php-comment">     * @return array Ein Array von Tabellennamen
+</span></span><span class="l" id="1493"><a class="l" href="#1493">1493 </a><span class="php-comment">     *
+</span></span><span class="l" id="1494"><a class="l" href="#1494">1494 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1495"><a class="l" href="#1495">1495 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1496"><a class="l" href="#1496">1496 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getTables" id="_getTables">getTables</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1497"><a class="l" href="#1497">1497 </a>    {
+</span><span class="l" id="1498"><a class="l" href="#1498">1498 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fetchTablesAndViews(<span class="php-var">$tablePrefix</span>, <span class="php-quote">'Table_type = "BASE TABLE"'</span>);
+</span><span class="l" id="1499"><a class="l" href="#1499">1499 </a>    }
+</span><span class="l" id="1500"><a class="l" href="#1500">1500 </a>
+</span><span class="l" id="1501"><a class="l" href="#1501">1501 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1502"><a class="l" href="#1502">1502 </a><span class="php-comment">     * Sucht alle Views der Datenbankverbindung $DBID.
+</span></span><span class="l" id="1503"><a class="l" href="#1503">1503 </a><span class="php-comment">     * Falls $tablePrefix gesetzt ist, werden nur dem Prefix entsprechende Views gesucht.
+</span></span><span class="l" id="1504"><a class="l" href="#1504">1504 </a><span class="php-comment">     *
+</span></span><span class="l" id="1505"><a class="l" href="#1505">1505 </a><span class="php-comment">     * @param null|string $tablePrefix Zu suchender Tabellennamen-Prefix
+</span></span><span class="l" id="1506"><a class="l" href="#1506">1506 </a><span class="php-comment">     *
+</span></span><span class="l" id="1507"><a class="l" href="#1507">1507 </a><span class="php-comment">     * @return array Ein Array von Viewnamen
+</span></span><span class="l" id="1508"><a class="l" href="#1508">1508 </a><span class="php-comment">     *
+</span></span><span class="l" id="1509"><a class="l" href="#1509">1509 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1510"><a class="l" href="#1510">1510 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1511"><a class="l" href="#1511">1511 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_getViews" id="_getViews">getViews</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1512"><a class="l" href="#1512">1512 </a>    {
+</span><span class="l" id="1513"><a class="l" href="#1513">1513 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;fetchTablesAndViews(<span class="php-var">$tablePrefix</span>, <span class="php-quote">'Table_type = "VIEW"'</span>);
+</span><span class="l" id="1514"><a class="l" href="#1514">1514 </a>    }
+</span><span class="l" id="1515"><a class="l" href="#1515">1515 </a>
+</span><span class="l" id="1516"><a class="l" href="#1516">1516 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1517"><a class="l" href="#1517">1517 </a><span class="php-comment">     * @param null|string $tablePrefix
+</span></span><span class="l" id="1518"><a class="l" href="#1518">1518 </a><span class="php-comment">     * @param null|string $where
+</span></span><span class="l" id="1519"><a class="l" href="#1519">1519 </a><span class="php-comment">     *
+</span></span><span class="l" id="1520"><a class="l" href="#1520">1520 </a><span class="php-comment">     * @return array
+</span></span><span class="l" id="1521"><a class="l" href="#1521">1521 </a><span class="php-comment">     *
+</span></span><span class="l" id="1522"><a class="l" href="#1522">1522 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1523"><a class="l" href="#1523">1523 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1524"><a class="l" href="#1524">1524 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_fetchTablesAndViews" id="_fetchTablesAndViews">fetchTablesAndViews</a>(<span class="php-var">$tablePrefix</span> = <span class="php-keyword1">null</span>, <span class="php-var">$where</span> = <span class="php-keyword1">null</span>)
+</span><span class="l" id="1525"><a class="l" href="#1525">1525 </a>    {
+</span><span class="l" id="1526"><a class="l" href="#1526">1526 </a>        <span class="php-var">$qry</span> = <span class="php-quote">'SHOW FULL TABLES'</span>;
+</span><span class="l" id="1527"><a class="l" href="#1527">1527 </a>
+</span><span class="l" id="1528"><a class="l" href="#1528">1528 </a>        <span class="php-var">$where</span> = <span class="php-var">$where</span> ? [<span class="php-var">$where</span>] : [];
+</span><span class="l" id="1529"><a class="l" href="#1529">1529 </a>
+</span><span class="l" id="1530"><a class="l" href="#1530">1530 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$tablePrefix</span> != <span class="php-keyword1">null</span>) {
+</span><span class="l" id="1531"><a class="l" href="#1531">1531 </a>            <span class="php-comment">// replace LIKE wildcards</span>
+</span><span class="l" id="1532"><a class="l" href="#1532">1532 </a>            <span class="php-var">$tablePrefix</span> = <span class="php-keyword2">str_replace</span>([<span class="php-quote">'_'</span>, <span class="php-quote">'%'</span>], [<span class="php-quote">'\_'</span>, <span class="php-quote">'\%'</span>], <span class="php-var">$tablePrefix</span>);
+</span><span class="l" id="1533"><a class="l" href="#1533">1533 </a>            <span class="php-var">$column</span> = <span class="php-var">$this</span>-&gt;escapeIdentifier(<span class="php-quote">'Tables_in_'</span>.rex::getProperty(<span class="php-quote">'db'</span>)[<span class="php-var">$this</span>-&gt;DBID][<span class="php-quote">'name'</span>]);
+</span><span class="l" id="1534"><a class="l" href="#1534">1534 </a>            <span class="php-var">$where</span>[] = <span class="php-var">$column</span>.<span class="php-quote">' LIKE "'</span> . <span class="php-var">$tablePrefix</span> . <span class="php-quote">'%"'</span>;
+</span><span class="l" id="1535"><a class="l" href="#1535">1535 </a>        }
+</span><span class="l" id="1536"><a class="l" href="#1536">1536 </a>
+</span><span class="l" id="1537"><a class="l" href="#1537">1537 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$where</span>) {
+</span><span class="l" id="1538"><a class="l" href="#1538">1538 </a>            <span class="php-var">$qry</span> .= <span class="php-quote">' WHERE '</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">' AND '</span>, <span class="php-var">$where</span>);
+</span><span class="l" id="1539"><a class="l" href="#1539">1539 </a>        }
+</span><span class="l" id="1540"><a class="l" href="#1540">1540 </a>
+</span><span class="l" id="1541"><a class="l" href="#1541">1541 </a>        <span class="php-var">$tables</span> = <span class="php-var">$this</span>-&gt;getArray(<span class="php-var">$qry</span>);
+</span><span class="l" id="1542"><a class="l" href="#1542">1542 </a>        <span class="php-var">$tables</span> = <span class="php-keyword2">array_map</span>(<span class="php-quote">'reset'</span>, <span class="php-var">$tables</span>);
+</span><span class="l" id="1543"><a class="l" href="#1543">1543 </a>
+</span><span class="l" id="1544"><a class="l" href="#1544">1544 </a>        <span class="php-keyword1">return</span> <span class="php-var">$tables</span>;
+</span><span class="l" id="1545"><a class="l" href="#1545">1545 </a>    }
+</span><span class="l" id="1546"><a class="l" href="#1546">1546 </a>
+</span><span class="l" id="1547"><a class="l" href="#1547">1547 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1548"><a class="l" href="#1548">1548 </a><span class="php-comment">     * Sucht Spalteninformationen der Tabelle $table der Datenbankverbindung $DBID.
+</span></span><span class="l" id="1549"><a class="l" href="#1549">1549 </a><span class="php-comment">     *
+</span></span><span class="l" id="1550"><a class="l" href="#1550">1550 </a><span class="php-comment">     * Beispiel fuer den Rueckgabewert:
+</span></span><span class="l" id="1551"><a class="l" href="#1551">1551 </a><span class="php-comment">     *
+</span></span><span class="l" id="1552"><a class="l" href="#1552">1552 </a><span class="php-comment">     * Array (
+</span></span><span class="l" id="1553"><a class="l" href="#1553">1553 </a><span class="php-comment">     *  [0] =&gt; Array (
+</span></span><span class="l" id="1554"><a class="l" href="#1554">1554 </a><span class="php-comment">     *    [name] =&gt; pid
 </span></span><span class="l" id="1555"><a class="l" href="#1555">1555 </a><span class="php-comment">     *    [type] =&gt; int(11)
 </span></span><span class="l" id="1556"><a class="l" href="#1556">1556 </a><span class="php-comment">     *    [null] =&gt; NO
-</span></span><span class="l" id="1557"><a class="l" href="#1557">1557 </a><span class="php-comment">     *    [key] =&gt; MUL
+</span></span><span class="l" id="1557"><a class="l" href="#1557">1557 </a><span class="php-comment">     *    [key] =&gt; PRI
 </span></span><span class="l" id="1558"><a class="l" href="#1558">1558 </a><span class="php-comment">     *    [default] =&gt;
-</span></span><span class="l" id="1559"><a class="l" href="#1559">1559 </a><span class="php-comment">     *    [extra] =&gt;
+</span></span><span class="l" id="1559"><a class="l" href="#1559">1559 </a><span class="php-comment">     *    [extra] =&gt; auto_increment
 </span></span><span class="l" id="1560"><a class="l" href="#1560">1560 </a><span class="php-comment">     *  )
-</span></span><span class="l" id="1561"><a class="l" href="#1561">1561 </a><span class="php-comment">     * )
-</span></span><span class="l" id="1562"><a class="l" href="#1562">1562 </a><span class="php-comment">     *
-</span></span><span class="l" id="1563"><a class="l" href="#1563">1563 </a><span class="php-comment">     * @param string $table Name der Tabelle
-</span></span><span class="l" id="1564"><a class="l" href="#1564">1564 </a><span class="php-comment">     * @param int    $DBID  Id der Datenbankverbindung
-</span></span><span class="l" id="1565"><a class="l" href="#1565">1565 </a><span class="php-comment">     *
-</span></span><span class="l" id="1566"><a class="l" href="#1566">1566 </a><span class="php-comment">     * @return array Ein mehrdimensionales Array das die Metadaten enthaelt
-</span></span><span class="l" id="1567"><a class="l" href="#1567">1567 </a><span class="php-comment">     *
-</span></span><span class="l" id="1568"><a class="l" href="#1568">1568 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1569"><a class="l" href="#1569">1569 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1570"><a class="l" href="#1570">1570 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_showColumns" id="_showColumns">showColumns</a>(<span class="php-var">$table</span>, <span class="php-var">$DBID</span> = <span class="php-num">1</span>)
-</span><span class="l" id="1571"><a class="l" href="#1571">1571 </a>    {
-</span><span class="l" id="1572"><a class="l" href="#1572">1572 </a>        <span class="php-var">$sql</span> = self::factory(<span class="php-var">$DBID</span>);
-</span><span class="l" id="1573"><a class="l" href="#1573">1573 </a>        <span class="php-var">$sql</span>-&gt;setQuery(<span class="php-quote">'SHOW COLUMNS FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>));
-</span><span class="l" id="1574"><a class="l" href="#1574">1574 </a>
-</span><span class="l" id="1575"><a class="l" href="#1575">1575 </a>        <span class="php-var">$columns</span> = [];
-</span><span class="l" id="1576"><a class="l" href="#1576">1576 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$sql</span> <span class="php-keyword1">as</span> <span class="php-var">$col</span>) {
-</span><span class="l" id="1577"><a class="l" href="#1577">1577 </a>            <span class="php-var">$columns</span>[] = [
-</span><span class="l" id="1578"><a class="l" href="#1578">1578 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Field'</span>),
-</span><span class="l" id="1579"><a class="l" href="#1579">1579 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Type'</span>),
-</span><span class="l" id="1580"><a class="l" href="#1580">1580 </a>                <span class="php-quote">'null'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Null'</span>),
-</span><span class="l" id="1581"><a class="l" href="#1581">1581 </a>                <span class="php-quote">'key'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Key'</span>),
-</span><span class="l" id="1582"><a class="l" href="#1582">1582 </a>                <span class="php-quote">'default'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Default'</span>),
-</span><span class="l" id="1583"><a class="l" href="#1583">1583 </a>                <span class="php-quote">'extra'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Extra'</span>),
-</span><span class="l" id="1584"><a class="l" href="#1584">1584 </a>            ];
-</span><span class="l" id="1585"><a class="l" href="#1585">1585 </a>        }
-</span><span class="l" id="1586"><a class="l" href="#1586">1586 </a>
-</span><span class="l" id="1587"><a class="l" href="#1587">1587 </a>        <span class="php-keyword1">return</span> <span class="php-var">$columns</span>;
-</span><span class="l" id="1588"><a class="l" href="#1588">1588 </a>    }
-</span><span class="l" id="1589"><a class="l" href="#1589">1589 </a>
-</span><span class="l" id="1590"><a class="l" href="#1590">1590 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1591"><a class="l" href="#1591">1591 </a><span class="php-comment">     * Gibt die Serverversion zurueck.
-</span></span><span class="l" id="1592"><a class="l" href="#1592">1592 </a><span class="php-comment">     *
-</span></span><span class="l" id="1593"><a class="l" href="#1593">1593 </a><span class="php-comment">     * Die Versionsinformation ist erst bekannt,
-</span></span><span class="l" id="1594"><a class="l" href="#1594">1594 </a><span class="php-comment">     * nachdem der rex_sql Konstruktor einmalig erfolgreich durchlaufen wurde.
-</span></span><span class="l" id="1595"><a class="l" href="#1595">1595 </a><span class="php-comment">     *
-</span></span><span class="l" id="1596"><a class="l" href="#1596">1596 </a><span class="php-comment">     * @param int $DBID
-</span></span><span class="l" id="1597"><a class="l" href="#1597">1597 </a><span class="php-comment">     *
-</span></span><span class="l" id="1598"><a class="l" href="#1598">1598 </a><span class="php-comment">     * @return mixed
-</span></span><span class="l" id="1599"><a class="l" href="#1599">1599 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1600"><a class="l" href="#1600">1600 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getServerVersion" id="_getServerVersion">getServerVersion</a>(<span class="php-var">$DBID</span> = <span class="php-num">1</span>)
-</span><span class="l" id="1601"><a class="l" href="#1601">1601 </a>    {
-</span><span class="l" id="1602"><a class="l" href="#1602">1602 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$pdo</span>[<span class="php-var">$DBID</span>])) {
-</span><span class="l" id="1603"><a class="l" href="#1603">1603 </a>            <span class="php-comment">// create connection if necessary</span>
-</span><span class="l" id="1604"><a class="l" href="#1604">1604 </a>            self::factory(<span class="php-var">$DBID</span>);
-</span><span class="l" id="1605"><a class="l" href="#1605">1605 </a>        }
-</span><span class="l" id="1606"><a class="l" href="#1606">1606 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$DBID</span>]-&gt;getAttribute(PDO::ATTR_SERVER_VERSION);
-</span><span class="l" id="1607"><a class="l" href="#1607">1607 </a>    }
-</span><span class="l" id="1608"><a class="l" href="#1608">1608 </a>
-</span><span class="l" id="1609"><a class="l" href="#1609">1609 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1610"><a class="l" href="#1610">1610 </a><span class="php-comment">     * Creates a rex_sql instance.
-</span></span><span class="l" id="1611"><a class="l" href="#1611">1611 </a><span class="php-comment">     *
-</span></span><span class="l" id="1612"><a class="l" href="#1612">1612 </a><span class="php-comment">     * @param int $DBID
-</span></span><span class="l" id="1613"><a class="l" href="#1613">1613 </a><span class="php-comment">     *
-</span></span><span class="l" id="1614"><a class="l" href="#1614">1614 </a><span class="php-comment">     * @return static Returns a rex_sql instance
-</span></span><span class="l" id="1615"><a class="l" href="#1615">1615 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1616"><a class="l" href="#1616">1616 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_factory" id="_factory">factory</a>(<span class="php-var">$DBID</span> = <span class="php-num">1</span>)
-</span><span class="l" id="1617"><a class="l" href="#1617">1617 </a>    {
-</span><span class="l" id="1618"><a class="l" href="#1618">1618 </a>        <span class="php-var">$class</span> = <span class="php-keyword1">static</span>::getFactoryClass();
-</span><span class="l" id="1619"><a class="l" href="#1619">1619 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> <span class="php-var">$class</span>(<span class="php-var">$DBID</span>);
-</span><span class="l" id="1620"><a class="l" href="#1620">1620 </a>    }
-</span><span class="l" id="1621"><a class="l" href="#1621">1621 </a>
-</span><span class="l" id="1622"><a class="l" href="#1622">1622 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1623"><a class="l" href="#1623">1623 </a><span class="php-comment">     * Prueft die uebergebenen Zugangsdaten auf gueltigkeit und legt ggf. die
-</span></span><span class="l" id="1624"><a class="l" href="#1624">1624 </a><span class="php-comment">     * Datenbank an.
-</span></span><span class="l" id="1625"><a class="l" href="#1625">1625 </a><span class="php-comment">     *
-</span></span><span class="l" id="1626"><a class="l" href="#1626">1626 </a><span class="php-comment">     * @param string $host
-</span></span><span class="l" id="1627"><a class="l" href="#1627">1627 </a><span class="php-comment">     * @param string $login
-</span></span><span class="l" id="1628"><a class="l" href="#1628">1628 </a><span class="php-comment">     * @param string $pw
-</span></span><span class="l" id="1629"><a class="l" href="#1629">1629 </a><span class="php-comment">     * @param string $dbname
-</span></span><span class="l" id="1630"><a class="l" href="#1630">1630 </a><span class="php-comment">     * @param bool   $createDb
-</span></span><span class="l" id="1631"><a class="l" href="#1631">1631 </a><span class="php-comment">     *
-</span></span><span class="l" id="1632"><a class="l" href="#1632">1632 </a><span class="php-comment">     * @return bool|string
-</span></span><span class="l" id="1633"><a class="l" href="#1633">1633 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1634"><a class="l" href="#1634">1634 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_checkDbConnection" id="_checkDbConnection">checkDbConnection</a>(<span class="php-var">$host</span>, <span class="php-var">$login</span>, <span class="php-var">$pw</span>, <span class="php-var">$dbname</span>, <span class="php-var">$createDb</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="1635"><a class="l" href="#1635">1635 </a>    {
-</span><span class="l" id="1636"><a class="l" href="#1636">1636 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$dbname</span>) {
-</span><span class="l" id="1637"><a class="l" href="#1637">1637 </a>            <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'sql_database_name_missing'</span>);
-</span><span class="l" id="1638"><a class="l" href="#1638">1638 </a>        }
-</span><span class="l" id="1639"><a class="l" href="#1639">1639 </a>
-</span><span class="l" id="1640"><a class="l" href="#1640">1640 </a>        <span class="php-var">$err_msg</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="1641"><a class="l" href="#1641">1641 </a>
-</span><span class="l" id="1642"><a class="l" href="#1642">1642 </a>        <span class="php-keyword1">try</span> {
-</span><span class="l" id="1643"><a class="l" href="#1643">1643 </a>            self::createConnection(
-</span><span class="l" id="1644"><a class="l" href="#1644">1644 </a>                <span class="php-var">$host</span>,
-</span><span class="l" id="1645"><a class="l" href="#1645">1645 </a>                <span class="php-var">$dbname</span>,
-</span><span class="l" id="1646"><a class="l" href="#1646">1646 </a>                <span class="php-var">$login</span>,
-</span><span class="l" id="1647"><a class="l" href="#1647">1647 </a>                <span class="php-var">$pw</span>
-</span><span class="l" id="1648"><a class="l" href="#1648">1648 </a>            );
+</span></span><span class="l" id="1561"><a class="l" href="#1561">1561 </a><span class="php-comment">     *  [1] =&gt; Array (
+</span></span><span class="l" id="1562"><a class="l" href="#1562">1562 </a><span class="php-comment">     *    [name] =&gt; id
+</span></span><span class="l" id="1563"><a class="l" href="#1563">1563 </a><span class="php-comment">     *    [type] =&gt; int(11)
+</span></span><span class="l" id="1564"><a class="l" href="#1564">1564 </a><span class="php-comment">     *    [null] =&gt; NO
+</span></span><span class="l" id="1565"><a class="l" href="#1565">1565 </a><span class="php-comment">     *    [key] =&gt; MUL
+</span></span><span class="l" id="1566"><a class="l" href="#1566">1566 </a><span class="php-comment">     *    [default] =&gt;
+</span></span><span class="l" id="1567"><a class="l" href="#1567">1567 </a><span class="php-comment">     *    [extra] =&gt;
+</span></span><span class="l" id="1568"><a class="l" href="#1568">1568 </a><span class="php-comment">     *  )
+</span></span><span class="l" id="1569"><a class="l" href="#1569">1569 </a><span class="php-comment">     * )
+</span></span><span class="l" id="1570"><a class="l" href="#1570">1570 </a><span class="php-comment">     *
+</span></span><span class="l" id="1571"><a class="l" href="#1571">1571 </a><span class="php-comment">     * @param string $table Name der Tabelle
+</span></span><span class="l" id="1572"><a class="l" href="#1572">1572 </a><span class="php-comment">     * @param int    $DBID  Id der Datenbankverbindung
+</span></span><span class="l" id="1573"><a class="l" href="#1573">1573 </a><span class="php-comment">     *
+</span></span><span class="l" id="1574"><a class="l" href="#1574">1574 </a><span class="php-comment">     * @return array Ein mehrdimensionales Array das die Metadaten enthaelt
+</span></span><span class="l" id="1575"><a class="l" href="#1575">1575 </a><span class="php-comment">     *
+</span></span><span class="l" id="1576"><a class="l" href="#1576">1576 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1577"><a class="l" href="#1577">1577 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1578"><a class="l" href="#1578">1578 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_showColumns" id="_showColumns">showColumns</a>(<span class="php-var">$table</span>, <span class="php-var">$DBID</span> = <span class="php-num">1</span>)
+</span><span class="l" id="1579"><a class="l" href="#1579">1579 </a>    {
+</span><span class="l" id="1580"><a class="l" href="#1580">1580 </a>        <span class="php-var">$sql</span> = self::factory(<span class="php-var">$DBID</span>);
+</span><span class="l" id="1581"><a class="l" href="#1581">1581 </a>        <span class="php-var">$sql</span>-&gt;setQuery(<span class="php-quote">'SHOW COLUMNS FROM '</span> . <span class="php-var">$sql</span>-&gt;escapeIdentifier(<span class="php-var">$table</span>));
+</span><span class="l" id="1582"><a class="l" href="#1582">1582 </a>
+</span><span class="l" id="1583"><a class="l" href="#1583">1583 </a>        <span class="php-var">$columns</span> = [];
+</span><span class="l" id="1584"><a class="l" href="#1584">1584 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$sql</span> <span class="php-keyword1">as</span> <span class="php-var">$col</span>) {
+</span><span class="l" id="1585"><a class="l" href="#1585">1585 </a>            <span class="php-var">$columns</span>[] = [
+</span><span class="l" id="1586"><a class="l" href="#1586">1586 </a>                <span class="php-quote">'name'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Field'</span>),
+</span><span class="l" id="1587"><a class="l" href="#1587">1587 </a>                <span class="php-quote">'type'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Type'</span>),
+</span><span class="l" id="1588"><a class="l" href="#1588">1588 </a>                <span class="php-quote">'null'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Null'</span>),
+</span><span class="l" id="1589"><a class="l" href="#1589">1589 </a>                <span class="php-quote">'key'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Key'</span>),
+</span><span class="l" id="1590"><a class="l" href="#1590">1590 </a>                <span class="php-quote">'default'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Default'</span>),
+</span><span class="l" id="1591"><a class="l" href="#1591">1591 </a>                <span class="php-quote">'extra'</span> =&gt; <span class="php-var">$col</span>-&gt;getValue(<span class="php-quote">'Extra'</span>),
+</span><span class="l" id="1592"><a class="l" href="#1592">1592 </a>            ];
+</span><span class="l" id="1593"><a class="l" href="#1593">1593 </a>        }
+</span><span class="l" id="1594"><a class="l" href="#1594">1594 </a>
+</span><span class="l" id="1595"><a class="l" href="#1595">1595 </a>        <span class="php-keyword1">return</span> <span class="php-var">$columns</span>;
+</span><span class="l" id="1596"><a class="l" href="#1596">1596 </a>    }
+</span><span class="l" id="1597"><a class="l" href="#1597">1597 </a>
+</span><span class="l" id="1598"><a class="l" href="#1598">1598 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1599"><a class="l" href="#1599">1599 </a><span class="php-comment">     * Gibt die Serverversion zurueck.
+</span></span><span class="l" id="1600"><a class="l" href="#1600">1600 </a><span class="php-comment">     *
+</span></span><span class="l" id="1601"><a class="l" href="#1601">1601 </a><span class="php-comment">     * Die Versionsinformation ist erst bekannt,
+</span></span><span class="l" id="1602"><a class="l" href="#1602">1602 </a><span class="php-comment">     * nachdem der rex_sql Konstruktor einmalig erfolgreich durchlaufen wurde.
+</span></span><span class="l" id="1603"><a class="l" href="#1603">1603 </a><span class="php-comment">     *
+</span></span><span class="l" id="1604"><a class="l" href="#1604">1604 </a><span class="php-comment">     * @param int $DBID
+</span></span><span class="l" id="1605"><a class="l" href="#1605">1605 </a><span class="php-comment">     *
+</span></span><span class="l" id="1606"><a class="l" href="#1606">1606 </a><span class="php-comment">     * @return mixed
+</span></span><span class="l" id="1607"><a class="l" href="#1607">1607 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1608"><a class="l" href="#1608">1608 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getServerVersion" id="_getServerVersion">getServerVersion</a>(<span class="php-var">$DBID</span> = <span class="php-num">1</span>)
+</span><span class="l" id="1609"><a class="l" href="#1609">1609 </a>    {
+</span><span class="l" id="1610"><a class="l" href="#1610">1610 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(self::<span class="php-var">$pdo</span>[<span class="php-var">$DBID</span>])) {
+</span><span class="l" id="1611"><a class="l" href="#1611">1611 </a>            <span class="php-comment">// create connection if necessary</span>
+</span><span class="l" id="1612"><a class="l" href="#1612">1612 </a>            self::factory(<span class="php-var">$DBID</span>);
+</span><span class="l" id="1613"><a class="l" href="#1613">1613 </a>        }
+</span><span class="l" id="1614"><a class="l" href="#1614">1614 </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$pdo</span>[<span class="php-var">$DBID</span>]-&gt;getAttribute(PDO::ATTR_SERVER_VERSION);
+</span><span class="l" id="1615"><a class="l" href="#1615">1615 </a>    }
+</span><span class="l" id="1616"><a class="l" href="#1616">1616 </a>
+</span><span class="l" id="1617"><a class="l" href="#1617">1617 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1618"><a class="l" href="#1618">1618 </a><span class="php-comment">     * Creates a rex_sql instance.
+</span></span><span class="l" id="1619"><a class="l" href="#1619">1619 </a><span class="php-comment">     *
+</span></span><span class="l" id="1620"><a class="l" href="#1620">1620 </a><span class="php-comment">     * @param int $DBID
+</span></span><span class="l" id="1621"><a class="l" href="#1621">1621 </a><span class="php-comment">     *
+</span></span><span class="l" id="1622"><a class="l" href="#1622">1622 </a><span class="php-comment">     * @return static Returns a rex_sql instance
+</span></span><span class="l" id="1623"><a class="l" href="#1623">1623 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1624"><a class="l" href="#1624">1624 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_factory" id="_factory">factory</a>(<span class="php-var">$DBID</span> = <span class="php-num">1</span>)
+</span><span class="l" id="1625"><a class="l" href="#1625">1625 </a>    {
+</span><span class="l" id="1626"><a class="l" href="#1626">1626 </a>        <span class="php-var">$class</span> = <span class="php-keyword1">static</span>::getFactoryClass();
+</span><span class="l" id="1627"><a class="l" href="#1627">1627 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">new</span> <span class="php-var">$class</span>(<span class="php-var">$DBID</span>);
+</span><span class="l" id="1628"><a class="l" href="#1628">1628 </a>    }
+</span><span class="l" id="1629"><a class="l" href="#1629">1629 </a>
+</span><span class="l" id="1630"><a class="l" href="#1630">1630 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1631"><a class="l" href="#1631">1631 </a><span class="php-comment">     * Prueft die uebergebenen Zugangsdaten auf gueltigkeit und legt ggf. die
+</span></span><span class="l" id="1632"><a class="l" href="#1632">1632 </a><span class="php-comment">     * Datenbank an.
+</span></span><span class="l" id="1633"><a class="l" href="#1633">1633 </a><span class="php-comment">     *
+</span></span><span class="l" id="1634"><a class="l" href="#1634">1634 </a><span class="php-comment">     * @param string $host
+</span></span><span class="l" id="1635"><a class="l" href="#1635">1635 </a><span class="php-comment">     * @param string $login
+</span></span><span class="l" id="1636"><a class="l" href="#1636">1636 </a><span class="php-comment">     * @param string $pw
+</span></span><span class="l" id="1637"><a class="l" href="#1637">1637 </a><span class="php-comment">     * @param string $dbname
+</span></span><span class="l" id="1638"><a class="l" href="#1638">1638 </a><span class="php-comment">     * @param bool   $createDb
+</span></span><span class="l" id="1639"><a class="l" href="#1639">1639 </a><span class="php-comment">     *
+</span></span><span class="l" id="1640"><a class="l" href="#1640">1640 </a><span class="php-comment">     * @return bool|string
+</span></span><span class="l" id="1641"><a class="l" href="#1641">1641 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1642"><a class="l" href="#1642">1642 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_checkDbConnection" id="_checkDbConnection">checkDbConnection</a>(<span class="php-var">$host</span>, <span class="php-var">$login</span>, <span class="php-var">$pw</span>, <span class="php-var">$dbname</span>, <span class="php-var">$createDb</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="1643"><a class="l" href="#1643">1643 </a>    {
+</span><span class="l" id="1644"><a class="l" href="#1644">1644 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$dbname</span>) {
+</span><span class="l" id="1645"><a class="l" href="#1645">1645 </a>            <span class="php-keyword1">return</span> rex_i18n::msg(<span class="php-quote">'sql_database_name_missing'</span>);
+</span><span class="l" id="1646"><a class="l" href="#1646">1646 </a>        }
+</span><span class="l" id="1647"><a class="l" href="#1647">1647 </a>
+</span><span class="l" id="1648"><a class="l" href="#1648">1648 </a>        <span class="php-var">$err_msg</span> = <span class="php-keyword1">true</span>;
 </span><span class="l" id="1649"><a class="l" href="#1649">1649 </a>
-</span><span class="l" id="1650"><a class="l" href="#1650">1650 </a>            <span class="php-comment">// db connection was successfully established, but we were meant to create the db</span>
-</span><span class="l" id="1651"><a class="l" href="#1651">1651 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$createDb</span>) {
-</span><span class="l" id="1652"><a class="l" href="#1652">1652 </a>                <span class="php-comment">// -&gt; throw db already exists error</span>
-</span><span class="l" id="1653"><a class="l" href="#1653">1653 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_database_already_exists'</span>);
-</span><span class="l" id="1654"><a class="l" href="#1654">1654 </a>            }
-</span><span class="l" id="1655"><a class="l" href="#1655">1655 </a>        } <span class="php-keyword1">catch</span> (PDOException <span class="php-var">$e</span>) {
-</span><span class="l" id="1656"><a class="l" href="#1656">1656 </a>            <span class="php-comment">// see mysql error codes at http://dev.mysql.com/doc/refman/5.1/de/error-messages-server.html</span>
+</span><span class="l" id="1650"><a class="l" href="#1650">1650 </a>        <span class="php-keyword1">try</span> {
+</span><span class="l" id="1651"><a class="l" href="#1651">1651 </a>            self::createConnection(
+</span><span class="l" id="1652"><a class="l" href="#1652">1652 </a>                <span class="php-var">$host</span>,
+</span><span class="l" id="1653"><a class="l" href="#1653">1653 </a>                <span class="php-var">$dbname</span>,
+</span><span class="l" id="1654"><a class="l" href="#1654">1654 </a>                <span class="php-var">$login</span>,
+</span><span class="l" id="1655"><a class="l" href="#1655">1655 </a>                <span class="php-var">$pw</span>
+</span><span class="l" id="1656"><a class="l" href="#1656">1656 </a>            );
 </span><span class="l" id="1657"><a class="l" href="#1657">1657 </a>
-</span><span class="l" id="1658"><a class="l" href="#1658">1658 </a>            <span class="php-comment">// ER_BAD_HOST</span>
-</span><span class="l" id="1659"><a class="l" href="#1659">1659 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [2002]'</span>) !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="1660"><a class="l" href="#1660">1660 </a>                <span class="php-comment">// unable to connect to db server</span>
-</span><span class="l" id="1661"><a class="l" href="#1661">1661 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_connect_database'</span>);
+</span><span class="l" id="1658"><a class="l" href="#1658">1658 </a>            <span class="php-comment">// db connection was successfully established, but we were meant to create the db</span>
+</span><span class="l" id="1659"><a class="l" href="#1659">1659 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$createDb</span>) {
+</span><span class="l" id="1660"><a class="l" href="#1660">1660 </a>                <span class="php-comment">// -&gt; throw db already exists error</span>
+</span><span class="l" id="1661"><a class="l" href="#1661">1661 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_database_already_exists'</span>);
 </span><span class="l" id="1662"><a class="l" href="#1662">1662 </a>            }
-</span><span class="l" id="1663"><a class="l" href="#1663">1663 </a>            <span class="php-comment">// ER_BAD_DB_ERROR</span>
-</span><span class="l" id="1664"><a class="l" href="#1664">1664 </a>            <span class="php-keyword1">elseif</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [1049]'</span>) !== <span class="php-keyword1">false</span> ||
-</span><span class="l" id="1665"><a class="l" href="#1665">1665 </a>                    <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[42000]'</span>) !== <span class="php-keyword1">false</span>
-</span><span class="l" id="1666"><a class="l" href="#1666">1666 </a>            ) {
-</span><span class="l" id="1667"><a class="l" href="#1667">1667 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$createDb</span>) {
-</span><span class="l" id="1668"><a class="l" href="#1668">1668 </a>                    <span class="php-keyword1">try</span> {
-</span><span class="l" id="1669"><a class="l" href="#1669">1669 </a>                        <span class="php-comment">// use the "mysql" db for the connection</span>
-</span><span class="l" id="1670"><a class="l" href="#1670">1670 </a>                        <span class="php-var">$conn</span> = self::createConnection(
-</span><span class="l" id="1671"><a class="l" href="#1671">1671 </a>                            <span class="php-var">$host</span>,
-</span><span class="l" id="1672"><a class="l" href="#1672">1672 </a>                            <span class="php-quote">'mysql'</span>,
-</span><span class="l" id="1673"><a class="l" href="#1673">1673 </a>                            <span class="php-var">$login</span>,
-</span><span class="l" id="1674"><a class="l" href="#1674">1674 </a>                            <span class="php-var">$pw</span>
-</span><span class="l" id="1675"><a class="l" href="#1675">1675 </a>                        );
-</span><span class="l" id="1676"><a class="l" href="#1676">1676 </a>                        <span class="php-keyword1">if</span> (<span class="php-var">$conn</span>-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">'CREATE DATABASE '</span> . <span class="php-var">$dbname</span> . <span class="php-quote">' CHARACTER SET utf8 COLLATE utf8_general_ci'</span>) !== <span class="php-num">1</span>) {
-</span><span class="l" id="1677"><a class="l" href="#1677">1677 </a>                            <span class="php-comment">// unable to create db</span>
-</span><span class="l" id="1678"><a class="l" href="#1678">1678 </a>                            <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_create_database'</span>);
-</span><span class="l" id="1679"><a class="l" href="#1679">1679 </a>                        }
-</span><span class="l" id="1680"><a class="l" href="#1680">1680 </a>                    } <span class="php-keyword1">catch</span> (PDOException <span class="php-var">$e</span>) {
-</span><span class="l" id="1681"><a class="l" href="#1681">1681 </a>                        <span class="php-comment">// unable to find database</span>
-</span><span class="l" id="1682"><a class="l" href="#1682">1682 </a>                        <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_open_database'</span>);
-</span><span class="l" id="1683"><a class="l" href="#1683">1683 </a>                    }
-</span><span class="l" id="1684"><a class="l" href="#1684">1684 </a>                } <span class="php-keyword1">else</span> {
-</span><span class="l" id="1685"><a class="l" href="#1685">1685 </a>                    <span class="php-comment">// unable to find database</span>
-</span><span class="l" id="1686"><a class="l" href="#1686">1686 </a>                    <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_find_database'</span>);
-</span><span class="l" id="1687"><a class="l" href="#1687">1687 </a>                }
-</span><span class="l" id="1688"><a class="l" href="#1688">1688 </a>            }
-</span><span class="l" id="1689"><a class="l" href="#1689">1689 </a>            <span class="php-comment">// ER_ACCESS_DENIED_ERROR</span>
-</span><span class="l" id="1690"><a class="l" href="#1690">1690 </a>            <span class="php-comment">// ER_DBACCESS_DENIED_ERROR</span>
-</span><span class="l" id="1691"><a class="l" href="#1691">1691 </a>            <span class="php-keyword1">elseif</span> (
-</span><span class="l" id="1692"><a class="l" href="#1692">1692 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [1045]'</span>) !== <span class="php-keyword1">false</span> ||
-</span><span class="l" id="1693"><a class="l" href="#1693">1693 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[28000]'</span>) !== <span class="php-keyword1">false</span> ||
-</span><span class="l" id="1694"><a class="l" href="#1694">1694 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [1044]'</span>) !== <span class="php-keyword1">false</span> ||
-</span><span class="l" id="1695"><a class="l" href="#1695">1695 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[42000]'</span>) !== <span class="php-keyword1">false</span>
-</span><span class="l" id="1696"><a class="l" href="#1696">1696 </a>            ) {
-</span><span class="l" id="1697"><a class="l" href="#1697">1697 </a>                <span class="php-comment">// unable to connect to db</span>
-</span><span class="l" id="1698"><a class="l" href="#1698">1698 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_connect_database'</span>);
-</span><span class="l" id="1699"><a class="l" href="#1699">1699 </a>            }
-</span><span class="l" id="1700"><a class="l" href="#1700">1700 </a>            <span class="php-comment">// ER_ACCESS_TO_SERVER_ERROR</span>
-</span><span class="l" id="1701"><a class="l" href="#1701">1701 </a>            <span class="php-keyword1">elseif</span> (
-</span><span class="l" id="1702"><a class="l" href="#1702">1702 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [2005]'</span>) !== <span class="php-keyword1">false</span>
-</span><span class="l" id="1703"><a class="l" href="#1703">1703 </a>            ) {
-</span><span class="l" id="1704"><a class="l" href="#1704">1704 </a>                <span class="php-comment">// unable to connect to server</span>
-</span><span class="l" id="1705"><a class="l" href="#1705">1705 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_connect_server'</span>);
-</span><span class="l" id="1706"><a class="l" href="#1706">1706 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="1707"><a class="l" href="#1707">1707 </a>                <span class="php-comment">// we didn't expected this error, so rethrow it to show it to the admin/end-user</span>
-</span><span class="l" id="1708"><a class="l" href="#1708">1708 </a>                <span class="php-keyword1">throw</span> <span class="php-var">$e</span>;
-</span><span class="l" id="1709"><a class="l" href="#1709">1709 </a>            }
-</span><span class="l" id="1710"><a class="l" href="#1710">1710 </a>        }
-</span><span class="l" id="1711"><a class="l" href="#1711">1711 </a>
-</span><span class="l" id="1712"><a class="l" href="#1712">1712 </a>        <span class="php-comment">// close the connection</span>
-</span><span class="l" id="1713"><a class="l" href="#1713">1713 </a>        <span class="php-var">$conn</span> = <span class="php-keyword1">null</span>;
-</span><span class="l" id="1714"><a class="l" href="#1714">1714 </a>
-</span><span class="l" id="1715"><a class="l" href="#1715">1715 </a>        <span class="php-keyword1">return</span>  <span class="php-var">$err_msg</span>;
-</span><span class="l" id="1716"><a class="l" href="#1716">1716 </a>    }
-</span><span class="l" id="1717"><a class="l" href="#1717">1717 </a>
-</span><span class="l" id="1718"><a class="l" href="#1718">1718 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1719"><a class="l" href="#1719">1719 </a><span class="php-comment">     * @param string $verb
-</span></span><span class="l" id="1720"><a class="l" href="#1720">1720 </a><span class="php-comment">     * @param bool   $onDuplicateKeyUpdate
-</span></span><span class="l" id="1721"><a class="l" href="#1721">1721 </a><span class="php-comment">     *
-</span></span><span class="l" id="1722"><a class="l" href="#1722">1722 </a><span class="php-comment">     * @return $this|rex_sql
-</span></span><span class="l" id="1723"><a class="l" href="#1723">1723 </a><span class="php-comment">     *
-</span></span><span class="l" id="1724"><a class="l" href="#1724">1724 </a><span class="php-comment">     * @throws rex_sql_exception
-</span></span><span class="l" id="1725"><a class="l" href="#1725">1725 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1726"><a class="l" href="#1726">1726 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_setMultiRecordQuery" id="_setMultiRecordQuery">setMultiRecordQuery</a>(<span class="php-var">$verb</span>, <span class="php-var">$onDuplicateKeyUpdate</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="1727"><a class="l" href="#1727">1727 </a>    {
-</span><span class="l" id="1728"><a class="l" href="#1728">1728 </a>        <span class="php-var">$fields</span> = [];
-</span><span class="l" id="1729"><a class="l" href="#1729">1729 </a>
-</span><span class="l" id="1730"><a class="l" href="#1730">1730 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;records <span class="php-keyword1">as</span> <span class="php-var">$record</span>) {
-</span><span class="l" id="1731"><a class="l" href="#1731">1731 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$record</span>-&gt;values <span class="php-keyword1">as</span> <span class="php-var">$field</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="1732"><a class="l" href="#1732">1732 </a>                <span class="php-var">$fields</span>[<span class="php-var">$field</span>] = <span class="php-keyword1">true</span>;
-</span><span class="l" id="1733"><a class="l" href="#1733">1733 </a>            }
-</span><span class="l" id="1734"><a class="l" href="#1734">1734 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$record</span>-&gt;rawValues <span class="php-keyword1">as</span> <span class="php-var">$field</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="1735"><a class="l" href="#1735">1735 </a>                <span class="php-var">$fields</span>[<span class="php-var">$field</span>] = <span class="php-keyword1">true</span>;
-</span><span class="l" id="1736"><a class="l" href="#1736">1736 </a>            }
-</span><span class="l" id="1737"><a class="l" href="#1737">1737 </a>        }
-</span><span class="l" id="1738"><a class="l" href="#1738">1738 </a>
-</span><span class="l" id="1739"><a class="l" href="#1739">1739 </a>        <span class="php-var">$fields</span> = <span class="php-keyword2">array_keys</span>(<span class="php-var">$fields</span>);
-</span><span class="l" id="1740"><a class="l" href="#1740">1740 </a>
-</span><span class="l" id="1741"><a class="l" href="#1741">1741 </a>        <span class="php-var">$rows</span> = [];
-</span><span class="l" id="1742"><a class="l" href="#1742">1742 </a>        <span class="php-var">$params</span> = [];
-</span><span class="l" id="1743"><a class="l" href="#1743">1743 </a>
-</span><span class="l" id="1744"><a class="l" href="#1744">1744 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;records <span class="php-keyword1">as</span> <span class="php-var">$record</span>) {
-</span><span class="l" id="1745"><a class="l" href="#1745">1745 </a>            <span class="php-var">$row</span> = [];
+</span><span class="l" id="1663"><a class="l" href="#1663">1663 </a>        } <span class="php-keyword1">catch</span> (PDOException <span class="php-var">$e</span>) {
+</span><span class="l" id="1664"><a class="l" href="#1664">1664 </a>            <span class="php-comment">// see mysql error codes at http://dev.mysql.com/doc/refman/5.1/de/error-messages-server.html</span>
+</span><span class="l" id="1665"><a class="l" href="#1665">1665 </a>
+</span><span class="l" id="1666"><a class="l" href="#1666">1666 </a>            <span class="php-comment">// ER_BAD_HOST</span>
+</span><span class="l" id="1667"><a class="l" href="#1667">1667 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [2002]'</span>) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="1668"><a class="l" href="#1668">1668 </a>                <span class="php-comment">// unable to connect to db server</span>
+</span><span class="l" id="1669"><a class="l" href="#1669">1669 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_connect_database'</span>);
+</span><span class="l" id="1670"><a class="l" href="#1670">1670 </a>            }
+</span><span class="l" id="1671"><a class="l" href="#1671">1671 </a>            <span class="php-comment">// ER_BAD_DB_ERROR</span>
+</span><span class="l" id="1672"><a class="l" href="#1672">1672 </a>            <span class="php-keyword1">elseif</span> (<span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [1049]'</span>) !== <span class="php-keyword1">false</span> ||
+</span><span class="l" id="1673"><a class="l" href="#1673">1673 </a>                    <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[42000]'</span>) !== <span class="php-keyword1">false</span>
+</span><span class="l" id="1674"><a class="l" href="#1674">1674 </a>            ) {
+</span><span class="l" id="1675"><a class="l" href="#1675">1675 </a>                <span class="php-keyword1">if</span> (<span class="php-var">$createDb</span>) {
+</span><span class="l" id="1676"><a class="l" href="#1676">1676 </a>                    <span class="php-keyword1">try</span> {
+</span><span class="l" id="1677"><a class="l" href="#1677">1677 </a>                        <span class="php-comment">// use the "mysql" db for the connection</span>
+</span><span class="l" id="1678"><a class="l" href="#1678">1678 </a>                        <span class="php-var">$conn</span> = self::createConnection(
+</span><span class="l" id="1679"><a class="l" href="#1679">1679 </a>                            <span class="php-var">$host</span>,
+</span><span class="l" id="1680"><a class="l" href="#1680">1680 </a>                            <span class="php-quote">'mysql'</span>,
+</span><span class="l" id="1681"><a class="l" href="#1681">1681 </a>                            <span class="php-var">$login</span>,
+</span><span class="l" id="1682"><a class="l" href="#1682">1682 </a>                            <span class="php-var">$pw</span>
+</span><span class="l" id="1683"><a class="l" href="#1683">1683 </a>                        );
+</span><span class="l" id="1684"><a class="l" href="#1684">1684 </a>                        <span class="php-keyword1">if</span> (<span class="php-var">$conn</span>-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">'CREATE DATABASE '</span> . <span class="php-var">$dbname</span> . <span class="php-quote">' CHARACTER SET utf8 COLLATE utf8_general_ci'</span>) !== <span class="php-num">1</span>) {
+</span><span class="l" id="1685"><a class="l" href="#1685">1685 </a>                            <span class="php-comment">// unable to create db</span>
+</span><span class="l" id="1686"><a class="l" href="#1686">1686 </a>                            <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_create_database'</span>);
+</span><span class="l" id="1687"><a class="l" href="#1687">1687 </a>                        }
+</span><span class="l" id="1688"><a class="l" href="#1688">1688 </a>                    } <span class="php-keyword1">catch</span> (PDOException <span class="php-var">$e</span>) {
+</span><span class="l" id="1689"><a class="l" href="#1689">1689 </a>                        <span class="php-comment">// unable to find database</span>
+</span><span class="l" id="1690"><a class="l" href="#1690">1690 </a>                        <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_open_database'</span>);
+</span><span class="l" id="1691"><a class="l" href="#1691">1691 </a>                    }
+</span><span class="l" id="1692"><a class="l" href="#1692">1692 </a>                } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1693"><a class="l" href="#1693">1693 </a>                    <span class="php-comment">// unable to find database</span>
+</span><span class="l" id="1694"><a class="l" href="#1694">1694 </a>                    <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_find_database'</span>);
+</span><span class="l" id="1695"><a class="l" href="#1695">1695 </a>                }
+</span><span class="l" id="1696"><a class="l" href="#1696">1696 </a>            }
+</span><span class="l" id="1697"><a class="l" href="#1697">1697 </a>            <span class="php-comment">// ER_ACCESS_DENIED_ERROR</span>
+</span><span class="l" id="1698"><a class="l" href="#1698">1698 </a>            <span class="php-comment">// ER_DBACCESS_DENIED_ERROR</span>
+</span><span class="l" id="1699"><a class="l" href="#1699">1699 </a>            <span class="php-keyword1">elseif</span> (
+</span><span class="l" id="1700"><a class="l" href="#1700">1700 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [1045]'</span>) !== <span class="php-keyword1">false</span> ||
+</span><span class="l" id="1701"><a class="l" href="#1701">1701 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[28000]'</span>) !== <span class="php-keyword1">false</span> ||
+</span><span class="l" id="1702"><a class="l" href="#1702">1702 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [1044]'</span>) !== <span class="php-keyword1">false</span> ||
+</span><span class="l" id="1703"><a class="l" href="#1703">1703 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[42000]'</span>) !== <span class="php-keyword1">false</span>
+</span><span class="l" id="1704"><a class="l" href="#1704">1704 </a>            ) {
+</span><span class="l" id="1705"><a class="l" href="#1705">1705 </a>                <span class="php-comment">// unable to connect to db</span>
+</span><span class="l" id="1706"><a class="l" href="#1706">1706 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_connect_database'</span>);
+</span><span class="l" id="1707"><a class="l" href="#1707">1707 </a>            }
+</span><span class="l" id="1708"><a class="l" href="#1708">1708 </a>            <span class="php-comment">// ER_ACCESS_TO_SERVER_ERROR</span>
+</span><span class="l" id="1709"><a class="l" href="#1709">1709 </a>            <span class="php-keyword1">elseif</span> (
+</span><span class="l" id="1710"><a class="l" href="#1710">1710 </a>                <span class="php-keyword2">strpos</span>(<span class="php-var">$e</span>-&gt;getMessage(), <span class="php-quote">'SQLSTATE[HY000] [2005]'</span>) !== <span class="php-keyword1">false</span>
+</span><span class="l" id="1711"><a class="l" href="#1711">1711 </a>            ) {
+</span><span class="l" id="1712"><a class="l" href="#1712">1712 </a>                <span class="php-comment">// unable to connect to server</span>
+</span><span class="l" id="1713"><a class="l" href="#1713">1713 </a>                <span class="php-var">$err_msg</span> = rex_i18n::msg(<span class="php-quote">'sql_unable_to_connect_server'</span>);
+</span><span class="l" id="1714"><a class="l" href="#1714">1714 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="1715"><a class="l" href="#1715">1715 </a>                <span class="php-comment">// we didn't expected this error, so rethrow it to show it to the admin/end-user</span>
+</span><span class="l" id="1716"><a class="l" href="#1716">1716 </a>                <span class="php-keyword1">throw</span> <span class="php-var">$e</span>;
+</span><span class="l" id="1717"><a class="l" href="#1717">1717 </a>            }
+</span><span class="l" id="1718"><a class="l" href="#1718">1718 </a>        }
+</span><span class="l" id="1719"><a class="l" href="#1719">1719 </a>
+</span><span class="l" id="1720"><a class="l" href="#1720">1720 </a>        <span class="php-comment">// close the connection</span>
+</span><span class="l" id="1721"><a class="l" href="#1721">1721 </a>        <span class="php-var">$conn</span> = <span class="php-keyword1">null</span>;
+</span><span class="l" id="1722"><a class="l" href="#1722">1722 </a>
+</span><span class="l" id="1723"><a class="l" href="#1723">1723 </a>        <span class="php-keyword1">return</span>  <span class="php-var">$err_msg</span>;
+</span><span class="l" id="1724"><a class="l" href="#1724">1724 </a>    }
+</span><span class="l" id="1725"><a class="l" href="#1725">1725 </a>
+</span><span class="l" id="1726"><a class="l" href="#1726">1726 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1727"><a class="l" href="#1727">1727 </a><span class="php-comment">     * @param string $verb
+</span></span><span class="l" id="1728"><a class="l" href="#1728">1728 </a><span class="php-comment">     * @param bool   $onDuplicateKeyUpdate
+</span></span><span class="l" id="1729"><a class="l" href="#1729">1729 </a><span class="php-comment">     *
+</span></span><span class="l" id="1730"><a class="l" href="#1730">1730 </a><span class="php-comment">     * @return $this|rex_sql
+</span></span><span class="l" id="1731"><a class="l" href="#1731">1731 </a><span class="php-comment">     *
+</span></span><span class="l" id="1732"><a class="l" href="#1732">1732 </a><span class="php-comment">     * @throws rex_sql_exception
+</span></span><span class="l" id="1733"><a class="l" href="#1733">1733 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1734"><a class="l" href="#1734">1734 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_setMultiRecordQuery" id="_setMultiRecordQuery">setMultiRecordQuery</a>(<span class="php-var">$verb</span>, <span class="php-var">$onDuplicateKeyUpdate</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="1735"><a class="l" href="#1735">1735 </a>    {
+</span><span class="l" id="1736"><a class="l" href="#1736">1736 </a>        <span class="php-var">$fields</span> = [];
+</span><span class="l" id="1737"><a class="l" href="#1737">1737 </a>
+</span><span class="l" id="1738"><a class="l" href="#1738">1738 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;records <span class="php-keyword1">as</span> <span class="php-var">$record</span>) {
+</span><span class="l" id="1739"><a class="l" href="#1739">1739 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$record</span>-&gt;values <span class="php-keyword1">as</span> <span class="php-var">$field</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="1740"><a class="l" href="#1740">1740 </a>                <span class="php-var">$fields</span>[<span class="php-var">$field</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="1741"><a class="l" href="#1741">1741 </a>            }
+</span><span class="l" id="1742"><a class="l" href="#1742">1742 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$record</span>-&gt;rawValues <span class="php-keyword1">as</span> <span class="php-var">$field</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="1743"><a class="l" href="#1743">1743 </a>                <span class="php-var">$fields</span>[<span class="php-var">$field</span>] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="1744"><a class="l" href="#1744">1744 </a>            }
+</span><span class="l" id="1745"><a class="l" href="#1745">1745 </a>        }
 </span><span class="l" id="1746"><a class="l" href="#1746">1746 </a>
-</span><span class="l" id="1747"><a class="l" href="#1747">1747 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$field</span>) {
-</span><span class="l" id="1748"><a class="l" href="#1748">1748 </a>                <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$record</span>-&gt;rawValues[<span class="php-var">$field</span>])) {
-</span><span class="l" id="1749"><a class="l" href="#1749">1749 </a>                    <span class="php-var">$row</span>[] = <span class="php-var">$record</span>-&gt;rawValues[<span class="php-var">$field</span>];
-</span><span class="l" id="1750"><a class="l" href="#1750">1750 </a>
-</span><span class="l" id="1751"><a class="l" href="#1751">1751 </a>                    <span class="php-keyword1">continue</span>;
-</span><span class="l" id="1752"><a class="l" href="#1752">1752 </a>                }
-</span><span class="l" id="1753"><a class="l" href="#1753">1753 </a>
-</span><span class="l" id="1754"><a class="l" href="#1754">1754 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$record</span>-&gt;values[<span class="php-var">$field</span>]) &amp;&amp; !<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$field</span>, <span class="php-var">$this</span>-&gt;values)) {
-</span><span class="l" id="1755"><a class="l" href="#1755">1755 </a>                    <span class="php-var">$row</span>[] = <span class="php-quote">'DEFAULT'</span>;
-</span><span class="l" id="1756"><a class="l" href="#1756">1756 </a>
-</span><span class="l" id="1757"><a class="l" href="#1757">1757 </a>                    <span class="php-keyword1">continue</span>;
-</span><span class="l" id="1758"><a class="l" href="#1758">1758 </a>                }
-</span><span class="l" id="1759"><a class="l" href="#1759">1759 </a>
-</span><span class="l" id="1760"><a class="l" href="#1760">1760 </a>                <span class="php-var">$row</span>[] = <span class="php-quote">'?'</span>;
-</span><span class="l" id="1761"><a class="l" href="#1761">1761 </a>                <span class="php-var">$params</span>[] = <span class="php-var">$record</span>-&gt;values[<span class="php-var">$field</span>];
-</span><span class="l" id="1762"><a class="l" href="#1762">1762 </a>            }
-</span><span class="l" id="1763"><a class="l" href="#1763">1763 </a>
-</span><span class="l" id="1764"><a class="l" href="#1764">1764 </a>            <span class="php-var">$rows</span>[] = <span class="php-quote">'('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$row</span>).<span class="php-quote">')'</span>;
-</span><span class="l" id="1765"><a class="l" href="#1765">1765 </a>        }
-</span><span class="l" id="1766"><a class="l" href="#1766">1766 </a>
-</span><span class="l" id="1767"><a class="l" href="#1767">1767 </a>        <span class="php-var">$query</span> = <span class="php-var">$verb</span>.<span class="php-quote">' INTO '</span>.<span class="php-var">$this</span>-&gt;escapeIdentifier(<span class="php-var">$this</span>-&gt;table).<span class="php-quote">"\n"</span>;
-</span><span class="l" id="1768"><a class="l" href="#1768">1768 </a>        <span class="php-var">$query</span> .= <span class="php-quote">'('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-keyword2">array_map</span>([<span class="php-var">$this</span>, <span class="php-quote">'escapeIdentifier'</span>], <span class="php-var">$fields</span>)).<span class="php-quote">")\n"</span>;
-</span><span class="l" id="1769"><a class="l" href="#1769">1769 </a>        <span class="php-var">$query</span> .= <span class="php-quote">"VALUES\n"</span>;
-</span><span class="l" id="1770"><a class="l" href="#1770">1770 </a>        <span class="php-var">$query</span> .= <span class="php-keyword2">implode</span>(<span class="php-quote">",\n"</span>, <span class="php-var">$rows</span>);
+</span><span class="l" id="1747"><a class="l" href="#1747">1747 </a>        <span class="php-var">$fields</span> = <span class="php-keyword2">array_keys</span>(<span class="php-var">$fields</span>);
+</span><span class="l" id="1748"><a class="l" href="#1748">1748 </a>
+</span><span class="l" id="1749"><a class="l" href="#1749">1749 </a>        <span class="php-var">$rows</span> = [];
+</span><span class="l" id="1750"><a class="l" href="#1750">1750 </a>        <span class="php-var">$params</span> = [];
+</span><span class="l" id="1751"><a class="l" href="#1751">1751 </a>
+</span><span class="l" id="1752"><a class="l" href="#1752">1752 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;records <span class="php-keyword1">as</span> <span class="php-var">$record</span>) {
+</span><span class="l" id="1753"><a class="l" href="#1753">1753 </a>            <span class="php-var">$row</span> = [];
+</span><span class="l" id="1754"><a class="l" href="#1754">1754 </a>
+</span><span class="l" id="1755"><a class="l" href="#1755">1755 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$field</span>) {
+</span><span class="l" id="1756"><a class="l" href="#1756">1756 </a>                <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$record</span>-&gt;rawValues[<span class="php-var">$field</span>])) {
+</span><span class="l" id="1757"><a class="l" href="#1757">1757 </a>                    <span class="php-var">$row</span>[] = <span class="php-var">$record</span>-&gt;rawValues[<span class="php-var">$field</span>];
+</span><span class="l" id="1758"><a class="l" href="#1758">1758 </a>
+</span><span class="l" id="1759"><a class="l" href="#1759">1759 </a>                    <span class="php-keyword1">continue</span>;
+</span><span class="l" id="1760"><a class="l" href="#1760">1760 </a>                }
+</span><span class="l" id="1761"><a class="l" href="#1761">1761 </a>
+</span><span class="l" id="1762"><a class="l" href="#1762">1762 </a>                <span class="php-keyword1">if</span> (!<span class="php-keyword1">isset</span>(<span class="php-var">$record</span>-&gt;values[<span class="php-var">$field</span>]) &amp;&amp; !<span class="php-keyword2">array_key_exists</span>(<span class="php-var">$field</span>, <span class="php-var">$this</span>-&gt;values)) {
+</span><span class="l" id="1763"><a class="l" href="#1763">1763 </a>                    <span class="php-var">$row</span>[] = <span class="php-quote">'DEFAULT'</span>;
+</span><span class="l" id="1764"><a class="l" href="#1764">1764 </a>
+</span><span class="l" id="1765"><a class="l" href="#1765">1765 </a>                    <span class="php-keyword1">continue</span>;
+</span><span class="l" id="1766"><a class="l" href="#1766">1766 </a>                }
+</span><span class="l" id="1767"><a class="l" href="#1767">1767 </a>
+</span><span class="l" id="1768"><a class="l" href="#1768">1768 </a>                <span class="php-var">$row</span>[] = <span class="php-quote">'?'</span>;
+</span><span class="l" id="1769"><a class="l" href="#1769">1769 </a>                <span class="php-var">$params</span>[] = <span class="php-var">$record</span>-&gt;values[<span class="php-var">$field</span>];
+</span><span class="l" id="1770"><a class="l" href="#1770">1770 </a>            }
 </span><span class="l" id="1771"><a class="l" href="#1771">1771 </a>
-</span><span class="l" id="1772"><a class="l" href="#1772">1772 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$onDuplicateKeyUpdate</span>) {
-</span><span class="l" id="1773"><a class="l" href="#1773">1773 </a>            <span class="php-var">$query</span> .= <span class="php-quote">"\n"</span>.<span class="php-var">$this</span>-&gt;buildOnDuplicateKeyUpdate(<span class="php-var">$fields</span>);
-</span><span class="l" id="1774"><a class="l" href="#1774">1774 </a>        }
-</span><span class="l" id="1775"><a class="l" href="#1775">1775 </a>
-</span><span class="l" id="1776"><a class="l" href="#1776">1776 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;setQuery(<span class="php-var">$query</span>, <span class="php-var">$params</span>);
-</span><span class="l" id="1777"><a class="l" href="#1777">1777 </a>    }
-</span><span class="l" id="1778"><a class="l" href="#1778">1778 </a>
-</span><span class="l" id="1779"><a class="l" href="#1779">1779 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="1780"><a class="l" href="#1780">1780 </a><span class="php-comment">     * @param array $fields
-</span></span><span class="l" id="1781"><a class="l" href="#1781">1781 </a><span class="php-comment">     *
-</span></span><span class="l" id="1782"><a class="l" href="#1782">1782 </a><span class="php-comment">     * @return string
-</span></span><span class="l" id="1783"><a class="l" href="#1783">1783 </a><span class="php-comment">     */</span>
-</span><span class="l" id="1784"><a class="l" href="#1784">1784 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_buildOnDuplicateKeyUpdate" id="_buildOnDuplicateKeyUpdate">buildOnDuplicateKeyUpdate</a>(<span class="php-var">$fields</span>)
-</span><span class="l" id="1785"><a class="l" href="#1785">1785 </a>    {
-</span><span class="l" id="1786"><a class="l" href="#1786">1786 </a>        <span class="php-var">$updates</span> = [];
-</span><span class="l" id="1787"><a class="l" href="#1787">1787 </a>
-</span><span class="l" id="1788"><a class="l" href="#1788">1788 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$field</span>) {
-</span><span class="l" id="1789"><a class="l" href="#1789">1789 </a>            <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;escapeIdentifier(<span class="php-var">$field</span>);
-</span><span class="l" id="1790"><a class="l" href="#1790">1790 </a>            <span class="php-var">$updates</span>[] = <span class="php-quote">"</span><span class="php-var">$field</span><span class="php-quote"> = VALUES(</span><span class="php-var">$field</span><span class="php-quote">)"</span>;
-</span><span class="l" id="1791"><a class="l" href="#1791">1791 </a>        }
-</span><span class="l" id="1792"><a class="l" href="#1792">1792 </a>
-</span><span class="l" id="1793"><a class="l" href="#1793">1793 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'ON DUPLICATE KEY UPDATE '</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$updates</span>);
-</span><span class="l" id="1794"><a class="l" href="#1794">1794 </a>    }
-</span><span class="l" id="1795"><a class="l" href="#1795">1795 </a>}
-</span><span class="l" id="1796"><a class="l" href="#1796">1796 </a></span></code></pre>
+</span><span class="l" id="1772"><a class="l" href="#1772">1772 </a>            <span class="php-var">$rows</span>[] = <span class="php-quote">'('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$row</span>).<span class="php-quote">')'</span>;
+</span><span class="l" id="1773"><a class="l" href="#1773">1773 </a>        }
+</span><span class="l" id="1774"><a class="l" href="#1774">1774 </a>
+</span><span class="l" id="1775"><a class="l" href="#1775">1775 </a>        <span class="php-var">$query</span> = <span class="php-var">$verb</span>.<span class="php-quote">' INTO '</span>.<span class="php-var">$this</span>-&gt;escapeIdentifier(<span class="php-var">$this</span>-&gt;table).<span class="php-quote">"\n"</span>;
+</span><span class="l" id="1776"><a class="l" href="#1776">1776 </a>        <span class="php-var">$query</span> .= <span class="php-quote">'('</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-keyword2">array_map</span>([<span class="php-var">$this</span>, <span class="php-quote">'escapeIdentifier'</span>], <span class="php-var">$fields</span>)).<span class="php-quote">")\n"</span>;
+</span><span class="l" id="1777"><a class="l" href="#1777">1777 </a>        <span class="php-var">$query</span> .= <span class="php-quote">"VALUES\n"</span>;
+</span><span class="l" id="1778"><a class="l" href="#1778">1778 </a>        <span class="php-var">$query</span> .= <span class="php-keyword2">implode</span>(<span class="php-quote">",\n"</span>, <span class="php-var">$rows</span>);
+</span><span class="l" id="1779"><a class="l" href="#1779">1779 </a>
+</span><span class="l" id="1780"><a class="l" href="#1780">1780 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$onDuplicateKeyUpdate</span>) {
+</span><span class="l" id="1781"><a class="l" href="#1781">1781 </a>            <span class="php-var">$query</span> .= <span class="php-quote">"\n"</span>.<span class="php-var">$this</span>-&gt;buildOnDuplicateKeyUpdate(<span class="php-var">$fields</span>);
+</span><span class="l" id="1782"><a class="l" href="#1782">1782 </a>        }
+</span><span class="l" id="1783"><a class="l" href="#1783">1783 </a>
+</span><span class="l" id="1784"><a class="l" href="#1784">1784 </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;setQuery(<span class="php-var">$query</span>, <span class="php-var">$params</span>);
+</span><span class="l" id="1785"><a class="l" href="#1785">1785 </a>    }
+</span><span class="l" id="1786"><a class="l" href="#1786">1786 </a>
+</span><span class="l" id="1787"><a class="l" href="#1787">1787 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="1788"><a class="l" href="#1788">1788 </a><span class="php-comment">     * @param array $fields
+</span></span><span class="l" id="1789"><a class="l" href="#1789">1789 </a><span class="php-comment">     *
+</span></span><span class="l" id="1790"><a class="l" href="#1790">1790 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="1791"><a class="l" href="#1791">1791 </a><span class="php-comment">     */</span>
+</span><span class="l" id="1792"><a class="l" href="#1792">1792 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a href="#_buildOnDuplicateKeyUpdate" id="_buildOnDuplicateKeyUpdate">buildOnDuplicateKeyUpdate</a>(<span class="php-var">$fields</span>)
+</span><span class="l" id="1793"><a class="l" href="#1793">1793 </a>    {
+</span><span class="l" id="1794"><a class="l" href="#1794">1794 </a>        <span class="php-var">$updates</span> = [];
+</span><span class="l" id="1795"><a class="l" href="#1795">1795 </a>
+</span><span class="l" id="1796"><a class="l" href="#1796">1796 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$fields</span> <span class="php-keyword1">as</span> <span class="php-var">$field</span>) {
+</span><span class="l" id="1797"><a class="l" href="#1797">1797 </a>            <span class="php-var">$field</span> = <span class="php-var">$this</span>-&gt;escapeIdentifier(<span class="php-var">$field</span>);
+</span><span class="l" id="1798"><a class="l" href="#1798">1798 </a>            <span class="php-var">$updates</span>[] = <span class="php-quote">"</span><span class="php-var">$field</span><span class="php-quote"> = VALUES(</span><span class="php-var">$field</span><span class="php-quote">)"</span>;
+</span><span class="l" id="1799"><a class="l" href="#1799">1799 </a>        }
+</span><span class="l" id="1800"><a class="l" href="#1800">1800 </a>
+</span><span class="l" id="1801"><a class="l" href="#1801">1801 </a>        <span class="php-keyword1">return</span> <span class="php-quote">'ON DUPLICATE KEY UPDATE '</span>.<span class="php-keyword2">implode</span>(<span class="php-quote">', '</span>, <span class="php-var">$updates</span>);
+</span><span class="l" id="1802"><a class="l" href="#1802">1802 </a>    }
+</span><span class="l" id="1803"><a class="l" href="#1803">1803 </a>}
+</span><span class="l" id="1804"><a class="l" href="#1804">1804 </a></span></code></pre>
  </body>
 </html>

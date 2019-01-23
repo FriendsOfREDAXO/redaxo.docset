@@ -926,7 +926,7 @@
 </span><span class="l" id="917"><a class="l" href="#917"> 917 </a>        <span class="php-var">$s</span> = <span class="php-quote">''</span>;
 </span><span class="l" id="918"><a class="l" href="#918"> 918 </a>
 </span><span class="l" id="919"><a class="l" href="#919"> 919 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$array</span> <span class="php-keyword1">as</span> <span class="php-var">$name</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="920"><a class="l" href="#920"> 920 </a>            <span class="php-var">$s</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$name</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$value</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="920"><a class="l" href="#920"> 920 </a>            <span class="php-var">$s</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$name</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$value</span>) . <span class="php-quote">'"'</span>;
 </span><span class="l" id="921"><a class="l" href="#921"> 921 </a>        }
 </span><span class="l" id="922"><a class="l" href="#922"> 922 </a>
 </span><span class="l" id="923"><a class="l" href="#923"> 923 </a>        <span class="php-keyword1">return</span> <span class="php-var">$s</span>;

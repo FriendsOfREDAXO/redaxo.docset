@@ -40,7 +40,7 @@
 </span><span class="l" id="31"><a class="l" href="#31">31 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$attributeName</span> == <span class="php-quote">'id'</span>) {
 </span><span class="l" id="32"><a class="l" href="#32">32 </a>                <span class="php-keyword1">continue</span>;
 </span><span class="l" id="33"><a class="l" href="#33">33 </a>            }
-</span><span class="l" id="34"><a class="l" href="#34">34 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span>;
+</span><span class="l" id="34"><a class="l" href="#34">34 </a>            <span class="php-var">$attr</span> .= <span class="php-quote">' '</span> . rex_escape(<span class="php-var">$attributeName</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'="'</span> . rex_escape(<span class="php-var">$attributeValue</span>) . <span class="php-quote">'"'</span>;
 </span><span class="l" id="35"><a class="l" href="#35">35 </a>        }
 </span><span class="l" id="36"><a class="l" href="#36">36 </a>
 </span><span class="l" id="37"><a class="l" href="#37">37 </a>        <span class="php-var">$formElements</span> = [];
@@ -52,7 +52,7 @@
 </span><span class="l" id="43"><a class="l" href="#43">43 </a>
 </span><span class="l" id="44"><a class="l" href="#44">44 </a>            <span class="php-var">$n</span> = [];
 </span><span class="l" id="45"><a class="l" href="#45">45 </a>            <span class="php-var">$n</span>[<span class="php-quote">'label'</span>] = <span class="php-quote">'&lt;label class="control-label" for="'</span> . <span class="php-var">$opt_id</span> . <span class="php-quote">'"&gt;'</span> . rex_escape(<span class="php-var">$opt_name</span>) . <span class="php-quote">'&lt;/label&gt;'</span>;
-</span><span class="l" id="46"><a class="l" href="#46">46 </a>            <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;input type="radio" value="'</span> . rex_escape(<span class="php-var">$opt_value</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"'</span> . <span class="php-var">$opt_attr</span> . <span class="php-var">$checked</span> . <span class="php-quote">' /&gt;'</span>;
+</span><span class="l" id="46"><a class="l" href="#46">46 </a>            <span class="php-var">$n</span>[<span class="php-quote">'field'</span>] = <span class="php-quote">'&lt;input type="radio" value="'</span> . rex_escape(<span class="php-var">$opt_value</span>) . <span class="php-quote">'"'</span> . <span class="php-var">$opt_attr</span> . <span class="php-var">$checked</span> . <span class="php-quote">' /&gt;'</span>;
 </span><span class="l" id="47"><a class="l" href="#47">47 </a>            <span class="php-var">$formElements</span>[] = <span class="php-var">$n</span>;
 </span><span class="l" id="48"><a class="l" href="#48">48 </a>        }
 </span><span class="l" id="49"><a class="l" href="#49">49 </a>

@@ -138,7 +138,7 @@
 </span><span class="l" id="129"><a class="l" href="#129">129 </a>        <span class="php-comment">// remove the `rex_api_` prefix</span>
 </span><span class="l" id="130"><a class="l" href="#130">130 </a>        <span class="php-var">$name</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$class</span>, <span class="php-num">8</span>);
 </span><span class="l" id="131"><a class="l" href="#131">131 </a>
-</span><span class="l" id="132"><a class="l" href="#132">132 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'&lt;input type="hidden" name="%s" value="%s"/&gt;'</span>, self::REQ_CALL_PARAM, rex_escape(<span class="php-var">$name</span>, <span class="php-quote">'html_attr'</span>))
+</span><span class="l" id="132"><a class="l" href="#132">132 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">sprintf</span>(<span class="php-quote">'&lt;input type="hidden" name="%s" value="%s"/&gt;'</span>, self::REQ_CALL_PARAM, rex_escape(<span class="php-var">$name</span>))
 </span><span class="l" id="133"><a class="l" href="#133">133 </a>            .rex_csrf_token::factory(<span class="php-var">$class</span>)-&gt;getHiddenField();
 </span><span class="l" id="134"><a class="l" href="#134">134 </a>    }
 </span><span class="l" id="135"><a class="l" href="#135">135 </a>

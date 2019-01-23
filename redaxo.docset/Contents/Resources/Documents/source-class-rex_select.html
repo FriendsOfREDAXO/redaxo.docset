@@ -130,7 +130,7 @@
 </span><span class="l" id="121"><a class="l" href="#121">121 </a>                <span class="php-var">$this</span>-&gt;setSelected(<span class="php-var">$sectvalue</span>);
 </span><span class="l" id="122"><a class="l" href="#122">122 </a>            }
 </span><span class="l" id="123"><a class="l" href="#123">123 </a>        } <span class="php-keyword1">else</span> {
-</span><span class="l" id="124"><a class="l" href="#124">124 </a>            <span class="php-var">$this</span>-&gt;option_selected[] = (string) rex_escape(<span class="php-var">$selected</span>, <span class="php-quote">'html_attr'</span>);
+</span><span class="l" id="124"><a class="l" href="#124">124 </a>            <span class="php-var">$this</span>-&gt;option_selected[] = (string) rex_escape(<span class="php-var">$selected</span>);
 </span><span class="l" id="125"><a class="l" href="#125">125 </a>        }
 </span><span class="l" id="126"><a class="l" href="#126">126 </a>    }
 </span><span class="l" id="127"><a class="l" href="#127">127 </a>
@@ -248,7 +248,7 @@
 </span><span class="l" id="239"><a class="l" href="#239">239 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;options <span class="php-keyword1">as</span> <span class="php-var">$optgroup</span> =&gt; <span class="php-var">$options</span>) {
 </span><span class="l" id="240"><a class="l" href="#240">240 </a>            <span class="php-var">$this</span>-&gt;currentOptgroup = <span class="php-var">$optgroup</span>;
 </span><span class="l" id="241"><a class="l" href="#241">241 </a>            <span class="php-keyword1">if</span> (<span class="php-var">$optgroupLabel</span> = <span class="php-keyword1">isset</span>(<span class="php-var">$this</span>-&gt;optgroups[<span class="php-var">$optgroup</span>]) ? <span class="php-var">$this</span>-&gt;optgroups[<span class="php-var">$optgroup</span>] : <span class="php-keyword1">null</span>) {
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>                <span class="php-var">$ausgabe</span> .= <span class="php-quote">'  &lt;optgroup label="'</span> . rex_escape(<span class="php-var">$optgroupLabel</span>, <span class="php-quote">'html_attr'</span>) . <span class="php-quote">'"&gt;'</span> . <span class="php-quote">"\n"</span>;
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>                <span class="php-var">$ausgabe</span> .= <span class="php-quote">'  &lt;optgroup label="'</span> . rex_escape(<span class="php-var">$optgroupLabel</span>) . <span class="php-quote">'"&gt;'</span> . <span class="php-quote">"\n"</span>;
 </span><span class="l" id="243"><a class="l" href="#243">243 </a>            }
 </span><span class="l" id="244"><a class="l" href="#244">244 </a>            <span class="php-keyword1">if</span> (<span class="php-keyword2">is_array</span>(<span class="php-var">$options</span>)) {
 </span><span class="l" id="245"><a class="l" href="#245">245 </a>                <span class="php-var">$ausgabe</span> .= <span class="php-var">$this</span>-&gt;outGroup(<span class="php-num">0</span>);
@@ -302,7 +302,7 @@
 </span><span class="l" id="293"><a class="l" href="#293">293 </a>        <span class="php-var">$name</span> = rex_escape(<span class="php-var">$name</span>);
 </span><span class="l" id="294"><a class="l" href="#294">294 </a>        <span class="php-comment">// for BC reasons, we always expect value to be a string.</span>
 </span><span class="l" id="295"><a class="l" href="#295">295 </a>        <span class="php-comment">// this also makes sure that the strict in_array() check below works.</span>
-</span><span class="l" id="296"><a class="l" href="#296">296 </a>        <span class="php-var">$value</span> = (string) rex_escape(<span class="php-var">$value</span>, <span class="php-quote">'html_attr'</span>);
+</span><span class="l" id="296"><a class="l" href="#296">296 </a>        <span class="php-var">$value</span> = (string) rex_escape(<span class="php-var">$value</span>);
 </span><span class="l" id="297"><a class="l" href="#297">297 </a>
 </span><span class="l" id="298"><a class="l" href="#298">298 </a>        <span class="php-var">$bsps</span> = <span class="php-quote">''</span>;
 </span><span class="l" id="299"><a class="l" href="#299">299 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$level</span> &gt; <span class="php-num">0</span>) {

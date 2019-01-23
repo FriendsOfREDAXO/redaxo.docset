@@ -225,7 +225,7 @@
 </span><span class="l" id="216"><a class="l" href="#216">216 </a>    {
 </span><span class="l" id="217"><a class="l" href="#217">217 </a>        <span class="php-var">$close</span> = <span class="php-keyword1">false</span>;
 </span><span class="l" id="218"><a class="l" href="#218">218 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_string</span>(<span class="php-var">$resource</span>) &amp;&amp; rex_dir::create(<span class="php-keyword2">dirname</span>(<span class="php-var">$resource</span>))) {
-</span><span class="l" id="219"><a class="l" href="#219">219 </a>            <span class="php-var">$resource</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$resource</span>, <span class="php-quote">'wb'</span>);
+</span><span class="l" id="219"><a class="l" href="#219">219 </a>            <span class="php-var">$resource</span> = <span class="php-keyword2">fopen</span>(<span class="php-var">$resource</span>, <span class="php-quote">'w'</span>);
 </span><span class="l" id="220"><a class="l" href="#220">220 </a>            <span class="php-var">$close</span> = <span class="php-keyword1">true</span>;
 </span><span class="l" id="221"><a class="l" href="#221">221 </a>        }
 </span><span class="l" id="222"><a class="l" href="#222">222 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_resource</span>(<span class="php-var">$resource</span>)) {
