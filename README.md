@@ -1,6 +1,6 @@
 # REDAXO Docset
 
-![](assets/dash-screenshot.png)
+![](https://raw.githubusercontent.com/FriendsOfREDAXO/redaxo.docset/assets/assets/dash-screenshot.png)
 
 Ein "Dash-Docset" für die Redaxo-API-Doku.
 [Dash](http://kapeli.com/dash/) ist ein API-Browser für den Mac (und iOS).
