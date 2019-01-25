@@ -114,6 +114,17 @@ for page in api_docs:
     response = http.request("GET", api_url + page)
     doc_soup = bs(response.data, "html.parser")
 
+    # Add extra column in method table for collapsing
+    methods_table = doc_soup.find(id="methods")
+    if (methods_table):
+        for tr in methods_table.find_all("tr"):
+            td = soup.new_tag("td")
+            td["class"] = "collapse"
+            div = soup.new_tag("div")
+            div["title"] = "toggle details"
+            td.append(div)
+            tr.append(td)
+
     # find images
     for i in [img["src"] for img in doc_soup.find_all("img")]:
         images.add(i)
@@ -156,9 +167,6 @@ for page in api_docs:
     response = http.request("GET", api_url + "source-" + page)
     source_soup = bs(response.data, "html.parser")
     page_content = source_soup.find(id="source")
-
-    # for a in page_content.find_all("a"):
-    #    del a['href']
 
     # save modified sources
     target_source_soup = bs(template % page_content, "html.parser")

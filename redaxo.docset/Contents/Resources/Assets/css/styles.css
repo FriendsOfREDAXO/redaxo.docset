@@ -274,6 +274,8 @@ h3 {
 }
 h4 {
   font-size: 1.25rem;
+  margin: 0.625rem 0 0;
+  border-top: 1px solid #cee0f2;
 }
 code {
   font-family: "Fira Code", "Courier New", Courier, monospace;
@@ -320,6 +322,32 @@ td .description.short p {
 }
 td .description.hidden {
   display: none;
+}
+td .description.detailed {
+  padding-bottom: 0.625rem;
+}
+td .description.detailed p,td .description.detailed dl {
+  margin: 0;
+}
+td .description.detailed .list {
+  padding: 0.3125rem 0 0 1.875rem;
+}
+td.collapse {
+  position: relative;
+}
+td.collapse div {
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 14px;
+  height: 14px;
+  background-image: url("../images/collapsed.png");
+  background-repeat: no-repeat;
+}
+td.collapse div.expanded {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 p.elementList {
   line-height: 1.7;

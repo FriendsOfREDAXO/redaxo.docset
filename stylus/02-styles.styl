@@ -58,6 +58,9 @@ h3
 
 h4
     font-size rem(20)
+    margin rem(10) 0 0
+    border-top 1px solid lighten($color--blue, 70%)
+
 
 code
     font-family "Fira Code", "Courier New", Courier, monospace
@@ -104,6 +107,28 @@ td
 
         &.hidden
             display none
+
+        &.detailed
+            padding-bottom rem(10)
+            p
+                margin 0
+            dl
+                margin 0
+            .list
+                padding rem(5) 0 0 rem(30)
+
+    &.collapse
+        position relative
+        div
+            cursor pointer
+            position absolute
+            top 8px
+            right 8px
+            size 14px
+            background-image url(../images/collapsed.png)
+            background-repeat no-repeat
+            &.expanded
+                transform rotate(-90deg)
 
 p.elementList
     line-height 1.7

@@ -67,6 +67,10 @@ function watch () {
     'stylus/**/*.styl',
     gulp.series(stylus, reload)
   )
+  gulp.watch(
+    'redaxo.docset/Contents/Resources/Assets/**/*.*',
+    reload
+  )
 }
 
 // ------------------------------------------------------------
