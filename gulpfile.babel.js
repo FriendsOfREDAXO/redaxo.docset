@@ -6,23 +6,37 @@ const mqpacker = require('css-mqpacker')
 const path = require('path')
 const pmr = require('postcss-merge-rules')
 const poststylus = require('poststylus')
+const pump = require('pump')
 const reporter = require('postcss-reporter')
 
 // ------------------------------------------------------------
 
-gulp.task('default', ['watch'], function () {})
-gulp.task('build', ['stylus'], function () {})
+function reload (done) {
+  browsersync.reload()
+  done()
+}
+
+function serve (done) {
+  browsersync.init({
+    open: false,
+    server: {
+      baseDir: path.join(__dirname, 'redaxo.docset/Contents/Resources'),
+      directory: true
+    }
+  })
+  done()
+}
 
 // ------------------------------------------------------------
 
-gulp.task('stylus', function () {
+function stylus (done) {
   const src = 'stylus/**/[!_]*.styl'
   const dest = 'redaxo.docset/Contents/Resources/Assets/css'
-  return gulp
-    .src(src)
-    .pipe($.plumber())
-    .pipe($.sort())
-    .pipe(
+  pump(
+    [
+      gulp.src(src),
+      $.plumber(),
+      $.sort(),
       $.stylus({
         compress: false,
         use: [
@@ -39,25 +53,32 @@ gulp.task('stylus', function () {
           path.join(__dirname, 'stylus/_settings.styl'),
           path.join(__dirname, 'stylus/_functions.styl')
         ]
-      })
-    )
-    .pipe($.concat('styles.css'))
-    .pipe(gulp.dest(dest))
-    .pipe(browsersync.stream())
-})
+      }),
+      $.concat('styles.css'),
+      gulp.dest(dest),
+      browsersync.stream()
+    ], done)
+}
 
 // ------------------------------------------------------------
 
-gulp.task('watch', ['stylus'], function () {
-  browsersync.init({
-    server: {
-      baseDir: './',
-      directory: true
-    }
-  })
-  gulp.watch('stylus/**/*.styl', ['stylus'])
-  gulp
-    .watch(['*.html', 'redaxo.docset/Contents/Resources/Assets/js/*.js']
-      , function () {})
-    .on('change', browsersync.reload)
-})
+function watch () {
+  gulp.watch(
+    'stylus/**/*.styl',
+    gulp.series(stylus, reload)
+  )
+}
+
+// ------------------------------------------------------------
+
+export const build = gulp.series(
+  stylus
+)
+
+export const dev = gulp.series(
+  stylus,
+  serve,
+  watch
+)
+
+export default dev
