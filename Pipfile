@@ -9,6 +9,7 @@ name = "pypi"
 "urllib3" = "*"
 
 [dev-packages]
+rope = "*"
 
 [requires]
 python_version = "3.7"
