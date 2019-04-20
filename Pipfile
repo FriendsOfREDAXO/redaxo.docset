@@ -6,7 +6,8 @@ name = "pypi"
 [packages]
 "bs4" = "*"
 "yolk3k" = "*"
-"urllib3" = "*"
+urllib3 = "==1.24.2"
+rope = "==0.14.0"
 
 [dev-packages]
 rope = "*"
