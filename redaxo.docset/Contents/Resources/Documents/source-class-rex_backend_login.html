@@ -131,7 +131,7 @@
 </span><span class="l" id="122"><a class="l" href="#122">122 </a>    {
 </span><span class="l" id="123"><a class="l" href="#123">123 </a>        self::startSession();
 </span><span class="l" id="124"><a class="l" href="#124">124 </a>
-</span><span class="l" id="125"><a class="l" href="#125">125 </a>        <span class="php-keyword1">unset</span>(<span class="php-var">$_SESSION</span>[rex::getProperty(<span class="php-quote">'instname'</span>)][self::SYSTEM_ID]);
+</span><span class="l" id="125"><a class="l" href="#125">125 </a>        <span class="php-keyword1">unset</span>(<span class="php-var">$_SESSION</span>[<span class="php-keyword1">static</span>::getSessionNamespace()][self::SYSTEM_ID]);
 </span><span class="l" id="126"><a class="l" href="#126">126 </a>        self::deleteStayLoggedInCookie();
 </span><span class="l" id="127"><a class="l" href="#127">127 </a>
 </span><span class="l" id="128"><a class="l" href="#128">128 </a>        rex_csrf_token::removeAll();
@@ -155,38 +155,47 @@
 </span><span class="l" id="146"><a class="l" href="#146">146 </a>        }
 </span><span class="l" id="147"><a class="l" href="#147">147 </a>        self::startSession();
 </span><span class="l" id="148"><a class="l" href="#148">148 </a>
-</span><span class="l" id="149"><a class="l" href="#149">149 </a>        <span class="php-var">$instname</span> = rex::getProperty(<span class="php-quote">'instname'</span>);
-</span><span class="l" id="150"><a class="l" href="#150">150 </a>
-</span><span class="l" id="151"><a class="l" href="#151">151 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$_SESSION</span>[<span class="php-var">$instname</span>][self::SYSTEM_ID][<span class="php-quote">'UID'</span>]) &amp;&amp; <span class="php-var">$_SESSION</span>[<span class="php-var">$instname</span>][self::SYSTEM_ID][<span class="php-quote">'UID'</span>] &gt; <span class="php-num">0</span>;
-</span><span class="l" id="152"><a class="l" href="#152">152 </a>    }
-</span><span class="l" id="153"><a class="l" href="#153">153 </a>
-</span><span class="l" id="154"><a class="l" href="#154">154 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="155"><a class="l" href="#155">155 </a><span class="php-comment">     * Creates the user object if it does not already exist.
-</span></span><span class="l" id="156"><a class="l" href="#156">156 </a><span class="php-comment">     *
-</span></span><span class="l" id="157"><a class="l" href="#157">157 </a><span class="php-comment">     * Helpful if you want to check permissions of the backend user in frontend.
-</span></span><span class="l" id="158"><a class="l" href="#158">158 </a><span class="php-comment">     * If you only want to know if there is any backend session, use {@link rex_backend_login::hasSession()}.
-</span></span><span class="l" id="159"><a class="l" href="#159">159 </a><span class="php-comment">     *
-</span></span><span class="l" id="160"><a class="l" href="#160">160 </a><span class="php-comment">     * @return rex_user
-</span></span><span class="l" id="161"><a class="l" href="#161">161 </a><span class="php-comment">     */</span>
-</span><span class="l" id="162"><a class="l" href="#162">162 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_createUser" id="_createUser">createUser</a>()
-</span><span class="l" id="163"><a class="l" href="#163">163 </a>    {
-</span><span class="l" id="164"><a class="l" href="#164">164 </a>        <span class="php-keyword1">if</span> (!self::hasSession()) {
-</span><span class="l" id="165"><a class="l" href="#165">165 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
-</span><span class="l" id="166"><a class="l" href="#166">166 </a>        }
-</span><span class="l" id="167"><a class="l" href="#167">167 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$user</span> = rex::getUser()) {
-</span><span class="l" id="168"><a class="l" href="#168">168 </a>            <span class="php-keyword1">return</span> <span class="php-var">$user</span>;
-</span><span class="l" id="169"><a class="l" href="#169">169 </a>        }
-</span><span class="l" id="170"><a class="l" href="#170">170 </a>
-</span><span class="l" id="171"><a class="l" href="#171">171 </a>        <span class="php-var">$login</span> = <span class="php-keyword1">new</span> self();
-</span><span class="l" id="172"><a class="l" href="#172">172 </a>        rex::setProperty(<span class="php-quote">'login'</span>, <span class="php-var">$login</span>);
-</span><span class="l" id="173"><a class="l" href="#173">173 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$login</span>-&gt;checkLogin()) {
-</span><span class="l" id="174"><a class="l" href="#174">174 </a>            <span class="php-var">$user</span> = <span class="php-var">$login</span>-&gt;getUser();
-</span><span class="l" id="175"><a class="l" href="#175">175 </a>            rex::setProperty(<span class="php-quote">'user'</span>, <span class="php-var">$user</span>);
-</span><span class="l" id="176"><a class="l" href="#176">176 </a>            <span class="php-keyword1">return</span> <span class="php-var">$user</span>;
-</span><span class="l" id="177"><a class="l" href="#177">177 </a>        }
-</span><span class="l" id="178"><a class="l" href="#178">178 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
-</span><span class="l" id="179"><a class="l" href="#179">179 </a>    }
-</span><span class="l" id="180"><a class="l" href="#180">180 </a>}
-</span><span class="l" id="181"><a class="l" href="#181">181 </a></span></code></pre>
+</span><span class="l" id="149"><a class="l" href="#149">149 </a>        <span class="php-var">$sessionNs</span> = <span class="php-keyword1">static</span>::getSessionNamespace();
+</span><span class="l" id="150"><a class="l" href="#150">150 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">isset</span>(<span class="php-var">$_SESSION</span>[<span class="php-var">$sessionNs</span>][self::SYSTEM_ID][<span class="php-quote">'UID'</span>]) &amp;&amp; <span class="php-var">$_SESSION</span>[<span class="php-var">$sessionNs</span>][self::SYSTEM_ID][<span class="php-quote">'UID'</span>] &gt; <span class="php-num">0</span>;
+</span><span class="l" id="151"><a class="l" href="#151">151 </a>    }
+</span><span class="l" id="152"><a class="l" href="#152">152 </a>
+</span><span class="l" id="153"><a class="l" href="#153">153 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="154"><a class="l" href="#154">154 </a><span class="php-comment">     * Creates the user object if it does not already exist.
+</span></span><span class="l" id="155"><a class="l" href="#155">155 </a><span class="php-comment">     *
+</span></span><span class="l" id="156"><a class="l" href="#156">156 </a><span class="php-comment">     * Helpful if you want to check permissions of the backend user in frontend.
+</span></span><span class="l" id="157"><a class="l" href="#157">157 </a><span class="php-comment">     * If you only want to know if there is any backend session, use {@link rex_backend_login::hasSession()}.
+</span></span><span class="l" id="158"><a class="l" href="#158">158 </a><span class="php-comment">     *
+</span></span><span class="l" id="159"><a class="l" href="#159">159 </a><span class="php-comment">     * @return rex_user
+</span></span><span class="l" id="160"><a class="l" href="#160">160 </a><span class="php-comment">     */</span>
+</span><span class="l" id="161"><a class="l" href="#161">161 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_createUser" id="_createUser">createUser</a>()
+</span><span class="l" id="162"><a class="l" href="#162">162 </a>    {
+</span><span class="l" id="163"><a class="l" href="#163">163 </a>        <span class="php-keyword1">if</span> (!self::hasSession()) {
+</span><span class="l" id="164"><a class="l" href="#164">164 </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
+</span><span class="l" id="165"><a class="l" href="#165">165 </a>        }
+</span><span class="l" id="166"><a class="l" href="#166">166 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$user</span> = rex::getUser()) {
+</span><span class="l" id="167"><a class="l" href="#167">167 </a>            <span class="php-keyword1">return</span> <span class="php-var">$user</span>;
+</span><span class="l" id="168"><a class="l" href="#168">168 </a>        }
+</span><span class="l" id="169"><a class="l" href="#169">169 </a>
+</span><span class="l" id="170"><a class="l" href="#170">170 </a>        <span class="php-var">$login</span> = <span class="php-keyword1">new</span> self();
+</span><span class="l" id="171"><a class="l" href="#171">171 </a>        rex::setProperty(<span class="php-quote">'login'</span>, <span class="php-var">$login</span>);
+</span><span class="l" id="172"><a class="l" href="#172">172 </a>        <span class="php-keyword1">if</span> (<span class="php-var">$login</span>-&gt;checkLogin()) {
+</span><span class="l" id="173"><a class="l" href="#173">173 </a>            <span class="php-var">$user</span> = <span class="php-var">$login</span>-&gt;getUser();
+</span><span class="l" id="174"><a class="l" href="#174">174 </a>            rex::setProperty(<span class="php-quote">'user'</span>, <span class="php-var">$user</span>);
+</span><span class="l" id="175"><a class="l" href="#175">175 </a>            <span class="php-keyword1">return</span> <span class="php-var">$user</span>;
+</span><span class="l" id="176"><a class="l" href="#176">176 </a>        }
+</span><span class="l" id="177"><a class="l" href="#177">177 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">null</span>;
+</span><span class="l" id="178"><a class="l" href="#178">178 </a>    }
+</span><span class="l" id="179"><a class="l" href="#179">179 </a>
+</span><span class="l" id="180"><a class="l" href="#180">180 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="181"><a class="l" href="#181">181 </a><span class="php-comment">     * returns the backends session namespace.
+</span></span><span class="l" id="182"><a class="l" href="#182">182 </a><span class="php-comment">     *
+</span></span><span class="l" id="183"><a class="l" href="#183">183 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="184"><a class="l" href="#184">184 </a><span class="php-comment">     */</span>
+</span><span class="l" id="185"><a class="l" href="#185">185 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSessionNamespace" id="_getSessionNamespace">getSessionNamespace</a>()
+</span><span class="l" id="186"><a class="l" href="#186">186 </a>    {
+</span><span class="l" id="187"><a class="l" href="#187">187 </a>        <span class="php-keyword1">return</span> rex::getProperty(<span class="php-quote">'instname'</span>). <span class="php-quote">'_backend'</span>;
+</span><span class="l" id="188"><a class="l" href="#188">188 </a>    }
+</span><span class="l" id="189"><a class="l" href="#189">189 </a>}
+</span><span class="l" id="190"><a class="l" href="#190">190 </a></span></code></pre>
  </body>
 </html>

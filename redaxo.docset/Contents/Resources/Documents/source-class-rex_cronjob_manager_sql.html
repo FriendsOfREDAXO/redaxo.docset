@@ -66,7 +66,7 @@
 </span><span class="l" id="57"><a class="l" href="#57"> 57 </a>    {
 </span><span class="l" id="58"><a class="l" href="#58"> 58 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setQuery(<span class="php-quote">'
 </span></span><span class="l" id="59"><a class="l" href="#59"> 59 </a><span class="php-quote">            SELECT  name
-</span></span><span class="l" id="60"><a class="l" href="#60"> 60 </a><span class="php-quote">            FROM    '</span> . REX_CRONJOB_TABLE . <span class="php-quote">'
+</span></span><span class="l" id="60"><a class="l" href="#60"> 60 </a><span class="php-quote">            FROM    '</span> . rex::getTable(<span class="php-quote">'cronjob'</span>) . <span class="php-quote">'
 </span></span><span class="l" id="61"><a class="l" href="#61"> 61 </a><span class="php-quote">            WHERE   id = ?
 </span></span><span class="l" id="62"><a class="l" href="#62"> 62 </a><span class="php-quote">            LIMIT   1
 </span></span><span class="l" id="63"><a class="l" href="#63"> 63 </a><span class="php-quote">        '</span>, [<span class="php-var">$id</span>]);
@@ -78,7 +78,7 @@
 </span><span class="l" id="69"><a class="l" href="#69"> 69 </a>
 </span><span class="l" id="70"><a class="l" href="#70"> 70 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_setStatus" id="_setStatus">setStatus</a>(<span class="php-var">$id</span>, <span class="php-var">$status</span>)
 </span><span class="l" id="71"><a class="l" href="#71"> 71 </a>    {
-</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setTable(REX_CRONJOB_TABLE);
+</span><span class="l" id="72"><a class="l" href="#72"> 72 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setTable(rex::getTable(<span class="php-quote">'cronjob'</span>));
 </span><span class="l" id="73"><a class="l" href="#73"> 73 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setWhere([<span class="php-quote">'id'</span> =&gt; <span class="php-var">$id</span>]);
 </span><span class="l" id="74"><a class="l" href="#74"> 74 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setValue(<span class="php-quote">'status'</span>, <span class="php-var">$status</span>);
 </span><span class="l" id="75"><a class="l" href="#75"> 75 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;addGlobalUpdateFields();
@@ -94,7 +94,7 @@
 </span><span class="l" id="85"><a class="l" href="#85"> 85 </a>
 </span><span class="l" id="86"><a class="l" href="#86"> 86 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_setExecutionStart" id="_setExecutionStart">setExecutionStart</a>(<span class="php-var">$id</span>, <span class="php-var">$reset</span> = <span class="php-keyword1">false</span>)
 </span><span class="l" id="87"><a class="l" href="#87"> 87 </a>    {
-</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setTable(REX_CRONJOB_TABLE);
+</span><span class="l" id="88"><a class="l" href="#88"> 88 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setTable(rex::getTable(<span class="php-quote">'cronjob'</span>));
 </span><span class="l" id="89"><a class="l" href="#89"> 89 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setWhere([<span class="php-quote">'id'</span> =&gt; <span class="php-var">$id</span>]);
 </span><span class="l" id="90"><a class="l" href="#90"> 90 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setDateTimeValue(<span class="php-quote">'execution_start'</span>, <span class="php-var">$reset</span> ? <span class="php-num">0</span> : <span class="php-keyword2">time</span>());
 </span><span class="l" id="91"><a class="l" href="#91"> 91 </a>        <span class="php-keyword1">try</span> {
@@ -107,7 +107,7 @@
 </span><span class="l" id="98"><a class="l" href="#98"> 98 </a>
 </span><span class="l" id="99"><a class="l" href="#99"> 99 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(<span class="php-var">$id</span>)
 </span><span class="l" id="100"><a class="l" href="#100">100 </a>    {
-</span><span class="l" id="101"><a class="l" href="#101">101 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setTable(REX_CRONJOB_TABLE);
+</span><span class="l" id="101"><a class="l" href="#101">101 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setTable(rex::getTable(<span class="php-quote">'cronjob'</span>));
 </span><span class="l" id="102"><a class="l" href="#102">102 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setWhere([<span class="php-quote">'id'</span> =&gt; <span class="php-var">$id</span>]);
 </span><span class="l" id="103"><a class="l" href="#103">103 </a>        <span class="php-keyword1">try</span> {
 </span><span class="l" id="104"><a class="l" href="#104">104 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;<span class="php-keyword2">delete</span>();
@@ -129,7 +129,7 @@
 </span><span class="l" id="120"><a class="l" href="#120">120 </a>
 </span><span class="l" id="121"><a class="l" href="#121">121 </a>        <span class="php-var">$query</span> = <span class="php-quote">'
 </span></span><span class="l" id="122"><a class="l" href="#122">122 </a><span class="php-quote">            SELECT    id, name, type, parameters, `interval`, execution_moment
-</span></span><span class="l" id="123"><a class="l" href="#123">123 </a><span class="php-quote">            FROM      '</span>.REX_CRONJOB_TABLE.<span class="php-quote">'
+</span></span><span class="l" id="123"><a class="l" href="#123">123 </a><span class="php-quote">            FROM      '</span>.rex::getTable(<span class="php-quote">'cronjob'</span>).<span class="php-quote">'
 </span></span><span class="l" id="124"><a class="l" href="#124">124 </a><span class="php-quote">            WHERE     status = 1
 </span></span><span class="l" id="125"><a class="l" href="#125">125 </a><span class="php-quote">                AND   execution_start &lt; ?
 </span></span><span class="l" id="126"><a class="l" href="#126">126 </a><span class="php-quote">                AND   environment LIKE ?
@@ -198,7 +198,7 @@
 </span><span class="l" id="189"><a class="l" href="#189">189 </a>        <span class="php-var">$sql</span> = rex_sql::factory();
 </span><span class="l" id="190"><a class="l" href="#190">190 </a>        <span class="php-var">$jobs</span> = <span class="php-var">$sql</span>-&gt;getArray(<span class="php-quote">'
 </span></span><span class="l" id="191"><a class="l" href="#191">191 </a><span class="php-quote">            SELECT    id, name, type, parameters, `interval`
-</span></span><span class="l" id="192"><a class="l" href="#192">192 </a><span class="php-quote">            FROM      '</span> . REX_CRONJOB_TABLE . <span class="php-quote">'
+</span></span><span class="l" id="192"><a class="l" href="#192">192 </a><span class="php-quote">            FROM      '</span> . rex::getTable(<span class="php-quote">'cronjob'</span>) . <span class="php-quote">'
 </span></span><span class="l" id="193"><a class="l" href="#193">193 </a><span class="php-quote">            WHERE     id = ? AND environment LIKE ?
 </span></span><span class="l" id="194"><a class="l" href="#194">194 </a><span class="php-quote">            LIMIT     1
 </span></span><span class="l" id="195"><a class="l" href="#195">195 </a><span class="php-quote">        '</span>, [<span class="php-var">$id</span>, <span class="php-quote">'%|'</span> . rex_cronjob_manager::getCurrentEnvironment() . <span class="php-quote">'|%'</span>]);
@@ -231,7 +231,7 @@
 </span><span class="l" id="222"><a class="l" href="#222">222 </a>        <span class="php-var">$add</span> = <span class="php-var">$resetExecutionStart</span> ? <span class="php-quote">', execution_start = 0'</span> : <span class="php-quote">''</span>;
 </span><span class="l" id="223"><a class="l" href="#223">223 </a>        <span class="php-keyword1">try</span> {
 </span><span class="l" id="224"><a class="l" href="#224">224 </a>            <span class="php-var">$this</span>-&gt;sql-&gt;setQuery(<span class="php-quote">'
-</span></span><span class="l" id="225"><a class="l" href="#225">225 </a><span class="php-quote">                UPDATE  '</span> . REX_CRONJOB_TABLE . <span class="php-quote">'
+</span></span><span class="l" id="225"><a class="l" href="#225">225 </a><span class="php-quote">                UPDATE  '</span> . rex::getTable(<span class="php-quote">'cronjob'</span>) . <span class="php-quote">'
 </span></span><span class="l" id="226"><a class="l" href="#226">226 </a><span class="php-quote">                SET     nexttime = ?'</span> . <span class="php-var">$add</span> . <span class="php-quote">'
 </span></span><span class="l" id="227"><a class="l" href="#227">227 </a><span class="php-quote">                WHERE   id = ?
 </span></span><span class="l" id="228"><a class="l" href="#228">228 </a><span class="php-quote">            '</span>, [<span class="php-var">$nexttime</span>, <span class="php-var">$id</span>]);
@@ -247,7 +247,7 @@
 </span><span class="l" id="238"><a class="l" href="#238">238 </a>    {
 </span><span class="l" id="239"><a class="l" href="#239">239 </a>        <span class="php-var">$this</span>-&gt;sql-&gt;setQuery(<span class="php-quote">'
 </span></span><span class="l" id="240"><a class="l" href="#240">240 </a><span class="php-quote">            SELECT  MIN(nexttime) AS nexttime
-</span></span><span class="l" id="241"><a class="l" href="#241">241 </a><span class="php-quote">            FROM    '</span> . REX_CRONJOB_TABLE . <span class="php-quote">'
+</span></span><span class="l" id="241"><a class="l" href="#241">241 </a><span class="php-quote">            FROM    '</span> . rex::getTable(<span class="php-quote">'cronjob'</span>) . <span class="php-quote">'
 </span></span><span class="l" id="242"><a class="l" href="#242">242 </a><span class="php-quote">            WHERE   status = 1
 </span></span><span class="l" id="243"><a class="l" href="#243">243 </a><span class="php-quote">        '</span>);
 </span><span class="l" id="244"><a class="l" href="#244">244 </a>

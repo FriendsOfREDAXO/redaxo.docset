@@ -734,50 +734,52 @@
 </span><span class="l" id="725"><a class="l" href="#725">725 </a>            } <span class="php-keyword1">elseif</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$match</span>[<span class="php-quote">'op'</span>], [<span class="php-quote">'~'</span>, <span class="php-quote">'^'</span>])) {
 </span><span class="l" id="726"><a class="l" href="#726">726 </a>                <span class="php-var">$constraints</span>[] = [<span class="php-quote">'&gt;='</span>, <span class="php-var">$match</span>[<span class="php-quote">'version'</span>] . (<span class="php-keyword1">isset</span>(<span class="php-var">$match</span>[<span class="php-quote">'prerelease'</span>]) ? <span class="php-var">$match</span>[<span class="php-quote">'prerelease'</span>] : <span class="php-quote">''</span>)];
 </span><span class="l" id="727"><a class="l" href="#727">727 </a>                <span class="php-keyword1">if</span> (<span class="php-quote">'^'</span> === <span class="php-var">$match</span>[<span class="php-quote">'op'</span>] || <span class="php-keyword1">false</span> === <span class="php-var">$pos</span> = <span class="php-keyword2">strrpos</span>(<span class="php-var">$match</span>[<span class="php-quote">'version'</span>], <span class="php-quote">'.'</span>)) {
-</span><span class="l" id="728"><a class="l" href="#728">728 </a>                    <span class="php-var">$constraints</span>[] = [<span class="php-quote">'&lt;'</span>, (int) <span class="php-var">$match</span>[<span class="php-quote">'version'</span>] + <span class="php-num">1</span>];
-</span><span class="l" id="729"><a class="l" href="#729">729 </a>                } <span class="php-keyword1">else</span> {
-</span><span class="l" id="730"><a class="l" href="#730">730 </a>                    <span class="php-var">$main</span> = <span class="php-quote">''</span>;
-</span><span class="l" id="731"><a class="l" href="#731">731 </a>                    <span class="php-var">$sub</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$match</span>[<span class="php-quote">'version'</span>], <span class="php-num">0</span>, <span class="php-var">$pos</span>);
-</span><span class="l" id="732"><a class="l" href="#732">732 </a>                    <span class="php-keyword1">if</span> ((<span class="php-var">$pos</span> = <span class="php-keyword2">strrpos</span>(<span class="php-var">$sub</span>, <span class="php-quote">'.'</span>)) !== <span class="php-keyword1">false</span>) {
-</span><span class="l" id="733"><a class="l" href="#733">733 </a>                        <span class="php-var">$main</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$sub</span>, <span class="php-num">0</span>, <span class="php-var">$pos</span> + <span class="php-num">1</span>);
-</span><span class="l" id="734"><a class="l" href="#734">734 </a>                        <span class="php-var">$sub</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$sub</span>, <span class="php-var">$pos</span> + <span class="php-num">1</span>);
-</span><span class="l" id="735"><a class="l" href="#735">735 </a>                    }
-</span><span class="l" id="736"><a class="l" href="#736">736 </a>                    <span class="php-var">$constraints</span>[] = [<span class="php-quote">'&lt;'</span>, <span class="php-var">$main</span> . (<span class="php-var">$sub</span> + <span class="php-num">1</span>)];
-</span><span class="l" id="737"><a class="l" href="#737">737 </a>                }
-</span><span class="l" id="738"><a class="l" href="#738">738 </a>            } <span class="php-keyword1">else</span> {
-</span><span class="l" id="739"><a class="l" href="#739">739 </a>                <span class="php-var">$constraints</span>[] = [<span class="php-var">$match</span>[<span class="php-quote">'op'</span>] ?: <span class="php-quote">'='</span>, <span class="php-var">$match</span>[<span class="php-quote">'version'</span>] . (<span class="php-keyword1">isset</span>(<span class="php-var">$match</span>[<span class="php-quote">'prerelease'</span>]) ? <span class="php-var">$match</span>[<span class="php-quote">'prerelease'</span>] : <span class="php-quote">''</span>)];
-</span><span class="l" id="740"><a class="l" href="#740">740 </a>            }
-</span><span class="l" id="741"><a class="l" href="#741">741 </a>        }
-</span><span class="l" id="742"><a class="l" href="#742">742 </a>
-</span><span class="l" id="743"><a class="l" href="#743">743 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$constraints</span> <span class="php-keyword1">as</span> <span class="php-var">$constraint</span>) {
-</span><span class="l" id="744"><a class="l" href="#744">744 </a>            <span class="php-keyword1">if</span> (!rex_string::versionCompare(<span class="php-var">$version</span>, <span class="php-var">$constraint</span>[<span class="php-num">1</span>], <span class="php-var">$constraint</span>[<span class="php-num">0</span>])) {
-</span><span class="l" id="745"><a class="l" href="#745">745 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
-</span><span class="l" id="746"><a class="l" href="#746">746 </a>            }
-</span><span class="l" id="747"><a class="l" href="#747">747 </a>        }
-</span><span class="l" id="748"><a class="l" href="#748">748 </a>
-</span><span class="l" id="749"><a class="l" href="#749">749 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
-</span><span class="l" id="750"><a class="l" href="#750">750 </a>    }
-</span><span class="l" id="751"><a class="l" href="#751">751 </a>
-</span><span class="l" id="752"><a class="l" href="#752">752 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="753"><a class="l" href="#753">753 </a><span class="php-comment">     * Returns the subfolders of the given folder.
-</span></span><span class="l" id="754"><a class="l" href="#754">754 </a><span class="php-comment">     *
-</span></span><span class="l" id="755"><a class="l" href="#755">755 </a><span class="php-comment">     * @param string $folder Folder
+</span><span class="l" id="728"><a class="l" href="#728">728 </a>                    <span class="php-comment">// add "-foo" to get a version lower than a "-dev" version</span>
+</span><span class="l" id="729"><a class="l" href="#729">729 </a>                    <span class="php-var">$constraints</span>[] = [<span class="php-quote">'&lt;'</span>, ((int) <span class="php-var">$match</span>[<span class="php-quote">'version'</span>] + <span class="php-num">1</span>) . <span class="php-quote">'-foo'</span>];
+</span><span class="l" id="730"><a class="l" href="#730">730 </a>                } <span class="php-keyword1">else</span> {
+</span><span class="l" id="731"><a class="l" href="#731">731 </a>                    <span class="php-var">$main</span> = <span class="php-quote">''</span>;
+</span><span class="l" id="732"><a class="l" href="#732">732 </a>                    <span class="php-var">$sub</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$match</span>[<span class="php-quote">'version'</span>], <span class="php-num">0</span>, <span class="php-var">$pos</span>);
+</span><span class="l" id="733"><a class="l" href="#733">733 </a>                    <span class="php-keyword1">if</span> ((<span class="php-var">$pos</span> = <span class="php-keyword2">strrpos</span>(<span class="php-var">$sub</span>, <span class="php-quote">'.'</span>)) !== <span class="php-keyword1">false</span>) {
+</span><span class="l" id="734"><a class="l" href="#734">734 </a>                        <span class="php-var">$main</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$sub</span>, <span class="php-num">0</span>, <span class="php-var">$pos</span> + <span class="php-num">1</span>);
+</span><span class="l" id="735"><a class="l" href="#735">735 </a>                        <span class="php-var">$sub</span> = <span class="php-keyword2">substr</span>(<span class="php-var">$sub</span>, <span class="php-var">$pos</span> + <span class="php-num">1</span>);
+</span><span class="l" id="736"><a class="l" href="#736">736 </a>                    }
+</span><span class="l" id="737"><a class="l" href="#737">737 </a>                    <span class="php-comment">// add "-foo" to get a version lower than a "-dev" version</span>
+</span><span class="l" id="738"><a class="l" href="#738">738 </a>                    <span class="php-var">$constraints</span>[] = [<span class="php-quote">'&lt;'</span>, <span class="php-var">$main</span> . (<span class="php-var">$sub</span> + <span class="php-num">1</span>) . <span class="php-quote">'-foo'</span>];
+</span><span class="l" id="739"><a class="l" href="#739">739 </a>                }
+</span><span class="l" id="740"><a class="l" href="#740">740 </a>            } <span class="php-keyword1">else</span> {
+</span><span class="l" id="741"><a class="l" href="#741">741 </a>                <span class="php-var">$constraints</span>[] = [<span class="php-var">$match</span>[<span class="php-quote">'op'</span>] ?: <span class="php-quote">'='</span>, <span class="php-var">$match</span>[<span class="php-quote">'version'</span>] . (<span class="php-keyword1">isset</span>(<span class="php-var">$match</span>[<span class="php-quote">'prerelease'</span>]) ? <span class="php-var">$match</span>[<span class="php-quote">'prerelease'</span>] : <span class="php-quote">''</span>)];
+</span><span class="l" id="742"><a class="l" href="#742">742 </a>            }
+</span><span class="l" id="743"><a class="l" href="#743">743 </a>        }
+</span><span class="l" id="744"><a class="l" href="#744">744 </a>
+</span><span class="l" id="745"><a class="l" href="#745">745 </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$constraints</span> <span class="php-keyword1">as</span> <span class="php-var">$constraint</span>) {
+</span><span class="l" id="746"><a class="l" href="#746">746 </a>            <span class="php-keyword1">if</span> (!rex_string::versionCompare(<span class="php-var">$version</span>, <span class="php-var">$constraint</span>[<span class="php-num">1</span>], <span class="php-var">$constraint</span>[<span class="php-num">0</span>])) {
+</span><span class="l" id="747"><a class="l" href="#747">747 </a>                <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
+</span><span class="l" id="748"><a class="l" href="#748">748 </a>            }
+</span><span class="l" id="749"><a class="l" href="#749">749 </a>        }
+</span><span class="l" id="750"><a class="l" href="#750">750 </a>
+</span><span class="l" id="751"><a class="l" href="#751">751 </a>        <span class="php-keyword1">return</span> <span class="php-keyword1">true</span>;
+</span><span class="l" id="752"><a class="l" href="#752">752 </a>    }
+</span><span class="l" id="753"><a class="l" href="#753">753 </a>
+</span><span class="l" id="754"><a class="l" href="#754">754 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="755"><a class="l" href="#755">755 </a><span class="php-comment">     * Returns the subfolders of the given folder.
 </span></span><span class="l" id="756"><a class="l" href="#756">756 </a><span class="php-comment">     *
-</span></span><span class="l" id="757"><a class="l" href="#757">757 </a><span class="php-comment">     * @return string[]
-</span></span><span class="l" id="758"><a class="l" href="#758">758 </a><span class="php-comment">     */</span>
-</span><span class="l" id="759"><a class="l" href="#759">759 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_readPackageFolder" id="_readPackageFolder">readPackageFolder</a>(<span class="php-var">$folder</span>)
-</span><span class="l" id="760"><a class="l" href="#760">760 </a>    {
-</span><span class="l" id="761"><a class="l" href="#761">761 </a>        <span class="php-var">$packages</span> = [];
-</span><span class="l" id="762"><a class="l" href="#762">762 </a>
-</span><span class="l" id="763"><a class="l" href="#763">763 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_dir</span>(<span class="php-var">$folder</span>)) {
-</span><span class="l" id="764"><a class="l" href="#764">764 </a>            <span class="php-keyword1">foreach</span> (rex_finder::factory(<span class="php-var">$folder</span>)-&gt;dirsOnly() <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
-</span><span class="l" id="765"><a class="l" href="#765">765 </a>                <span class="php-var">$packages</span>[] = <span class="php-var">$file</span>-&gt;getBasename();
-</span><span class="l" id="766"><a class="l" href="#766">766 </a>            }
-</span><span class="l" id="767"><a class="l" href="#767">767 </a>        }
-</span><span class="l" id="768"><a class="l" href="#768">768 </a>
-</span><span class="l" id="769"><a class="l" href="#769">769 </a>        <span class="php-keyword1">return</span> <span class="php-var">$packages</span>;
-</span><span class="l" id="770"><a class="l" href="#770">770 </a>    }
-</span><span class="l" id="771"><a class="l" href="#771">771 </a>}
-</span><span class="l" id="772"><a class="l" href="#772">772 </a></span></code></pre>
+</span></span><span class="l" id="757"><a class="l" href="#757">757 </a><span class="php-comment">     * @param string $folder Folder
+</span></span><span class="l" id="758"><a class="l" href="#758">758 </a><span class="php-comment">     *
+</span></span><span class="l" id="759"><a class="l" href="#759">759 </a><span class="php-comment">     * @return string[]
+</span></span><span class="l" id="760"><a class="l" href="#760">760 </a><span class="php-comment">     */</span>
+</span><span class="l" id="761"><a class="l" href="#761">761 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_readPackageFolder" id="_readPackageFolder">readPackageFolder</a>(<span class="php-var">$folder</span>)
+</span><span class="l" id="762"><a class="l" href="#762">762 </a>    {
+</span><span class="l" id="763"><a class="l" href="#763">763 </a>        <span class="php-var">$packages</span> = [];
+</span><span class="l" id="764"><a class="l" href="#764">764 </a>
+</span><span class="l" id="765"><a class="l" href="#765">765 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_dir</span>(<span class="php-var">$folder</span>)) {
+</span><span class="l" id="766"><a class="l" href="#766">766 </a>            <span class="php-keyword1">foreach</span> (rex_finder::factory(<span class="php-var">$folder</span>)-&gt;dirsOnly() <span class="php-keyword1">as</span> <span class="php-var">$file</span>) {
+</span><span class="l" id="767"><a class="l" href="#767">767 </a>                <span class="php-var">$packages</span>[] = <span class="php-var">$file</span>-&gt;getBasename();
+</span><span class="l" id="768"><a class="l" href="#768">768 </a>            }
+</span><span class="l" id="769"><a class="l" href="#769">769 </a>        }
+</span><span class="l" id="770"><a class="l" href="#770">770 </a>
+</span><span class="l" id="771"><a class="l" href="#771">771 </a>        <span class="php-keyword1">return</span> <span class="php-var">$packages</span>;
+</span><span class="l" id="772"><a class="l" href="#772">772 </a>    }
+</span><span class="l" id="773"><a class="l" href="#773">773 </a>}
+</span><span class="l" id="774"><a class="l" href="#774">774 </a></span></code></pre>
  </body>
 </html>

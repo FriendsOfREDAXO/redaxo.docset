@@ -14,7 +14,7 @@
 </div>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_request.html#3-256" title="Go to source code">redaxo/src/core/lib/request.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_request.html#3-284" title="Go to source code">redaxo/src/core/lib/request.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -233,6 +233,30 @@
 </div>
 </div></td>
 </tr>
+<tr data-order="clearSession" id="_clearSession">
+<td class="attributes"><code>
+				 public static
+				
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_clearSession">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/clearSession"></a><a href="source-class-rex_request.html?126,138#126" title="Go to source code">clearSession</a>( )</code>
+<div class="description short">
+<p>clear redaxo session contents within the current namespace (the session
+itself stays alive).</p>
+</div>
+<div class="description detailed hidden">
+<p>clear redaxo session contents within the current namespace (the session
+itself stays alive).</p>
+<h4>Throws</h4>
+<div class="list">
+<code><code><a href="class-rex_exception.html">rex_exception</a></code></code><br/>rex_exception<br/>
+</div>
+</div>
+</div></td>
+</tr>
 <tr data-order="cookie" id="_cookie">
 <td class="attributes"><code>
 				 public static
@@ -242,7 +266,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_cookie">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/cookie"></a><a href="source-class-rex_request.html?126,138#126" title="Go to source code">cookie</a>( <span>string <var>$varname</var></span>, <span>string <var>$vartype</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/cookie"></a><a href="source-class-rex_request.html?140,152#140" title="Go to source code">cookie</a>( <span>string <var>$varname</var></span>, <span>string <var>$vartype</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns the variable $varname of $_COOKIE and casts the value.</p>
 </div>
@@ -273,7 +297,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_files">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/files"></a><a href="source-class-rex_request.html?140,152#140" title="Go to source code">files</a>( <span>string <var>$varname</var></span>, <span>string <var>$vartype</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/files"></a><a href="source-class-rex_request.html?154,166#154" title="Go to source code">files</a>( <span>string <var>$varname</var></span>, <span>string <var>$vartype</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns the variable $varname of $_FILES and casts the value.</p>
 </div>
@@ -304,7 +328,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_env">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/env"></a><a href="source-class-rex_request.html?154,166#154" title="Go to source code">env</a>( <span>string <var>$varname</var></span>, <span>string <var>$vartype</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/env"></a><a href="source-class-rex_request.html?168,180#168" title="Go to source code">env</a>( <span>string <var>$varname</var></span>, <span>string <var>$vartype</var> = <span class="php-quote">''</span></span>, <span>mixed <var>$default</var> = <span class="php-quote">''</span></span> )</code>
 <div class="description short">
 <p>Returns the variable $varname of $_ENV and casts the value.</p>
 </div>
@@ -335,7 +359,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_requestMethod">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/requestMethod"></a><a href="source-class-rex_request.html?196,204#196" title="Go to source code">requestMethod</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/requestMethod"></a><a href="source-class-rex_request.html?210,218#210" title="Go to source code">requestMethod</a>( )</code>
 <div class="description short">
 <p>Returns the HTTP method of the current request.</p>
 </div>
@@ -357,7 +381,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isXmlHttpRequest">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isXmlHttpRequest"></a><a href="source-class-rex_request.html?206,219#206" title="Go to source code">isXmlHttpRequest</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isXmlHttpRequest"></a><a href="source-class-rex_request.html?220,233#220" title="Go to source code">isXmlHttpRequest</a>( )</code>
 <div class="description short">
 <p>Returns true if the request is a XMLHttpRequest.</p>
 </div>
@@ -383,7 +407,7 @@ others.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isPJAXRequest">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPJAXRequest"></a><a href="source-class-rex_request.html?221,229#221" title="Go to source code">isPJAXRequest</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPJAXRequest"></a><a href="source-class-rex_request.html?235,243#235" title="Go to source code">isPJAXRequest</a>( )</code>
 <div class="description short">
 <p>Returns true if the request is a PJAX-Request.</p>
 </div>
@@ -405,7 +429,7 @@ others.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isPJAXContainer">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPJAXContainer"></a><a href="source-class-rex_request.html?231,245#231" title="Go to source code">isPJAXContainer</a>( <span>string <var>$containerId</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPJAXContainer"></a><a href="source-class-rex_request.html?245,259#245" title="Go to source code">isPJAXContainer</a>( <span>string <var>$containerId</var></span> )</code>
 <div class="description short">
 <p>Returns true when the current request is a PJAX-Request and the requested
 container matches the given $containerId.</p>
@@ -434,7 +458,7 @@ container matches the given $containerId.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isHttps">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isHttps"></a><a href="source-class-rex_request.html?247,255#247" title="Go to source code">isHttps</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isHttps"></a><a href="source-class-rex_request.html?261,269#261" title="Go to source code">isHttps</a>( )</code>
 <div class="description short">
 <p>Returns whether the current request is served via https/ssl.</p>
 </div>
@@ -443,6 +467,28 @@ container matches the given $containerId.</p>
 <h4>Returns</h4>
 <div class="list">
 <code>boolean</code><br/>true when https/ssl, otherwise false.<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="getSessionNamespace" id="_getSessionNamespace">
+<td class="attributes"><code>
+				 public static
+				string
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_getSessionNamespace">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSessionNamespace"></a><a href="source-class-rex_request.html?271,283#271" title="Go to source code">getSessionNamespace</a>( )</code>
+<div class="description short">
+<p>Returns the session namespace for the current http request.</p>
+</div>
+<div class="description detailed hidden">
+<p>Returns the session namespace for the current http request.</p>
+<h4>Returns</h4>
+<div class="list">
+<code>string</code><br/>string<br/>
 </div>
 </div>
 </div></td>

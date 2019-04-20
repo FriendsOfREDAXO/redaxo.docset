@@ -60,7 +60,7 @@
 </span><span class="l" id="51"><a class="l" href="#51"> 51 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_addJsFile" id="_addJsFile">addJsFile</a>(<span class="php-var">$file</span>, <span class="php-keyword1">array</span> <span class="php-var">$options</span> = [])
 </span><span class="l" id="52"><a class="l" href="#52"> 52 </a>    {
 </span><span class="l" id="53"><a class="l" href="#53"> 53 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">empty</span>(<span class="php-var">$options</span>)) {
-</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>            <span class="php-var">$options</span>[self::JS_IMMUTABLE] = <span class="php-keyword1">true</span>;
+</span><span class="l" id="54"><a class="l" href="#54"> 54 </a>            <span class="php-var">$options</span>[self::JS_IMMUTABLE] = <span class="php-keyword1">false</span>;
 </span><span class="l" id="55"><a class="l" href="#55"> 55 </a>        }
 </span><span class="l" id="56"><a class="l" href="#56"> 56 </a>
 </span><span class="l" id="57"><a class="l" href="#57"> 57 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">in_array</span>(<span class="php-var">$file</span>, self::<span class="php-var">$jsFiles</span>)) {

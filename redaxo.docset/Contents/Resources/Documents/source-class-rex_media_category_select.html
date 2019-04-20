@@ -72,7 +72,7 @@
 </span><span class="l" id="63"><a class="l" href="#63">63 </a>                <span class="php-var">$this</span>-&gt;check_perms &amp;&amp; rex::getUser()-&gt;getComplexPerm(<span class="php-quote">'media'</span>)-&gt;hasCategoryPerm(<span class="php-var">$mediacat</span>-&gt;getId())
 </span><span class="l" id="64"><a class="l" href="#64">64 </a>        ) {
 </span><span class="l" id="65"><a class="l" href="#65">65 </a>            <span class="php-var">$mid</span> = <span class="php-var">$mediacat</span>-&gt;getId();
-</span><span class="l" id="66"><a class="l" href="#66">66 </a>            <span class="php-var">$mname</span> = <span class="php-var">$mediacat</span>-&gt;getName() . <span class="php-quote">' ['</span> . <span class="php-var">$mid</span> . <span class="php-quote">']'</span>;
+</span><span class="l" id="66"><a class="l" href="#66">66 </a>            <span class="php-var">$mname</span> = <span class="php-var">$mediacat</span>-&gt;getName();
 </span><span class="l" id="67"><a class="l" href="#67">67 </a>
 </span><span class="l" id="68"><a class="l" href="#68">68 </a>            <span class="php-var">$this</span>-&gt;addOption(<span class="php-var">$mname</span>, <span class="php-var">$mid</span>, <span class="php-var">$mid</span>, <span class="php-var">$mediacat</span>-&gt;getParentId());
 </span><span class="l" id="69"><a class="l" href="#69">69 </a>            <span class="php-var">$childs</span> = <span class="php-var">$mediacat</span>-&gt;getChildren();

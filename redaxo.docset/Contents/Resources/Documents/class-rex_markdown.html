@@ -24,7 +24,7 @@
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
 <b>Author:</b>
 				gharlan<br/>
-<b>Located at</b> <a href="source-class-rex_markdown.html#3-43" title="Go to source code">redaxo/src/core/lib/util/markdown.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_markdown.html#3-101" title="Go to source code">redaxo/src/core/lib/util/markdown.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -37,7 +37,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_factory">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_markdown.html?23,30#23" title="Go to source code">factory</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_markdown.html?18,25#18" title="Go to source code">factory</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -57,7 +57,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_parse">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parse"></a><a href="source-class-rex_markdown.html?32,42#32" title="Go to source code">parse</a>( <span>string <var>$code</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parse"></a><a href="source-class-rex_markdown.html?27,40#27" title="Go to source code">parse</a>( <span>string <var>$code</var></span> )</code>
 <div class="description short">
 <p>Parses markdown code.</p>
 </div>
@@ -71,6 +71,39 @@
 <h4>Returns</h4>
 <div class="list">
 <code>string</code><br/>HTML code<br/>
+</div>
+</div>
+</div></td>
+</tr>
+<tr data-order="parseWithToc" id="_parseWithToc">
+<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+</td>
+<td class="name"><div>
+<a class="anchor" href="#_parseWithToc">#</a>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/parseWithToc"></a><a href="source-class-rex_markdown.html?42,100#42" title="Go to source code">parseWithToc</a>( <span>string <var>$code</var></span>, <span>integer <var>$topLevel</var> = <span class="php-num">2</span></span>, <span>integer <var>$bottomLevel</var> = <span class="php-num">3</span></span> )</code>
+<div class="description short">
+<p>Parses markdown code and extracts a table-of-content.</p>
+</div>
+<div class="description detailed hidden">
+<p>Parses markdown code and extracts a table-of-content.</p>
+<h4>Parameters</h4>
+<div class="list"><dl>
+<dt><var>$code</var></dt>
+<dd>Markdown code</dd>
+<dt><var>$topLevel</var></dt>
+<dd>Top included headline level for TOC, e.g. &lt;code&gt;1&lt;/code&gt; for
+&lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;</dd>
+<dt><var>$bottomLevel</var></dt>
+<dd>Bottom included headline level for TOC, e.g. &lt;code&gt;6&lt;/code&gt; for
+&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt;</dd>
+</dl></div>
+<h4>Returns</h4>
+<div class="list">
+<code>array</code><br/>tupel of table-of-content and content<br/>
 </div>
 </div>
 </div></td>

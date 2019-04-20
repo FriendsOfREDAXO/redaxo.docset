@@ -26,7 +26,7 @@
 </span><span class="l" id="17"><a class="l" href="#17"> 17 </a><span class="php-keyword1">function</span> <a href="#_rex_mediapool_filename" id="_rex_mediapool_filename">rex_mediapool_filename</a>(<span class="php-var">$FILENAME</span>, <span class="php-var">$doSubindexing</span> = <span class="php-keyword1">true</span>)
 </span><span class="l" id="18"><a class="l" href="#18"> 18 </a>{
 </span><span class="l" id="19"><a class="l" href="#19"> 19 </a>    <span class="php-comment">// ----- neuer filename und extension holen</span>
-</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>    <span class="php-var">$NFILENAME</span> = rex_string::normalize(<span class="php-var">$FILENAME</span>, <span class="php-quote">'_'</span>, <span class="php-quote">'.-'</span>);
+</span><span class="l" id="20"><a class="l" href="#20"> 20 </a>    <span class="php-var">$NFILENAME</span> = rex_string::normalize(<span class="php-var">$FILENAME</span>, <span class="php-quote">'_'</span>, <span class="php-quote">'.-@'</span>);
 </span><span class="l" id="21"><a class="l" href="#21"> 21 </a>
 </span><span class="l" id="22"><a class="l" href="#22"> 22 </a>    <span class="php-keyword1">if</span> (<span class="php-quote">'.'</span> === <span class="php-var">$NFILENAME</span>[<span class="php-num">0</span>]) {
 </span><span class="l" id="23"><a class="l" href="#23"> 23 </a>        <span class="php-var">$NFILENAME</span>[<span class="php-num">0</span>] = <span class="php-quote">'_'</span>;

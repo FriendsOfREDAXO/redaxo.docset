@@ -29,20 +29,20 @@
 </dl>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.structure.html">structure</a><br/>
-<b>Located at</b> <a href="source-class-rex_category.html#3-154" title="Go to source code">redaxo/src/addons/structure/lib/category.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_category.html#3-156" title="Go to source code">redaxo/src/addons/structure/lib/category.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
 <tr data-order="getCurrent" id="_getCurrent">
 <td class="attributes"><code>
 				 public static
-				self
+				null|self
 				
 				</code>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getCurrent">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCurrent"></a><a href="source-class-rex_category.html?10,20#10" title="Go to source code">getCurrent</a>( <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCurrent"></a><a href="source-class-rex_category.html?10,22#10" title="Go to source code">getCurrent</a>( <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Return the current category.</p>
 </div>
@@ -55,7 +55,7 @@
 </dl></div>
 <h4>Returns</h4>
 <div class="list">
-<code>self</code><br/>self<br/>
+<code>null|self</code><br/>null|self<br/>
 </div>
 </div>
 </div></td>
@@ -69,7 +69,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getRootCategories">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRootCategories"></a><a href="source-class-rex_category.html?22,39#22" title="Go to source code">getRootCategories</a>( <span>boolean <var>$ignoreOfflines</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRootCategories"></a><a href="source-class-rex_category.html?24,41#24" title="Go to source code">getRootCategories</a>( <span>boolean <var>$ignoreOfflines</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$clang</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Return a list of top level categories, ie. categories that have no parent.
 Returns an array of rex_category objects sorted by $priority.</p>
@@ -102,7 +102,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getPriority">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPriority"></a><a href="source-class-rex_category.html?41,47#41" title="Go to source code">getPriority</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPriority"></a><a href="source-class-rex_category.html?43,49#43" title="Go to source code">getPriority</a>( )</code>
 <div class="description short">
 <p>Returns the article priority.</p>
 </div>
@@ -126,7 +126,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getChildren">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getChildren"></a><a href="source-class-rex_category.html?49,64#49" title="Go to source code">getChildren</a>( <span>boolean <var>$ignoreOfflines</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getChildren"></a><a href="source-class-rex_category.html?51,66#51" title="Go to source code">getChildren</a>( <span>boolean <var>$ignoreOfflines</var> = <span class="php-keyword1">false</span></span> )</code>
 <div class="description short">
 <p>Return a list of all subcategories. Returns an array of rex_category objects
 sorted by $priority.</p>
@@ -157,7 +157,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getParent">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParent"></a><a href="source-class-rex_category.html?66,74#66" title="Go to source code">getParent</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParent"></a><a href="source-class-rex_category.html?68,76#68" title="Go to source code">getParent</a>( )</code>
 <div class="description short">
 <p>Returns the parent category.</p>
 </div>
@@ -179,7 +179,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isParent">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isParent"></a><a href="source-class-rex_category.html?76,88#76" title="Go to source code">isParent</a>( <span><code><a href="class-rex_category.html">rex_category</a></code> <var>$otherCat</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isParent"></a><a href="source-class-rex_category.html?78,90#78" title="Go to source code">isParent</a>( <span><code><a href="class-rex_category.html">rex_category</a></code> <var>$otherCat</var></span> )</code>
 <div class="description short">
 <p>Returns TRUE if this category is the direct parent of the other category.</p>
 </div>
@@ -205,7 +205,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getArticles">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArticles"></a><a href="source-class-rex_category.html?90,105#90" title="Go to source code">getArticles</a>( <span>boolean <var>$ignoreOfflines</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArticles"></a><a href="source-class-rex_category.html?92,107#92" title="Go to source code">getArticles</a>( <span>boolean <var>$ignoreOfflines</var> = <span class="php-keyword1">false</span></span> )</code>
 <div class="description short">
 <p>Return a list of articles in this category Returns an array of rex_article
 objects sorted by $priority.</p>
@@ -235,7 +235,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getStartArticle">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStartArticle"></a><a href="source-class-rex_category.html?107,115#107" title="Go to source code">getStartArticle</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getStartArticle"></a><a href="source-class-rex_category.html?109,117#109" title="Go to source code">getStartArticle</a>( )</code>
 <div class="description short">
 <p>Return the start article for this category.</p>
 </div>
@@ -257,7 +257,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getName">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_category.html?117,125#117" title="Go to source code">getName</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_category.html?119,127#119" title="Go to source code">getName</a>( )</code>
 <div class="description short">
 <p>Returns the name of the category.</p>
 </div>
@@ -281,7 +281,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getPath">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPath"></a><a href="source-class-rex_category.html?127,135#127" title="Go to source code">getPath</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPath"></a><a href="source-class-rex_category.html?129,137#129" title="Go to source code">getPath</a>( )</code>
 <div class="description short">
 <p>Returns the path of the category.</p>
 </div>
@@ -303,7 +303,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_hasValue">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasValue"></a><a href="source-class-rex_category.html?137,145#137" title="Go to source code">hasValue</a>( <span>string <var>$value</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasValue"></a><a href="source-class-rex_category.html?139,147#139" title="Go to source code">hasValue</a>( <span>string <var>$value</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -328,7 +328,7 @@ excempt from this list!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isPermitted">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPermitted"></a><a href="source-class-rex_category.html?147,153#147" title="Go to source code">isPermitted</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isPermitted"></a><a href="source-class-rex_category.html?149,155#149" title="Go to source code">isPermitted</a>( )</code>
 <div class="description short">
 <p>Returns whether the element is permitted.</p>
 </div>

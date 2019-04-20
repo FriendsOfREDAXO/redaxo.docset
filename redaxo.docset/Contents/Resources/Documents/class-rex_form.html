@@ -32,7 +32,7 @@ ausgegeben werden.</p>
 </dl>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a>\<a href="package-redaxo.core.form.html">form</a><br/>
-<b>Located at</b> <a href="source-class-rex_form.html#5-372" title="Go to source code">redaxo/src/core/lib/form/form.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_form.html#5-375" title="Go to source code">redaxo/src/core/lib/form/form.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -45,7 +45,7 @@ ausgegeben werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#___construct">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_form.html?26,61#26" title="Go to source code">__construct</a>( <span>mixed <var>$tableName</var></span>, <span>mixed <var>$fieldset</var></span>, <span>mixed <var>$whereCondition</var></span>, <span>mixed <var>$method</var> = <span class="php-quote">'post'</span></span>, <span>mixed <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_form.html?27,63#27" title="Go to source code">__construct</a>( <span>mixed <var>$tableName</var></span>, <span>mixed <var>$fieldset</var></span>, <span>mixed <var>$whereCondition</var></span>, <span>mixed <var>$method</var> = <span class="php-quote">'post'</span></span>, <span>mixed <var>$debug</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$db</var> = <span class="php-num">1</span></span> )</code>
 <div class="description short">
 <p>Diese Konstruktor sollte nicht verwendet werden. Instanzen muessen ueber die
 facotry() Methode erstellt werden!</p>
@@ -67,7 +67,7 @@ facotry() Methode erstellt werden!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_factory">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_form.html?63,78#63" title="Go to source code">factory</a>( <span>string <var>$tableName</var></span>, <span>string <var>$fieldset</var></span>, <span>string <var>$whereCondition</var></span>, <span>string <var>$method</var> = <span class="php-quote">'post'</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_form.html?65,81#65" title="Go to source code">factory</a>( <span>string <var>$tableName</var></span>, <span>string <var>$fieldset</var></span>, <span>string <var>$whereCondition</var></span>, <span>string <var>$method</var> = <span class="php-quote">'post'</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$db</var> = <span class="php-num">1</span></span> )</code>
 <div class="description short">
 <p>Methode zum erstellen von rex_form Instanzen.</p>
 </div>
@@ -85,6 +85,8 @@ facotry() Methode erstellt werden!</p>
 <dd></dd>
 <dt><var>$debug</var></dt>
 <dd></dd>
+<dt><var>$db</var></dt>
+<dd>DB connection ID</dd>
 </dl></div>
 <h4>Returns</h4>
 <div class="list">
@@ -102,7 +104,7 @@ facotry() Methode erstellt werden!</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_loadBackendConfig">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/loadBackendConfig"></a><a href="source-class-rex_form.html?80,129#80" title="Go to source code">loadBackendConfig</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/loadBackendConfig"></a><a href="source-class-rex_form.html?83,132#83" title="Go to source code">loadBackendConfig</a>( )</code>
 <div class="description short">
 <p>Laedt die Konfiguration die noetig ist um rex_form im REDAXO Backend zu
 verwenden.</p>
@@ -123,7 +125,7 @@ verwenden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addPrioField">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addPrioField"></a><a href="source-class-rex_form.html?131,148#131" title="Go to source code">addPrioField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addPrioField"></a><a href="source-class-rex_form.html?134,151#134" title="Go to source code">addPrioField</a>( <span>string <var>$name</var></span>, <span>mixed <var>$value</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$attributes</var> = []</span> )</code>
 <div class="description short">
 <p>Fuegt dem Formular ein Feld hinzu mitdem die Prioritaet von Datensaetzen
 verwaltet werden kann.</p>
@@ -156,7 +158,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getWhereCondition">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWhereCondition"></a><a href="source-class-rex_form.html?150,156#150" title="Go to source code">getWhereCondition</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWhereCondition"></a><a href="source-class-rex_form.html?153,159#153" title="Go to source code">getWhereCondition</a>( )</code>
 <div class="description short">
 <p>Gibt die Where-Bedingung des Formulars zurueck.</p>
 </div>
@@ -174,7 +176,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setLanguageSupport">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setLanguageSupport"></a><a href="source-class-rex_form.html?158,168#158" title="Go to source code">setLanguageSupport</a>( <span>string <var>$idField</var></span>, <span>string <var>$clangField</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setLanguageSupport"></a><a href="source-class-rex_form.html?161,171#161" title="Go to source code">setLanguageSupport</a>( <span>string <var>$idField</var></span>, <span>string <var>$clangField</var></span> )</code>
 <div class="description short">
 <p>Mehrsprachigkeit unterstuetzen.</p>
 </div>
@@ -199,7 +201,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setEditMode">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setEditMode"></a><a href="source-class-rex_form.html?170,180#170" title="Go to source code">setEditMode</a>( <span>mixed <var>$isEditMode</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setEditMode"></a><a href="source-class-rex_form.html?173,183#173" title="Go to source code">setEditMode</a>( <span>mixed <var>$isEditMode</var></span> )</code>
 <div class="description short">
 <p>Wechselt den Modus des Formulars.</p>
 </div>
@@ -217,7 +219,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isEditMode">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isEditMode"></a><a href="source-class-rex_form.html?182,190#182" title="Go to source code">isEditMode</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isEditMode"></a><a href="source-class-rex_form.html?185,193#185" title="Go to source code">isEditMode</a>( )</code>
 <div class="description short">
 <p>Prueft ob sich das Formular im Edit-Modus befindet.</p>
 </div>
@@ -239,7 +241,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getTableName">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableName"></a><a href="source-class-rex_form.html?192,198#192" title="Go to source code">getTableName</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableName"></a><a href="source-class-rex_form.html?195,201#195" title="Go to source code">getTableName</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -258,7 +260,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getSql">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSql"></a><a href="source-class-rex_form.html?200,206#200" title="Go to source code">getSql</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSql"></a><a href="source-class-rex_form.html?203,209#203" title="Go to source code">getSql</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -278,7 +280,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getId">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getId"></a><a href="source-class-rex_form.html?208,211#208" title="Go to source code">getId</a>( <span>mixed <var>$name</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getId"></a><a href="source-class-rex_form.html?211,214#211" title="Go to source code">getId</a>( <span>mixed <var>$name</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -296,7 +298,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getValue">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_form.html?213,220#213" title="Go to source code">getValue</a>( <span>mixed <var>$name</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_form.html?216,223#216" title="Go to source code">getValue</a>( <span>mixed <var>$name</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -312,7 +314,7 @@ verwaltet werden kann.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_preSave">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preSave"></a><a href="source-class-rex_form.html?222,254#222" title="Go to source code">preSave</a>( <span>mixed <var>$fieldsetName</var></span>, <span>mixed <var>$fieldName</var></span>, <span>mixed <var>$fieldValue</var></span>, <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$saveSql</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/preSave"></a><a href="source-class-rex_form.html?225,257#225" title="Go to source code">preSave</a>( <span>mixed <var>$fieldsetName</var></span>, <span>mixed <var>$fieldName</var></span>, <span>mixed <var>$fieldValue</var></span>, <span><code><a href="class-rex_sql.html">rex_sql</a></code> <var>$saveSql</var></span> )</code>
 <div class="description short">
 <p>Callbackfunktion, damit in subklassen der Value noch beeinflusst werden kann
 kurz vorm speichern.</p>
@@ -332,7 +334,7 @@ kurz vorm speichern.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_equals">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/equals"></a><a href="source-class-rex_form.html?256,267#256" title="Go to source code">equals</a>( <span>object <var>$form</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/equals"></a><a href="source-class-rex_form.html?259,270#259" title="Go to source code">equals</a>( <span>object <var>$form</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -357,7 +359,7 @@ kurz vorm speichern.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_save">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/save"></a><a href="source-class-rex_form.html?269,344#269" title="Go to source code">save</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/save"></a><a href="source-class-rex_form.html?272,347#272" title="Go to source code">save</a>( )</code>
 <div class="description short">
 <p>Speichert das Formular.</p>
 </div>
@@ -383,7 +385,7 @@ ErrorCode.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_delete">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/delete"></a><a href="source-class-rex_form.html?346,371#346" title="Go to source code">delete</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/delete"></a><a href="source-class-rex_form.html?349,374#349" title="Go to source code">delete</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -508,13 +510,27 @@ ErrorCode.</p>
 </td>
 <td class="value"><div><a class="anchor" href="#$mode">#</a><code></code></div></td>
 </tr>
+<tr data-order="db" id="$db">
+<td class="attributes"><code>
+				protected  
+				mixed
+			</code></td>
+<td class="name">
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24db"></a><a href="source-class-rex_form.html#23" title="Go to source code"><var>$db</var></a>
+<div class="description short">
+</div>
+<div class="description detailed hidden">
+</div>
+</td>
+<td class="value"><div><a class="anchor" href="#$db">#</a><code></code></div></td>
+</tr>
 <tr data-order="sql" id="$sql">
 <td class="attributes"><code>
 				protected  
 				mixed
 			</code></td>
 <td class="name">
-<a class="dashAnchor" name="//apple_ref/cpp/Property/%24sql"></a><a href="source-class-rex_form.html#23" title="Go to source code"><var>$sql</var></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24sql"></a><a href="source-class-rex_form.html#24" title="Go to source code"><var>$sql</var></a>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -528,7 +544,7 @@ ErrorCode.</p>
 				mixed
 			</code></td>
 <td class="name">
-<a class="dashAnchor" name="//apple_ref/cpp/Property/%24languageSupport"></a><a href="source-class-rex_form.html#24" title="Go to source code"><var>$languageSupport</var></a>
+<a class="dashAnchor" name="//apple_ref/cpp/Property/%24languageSupport"></a><a href="source-class-rex_form.html#25" title="Go to source code"><var>$languageSupport</var></a>
 <div class="description short">
 </div>
 <div class="description detailed hidden">

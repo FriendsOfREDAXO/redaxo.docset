@@ -24,7 +24,7 @@
 </dl>
 <div class="alert alert-info">
 <b>Package:</b> <a href="package-redaxo.html">redaxo</a>\<a href="package-redaxo.core.html">core</a><br/>
-<b>Located at</b> <a href="source-class-rex_list.html#46-1082" title="Go to source code">redaxo/src/core/lib/list.php</a><br/>
+<b>Located at</b> <a href="source-class-rex_list.html#46-1085" title="Go to source code">redaxo/src/core/lib/list.php</a><br/>
 </div>
 <h2>Methods summary</h2>
 <table class="summary table table-bordered table-striped methods" id="methods">
@@ -37,7 +37,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#___construct">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_list.html?93,169#93" title="Go to source code">__construct</a>( <span>string <var>$query</var></span>, <span>integer <var>$rowsPerPage</var> = <span class="php-num">30</span></span>, <span>string <var>$listName</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/__construct"></a><a href="source-class-rex_list.html?94,171#94" title="Go to source code">__construct</a>( <span>string <var>$query</var></span>, <span>integer <var>$rowsPerPage</var> = <span class="php-num">30</span></span>, <span>string <var>$listName</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$db</var> = <span class="php-num">1</span></span> )</code>
 <div class="description short">
 <p>Erstellt ein rex_list Objekt.</p>
 </div>
@@ -53,6 +53,8 @@
 <dd>Name der Liste</dd>
 <dt><var>$debug</var></dt>
 <dd></dd>
+<dt><var>$db</var></dt>
+<dd></dd>
 </dl></div>
 </div>
 </div></td>
@@ -66,7 +68,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_factory">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_list.html?171,183#171" title="Go to source code">factory</a>( <span>string <var>$query</var></span>, <span>integer <var>$rowsPerPage</var> = <span class="php-num">30</span></span>, <span>null <var>$listName</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/factory"></a><a href="source-class-rex_list.html?173,186#173" title="Go to source code">factory</a>( <span>string <var>$query</var></span>, <span>integer <var>$rowsPerPage</var> = <span class="php-num">30</span></span>, <span>null <var>$listName</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$debug</var> = <span class="php-keyword1">false</span></span>, <span>integer <var>$db</var> = <span class="php-num">1</span></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -80,6 +82,8 @@
 <dd></dd>
 <dt><var>$debug</var></dt>
 <dd></dd>
+<dt><var>$db</var></dt>
+<dd>DB connection ID</dd>
 </dl></div>
 <h4>Returns</h4>
 <div class="list">
@@ -97,7 +101,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_init">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_list.html?185,188#185" title="Go to source code">init</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/init"></a><a href="source-class-rex_list.html?188,191#188" title="Go to source code">init</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -113,7 +117,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getName">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_list.html?192,200#192" title="Go to source code">getName</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getName"></a><a href="source-class-rex_list.html?195,203#195" title="Go to source code">getName</a>( )</code>
 <div class="description short">
 <p>Gibt den Namen es Formulars zurück.</p>
 </div>
@@ -135,7 +139,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getMessage">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMessage"></a><a href="source-class-rex_list.html?202,210#202" title="Go to source code">getMessage</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getMessage"></a><a href="source-class-rex_list.html?205,213#205" title="Go to source code">getMessage</a>( )</code>
 <div class="description short">
 <p>Gibt eine Status Nachricht zurück.</p>
 </div>
@@ -157,7 +161,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getWarning">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWarning"></a><a href="source-class-rex_list.html?212,220#212" title="Go to source code">getWarning</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getWarning"></a><a href="source-class-rex_list.html?215,223#215" title="Go to source code">getWarning</a>( )</code>
 <div class="description short">
 <p>Gibt eine Warnung zurück.</p>
 </div>
@@ -179,7 +183,7 @@
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setCaption">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setCaption"></a><a href="source-class-rex_list.html?222,231#222" title="Go to source code">setCaption</a>( <span>string <var>$caption</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setCaption"></a><a href="source-class-rex_list.html?225,234#225" title="Go to source code">setCaption</a>( <span>string <var>$caption</var></span> )</code>
 <div class="description short">
 <p>Setzt die Caption/den Titel der Tabelle Gibt den Namen es Formulars
 zurück.</p>
@@ -204,7 +208,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getCaption">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCaption"></a><a href="source-class-rex_list.html?233,241#233" title="Go to source code">getCaption</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getCaption"></a><a href="source-class-rex_list.html?236,244#236" title="Go to source code">getCaption</a>( )</code>
 <div class="description short">
 <p>Gibt die Caption/den Titel der Tabelle zurück.</p>
 </div>
@@ -226,7 +230,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setNoRowsMessage">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setNoRowsMessage"></a><a href="source-class-rex_list.html?243,246#243" title="Go to source code">setNoRowsMessage</a>( <span>mixed <var>$msg</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setNoRowsMessage"></a><a href="source-class-rex_list.html?246,249#246" title="Go to source code">setNoRowsMessage</a>( <span>mixed <var>$msg</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -242,7 +246,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getNoRowsMessage">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getNoRowsMessage"></a><a href="source-class-rex_list.html?248,251#248" title="Go to source code">getNoRowsMessage</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getNoRowsMessage"></a><a href="source-class-rex_list.html?251,254#251" title="Go to source code">getNoRowsMessage</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -258,7 +262,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addParam">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addParam"></a><a href="source-class-rex_list.html?253,256#253" title="Go to source code">addParam</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addParam"></a><a href="source-class-rex_list.html?256,259#256" title="Go to source code">addParam</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -274,7 +278,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getParams">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParams"></a><a href="source-class-rex_list.html?258,261#258" title="Go to source code">getParams</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParams"></a><a href="source-class-rex_list.html?261,264#261" title="Go to source code">getParams</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -290,7 +294,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_loadBackendConfig">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/loadBackendConfig"></a><a href="source-class-rex_list.html?263,266#263" title="Go to source code">loadBackendConfig</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/loadBackendConfig"></a><a href="source-class-rex_list.html?266,269#266" title="Go to source code">loadBackendConfig</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -306,7 +310,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addTableAttribute">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableAttribute"></a><a href="source-class-rex_list.html?268,271#268" title="Go to source code">addTableAttribute</a>( <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableAttribute"></a><a href="source-class-rex_list.html?271,274#271" title="Go to source code">addTableAttribute</a>( <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -322,7 +326,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getTableAttributes">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableAttributes"></a><a href="source-class-rex_list.html?273,276#273" title="Go to source code">getTableAttributes</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableAttributes"></a><a href="source-class-rex_list.html?276,279#276" title="Go to source code">getTableAttributes</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -338,7 +342,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addFormAttribute">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addFormAttribute"></a><a href="source-class-rex_list.html?278,281#278" title="Go to source code">addFormAttribute</a>( <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addFormAttribute"></a><a href="source-class-rex_list.html?281,284#281" title="Go to source code">addFormAttribute</a>( <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -354,7 +358,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getFormAttributes">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormAttributes"></a><a href="source-class-rex_list.html?283,286#283" title="Go to source code">getFormAttributes</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFormAttributes"></a><a href="source-class-rex_list.html?286,289#286" title="Go to source code">getFormAttributes</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -370,7 +374,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addLinkAttribute">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addLinkAttribute"></a><a href="source-class-rex_list.html?288,291#288" title="Go to source code">addLinkAttribute</a>( <span>mixed <var>$columnName</var></span>, <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addLinkAttribute"></a><a href="source-class-rex_list.html?291,294#291" title="Go to source code">addLinkAttribute</a>( <span>mixed <var>$columnName</var></span>, <span>mixed <var>$attrName</var></span>, <span>mixed <var>$attrValue</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -386,7 +390,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getLinkAttributes">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLinkAttributes"></a><a href="source-class-rex_list.html?293,296#293" title="Go to source code">getLinkAttributes</a>( <span>mixed <var>$column</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getLinkAttributes"></a><a href="source-class-rex_list.html?296,299#296" title="Go to source code">getLinkAttributes</a>( <span>mixed <var>$column</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -402,7 +406,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addColumn">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addColumn"></a><a href="source-class-rex_list.html?300,318#300" title="Go to source code">addColumn</a>( <span>string <var>$columnHead</var></span>, <span>string <var>$columnBody</var></span>, <span>integer <var>$columnIndex</var> = -<span class="php-num">1</span></span>, <span>array <var>$columnLayout</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addColumn"></a><a href="source-class-rex_list.html?303,321#303" title="Go to source code">addColumn</a>( <span>string <var>$columnHead</var></span>, <span>string <var>$columnBody</var></span>, <span>integer <var>$columnIndex</var> = -<span class="php-num">1</span></span>, <span>array <var>$columnLayout</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Methode, um eine Spalte einzufügen.</p>
 </div>
@@ -431,7 +435,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_removeColumn">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeColumn"></a><a href="source-class-rex_list.html?320,328#320" title="Go to source code">removeColumn</a>( <span>string <var>$columnName</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/removeColumn"></a><a href="source-class-rex_list.html?323,331#323" title="Go to source code">removeColumn</a>( <span>string <var>$columnName</var></span> )</code>
 <div class="description short">
 <p>Entfernt eine Spalte aus der Anzeige.</p>
 </div>
@@ -454,7 +458,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setColumnLayout">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnLayout"></a><a href="source-class-rex_list.html?330,339#330" title="Go to source code">setColumnLayout</a>( <span>string <var>$columnHead</var></span>, <span>array <var>$columnLayout</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnLayout"></a><a href="source-class-rex_list.html?333,342#333" title="Go to source code">setColumnLayout</a>( <span>string <var>$columnHead</var></span>, <span>array <var>$columnLayout</var></span> )</code>
 <div class="description short">
 <p>Methode, um das Layout einer Spalte zu setzen.</p>
 </div>
@@ -479,7 +483,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnLayout">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLayout"></a><a href="source-class-rex_list.html?341,355#341" title="Go to source code">getColumnLayout</a>( <span>string <var>$columnName</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLayout"></a><a href="source-class-rex_list.html?344,358#344" title="Go to source code">getColumnLayout</a>( <span>string <var>$columnName</var></span> )</code>
 <div class="description short">
 <p>Gibt das Layout einer Spalte zurück.</p>
 </div>
@@ -506,7 +510,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnLayouts">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLayouts"></a><a href="source-class-rex_list.html?357,363#357" title="Go to source code">getColumnLayouts</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLayouts"></a><a href="source-class-rex_list.html?360,366#360" title="Go to source code">getColumnLayouts</a>( )</code>
 <div class="description short">
 <p>Gibt die Layouts aller Spalten zurück.</p>
 </div>
@@ -524,7 +528,7 @@ zurück.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnName">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnName"></a><a href="source-class-rex_list.html?365,380#365" title="Go to source code">getColumnName</a>( <span>integer <var>$columnIndex</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnName"></a><a href="source-class-rex_list.html?368,383#368" title="Go to source code">getColumnName</a>( <span>integer <var>$columnIndex</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Gibt den Namen einer Spalte zurück.</p>
 </div>
@@ -554,7 +558,7 @@ ist</dd>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnNames">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnNames"></a><a href="source-class-rex_list.html?382,390#382" title="Go to source code">getColumnNames</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnNames"></a><a href="source-class-rex_list.html?385,393#385" title="Go to source code">getColumnNames</a>( )</code>
 <div class="description short">
 <p>Gibt alle Namen der Spalten als Array zurück.</p>
 </div>
@@ -576,7 +580,7 @@ ist</dd>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setColumnLabel">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnLabel"></a><a href="source-class-rex_list.html?392,401#392" title="Go to source code">setColumnLabel</a>( <span>string <var>$columnName</var></span>, <span>string <var>$label</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnLabel"></a><a href="source-class-rex_list.html?395,404#395" title="Go to source code">setColumnLabel</a>( <span>string <var>$columnName</var></span>, <span>string <var>$label</var></span> )</code>
 <div class="description short">
 <p>Setzt ein Label für eine Spalte.</p>
 </div>
@@ -601,7 +605,7 @@ ist</dd>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnLabel">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLabel"></a><a href="source-class-rex_list.html?403,421#403" title="Go to source code">getColumnLabel</a>( <span>string <var>$columnName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLabel"></a><a href="source-class-rex_list.html?406,424#406" title="Go to source code">getColumnLabel</a>( <span>string <var>$columnName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Gibt das Label der Spalte zurück, falls gesetzt.</p>
 </div>
@@ -632,7 +636,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setColumnFormat">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnFormat"></a><a href="source-class-rex_list.html?423,434#423" title="Go to source code">setColumnFormat</a>( <span>string <var>$columnName</var></span>, <span>string <var>$format_type</var></span>, <span>mixed <var>$format</var> = <span class="php-quote">''</span></span>, <span>array <var>$params</var> = []</span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnFormat"></a><a href="source-class-rex_list.html?426,437#426" title="Go to source code">setColumnFormat</a>( <span>string <var>$columnName</var></span>, <span>string <var>$format_type</var></span>, <span>mixed <var>$format</var> = <span class="php-quote">''</span></span>, <span>array <var>$params</var> = []</span> )</code>
 <div class="description short">
 <p>Setzt ein Format für die Spalte.</p>
 </div>
@@ -661,7 +665,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnFormat">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnFormat"></a><a href="source-class-rex_list.html?436,451#436" title="Go to source code">getColumnFormat</a>( <span>string <var>$columnName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnFormat"></a><a href="source-class-rex_list.html?439,454#439" title="Go to source code">getColumnFormat</a>( <span>string <var>$columnName</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Gibt das Format für eine Spalte zurück.</p>
 </div>
@@ -690,7 +694,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setColumnSortable">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnSortable"></a><a href="source-class-rex_list.html?453,463#453" title="Go to source code">setColumnSortable</a>( <span>string <var>$columnName</var></span>, <span>string <var>$direction</var> = <span class="php-quote">'asc'</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnSortable"></a><a href="source-class-rex_list.html?456,466#456" title="Go to source code">setColumnSortable</a>( <span>string <var>$columnName</var></span>, <span>string <var>$direction</var> = <span class="php-quote">'asc'</span></span> )</code>
 <div class="description short">
 <p>Markiert eine Spalte als sortierbar.</p>
 </div>
@@ -715,7 +719,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setColumnOption">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnOption"></a><a href="source-class-rex_list.html?465,476#465" title="Go to source code">setColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span>, <span>mixed <var>$value</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnOption"></a><a href="source-class-rex_list.html?468,479#468" title="Go to source code">setColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span>, <span>mixed <var>$value</var></span> )</code>
 <div class="description short">
 <p>Setzt eine Option für eine Spalte (z.b. Sortable,..).</p>
 </div>
@@ -742,7 +746,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnOption">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnOption"></a><a href="source-class-rex_list.html?478,493#478" title="Go to source code">getColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnOption"></a><a href="source-class-rex_list.html?481,496#481" title="Go to source code">getColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Gibt den Wert einer Option für eine Spalte zurück.</p>
 </div>
@@ -773,7 +777,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_hasColumnOption">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumnOption"></a><a href="source-class-rex_list.html?495,506#495" title="Go to source code">hasColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumnOption"></a><a href="source-class-rex_list.html?498,509#498" title="Go to source code">hasColumnOption</a>( <span>string <var>$columnName</var></span>, <span>string <var>$option</var></span> )</code>
 <div class="description short">
 <p>Gibt zurück, ob für eine Spalte eine Option gesetzt wurde.</p>
 </div>
@@ -802,7 +806,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_setColumnParams">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnParams"></a><a href="source-class-rex_list.html?508,517#508" title="Go to source code">setColumnParams</a>( <span>string <var>$columnName</var></span>, <span>array <var>$params</var> = []</span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/setColumnParams"></a><a href="source-class-rex_list.html?511,520#511" title="Go to source code">setColumnParams</a>( <span>string <var>$columnName</var></span>, <span>array <var>$params</var> = []</span> )</code>
 <div class="description short">
 <p>Verlinkt eine Spalte mit den übergebenen Parametern.</p>
 </div>
@@ -827,7 +831,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnParams">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnParams"></a><a href="source-class-rex_list.html?519,532#519" title="Go to source code">getColumnParams</a>( <span>string <var>$columnName</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnParams"></a><a href="source-class-rex_list.html?522,535#522" title="Go to source code">getColumnParams</a>( <span>string <var>$columnName</var></span> )</code>
 <div class="description short">
 <p>Gibt die Parameter für eine Spalte zurück.</p>
 </div>
@@ -854,7 +858,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_hasColumnParams">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumnParams"></a><a href="source-class-rex_list.html?534,544#534" title="Go to source code">hasColumnParams</a>( <span>string <var>$columnName</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/hasColumnParams"></a><a href="source-class-rex_list.html?537,547#537" title="Go to source code">hasColumnParams</a>( <span>string <var>$columnName</var></span> )</code>
 <div class="description short">
 <p>Gibt zurück, ob Parameter für eine Spalte existieren.</p>
 </div>
@@ -881,7 +885,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addTableColumnGroup">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableColumnGroup"></a><a href="source-class-rex_list.html?548,589#548" title="Go to source code">addTableColumnGroup</a>( <span>array <var>$columns</var></span>, <span>integer <var>$columnGroupSpan</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableColumnGroup"></a><a href="source-class-rex_list.html?551,592#551" title="Go to source code">addTableColumnGroup</a>( <span>array <var>$columns</var></span>, <span>integer <var>$columnGroupSpan</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Methode um eine Colgroup einzufügen.</p>
 </div>
@@ -914,7 +918,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getTableColumnGroups">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableColumnGroups"></a><a href="source-class-rex_list.html?591,597#591" title="Go to source code">getTableColumnGroups</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getTableColumnGroups"></a><a href="source-class-rex_list.html?594,600#594" title="Go to source code">getTableColumnGroups</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -934,7 +938,7 @@ Spaltenname zurückgegeben</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_addTableColumn">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableColumn"></a><a href="source-class-rex_list.html?599,632#599" title="Go to source code">addTableColumn</a>( <span>integer <var>$width</var></span>, <span>integer <var>$span</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$class</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/addTableColumn"></a><a href="source-class-rex_list.html?602,635#602" title="Go to source code">addTableColumn</a>( <span>integer <var>$width</var></span>, <span>integer <var>$span</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$class</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Fügt der zuletzte eingefügten TableColumnGroup eine weitere Spalte
 hinzu.</p>
@@ -963,7 +967,7 @@ hinzu.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getUrl">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUrl"></a><a href="source-class-rex_list.html?636,665#636" title="Go to source code">getUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getUrl"></a><a href="source-class-rex_list.html?639,668#639" title="Go to source code">getUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
 <div class="description short">
 <p>Returns a Url which contains the given parameters.</p>
 </div>
@@ -994,7 +998,7 @@ hinzu.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getParsedUrl">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParsedUrl"></a><a href="source-class-rex_list.html?667,705#667" title="Go to source code">getParsedUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getParsedUrl"></a><a href="source-class-rex_list.html?670,708#670" title="Go to source code">getParsedUrl</a>( <span>array <var>$params</var> = []</span>, <span>boolean <var>$escape</var> = <span class="php-keyword1">true</span></span> )</code>
 <div class="description short">
 <p>Gibt eine Url zurück, die die Parameter $params enthält Dieser Url werden
 die Standard rexList Variablen zugefügt.</p>
@@ -1030,7 +1034,7 @@ die Standard rexList Variablen zugefügt.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_prepareQuery">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/prepareQuery"></a><a href="source-class-rex_list.html?709,743#709" title="Go to source code">prepareQuery</a>( <span>string <var>$query</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/prepareQuery"></a><a href="source-class-rex_list.html?712,746#712" title="Go to source code">prepareQuery</a>( <span>string <var>$query</var></span> )</code>
 <div class="description short">
 <p>Prepariert das SQL Statement vorm anzeigen der Liste.</p>
 </div>
@@ -1057,7 +1061,7 @@ die Standard rexList Variablen zugefügt.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getRows">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRows"></a><a href="source-class-rex_list.html?745,753#745" title="Go to source code">getRows</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getRows"></a><a href="source-class-rex_list.html?748,756#748" title="Go to source code">getRows</a>( )</code>
 <div class="description short">
 <p>Gibt die Anzahl der Zeilen zurück, welche vom ursprüngliche SQL Statement
 betroffen werden.</p>
@@ -1080,7 +1084,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getPager">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPager"></a><a href="source-class-rex_list.html?755,763#755" title="Go to source code">getPager</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPager"></a><a href="source-class-rex_list.html?758,766#758" title="Go to source code">getPager</a>( )</code>
 <div class="description short">
 <p>Returns the pager for this list.</p>
 </div>
@@ -1102,7 +1106,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getSortColumn">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSortColumn"></a><a href="source-class-rex_list.html?765,778#765" title="Go to source code">getSortColumn</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSortColumn"></a><a href="source-class-rex_list.html?768,781#768" title="Go to source code">getSortColumn</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Gibt zurück, nach welcher Spalte sortiert werden soll.</p>
 </div>
@@ -1129,7 +1133,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getSortType">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSortType"></a><a href="source-class-rex_list.html?780,797#780" title="Go to source code">getSortType</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getSortType"></a><a href="source-class-rex_list.html?783,800#783" title="Go to source code">getSortType</a>( <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Gibt zurück, in welcher Art und Weise sortiert werden soll (ASC/DESC).</p>
 </div>
@@ -1156,7 +1160,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getPagination">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPagination"></a><a href="source-class-rex_list.html?799,810#799" title="Go to source code">getPagination</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getPagination"></a><a href="source-class-rex_list.html?802,813#802" title="Go to source code">getPagination</a>( )</code>
 <div class="description short">
 <p>Gibt die Navigation der Liste zurück.</p>
 </div>
@@ -1178,7 +1182,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getFooter">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFooter"></a><a href="source-class-rex_list.html?812,826#812" title="Go to source code">getFooter</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getFooter"></a><a href="source-class-rex_list.html?815,829#815" title="Go to source code">getFooter</a>( )</code>
 <div class="description short">
 <p>Gibt den Footer der Liste zurück.</p>
 </div>
@@ -1200,7 +1204,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getHeader">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeader"></a><a href="source-class-rex_list.html?828,839#828" title="Go to source code">getHeader</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getHeader"></a><a href="source-class-rex_list.html?831,842#831" title="Go to source code">getHeader</a>( )</code>
 <div class="description short">
 <p>Gibt den Header der Liste zurück.</p>
 </div>
@@ -1222,7 +1226,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_replaceVariable">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVariable"></a><a href="source-class-rex_list.html?843,846#843" title="Go to source code">replaceVariable</a>( <span>mixed <var>$string</var></span>, <span>mixed <var>$varname</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVariable"></a><a href="source-class-rex_list.html?846,849#846" title="Go to source code">replaceVariable</a>( <span>mixed <var>$string</var></span>, <span>mixed <var>$varname</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -1238,7 +1242,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_replaceVariables">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVariables"></a><a href="source-class-rex_list.html?848,874#848" title="Go to source code">replaceVariables</a>( <span>string <var>$value</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/replaceVariables"></a><a href="source-class-rex_list.html?851,877#851" title="Go to source code">replaceVariables</a>( <span>string <var>$value</var></span> )</code>
 <div class="description short">
 <p>Ersetzt alle Variablen im Format ###&lt;Spaltenname&gt;###.</p>
 </div>
@@ -1265,7 +1269,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_isCustomFormat">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isCustomFormat"></a><a href="source-class-rex_list.html?876,879#876" title="Go to source code">isCustomFormat</a>( <span>mixed <var>$format</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/isCustomFormat"></a><a href="source-class-rex_list.html?879,882#879" title="Go to source code">isCustomFormat</a>( <span>mixed <var>$format</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -1281,7 +1285,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_formatValue">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatValue"></a><a href="source-class-rex_list.html?881,913#881" title="Go to source code">formatValue</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var></span>, <span>boolean <var>$escape</var></span>, <span>string <var>$field</var> = <span class="php-keyword1">null</span></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/formatValue"></a><a href="source-class-rex_list.html?884,916#884" title="Go to source code">formatValue</a>( <span>string <var>$value</var></span>, <span>array <var>$format</var></span>, <span>boolean <var>$escape</var></span>, <span>string <var>$field</var> = <span class="php-keyword1">null</span></span> )</code>
 <div class="description short">
 <p>Formatiert einen übergebenen String anhand der rexFormatter Klasse.</p>
 </div>
@@ -1314,7 +1318,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#__getAttributeString">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_getAttributeString"></a><a href="source-class-rex_list.html?915,924#915" title="Go to source code">_getAttributeString</a>( <span>mixed <var>$array</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/_getAttributeString"></a><a href="source-class-rex_list.html?918,927#918" title="Go to source code">_getAttributeString</a>( <span>mixed <var>$array</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -1330,7 +1334,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getColumnLink">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLink"></a><a href="source-class-rex_list.html?926,929#926" title="Go to source code">getColumnLink</a>( <span>mixed <var>$columnName</var></span>, <span>mixed <var>$columnValue</var></span>, <span>mixed <var>$params</var> = []</span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getColumnLink"></a><a href="source-class-rex_list.html?929,932#929" title="Go to source code">getColumnLink</a>( <span>mixed <var>$columnName</var></span>, <span>mixed <var>$columnValue</var></span>, <span>mixed <var>$params</var> = []</span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -1346,7 +1350,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getValue">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_list.html?931,934#931" title="Go to source code">getValue</a>( <span>mixed <var>$colname</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getValue"></a><a href="source-class-rex_list.html?934,937#934" title="Go to source code">getValue</a>( <span>mixed <var>$colname</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -1362,7 +1366,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_getArrayValue">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArrayValue"></a><a href="source-class-rex_list.html?936,939#936" title="Go to source code">getArrayValue</a>( <span>mixed <var>$colname</var></span> )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/getArrayValue"></a><a href="source-class-rex_list.html?939,942#939" title="Go to source code">getArrayValue</a>( <span>mixed <var>$colname</var></span> )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">
@@ -1378,7 +1382,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_get">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_list.html?941,1076#941" title="Go to source code">get</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/get"></a><a href="source-class-rex_list.html?944,1079#944" title="Go to source code">get</a>( )</code>
 <div class="description short">
 <p>Erstellt den Tabellen Quellcode.</p>
 </div>
@@ -1400,7 +1404,7 @@ betroffen werden.</p>
 </td>
 <td class="name"><div>
 <a class="anchor" href="#_show">#</a>
-<code><a class="dashAnchor" name="//apple_ref/cpp/Method/show"></a><a href="source-class-rex_list.html?1078,1081#1078" title="Go to source code">show</a>( )</code>
+<code><a class="dashAnchor" name="//apple_ref/cpp/Method/show"></a><a href="source-class-rex_list.html?1081,1084#1081" title="Go to source code">show</a>( )</code>
 <div class="description short">
 </div>
 <div class="description detailed hidden">

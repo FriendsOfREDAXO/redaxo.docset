@@ -192,81 +192,83 @@
 </span><span class="l" id="183"><a class="l" href="#183">183 </a>    <span class="php-comment">/**
 </span></span><span class="l" id="184"><a class="l" href="#184">184 </a><span class="php-comment">     * Counts the clangs.
 </span></span><span class="l" id="185"><a class="l" href="#185">185 </a><span class="php-comment">     *
-</span></span><span class="l" id="186"><a class="l" href="#186">186 </a><span class="php-comment">     * @return int
-</span></span><span class="l" id="187"><a class="l" href="#187">187 </a><span class="php-comment">     */</span>
-</span><span class="l" id="188"><a class="l" href="#188">188 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">count</span>()
-</span><span class="l" id="189"><a class="l" href="#189">189 </a>    {
-</span><span class="l" id="190"><a class="l" href="#190">190 </a>        self::checkCache();
-</span><span class="l" id="191"><a class="l" href="#191">191 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">count</span>(self::<span class="php-var">$clangs</span>);
-</span><span class="l" id="192"><a class="l" href="#192">192 </a>    }
-</span><span class="l" id="193"><a class="l" href="#193">193 </a>
-</span><span class="l" id="194"><a class="l" href="#194">194 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="195"><a class="l" href="#195">195 </a><span class="php-comment">     * Returns an array of all clang ids.
-</span></span><span class="l" id="196"><a class="l" href="#196">196 </a><span class="php-comment">     *
-</span></span><span class="l" id="197"><a class="l" href="#197">197 </a><span class="php-comment">     * @param bool $ignoreOfflines
+</span></span><span class="l" id="186"><a class="l" href="#186">186 </a><span class="php-comment">     * @param bool $ignoreOfflines
+</span></span><span class="l" id="187"><a class="l" href="#187">187 </a><span class="php-comment">     *
+</span></span><span class="l" id="188"><a class="l" href="#188">188 </a><span class="php-comment">     * @return int
+</span></span><span class="l" id="189"><a class="l" href="#189">189 </a><span class="php-comment">     */</span>
+</span><span class="l" id="190"><a class="l" href="#190">190 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">count</span>(<span class="php-var">$ignoreOfflines</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="191"><a class="l" href="#191">191 </a>    {
+</span><span class="l" id="192"><a class="l" href="#192">192 </a>        self::checkCache();
+</span><span class="l" id="193"><a class="l" href="#193">193 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">count</span>(self::getAll(<span class="php-var">$ignoreOfflines</span>));
+</span><span class="l" id="194"><a class="l" href="#194">194 </a>    }
+</span><span class="l" id="195"><a class="l" href="#195">195 </a>
+</span><span class="l" id="196"><a class="l" href="#196">196 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="197"><a class="l" href="#197">197 </a><span class="php-comment">     * Returns an array of all clang ids.
 </span></span><span class="l" id="198"><a class="l" href="#198">198 </a><span class="php-comment">     *
-</span></span><span class="l" id="199"><a class="l" href="#199">199 </a><span class="php-comment">     * @return int[]
-</span></span><span class="l" id="200"><a class="l" href="#200">200 </a><span class="php-comment">     */</span>
-</span><span class="l" id="201"><a class="l" href="#201">201 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getAllIds" id="_getAllIds">getAllIds</a>(<span class="php-var">$ignoreOfflines</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="202"><a class="l" href="#202">202 </a>    {
-</span><span class="l" id="203"><a class="l" href="#203">203 </a>        self::checkCache();
-</span><span class="l" id="204"><a class="l" href="#204">204 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_keys</span>(self::getAll(<span class="php-var">$ignoreOfflines</span>));
-</span><span class="l" id="205"><a class="l" href="#205">205 </a>    }
-</span><span class="l" id="206"><a class="l" href="#206">206 </a>
-</span><span class="l" id="207"><a class="l" href="#207">207 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="208"><a class="l" href="#208">208 </a><span class="php-comment">     * Returns an array of all clangs.
-</span></span><span class="l" id="209"><a class="l" href="#209">209 </a><span class="php-comment">     *
-</span></span><span class="l" id="210"><a class="l" href="#210">210 </a><span class="php-comment">     * @param bool $ignoreOfflines
+</span></span><span class="l" id="199"><a class="l" href="#199">199 </a><span class="php-comment">     * @param bool $ignoreOfflines
+</span></span><span class="l" id="200"><a class="l" href="#200">200 </a><span class="php-comment">     *
+</span></span><span class="l" id="201"><a class="l" href="#201">201 </a><span class="php-comment">     * @return int[]
+</span></span><span class="l" id="202"><a class="l" href="#202">202 </a><span class="php-comment">     */</span>
+</span><span class="l" id="203"><a class="l" href="#203">203 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getAllIds" id="_getAllIds">getAllIds</a>(<span class="php-var">$ignoreOfflines</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="204"><a class="l" href="#204">204 </a>    {
+</span><span class="l" id="205"><a class="l" href="#205">205 </a>        self::checkCache();
+</span><span class="l" id="206"><a class="l" href="#206">206 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_keys</span>(self::getAll(<span class="php-var">$ignoreOfflines</span>));
+</span><span class="l" id="207"><a class="l" href="#207">207 </a>    }
+</span><span class="l" id="208"><a class="l" href="#208">208 </a>
+</span><span class="l" id="209"><a class="l" href="#209">209 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="210"><a class="l" href="#210">210 </a><span class="php-comment">     * Returns an array of all clangs.
 </span></span><span class="l" id="211"><a class="l" href="#211">211 </a><span class="php-comment">     *
-</span></span><span class="l" id="212"><a class="l" href="#212">212 </a><span class="php-comment">     * @return self[]
-</span></span><span class="l" id="213"><a class="l" href="#213">213 </a><span class="php-comment">     */</span>
-</span><span class="l" id="214"><a class="l" href="#214">214 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getAll" id="_getAll">getAll</a>(<span class="php-var">$ignoreOfflines</span> = <span class="php-keyword1">false</span>)
-</span><span class="l" id="215"><a class="l" href="#215">215 </a>    {
-</span><span class="l" id="216"><a class="l" href="#216">216 </a>        self::checkCache();
-</span><span class="l" id="217"><a class="l" href="#217">217 </a>
-</span><span class="l" id="218"><a class="l" href="#218">218 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$ignoreOfflines</span>) {
-</span><span class="l" id="219"><a class="l" href="#219">219 </a>            <span class="php-keyword1">return</span> self::<span class="php-var">$clangs</span>;
-</span><span class="l" id="220"><a class="l" href="#220">220 </a>        }
-</span><span class="l" id="221"><a class="l" href="#221">221 </a>
-</span><span class="l" id="222"><a class="l" href="#222">222 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_filter</span>(self::<span class="php-var">$clangs</span>, <span class="php-keyword1">function</span> (self <span class="php-var">$clang</span>) {
-</span><span class="l" id="223"><a class="l" href="#223">223 </a>            <span class="php-keyword1">return</span> <span class="php-var">$clang</span>-&gt;isOnline();
-</span><span class="l" id="224"><a class="l" href="#224">224 </a>        });
-</span><span class="l" id="225"><a class="l" href="#225">225 </a>    }
-</span><span class="l" id="226"><a class="l" href="#226">226 </a>
-</span><span class="l" id="227"><a class="l" href="#227">227 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="228"><a class="l" href="#228">228 </a><span class="php-comment">     * Loads the cache if not already loaded.
-</span></span><span class="l" id="229"><a class="l" href="#229">229 </a><span class="php-comment">     */</span>
-</span><span class="l" id="230"><a class="l" href="#230">230 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_checkCache" id="_checkCache">checkCache</a>()
-</span><span class="l" id="231"><a class="l" href="#231">231 </a>    {
-</span><span class="l" id="232"><a class="l" href="#232">232 </a>        <span class="php-keyword1">if</span> (self::<span class="php-var">$cacheLoaded</span>) {
-</span><span class="l" id="233"><a class="l" href="#233">233 </a>            <span class="php-keyword1">return</span>;
-</span><span class="l" id="234"><a class="l" href="#234">234 </a>        }
-</span><span class="l" id="235"><a class="l" href="#235">235 </a>
-</span><span class="l" id="236"><a class="l" href="#236">236 </a>        <span class="php-var">$file</span> = rex_path::coreCache(<span class="php-quote">'clang.cache'</span>);
-</span><span class="l" id="237"><a class="l" href="#237">237 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$file</span>)) {
-</span><span class="l" id="238"><a class="l" href="#238">238 </a>            rex_clang_service::generateCache();
-</span><span class="l" id="239"><a class="l" href="#239">239 </a>        }
-</span><span class="l" id="240"><a class="l" href="#240">240 </a>        <span class="php-keyword1">foreach</span> (rex_file::getCache(<span class="php-var">$file</span>) <span class="php-keyword1">as</span> <span class="php-var">$id</span> =&gt; <span class="php-var">$data</span>) {
-</span><span class="l" id="241"><a class="l" href="#241">241 </a>            <span class="php-var">$clang</span> = <span class="php-keyword1">new</span> self();
-</span><span class="l" id="242"><a class="l" href="#242">242 </a>
-</span><span class="l" id="243"><a class="l" href="#243">243 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$data</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
-</span><span class="l" id="244"><a class="l" href="#244">244 </a>                <span class="php-var">$clang</span>-&gt;<span class="php-var">$key</span> = <span class="php-var">$value</span>;
-</span><span class="l" id="245"><a class="l" href="#245">245 </a>            }
-</span><span class="l" id="246"><a class="l" href="#246">246 </a>
-</span><span class="l" id="247"><a class="l" href="#247">247 </a>            self::<span class="php-var">$clangs</span>[<span class="php-var">$id</span>] = <span class="php-var">$clang</span>;
-</span><span class="l" id="248"><a class="l" href="#248">248 </a>        }
-</span><span class="l" id="249"><a class="l" href="#249">249 </a>        self::<span class="php-var">$cacheLoaded</span> = <span class="php-keyword1">true</span>;
-</span><span class="l" id="250"><a class="l" href="#250">250 </a>    }
-</span><span class="l" id="251"><a class="l" href="#251">251 </a>
-</span><span class="l" id="252"><a class="l" href="#252">252 </a>    <span class="php-comment">/**
-</span></span><span class="l" id="253"><a class="l" href="#253">253 </a><span class="php-comment">     * Resets the intern cache of this class.
-</span></span><span class="l" id="254"><a class="l" href="#254">254 </a><span class="php-comment">     */</span>
-</span><span class="l" id="255"><a class="l" href="#255">255 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">reset</span>()
-</span><span class="l" id="256"><a class="l" href="#256">256 </a>    {
-</span><span class="l" id="257"><a class="l" href="#257">257 </a>        self::<span class="php-var">$cacheLoaded</span> = <span class="php-keyword1">false</span>;
-</span><span class="l" id="258"><a class="l" href="#258">258 </a>        self::<span class="php-var">$clangs</span> = [];
-</span><span class="l" id="259"><a class="l" href="#259">259 </a>    }
-</span><span class="l" id="260"><a class="l" href="#260">260 </a>}
-</span><span class="l" id="261"><a class="l" href="#261">261 </a></span></code></pre>
+</span></span><span class="l" id="212"><a class="l" href="#212">212 </a><span class="php-comment">     * @param bool $ignoreOfflines
+</span></span><span class="l" id="213"><a class="l" href="#213">213 </a><span class="php-comment">     *
+</span></span><span class="l" id="214"><a class="l" href="#214">214 </a><span class="php-comment">     * @return self[]
+</span></span><span class="l" id="215"><a class="l" href="#215">215 </a><span class="php-comment">     */</span>
+</span><span class="l" id="216"><a class="l" href="#216">216 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getAll" id="_getAll">getAll</a>(<span class="php-var">$ignoreOfflines</span> = <span class="php-keyword1">false</span>)
+</span><span class="l" id="217"><a class="l" href="#217">217 </a>    {
+</span><span class="l" id="218"><a class="l" href="#218">218 </a>        self::checkCache();
+</span><span class="l" id="219"><a class="l" href="#219">219 </a>
+</span><span class="l" id="220"><a class="l" href="#220">220 </a>        <span class="php-keyword1">if</span> (!<span class="php-var">$ignoreOfflines</span>) {
+</span><span class="l" id="221"><a class="l" href="#221">221 </a>            <span class="php-keyword1">return</span> self::<span class="php-var">$clangs</span>;
+</span><span class="l" id="222"><a class="l" href="#222">222 </a>        }
+</span><span class="l" id="223"><a class="l" href="#223">223 </a>
+</span><span class="l" id="224"><a class="l" href="#224">224 </a>        <span class="php-keyword1">return</span> <span class="php-keyword2">array_filter</span>(self::<span class="php-var">$clangs</span>, <span class="php-keyword1">function</span> (self <span class="php-var">$clang</span>) {
+</span><span class="l" id="225"><a class="l" href="#225">225 </a>            <span class="php-keyword1">return</span> <span class="php-var">$clang</span>-&gt;isOnline();
+</span><span class="l" id="226"><a class="l" href="#226">226 </a>        });
+</span><span class="l" id="227"><a class="l" href="#227">227 </a>    }
+</span><span class="l" id="228"><a class="l" href="#228">228 </a>
+</span><span class="l" id="229"><a class="l" href="#229">229 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="230"><a class="l" href="#230">230 </a><span class="php-comment">     * Loads the cache if not already loaded.
+</span></span><span class="l" id="231"><a class="l" href="#231">231 </a><span class="php-comment">     */</span>
+</span><span class="l" id="232"><a class="l" href="#232">232 </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_checkCache" id="_checkCache">checkCache</a>()
+</span><span class="l" id="233"><a class="l" href="#233">233 </a>    {
+</span><span class="l" id="234"><a class="l" href="#234">234 </a>        <span class="php-keyword1">if</span> (self::<span class="php-var">$cacheLoaded</span>) {
+</span><span class="l" id="235"><a class="l" href="#235">235 </a>            <span class="php-keyword1">return</span>;
+</span><span class="l" id="236"><a class="l" href="#236">236 </a>        }
+</span><span class="l" id="237"><a class="l" href="#237">237 </a>
+</span><span class="l" id="238"><a class="l" href="#238">238 </a>        <span class="php-var">$file</span> = rex_path::coreCache(<span class="php-quote">'clang.cache'</span>);
+</span><span class="l" id="239"><a class="l" href="#239">239 </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">file_exists</span>(<span class="php-var">$file</span>)) {
+</span><span class="l" id="240"><a class="l" href="#240">240 </a>            rex_clang_service::generateCache();
+</span><span class="l" id="241"><a class="l" href="#241">241 </a>        }
+</span><span class="l" id="242"><a class="l" href="#242">242 </a>        <span class="php-keyword1">foreach</span> (rex_file::getCache(<span class="php-var">$file</span>) <span class="php-keyword1">as</span> <span class="php-var">$id</span> =&gt; <span class="php-var">$data</span>) {
+</span><span class="l" id="243"><a class="l" href="#243">243 </a>            <span class="php-var">$clang</span> = <span class="php-keyword1">new</span> self();
+</span><span class="l" id="244"><a class="l" href="#244">244 </a>
+</span><span class="l" id="245"><a class="l" href="#245">245 </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$data</span> <span class="php-keyword1">as</span> <span class="php-var">$key</span> =&gt; <span class="php-var">$value</span>) {
+</span><span class="l" id="246"><a class="l" href="#246">246 </a>                <span class="php-var">$clang</span>-&gt;<span class="php-var">$key</span> = <span class="php-var">$value</span>;
+</span><span class="l" id="247"><a class="l" href="#247">247 </a>            }
+</span><span class="l" id="248"><a class="l" href="#248">248 </a>
+</span><span class="l" id="249"><a class="l" href="#249">249 </a>            self::<span class="php-var">$clangs</span>[<span class="php-var">$id</span>] = <span class="php-var">$clang</span>;
+</span><span class="l" id="250"><a class="l" href="#250">250 </a>        }
+</span><span class="l" id="251"><a class="l" href="#251">251 </a>        self::<span class="php-var">$cacheLoaded</span> = <span class="php-keyword1">true</span>;
+</span><span class="l" id="252"><a class="l" href="#252">252 </a>    }
+</span><span class="l" id="253"><a class="l" href="#253">253 </a>
+</span><span class="l" id="254"><a class="l" href="#254">254 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="255"><a class="l" href="#255">255 </a><span class="php-comment">     * Resets the intern cache of this class.
+</span></span><span class="l" id="256"><a class="l" href="#256">256 </a><span class="php-comment">     */</span>
+</span><span class="l" id="257"><a class="l" href="#257">257 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <span class="php-keyword2">reset</span>()
+</span><span class="l" id="258"><a class="l" href="#258">258 </a>    {
+</span><span class="l" id="259"><a class="l" href="#259">259 </a>        self::<span class="php-var">$cacheLoaded</span> = <span class="php-keyword1">false</span>;
+</span><span class="l" id="260"><a class="l" href="#260">260 </a>        self::<span class="php-var">$clangs</span> = [];
+</span><span class="l" id="261"><a class="l" href="#261">261 </a>    }
+</span><span class="l" id="262"><a class="l" href="#262">262 </a>}
+</span><span class="l" id="263"><a class="l" href="#263">263 </a></span></code></pre>
  </body>
 </html>

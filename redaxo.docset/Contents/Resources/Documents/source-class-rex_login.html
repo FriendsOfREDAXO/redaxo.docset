@@ -339,7 +339,7 @@
 </span></span><span class="l" id="330"><a class="l" href="#330">330 </a><span class="php-comment">     */</span>
 </span><span class="l" id="331"><a class="l" href="#331">331 </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a href="#_setSessionVar" id="_setSessionVar">setSessionVar</a>(<span class="php-var">$varname</span>, <span class="php-var">$value</span>)
 </span><span class="l" id="332"><a class="l" href="#332">332 </a>    {
-</span><span class="l" id="333"><a class="l" href="#333">333 </a>        <span class="php-var">$_SESSION</span>[rex::getProperty(<span class="php-quote">'instname'</span>)][<span class="php-var">$this</span>-&gt;systemId][<span class="php-var">$varname</span>] = <span class="php-var">$value</span>;
+</span><span class="l" id="333"><a class="l" href="#333">333 </a>        <span class="php-var">$_SESSION</span>[<span class="php-keyword1">static</span>::getSessionNamespace()][<span class="php-var">$this</span>-&gt;systemId][<span class="php-var">$varname</span>] = <span class="php-var">$value</span>;
 </span><span class="l" id="334"><a class="l" href="#334">334 </a>    }
 </span><span class="l" id="335"><a class="l" href="#335">335 </a>
 </span><span class="l" id="336"><a class="l" href="#336">336 </a>    <span class="php-comment">/**
@@ -354,13 +354,13 @@
 </span><span class="l" id="345"><a class="l" href="#345">345 </a>
 </span><span class="l" id="346"><a class="l" href="#346">346 </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword1">empty</span>(<span class="php-var">$rexSessId</span>) &amp;&amp; <span class="php-var">$rexSessId</span> !== <span class="php-keyword2">session_id</span>()) {
 </span><span class="l" id="347"><a class="l" href="#347">347 </a>                <span class="php-comment">// clear redaxo related session properties on a possible attack</span>
-</span><span class="l" id="348"><a class="l" href="#348">348 </a>                <span class="php-var">$_SESSION</span>[rex::getProperty(<span class="php-quote">'instname'</span>)][<span class="php-var">$this</span>-&gt;systemId] = [];
+</span><span class="l" id="348"><a class="l" href="#348">348 </a>                <span class="php-var">$_SESSION</span>[<span class="php-keyword1">static</span>::getSessionNamespace()][<span class="php-var">$this</span>-&gt;systemId] = [];
 </span><span class="l" id="349"><a class="l" href="#349">349 </a>            }
 </span><span class="l" id="350"><a class="l" href="#350">350 </a>            <span class="php-var">$sessChecked</span> = <span class="php-keyword1">true</span>;
 </span><span class="l" id="351"><a class="l" href="#351">351 </a>        }
 </span><span class="l" id="352"><a class="l" href="#352">352 </a>
-</span><span class="l" id="353"><a class="l" href="#353">353 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SESSION</span>[rex::getProperty(<span class="php-quote">'instname'</span>)][<span class="php-var">$this</span>-&gt;systemId][<span class="php-var">$varname</span>])) {
-</span><span class="l" id="354"><a class="l" href="#354">354 </a>            <span class="php-keyword1">return</span> <span class="php-var">$_SESSION</span>[rex::getProperty(<span class="php-quote">'instname'</span>)][<span class="php-var">$this</span>-&gt;systemId][<span class="php-var">$varname</span>];
+</span><span class="l" id="353"><a class="l" href="#353">353 </a>        <span class="php-keyword1">if</span> (<span class="php-keyword1">isset</span>(<span class="php-var">$_SESSION</span>[<span class="php-keyword1">static</span>::getSessionNamespace()][<span class="php-var">$this</span>-&gt;systemId][<span class="php-var">$varname</span>])) {
+</span><span class="l" id="354"><a class="l" href="#354">354 </a>            <span class="php-keyword1">return</span> <span class="php-var">$_SESSION</span>[<span class="php-keyword1">static</span>::getSessionNamespace()][<span class="php-var">$this</span>-&gt;systemId][<span class="php-var">$varname</span>];
 </span><span class="l" id="355"><a class="l" href="#355">355 </a>        }
 </span><span class="l" id="356"><a class="l" href="#356">356 </a>
 </span><span class="l" id="357"><a class="l" href="#357">357 </a>        <span class="php-keyword1">return</span> <span class="php-var">$default</span>;
@@ -498,7 +498,17 @@
 </span><span class="l" id="489"><a class="l" href="#489">489 </a>    {
 </span><span class="l" id="490"><a class="l" href="#490">490 </a>        <span class="php-keyword1">return</span> password_needs_rehash(<span class="php-var">$hash</span>, PASSWORD_DEFAULT);
 </span><span class="l" id="491"><a class="l" href="#491">491 </a>    }
-</span><span class="l" id="492"><a class="l" href="#492">492 </a>}
-</span><span class="l" id="493"><a class="l" href="#493">493 </a></span></code></pre>
+</span><span class="l" id="492"><a class="l" href="#492">492 </a>
+</span><span class="l" id="493"><a class="l" href="#493">493 </a>    <span class="php-comment">/**
+</span></span><span class="l" id="494"><a class="l" href="#494">494 </a><span class="php-comment">     * returns the current session namespace.
+</span></span><span class="l" id="495"><a class="l" href="#495">495 </a><span class="php-comment">     *
+</span></span><span class="l" id="496"><a class="l" href="#496">496 </a><span class="php-comment">     * @return string
+</span></span><span class="l" id="497"><a class="l" href="#497">497 </a><span class="php-comment">     */</span>
+</span><span class="l" id="498"><a class="l" href="#498">498 </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a href="#_getSessionNamespace" id="_getSessionNamespace">getSessionNamespace</a>()
+</span><span class="l" id="499"><a class="l" href="#499">499 </a>    {
+</span><span class="l" id="500"><a class="l" href="#500">500 </a>        <span class="php-keyword1">return</span> rex_request::getSessionNamespace();
+</span><span class="l" id="501"><a class="l" href="#501">501 </a>    }
+</span><span class="l" id="502"><a class="l" href="#502">502 </a>}
+</span><span class="l" id="503"><a class="l" href="#503">503 </a></span></code></pre>
  </body>
 </html>
