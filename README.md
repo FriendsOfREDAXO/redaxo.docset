@@ -7,6 +7,14 @@ Ein "Dash-Docset" für die Redaxo-API-Doku.
 
 Für Windows und Linux gibt es ähnliche Programme, die auch Docsets verarbeiten können (habe ich aber nicht getestet). Docsets gibt es für mehr als 200 APIs (JavaScript, PHP, HTML, VueJS, Python ... uswusf) und es gibt mehr als 100 Cheat-Sheets zu allen möglichen Themen (RegEx, Tmux, HTTP Statuscodes ... uswusf, auch sehr praktisch).
 
+---
+
+### 📣 Update
+
+Das Docset ist nun Teil der [User Contributed Docsets](https://github.com/Kapeli/Dash-User-Contributions). Es sollte in Dash in den Preferences (Bereich Downloads) aktiviert werden, damit es automatisch aktualisiert wird.
+
+---
+
 ## English
 
 A Dash docset for REDAXO Content Management System.
@@ -20,15 +28,18 @@ It's only available for Mac but there are ports for Windows and Linux as well (h
 
 You'll need Python 3.7, Beautiful Soup and urllib3 installed on your machine.
 The most simple way is to install [Pipenv](https://pipenv.readthedocs.io/en/latest/), setup a new virtual environment with
+
 ```bash
 pipenv install
 ```
+
 and then just run
+
 ```bash
 pipenv run python generate.py
 ```
-That's it!
 
+That's it!
 
 ## Links
 
